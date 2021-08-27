@@ -1,135 +1,131 @@
-# Editorial and technical notes { }
+# Notas editoriales y técnicas {#editorial-and-technical-notes}
 
-In this page we describe the philosophical approach, style, and specific editorial decisions made during the creation of this handbook.  
-
-
-## Approach and style
-
-The potential audience for this book is large. It will surely be used by people very new to R, and also by experienced R users looking for best practices and tips. So it must be both accessible and succinct. Therefore, our approach was to provide *just enough* text explanation that someone very new to R can apply the code and follow what the code is doing.  
-
-A few other points:  
-
-* This is a code reference book accompanied by relatively brief examples - *not* a thorough textbook on R or data science  
-* This is a *R handbook* for use within applied epidemiology - not a manual on the methods or science of applied epidemiology  
-* This is intended to be a living document - optimal R packages for a given task change often and we welcome discussion about which to emphasize in this handbook  
+En esta página describimos la filosofía, el estilo y las decisiones editoriales elegidas para la elaboración de este manual.
 
 
+## Enfoque y estilo
+
+El público potencial de este libro es amplio. Seguramente será utilizado tanto por personas muy noveles con R, como por usuarios experimentados buscando los mejores consejos y prácticas. Por lo tanto, este debe ser accesible y conciso a la vez. Por ello, nuestro enfoque fue proporcionar *la información suficiente* para que alguien muy nuevo en R pueda aplicar y seguir el código.
+
+Otros puntos:
+
+* Se trata de un libro de referencia de códigos acompañado de ejemplos relativamente breves, *no* de un libro de texto completo sobre R o ciencia de datos
+* Este es un *manual de R* para su uso dentro de la epidemiología aplicada - no un manual sobre los métodos o ciencia de la epidemiología aplicada
+* Se trata de un documento vivo: los paquetes de R óptimos para una tarea determinada cambian a menudo, por lo que agradecemos que exista debate sobre cuáles son los más empleados en el manual
 
 
-### R packages {.unnumbered}
+### Paquetes de R {.unnumbered}
 
-**So many choices**  
+**Muchas opciones**
 
-One of the most challenging aspects of learning R is knowing which R package to use for a given task. It is a common occurrence to struggle through a task only later to realize - hey, there's an R package that does all that in one command line!  
+Uno de los aspectos más difíciles de aprender en R es saber qué paquete utilizar para una tarea determinada. Es muy común pelearse con una tarea para luego darse cuenta de que ¡hay un paquete de R que hace todo eso en una línea de código!.
 
-In this handbook, we try to offer you at least two ways to complete each task: one tried-and-true method (probably in **base** R or **tidyverse**) and one special R package that is custom-built for that purpose. We want you to have a couple options in case you can't download a given package or it otherwise does not work for you.  
+En este manual, tratamos de ofrecerte al menos dos maneras de completar cada tarea: un método probado y comprobado (probablemente en R **base** o **tidyverse**) y un paquete especial de R que está hecho a medida para ese propósito. Queremos que tengas un par de opciones en caso de que no puedas descargar un paquete determinado o de que éste no te funcione.
 
-In choosing which packages to use, we prioritized R packages and approaches that have been tested and vetted by the community, minimize the number of packages used in a typical work session, that are stable (not changing very often), and that accomplish the task simply and cleanly  
+A la hora de elegir los paquetes a utilizar, hemos dado prioridad a los paquetes y enfoques de R que han sido probados y aprobados por la comunidad, que minimizan el número de paquetes utilizados en una sesión de trabajo típica, que son estables (no cambian con frecuencia) y que realizan la tarea de forma sencilla y limpia.
 
-This handbook generally prioritizes R packages and functions from the **tidyverse**. Tidyverse is a collection of R packages designed for data science that share underlying grammar and data structures. All tidyverse packages can be installed or loaded via the **tidyverse** package. Read more at the [tidyverse website](https://www.tidyverse.org/).  
+En general, este manual da prioridad a los paquetes y funciones de R de **tidyverse**. Tidyverse es una colección de paquetes de R diseñados para ciencia de datos que comparten la gramática y estructuras de datos subyacentes. Todos los paquetes tidyverse pueden instalarse o cargarse a través del paquete **tidyverse**. Más información en el [sitio web de tidyverse](https://www.tidyverse.org/).
 
-When applicable, we also offer code options using **base** R - the packages and functions that come with R at installation. This is because we recognize that some of this book's audience may not have reliable internet to download extra packages.  
+Cuando es aplicable, también ofrecemos opciones de código usando R **base** - los paquetes y funciones que vienen con R en la instalación. Esto se debe a que somos conscientes de que parte de la audiencia de este libro podría no tener una buena conexión a internet para descargar paquetes adicionales. 
 
-**Linking functions to packages explicitly**
+**Vinculación explícita de las funciones a los paquetes**
 
-It is often frustrating in R tutorials when a function is shown in code, but you don't know which package it is from! We try to avoid this situation.  
+Es frustrante cuando en algunos tutoriales de R, se muestra una función (en código), pero no se sabe bien de qué paquete es. En este libro intentamos evitar esta situación.
 
-In the narrative text, package names are written in bold (e.g. **dplyr**) and functions are written like this: `mutate()`. We strive to be explicit about which package a function comes from, either by referencing the package in nearby text or by specifying the package explicitly in the code like this: `dplyr::mutate()`. It may look redundant, but we are doing it on purpose.  
+En el texto explicativo, los nombres de los paquetes se escriben en negrita (por ejemplo, **dplyr**) y las funciones se escriben así: `mutate()`. Nos esforzaremos en dejar claro el paquete del que proviene una función, ya sea haciendo referencia al paquete en el texto o especificando el paquete en el código mediante esta sintaxis: `dplyr::mutate()`. Puede parecer redundante, pero lo hacemos a propósito.
 
-See the page on [R basics] to learn more about packages and functions.  
+Consulta la página sobre [los fundamentos de R](#r-basics) para saber más sobre los paquetes y las funciones.
 
 
-### Code style {.unnumbered}
+### Código de estilo {.unnumbered}
 
-In the handbook, we frequently utilize "new lines", making our code appear "long". We do this for a few reasons:  
+En el manual, utilizamos con frecuencia "líneas nuevas", haciendo que nuestro código parezca "largo". Lo hacemos por varias razones:
 
-* We can write explanatory comments with `#` that are adjacent to each little part of the code  
-* Generally, longer (vertical) code is easier to read  
-* It is easier to read on a narrow screen (no sideways scrolling needed)  
-* From the indentations, it can be easier to know which arguments belong to which function  
+* De esta forma se pueden escribir comentarios explicativos con `#`, los cuales están situados adyacentes a cada línea de código 
+* En general, el código más largo (en vertical) es más fácil de leer 
+* Es más fácil de leer en una pantalla estrecha (no es necesario desplazarse lateralmente) 
+* Con las sangrías, puede ser más fácil saber qué argumentos pertenecen a cada función
 
-As a result, code that *could* be written like this:  
+Como resultado, el código que *podría* estar escrito:
+ 
 
 ```{r, eval=F}
 linelist %>% 
-  group_by(hospital) %>%  # group rows by hospital
-  slice_max(date, n = 1, with_ties = F) # if there's a tie (of date), take the first row
+  group_by(hospital) %>%  # filas agrupadas por hospital
+  slice_max(date, n = 1, with_ties = F) # si hay un empate (de fecha), tomar la primera fila
 ```
 
-...is written like this:  
+...pero se escribe así:
 
 ```{r, eval=F}
 linelist %>% 
   group_by(hospital) %>% # group rows by hospital
   slice_max(
-    date,                # keep row per group with maximum date value 
-    n = 1,               # keep only the single highest row 
-    with_ties = F)       # if there's a tie (of date), take the first row
+    date,                # mantener la fila por grupo con el valor máximo de la fecha 
+    n = 1,               # mantener sólo la fila más alta
+    with_ties = F)       # si hay un empate (de fecha), tomar la primera fila
 ```
 
-R code is generally not affected by new lines or indentations. When writing code, if you initiate a new line after a comma it will apply automatic indentation patterns. 
+El código de R generalmente no se ve afectado por nuevas líneas o sangrías. Al escribir el código, si se inicia una nueva línea después de una coma, se aplicarán patrones de sangría automáticos.
 
-We also use lots of spaces (e.g. `n = 1` instead of `n=1`) because it is easier to read. Be kind to the people reading your code!  
-
-
-
-### Nomenclature {.unnumbered}  
-
-In this handbook, we generally reference "columns" and "rows" instead of "variables" and "observations". As explained in this primer on ["tidy data"](https://tidyr.tidyverse.org/articles/tidy-data.html), most epidemiological statistical datasets consist structurally of rows, columns, and values.  
-
-*Variables* contain the values that measure the same underlying attribute (like age group, outcome, or date of onset). *Observations* contain all values measured on the same unit (e.g. a person, site, or lab sample). So these aspects can be more difficult to tangibly define.  
-
-In "tidy" datasets, each column is a variable, each row is an observation, and each cell is a single value. However some datasets you encounter will not fit this mold - a "wide" format dataset may have a variable split across several columns (see an example in the [Pivoting data] page). Likewise, observations could be split across several rows.  
-
-Most of this handbook is about managing and transforming data, so referring to the concrete data structures of rows and columns is more relevant than the more abstract observations and variables. Exceptions occur primarily in pages on data analysis, where you will see more references to variables and observations.  
+También utilizamos muchos espacios (por ejemplo, `n = 1` en lugar de `n=1`) porque es más fácil de leer. ¡Sé amable con la gente que lee tu código!
 
 
 
-### Notes {.unnumbered} 
+### Nomenclatura {.unnumbered}  
+
+En este manual, generalmente hacemos referencia a "columnas" y "filas" en lugar de "variables" y "observaciones". Como se explica en este manual sobre ["datos ordenados"](https://tidyr.tidyverse.org/articles/tidy-data.html), la mayoría de los conjuntos de datos estadísticos epidemiológicos se componen estructuralmente de filas, columnas y valores.
+
+*Las variables contienen* los valores que miden el mismo atributo subyacente (como el grupo de edad, el resultado o la fecha de inicio). Las *observaciones contienen* todos los valores medidos en la misma unidad (por ejemplo, una persona, un lugar o una muestra de laboratorio). Por lo tanto, estos aspectos pueden ser más difíciles de definir de forma tangible.
+
+En los conjuntos de datos "ordenados", cada columna es una variable, cada fila es una observación y cada celda es un único valor. Sin embargo, algunos conjuntos de datos que se encuentran no se ajustan a este molde: unos datos de formato "amplio" puede tener una variable dividida en varias columnas (véase un ejemplo en la página [Pivotar datos](#pivoting-data)). Del mismo modo, las observaciones pueden estar divididas en varias filas.
+
+La mayor parte de este manual trata sobre la gestión y la transformación de datos, por lo que las referencias a las estructuras de datos concretas de filas y columnas son más relevantes que las observaciones y las variables más abstractas. Las excepciones se dan sobre todo en las páginas sobre análisis de datos, en las que verás más referencias a las variables y las observaciones.
+
+
+### Nota {.unnumbered} 
 
 Here are the types of notes you may encounter in the handbook:  
 
-<span style="color: black;">**_NOTE:_** This is a note</span>  
-<span style="color: darkgreen;">**_TIP:_** This is a tip.</span>  
-<span style="color: orange;">**_CAUTION:_** This is a cautionary note.</span>  
-<span style="color: red;">**_DANGER:_** This is a warning.</span>  
+<span style="color: black;">**_NOTA:_** Esto es una nota</span>  
+<span style="color: darkgreen;">**_CONSEJO:_** Esto es un consejo.</span>  
+<span style="color: orange;">**_PRECAUCIÓN:_** Esto es una nota de precaución.</span>  
+<span style="color: red;">**_PELIGRO_* Esto es un aviso (warning).</span>  
 
 
+## Decisiones editoriales
 
-## Editorial decisions  
+A continuación, hacemos un seguimiento de las decisiones editoriales importantes en torno a la elección de paquetes y funciones. Si no estás de acuerdo o quieres ofrecer una nueva herramienta para que la consideremos, únete o inicia una conversación en nuestra [página de Github](https://github.com/epirhandbook/Epi_R_handbook).
 
-Below, we track significant editorial decisions around package and function choice. If you disagree or want to offer a new tool for consideration, please join/start a conversation on our [Github page](https://github.com/epirhandbook/Epi_R_handbook).    
-
-
-**Table of package, function, and other editorial decisions**  
+**Tabla de paquetes, funciones y otras decisiones editoriales** 
 
 
-Subject           |     Considered      |   Outcome              |    Brief rationale   
+Asunto            |     Considerado     |   Resultado            |    Breve explicación 
 ----------------- | --------------------|------------------------|-----------------------------------------------
-General coding approach|**tidyverse**, **data.table**, **base**|**tidyverse**, with a page on **data.table**, and mentions of **base** alternatives for readers with no internet|**tidyverse** readability, universality, most-taught  
-Package loading|`library()`,`install.packages()`, `require()`, **pacman**|**pacman**|Shortens and simplifies code for most multi-package install/load use-cases
-Import and export|**rio**, many other packages|**rio**|Ease for many file types
-Grouping for summary statistics|**dplyr** `group_by()`, **stats** `aggregate()`|**dplyr** `group_by()`|Consistent with **tidyverse** emphasis
-Pivoting|**tidyr** (pivot functions), **reshape2** (melt/cast), **tidyr** (spread/gather)|**tidyr** (pivot functions)|**reshape2** is retired, **tidyr** uses pivot functions as of v1.0.0
-Clean column names|**linelist**, **janitor**|**janitor**|Consolidation of packages emphasized
-Epiweeks |**lubridate**, **aweek**, **tsibble**, **zoo**|**lubridate** generally, the others for specific cases| **lubridate's** flexibility, consistency, package maintenance prospects  
-ggplot labels |`labs()`, `ggtitle()`/`ylab()`/`xlab()` |`labs()` |all labels in one place, simplicity  
-Convert to factor |`factor()`, **forcats**|**forcats**|its various functions also convert to factor in same command
-Epidemic curves|**incidence**, **ggplot2**, **EpiCurve**|**incidence2** as quick, **ggplot2** as detailed|dependability
-Concatenation|`paste()`, `paste0()`, `str_glue()`, `glue()`|`str_glue()`|More simple syntax than paste functions; within **stringr**
+Enfoque general de codificación|**tidyverse**, **data.table**, **base**|**tidyverse**, con una página sobre **data.table**, y menciones de alternativas de R **base** para los lectores sin internet|legibilidad de **tidyverse**, universalidad, más enseñado
+Carga de paquetes|`library()`,`install.packages()`, `require()`, **pacman**|**pacman**|Acorta y simplifica el código para la mayoría de los casos de instalación/carga de paquetes múltiples
+Importación y exportación|**rio**, muchos otros paquetes|**rio**|Facilidad para muchos tipos de archivos
+Agrupación para las estadísticas de síntesis|**dplyr** `group_by()`, **stats** `aggregate()`|**dplyr** `group_by()`|Consecuente con el énfasis en **tidyverse**
+Pivotar tablas|**tidyr** (funciones de pivote), **reshape2** (melt/cast), **tidyr** (spread/gather)|**tidyr** (funciones de pivote)|**reshape2** se ha retirado, **tidyr** utiliza funciones pivot a partir de la v1.0.0
+Limpiar los nombres de las columnas|**linelist**, **janitor**|**janitor**|Se hace hincapié en la consolidación de los paquetes
+Semanas epidemiológicas. Epiweeks |**lubridate**, **aweek**, **tsibble**, **zoo**|Normalmente **lubridate**, los otros para casos específicos|La flexibilidad, la coherencia y las perspectivas de mantenimiento de los paquetes de **lubridate**
+Etiquetas ggplot|`labs()`, `ggtitle()`/`ylab()`/`xlab()` |`labs()` |Todas las etiquetas en un solo lugar, la simplicidad  
+Convertir en factor |`factor()`, **forcats**|**forcats**|Sus diversas funciones también se convierten en factor en el mismo comando
+Curvas epidémicas|**incidence**, **ggplot2**, **EpiCurve**|**incidence2** por rapidez`, **ggplot2** para tareas detalladas|fiabilidad
+Concatenación|`paste()`, `paste0()`, `str_glue()`, `glue()`|`str_glue()`|Sintaxis más sencilla que las funciones de pegado; dentro de **stringr**
 
 
-## Major revisions  
+## Revisiones importantes  
 
 
-Date           |Major changes        
+Fecha          |Cambios mayores       
 ---------------| ------------------------------------------    
-10 May 2021    |Release of version 1.0.0    
+10 Mayo 2021    |Lanzamiento de la versión 1.0.0    
 
 
-## Session info (R, RStudio, packages)  
+## Información de la sesión (R, RStudio, paquetes)
 
-Below is the information on the versions of R, RStudio, and R packages used during this rendering of the Handbook.  
+A continuación se presenta la información sobre las versiones de R, RStudio y los paquetes de R utilizados en esta versión del Manual.
 
 
 ```{r}
