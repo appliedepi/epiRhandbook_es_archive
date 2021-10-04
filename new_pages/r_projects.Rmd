@@ -1,113 +1,92 @@
+# Proyectos en R{#r-projects}
 
-# R projects {}  
+Un proyecto de R permite agrupar tu trabajo en una carpeta que contiene todos los archivos vínculados al mismo, facilitando su manejo. Dentro del proyecto, todos los scripts relevantes, los archivos de datos, las figuras/resultados y el historial se almacenan en subcarpetas y, lo que es más importante, el *directorio de trabajo* de dicho proyecto constituye la carpeta raíz del mismo.
 
+##Uso sugerido
 
-An R project enables your work to be bundled in a portable, self-contained folder. Within the project, all the relevant scripts, data files, figures/outputs, and history are stored in sub-folders and importantly - the *working directory* is the project's root folder.  
+Una forma común, eficiente y sencilla de utilizar R es combinar 3 elementos. Un proyecto de trabajo concreto se aloja dentro de un proyecto R. Cada uno de los tres elementos anteriores se describe a continuación.
 
+1) Un **proyecto en R **
+    - Un entorno de trabajo autónomo con carpetas para datos, scripts, salidas (outputs), etc
 
-## Suggested use  
+2) El paquete **here**, el cual se utiliza para indicar las rutas relativas de los archivos
+  - Las rutas de los archivos se escriben en relación con la ubicación de la carpeta raíz del proyecto R - véase [Importar y exportar](#import-and-export) para más información
 
-A common, efficient, and trouble-free way to use R is to combine these 3 elements. One discrete work project is hosted within one R project. Each element is described in the sections below.  
-
-1) An **R project**  
-     - A self-contained working environment with folders for data, scripts, outputs, etc.  
-2) The **here** package for relative filepaths  
-     - Filepaths are written relative to the root folder of the R project - see [Import and export] for more information  
-3) The **rio** package for importing/exporting  
-     - `import()` and `export()` handle any file type by by its extension (e.g. .csv, .xlsx, .png)  
-     
-     
-
-
+3) El paquete **rio** para importar/exportar
+    -`import()` y `export()` manejan cualquier tipo de archivo por su extensión (por ejemplo, .csv, .xlsx, .png)
+    
 <!-- ======================================================= -->
-## Creating an R project {}
 
-To create an R project, select "New Project" from the File menu.
+## Creación de un proyecto R
 
-* If you want to create a new folder for the project, select "New directory" and indicate where you want it to be created.  
-* If you want to create the project within an existing folder, click "Existing directory" and indicate the folder.  
-* If you want to clone a Github repository, select the third option "Version Control" and then "Git". See the page on [Version control and collaboration with Git and Github] for further details.  
+Para crear un proyecto R, selecciona "New proyect" en el menú File (Archivo).
 
+* Si quieres crear una nueva carpeta para el proyecto, selecciona "New directory" e indica dónde quieres crear la carpeta.
+* Si deseas crear el proyecto dentro de una carpeta existente, cliquea en "Existing Directory" e indica la carpeta.
+* Si quieres clonar un repositorio de Github, selecciona la tercera opción "Version Control" y luego "Git". Consulta la página [Control de versiones y colaboración con Git y Github](#version-control-and-collaboration-with-) para más detalles.
 
 ```{r out.width = "75%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "create_project.png"))
 ```
 
 
-The R project you create will come in the form of a folder containing a *.Rproj* file. This file is a shortcut and likely the primary way you will open your project. You can also open a project by selecting "Open Project" from the File menu. Alternatively on the far upper right side of RStudio you will see an R project icon and a drop-down menu of available R projects. 
+El proyecto R que has creado estará en una carpeta que contiene un archivo *.Rproj*. Este archivo es un acceso directo y probablemente la forma más directa de abrir tu proyecto. También puedes abrir un proyecto seleccionando "Open Project" en el menú File. Alternativamente, en el extremo superior derecho de RStudio verás un icono de R projects y un menú desplegable de proyectos disponibles.
 
-To exit from an R project, either open a new project, or close the project (File - Close Project).  
+Para salir de un proyecto R, abre un nuevo proyecto o cierra el proyecto actual (Archivo - Cerrar proyecto).
 
+## Cambiar de proyecto
 
-### Switch projects {.unnumbered}
-
-To switch between projects, click the R project icon and drop-down menu at the very top-right of RStudio. You will see options to Close Project, Open Project, and a list of recent projects.  
+Para cambiar entre proyectos, clica en el icono de R projects en el menú desplegable en la parte superior derecha de RStudio. Verás las opciones de Cerrar proyecto, Abrir proyecto y una lista de proyectos recientes.
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "Rproject_dropdown.png"))
 ```
 
+## Ajustes
 
-### Settings {.unnumbered}  
+Generalmente se aconseja que inicies RStudio cada vez con una "pizarra limpia" - es decir, con tu espacio de trabajo **no** arrastrado de la sesión anterior. Esto significará que los objetos y resultados de una sesión no persistirán en la siguiente sesión (deberás volver a crearlos al ejecutar tus scripts). Esto es bueno, porque te obligará a escribir mejores scripts y evitar errores a largo plazo.
 
-It is generally advised that you start RStudio each time with a "clean slate" - that is, with your workspace **not** preserved from your previous session. This will mean that your objects and results will not persist session-to-session (you must re-create them by running your scripts). This is good, because it will force you to write better scripts and avoid errors in the long run.  
+Para configurar RStudio para que haga "borrón y cuenta nueva" cada vez que se inicie:
 
-To set RStudio to have a "clean slate" each time at start-up:  
+* Selecciona "Project Options" en el menú Tools (Herramientas).
 
-* Select "Project Options" from the Tools menu.  
-* In the "General" tab, set RStudio to **not** restore .RData into workspace at startup, and to **not** save workspace to .RData on exit.  
+* En la pestaña "General", configura RStudio para que **no** restaure .RData en el espacio de trabajo al iniciar, y para que **no** guarde el espacio de trabajo en .RData al salir.
 
+## Organización
 
+Es habitual tener subcarpetas en tu proyecto. Piensa en tener carpetas como "datos", "scripts", "figuras" y "presentaciones". Puedes añadir carpetas de la forma típica en que añadirías una nueva carpeta en tu ordenador. Alternativamente, puedes ver en la página sobre [interacciones de directorios](#directory-interactions) para aprender a crear nuevas carpetas con los comandos de R.
 
-### Organization {.unnumbered}  
+## Control de versiones
 
-It is common to have subfolders in your project. Consider having folders such as "data", "scripts", "figures", "presentations". You can add folders in the typical way you would add a new folder for your computer. Alternatively, see the page on [Directory interactions] to learn how to create new folders with R commands.  
+Considera utilizar un sistema de control de versiones. Podría ser algo tan simple como tener fechas en los nombres de los scripts (por ejemplo, "transmission_analysis_2020-10-03.R") y una carpeta de "archivado". También es buena idea tener un texto de cabecera agregando al comienzo de cada script una descripción, etiquetas, autores y un registro de cambios.
 
+Un método más complicado implicaría utilizar Github o una plataforma similar para el control de versiones. Consulta la página sobre [Control de versiones y colaboración con Git y Github](#version-control-and-collaboration-with-).
 
-### Version control {.unnumbered}  
+Un consejo es que puedes realizas búsquedas en todo un proyecto o carpeta utilizando la herramienta "Buscar en archivos" (menú Edición).
+Puedes buscar e incluso reemplazar líneas de script en varios archivos.
 
-Consider a version control system. It could be something as simple as having dates on the names of scripts (e.g. "transmission_analysis_2020-10-03.R") and an "archive" folder. Consider also having commented header text at the top of each script with a description, tags, authors, and change log.  
+## Ejemplos
 
-A more complicated method would involve using Github or a similar platform for version control. See the page on [Version control and collaboration with Git and Github].  
+A continuación se muestran algunos ejemplos de importación/exportación/guardado utilizando `here()` desde un proyecto R. Lea más sobre el uso del paquete **here** en la página de [importación y exportación](#import-and-export).
 
-One tip is that you can search across an entire project or folder using the "Find in Files" tool (Edit menu). It can search and even replace strings across multiple files.  
-
-
-
-
-
-
-## Examples  
-
-Below are some examples of import/export/saving using `here()` from within an R projct. Read more about using the **here** package in the [Import and export] page.  
-
-
-*Importing `linelist_raw.xlsx` from the "data" folder in your R project*  
+*Importación de `linelist_raw.xlsx` desde la carpeta "data" de tu proyecto R*
 
 ```{r eval=F}
 linelist <- import(here("data", "linelist_raw.xlsx"))
 ```
 
-*Exporting the R object `linelist` as "my_linelist.rds" to the "clean" folder within the "data" folder in your R project.*   
+*Exportar linelist de objetos de R como "my_linelist.rds" a la carpeta "clean" dentro de la carpeta "data" de tu proyecto R.*
 
 ```{r, eval=F}
 export(linelist, here("data","clean", "my_linelist.rds"))
 ```
 
-*Saving the most recently printed plot as "epicurve_2021-02-15.png" within the "epicurves" folder in "outputs" folder in your R project.*  
+*Guardando el último gráfico creado como "epicurve_2021-02-15.png" dentro de la carpeta "epicurves" en la carpeta "outputs" de tu proyecto R.*
 
 ```{r, eval=F}
 ggsave(here("outputs", "epicurves", "epicurve_2021-02-15.png"))
 ```
-
-
-
-
 <!-- ======================================================= -->
-## Resources {}
+## Recursos
 
-RStudio webpage on [using R projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
-
-
-
-
+Página web de RStudio sobre [uso de proyectos R](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
