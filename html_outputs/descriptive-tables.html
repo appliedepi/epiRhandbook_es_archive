@@ -16,8 +16,8 @@
 <meta name="twitter:description" content="This page demonstrates the use of janitor, dplyr, gtsummary, rstatix, and base R to summarise data and create tables with descriptive statistics. This page covers how to create* the underlying...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.18/datatables.js"></script><link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@
 <li><a class="" href="r-basics.html"><span class="header-section-number">3</span> R Basics</a></li>
 <li><a class="" href="transition-to-r.html"><span class="header-section-number">4</span> Transición a R</a></li>
 <li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Suggested packages</a></li>
-<li><a class="" href="r-projects.html"><span class="header-section-number">6</span> R projects</a></li>
+<li><a class="" href="r-projects.html"><span class="header-section-number">6</span> Proyectos en R</a></li>
 <li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Import and export</a></li>
 <li class="book-part">Gestión de datos</li>
 <li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Cleaning data and core functions</a></li>
@@ -165,8 +165,8 @@
 <code class="sourceCode R"><span class="co"># import the linelist</span>
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
 <p>The first 50 rows of the linelist are displayed below.</p>
-<div id="htmlwidget-0cf8dfd72fb852e773c3" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0cf8dfd72fb852e773c3">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"2\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1399075200000\" data-max=\"1406419200000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1399939200000\" data-max=\"1407024000000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1400025600000\" data-max=\"1407110400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1400371200000\" data-max=\"1410566400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-29&quot;,&quot;30-49&quot;,&quot;50-69&quot;,&quot;70+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-24&quot;,&quot;25-29&quot;,&quot;30-34&quot;,&quot;35-39&quot;,&quot;40-44&quot;,&quot;45-49&quot;,&quot;50-54&quot;,&quot;55-59&quot;,&quot;60-64&quot;,&quot;65-69&quot;,&quot;70-74&quot;,&quot;75-79&quot;,&quot;80-84&quot;,&quot;85+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"-13.2697246824573\" data-max=\"-13.209391925612\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"8.45171855856465\" data-max=\"8.48802917129884\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"100\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"11\" data-max=\"241\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"20\" data-max=\"24\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"35.9\" data-max=\"38\" data-scale=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"428.994082840237\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"2\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
+<div id="htmlwidget-66280c1574cbed9c27ba" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-66280c1574cbed9c27ba">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"2\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1399075200000\" data-max=\"1406419200000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1399939200000\" data-max=\"1407024000000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1400025600000\" data-max=\"1407110400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1400371200000\" data-max=\"1410566400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-29&quot;,&quot;30-49&quot;,&quot;50-69&quot;,&quot;70+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-24&quot;,&quot;25-29&quot;,&quot;30-34&quot;,&quot;35-39&quot;,&quot;40-44&quot;,&quot;45-49&quot;,&quot;50-54&quot;,&quot;55-59&quot;,&quot;60-64&quot;,&quot;65-69&quot;,&quot;70-74&quot;,&quot;75-79&quot;,&quot;80-84&quot;,&quot;85+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"-13.2697246824573\" data-max=\"-13.209391925612\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"8.45171855856465\" data-max=\"8.48802917129884\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"100\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"11\" data-max=\"241\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"20\" data-max=\"24\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"35.9\" data-max=\"38\" data-scale=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"428.994082840237\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"2\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
 </div>
 </div>
 <div id="browse-data" class="section level2" number="17.2">
@@ -1251,7 +1251,7 @@ days_onset_hosp
   <span class="fu">get_summary_stats</span><span class="op">(</span>
     <span class="va">age</span>, <span class="va">wt_kg</span>, <span class="va">ht_cm</span>, <span class="va">ct_blood</span>, <span class="va">temp</span>,  <span class="co"># columns to calculate for</span>
     type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span>                    <span class="co"># summary stats to return</span></code></pre></div>
-<pre><code>## # A tibble: 5 × 10
+<pre><code>## # A tibble: 5 x 10
 ##   variable     n   min   max median   iqr  mean     sd    se    ci
 ##   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 age       5802   0    84     13      17  16.1 12.6   0.166 0.325
@@ -1420,7 +1420,7 @@ days_onset_hosp
     placement <span class="op">=</span> <span class="st">"combined"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># this is necessary to print as image</span>
   <span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/flextable.html">flextable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>    <span class="co"># convert to pretty image</span>
   <span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/autofit.html">autofit</a></span><span class="op">(</span><span class="op">)</span>          <span class="co"># format to one line per row </span></code></pre></div>
-<template id="2ea0f05d-fc4d-4c53-9ddf-54a70892421c"><style>
+<template id="546add27-babf-4bd9-84de-aaf141e830a5"><style>
 .tabwid table{
   border-collapse:collapse;
   line-height:1;
@@ -1456,85 +1456,85 @@ background-color: transparent;
 }
 </style>
 <div class="tabwid">
-<style>.cl-932dcb44{border-collapse:collapse;}.cl-9326b07a{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-9326ca4c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-932709b2{width:95.6pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-932709da{width:81.6pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-932709f8{width:139.8pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-93270a02{width:88.6pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-93270a0c{width:95.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-93270a16{width:88.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-93270a2a{width:81.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-93270a3e{width:139.8pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-93270a48{width:139.8pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-93270a5c{width:88.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-93270a66{width:81.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-93270a70{width:95.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<div class="inline-table"><table class="cl-932dcb44">
+<style>.cl-7cf0acfa{border-collapse:collapse;}.cl-7ce4c098{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-7ce4c099{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-7ce4c09a{width:86.6pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce4c09b{width:74.3pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce4c09c{width:127.5pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce4c09d{width:80.5pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce4c09e{width:86.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce4c09f{width:80.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce4c0a0{width:74.3pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce4c0a1{width:127.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce4c0a2{width:127.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce7239c{width:80.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce7239d{width:74.3pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ce7239e{width:86.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<div class="inline-table"><table class="cl-7cf0acfa">
 <thead><tr style="overflow-wrap:break-word;">
-<td class="cl-93270a48"><p class="cl-9326ca4c"><span class="cl-9326b07a">Age Category/Gender</span></p></td>
-<td class="cl-93270a5c"><p class="cl-9326ca4c"><span class="cl-9326b07a">f</span></p></td>
-<td class="cl-93270a5c"><p class="cl-9326ca4c"><span class="cl-9326b07a">m</span></p></td>
-<td class="cl-93270a66"><p class="cl-9326ca4c"><span class="cl-9326b07a">NA_</span></p></td>
-<td class="cl-93270a70"><p class="cl-9326ca4c"><span class="cl-9326b07a">Total</span></p></td>
+<td class="cl-7ce4c0a2"><p class="cl-7ce4c099"><span class="cl-7ce4c098">Age Category/Gender</span></p></td>
+<td class="cl-7ce7239c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">f</span></p></td>
+<td class="cl-7ce7239c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">m</span></p></td>
+<td class="cl-7ce7239d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">NA_</span></p></td>
+<td class="cl-7ce7239e"><p class="cl-7ce4c099"><span class="cl-7ce4c098">Total</span></p></td>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-932709f8"><p class="cl-9326ca4c"><span class="cl-9326b07a">0-4</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">640 (22.8%)</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">416 (14.8%)</span></p></td>
-<td class="cl-932709da"><p class="cl-9326ca4c"><span class="cl-9326b07a">39 (14.0%)</span></p></td>
-<td class="cl-932709b2"><p class="cl-9326ca4c"><span class="cl-9326b07a">1095 (18.6%)</span></p></td>
+<td class="cl-7ce4c09c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">0-4</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">640 (22.8%)</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">416 (14.8%)</span></p></td>
+<td class="cl-7ce4c09b"><p class="cl-7ce4c099"><span class="cl-7ce4c098">39 (14.0%)</span></p></td>
+<td class="cl-7ce4c09a"><p class="cl-7ce4c099"><span class="cl-7ce4c098">1095 (18.6%)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-932709f8"><p class="cl-9326ca4c"><span class="cl-9326b07a">5-9</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">641 (22.8%)</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">412 (14.7%)</span></p></td>
-<td class="cl-932709da"><p class="cl-9326ca4c"><span class="cl-9326b07a">42 (15.1%)</span></p></td>
-<td class="cl-932709b2"><p class="cl-9326ca4c"><span class="cl-9326b07a">1095 (18.6%)</span></p></td>
+<td class="cl-7ce4c09c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">5-9</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">641 (22.8%)</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">412 (14.7%)</span></p></td>
+<td class="cl-7ce4c09b"><p class="cl-7ce4c099"><span class="cl-7ce4c098">42 (15.1%)</span></p></td>
+<td class="cl-7ce4c09a"><p class="cl-7ce4c099"><span class="cl-7ce4c098">1095 (18.6%)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-932709f8"><p class="cl-9326ca4c"><span class="cl-9326b07a">10-14</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">518 (18.5%)</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">383 (13.7%)</span></p></td>
-<td class="cl-932709da"><p class="cl-9326ca4c"><span class="cl-9326b07a">40 (14.4%)</span></p></td>
-<td class="cl-932709b2"><p class="cl-9326ca4c"><span class="cl-9326b07a"> 941 (16.0%)</span></p></td>
+<td class="cl-7ce4c09c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">10-14</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">518 (18.5%)</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">383 (13.7%)</span></p></td>
+<td class="cl-7ce4c09b"><p class="cl-7ce4c099"><span class="cl-7ce4c098">40 (14.4%)</span></p></td>
+<td class="cl-7ce4c09a"><p class="cl-7ce4c099"><span class="cl-7ce4c098"> 941 (16.0%)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-932709f8"><p class="cl-9326ca4c"><span class="cl-9326b07a">15-19</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">359 (12.8%)</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">364 (13.0%)</span></p></td>
-<td class="cl-932709da"><p class="cl-9326ca4c"><span class="cl-9326b07a">20  (7.2%)</span></p></td>
-<td class="cl-932709b2"><p class="cl-9326ca4c"><span class="cl-9326b07a"> 743 (12.6%)</span></p></td>
+<td class="cl-7ce4c09c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">15-19</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">359 (12.8%)</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">364 (13.0%)</span></p></td>
+<td class="cl-7ce4c09b"><p class="cl-7ce4c099"><span class="cl-7ce4c098">20  (7.2%)</span></p></td>
+<td class="cl-7ce4c09a"><p class="cl-7ce4c099"><span class="cl-7ce4c098"> 743 (12.6%)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-932709f8"><p class="cl-9326ca4c"><span class="cl-9326b07a">20-29</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">468 (16.7%)</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">575 (20.5%)</span></p></td>
-<td class="cl-932709da"><p class="cl-9326ca4c"><span class="cl-9326b07a">30 (10.8%)</span></p></td>
-<td class="cl-932709b2"><p class="cl-9326ca4c"><span class="cl-9326b07a">1073 (18.2%)</span></p></td>
+<td class="cl-7ce4c09c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">20-29</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">468 (16.7%)</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">575 (20.5%)</span></p></td>
+<td class="cl-7ce4c09b"><p class="cl-7ce4c099"><span class="cl-7ce4c098">30 (10.8%)</span></p></td>
+<td class="cl-7ce4c09a"><p class="cl-7ce4c099"><span class="cl-7ce4c098">1073 (18.2%)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-932709f8"><p class="cl-9326ca4c"><span class="cl-9326b07a">30-49</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">179  (6.4%)</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">557 (19.9%)</span></p></td>
-<td class="cl-932709da"><p class="cl-9326ca4c"><span class="cl-9326b07a">18  (6.5%)</span></p></td>
-<td class="cl-932709b2"><p class="cl-9326ca4c"><span class="cl-9326b07a"> 754 (12.8%)</span></p></td>
+<td class="cl-7ce4c09c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">30-49</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">179  (6.4%)</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">557 (19.9%)</span></p></td>
+<td class="cl-7ce4c09b"><p class="cl-7ce4c099"><span class="cl-7ce4c098">18  (6.5%)</span></p></td>
+<td class="cl-7ce4c09a"><p class="cl-7ce4c099"><span class="cl-7ce4c098"> 754 (12.8%)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-932709f8"><p class="cl-9326ca4c"><span class="cl-9326b07a">50-69</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">  2  (0.1%)</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a"> 91  (3.2%)</span></p></td>
-<td class="cl-932709da"><p class="cl-9326ca4c"><span class="cl-9326b07a"> 2  (0.7%)</span></p></td>
-<td class="cl-932709b2"><p class="cl-9326ca4c"><span class="cl-9326b07a">  95  (1.6%)</span></p></td>
+<td class="cl-7ce4c09c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">50-69</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">  2  (0.1%)</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098"> 91  (3.2%)</span></p></td>
+<td class="cl-7ce4c09b"><p class="cl-7ce4c099"><span class="cl-7ce4c098"> 2  (0.7%)</span></p></td>
+<td class="cl-7ce4c09a"><p class="cl-7ce4c099"><span class="cl-7ce4c098">  95  (1.6%)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-932709f8"><p class="cl-9326ca4c"><span class="cl-9326b07a">70+</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">  0  (0.0%)</span></p></td>
-<td class="cl-93270a02"><p class="cl-9326ca4c"><span class="cl-9326b07a">  5  (0.2%)</span></p></td>
-<td class="cl-932709da"><p class="cl-9326ca4c"><span class="cl-9326b07a"> 1  (0.4%)</span></p></td>
-<td class="cl-932709b2"><p class="cl-9326ca4c"><span class="cl-9326b07a">   6  (0.1%)</span></p></td>
+<td class="cl-7ce4c09c"><p class="cl-7ce4c099"><span class="cl-7ce4c098">70+</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">  0  (0.0%)</span></p></td>
+<td class="cl-7ce4c09d"><p class="cl-7ce4c099"><span class="cl-7ce4c098">  5  (0.2%)</span></p></td>
+<td class="cl-7ce4c09b"><p class="cl-7ce4c099"><span class="cl-7ce4c098"> 1  (0.4%)</span></p></td>
+<td class="cl-7ce4c09a"><p class="cl-7ce4c099"><span class="cl-7ce4c098">   6  (0.1%)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-93270a3e"><p class="cl-9326ca4c"><span class="cl-9326b07a"></span></p></td>
-<td class="cl-93270a16"><p class="cl-9326ca4c"><span class="cl-9326b07a">  0  (0.0%)</span></p></td>
-<td class="cl-93270a16"><p class="cl-9326ca4c"><span class="cl-9326b07a">  0  (0.0%)</span></p></td>
-<td class="cl-93270a2a"><p class="cl-9326ca4c"><span class="cl-9326b07a">86 (30.9%)</span></p></td>
-<td class="cl-93270a0c"><p class="cl-9326ca4c"><span class="cl-9326b07a">  86  (1.5%)</span></p></td>
+<td class="cl-7ce4c0a1"><p class="cl-7ce4c099"><span class="cl-7ce4c098"></span></p></td>
+<td class="cl-7ce4c09f"><p class="cl-7ce4c099"><span class="cl-7ce4c098">  0  (0.0%)</span></p></td>
+<td class="cl-7ce4c09f"><p class="cl-7ce4c099"><span class="cl-7ce4c098">  0  (0.0%)</span></p></td>
+<td class="cl-7ce4c0a0"><p class="cl-7ce4c099"><span class="cl-7ce4c098">86 (30.9%)</span></p></td>
+<td class="cl-7ce4c09e"><p class="cl-7ce4c099"><span class="cl-7ce4c098">  86  (1.5%)</span></p></td>
 </tr>
 </tbody>
 </table></div>
-</div></template><div class="flextable-shadow-host" id="b7832270-7fdf-41c1-8803-1200229f4b23"></div>
+</div></template><div class="flextable-shadow-host" id="0f9c2d13-cc66-47db-93b6-4e012c1010f8"></div>
 <script>
-var dest = document.getElementById("b7832270-7fdf-41c1-8803-1200229f4b23");
-var template = document.getElementById("2ea0f05d-fc4d-4c53-9ddf-54a70892421c");
+var dest = document.getElementById("0f9c2d13-cc66-47db-93b6-4e012c1010f8");
+var template = document.getElementById("546add27-babf-4bd9-84de-aaf141e830a5");
 var caption = template.content.querySelector("caption");
 if(caption) {
   caption.style.cssText = "display:block;text-align:center;";
@@ -1634,7 +1634,7 @@ fantome.appendChild(templateContent);
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">age_cat</span><span class="op">)</span> <span class="op">%&gt;%</span>     <span class="co"># group data by unique values in column age_cat</span>
   <span class="fu">summarise</span><span class="op">(</span>n_rows <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>   <span class="co"># return number of rows *per group*</span></code></pre></div>
-<pre><code>## # A tibble: 9 × 2
+<pre><code>## # A tibble: 9 x 2
 ##   age_cat n_rows
 ##   &lt;fct&gt;    &lt;int&gt;
 ## 1 0-4       1095
@@ -1737,8 +1737,8 @@ fantome.appendChild(templateContent);
   <span class="fu">group_by</span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>                         <span class="co"># group by outcome </span>
   <span class="fu">count</span><span class="op">(</span><span class="va">age_cat</span><span class="op">)</span> <span class="op">%&gt;%</span>                            <span class="co"># group and count by age_cat, and then remove age_cat grouping</span>
   <span class="fu">mutate</span><span class="op">(</span>percent <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html">percent</a></span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># calculate percent - note the denominator is by outcome group</span></code></pre></div>
-<div id="htmlwidget-53150b22809c24589a4c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-53150b22809c24589a4c">{"x":{"filter":"none","data":[["Death","Death","Death","Death","Death","Death","Death","Death","Death","Recover","Recover","Recover","Recover","Recover","Recover","Recover","Recover","Recover",null,null,null,null,null,null,null,null],["0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+",null,"0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+",null,"0-4","5-9","10-14","15-19","20-29","30-49","50-69",null],[471,476,438,323,477,329,33,3,32,364,391,303,251,367,238,38,3,28,260,228,200,169,229,187,24,26],["18.242%","18.435%","16.964%","12.510%","18.474%","12.742%","1.278%","0.116%","1.239%","18.36%","19.72%","15.28%","12.66%","18.51%","12.00%","1.92%","0.15%","1.41%","19.652%","17.234%","15.117%","12.774%","17.309%","14.135%","1.814%","1.965%"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>outcome<\/th>\n      <th>age_cat<\/th>\n      <th>n<\/th>\n      <th>percent<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-639a1587a08627e4f7c2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-639a1587a08627e4f7c2">{"x":{"filter":"none","data":[["Death","Death","Death","Death","Death","Death","Death","Death","Death","Recover","Recover","Recover","Recover","Recover","Recover","Recover","Recover","Recover",null,null,null,null,null,null,null,null],["0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+",null,"0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+",null,"0-4","5-9","10-14","15-19","20-29","30-49","50-69",null],[471,476,438,323,477,329,33,3,32,364,391,303,251,367,238,38,3,28,260,228,200,169,229,187,24,26],["18.242%","18.435%","16.964%","12.510%","18.474%","12.742%","1.278%","0.116%","1.239%","18.36%","19.72%","15.28%","12.66%","18.51%","12.00%","1.92%","0.15%","1.41%","19.652%","17.234%","15.117%","12.774%","17.309%","14.135%","1.814%","1.965%"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>outcome<\/th>\n      <th>age_cat<\/th>\n      <th>n<\/th>\n      <th>percent<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="plotting" class="section level3 unnumbered">
 <h3>Plotting<a class="anchor" aria-label="anchor" href="#plotting"><i class="fas fa-link"></i></a>
@@ -1784,7 +1784,7 @@ fantome.appendChild(templateContent);
   <span class="op">)</span>
 
 <span class="va">summary_table</span>  <span class="co"># print</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 7
+<pre><code>## # A tibble: 6 x 7
 ##   hospital                             cases delay_max delay_mean delay_sd delay_3 pct_delay_3
 ##   &lt;chr&gt;                                &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt; &lt;chr&gt;      
 ## 1 Central Hospital                       454        12        1.9      1.9     108 24%        
@@ -1823,7 +1823,7 @@ fantome.appendChild(templateContent);
     max_temp_fvr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">temp</span><span class="op">[</span><span class="va">fever</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,
     max_temp_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">temp</span><span class="op">[</span><span class="va">fever</span> <span class="op">==</span> <span class="st">"no"</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 3
+<pre><code>## # A tibble: 6 x 3
 ##   hospital                             max_temp_fvr max_temp_no
 ##   &lt;chr&gt;                                       &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 Central Hospital                             40.4        38  
@@ -1901,7 +1901,7 @@ fantome.appendChild(templateContent);
     p75 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">age_years</span>, probs <span class="op">=</span> <span class="fl">0.75</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>,
     p98 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">age_years</span>, probs <span class="op">=</span> <span class="fl">0.98</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
     <span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 5
+<pre><code>## # A tibble: 6 x 5
 ##   hospital                               p05   p50   p75   p98
 ##   &lt;chr&gt;                                &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 Central Hospital                         1    12    21  48  
@@ -1927,7 +1927,7 @@ fantome.appendChild(templateContent);
 ## Column `variable`
 ## `mutate_if()` ignored the following grouping variables:
 ## Column `variable`</code></pre>
-<pre><code>## # A tibble: 6 × 8
+<pre><code>## # A tibble: 6 x 8
 ##   hospital                             variable     n  `0%` `25%` `50%` `75%` `100%`
 ##   &lt;chr&gt;                                &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
 ## 1 Central Hospital                     age        445     0     6    12    21     58
@@ -1941,7 +1941,7 @@ fantome.appendChild(templateContent);
   <span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span><span class="va">age</span>, type <span class="op">=</span> <span class="st">"quantile"</span><span class="op">)</span></code></pre></div>
 <pre><code>## `mutate_if()` ignored the following grouping variables:
 ## Column `variable`</code></pre>
-<pre><code>## # A tibble: 1 × 7
+<pre><code>## # A tibble: 1 x 7
 ## # Groups:   variable [1]
 ##   variable     n  `0%` `25%` `50%` `75%` `100%`
 ##   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
@@ -1973,7 +1973,7 @@ fantome.appendChild(templateContent);
     total_cases  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>,
     male_cases   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"m"</span><span class="op">]</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>,
     female_cases <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"f"</span><span class="op">]</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 4
+<pre><code>## # A tibble: 2 x 4
 ##   outcome total_cases male_cases female_cases
 ##   &lt;chr&gt;         &lt;int&gt;      &lt;int&gt;        &lt;int&gt;
 ## 1 Death          2455       1228         1227
@@ -2000,7 +2000,7 @@ fantome.appendChild(templateContent);
   <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span>.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">age_years</span>, <span class="va">temp</span>, <span class="va">wt_kg</span>, <span class="va">ht_cm</span><span class="op">)</span>,  <span class="co"># columns</span>
                    .fns <span class="op">=</span> <span class="va">mean</span>,                               <span class="co"># function</span>
                    na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>                                  <span class="co"># extra arguments</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 5
+<pre><code>## # A tibble: 3 x 5
 ##   outcome age_years  temp wt_kg ht_cm
 ##   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 Death        15.9  38.6  52.6  125.
@@ -2013,7 +2013,7 @@ fantome.appendChild(templateContent);
   <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span>.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">age_years</span>, <span class="va">temp</span>, <span class="va">wt_kg</span>, <span class="va">ht_cm</span><span class="op">)</span>, <span class="co"># columns</span>
                    .fns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"mean"</span> <span class="op">=</span> <span class="va">mean</span>, <span class="st">"sd"</span> <span class="op">=</span> <span class="va">sd</span><span class="op">)</span>,    <span class="co"># multiple functions </span>
                    na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>                                 <span class="co"># extra arguments</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 9
+<pre><code>## # A tibble: 3 x 9
 ##   outcome age_years_mean age_years_sd temp_mean temp_sd wt_kg_mean wt_kg_sd ht_cm_mean ht_cm_sd
 ##   &lt;chr&gt;            &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 Death             15.9         12.3      38.6   0.962       52.6     18.4       125.     48.7
@@ -2056,7 +2056,7 @@ fantome.appendChild(templateContent);
     .cols <span class="op">=</span> <span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>,  <span class="co"># all numeric columns in the data frame</span>
     .fns <span class="op">=</span> <span class="va">mean</span>,
     na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 12
+<pre><code>## # A tibble: 3 x 12
 ##   outcome generation   age age_years   lon   lat wt_kg ht_cm ct_blood  temp   bmi days_onset_hosp
 ##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;
 ## 1 Death         16.7  15.9      15.9 -13.2  8.47  52.6  125.     21.3  38.6  45.6            1.84
@@ -2073,13 +2073,13 @@ fantome.appendChild(templateContent);
   <span class="fu">group_by</span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>                         <span class="co"># group by outcome </span>
   <span class="fu">count</span><span class="op">(</span><span class="va">age_cat</span><span class="op">)</span> <span class="op">%&gt;%</span>                            <span class="co"># group and count by age_cat, and then remove age_cat grouping</span>
   <span class="fu">mutate</span><span class="op">(</span>percent <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html">percent</a></span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># calculate percent - note the denominator is by outcome group</span></code></pre></div>
-<div id="htmlwidget-92c27a0d03550049d078" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-92c27a0d03550049d078">{"x":{"filter":"none","data":[["Death","Death","Death","Death","Death","Death","Death","Death","Death","Recover","Recover","Recover","Recover","Recover","Recover","Recover","Recover","Recover",null,null,null,null,null,null,null,null],["0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+",null,"0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+",null,"0-4","5-9","10-14","15-19","20-29","30-49","50-69",null],[471,476,438,323,477,329,33,3,32,364,391,303,251,367,238,38,3,28,260,228,200,169,229,187,24,26],["18.242%","18.435%","16.964%","12.510%","18.474%","12.742%","1.278%","0.116%","1.239%","18.36%","19.72%","15.28%","12.66%","18.51%","12.00%","1.92%","0.15%","1.41%","19.652%","17.234%","15.117%","12.774%","17.309%","14.135%","1.814%","1.965%"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>outcome<\/th>\n      <th>age_cat<\/th>\n      <th>n<\/th>\n      <th>percent<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>To pivot wider, we create the new columns from the <em>values</em> in the existing column <code>age_cat</code> (by setting <code>names_from = age_cat</code>). We also specify that the new table values will come from the existing column <code>n</code>, with <code>values_from = n</code>. The columns not mentioned in our pivoting command (<code>outcome</code>) will remain unchanged on the far left side.</p>
+<div id="htmlwidget-788d75bb382591b946c1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-788d75bb382591b946c1">{"x":{"filter":"none","data":[["Death","Death","Death","Death","Death","Death","Death","Death","Death","Recover","Recover","Recover","Recover","Recover","Recover","Recover","Recover","Recover",null,null,null,null,null,null,null,null],["0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+",null,"0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+",null,"0-4","5-9","10-14","15-19","20-29","30-49","50-69",null],[471,476,438,323,477,329,33,3,32,364,391,303,251,367,238,38,3,28,260,228,200,169,229,187,24,26],["18.242%","18.435%","16.964%","12.510%","18.474%","12.742%","1.278%","0.116%","1.239%","18.36%","19.72%","15.28%","12.66%","18.51%","12.00%","1.92%","0.15%","1.41%","19.652%","17.234%","15.117%","12.774%","17.309%","14.135%","1.814%","1.965%"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>outcome<\/th>\n      <th>age_cat<\/th>\n      <th>n<\/th>\n      <th>percent<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>To pivot wider, we create the new columns from the <em>values</em> in the existing column <code>age_cat</code> (by setting <code>names_from = age_cat</code>). We also specify that the new table values will come from the existing column <code>n</code>, with <code>values_from = n</code>. The columns not mentioned in our pivoting command (<code>outcome</code>) will remain unchanged on the far left side.</p>
 <div class="sourceCode" id="cb888"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">age_by_outcome</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">percent</span><span class="op">)</span> <span class="op">%&gt;%</span>   <span class="co"># keep only counts for simplicity</span>
   <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">age_cat</span>, values_from <span class="op">=</span> <span class="va">n</span><span class="op">)</span>  </code></pre></div>
-<pre><code>## # A tibble: 3 × 10
+<pre><code>## # A tibble: 3 x 10
 ## # Groups:   outcome [3]
 ##   outcome `0-4` `5-9` `10-14` `15-19` `20-29` `30-49` `50-69` `70+`  `NA`
 ##   &lt;chr&gt;   &lt;int&gt; &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -2130,7 +2130,7 @@ fantome.appendChild(templateContent);
     ct_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">ct_blood</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>               <span class="co"># median CT value per group</span>
   
 <span class="va">by_hospital</span> <span class="co"># print table</span></code></pre></div>
-<pre><code>## # A tibble: 10 × 4
+<pre><code>## # A tibble: 10 x 4
 ## # Groups:   hospital [5]
 ##    hospital                             outcome     N ct_value
 ##    &lt;chr&gt;                                &lt;chr&gt;   &lt;int&gt;    &lt;dbl&gt;
@@ -2154,7 +2154,7 @@ fantome.appendChild(templateContent);
         ct_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">ct_blood</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">totals</span> <span class="co"># print table</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 3
+<pre><code>## # A tibble: 2 x 3
 ##   outcome     N ct_value
 ##   &lt;chr&gt;   &lt;int&gt;    &lt;dbl&gt;
 ## 1 Death    1971       22
@@ -2164,8 +2164,8 @@ fantome.appendChild(templateContent);
 <code class="sourceCode R"><span class="va">table_long</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">by_hospital</span>, <span class="va">totals</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>hospital <span class="op">=</span> <span class="fu">replace_na</span><span class="op">(</span><span class="va">hospital</span>, <span class="st">"Total"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Here is the new table with “Total” rows at the bottom.</p>
-<div id="htmlwidget-f9bb1a5b8deece18bd8b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f9bb1a5b8deece18bd8b">{"x":{"filter":"none","data":[["Central Hospital","Central Hospital","Military Hospital","Military Hospital","Other","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Total","Total"],["Death","Recover","Death","Recover","Death","Recover","Death","Recover","Death","Recover","Death","Recover"],[193,165,399,309,395,290,785,579,199,126,1971,1469],[22,22,21,22,22,21,22,21,22,22,22,22]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>hospital<\/th>\n      <th>outcome<\/th>\n      <th>N<\/th>\n      <th>ct_value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>This table is in a “long” format, which may be what you want. <em>Optionally</em>, you can <em>pivot</em> this table <em>wider</em> to make it more readable. See the section on pivoting wider above, and the <a href="pivoting-data.html#pivoting-data">Pivoting data</a> page. You can also add more columns, and arrange it nicely. This code is below.</p>
+<div id="htmlwidget-0d2bdea388f791f82276" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0d2bdea388f791f82276">{"x":{"filter":"none","data":[["Central Hospital","Central Hospital","Military Hospital","Military Hospital","Other","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Total","Total"],["Death","Recover","Death","Recover","Death","Recover","Death","Recover","Death","Recover","Death","Recover"],[193,165,399,309,395,290,785,579,199,126,1971,1469],[22,22,21,22,22,21,22,21,22,22,22,22]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>hospital<\/th>\n      <th>outcome<\/th>\n      <th>N<\/th>\n      <th>ct_value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>This table is in a “long” format, which may be what you want. <em>Optionally</em>, you can <em>pivot</em> this table <em>wider</em> to make it more readable. See the section on pivoting wider above, and the <a href="pivoting-data.html#pivoting-data">Pivoting data</a> page. You can also add more columns, and arrange it nicely. This code is below.</p>
 <div class="sourceCode" id="cb897"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">table_long</span> <span class="op">%&gt;%</span> 
   
@@ -2184,18 +2184,18 @@ fantome.appendChild(templateContent);
     <span class="va">N_Recover</span>, <span class="va">Pct_Recover</span>, <span class="va">ct_value_Recover</span>,            <span class="co"># Recovered columns</span>
     <span class="va">N_Death</span>, <span class="va">Pct_Death</span>, <span class="va">ct_value_Death</span><span class="op">)</span>  <span class="op">%&gt;%</span>             <span class="co"># Death columns</span>
   <span class="fu">arrange</span><span class="op">(</span><span class="va">N_Known</span><span class="op">)</span>                                  <span class="co"># Arrange rows from lowest to highest (Total row at bottom)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 8
+<pre><code>## # A tibble: 6 x 8
 ## # Groups:   hospital [6]
-##   hospital           N_Known N_Recover Pct_Recover ct_value_Recover N_Death Pct_Death ct_value_Death
-##   &lt;chr&gt;                &lt;int&gt;     &lt;int&gt; &lt;chr&gt;                  &lt;dbl&gt;   &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
-## 1 St. Mark's Matern…     325       126 38.8%                     22     199 61.2%                 22
-## 2 Central Hospital       358       165 46.1%                     22     193 53.9%                 22
-## 3 Other                  685       290 42.3%                     21     395 57.7%                 22
-## 4 Military Hospital      708       309 43.6%                     22     399 56.4%                 21
-## 5 Port Hospital         1364       579 42.4%                     21     785 57.6%                 22
-## 6 Total                 3440      1469 42.7%                     22    1971 57.3%                 22</code></pre>
+##   hospital                             N_Known N_Recover Pct_Recover ct_value_Recover N_Death Pct_Death ct_value_Death
+##   &lt;chr&gt;                                  &lt;int&gt;     &lt;int&gt; &lt;chr&gt;                  &lt;dbl&gt;   &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
+## 1 St. Mark's Maternity Hospital (SMMH)     325       126 38.8%                     22     199 61.2%                 22
+## 2 Central Hospital                         358       165 46.1%                     22     193 53.9%                 22
+## 3 Other                                    685       290 42.3%                     21     395 57.7%                 22
+## 4 Military Hospital                        708       309 43.6%                     22     399 56.4%                 21
+## 5 Port Hospital                           1364       579 42.4%                     21     785 57.6%                 22
+## 6 Total                                   3440      1469 42.7%                     22    1971 57.3%                 22</code></pre>
 <p>And then you can print this nicely as an image - below is the output printed with <strong>flextable</strong>. You can read more in depth about this example and how to achieve this “pretty” table in the <a href="tables-for-presentation.html#tables-for-presentation">Tables for presentation</a> page.</p>
-<template id="48c539d9-55fb-4717-8edb-3e93e13a7d2a"><style>
+<template id="a7159d38-7d68-4877-a46f-e99482d53125"><style>
 .tabwid table{
   border-collapse:collapse;
   line-height:1;
@@ -2231,101 +2231,101 @@ background-color: transparent;
 }
 </style>
 <div class="tabwid">
-<style>.cl-94bf2912{border-collapse:collapse;}.cl-94b7fd04{font-family:'DejaVu Sans';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-94b7fd54{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-94b80ec0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-94b80ede{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-94b857cc{width:72pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b857ea{width:194.4pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b85808{width:108pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b85812{width:72pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b85826{width:54pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b8583a{width:108pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b85844{width:72pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b8584e{width:54pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b85858{width:194.4pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b85862{width:72pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b8586c{width:72pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b85880{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 1pt solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b85894{width:108pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b8589e{width:72pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b858a8{width:194.4pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b858b2{width:72pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b858bc{width:194.4pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b858c6{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 1pt solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b858d0{width:72pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-94b858da{width:108pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<div class="inline-table"><table class="cl-94bf2912">
+<style>.cl-7fc10ec0{border-collapse:collapse;}.cl-7f74c4f2{font-family:'Arial';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-7f74c4f3{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-7fb05e90{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-7fb05e91{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-7fb2c112{width:72pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c113{width:194.4pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c114{width:108pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c115{width:72pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c116{width:54pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c117{width:108pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c118{width:72pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c119{width:54pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c11a{width:194.4pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c11b{width:72pt;background-color:rgba(242, 242, 242, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb2c11c{width:72pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb52330{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 1pt solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb52331{width:108pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb52332{width:72pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb52333{width:194.4pt;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb52334{width:72pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb52335{width:194.4pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb52336{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 1pt solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb52337{width:72pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7fb52338{width:108pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<div class="inline-table"><table class="cl-7fc10ec0">
 <thead>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="2" class="cl-94b858a8"><p class="cl-94b80ec0"><span class="cl-94b7fd04">Hospital</span></p></td>
-<td rowspan="2" class="cl-94b85894"><p class="cl-94b80ede"><span class="cl-94b7fd04">Total cases with known outcome</span></p></td>
-<td colspan="3" class="cl-94b85880"><p class="cl-94b80ede"><span class="cl-94b7fd04">Recovered</span></p></td>
-<td colspan="3" class="cl-94b85880"><p class="cl-94b80ede"><span class="cl-94b7fd04">Died</span></p></td>
+<td rowspan="2" class="cl-7fb52333"><p class="cl-7fb05e90"><span class="cl-7f74c4f2">Hospital</span></p></td>
+<td rowspan="2" class="cl-7fb52331"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">Total cases with known outcome</span></p></td>
+<td colspan="3" class="cl-7fb52330"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">Recovered</span></p></td>
+<td colspan="3" class="cl-7fb52330"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">Died</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-94b858c6"><p class="cl-94b80ede"><span class="cl-94b7fd54">Total</span></p></td>
-<td class="cl-94b858d0"><p class="cl-94b80ede"><span class="cl-94b7fd54">% of cases</span></p></td>
-<td class="cl-94b858b2"><p class="cl-94b80ede"><span class="cl-94b7fd54">Median CT values</span></p></td>
-<td class="cl-94b858c6"><p class="cl-94b80ede"><span class="cl-94b7fd54">Total</span></p></td>
-<td class="cl-94b858d0"><p class="cl-94b80ede"><span class="cl-94b7fd54">% of cases</span></p></td>
-<td class="cl-94b858d0"><p class="cl-94b80ede"><span class="cl-94b7fd54">Median CT values</span></p></td>
+<td class="cl-7fb52336"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">Total</span></p></td>
+<td class="cl-7fb52337"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">% of cases</span></p></td>
+<td class="cl-7fb52334"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">Median CT values</span></p></td>
+<td class="cl-7fb52336"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">Total</span></p></td>
+<td class="cl-7fb52337"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">% of cases</span></p></td>
+<td class="cl-7fb52337"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">Median CT values</span></p></td>
 </tr>
 </thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-94b857ea"><p class="cl-94b80ec0"><span class="cl-94b7fd54">St. Mark's Maternity Hospital (SMMH)</span></p></td>
-<td class="cl-94b85808"><p class="cl-94b80ede"><span class="cl-94b7fd54">325</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">126</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">38.8%</span></p></td>
-<td class="cl-94b85812"><p class="cl-94b80ede"><span class="cl-94b7fd54">22</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">199</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">61.2%</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">22</span></p></td>
+<td class="cl-7fb2c113"><p class="cl-7fb05e90"><span class="cl-7f74c4f3">St. Mark's Maternity Hospital (SMMH)</span></p></td>
+<td class="cl-7fb2c114"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">325</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">126</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">38.8%</span></p></td>
+<td class="cl-7fb2c115"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">22</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">199</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">61.2%</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">22</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-94b857ea"><p class="cl-94b80ec0"><span class="cl-94b7fd54">Central Hospital</span></p></td>
-<td class="cl-94b85808"><p class="cl-94b80ede"><span class="cl-94b7fd54">358</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">165</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">46.1%</span></p></td>
-<td class="cl-94b85812"><p class="cl-94b80ede"><span class="cl-94b7fd54">22</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">193</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">53.9%</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">22</span></p></td>
+<td class="cl-7fb2c113"><p class="cl-7fb05e90"><span class="cl-7f74c4f3">Central Hospital</span></p></td>
+<td class="cl-7fb2c114"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">358</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">165</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">46.1%</span></p></td>
+<td class="cl-7fb2c115"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">22</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">193</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">53.9%</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">22</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-94b857ea"><p class="cl-94b80ec0"><span class="cl-94b7fd54">Other</span></p></td>
-<td class="cl-94b85808"><p class="cl-94b80ede"><span class="cl-94b7fd54">685</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">290</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">42.3%</span></p></td>
-<td class="cl-94b85812"><p class="cl-94b80ede"><span class="cl-94b7fd54">21</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">395</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">57.7%</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">22</span></p></td>
+<td class="cl-7fb2c113"><p class="cl-7fb05e90"><span class="cl-7f74c4f3">Other</span></p></td>
+<td class="cl-7fb2c114"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">685</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">290</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">42.3%</span></p></td>
+<td class="cl-7fb2c115"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">21</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">395</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">57.7%</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">22</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-94b857ea"><p class="cl-94b80ec0"><span class="cl-94b7fd54">Military Hospital</span></p></td>
-<td class="cl-94b85808"><p class="cl-94b80ede"><span class="cl-94b7fd54">708</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">309</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">43.6%</span></p></td>
-<td class="cl-94b85812"><p class="cl-94b80ede"><span class="cl-94b7fd54">22</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">399</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">56.4%</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">21</span></p></td>
+<td class="cl-7fb2c113"><p class="cl-7fb05e90"><span class="cl-7f74c4f3">Military Hospital</span></p></td>
+<td class="cl-7fb2c114"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">708</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">309</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">43.6%</span></p></td>
+<td class="cl-7fb2c115"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">22</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">399</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">56.4%</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">21</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-94b857ea"><p class="cl-94b80ec0"><span class="cl-94b7fd54">Missing</span></p></td>
-<td class="cl-94b85808"><p class="cl-94b80ede"><span class="cl-94b7fd54">1,125</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">514</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">45.7%</span></p></td>
-<td class="cl-94b85812"><p class="cl-94b80ede"><span class="cl-94b7fd54">21</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd54">611</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">54.3%</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd54">21</span></p></td>
+<td class="cl-7fb2c113"><p class="cl-7fb05e90"><span class="cl-7f74c4f3">Missing</span></p></td>
+<td class="cl-7fb2c114"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">1,125</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">514</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">45.7%</span></p></td>
+<td class="cl-7fb2c115"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">21</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">611</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">54.3%</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">21</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-94b857ea"><p class="cl-94b80ec0"><span class="cl-94b7fd04">Port Hospital</span></p></td>
-<td class="cl-94b85808"><p class="cl-94b80ede"><span class="cl-94b7fd04">1,364</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd04">579</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd04">42.4%</span></p></td>
-<td class="cl-94b85812"><p class="cl-94b80ede"><span class="cl-94b7fd04">21</span></p></td>
-<td class="cl-94b85826"><p class="cl-94b80ede"><span class="cl-94b7fd04">785</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd04">57.6%</span></p></td>
-<td class="cl-94b857cc"><p class="cl-94b80ede"><span class="cl-94b7fd04">22</span></p></td>
+<td class="cl-7fb2c113"><p class="cl-7fb05e90"><span class="cl-7f74c4f2">Port Hospital</span></p></td>
+<td class="cl-7fb2c114"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">1,364</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">579</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">42.4%</span></p></td>
+<td class="cl-7fb2c115"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">21</span></p></td>
+<td class="cl-7fb2c116"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">785</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">57.6%</span></p></td>
+<td class="cl-7fb2c112"><p class="cl-7fb05e91"><span class="cl-7f74c4f2">22</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-94b85858"><p class="cl-94b80ec0"><span class="cl-94b7fd54">Total</span></p></td>
-<td class="cl-94b8583a"><p class="cl-94b80ede"><span class="cl-94b7fd54">3,440</span></p></td>
-<td class="cl-94b8584e"><p class="cl-94b80ede"><span class="cl-94b7fd54">1,469</span></p></td>
-<td class="cl-94b85844"><p class="cl-94b80ede"><span class="cl-94b7fd54">42.7%</span></p></td>
-<td class="cl-94b85862"><p class="cl-94b80ede"><span class="cl-94b7fd54">22</span></p></td>
-<td class="cl-94b8584e"><p class="cl-94b80ede"><span class="cl-94b7fd54">1,971</span></p></td>
-<td class="cl-94b85844"><p class="cl-94b80ede"><span class="cl-94b7fd54">57.3%</span></p></td>
-<td class="cl-94b85844"><p class="cl-94b80ede"><span class="cl-94b7fd54">22</span></p></td>
+<td class="cl-7fb2c11a"><p class="cl-7fb05e90"><span class="cl-7f74c4f3">Total</span></p></td>
+<td class="cl-7fb2c117"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">3,440</span></p></td>
+<td class="cl-7fb2c119"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">1,469</span></p></td>
+<td class="cl-7fb2c118"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">42.7%</span></p></td>
+<td class="cl-7fb2c11b"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">22</span></p></td>
+<td class="cl-7fb2c119"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">1,971</span></p></td>
+<td class="cl-7fb2c118"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">57.3%</span></p></td>
+<td class="cl-7fb2c118"><p class="cl-7fb05e91"><span class="cl-7f74c4f3">22</span></p></td>
 </tr>
 </tbody>
 </table></div>
-</div></template><div class="flextable-shadow-host" id="1c508372-3735-4502-b21a-a056629bee00"></div>
+</div></template><div class="flextable-shadow-host" id="71bd1efb-7221-41a4-9f30-2c729431b5d8"></div>
 <script>
-var dest = document.getElementById("1c508372-3735-4502-b21a-a056629bee00");
-var template = document.getElementById("48c539d9-55fb-4717-8edb-3e93e13a7d2a");
+var dest = document.getElementById("71bd1efb-7221-41a4-9f30-2c729431b5d8");
+var template = document.getElementById("a7159d38-7d68-4877-a46f-e99482d53125");
 var caption = template.content.querySelector("caption");
 if(caption) {
   caption.style.cssText = "display:block;text-align:center;";
@@ -2355,12 +2355,12 @@ fantome.appendChild(templateContent);
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="va">age_years</span>, <span class="va">gender</span>, <span class="va">outcome</span>, <span class="va">fever</span>, <span class="va">temp</span>, <span class="va">hospital</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># keep only the columns of interest</span>
   <span class="fu">tbl_summary</span><span class="op">(</span><span class="op">)</span>                                                  <span class="co"># default</span></code></pre></div>
-<div id="opartasdzz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="dlgbqevhmq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#opartasdzz .gt_table {
+#dlgbqevhmq .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2385,7 +2385,7 @@ fantome.appendChild(templateContent);
   border-left-color: #D3D3D3;
 }
 
-#opartasdzz .gt_heading {
+#dlgbqevhmq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2397,7 +2397,7 @@ fantome.appendChild(templateContent);
   border-right-color: #D3D3D3;
 }
 
-#opartasdzz .gt_title {
+#dlgbqevhmq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2407,7 +2407,7 @@ fantome.appendChild(templateContent);
   border-bottom-width: 0;
 }
 
-#opartasdzz .gt_subtitle {
+#dlgbqevhmq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2417,13 +2417,13 @@ fantome.appendChild(templateContent);
   border-top-width: 0;
 }
 
-#opartasdzz .gt_bottom_border {
+#dlgbqevhmq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#opartasdzz .gt_col_headings {
+#dlgbqevhmq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2438,7 +2438,7 @@ fantome.appendChild(templateContent);
   border-right-color: #D3D3D3;
 }
 
-#opartasdzz .gt_col_heading {
+#dlgbqevhmq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2458,7 +2458,7 @@ fantome.appendChild(templateContent);
   overflow-x: hidden;
 }
 
-#opartasdzz .gt_column_spanner_outer {
+#dlgbqevhmq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2470,15 +2470,15 @@ fantome.appendChild(templateContent);
   padding-right: 4px;
 }
 
-#opartasdzz .gt_column_spanner_outer:first-child {
+#dlgbqevhmq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#opartasdzz .gt_column_spanner_outer:last-child {
+#dlgbqevhmq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#opartasdzz .gt_column_spanner {
+#dlgbqevhmq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2490,7 +2490,7 @@ fantome.appendChild(templateContent);
   width: 100%;
 }
 
-#opartasdzz .gt_group_heading {
+#dlgbqevhmq .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2512,7 +2512,7 @@ fantome.appendChild(templateContent);
   vertical-align: middle;
 }
 
-#opartasdzz .gt_empty_group_heading {
+#dlgbqevhmq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2527,15 +2527,15 @@ fantome.appendChild(templateContent);
   vertical-align: middle;
 }
 
-#opartasdzz .gt_from_md > :first-child {
+#dlgbqevhmq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#opartasdzz .gt_from_md > :last-child {
+#dlgbqevhmq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#opartasdzz .gt_row {
+#dlgbqevhmq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2554,7 +2554,7 @@ fantome.appendChild(templateContent);
   overflow-x: hidden;
 }
 
-#opartasdzz .gt_stub {
+#dlgbqevhmq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2566,7 +2566,7 @@ fantome.appendChild(templateContent);
   padding-left: 12px;
 }
 
-#opartasdzz .gt_summary_row {
+#dlgbqevhmq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2576,7 +2576,7 @@ fantome.appendChild(templateContent);
   padding-right: 5px;
 }
 
-#opartasdzz .gt_first_summary_row {
+#dlgbqevhmq .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2586,7 +2586,7 @@ fantome.appendChild(templateContent);
   border-top-color: #D3D3D3;
 }
 
-#opartasdzz .gt_grand_summary_row {
+#dlgbqevhmq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2596,7 +2596,7 @@ fantome.appendChild(templateContent);
   padding-right: 5px;
 }
 
-#opartasdzz .gt_first_grand_summary_row {
+#dlgbqevhmq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2606,11 +2606,11 @@ fantome.appendChild(templateContent);
   border-top-color: #D3D3D3;
 }
 
-#opartasdzz .gt_striped {
+#dlgbqevhmq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#opartasdzz .gt_table_body {
+#dlgbqevhmq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2619,7 +2619,7 @@ fantome.appendChild(templateContent);
   border-bottom-color: #D3D3D3;
 }
 
-#opartasdzz .gt_footnotes {
+#dlgbqevhmq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2633,13 +2633,13 @@ fantome.appendChild(templateContent);
   border-right-color: #D3D3D3;
 }
 
-#opartasdzz .gt_footnote {
+#dlgbqevhmq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#opartasdzz .gt_sourcenotes {
+#dlgbqevhmq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2653,41 +2653,41 @@ fantome.appendChild(templateContent);
   border-right-color: #D3D3D3;
 }
 
-#opartasdzz .gt_sourcenote {
+#dlgbqevhmq .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#opartasdzz .gt_left {
+#dlgbqevhmq .gt_left {
   text-align: left;
 }
 
-#opartasdzz .gt_center {
+#dlgbqevhmq .gt_center {
   text-align: center;
 }
 
-#opartasdzz .gt_right {
+#dlgbqevhmq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#opartasdzz .gt_font_normal {
+#dlgbqevhmq .gt_font_normal {
   font-weight: normal;
 }
 
-#opartasdzz .gt_font_bold {
+#dlgbqevhmq .gt_font_bold {
   font-weight: bold;
 }
 
-#opartasdzz .gt_font_italic {
+#dlgbqevhmq .gt_font_italic {
   font-style: italic;
 }
 
-#opartasdzz .gt_super {
+#dlgbqevhmq .gt_super {
   font-size: 65%;
 }
 
-#opartasdzz .gt_footnote_marks {
+#dlgbqevhmq .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2818,12 +2818,12 @@ Use an equations to specify which statistics to show and how to display them. Th
   <span class="fu">select</span><span class="op">(</span><span class="va">age_years</span><span class="op">)</span> <span class="op">%&gt;%</span>         <span class="co"># keep only columns of interest </span>
   <span class="fu">tbl_summary</span><span class="op">(</span>                  <span class="co"># create summary table</span>
     statistic <span class="op">=</span> <span class="va">age_years</span> <span class="op">~</span> <span class="st">"{mean}"</span><span class="op">)</span> <span class="co"># print mean of age</span></code></pre></div>
-<div id="iundvjxadq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hjmkndeytd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#iundvjxadq .gt_table {
+#hjmkndeytd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2848,7 +2848,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-left-color: #D3D3D3;
 }
 
-#iundvjxadq .gt_heading {
+#hjmkndeytd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2860,7 +2860,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-right-color: #D3D3D3;
 }
 
-#iundvjxadq .gt_title {
+#hjmkndeytd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2870,7 +2870,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-bottom-width: 0;
 }
 
-#iundvjxadq .gt_subtitle {
+#hjmkndeytd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2880,13 +2880,13 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-top-width: 0;
 }
 
-#iundvjxadq .gt_bottom_border {
+#hjmkndeytd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iundvjxadq .gt_col_headings {
+#hjmkndeytd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2901,7 +2901,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-right-color: #D3D3D3;
 }
 
-#iundvjxadq .gt_col_heading {
+#hjmkndeytd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2921,7 +2921,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   overflow-x: hidden;
 }
 
-#iundvjxadq .gt_column_spanner_outer {
+#hjmkndeytd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2933,15 +2933,15 @@ Use an equations to specify which statistics to show and how to display them. Th
   padding-right: 4px;
 }
 
-#iundvjxadq .gt_column_spanner_outer:first-child {
+#hjmkndeytd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iundvjxadq .gt_column_spanner_outer:last-child {
+#hjmkndeytd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iundvjxadq .gt_column_spanner {
+#hjmkndeytd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2953,7 +2953,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   width: 100%;
 }
 
-#iundvjxadq .gt_group_heading {
+#hjmkndeytd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2975,7 +2975,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   vertical-align: middle;
 }
 
-#iundvjxadq .gt_empty_group_heading {
+#hjmkndeytd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2990,15 +2990,15 @@ Use an equations to specify which statistics to show and how to display them. Th
   vertical-align: middle;
 }
 
-#iundvjxadq .gt_from_md > :first-child {
+#hjmkndeytd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iundvjxadq .gt_from_md > :last-child {
+#hjmkndeytd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iundvjxadq .gt_row {
+#hjmkndeytd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3017,7 +3017,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   overflow-x: hidden;
 }
 
-#iundvjxadq .gt_stub {
+#hjmkndeytd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3029,7 +3029,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   padding-left: 12px;
 }
 
-#iundvjxadq .gt_summary_row {
+#hjmkndeytd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3039,7 +3039,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   padding-right: 5px;
 }
 
-#iundvjxadq .gt_first_summary_row {
+#hjmkndeytd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3049,7 +3049,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-top-color: #D3D3D3;
 }
 
-#iundvjxadq .gt_grand_summary_row {
+#hjmkndeytd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3059,7 +3059,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   padding-right: 5px;
 }
 
-#iundvjxadq .gt_first_grand_summary_row {
+#hjmkndeytd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3069,11 +3069,11 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-top-color: #D3D3D3;
 }
 
-#iundvjxadq .gt_striped {
+#hjmkndeytd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iundvjxadq .gt_table_body {
+#hjmkndeytd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3082,7 +3082,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-bottom-color: #D3D3D3;
 }
 
-#iundvjxadq .gt_footnotes {
+#hjmkndeytd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3096,13 +3096,13 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-right-color: #D3D3D3;
 }
 
-#iundvjxadq .gt_footnote {
+#hjmkndeytd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#iundvjxadq .gt_sourcenotes {
+#hjmkndeytd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3116,41 +3116,41 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-right-color: #D3D3D3;
 }
 
-#iundvjxadq .gt_sourcenote {
+#hjmkndeytd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#iundvjxadq .gt_left {
+#hjmkndeytd .gt_left {
   text-align: left;
 }
 
-#iundvjxadq .gt_center {
+#hjmkndeytd .gt_center {
   text-align: center;
 }
 
-#iundvjxadq .gt_right {
+#hjmkndeytd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iundvjxadq .gt_font_normal {
+#hjmkndeytd .gt_font_normal {
   font-weight: normal;
 }
 
-#iundvjxadq .gt_font_bold {
+#hjmkndeytd .gt_font_bold {
   font-weight: bold;
 }
 
-#iundvjxadq .gt_font_italic {
+#hjmkndeytd .gt_font_italic {
   font-style: italic;
 }
 
-#iundvjxadq .gt_super {
+#hjmkndeytd .gt_super {
   font-size: 65%;
 }
 
-#iundvjxadq .gt_footnote_marks {
+#hjmkndeytd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -3191,12 +3191,12 @@ Use an equations to specify which statistics to show and how to display them. Th
   <span class="fu">select</span><span class="op">(</span><span class="va">age_years</span><span class="op">)</span> <span class="op">%&gt;%</span>                       <span class="co"># keep only columns of interest </span>
   <span class="fu">tbl_summary</span><span class="op">(</span>                                <span class="co"># create summary table</span>
     statistic <span class="op">=</span> <span class="va">age_years</span> <span class="op">~</span> <span class="st">"({min}, {max})"</span><span class="op">)</span> <span class="co"># print min and max of age</span></code></pre></div>
-<div id="xxjhdkakts" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ibkqdtddtt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#xxjhdkakts .gt_table {
+#ibkqdtddtt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3221,7 +3221,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-left-color: #D3D3D3;
 }
 
-#xxjhdkakts .gt_heading {
+#ibkqdtddtt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3233,7 +3233,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-right-color: #D3D3D3;
 }
 
-#xxjhdkakts .gt_title {
+#ibkqdtddtt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3243,7 +3243,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-bottom-width: 0;
 }
 
-#xxjhdkakts .gt_subtitle {
+#ibkqdtddtt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3253,13 +3253,13 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-top-width: 0;
 }
 
-#xxjhdkakts .gt_bottom_border {
+#ibkqdtddtt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xxjhdkakts .gt_col_headings {
+#ibkqdtddtt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3274,7 +3274,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-right-color: #D3D3D3;
 }
 
-#xxjhdkakts .gt_col_heading {
+#ibkqdtddtt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3294,7 +3294,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   overflow-x: hidden;
 }
 
-#xxjhdkakts .gt_column_spanner_outer {
+#ibkqdtddtt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3306,15 +3306,15 @@ Use an equations to specify which statistics to show and how to display them. Th
   padding-right: 4px;
 }
 
-#xxjhdkakts .gt_column_spanner_outer:first-child {
+#ibkqdtddtt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xxjhdkakts .gt_column_spanner_outer:last-child {
+#ibkqdtddtt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xxjhdkakts .gt_column_spanner {
+#ibkqdtddtt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3326,7 +3326,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   width: 100%;
 }
 
-#xxjhdkakts .gt_group_heading {
+#ibkqdtddtt .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3348,7 +3348,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   vertical-align: middle;
 }
 
-#xxjhdkakts .gt_empty_group_heading {
+#ibkqdtddtt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3363,15 +3363,15 @@ Use an equations to specify which statistics to show and how to display them. Th
   vertical-align: middle;
 }
 
-#xxjhdkakts .gt_from_md > :first-child {
+#ibkqdtddtt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xxjhdkakts .gt_from_md > :last-child {
+#ibkqdtddtt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xxjhdkakts .gt_row {
+#ibkqdtddtt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3390,7 +3390,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   overflow-x: hidden;
 }
 
-#xxjhdkakts .gt_stub {
+#ibkqdtddtt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3402,7 +3402,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   padding-left: 12px;
 }
 
-#xxjhdkakts .gt_summary_row {
+#ibkqdtddtt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3412,7 +3412,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   padding-right: 5px;
 }
 
-#xxjhdkakts .gt_first_summary_row {
+#ibkqdtddtt .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3422,7 +3422,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-top-color: #D3D3D3;
 }
 
-#xxjhdkakts .gt_grand_summary_row {
+#ibkqdtddtt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3432,7 +3432,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   padding-right: 5px;
 }
 
-#xxjhdkakts .gt_first_grand_summary_row {
+#ibkqdtddtt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3442,11 +3442,11 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-top-color: #D3D3D3;
 }
 
-#xxjhdkakts .gt_striped {
+#ibkqdtddtt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xxjhdkakts .gt_table_body {
+#ibkqdtddtt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3455,7 +3455,7 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-bottom-color: #D3D3D3;
 }
 
-#xxjhdkakts .gt_footnotes {
+#ibkqdtddtt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3469,13 +3469,13 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-right-color: #D3D3D3;
 }
 
-#xxjhdkakts .gt_footnote {
+#ibkqdtddtt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#xxjhdkakts .gt_sourcenotes {
+#ibkqdtddtt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3489,41 +3489,41 @@ Use an equations to specify which statistics to show and how to display them. Th
   border-right-color: #D3D3D3;
 }
 
-#xxjhdkakts .gt_sourcenote {
+#ibkqdtddtt .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#xxjhdkakts .gt_left {
+#ibkqdtddtt .gt_left {
   text-align: left;
 }
 
-#xxjhdkakts .gt_center {
+#ibkqdtddtt .gt_center {
   text-align: center;
 }
 
-#xxjhdkakts .gt_right {
+#ibkqdtddtt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xxjhdkakts .gt_font_normal {
+#ibkqdtddtt .gt_font_normal {
   font-weight: normal;
 }
 
-#xxjhdkakts .gt_font_bold {
+#ibkqdtddtt .gt_font_bold {
   font-weight: bold;
 }
 
-#xxjhdkakts .gt_font_italic {
+#ibkqdtddtt .gt_font_italic {
   font-style: italic;
 }
 
-#xxjhdkakts .gt_super {
+#ibkqdtddtt .gt_super {
   font-size: 65%;
 }
 
-#xxjhdkakts .gt_footnote_marks {
+#ibkqdtddtt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -3593,12 +3593,12 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
     missing_text <span class="op">=</span> <span class="st">"Missing"</span>                                    <span class="co"># how missing values should display</span>
   <span class="op">)</span></code></pre></div>
 <pre><code>## 1323 observations missing `outcome` have been removed. To include these observations, use `forcats::fct_explicit_na()` on `outcome` column before passing to `tbl_summary()`.</code></pre>
-<div id="ainyzvsonh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kyuqumzvzt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ainyzvsonh .gt_table {
+#kyuqumzvzt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3623,7 +3623,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-left-color: #D3D3D3;
 }
 
-#ainyzvsonh .gt_heading {
+#kyuqumzvzt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3635,7 +3635,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-right-color: #D3D3D3;
 }
 
-#ainyzvsonh .gt_title {
+#kyuqumzvzt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3645,7 +3645,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-bottom-width: 0;
 }
 
-#ainyzvsonh .gt_subtitle {
+#kyuqumzvzt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3655,13 +3655,13 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-top-width: 0;
 }
 
-#ainyzvsonh .gt_bottom_border {
+#kyuqumzvzt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ainyzvsonh .gt_col_headings {
+#kyuqumzvzt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3676,7 +3676,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-right-color: #D3D3D3;
 }
 
-#ainyzvsonh .gt_col_heading {
+#kyuqumzvzt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3696,7 +3696,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   overflow-x: hidden;
 }
 
-#ainyzvsonh .gt_column_spanner_outer {
+#kyuqumzvzt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3708,15 +3708,15 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   padding-right: 4px;
 }
 
-#ainyzvsonh .gt_column_spanner_outer:first-child {
+#kyuqumzvzt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ainyzvsonh .gt_column_spanner_outer:last-child {
+#kyuqumzvzt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ainyzvsonh .gt_column_spanner {
+#kyuqumzvzt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3728,7 +3728,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   width: 100%;
 }
 
-#ainyzvsonh .gt_group_heading {
+#kyuqumzvzt .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3750,7 +3750,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   vertical-align: middle;
 }
 
-#ainyzvsonh .gt_empty_group_heading {
+#kyuqumzvzt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3765,15 +3765,15 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   vertical-align: middle;
 }
 
-#ainyzvsonh .gt_from_md > :first-child {
+#kyuqumzvzt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ainyzvsonh .gt_from_md > :last-child {
+#kyuqumzvzt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ainyzvsonh .gt_row {
+#kyuqumzvzt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3792,7 +3792,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   overflow-x: hidden;
 }
 
-#ainyzvsonh .gt_stub {
+#kyuqumzvzt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3804,7 +3804,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   padding-left: 12px;
 }
 
-#ainyzvsonh .gt_summary_row {
+#kyuqumzvzt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3814,7 +3814,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   padding-right: 5px;
 }
 
-#ainyzvsonh .gt_first_summary_row {
+#kyuqumzvzt .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3824,7 +3824,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-top-color: #D3D3D3;
 }
 
-#ainyzvsonh .gt_grand_summary_row {
+#kyuqumzvzt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3834,7 +3834,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   padding-right: 5px;
 }
 
-#ainyzvsonh .gt_first_grand_summary_row {
+#kyuqumzvzt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3844,11 +3844,11 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-top-color: #D3D3D3;
 }
 
-#ainyzvsonh .gt_striped {
+#kyuqumzvzt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ainyzvsonh .gt_table_body {
+#kyuqumzvzt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3857,7 +3857,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-bottom-color: #D3D3D3;
 }
 
-#ainyzvsonh .gt_footnotes {
+#kyuqumzvzt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3871,13 +3871,13 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-right-color: #D3D3D3;
 }
 
-#ainyzvsonh .gt_footnote {
+#kyuqumzvzt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ainyzvsonh .gt_sourcenotes {
+#kyuqumzvzt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3891,41 +3891,41 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-right-color: #D3D3D3;
 }
 
-#ainyzvsonh .gt_sourcenote {
+#kyuqumzvzt .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ainyzvsonh .gt_left {
+#kyuqumzvzt .gt_left {
   text-align: left;
 }
 
-#ainyzvsonh .gt_center {
+#kyuqumzvzt .gt_center {
   text-align: center;
 }
 
-#ainyzvsonh .gt_right {
+#kyuqumzvzt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ainyzvsonh .gt_font_normal {
+#kyuqumzvzt .gt_font_normal {
   font-weight: normal;
 }
 
-#ainyzvsonh .gt_font_bold {
+#kyuqumzvzt .gt_font_bold {
   font-weight: bold;
 }
 
-#ainyzvsonh .gt_font_italic {
+#kyuqumzvzt .gt_font_italic {
   font-style: italic;
 }
 
-#ainyzvsonh .gt_super {
+#kyuqumzvzt .gt_super {
   font-size: 65%;
 }
 
-#ainyzvsonh .gt_footnote_marks {
+#kyuqumzvzt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -4065,12 +4065,12 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
       <span class="st">"{median} ({p25}, {p75})"</span>,                   <span class="co"># line 2: median and IQR</span>
       <span class="st">"{min}, {max}"</span><span class="op">)</span>                              <span class="co"># line 3: min and max</span>
     <span class="op">)</span></code></pre></div>
-<div id="tpjpxfgchg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="okafilwdjz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#tpjpxfgchg .gt_table {
+#okafilwdjz .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -4095,7 +4095,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-left-color: #D3D3D3;
 }
 
-#tpjpxfgchg .gt_heading {
+#okafilwdjz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4107,7 +4107,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-right-color: #D3D3D3;
 }
 
-#tpjpxfgchg .gt_title {
+#okafilwdjz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4117,7 +4117,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-bottom-width: 0;
 }
 
-#tpjpxfgchg .gt_subtitle {
+#okafilwdjz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4127,13 +4127,13 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-top-width: 0;
 }
 
-#tpjpxfgchg .gt_bottom_border {
+#okafilwdjz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tpjpxfgchg .gt_col_headings {
+#okafilwdjz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4148,7 +4148,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-right-color: #D3D3D3;
 }
 
-#tpjpxfgchg .gt_col_heading {
+#okafilwdjz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4168,7 +4168,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   overflow-x: hidden;
 }
 
-#tpjpxfgchg .gt_column_spanner_outer {
+#okafilwdjz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4180,15 +4180,15 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   padding-right: 4px;
 }
 
-#tpjpxfgchg .gt_column_spanner_outer:first-child {
+#okafilwdjz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tpjpxfgchg .gt_column_spanner_outer:last-child {
+#okafilwdjz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tpjpxfgchg .gt_column_spanner {
+#okafilwdjz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4200,7 +4200,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   width: 100%;
 }
 
-#tpjpxfgchg .gt_group_heading {
+#okafilwdjz .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4222,7 +4222,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   vertical-align: middle;
 }
 
-#tpjpxfgchg .gt_empty_group_heading {
+#okafilwdjz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4237,15 +4237,15 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   vertical-align: middle;
 }
 
-#tpjpxfgchg .gt_from_md > :first-child {
+#okafilwdjz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tpjpxfgchg .gt_from_md > :last-child {
+#okafilwdjz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tpjpxfgchg .gt_row {
+#okafilwdjz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4264,7 +4264,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   overflow-x: hidden;
 }
 
-#tpjpxfgchg .gt_stub {
+#okafilwdjz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4276,7 +4276,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   padding-left: 12px;
 }
 
-#tpjpxfgchg .gt_summary_row {
+#okafilwdjz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4286,7 +4286,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   padding-right: 5px;
 }
 
-#tpjpxfgchg .gt_first_summary_row {
+#okafilwdjz .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4296,7 +4296,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-top-color: #D3D3D3;
 }
 
-#tpjpxfgchg .gt_grand_summary_row {
+#okafilwdjz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4306,7 +4306,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   padding-right: 5px;
 }
 
-#tpjpxfgchg .gt_first_grand_summary_row {
+#okafilwdjz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4316,11 +4316,11 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-top-color: #D3D3D3;
 }
 
-#tpjpxfgchg .gt_striped {
+#okafilwdjz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tpjpxfgchg .gt_table_body {
+#okafilwdjz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4329,7 +4329,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-bottom-color: #D3D3D3;
 }
 
-#tpjpxfgchg .gt_footnotes {
+#okafilwdjz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4343,13 +4343,13 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-right-color: #D3D3D3;
 }
 
-#tpjpxfgchg .gt_footnote {
+#okafilwdjz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#tpjpxfgchg .gt_sourcenotes {
+#okafilwdjz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4363,41 +4363,41 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   border-right-color: #D3D3D3;
 }
 
-#tpjpxfgchg .gt_sourcenote {
+#okafilwdjz .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#tpjpxfgchg .gt_left {
+#okafilwdjz .gt_left {
   text-align: left;
 }
 
-#tpjpxfgchg .gt_center {
+#okafilwdjz .gt_center {
   text-align: center;
 }
 
-#tpjpxfgchg .gt_right {
+#okafilwdjz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tpjpxfgchg .gt_font_normal {
+#okafilwdjz .gt_font_normal {
   font-weight: normal;
 }
 
-#tpjpxfgchg .gt_font_bold {
+#okafilwdjz .gt_font_bold {
   font-weight: bold;
 }
 
-#tpjpxfgchg .gt_font_italic {
+#okafilwdjz .gt_font_italic {
   font-style: italic;
 }
 
-#tpjpxfgchg .gt_super {
+#okafilwdjz .gt_super {
   font-size: 65%;
 }
 
-#tpjpxfgchg .gt_footnote_marks {
+#okafilwdjz .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -4541,7 +4541,7 @@ This is used to adjust how many levels of the statistics are shown. The syntax i
   <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame.matrix</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"Age Category"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/flextable.html">flextable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<template id="6464bff3-53ab-4625-8fc4-28c6f3aeb0b3"><style>
+<template id="263d5e2c-93b5-40ce-a74c-ead2fa3591e1"><style>
 .tabwid table{
   border-collapse:collapse;
   line-height:1;
@@ -4577,92 +4577,92 @@ background-color: transparent;
 }
 </style>
 <div class="tabwid">
-<style>.cl-97fda9dc{border-collapse:collapse;}.cl-97f7596a{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-97f76b3a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-97f76b58{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-97f7ae7e{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-97f7ae9c{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-97f7aeb0{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-97f7aeba{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-97f7aed8{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-97f7aeec{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<div class="inline-table"><table class="cl-97fda9dc">
+<style>.cl-8415883e{border-collapse:collapse;}.cl-840bff08{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-840bff09{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-840bff0a{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-840bff0b{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-840bff0c{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-840bff0d{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-840bff0e{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-840bff0f{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-840bff10{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<div class="inline-table"><table class="cl-8415883e">
 <thead><tr style="overflow-wrap:break-word;">
-<td class="cl-97f7aeec"><p class="cl-97f76b3a"><span class="cl-97f7596a">Age Category</span></p></td>
-<td class="cl-97f7aed8"><p class="cl-97f76b58"><span class="cl-97f7596a">Death</span></p></td>
-<td class="cl-97f7aed8"><p class="cl-97f76b58"><span class="cl-97f7596a">Recover</span></p></td>
-<td class="cl-97f7aed8"><p class="cl-97f76b58"><span class="cl-97f7596a">(Missing)</span></p></td>
-<td class="cl-97f7aed8"><p class="cl-97f76b58"><span class="cl-97f7596a">Sum</span></p></td>
+<td class="cl-840bff10"><p class="cl-840bff09"><span class="cl-840bff08">Age Category</span></p></td>
+<td class="cl-840bff0f"><p class="cl-840bff0a"><span class="cl-840bff08">Death</span></p></td>
+<td class="cl-840bff0f"><p class="cl-840bff0a"><span class="cl-840bff08">Recover</span></p></td>
+<td class="cl-840bff0f"><p class="cl-840bff0a"><span class="cl-840bff08">(Missing)</span></p></td>
+<td class="cl-840bff0f"><p class="cl-840bff0a"><span class="cl-840bff08">Sum</span></p></td>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7ae7e"><p class="cl-97f76b3a"><span class="cl-97f7596a">0-4</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">471</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">364</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">260</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">1,095</span></p></td>
+<td class="cl-840bff0b"><p class="cl-840bff09"><span class="cl-840bff08">0-4</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">471</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">364</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">260</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">1,095</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7ae7e"><p class="cl-97f76b3a"><span class="cl-97f7596a">5-9</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">476</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">391</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">228</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">1,095</span></p></td>
+<td class="cl-840bff0b"><p class="cl-840bff09"><span class="cl-840bff08">5-9</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">476</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">391</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">228</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">1,095</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7ae7e"><p class="cl-97f76b3a"><span class="cl-97f7596a">10-14</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">438</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">303</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">200</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">941</span></p></td>
+<td class="cl-840bff0b"><p class="cl-840bff09"><span class="cl-840bff08">10-14</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">438</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">303</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">200</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">941</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7ae7e"><p class="cl-97f76b3a"><span class="cl-97f7596a">15-19</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">323</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">251</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">169</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">743</span></p></td>
+<td class="cl-840bff0b"><p class="cl-840bff09"><span class="cl-840bff08">15-19</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">323</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">251</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">169</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">743</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7ae7e"><p class="cl-97f76b3a"><span class="cl-97f7596a">20-29</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">477</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">367</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">229</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">1,073</span></p></td>
+<td class="cl-840bff0b"><p class="cl-840bff09"><span class="cl-840bff08">20-29</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">477</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">367</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">229</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">1,073</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7ae7e"><p class="cl-97f76b3a"><span class="cl-97f7596a">30-49</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">329</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">238</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">187</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">754</span></p></td>
+<td class="cl-840bff0b"><p class="cl-840bff09"><span class="cl-840bff08">30-49</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">329</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">238</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">187</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">754</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7ae7e"><p class="cl-97f76b3a"><span class="cl-97f7596a">50-69</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">33</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">38</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">24</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">95</span></p></td>
+<td class="cl-840bff0b"><p class="cl-840bff09"><span class="cl-840bff08">50-69</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">33</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">38</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">24</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">95</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7ae7e"><p class="cl-97f76b3a"><span class="cl-97f7596a">70+</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">3</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">3</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">0</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">6</span></p></td>
+<td class="cl-840bff0b"><p class="cl-840bff09"><span class="cl-840bff08">70+</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">3</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">3</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">0</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">6</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7ae7e"><p class="cl-97f76b3a"><span class="cl-97f7596a">(Missing)</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">32</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">28</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">26</span></p></td>
-<td class="cl-97f7ae9c"><p class="cl-97f76b58"><span class="cl-97f7596a">86</span></p></td>
+<td class="cl-840bff0b"><p class="cl-840bff09"><span class="cl-840bff08">(Missing)</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">32</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">28</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">26</span></p></td>
+<td class="cl-840bff0c"><p class="cl-840bff0a"><span class="cl-840bff08">86</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-97f7aeba"><p class="cl-97f76b3a"><span class="cl-97f7596a">Sum</span></p></td>
-<td class="cl-97f7aeb0"><p class="cl-97f76b58"><span class="cl-97f7596a">2,582</span></p></td>
-<td class="cl-97f7aeb0"><p class="cl-97f76b58"><span class="cl-97f7596a">1,983</span></p></td>
-<td class="cl-97f7aeb0"><p class="cl-97f76b58"><span class="cl-97f7596a">1,323</span></p></td>
-<td class="cl-97f7aeb0"><p class="cl-97f76b58"><span class="cl-97f7596a">5,888</span></p></td>
+<td class="cl-840bff0e"><p class="cl-840bff09"><span class="cl-840bff08">Sum</span></p></td>
+<td class="cl-840bff0d"><p class="cl-840bff0a"><span class="cl-840bff08">2,582</span></p></td>
+<td class="cl-840bff0d"><p class="cl-840bff0a"><span class="cl-840bff08">1,983</span></p></td>
+<td class="cl-840bff0d"><p class="cl-840bff0a"><span class="cl-840bff08">1,323</span></p></td>
+<td class="cl-840bff0d"><p class="cl-840bff0a"><span class="cl-840bff08">5,888</span></p></td>
 </tr>
 </tbody>
 </table></div>
-</div></template><div class="flextable-shadow-host" id="80e1ca77-0bba-40cc-9ffa-a3e33bedafac"></div>
+</div></template><div class="flextable-shadow-host" id="de9da003-0bc5-41ca-8685-e533b5587f53"></div>
 <script>
-var dest = document.getElementById("80e1ca77-0bba-40cc-9ffa-a3e33bedafac");
-var template = document.getElementById("6464bff3-53ab-4625-8fc4-28c6f3aeb0b3");
+var dest = document.getElementById("de9da003-0bc5-41ca-8685-e533b5587f53");
+var template = document.getElementById("263d5e2c-93b5-40ce-a74c-ead2fa3591e1");
 var caption = template.content.querySelector("caption");
 if(caption) {
   caption.style.cssText = "display:block;text-align:center;";
@@ -4676,9 +4676,9 @@ fantome.appendChild(templateContent);
 </script><!-- ======================================================= -->
 </div>
 </div>
-<div id="resources-10" class="section level2" number="17.7">
+<div id="resources-9" class="section level2" number="17.7">
 <h2>
-<span class="header-section-number">17.7</span> Resources<a class="anchor" aria-label="anchor" href="#resources-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.7</span> Resources<a class="anchor" aria-label="anchor" href="#resources-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>Much of the information in this page is adapted from these resources and vignettes online:</p>
 <p><a href="http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html">gtsummary</a></p>
@@ -4746,7 +4746,7 @@ fantome.appendChild(templateContent);
 <li><a class="nav-link" href="#convert-to-data-frame">Convert to data frame</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#resources-10"><span class="header-section-number">17.7</span> Resources</a></li>
+<li><a class="nav-link" href="#resources-9"><span class="header-section-number">17.7</span> Resources</a></li>
 </ul>
 
       <div class="book-extra">
@@ -4763,7 +4763,7 @@ fantome.appendChild(templateContent);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-08-26.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
