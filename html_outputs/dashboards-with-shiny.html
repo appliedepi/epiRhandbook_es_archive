@@ -57,9 +57,9 @@
 <li><a class="" href="editorial-and-technical-notes.html"><span class="header-section-number">1</span> Notas editoriales y técnicas</a></li>
 <li><a class="" href="download-handbook-and-data.html"><span class="header-section-number">2</span> Descargando el manual y los datos</a></li>
 <li class="book-part">Aspectos básicos</li>
-<li><a class="" href="r-basics.html"><span class="header-section-number">3</span> R Basics</a></li>
+<li><a class="" href="r-basics.html"><span class="header-section-number">3</span> Fundamentos de R</a></li>
 <li><a class="" href="transition-to-r.html"><span class="header-section-number">4</span> Transición a R</a></li>
-<li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Suggested packages</a></li>
+<li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Paquetes recomendados</a></li>
 <li><a class="" href="r-projects.html"><span class="header-section-number">6</span> Proyectos en R</a></li>
 <li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Import and export</a></li>
 <li class="book-part">Gestión de datos</li>
@@ -133,7 +133,7 @@ For an alternative method of making dashboards that is faster, easier, but perha
 <div id="load-packages-30" class="section level3 unnumbered">
 <h3>Load packages<a class="anchor" aria-label="anchor" href="#load-packages-30"><i class="fas fa-link"></i></a>
 </h3>
-<p>In this handbook we emphasize <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> from <strong>pacman</strong>, which installs the package if necessary <em>and</em> loads it for use. You can also load installed packages with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> from <strong>base</strong> R. See the page on <a href="r-basics.html#r-basics">R basics</a> for more information on R packages.</p>
+<p>In this handbook we emphasize <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> from <strong>pacman</strong>, which installs the package if necessary <em>and</em> loads it for use. You can also load installed packages with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> from <strong>base</strong> R. See the page on [R basics] for more information on R packages.</p>
 <p>We begin by installing the <strong>shiny</strong> R package:</p>
 <div class="sourceCode" id="cb1783"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="st">"shiny"</span><span class="op">)</span></code></pre></div>
@@ -353,19 +353,20 @@ For an alternative method of making dashboards that is faster, easier, but perha
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">malaria_data</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3,038 x 10
-##    location_name data_date  submitted_date Province District `malaria_rdt_0-4` `malaria_rdt_5-14` malaria_rdt_15 malaria_tot
-##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;                &lt;int&gt;              &lt;int&gt;          &lt;int&gt;       &lt;int&gt;
-##  1 Facility 1    2020-08-11 2020-08-12     North    Spring                  11                 12             23          46
-##  2 Facility 2    2020-08-11 2020-08-12     North    Bolo                    11                 10              5          26
-##  3 Facility 3    2020-08-11 2020-08-12     North    Dingo                    8                  5              5          18
-##  4 Facility 4    2020-08-11 2020-08-12     North    Bolo                    16                 16             17          49
-##  5 Facility 5    2020-08-11 2020-08-12     North    Bolo                     9                  2              6          17
-##  6 Facility 6    2020-08-11 2020-08-12     North    Dingo                    3                  1              4           8
-##  7 Facility 6    2020-08-10 2020-08-12     North    Dingo                    4                  0              3           7
-##  8 Facility 5    2020-08-10 2020-08-12     North    Bolo                    15                 14             13          42
-##  9 Facility 5    2020-08-09 2020-08-12     North    Bolo                    11                 11             13          35
-## 10 Facility 5    2020-08-08 2020-08-12     North    Bolo                    19                 15             15          49
-## # ... with 3,028 more rows, and 1 more variable: newid &lt;int&gt;</code></pre>
+##    location_name data_date  submitted_date Province District `malaria_rdt_0-4`
+##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;                &lt;int&gt;
+##  1 Facility 1    2020-08-11 2020-08-12     North    Spring                  11
+##  2 Facility 2    2020-08-11 2020-08-12     North    Bolo                    11
+##  3 Facility 3    2020-08-11 2020-08-12     North    Dingo                    8
+##  4 Facility 4    2020-08-11 2020-08-12     North    Bolo                    16
+##  5 Facility 5    2020-08-11 2020-08-12     North    Bolo                     9
+##  6 Facility 6    2020-08-11 2020-08-12     North    Dingo                    3
+##  7 Facility 6    2020-08-10 2020-08-12     North    Dingo                    4
+##  8 Facility 5    2020-08-10 2020-08-12     North    Bolo                    15
+##  9 Facility 5    2020-08-09 2020-08-12     North    Bolo                    11
+## 10 Facility 5    2020-08-08 2020-08-12     North    Bolo                    19
+## # ... with 3,028 more rows, and 4 more variables: malaria_rdt_5-14 &lt;int&gt;,
+## #   malaria_rdt_15 &lt;int&gt;, malaria_tot &lt;int&gt;, newid &lt;int&gt;</code></pre>
 <p>It will be easier to work with this data if we use tidy data standards, so we should also transform into a longer data format, where age group is a column, and cases is another column. We can do this easily using what we’ve learned in the <a href="pivoting-data.html#pivoting-data">Pivoting data</a> page.</p>
 <div class="sourceCode" id="cb1788"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">malaria_data</span> <span class="op">&lt;-</span> <span class="va">malaria_data</span> <span class="op">%&gt;%</span>
@@ -374,19 +375,19 @@ For an alternative method of making dashboards that is faster, easier, but perha
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">malaria_data</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 12,152 x 7
-##    location_name data_date  submitted_date Province District age_group        cases_reported
-##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                     &lt;int&gt;
-##  1 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_0-4              11
-##  2 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_5-14             12
-##  3 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_15               23
-##  4 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_tot                  46
-##  5 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_0-4              11
-##  6 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_5-14             10
-##  7 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_15                5
-##  8 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_tot                  26
-##  9 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_0-4               8
-## 10 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_5-14              5
-## # ... with 12,142 more rows</code></pre>
+##    location_name data_date  submitted_date Province District age_group       
+##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;           
+##  1 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_0-4 
+##  2 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_5-14
+##  3 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_15  
+##  4 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_tot     
+##  5 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_0-4 
+##  6 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_5-14
+##  7 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_15  
+##  8 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_tot     
+##  9 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_0-4 
+## 10 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_5-14
+## # ... with 12,142 more rows, and 1 more variable: cases_reported &lt;int&gt;</code></pre>
 <p>And with that we’ve finished preparing our data! This crosses items 1, 2, and 3 off our list of things to develop for our “testing R script”. The last, and most difficult task will be building a function to produce an epicurve based on user defined parameters. As mentioned previously, it’s <em>highly recommended</em> that anyone learning shiny first look at the section on functional programming (<a href="writing-functions-1.html#writing-functions-1">Writing functions</a>) to understand how this works!</p>
 <p>When defining our function, it might be hard to think about what parameters we want to include. For functional programming with shiny, every relevent parameter will generally have a widget associated with it, so thinking about this is usually quite easy! For example in our current app, we want to be able to filter by district, and have a widget for this, so we can add a district parameter to reflect this. We <em>don’t</em> have any app functionality to filter by facility (for now), so we don’t need to add this as a parameter. Lets start by making a function with three parameters:</p>
 <ol style="list-style-type: decimal">
@@ -1404,7 +1405,7 @@ For an alternative method of making dashboards that is faster, easier, but perha
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-04.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

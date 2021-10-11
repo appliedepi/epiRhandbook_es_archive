@@ -57,9 +57,9 @@
 <li><a class="" href="editorial-and-technical-notes.html"><span class="header-section-number">1</span> Notas editoriales y técnicas</a></li>
 <li><a class="" href="download-handbook-and-data.html"><span class="header-section-number">2</span> Descargando el manual y los datos</a></li>
 <li class="book-part">Aspectos básicos</li>
-<li><a class="" href="r-basics.html"><span class="header-section-number">3</span> R Basics</a></li>
+<li><a class="" href="r-basics.html"><span class="header-section-number">3</span> Fundamentos de R</a></li>
 <li><a class="" href="transition-to-r.html"><span class="header-section-number">4</span> Transición a R</a></li>
-<li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Suggested packages</a></li>
+<li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Paquetes recomendados</a></li>
 <li><a class="" href="r-projects.html"><span class="header-section-number">6</span> Proyectos en R</a></li>
 <li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Import and export</a></li>
 <li class="book-part">Gestión de datos</li>
@@ -184,8 +184,8 @@ You can click here to download<span> this data file (.xlsx).</span></a></p>
 <code class="sourceCode R"><span class="co"># import the counts into R</span>
 <span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"campylobacter_germany.xlsx"</span><span class="op">)</span></code></pre></div>
 <p>The first 10 rows of the counts are displayed below.</p>
-<div id="htmlwidget-1bced9268f52e2b96815" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1bced9268f52e2b96815">{"x":{"filter":"none","data":[["2001-12-31T00:00:00Z","2002-01-07T00:00:00Z","2002-01-14T00:00:00Z","2002-01-21T00:00:00Z","2002-01-28T00:00:00Z","2002-02-04T00:00:00Z","2002-02-11T00:00:00Z","2002-02-18T00:00:00Z","2002-02-25T00:00:00Z","2002-03-04T00:00:00Z"],[514,913,1023,887,815,792,803,807,692,705]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>case<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d6e240fef3e73765c3ae" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d6e240fef3e73765c3ae">{"x":{"filter":"none","data":[["2001-12-31T00:00:00Z","2002-01-07T00:00:00Z","2002-01-14T00:00:00Z","2002-01-21T00:00:00Z","2002-01-28T00:00:00Z","2002-02-04T00:00:00Z","2002-02-11T00:00:00Z","2002-02-18T00:00:00Z","2002-02-25T00:00:00Z","2002-03-04T00:00:00Z"],[514,913,1023,887,815,792,803,807,692,705]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>case<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="clean-data-1" class="section level3 unnumbered">
 <h3>Clean data<a class="anchor" aria-label="anchor" href="#clean-data-1"><i class="fas fa-link"></i></a>
@@ -1593,9 +1593,10 @@ See <code><a href="https://rdrr.io/pkg/trending/man/trending_model_fit-predictio
          <span class="st">"95%CI high (perc)"</span> <span class="op">=</span> <span class="va">conf.high_perc</span>,
          <span class="st">"p-value"</span> <span class="op">=</span> <span class="va">p.value</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 7
-##     IRR `95%CI low` `95%CI high` `Percentage change` `95%CI low (perc)` `95%CI high (perc)` `p-value`
-##   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;              &lt;dbl&gt;               &lt;dbl&gt;     &lt;dbl&gt;
-## 1 0.936       0.874         1.00               -6.40              -12.6               0.306    0.0645</code></pre>
+##     IRR `95%CI low` `95%CI high` `Percentage change` `95%CI low (perc)`
+##   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;              &lt;dbl&gt;
+## 1 0.936       0.874         1.00               -6.40              -12.6
+## # ... with 2 more variables: 95%CI high (perc) &lt;dbl&gt;, p-value &lt;dbl&gt;</code></pre>
 <p>As previously we can visualise the outputs of the regression.</p>
 <div class="sourceCode" id="cb1170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">observed</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">epiweek</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -1706,7 +1707,7 @@ See <code><a href="https://rdrr.io/pkg/trending/man/trending_model_fit-predictio
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-04.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
