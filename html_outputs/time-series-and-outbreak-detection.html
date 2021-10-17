@@ -61,7 +61,7 @@
 <li><a class="" href="transition-to-r.html"><span class="header-section-number">4</span> Transición a R</a></li>
 <li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Paquetes recomendados</a></li>
 <li><a class="" href="r-projects.html"><span class="header-section-number">6</span> Proyectos en R</a></li>
-<li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Import and export</a></li>
+<li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Importación y exportación</a></li>
 <li class="book-part">Gestión de datos</li>
 <li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Cleaning data and core functions</a></li>
 <li><a class="" href="working-with-dates.html"><span class="header-section-number">9</span> Working with dates</a></li>
@@ -149,8 +149,8 @@ with multiple countries or other strata, then there is an example code template 
 <h2>
 <span class="header-section-number">23.2</span> Preparation<a class="anchor" aria-label="anchor" href="#preparation-13"><i class="fas fa-link"></i></a>
 </h2>
-<div id="packages-2" class="section level3 unnumbered">
-<h3>Packages<a class="anchor" aria-label="anchor" href="#packages-2"><i class="fas fa-link"></i></a>
+<div id="packages-1" class="section level3 unnumbered">
+<h3>Packages<a class="anchor" aria-label="anchor" href="#packages-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>This code chunk shows the loading of packages required for the analyses. In this handbook we emphasize <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> from <strong>pacman</strong>, which installs the package if necessary <em>and</em> loads it for use. You can also load packages with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> from <strong>base</strong> R. See the page on <a href="https://epirhandbook.com/r-basics.html">R basics</a> for more information on R packages.</p>
 <div class="sourceCode" id="cb1107"><pre class="downlit sourceCode r">
@@ -179,13 +179,13 @@ with multiple countries or other strata, then there is an example code template 
 You can click here to download<span> this data file (.xlsx).</span></a></p>
 <p>This dataset is a reduced version of the dataset available in the <a href="https://cran.r-project.org/web/packages/surveillance/"><strong>surveillance</strong></a> package.
 (for details load the surveillance package and see <code>?campyDE</code>)</p>
-<p>Import these data with the <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> function from the <strong>rio</strong> package (it handles many file types like .xlsx, .csv, .rds - see the <a href="import-and-export.html#import-and-export">Import and export</a> page for details).</p>
+<p>Import these data with the <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> function from the <strong>rio</strong> package (it handles many file types like .xlsx, .csv, .rds - see the [Import and export] page for details).</p>
 <div class="sourceCode" id="cb1108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import the counts into R</span>
 <span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"campylobacter_germany.xlsx"</span><span class="op">)</span></code></pre></div>
 <p>The first 10 rows of the counts are displayed below.</p>
-<div id="htmlwidget-d6e240fef3e73765c3ae" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d6e240fef3e73765c3ae">{"x":{"filter":"none","data":[["2001-12-31T00:00:00Z","2002-01-07T00:00:00Z","2002-01-14T00:00:00Z","2002-01-21T00:00:00Z","2002-01-28T00:00:00Z","2002-02-04T00:00:00Z","2002-02-11T00:00:00Z","2002-02-18T00:00:00Z","2002-02-25T00:00:00Z","2002-03-04T00:00:00Z"],[514,913,1023,887,815,792,803,807,692,705]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>case<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b91a3816730f2a69f0dd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b91a3816730f2a69f0dd">{"x":{"filter":"none","data":[["2001-12-31T00:00:00Z","2002-01-07T00:00:00Z","2002-01-14T00:00:00Z","2002-01-21T00:00:00Z","2002-01-28T00:00:00Z","2002-02-04T00:00:00Z","2002-02-11T00:00:00Z","2002-02-18T00:00:00Z","2002-02-25T00:00:00Z","2002-03-04T00:00:00Z"],[514,913,1023,887,815,792,803,807,692,705]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>case<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="clean-data-1" class="section level3 unnumbered">
 <h3>Clean data<a class="anchor" aria-label="anchor" href="#clean-data-1"><i class="fas fa-link"></i></a>
@@ -1593,10 +1593,9 @@ See <code><a href="https://rdrr.io/pkg/trending/man/trending_model_fit-predictio
          <span class="st">"95%CI high (perc)"</span> <span class="op">=</span> <span class="va">conf.high_perc</span>,
          <span class="st">"p-value"</span> <span class="op">=</span> <span class="va">p.value</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 7
-##     IRR `95%CI low` `95%CI high` `Percentage change` `95%CI low (perc)`
-##   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;              &lt;dbl&gt;
-## 1 0.936       0.874         1.00               -6.40              -12.6
-## # ... with 2 more variables: 95%CI high (perc) &lt;dbl&gt;, p-value &lt;dbl&gt;</code></pre>
+##     IRR `95%CI low` `95%CI high` `Percentage change` `95%CI low (perc)` `95%CI high (perc)` `p-value`
+##   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;              &lt;dbl&gt;               &lt;dbl&gt;     &lt;dbl&gt;
+## 1 0.936       0.874         1.00               -6.40              -12.6               0.306    0.0645</code></pre>
 <p>As previously we can visualise the outputs of the regression.</p>
 <div class="sourceCode" id="cb1170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">observed</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">epiweek</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -1647,7 +1646,7 @@ See <code><a href="https://rdrr.io/pkg/trending/man/trending_model_fit-predictio
 <li><a class="nav-link" href="#overview-2"><span class="header-section-number">23.1</span> Overview</a></li>
 <li>
 <a class="nav-link" href="#preparation-13"><span class="header-section-number">23.2</span> Preparation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#packages-2">Packages</a></li>
+<li><a class="nav-link" href="#packages-1">Packages</a></li>
 <li><a class="nav-link" href="#load-data">Load data</a></li>
 <li><a class="nav-link" href="#clean-data-1">Clean data</a></li>
 <li><a class="nav-link" href="#download-climate-data">Download climate data</a></li>
@@ -1707,7 +1706,7 @@ See <code><a href="https://rdrr.io/pkg/trending/man/trending_model_fit-predictio
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-11.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

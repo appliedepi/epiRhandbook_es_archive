@@ -61,7 +61,7 @@
 <li><a class="" href="transition-to-r.html"><span class="header-section-number">4</span> Transición a R</a></li>
 <li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Paquetes recomendados</a></li>
 <li><a class="" href="r-projects.html"><span class="header-section-number">6</span> Proyectos en R</a></li>
-<li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Import and export</a></li>
+<li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Importación y exportación</a></li>
 <li class="book-part">Gestión de datos</li>
 <li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Cleaning data and core functions</a></li>
 <li><a class="" href="working-with-dates.html"><span class="header-section-number">9</span> Working with dates</a></li>
@@ -148,7 +148,7 @@
 <div id="import-data-4" class="section level3 unnumbered">
 <h3>Import data<a class="anchor" aria-label="anchor" href="#import-data-4"><i class="fas fa-link"></i></a>
 </h3>
-<p>We import the dataset of cases from a simulated Ebola epidemic. If you want to follow along, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds" class="download-button">click to download the “clean” linelist</a> (as .rds file). Import your data with the <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> function from the <strong>rio</strong> package (it accepts many file types like .xlsx, .rds, .csv - see the <a href="import-and-export.html#import-and-export">Import and export</a> page for details).</p>
+<p>We import the dataset of cases from a simulated Ebola epidemic. If you want to follow along, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds" class="download-button">click to download the “clean” linelist</a> (as .rds file). Import your data with the <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> function from the <strong>rio</strong> package (it accepts many file types like .xlsx, .rds, .csv - see the [Import and export] page for details).</p>
 <div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import your dataset</span>
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
@@ -547,16 +547,12 @@ Please also see the <a href="working-with-dates.html#working-with-dates-1">Worki
 
 <span class="co"># Display levels</span>
 <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">epiweek_formatted</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] "2014-W13" "2014-W14" "2014-W15" "2014-W16" "2014-W17" "2014-W18"
-##  [7] "2014-W19" "2014-W20" "2014-W21" "2014-W22" "2014-W23" "2014-W24"
-## [13] "2014-W25" "2014-W26" "2014-W27" "2014-W28" "2014-W29" "2014-W30"
-## [19] "2014-W31" "2014-W32" "2014-W33" "2014-W34" "2014-W35" "2014-W36"
-## [25] "2014-W37" "2014-W38" "2014-W39" "2014-W40" "2014-W41" "2014-W42"
-## [31] "2014-W43" "2014-W44" "2014-W45" "2014-W46" "2014-W47" "2014-W48"
-## [37] "2014-W49" "2014-W50" "2014-W51" "2015-W00" "2015-W01" "2015-W02"
-## [43] "2015-W03" "2015-W04" "2015-W05" "2015-W06" "2015-W07" "2015-W08"
-## [49] "2015-W09" "2015-W10" "2015-W11" "2015-W12" "2015-W13" "2015-W14"
-## [55] "2015-W15" "2015-W16"</code></pre>
+<pre><code>##  [1] "2014-W13" "2014-W14" "2014-W15" "2014-W16" "2014-W17" "2014-W18" "2014-W19" "2014-W20" "2014-W21" "2014-W22"
+## [11] "2014-W23" "2014-W24" "2014-W25" "2014-W26" "2014-W27" "2014-W28" "2014-W29" "2014-W30" "2014-W31" "2014-W32"
+## [21] "2014-W33" "2014-W34" "2014-W35" "2014-W36" "2014-W37" "2014-W38" "2014-W39" "2014-W40" "2014-W41" "2014-W42"
+## [31] "2014-W43" "2014-W44" "2014-W45" "2014-W46" "2014-W47" "2014-W48" "2014-W49" "2014-W50" "2014-W51" "2015-W00"
+## [41] "2015-W01" "2015-W02" "2015-W03" "2015-W04" "2015-W05" "2015-W06" "2015-W07" "2015-W08" "2015-W09" "2015-W10"
+## [51] "2015-W11" "2015-W12" "2015-W13" "2015-W14" "2015-W15" "2015-W16"</code></pre>
 <p><span style="color: red;"><strong><em>DANGER:</em></strong> If you place the weeks ahead of the years (“Www-YYYY”) (“%W-%Y”), the default alpha-numeric level ordering will be incorrect (e.g. 01-2015 will be before 35-2014). You could need to manually adjust the order, which would be a long painful process.</span></p>
 <ol start="2" style="list-style-type: decimal">
 <li>
@@ -647,7 +643,7 @@ Please also see the <a href="working-with-dates.html#working-with-dates-1">Worki
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-11.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

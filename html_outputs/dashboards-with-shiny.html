@@ -61,7 +61,7 @@
 <li><a class="" href="transition-to-r.html"><span class="header-section-number">4</span> Transición a R</a></li>
 <li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Paquetes recomendados</a></li>
 <li><a class="" href="r-projects.html"><span class="header-section-number">6</span> Proyectos en R</a></li>
-<li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Import and export</a></li>
+<li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Importación y exportación</a></li>
 <li class="book-part">Gestión de datos</li>
 <li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Cleaning data and core functions</a></li>
 <li><a class="" href="working-with-dates.html"><span class="header-section-number">9</span> Working with dates</a></li>
@@ -353,20 +353,19 @@ For an alternative method of making dashboards that is faster, easier, but perha
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">malaria_data</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3,038 x 10
-##    location_name data_date  submitted_date Province District `malaria_rdt_0-4`
-##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;                &lt;int&gt;
-##  1 Facility 1    2020-08-11 2020-08-12     North    Spring                  11
-##  2 Facility 2    2020-08-11 2020-08-12     North    Bolo                    11
-##  3 Facility 3    2020-08-11 2020-08-12     North    Dingo                    8
-##  4 Facility 4    2020-08-11 2020-08-12     North    Bolo                    16
-##  5 Facility 5    2020-08-11 2020-08-12     North    Bolo                     9
-##  6 Facility 6    2020-08-11 2020-08-12     North    Dingo                    3
-##  7 Facility 6    2020-08-10 2020-08-12     North    Dingo                    4
-##  8 Facility 5    2020-08-10 2020-08-12     North    Bolo                    15
-##  9 Facility 5    2020-08-09 2020-08-12     North    Bolo                    11
-## 10 Facility 5    2020-08-08 2020-08-12     North    Bolo                    19
-## # ... with 3,028 more rows, and 4 more variables: malaria_rdt_5-14 &lt;int&gt;,
-## #   malaria_rdt_15 &lt;int&gt;, malaria_tot &lt;int&gt;, newid &lt;int&gt;</code></pre>
+##    location_name data_date  submitted_date Province District `malaria_rdt_0-4` `malaria_rdt_5-14` malaria_rdt_15
+##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;                &lt;int&gt;              &lt;int&gt;          &lt;int&gt;
+##  1 Facility 1    2020-08-11 2020-08-12     North    Spring                  11                 12             23
+##  2 Facility 2    2020-08-11 2020-08-12     North    Bolo                    11                 10              5
+##  3 Facility 3    2020-08-11 2020-08-12     North    Dingo                    8                  5              5
+##  4 Facility 4    2020-08-11 2020-08-12     North    Bolo                    16                 16             17
+##  5 Facility 5    2020-08-11 2020-08-12     North    Bolo                     9                  2              6
+##  6 Facility 6    2020-08-11 2020-08-12     North    Dingo                    3                  1              4
+##  7 Facility 6    2020-08-10 2020-08-12     North    Dingo                    4                  0              3
+##  8 Facility 5    2020-08-10 2020-08-12     North    Bolo                    15                 14             13
+##  9 Facility 5    2020-08-09 2020-08-12     North    Bolo                    11                 11             13
+## 10 Facility 5    2020-08-08 2020-08-12     North    Bolo                    19                 15             15
+## # ... with 3,028 more rows, and 2 more variables: malaria_tot &lt;int&gt;, newid &lt;int&gt;</code></pre>
 <p>It will be easier to work with this data if we use tidy data standards, so we should also transform into a longer data format, where age group is a column, and cases is another column. We can do this easily using what we’ve learned in the <a href="pivoting-data.html#pivoting-data">Pivoting data</a> page.</p>
 <div class="sourceCode" id="cb1788"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">malaria_data</span> <span class="op">&lt;-</span> <span class="va">malaria_data</span> <span class="op">%&gt;%</span>
@@ -375,19 +374,19 @@ For an alternative method of making dashboards that is faster, easier, but perha
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">malaria_data</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 12,152 x 7
-##    location_name data_date  submitted_date Province District age_group       
-##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;           
-##  1 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_0-4 
-##  2 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_5-14
-##  3 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_15  
-##  4 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_tot     
-##  5 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_0-4 
-##  6 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_5-14
-##  7 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_15  
-##  8 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_tot     
-##  9 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_0-4 
-## 10 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_5-14
-## # ... with 12,142 more rows, and 1 more variable: cases_reported &lt;int&gt;</code></pre>
+##    location_name data_date  submitted_date Province District age_group        cases_reported
+##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                     &lt;int&gt;
+##  1 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_0-4              11
+##  2 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_5-14             12
+##  3 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_15               23
+##  4 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_tot                  46
+##  5 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_0-4              11
+##  6 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_5-14             10
+##  7 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_15                5
+##  8 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_tot                  26
+##  9 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_0-4               8
+## 10 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_5-14              5
+## # ... with 12,142 more rows</code></pre>
 <p>And with that we’ve finished preparing our data! This crosses items 1, 2, and 3 off our list of things to develop for our “testing R script”. The last, and most difficult task will be building a function to produce an epicurve based on user defined parameters. As mentioned previously, it’s <em>highly recommended</em> that anyone learning shiny first look at the section on functional programming (<a href="writing-functions-1.html#writing-functions-1">Writing functions</a>) to understand how this works!</p>
 <p>When defining our function, it might be hard to think about what parameters we want to include. For functional programming with shiny, every relevent parameter will generally have a widget associated with it, so thinking about this is usually quite easy! For example in our current app, we want to be able to filter by district, and have a widget for this, so we can add a district parameter to reflect this. We <em>don’t</em> have any app functionality to filter by facility (for now), so we don’t need to add this as a parameter. Lets start by making a function with three parameters:</p>
 <ol style="list-style-type: decimal">
@@ -1405,7 +1404,7 @@ For an alternative method of making dashboards that is faster, easier, but perha
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-11.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
