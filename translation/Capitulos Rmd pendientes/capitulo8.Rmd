@@ -1,20 +1,22 @@
-# Limpieza de datos y funciones básicas 
+# Limpieza de datos y funciones básicas {#cleaning-data-and-core-functions} 
 
-{#cleaning-data-and-core-functions} 
+```{r, out.height = "10%", fig.align = "center", echo=F}
+knitr::include_graphics(here::here("images", "cleaning.png"))
+```
 
 Esta página muestra los pasos más utilizados en el proceso de "limpieza" de datos, y también explica el uso de muchas funciones esenciales de gestión de datos en R. 
 
-Para explicarlo, esta página comienza importando datos de un listado de casos crudo, y se avanza paso a paso a través del proceso de limpieza. En el código R, esto se manifiesta como una cadena de "tuberías", que hacen referencia al operador "tuberías" %>% que pasa unos datos de una operación a la siguiente. 
+Para explicarlo, esta página comienza importando datos de un listado de casos crudo, y se avanza paso a paso a través del proceso de limpieza. En el código R, esto se manifiesta como una cadena de "tuberías", que hacen referencia al operador "tuberías" `%>%` que pasa unos datos de una operación a la siguiente. 
 
-Funciones principales 
+## Funciones principales  {.unnumbered}
 
-Este manual hace hincapié en el uso de las funciones de la familia de paquetes de R [**[tidyverse]**(https://www.tidyverse.org/). Las funciones esenciales que se muestran en esta página se enumeran a continuación. 
+Este manual hace hincapié en el uso de las funciones de la familia de paquetes de R [**tidyverse**](https://www.tidyverse.org/). Las funciones esenciales que se muestran en esta página se enumeran a continuación. 
 
-Muchas de estas funciones pertenecen al paquete [**[dplyr]**(https://dplyr.tidyverse.org/), que proporciona funciones "verbales" para resolver los retos de la manipulación de datos (el nombre hace una referencia a unos alicates - [plier](https://www.thefreedictionary.com/plier#:~:text=also ply·er (plī′,holding%2C bending%2C or cutting.)) - de dataframes). **dplyr** forma parte de la familia de paquetes de R **tidyverse** (que también incluye **ggplot2**, **tidyr**, **stringr**, **tibble**, **purrr**, **magrittr** y **forcats**, entre otros). 
+Muchas de estas funciones pertenecen al paquete [**dplyr**](https://dplyr.tidyverse.org/), que proporciona funciones "verbales" para resolver los retos de la manipulación de datos (el nombre hace una referencia a unos alicates - [plier](https://www.thefreedictionary.com/plier#:~:text=also ply·er (plī′,holding%2C bending%2C or cutting.)) - de dataframes). **dplyr** forma parte de la familia de paquetes de R **tidyverse** (que también incluye **ggplot2**, **tidyr**, **stringr**, **tibble**, **purrr**, **magrittr** y **forcats**, entre otros). 
 
-**Función**                            |**Utilidad**                              |**Paquete**   
 
----------------------------------------|------------------------------------------|------------------   
+Función      | Utilidad                             | Paquete
+-------------|--------------------------------------|------------------------------
 [%>%](https://magrittr.tidyverse.org/reference/pipe.html) | "canalizar" (pasar) datos de una función a la siguiente | **magrittr**   
 [mutate()](https://dplyr.tidyverse.org/reference/mutate.html) | crear, transformar y redefinir columnas | **dplyr**   
 [selecct()](https://dplyr.tidyverse.org/reference/select.html) | mantener, eliminar, seleccionar o renombrar columnas | **dplyr**  
@@ -37,203 +39,351 @@ clean_variable_spelling() | recodificación/limpieza de valores mediante un dicc
 
 Si quieres ver cómo se comparan estas funciones con los comandos de Stata o SAS, consulta la página sobre la [transición a R](#transition-to-r). 
 
-Puedes encontrar una gestión de datos alternativa en el paquete R **data.table** con operadores como := y el uso frecuente de corchetes [ ]. Este enfoque y la sintaxis se explican brevemente en la página [data.table](https://epirhandbook.com/data-table.html#data-table). 
+Puedes encontrar una gestión de datos alternativa en el paquete R **data.table** con operadores como `:=` y el uso frecuente de corchetes `[ ]`. Este enfoque y la sintaxis se explican brevemente en la página [Data.Table](https://epirhandbook.com/data-table.html#data-table). 
 
-Nomenclatura 
+### Nomenclatura {.unnumbered} 
 
 En este manual, generalmente hacemos referencia a "columnas" y "filas" en lugar de "variables" y "observaciones". Como se explica en este manual sobre ["datos ordenados"](https://tidyr.tidyverse.org/articles/tidy-data.html), la mayoría de los conjuntos de datos estadísticos epidemiológicos se componen estructuralmente de filas, columnas y valores. 
 
-*Las variables contienen* los valores que miden el mismo atributo subyacente (como el grupo de edad, el resultado o la fecha de inicio). Las *observaciones contienen* todos los valores medidos en la misma unidad (por ejemplo, una persona, un lugar o una muestra de laboratorio). Por lo tanto, estos aspectos pueden ser más difíciles de definir de forma tangible. 
+Las *variables* contienen los valores que miden el mismo atributo subyacente (como el grupo de edad, el resultado o la fecha de inicio). Las *observaciones* contienen todos los valores medidos en la misma unidad (por ejemplo, una persona, un lugar o una muestra de laboratorio). Por lo tanto, estos aspectos pueden ser más difíciles de definir de forma tangible. 
 
 En los conjuntos de datos "ordenados", cada columna es una variable, cada fila es una observación y cada celda es un único valor. Sin embargo, algunos conjuntos de datos que se encuentran no se ajustan a este molde: unos datos de formato "amplio" pueden tener una variable dividida en varias columnas (véase un ejemplo en la página [Pivotar datos](#pivoting-data)). Del mismo modo, las observaciones pueden estar divididas en varias filas. 
 
 La mayor parte de este manual trata sobre la gestión y la transformación de datos, por lo que las referencias a las estructuras de datos concretas de filas y columnas son más relevantes que las observaciones y las variables más abstractas. Las excepciones se dan sobre todo en las páginas sobre análisis de datos, en las que verás más referencias a las variables y las observaciones. 
 
-Limpieza de tuberías 
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+
+## Limpieza de tuberías 
 
 **Esta página recorre los pasos típicos de limpieza, añadiéndolos secuencialmente a una cadena de tuberías de limpieza.** 
 
 En el análisis epidemiológico y el procesamiento de datos, los pasos de limpieza se realizan a menudo de forma secuencial, enlazados entre sí. En R, esto se manifiesta a menudo como una "tubería" de limpieza, en la que *los datos en bruto se pasan o se "canalizan" de un paso de limpieza a otro*. 
 
-Estas cadenas utilizan las funciones de **dplyr** y el operador %>% de **magrittr**. Esta tubería comienza con los datos "en bruto" ("linelist_raw.xlsx") y termina con un dataframe de R "limpio" (linelist) que se puede utilizar, guardar, exportar, etc. 
+Estas cadenas utilizan las funciones de **dplyr** y el operador `%>%` de **magrittr**. Esta tubería comienza con los datos "en bruto" ("linelist_raw.xlsx") y termina con un dataframe de R "limpio" (`linelist`) que se puede utilizar, guardar, exportar, etc. 
 
 En un proceso de limpieza, el orden de los pasos es importante. Los pasos de limpieza pueden incluir: 
 
 * Importación de datos 
-
 * Limpieza o cambio de los nombres de las columnas 
-
 * de-duplicación 
-
 * Creación y transformación de columnas (por ejemplo, recodificación o normalización de valores) 
 
 * Filtrado o añadido de filas 
 
-Carga de paquetes 
 
-Este trozo de código muestra la carga de los paquetes necesarios para el análisis. En este manual destacamos p_load() de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con library() de R **base.** Consulta la página sobre [Aspectos generales de R](#r-basics) para obtener más información sobre los paquetes de R. 
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
 
-Importar datos 
+## Carga de paquetes 
 
-Importar 
+Este trozo de código muestra la carga de los paquetes necesarios para el análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con `library()` de R **base.** Consulta la página sobre [Aspectos generales de R](#r-basics) para obtener más información sobre los paquetes de R. 
 
-Aquí importamos el archivo Excel de la lista de casos "en bruto" utilizando la función import() del paquete **rio**. El paquete **rio** maneja con flexibilidad muchos tipos de archivos (por ejemplo, .xlsx, .csv, .tsv, .rds. Consulta la página sobre [importación y exportación](#import-and-export) para obtener más información y consejos sobre situaciones inusuales (por ejemplo, omitir filas, establecer valores que faltan, importar hojas de Google, etc.). 
+```{r, message = F}
+pacman::p_load(
+  rio,        # importing data  
+  here,       # relative file pathways  
+  janitor,    # data cleaning and tables
+  lubridate,  # working with dates
+  epikit,     # age_categories() function
+  tidyverse   # data management and visualization
+)
+```
+
+
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+
+## Importar datos 
+
+### Importar {.unnumbered} 
+
+Aquí importamos el archivo Excel de la lista de casos "en bruto" utilizando la función `import()` del paquete **rio**. El paquete **rio** maneja con flexibilidad muchos tipos de archivos (por ejemplo, .xlsx, .csv, .tsv, .rds. Consulta la página sobre [importación y exportación](#import-and-export) para obtener más información y consejos sobre situaciones inusuales (por ejemplo, omitir filas, establecer valores que faltan, importar hojas de Google, etc). 
 
 Para continuar, [cliquea para descargar linelist "en crudo"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_raw.xlsx) (como archivo .xlsx). 
 
 Si tu conjunto de datos es grande y tarda mucho en importarse, puede ser útil que el comando de importación esté separado de la cadena de tuberías y que el "crudo" se guarde como un archivo distinto. Esto también permite comparar fácilmente las versiones original y limpia. 
 
-A continuación, importamos el archivo de Excel sin procesar y lo guardamos como el dataframe linelist_raw. Suponemos que el archivo se encuentra en tu directorio de trabajo o en la raíz del proyecto R, por lo que no se especifican subcarpetas en la ruta del archivo. 
+A continuación, importamos el archivo de Excel sin procesar y lo guardamos como el dataframe `linelist_raw`. Suponemos que el archivo se encuentra en tu directorio de trabajo o en la raíz del proyecto R, por lo que no se especifican subcarpetas en la ruta del archivo. 
 
-Puedes ver las primeras 50 filas del dataframe a continuación. Nota: la función **base** de R head(n) te permite ver sólo las primeras n filas en la consola de R. 
 
-Revisar 
+```{r, echo=F, message=F}
+# HIDDEN FROM READER
+# actually load the data using here()
+linelist_raw <- rio::import(here::here("data", "case_linelists", "linelist_raw.xlsx"))
+```
 
-Puedes utilizar la función skim() del paquete **skimr** para obtener una visión general de todo el dataframe (véase la página sobre [tablas descriptivas](#descriptive-tables) para más información). Las columnas se resumen por tipo, como carácter, numérico. Nota: "POSIXct" es un tipo de fecha cruda (ver [Trabajar con fechas](#working-with-dates-1). 
+```{r, eval=F}
+linelist_raw <- import("linelist_raw.xlsx")
+```
 
-Nombres de columnas 
+Puedes ver las primeras 50 filas del dataframe a continuación. Nota: la función **base** de R `head(n)` te permite ver sólo las primeras n filas en la consola de R. 
 
-En R, *los nombres de* las columnas son la "cabecera" o el valor "superior" de una columna. Se utilizan para referirse a las columnas en el código, y sirven como etiqueta por defecto en las figuras. 
+```{r message=FALSE, echo=F}
+# display the linelist data as a table
+DT::datatable(head(linelist_raw,50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
+```
+
+
+## Revisar {.unnumbered}  
+
+Puedes utilizar la función `skim()` del paquete **skimr** para obtener una visión general de todo el dataframe (véase la página sobre [tablas descriptivas](#descriptive-tables) para más información). Las columnas se resumen por clase o tipo, como, por ejemplo, carácter, numérico. Nota: "POSIXct" es un tipo de fecha cruda (ver [Trabajar con fechas](#working-with-dates-1). 
+
+```{r, eval=F}
+skimr::skim(linelist_raw)
+```
+
+```{r, echo=F}
+skimr::skim_without_charts(linelist_raw)
+```
+
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+
+## Nombres de columnas {}
+
+En R, los *nombres* de las columnas son la "cabecera" o el valor "superior" de una columna. Se utilizan para referirse a las columnas en el código, y sirven como etiqueta por defecto en las figuras. 
 
 Otros programas estadísticos, como SAS y STATA, utilizan *"etiquetas"* que coexisten como versiones impresas más largas de los nombres de columna más cortos. Aunque R ofrece la posibilidad de añadir etiquetas de columna a los datos, no es una práctica que sea muy utilizada. Para hacer que los nombres de las columnas sean "fáciles de imprimir" para las figuras, normalmente se ajusta su visualización dentro de los comandos de gráficas que crean las salidas (por ejemplo, los títulos de los ejes o de las leyendas de una gráfica, o las cabeceras de las columnas en una tabla impresa - véase la [sección de escalas de la página de consejos de ggplot](#ggplot_tips_scales) y las páginas de [Tablas para la presentación](#tables-for-presentation)). Si deseas asignar etiquetas de columna en los datos, lee más online [aquí](https://cran.r-project.org/web/packages/expss/vignettes/labels-support.html) y [aquí](https://cran.r-project.org/web/packages/labelled/vignettes/intro_labelled.html). 
 
 Como los nombres de las columnas de R se utilizan con mucha frecuencia, deben tener una sintaxis "limpia". Sugerimos lo siguiente: 
 
 * Nombres cortos 
-
 * Sin espacios (sustituir por barras bajas _ ) 
-
 * Sin caracteres inusuales (&, #, <, >, ...) 
+* Nomenclatura de estilo similar (por ejemplo, todas las columnas de fecha nombradas como **date**_onset, **date**_report, **date**_death...) 
 
-* Nomenclatura de estilo similar (por ejemplo, todas las columnas de fecha nombradas como **date_onset**, **date_report**, **date_death...**) 
+Los nombres de las columnas de `linelist_raw` se muestran a continuación utilizando `names()` de R **base**. Podemos ver que inicialmente 
 
-Los nombres de las columnas de linelist_raw se muestran a continuación utilizando names() de R **base**. Podemos ver que inicialmente 
+* Algunos nombres contienen espacios (por ejemplo, `infection date`) 
 
-* Algunos nombres contienen espacios (por ejemplo, infection date) 
+* Se utilizan diferentes patrones de nomenclatura para las fechas (`date onset` vs. `infection date`) 
 
-* Se utilizan diferentes patrones de nomenclatura para las fechas (date onset vs. infection date) 
+* Debe haber habido una *cabecera fusionada* en las dos últimas columnas del .xlsx. Lo sabemos porque el nombre de dos columnas fusionadas ("merged_header") fue asignado por R a la primera columna, y a la segunda columna se le asignó un nombre de marcador de posición "...28" (ya que entonces estaba vacía y es la columna 28). 
 
-* Debe haber habido una cabecera *fusionada en* las dos últimas columnas del .xlsx. Lo sabemos porque el nombre de dos columnas fusionadas ("merged_header") fue asignado por R a la primera columna, y a la segunda columna se le asignó un nombre de marcador de posición "...28" (ya que entonces estaba vacía y es la columna 28). 
+```{r}
+names(linelist_raw)
+```
 
-***NOTA:*** Para hacer referencia a un nombre de columna que incluya espacios, rodee el nombre con tildes, por ejemplo: linelist$\` '\x60infection date\x60'\`. Ten en cuenta que, en tu teclado, la tilde (\`) es diferente de la comilla simple ('). 
+<span style="color: black;">***NOTA:*** Para hacer referencia a un nombre de columna que incluya espacios, rodee el nombre con tildes, por ejemplo: linelist``$\` '\x60infection date\x60' ``. Ten en cuenta que, en tu teclado, la tilde (\`) es diferente de la comilla simple ('). </span>
 
-Etiquetas 
+### Etiquetas {.unnumbered}  
 
-Algunos otros programas estadísticos, como SAS, tienen *etiquetas de* variables 
+Algunos otros programas estadísticos, como SAS, tienen *etiquetas* de variables 
 
-Limpieza automática 
+### Limpieza automática {.unnumbered}  
 
-La función clean_names() del paquete **janitor** estandariza los nombres de las columnas y los hace únicos haciendo lo siguiente: 
+La función `clean_names()` del paquete **janitor** estandariza los nombres de las columnas y los hace únicos haciendo lo siguiente: 
 
 * Convierte todos los nombres para que estén compuestos sólo por barras bajas, números y letras 
-
 * Los caracteres acentuados se transliteran a ASCII (por ejemplo, la o alemana con diéresis se convierte en "o", la "ñ" española se convierte en "n") 
+* Se puede especificar la preferencia de mayúsculas para los nuevos nombres de columna utilizando `case =` argumento ("snake" es el valor por defecto, las alternativas incluyen "sentence", "title", "small_camel"...) 
+* Puedes especificar sustituciones de nombres concretos proporcionando un vector `replace =` argumento (por ejemplo, `replace = c(onset = "date_of_onset")`)
 
-* Se puede especificar la preferencia de mayúsculas para los nuevos nombres de columna utilizando case = argumento ("snake" es el valor por defecto, las alternativas incluyen "sentence", "title", "small_camel"...) 
+* Aquí puedes encontrar una  [viñeta](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html#cleaning) en línea sobre dicho paquete. 
 
-* Puedes especificar sustituciones de nombres concretos proporcionando un vector a replace = argumento (por ejemplo, replace = c(onset = "date_of_onset") 
+A continuación, el proceso de limpieza comienza utilizando `clean_names()` sobre linelist_raw. 
 
-* Esta es una [viñeta](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html#cleaning) en línea 
+```{r clean_names}
+# pipe the raw dataset through the function clean_names(), assign result as "linelist"  
+linelist <- linelist_raw %>% 
+  janitor::clean_names()
 
-A continuación, el proceso de limpieza comienza utilizando clean_names() en sobre linelist_raw. 
+# see the new column names
+names(linelist)
+```
 
-***NOTA:*** El nombre de la última columna "...28" se ha cambiado por "x28". 
+<span style="color: black;">***NOTA:*** El nombre de la última columna "...28" se ha cambiado por "x28". </span>
 
-Limpieza manual de nombres 
+### Limpieza manual de nombres {.unnumbered}  
 
-A menudo es necesario renombrar las columnas manualmente, incluso después del paso de estandarización anterior. A continuación, el renombramiento se realiza utilizando la función rename() del paquete **dplyr**, como parte de una cadena de tuberías. rename() utiliza el estilo NUEVO = ANTIGUO - el nombre nuevo de la columna se escribe antes que el antiguo. 
+A menudo es necesario renombrar las columnas manualmente, incluso después del paso de estandarización anterior. A continuación, el renombramiento se realiza utilizando la función `rename()` del paquete **dplyr**, como parte de una cadena de tuberías. `rename()` utiliza el estilo `NUEVO = ANTIGUO` - el nombre nuevo de la columna se escribe antes que el antiguo. 
 
 A continuación, se añade un comando de renombramiento a la tubería de limpieza. Se han añadido espacios estratégicamente para alinear el código y facilitar la lectura. 
 
+```{r}
+# CLEANING 'PIPE' CHAIN (starts with raw data and pipes it through cleaning steps)
+##################################################################################
+linelist <- linelist_raw %>%
+    
+    # standardize column name syntax
+    janitor::clean_names() %>% 
+    
+    # manually re-name columns
+           # NEW name             # OLD name
+    rename(date_infection       = infection_date,
+           date_hospitalisation = hosp_date,
+           date_outcome         = date_of_outcome)
+```
+
+
 Ahora puedes ver que los nombres de las columnas han cambiado: 
 
-Renombrar por posición de columna 
+```{r message=FALSE, echo=F}
+names(linelist)
+```
+
+#### Renombrar por posición de columna {.unnumbered} 
 
 También puedes renombrar por la posición de la columna, en lugar del nombre de la columna, por ejemplo: 
 
-Renombrar mediante select() y summarise() 
+```{r, eval=F}
+rename(newNameForFirstColumn  = 1,
+       newNameForSecondColumn = 2)
+```
 
-Como método abreviado, también puedes cambiar el nombre de las columnas dentro de las funciones de **dplyr** select() y summarise(). select() se utiliza para mantener sólo ciertas columnas (y se muestra más adelante en esta página). summarise() se muestra en las páginas [Agrupar datos](#grouping-data) y [Tablas descriptivas](#descriptive-tables). Estas funciones también utilizan el formato nombre_nuevo = nombre_antiguo. He aquí un ejemplo: 
+#### Renombrar mediante `select()` y `summarise()` {.unnumbered}
 
-Otros retos 
+Como método abreviado, también puedes cambiar el nombre de las columnas dentro de las funciones de **dplyr** `select()` y `summarise()`. `select()` se utiliza para mantener sólo ciertas columnas (y se muestra más adelante en esta página). `summarise()` se muestra en las páginas [Agrupar datos](#grouping-data) y [Tablas descriptivas](#descriptive-tables). Estas funciones también utilizan el formato `nombre_nuevo = nombre_antiguo`. He aquí un ejemplo: 
 
-Nombres de columnas de Excel vacíos 
+```{r, eval=F}
+linelist_raw %>% 
+  select(# NEW name             # OLD name
+         date_infection       = `infection date`,    # rename and KEEP ONLY these columns
+         date_hospitalisation = `hosp date`)
+```
+
+### Otros retos {.unnumbered} 
+
+#### Nombres de columnas de Excel vacíos {.unnumbered} 
 
 R no puede tener columnas de conjuntos de datos que no tengan nombres de columnas (cabeceras). Así, si importa unos datos de Excel con datos pero sin cabeceras de columna, R rellenará las cabeceras con nombres como "...1" o "...2". El nombre asignado representa el número de la columna (por ejemplo, si la cuarta columna de los datos no tiene cabecera, R la nombrará "...4"). 
 
-Puedes limpiar estos nombres manualmente haciendo referencia a su número de posición (véase el ejemplo anterior), o a su nombre asignado (linelist_raw$...1). 
+Puedes limpiar estos nombres manualmente haciendo referencia a su número de posición (véase el ejemplo anterior), o a su nombre asignado (`linelist_raw$...1`). 
 
-Nombres de columnas y celdas fusionadas de Excel 
+#### Nombres de columnas y celdas fusionadas de Excel {.unnumbered}
 
 Las celdas combinadas en un archivo de Excel son una ocurrencia común cuando se reciben datos. Como se explica en [Transición a R](#transition-to-r), las celdas combinadas pueden ser agradables para la lectura humana de los datos, pero no son "datos ordenados" y causan muchos problemas para la lectura de los datos por parte de las máquinas. R no puede ajustar las celdas combinadas. 
 
-Recuerda a las personas que introducen los datos que **los datos legibles para el ser humano no son lo mismo que los datos legibles para la máquina**. Esfuérzate en formar a los usuarios sobre los principios de los [**[datos ordenados]**(https://r4ds.had.co.nz/tidy-data.html). Si es posible, intenta cambiar los procedimientos para que los datos lleguen en un formato ordenado y sin celdas fusionadas. 
+Recuerda a las personas que introducen los datos que **los datos legibles para el ser humano no son lo mismo que los datos legibles para la máquina**. Esfuérzate en formar a los usuarios sobre los principios de los [[**datos ordenados**](https://r4ds.had.co.nz/tidy-data.html). Si es posible, intenta cambiar los procedimientos para que los datos lleguen en un formato ordenado y sin celdas fusionadas. 
 
 * Cada variable debe tener su propia columna. 
-
 * Cada observación debe tener su propia fila. 
-
 * Cada valor debe tener su propia celda. 
 
-Al utilizar la función import() de **rio**, el valor de una celda combinada se asignará a la primera celda y las siguientes estarán vacías. 
+Al utilizar la función `import()` de **rio**, el valor de una celda combinada se asignará a la primera celda y las siguientes estarán vacías. 
 
-Una solución para tratar las celdas combinadas es importar los datos con la función readWorkbook() del paquete **openxlsx**. Establece el argumento fillMergedCells = TRUE. Esto da el valor en una celda fusionada a todas las celdas dentro del rango de fusión. 
+Una solución para tratar las celdas combinadas es importar los datos con la función `readWorkbook()` del paquete **openxlsx**. Establece el argumento `fillMergedCells = TRUE`. Esto da el valor en una celda fusionada a todas las celdas dentro del rango de fusión. 
 
-***PELIGRO:*** Si los nombres de las columnas se fusionan con readWorkbook(), terminarás con nombres de columnas duplicados, que tendrás que arreglar manualmente - ¡R no funciona bien con nombres de columnas duplicados! Puedes renombrarlas haciendo referencia a su posición (por ejemplo, la columna 5), como se explica en la sección de limpieza manual de nombres de columnas. 
+```{r, eval=F}
+linelist_raw <- openxlsx::readWorkbook("linelist_raw.xlsx", fillMergedCells = TRUE)
+```
 
-Seleccionar o reordenar columnas 
+<span style="color: red;">***PELIGRO:*** Si los nombres de las columnas se fusionan con `readWorkbook()`, terminarás con nombres de columnas duplicados, que tendrás que arreglar manualmente - ¡R no funciona bien con nombres de columnas duplicados! Puedes renombrarlas haciendo referencia a su posición (por ejemplo, la columna 5), como se explica en la sección de limpieza manual de nombres de columnas. </span>
 
-Utiliza select() de **dplyr** para seleccionar las columnas que deseas conservar y para especificar su orden en el dataframe. 
 
-***ATENCIÓN:*** En los ejemplos siguientes, el dataframe linelist se modifica con select() y se muestra, pero no se guarda. Esto es a efectos de demostración. Los nombres de las columnas modificadas se imprimen pasando el dataframe a names(). 
+
+
+ 
+
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+
+## Seleccionar o reordenar columnas {} 
+
+Utiliza `select()` de **dplyr** para seleccionar las columnas que deseas conservar y para especificar su orden en el dataframe. 
+
+<span style="color: orange;">***ATENCIÓN:*** En los ejemplos siguientes, el dataframe `linelist` se modifica con `select()` y se muestra, pero no se guarda. Esto es a efectos de demostración. Los nombres de las columnas modificadas se imprimen pasando el dataframe a `names()`.</span>
 
 **Aquí están TODOS los nombres de las columnas en linelist en este punto de la cadena de limpieza:** 
 
-Mantener las columnas 
+```{r}
+names(linelist)
+```
+
+### Mantener las columnas {.unnumbered}  
 
 **Selecciona sólo las columnas que desees conservar** 
 
-Escribe sus nombres en el comando select(), sin comillas. Aparecerán en el dataframe en el orden que indiques. Ten en cuenta que si incluyes una columna que no existe, R devolverá un error (véase el uso de any_of() más adelante para evitar un error de este tipo). 
+Escribe sus nombres en el comando `select()`, sin comillas. Aparecerán en el dataframe en el orden que indiques. Ten en cuenta que si incluyes una columna que no existe, R devolverá un error (véase el uso de `any_of()` más adelante para evitar un error de este tipo). 
 
-Funciones de ayuda "tidyselect". 
+```{r}
+# linelist dataset is piped through select() command, and names() prints just the column names
+linelist %>% 
+  select(case_id, date_onset, date_hospitalisation, fever) %>% 
+  names()  # display the column names
+```
+
+
+
+### Funciones de ayuda "tidyselect". 
 
 Estas funciones de ayuda existen para facilitar la especificación de las columnas a conservar, descartar o transformar. Provienen del paquete **tidyselect**, que se incluye en **tidyverse** y se basa en la forma en que se seleccionan las columnas en las funciones de **dplyr**. 
 
-Por ejemplo, si deseas reordenar las columnas, everything() es una función útil para indicar "todas las demás columnas no mencionadas". El comando siguiente mueve las columnas date_onset y date_hospitalisation al principio (izquierda) de los datos, pero mantiene todas las demás columnas después. Fíjate en que verything() se escribe con paréntesis vacíos: 
+Por ejemplo, si deseas reordenar las columnas, `everything()` es una función útil para indicar "todas las demás columnas no mencionadas". El comando siguiente mueve las columnas `date_onset` y `date_hospitalisation` al principio (izquierda) de los datos, pero mantiene todas las demás columnas después. Fíjate en que `everything()` se escribe con paréntesis vacíos: 
 
-Aquí hay otras funciones de ayuda "tidyselect" que también funcionan *dentro de* las funciones de **dplyr** como select(), across() y summarise(): 
+```{r}
+# move date_onset and date_hospitalisation to beginning
+linelist %>% 
+  select(date_onset, date_hospitalisation, everything()) %>% 
+  names()
+```
 
-* everything() - todas las demás columnas no mencionadas 
+Aquí hay otras funciones de ayuda "tidyselect" que también funcionan *dentro de* las funciones de **dplyr** como `select()`, `across()` y `summarise()`: 
 
-* last_col() - la última columna 
+* `everything()` - todas las demás columnas no mencionadas 
 
-* where() - aplica una función a todas las columnas y selecciona las que son TRUE 
+* `last_col()` - la última columna 
 
-* contains() - columnas que contienen una cadena de caracteres  * ejemplo: select(contains("time")) 
+* `where()` - aplica una función a todas las columnas y selecciona las que son TRUE 
 
-* starts_with() - coincide con un prefijo especificado  * ejemplo: select(starts_with("date_")) 
+* `contains()` - columnas que contienen una cadena de caracteres  * ejemplo: `select(contains("time"))`
 
-* ends_with() - coincide con un sufijo especificado  * ejemplo: select(ends_with("_post")) 
+* `starts_with()` - coincide con un prefijo especificado  * ejemplo: `select(starts_with("date_"))`
 
-* matches() - para aplicar una expresión regular (regex)  * ejemplo: select(matches("[pt]al")) 
+* `ends_with()` - coincide con un sufijo especificado  * ejemplo: `select(ends_with("_post))` 
 
-* num_range() - un rango numérico como x01, x02, x03 
+* `matches()` - para aplicar una expresión regular (regex)  * ejemplo: `select(matches("[pt]al"))` 
 
-* any_of() - coincide con la columna SI existe pero no devuelve ningún error si no se encuentra  * ejemplo: select(any_of(date_onset, date_death,     cardiac_arrest)) 
+* `num_range()` - un rango numérico como x01, x02, x03 
 
-Además, utiliza operadores normales como c() para listar varias columnas, : para columnas consecutivas, ! para opuestas, & para "Y" y | para "O". 
+* `any_of()` - coincide con la columna SI existe pero no devuelve ningún error si no se encuentra  * ejemplo: `select(any_of(date_onset, date_death,     cardiac_arrest)) `
 
-Utiliza where() para especificar criterios lógicos para las columnas. Si escribes una función dentro de where(), no incluyas los paréntesis vacíos de la función. El comando siguiente selecciona las columnas de tipo Numeric. 
+Además, utiliza operadores normales como `c()` para listar varias columnas, `:` para columnas consecutivas, `!` para opuestas, `&` para "Y" y `|` para "O". 
 
-Utiliza contains() para seleccionar sólo las columnas en las que el nombre de la columna contiene una cadena de caracteres especificada. ends_with() y starts_with() proporcionan más matices. 
+Utiliza `where()` para especificar criterios lógicos para las columnas. Si escribes una función dentro de `where()`, no incluyas los paréntesis vacíos de la función. El comando siguiente selecciona las columnas de tipo Numeric. 
 
-La función matches() funciona de forma similar a contains(), pero puede escribirse en una expresión regular (mira la página sobre [Caracteres y cadenas](#characters-and-strings)), como varias cadenas separadas por barras "O" dentro de los paréntesis: 
+```{r}
+# select columns that are class Numeric
+linelist %>% 
+  select(where(is.numeric)) %>% 
+  names()
+```
 
-***ATENCIÓN:*** Si has escrito un nombre de columna y no existen datos para ella, puede devolver un error y detener tu código. Considera el uso de any_of() para citar columnas que pueden o no existir, especialmente útil en selecciones negativas (eliminar). 
+Utiliza `contains()` para seleccionar sólo las columnas en las que el nombre de la columna contiene una cadena de caracteres especificada. `ends_with()` y `starts_with()` proporcionan más matices. 
+
+```{r}
+# select columns containing certain characters
+linelist %>% 
+  select(contains("date")) %>% 
+  names()
+```
+
+La función `matches()` funciona de forma similar a `contains()`, pero puede escribirse en una expresión regular (mira la página sobre [Caracteres y cadenas](#characters-and-strings)), como varias cadenas separadas por barras "O" dentro de los paréntesis: 
+
+```{r}
+# searched for multiple character matches
+linelist %>% 
+  select(matches("onset|hosp|fev")) %>%   # note the OR symbol "|"
+  names()
+```
+
+<span style="color: orange;">***ATENCIÓN:*** Si has escrito un nombre de columna y no existen datos para ella, puede devolver un error y detener tu código. Considera el uso de `any_of()` para citar columnas que pueden o no existir, especialmente útil en selecciones negativas (eliminar). </span>
 
 Sólo existe una de estas columnas, pero no se produce ningún error y el código continúa sin detener su cadena de limpieza. 
 
-Eliminar columnas 
+```{r}
+linelist %>% 
+  select(any_of(c("date_onset", "village_origin", "village_detection", "village_residence", "village_travel"))) %>% 
+  names()
+```
+
+### Eliminar columnas {.unnumbered} 
 
 **Indica qué columnas se van a eliminar** colocando el símbolo "-" delante del nombre de la columna (por ejemplo, select(-outcome)), o un vector de nombres de columnas (como se indica a continuación). Todas las demás columnas se mantendrán. 
 
