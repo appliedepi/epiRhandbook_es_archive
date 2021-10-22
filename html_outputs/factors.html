@@ -63,7 +63,7 @@
 <li><a class="" href="r-projects.html"><span class="header-section-number">6</span> Proyectos en R</a></li>
 <li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Importación y exportación</a></li>
 <li class="book-part">Gestión de datos</li>
-<li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Cleaning data and core functions</a></li>
+<li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Limpieza de datos y funciones básicas</a></li>
 <li><a class="" href="working-with-dates.html"><span class="header-section-number">9</span> Working with dates</a></li>
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Caracteres y cadenas</a></li>
 <li><a class="active" href="factors.html"><span class="header-section-number">11</span> Factors</a></li>
@@ -130,8 +130,8 @@
 <h2>
 <span class="header-section-number">11.1</span> Preparation<a class="anchor" aria-label="anchor" href="#preparation-1"><i class="fas fa-link"></i></a>
 </h2>
-<div id="load-packages-2" class="section level3 unnumbered">
-<h3>Load packages<a class="anchor" aria-label="anchor" href="#load-packages-2"><i class="fas fa-link"></i></a>
+<div id="load-packages-1" class="section level3 unnumbered">
+<h3>Load packages<a class="anchor" aria-label="anchor" href="#load-packages-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>This code chunk shows the loading of packages required for the analyses. In this handbook we emphasize <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> from <strong>pacman</strong>, which installs the package if necessary <em>and</em> loads it for use. You can also load installed packages with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> from <strong>base</strong> R. See the page on [R basics] for more information on R packages.</p>
 <div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
@@ -145,8 +145,8 @@
   <span class="va">tidyverse</span>      <span class="co"># data mgmt and viz</span>
   <span class="op">)</span></code></pre></div>
 </div>
-<div id="import-data-4" class="section level3 unnumbered">
-<h3>Import data<a class="anchor" aria-label="anchor" href="#import-data-4"><i class="fas fa-link"></i></a>
+<div id="import-data-3" class="section level3 unnumbered">
+<h3>Import data<a class="anchor" aria-label="anchor" href="#import-data-3"><i class="fas fa-link"></i></a>
 </h3>
 <p>We import the dataset of cases from a simulated Ebola epidemic. If you want to follow along, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds" class="download-button">click to download the “clean” linelist</a> (as .rds file). Import your data with the <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> function from the <strong>rio</strong> package (it accepts many file types like .xlsx, .rds, .csv - see the [Import and export] page for details).</p>
 <div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
@@ -161,7 +161,7 @@
 <div id="create-column" class="section level4 unnumbered">
 <h4>Create column<a class="anchor" aria-label="anchor" href="#create-column"><i class="fas fa-link"></i></a>
 </h4>
-<p>We use the existing column <code>days_onset_hosp</code> (days from symptom onset to hospital admission) and create a new column <code>delay_cat</code> by classifying each row into one of several categories. We do this with the <strong>dplyr</strong> function <code>case_when()</code>, which sequentially applies logical criteria (right-side) to each row and returns the corresponding left-side value for the new column <code>delay_cat</code>. Read more about <code>case_when()</code> in <a href="cleaning-data-and-core-functions.html#cleaning-data-and-core-functions">Cleaning data and core functions</a>.</p>
+<p>We use the existing column <code>days_onset_hosp</code> (days from symptom onset to hospital admission) and create a new column <code>delay_cat</code> by classifying each row into one of several categories. We do this with the <strong>dplyr</strong> function <code>case_when()</code>, which sequentially applies logical criteria (right-side) to each row and returns the corresponding left-side value for the new column <code>delay_cat</code>. Read more about <code>case_when()</code> in [Cleaning data and core functions].</p>
 <div class="sourceCode" id="cb542"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
@@ -412,7 +412,7 @@
 <div id="manually-1" class="section level3 unnumbered">
 <h3>Manually<a class="anchor" aria-label="anchor" href="#manually-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>You can adjust the level displays manually manually with <code>fct_recode()</code>. This is like the <strong>dplyr</strong> function <code>recode()</code> (see <a href="cleaning-data-and-core-functions.html#cleaning-data-and-core-functions">Cleaning data and core functions</a>), but it allows the creation of new factor levels. If you use the simple <code>recode()</code> on a factor, new re-coded values will be rejected unless they have already been set as permissible levels.</p>
+<p>You can adjust the level displays manually manually with <code>fct_recode()</code>. This is like the <strong>dplyr</strong> function <code>recode()</code> (see [Cleaning data and core functions]), but it allows the creation of new factor levels. If you use the simple <code>recode()</code> on a factor, new re-coded values will be rejected unless they have already been set as permissible levels.</p>
 <p>This tool can also be used to “combine” levels, by assigning multiple levels the same re-coded value. Just be careful to not lose information! Consider doing these combining steps in a new column (not over-writing the existing column).</p>
 <p><code>fct_recode()</code> has a different syntax than <code>recode()</code>. <code>recode()</code> uses <code>OLD = NEW</code>, whereas <code>fct_recode()</code> uses <code>NEW = OLD</code>.</p>
 <p>The current levels of <code>delay_cat</code> are:</p>
@@ -547,12 +547,16 @@ Please also see the <a href="working-with-dates.html#working-with-dates-1">Worki
 
 <span class="co"># Display levels</span>
 <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">epiweek_formatted</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] "2014-W13" "2014-W14" "2014-W15" "2014-W16" "2014-W17" "2014-W18" "2014-W19" "2014-W20" "2014-W21" "2014-W22"
-## [11] "2014-W23" "2014-W24" "2014-W25" "2014-W26" "2014-W27" "2014-W28" "2014-W29" "2014-W30" "2014-W31" "2014-W32"
-## [21] "2014-W33" "2014-W34" "2014-W35" "2014-W36" "2014-W37" "2014-W38" "2014-W39" "2014-W40" "2014-W41" "2014-W42"
-## [31] "2014-W43" "2014-W44" "2014-W45" "2014-W46" "2014-W47" "2014-W48" "2014-W49" "2014-W50" "2014-W51" "2015-W00"
-## [41] "2015-W01" "2015-W02" "2015-W03" "2015-W04" "2015-W05" "2015-W06" "2015-W07" "2015-W08" "2015-W09" "2015-W10"
-## [51] "2015-W11" "2015-W12" "2015-W13" "2015-W14" "2015-W15" "2015-W16"</code></pre>
+<pre><code>##  [1] "2014-W13" "2014-W14" "2014-W15" "2014-W16" "2014-W17" "2014-W18"
+##  [7] "2014-W19" "2014-W20" "2014-W21" "2014-W22" "2014-W23" "2014-W24"
+## [13] "2014-W25" "2014-W26" "2014-W27" "2014-W28" "2014-W29" "2014-W30"
+## [19] "2014-W31" "2014-W32" "2014-W33" "2014-W34" "2014-W35" "2014-W36"
+## [25] "2014-W37" "2014-W38" "2014-W39" "2014-W40" "2014-W41" "2014-W42"
+## [31] "2014-W43" "2014-W44" "2014-W45" "2014-W46" "2014-W47" "2014-W48"
+## [37] "2014-W49" "2014-W50" "2014-W51" "2015-W00" "2015-W01" "2015-W02"
+## [43] "2015-W03" "2015-W04" "2015-W05" "2015-W06" "2015-W07" "2015-W08"
+## [49] "2015-W09" "2015-W10" "2015-W11" "2015-W12" "2015-W13" "2015-W14"
+## [55] "2015-W15" "2015-W16"</code></pre>
 <p><span style="color: red;"><strong><em>DANGER:</em></strong> If you place the weeks ahead of the years (“Www-YYYY”) (“%W-%Y”), the default alpha-numeric level ordering will be incorrect (e.g. 01-2015 will be before 35-2014). You could need to manually adjust the order, which would be a long painful process.</span></p>
 <ol start="2" style="list-style-type: decimal">
 <li>
@@ -587,8 +591,8 @@ Please also see the <a href="working-with-dates.html#working-with-dates-1">Worki
 <li><a class="nav-link" href="#factors"><span class="header-section-number">11</span> Factors</a></li>
 <li>
 <a class="nav-link" href="#preparation-1"><span class="header-section-number">11.1</span> Preparation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#load-packages-2">Load packages</a></li>
-<li><a class="nav-link" href="#import-data-4">Import data</a></li>
+<li><a class="nav-link" href="#load-packages-1">Load packages</a></li>
+<li><a class="nav-link" href="#import-data-3">Import data</a></li>
 <li><a class="nav-link" href="#fct_newcat">New categorical variable</a></li>
 </ul>
 </li>
@@ -643,7 +647,7 @@ Please also see the <a href="working-with-dates.html#working-with-dates-1">Worki
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-17.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

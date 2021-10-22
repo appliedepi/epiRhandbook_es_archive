@@ -63,7 +63,7 @@
 <li><a class="" href="r-projects.html"><span class="header-section-number">6</span> Proyectos en R</a></li>
 <li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Importación y exportación</a></li>
 <li class="book-part">Gestión de datos</li>
-<li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Cleaning data and core functions</a></li>
+<li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Limpieza de datos y funciones básicas</a></li>
 <li><a class="active" href="working-with-dates.html"><span class="header-section-number">9</span> Working with dates</a></li>
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Caracteres y cadenas</a></li>
 <li><a class="" href="factors.html"><span class="header-section-number">11</span> Factors</a></li>
@@ -135,8 +135,8 @@
 <h2>
 <span class="header-section-number">9.1</span> Preparation<a class="anchor" aria-label="anchor" href="#preparation"><i class="fas fa-link"></i></a>
 </h2>
-<div id="load-packages-1" class="section level3 unnumbered">
-<h3>Load packages<a class="anchor" aria-label="anchor" href="#load-packages-1"><i class="fas fa-link"></i></a>
+<div id="load-packages" class="section level3 unnumbered">
+<h3>Load packages<a class="anchor" aria-label="anchor" href="#load-packages"><i class="fas fa-link"></i></a>
 </h3>
 <p>This code chunk shows the loading of packages required for this page. In this handbook we emphasize <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> from <strong>pacman</strong>, which installs the package if necessary <em>and</em> loads it for use. You can also load installed packages with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> from <strong>base</strong> R. See the page on [R basics] for more information on R packages.</p>
 <div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
@@ -150,8 +150,8 @@
   <span class="va">tidyverse</span>,  <span class="co"># data management and visualization  </span>
   <span class="va">rio</span><span class="op">)</span>        <span class="co"># data import/export</span></code></pre></div>
 </div>
-<div id="import-data-2" class="section level3 unnumbered">
-<h3>Import data<a class="anchor" aria-label="anchor" href="#import-data-2"><i class="fas fa-link"></i></a>
+<div id="import-data-1" class="section level3 unnumbered">
+<h3>Import data<a class="anchor" aria-label="anchor" href="#import-data-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>We import the dataset of cases from a simulated Ebola epidemic. If you want to download the data to follow along step-by-step, see instruction in the [Download handbook and data] page. We assume the file is in the working directory so no sub-folders are specified in this file path.</p>
 <div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
@@ -167,11 +167,11 @@
 <div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get the system date - this is a DATE class</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "2021-10-17"</code></pre>
+<pre><code>## [1] "2021-10-22"</code></pre>
 <div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get the system time - this is a DATETIME class</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "2021-10-17 18:05:18 CEST"</code></pre>
+<pre><code>## [1] "2021-10-22 13:06:41 CEST"</code></pre>
 <p>With the <strong>lubridate</strong> package these can also be returned with <code>today()</code> and <code>now()</code>, respectively. <code><a href="https://rdrr.io/r/base/date.html">date()</a></code> returns the current date and time with weekday and month names.</p>
 <!-- ======================================================= -->
 </div>
@@ -425,7 +425,7 @@
     <span class="va">hour_admit</span> <span class="op">&gt;=</span> <span class="fl">12</span> <span class="op">&amp;</span> <span class="va">hour_admit</span> <span class="op">&lt;</span> <span class="fl">17</span> <span class="op">~</span> <span class="st">"Afternoon"</span>,
     <span class="va">hour_admit</span> <span class="op">&gt;=</span> <span class="fl">17</span> <span class="op">&amp;</span> <span class="va">hour_admit</span> <span class="op">&lt;</span> <span class="fl">21</span> <span class="op">~</span> <span class="st">"Evening"</span>,
     <span class="va">hour_admit</span> <span class="op">&gt;=</span><span class="fl">21</span> <span class="op">|</span> <span class="va">hour_admit</span> <span class="op">&lt;=</span> <span class="fl">6</span> <span class="op">~</span> <span class="st">"Night"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>To learn more about <code>case_when()</code> see the page on <a href="cleaning-data-and-core-functions.html#cleaning-data-and-core-functions">Cleaning data and core functions</a>.</p>
+<p>To learn more about <code>case_when()</code> see the page on [Cleaning data and core functions].</p>
 <!-- ======================================================= -->
 </div>
 </div>
@@ -550,19 +550,19 @@
 <div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># today's date, with formatting</span>
 <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"%d %B %Y"</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "17 octubre 2021"</code></pre>
+<pre><code>## [1] "22 octubre 2021"</code></pre>
 <div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># easy way to get full date and time (default formatting)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/date.html">date</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "Sun Oct 17 18:05:21 2021"</code></pre>
+<pre><code>## [1] "Fri Oct 22 13:06:43 2021"</code></pre>
 <div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># formatted combined date, time, and time zone using str_glue() function</span>
 <span class="fu">str_glue</span><span class="op">(</span><span class="st">"{format(Sys.Date(), format = '%A, %B %d %Y, %z  %Z, ')}{format(Sys.time(), format = '%H:%M:%S')}"</span><span class="op">)</span></code></pre></div>
-<pre><code>## domingo, octubre 17 2021, +0000  UTC, 18:05:21</code></pre>
+<pre><code>## viernes, octubre 22 2021, +0000  UTC, 13:06:43</code></pre>
 <div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Using format to display weeks</span>
 <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y Week %W"</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "2021 Week 41"</code></pre>
+<pre><code>## [1] "2021 Week 42"</code></pre>
 <p>Note that if using <code>str_glue()</code>, be aware of that within the expected double quotes " you should only use single quotes (as above).</p>
 </div>
 <div id="month-year" class="section level3 unnumbered">
@@ -578,10 +578,10 @@
 <span class="co"># print table</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">test_zoo</span><span class="op">$</span><span class="va">yearmon</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
-## abr. 2014 may. 2014 jun. 2014 jul. 2014 ago. 2014 sep. 2014 oct. 2014 nov. 2014 dic. 2014 ene. 2015 feb. 2015 
-##         7        64       100       226       528      1070      1112       763       562       431       306 
-## mar. 2015 abr. 2015 
-##       277       186</code></pre>
+## abr. 2014 may. 2014 jun. 2014 jul. 2014 ago. 2014 sep. 2014 oct. 2014 
+##         7        64       100       226       528      1070      1112 
+## nov. 2014 dic. 2014 ene. 2015 feb. 2015 mar. 2015 abr. 2015 
+##       763       562       431       306       277       186</code></pre>
 <p>In contrast, you can see how only using <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> does achieve the desired display format, but not the correct ordering.</p>
 <div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create new column</span>
@@ -591,10 +591,10 @@
 <span class="co"># print table</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">test_format</span><span class="op">$</span><span class="va">yearmon</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
-## abr. 2014 abr. 2015 ago. 2014 dic. 2014 ene. 2015 feb. 2015 jul. 2014 jun. 2014 mar. 2015 may. 2014 nov. 2014 
-##         7       186       528       562       431       306       226       100       277        64       763 
-## oct. 2014 sep. 2014 
-##      1112      1070</code></pre>
+## abr. 2014 abr. 2015 ago. 2014 dic. 2014 ene. 2015 feb. 2015 jul. 2014 
+##         7       186       528       562       431       306       226 
+## jun. 2014 mar. 2015 may. 2014 nov. 2014 oct. 2014 sep. 2014 
+##       100       277        64       763      1112      1070</code></pre>
 <p>Note: if you are working within a <code>ggplot()</code> and want to adjust how dates are <em>displayed</em> only, it may be sufficient to provide a strptime format to the <code>date_labels =</code> argument in <code>scale_x_date()</code> - you can use <code>"%b %Y"</code> or <code>"%Y %b"</code>. See the <a href="ggplot-tips.html#ggplot-tips">ggplot tips</a> page.</p>
 <p><strong>zoo</strong> also offers the function <code>as.yearqtr()</code>, and you can use <code>scale_x_yearmon()</code> when using <code>ggplot()</code>.</p>
 <!-- ======================================================= -->
@@ -639,8 +639,8 @@
       by <span class="op">=</span> <span class="st">"week"</span><span class="op">)</span>,                   <span class="co"># by weeks</span>
     fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>             <span class="co"># fill-in NAs in the n counts column with 0</span></code></pre></div>
 <p>Here are the first rows of the resulting data frame:</p>
-<div id="htmlwidget-8cab20cdf50056e6b831" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8cab20cdf50056e6b831">{"x":{"filter":"none","data":[["2014-04-06","2014-04-13","2014-04-20","2014-04-27","2014-05-04","2014-05-11","2014-05-18","2014-05-25","2014-06-01","2014-06-08","2014-06-15","2014-06-22","2014-06-29","2014-07-06","2014-07-13","2014-07-20","2014-07-27","2014-08-03","2014-08-10","2014-08-17"],[1,1,4,4,12,14,14,21,21,18,30,23,31,35,55,58,80,86,114,122]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>weekly_cases<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-93b0c41701a0acc56d33" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-93b0c41701a0acc56d33">{"x":{"filter":"none","data":[["2014-04-06","2014-04-13","2014-04-20","2014-04-27","2014-05-04","2014-05-11","2014-05-18","2014-05-25","2014-06-01","2014-06-08","2014-06-15","2014-06-22","2014-06-29","2014-07-06","2014-07-13","2014-07-20","2014-07-27","2014-08-03","2014-08-10","2014-08-17"],[1,1,4,4,12,14,14,21,21,18,30,23,31,35,55,58,80,86,114,122]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>weekly_cases<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="epiweek-alternatives" class="section level3 unnumbered">
 <h3>Epiweek alternatives<a class="anchor" aria-label="anchor" href="#epiweek-alternatives"><i class="fas fa-link"></i></a>
@@ -663,7 +663,7 @@
 <code class="sourceCode R"><span class="co"># assign the current time to a column</span>
 <span class="va">time_now</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">time_now</span></code></pre></div>
-<pre><code>## [1] "2021-10-17 18:05:22 CEST"</code></pre>
+<pre><code>## [1] "2021-10-22 13:06:43 CEST"</code></pre>
 <div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># use with_tz() to assign a new timezone to the column, while CHANGING the clock time</span>
 <span class="va">time_london_real</span> <span class="op">&lt;-</span> <span class="fu">with_tz</span><span class="op">(</span><span class="va">time_now</span>, <span class="st">"Europe/London"</span><span class="op">)</span>
@@ -686,8 +686,8 @@
 </h2>
 <p><code>lead()</code> and <code><a href="https://rdrr.io/r/stats/lag.html">lag()</a></code> are functions from the <strong>dplyr</strong> package which help find previous (lagged) or subsequent (leading) values in a vector - typically a numeric or date vector. This is useful when doing calculations of change/difference between time units.</p>
 <p>Let’s say you want to calculate the difference in cases between a current week and the previous one. The data are initially provided in weekly counts as shown below.</p>
-<div id="htmlwidget-64d6827236623b071132" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-64d6827236623b071132">{"x":{"filter":"none","data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p><strong>When using <code><a href="https://rdrr.io/r/stats/lag.html">lag()</a></code> or <code>lead()</code> the order of rows in the dataframe is very important! - pay attention to whether your dates/numbers are ascending or descending</strong></p>
+<div id="htmlwidget-9d6263bf3b1526b9bcc1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9d6263bf3b1526b9bcc1">{"x":{"filter":"none","data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p><strong>When using <code><a href="https://rdrr.io/r/stats/lag.html">lag()</a></code> or <code>lead()</code> the order of rows in the dataframe is very important! - pay attention to whether your dates/numbers are ascending or descending</strong></p>
 <p>First, create a new column containing the value of the previous (lagged) week.</p>
 <ul>
 <li>Control the number of units back/forward with <code>n =</code> (must be a non-negative integer)<br>
@@ -699,14 +699,14 @@
 <div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="va">counts</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>cases_prev_wk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">cases_wk</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-9659f5a1adc19be8b5f9" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9659f5a1adc19be8b5f9">{"x":{"filter":"none","data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0],[null,0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n      <th>cases_prev_wk<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Next, create a new column which is the difference between the two cases columns:</p>
+<div id="htmlwidget-aa1a5e027bfc322dc6d6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aa1a5e027bfc322dc6d6">{"x":{"filter":"none","data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0],[null,0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n      <th>cases_prev_wk<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Next, create a new column which is the difference between the two cases columns:</p>
 <div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="va">counts</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>cases_prev_wk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">cases_wk</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
          case_diff <span class="op">=</span> <span class="va">cases_wk</span> <span class="op">-</span> <span class="va">cases_prev_wk</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-4936804e1b9a062cb76a" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4936804e1b9a062cb76a">{"x":{"filter":"none","data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0],[null,0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19],[null,25,34,31,-25,14,-38,6,-16,1,-4,0,48,-35,29,20,34,154,93,-42,-152,-108,8,20,3,-61,-20,-19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n      <th>cases_prev_wk<\/th>\n      <th>case_diff<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>You can read more about <code>lead()</code> and <code><a href="https://rdrr.io/r/stats/lag.html">lag()</a></code> in the documentation <a href="https://dplyr.tidyverse.org/reference/lead-lag.html">here</a> or by entering <code><a href="https://rdrr.io/r/stats/lag.html">?lag</a></code> in your console.</p>
+<div id="htmlwidget-43a1816fdf1eba3497d7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-43a1816fdf1eba3497d7">{"x":{"filter":"none","data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0],[null,0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19],[null,25,34,31,-25,14,-38,6,-16,1,-4,0,48,-35,29,20,34,154,93,-42,-152,-108,8,20,3,-61,-20,-19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n      <th>cases_prev_wk<\/th>\n      <th>case_diff<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>You can read more about <code>lead()</code> and <code><a href="https://rdrr.io/r/stats/lag.html">lag()</a></code> in the documentation <a href="https://dplyr.tidyverse.org/reference/lead-lag.html">here</a> or by entering <code><a href="https://rdrr.io/r/stats/lag.html">?lag</a></code> in your console.</p>
 <!-- ======================================================= -->
 </div>
 <div id="resources" class="section level2" number="9.12">
@@ -720,7 +720,7 @@ R for Data Science page on <a href="https://r4ds.had.co.nz/dates-and-times.html"
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Cleaning data and core functions</a></div>
+<div class="prev"><a href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Limpieza de datos y funciones básicas</a></div>
 <div class="next"><a href="characters-and-strings.html"><span class="header-section-number">10</span> Caracteres y cadenas</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -728,8 +728,8 @@ R for Data Science page on <a href="https://r4ds.had.co.nz/dates-and-times.html"
 <li><a class="nav-link" href="#working-with-dates"><span class="header-section-number">9</span> Working with dates</a></li>
 <li>
 <a class="nav-link" href="#preparation"><span class="header-section-number">9.1</span> Preparation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#load-packages-1">Load packages</a></li>
-<li><a class="nav-link" href="#import-data-2">Import data</a></li>
+<li><a class="nav-link" href="#load-packages">Load packages</a></li>
+<li><a class="nav-link" href="#import-data-1">Import data</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#current-date"><span class="header-section-number">9.2</span> Current date</a></li>
@@ -788,7 +788,7 @@ R for Data Science page on <a href="https://r4ds.had.co.nz/dates-and-times.html"
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-17.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-10-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
