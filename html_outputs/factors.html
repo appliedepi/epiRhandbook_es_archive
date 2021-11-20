@@ -86,7 +86,7 @@
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">27</span> Survival analysis</a></li>
 <li class="book-part">Visualización de datos</li>
 <li><a class="" href="tables-for-presentation.html"><span class="header-section-number">28</span> Tables for presentation</a></li>
-<li><a class="" href="ggplot-basics.html"><span class="header-section-number">29</span> ggplot basics</a></li>
+<li><a class="" href="ggplot-basics.html"><span class="header-section-number">29</span> Conceptos básicos de ggplot</a></li>
 <li><a class="" href="ggplot-tips.html"><span class="header-section-number">30</span> ggplot tips</a></li>
 <li><a class="" href="epidemic-curves.html"><span class="header-section-number">31</span> Epidemic curves</a></li>
 <li><a class="" href="demographic-pyramids-and-likert-scales.html"><span class="header-section-number">32</span> Demographic pyramids and Likert-scales</a></li>
@@ -95,7 +95,7 @@
 <li><a class="" href="combinations-analysis.html"><span class="header-section-number">35</span> Combinations analysis</a></li>
 <li><a class="" href="transmission-chains.html"><span class="header-section-number">36</span> Transmission chains</a></li>
 <li><a class="" href="phylogenetic-trees-1.html"><span class="header-section-number">37</span> Árboles filogenéticos</a></li>
-<li><a class="" href="interactive-plots.html"><span class="header-section-number">38</span> Interactive plots</a></li>
+<li><a class="" href="interactive-plots.html"><span class="header-section-number">38</span> Gráficos interactivos</a></li>
 <li class="book-part">Informes y Dashboards</li>
 <li><a class="" href="reports-with-r-markdown.html"><span class="header-section-number">39</span> Reports with R Markdown</a></li>
 <li><a class="" href="organizing-routine-reports.html"><span class="header-section-number">40</span> Organizing routine reports</a></li>
@@ -104,7 +104,7 @@
 <li class="book-part">Miscelánea</li>
 <li><a class="" href="writing-functions-1.html"><span class="header-section-number">43</span> Writing functions</a></li>
 <li><a class="" href="directory-interactions.html"><span class="header-section-number">44</span> Directory interactions</a></li>
-<li><a class="" href="version-control-and-collaboration-with-git-and-github.html"><span class="header-section-number">45</span> Version control and collaboration with Git and Github</a></li>
+<li><a class="" href="version-control-and-collaboration-with-git-and-github.html"><span class="header-section-number">45</span> Control de versiones y colaboración con Git y Github</a></li>
 <li><a class="" href="common-errors.html"><span class="header-section-number">46</span> Common errors</a></li>
 <li><a class="" href="getting-help.html"><span class="header-section-number">47</span> Getting help</a></li>
 <li><a class="" href="r-on-network-drives.html"><span class="header-section-number">48</span> R on network drives</a></li>
@@ -181,7 +181,7 @@
 <pre><code>## 
 ##  &lt;2 days  &gt;5 days 2-5 days     &lt;NA&gt; 
 ##     2990      602     2040      256</code></pre>
-<p>Likewise, if we make a bar plot, the values also appear in this order on the x-axis (see the <a href="ggplot-basics.html#ggplot-basics">ggplot basics</a> page for more on <strong>ggplot2</strong> - the most common visualization package in R).</p>
+<p>Likewise, if we make a bar plot, the values also appear in this order on the x-axis (see the [ggplot basics] page for more on <strong>ggplot2</strong> - the most common visualization package in R).</p>
 <div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">geom_bar</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">delay_cat</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -291,7 +291,7 @@
 <h3>Within a plot<a class="anchor" aria-label="anchor" href="#within-a-plot"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>forcats</strong> commands can be used to set the level order in the data frame, or only within a plot. By using the command to “wrap around” the column name <em>within</em> the <code>ggplot()</code> plotting command, you can reverse/relevel/etc. the transformation will only apply within that plot.</p>
-<p>Below, two plots are created with <code>ggplot()</code> (see the <a href="ggplot-basics.html#ggplot-basics">ggplot basics</a> page). In the first, the <code>delay_cat</code> column is mapped to the x-axis of the plot, with it’s default level order as in the data <code>linelist</code>. In the second example it is wrapped within <code>fct_relevel()</code> and the order is changed in the plot.</p>
+<p>Below, two plots are created with <code>ggplot()</code> (see the [ggplot basics] page). In the first, the <code>delay_cat</code> column is mapped to the x-axis of the plot, with it’s default level order as in the data <code>linelist</code>. In the second example it is wrapped within <code>fct_relevel()</code> and the order is changed in the plot.</p>
 <div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Alpha-numeric default order - no adjustment within ggplot</span>
 <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span><span class="op">+</span>
@@ -547,13 +547,16 @@ Please also see the <a href="working-with-dates.html#working-with-dates-1">Worki
 
 <span class="co"># Display levels</span>
 <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">epiweek_formatted</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] "2014-W13" "2014-W14" "2014-W15" "2014-W16" "2014-W17" "2014-W18" "2014-W19" "2014-W20"
-##  [9] "2014-W21" "2014-W22" "2014-W23" "2014-W24" "2014-W25" "2014-W26" "2014-W27" "2014-W28"
-## [17] "2014-W29" "2014-W30" "2014-W31" "2014-W32" "2014-W33" "2014-W34" "2014-W35" "2014-W36"
-## [25] "2014-W37" "2014-W38" "2014-W39" "2014-W40" "2014-W41" "2014-W42" "2014-W43" "2014-W44"
-## [33] "2014-W45" "2014-W46" "2014-W47" "2014-W48" "2014-W49" "2014-W50" "2014-W51" "2015-W00"
-## [41] "2015-W01" "2015-W02" "2015-W03" "2015-W04" "2015-W05" "2015-W06" "2015-W07" "2015-W08"
-## [49] "2015-W09" "2015-W10" "2015-W11" "2015-W12" "2015-W13" "2015-W14" "2015-W15" "2015-W16"</code></pre>
+<pre><code>##  [1] "2014-W13" "2014-W14" "2014-W15" "2014-W16" "2014-W17" "2014-W18"
+##  [7] "2014-W19" "2014-W20" "2014-W21" "2014-W22" "2014-W23" "2014-W24"
+## [13] "2014-W25" "2014-W26" "2014-W27" "2014-W28" "2014-W29" "2014-W30"
+## [19] "2014-W31" "2014-W32" "2014-W33" "2014-W34" "2014-W35" "2014-W36"
+## [25] "2014-W37" "2014-W38" "2014-W39" "2014-W40" "2014-W41" "2014-W42"
+## [31] "2014-W43" "2014-W44" "2014-W45" "2014-W46" "2014-W47" "2014-W48"
+## [37] "2014-W49" "2014-W50" "2014-W51" "2015-W00" "2015-W01" "2015-W02"
+## [43] "2015-W03" "2015-W04" "2015-W05" "2015-W06" "2015-W07" "2015-W08"
+## [49] "2015-W09" "2015-W10" "2015-W11" "2015-W12" "2015-W13" "2015-W14"
+## [55] "2015-W15" "2015-W16"</code></pre>
 <p><span style="color: red;"><strong><em>DANGER:</em></strong> If you place the weeks ahead of the years (“Www-YYYY”) (“%W-%Y”), the default alpha-numeric level ordering will be incorrect (e.g. 01-2015 will be before 35-2014). You could need to manually adjust the order, which would be a long painful process.</span></p>
 <ol start="2" style="list-style-type: decimal">
 <li>
@@ -644,7 +647,7 @@ Please also see the <a href="working-with-dates.html#working-with-dates-1">Worki
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-11-08.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-11-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
