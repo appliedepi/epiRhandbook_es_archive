@@ -99,9 +99,9 @@ Debido a que R Markdown puede tener problemas con pandoc cuando se ejecuta en un
 <!-- ======================================================= -->
 ## Componentes de R Markdown {#r-markdown-components}
 
-Un documento R Markdown puede ser editado en RStudio igual que un script estándar de R. Cuando se inicia un nuevo script de R Markdown, RStudio intenta ser útil mostrando una plantilla que explica las diferentes secciones de un script de R Markdown.
+Un documento R Markdown puede ser editado en RStudio igual que un script estándar de R. Cuando se inicia un nuevo script de R Markdown, RStudio intenta ayudarnos mostrando una plantilla que explica las diferentes secciones de un script de R Markdown.
 
-Lo que aparece a continuación es lo que aparece al iniciar un nuevo script Rmd destinado a producir una salida html (según la sección anterior).
+Lo que aparece a continuación es lo que veremos al iniciar un nuevo script Rmd destinado a producir un documento de salida en html (según la sección anterior).
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/2_defaultRMD.png"))
@@ -119,9 +119,9 @@ knitr::include_graphics(here::here("images", "markdown/rmarkdown_translation.png
 
 ### Metadatos YAML {#yaml-metadata} {.unnumbered}
 
-Denominado 'metadatos YAML' o simplemente 'YAML¡, se encuentra en la parte superior del documento R Markdown. Esta sección del script le dirá a su archivo Rmd qué tipo de salida producir, preferencias de formato y otros metadatos como el título del documento, el autor y la fecha. Hay otros usos que no se mencionan aquí (pero a los que se hace referencia en 'Producción de una salida'). Ten en cuenta que la sangría es importante; los tabuladores no se aceptan, pero los espacios sí.
+Denominado 'metadatos YAML' o simplemente 'YAML', se encuentra en la parte superior del documento R Markdown. Esta sección del script le dirá a su archivo Rmd qué tipo de salida producir, preferencias de formato y otros metadatos como el título del documento, el autor y la fecha. Hay otros usos que no se mencionan aquí (pero a los que se hace referencia en 'Producción del documento de salida'). Ten en cuenta que la sangría es importante; los tabuladores no se aceptan, pero los espacios sí.
 
-Esta sección debe comenzar con una línea que contenga sólo tres guiones `---` y debe cerrar con una línea que contenga sólo tres guiones `---`. Los parámetros YAML vienen en pares clave:valor. La colocación de los dos puntos en YAML es importante - los pares `key:value` están separados por dos puntos (¡no por signos de igualdad!).
+Esta sección debe comenzar con una línea que contenga sólo tres guiones `---` y debe cerrar con una línea que contenga sólo tres guiones `---`. Los parámetros YAML vienen en pares `key:value`. La colocación de los dos puntos en YAML es importante - los pares `key:value` están separados por dos puntos (¡no por signos de igualdad!).
 
 El YAML debe comenzar con los metadatos del documento. El orden de estos parámetros YAML primarios (sin sangría) no importa. Por ejemplo:
 
@@ -133,46 +133,46 @@ date: "`r Sys.Date()`"
 
 Puedes utilizar código R en valores YAML escribiéndolo como código en línea (precedido por `r` entre comillas) pero también entre comillas (véase el ejemplo anterior para `date: `).
 
-En la imagen de arriba, porque hemos clicado en que nuestra salida por defecto sea un archivo html, podemos ver que el YAML dice `output: html_document`. Sin embargo, también podemos cambiar esto para decir `powerpoint_presentation` o `word_document` o incluso `pdf_document`. 
+En la imagen de arriba, porque hemos seleccionado el tipo de documento de salida como html, podemos ver que el YAML dice `output: html_document`. Sin embargo, también podemos cambiar esto escribir `powerpoint_presentation` o `word_document` o incluso `pdf_document`. 
 
 
 ### Texto {#text} {.unnumbered}
 
-Esta es la narrativa de su documento, incluyendo los títulos y encabezados. Está escrito en el lenguaje "markdown", que se utiliza en muchos programas diferentes.
+Esta es la narrativa de t u documento, incluyendo los títulos y encabezados. Está escrito en el lenguaje "markdown", que se utiliza en muchos otros programas.
 
-A continuación se presentan las formas principales de escribir este texto. Consulta una documentación más extensa disponible en R Markdown "cheatsheet" en el [sitio web de RStudio](https://rstudio.com/resources/cheatsheets/). 
+A continuación se presentan las formas principales de escribir este texto. Podés consultar material de referencia más detallado disponible en R Markdown "cheatsheet" en el [sitio web de RStudio](https://rstudio.com/resources/cheatsheets/). 
 
 #### Nuevas líneas {.unnumbered}  
 
-Únicamente en R Markdown, para iniciar una nueva línea, introduzca *dos espacios** al final de la línea anterior y luego Enter/Return.  
+En R Markdown, para iniciar una nueva línea, introducí *dos espacios** al final de la línea anterior y luego Enter/Return. Esto es una particularidad de R Markdown.   
 
 
 #### Formato de texto {.unnumbered}  
 
 Rodea el texto normal con estos caracteres para cambiar su apariencia en la salida.
 
-* Guiones bajos (`_texto_`) o asterisco simple (`*texto*`) para `*poner en cursiva*` (itálica)
+* Guiones bajos (`_texto_`) o un asterisco simple (`*texto*`) para *poner en cursiva* (itálica)
 * Doble asterisco (`**texto**`) para el **texto en negrita**
-* Marcas con acento grave  (````texto````) para mostrar el texto como código
+* Comillas invertidas `(texto)` para mostrar el texto como código
 
-El aspecto real de la fuente puede establecerse utilizando plantillas específicas (especificadas en los metadatos YAML; véase el ejemplo de las pestañas).
+El aspecto real de la fuente puede establecerse utilizando plantillas específicas (especificadas en los metadatos YAML; ver sub-secciones de este capitulo).
 
 #### Color {.unnumbered}  
 
-No existe un mecanismo sencillo para cambiar el color del texto en R Markdown. Una solución, *si tu salida es un archivo HTML*, es añadir una línea HTML en el texto de Markdown. El siguiente código HTML imprimirá una línea de texto en negrita roja.
+No existe un mecanismo sencillo para cambiar el color del texto en R Markdown. Como solución, *si tu salida es un archivo HTML*, es añadir una línea de codigo HTML en el texto de Markdown. El siguiente código HTML imprimirá una línea de texto en negrita roja.
 
 ```md
 <span style="color: red;">**_PELIGRO:_** Esto es una advertencia.</span>  
 ```
 
-<span style="color: red;">**_PELIGRO:_** Esto es una advertencia..</span>  
+<span style="color: red;">**_PELIGRO:_** Esto es una advertencia.</span>  
 
 
 #### Títulos y encabezamientos {.unnumbered}  
 
-Un símbolo de almohadilla (hash #) delante de un texto de un script de R Markdown crea un encabezado. Esto es diferente que en un trozo de código R en el script, en el que un símbolo hash es un mecanismo para comentar/anotar/desactivar, como en un script normal de R.
+Un símbolo de almohadilla (hash #) delante de un texto en un script de R Markdown crea un encabezado. Esto es diferente que en un trozo de código R en el script, en el que un símbolo de almohadilla permite comentar/anotar/desactivar, como en un script normal de R.
 
-Los distintos niveles de encabezamiento se establecen con diferentes números de símbolos de almohadilla al comienzo de una nueva línea. Un símbolo de almohadilla es un título o encabezamiento primario. Dos símbolos hash son un encabezamiento de segundo nivel. Los encabezamientos de tercer y cuarto nivel pueden hacerse con más símbolos hash sucesivamente.
+Los distintos niveles de encabezamiento se establecen con diferentes números de símbolos de almohadilla al comienzo de una nueva línea. Un solo símbolo de almohadilla genera un título o encabezamiento primario. Dos símbolos hash generan un encabezamiento de segundo nivel. Los encabezamientos de tercer y cuarto nivel pueden hacerse con más símbolos hash sucesivamente.
 
 ```md
 # Encabezamiento / título de primer nivel
@@ -185,7 +185,7 @@ Los distintos niveles de encabezamiento se establecen con diferentes números de
 
 #### Viñetas y numeración {.unnumbered}  
 
-Utiliza asteriscos (`*`) para crear una lista de viñetas. Termina la frase anterior, introduce dos espacios, Enter/Return *dos veces*, y luego comienza tus viñetas. Incluya un espacio entre el asterisco y el texto de su viñeta. Después de cada viñeta, introducea dos espacios y luego Enter/Return. Las sub viñetas funcionan de la misma manera pero con sangría. Los números funcionan de la misma manera, pero en lugar de un asterisco, escrib1 1), 2), etc. A continuación se muestra cómo podría ser el texto de tu script de R Markdown.
+Utilizá asteriscos (`*`) para crear una lista de viñetas. Completá la frase anterior, introducí dos espacios, presioná Enter/Return *dos veces*, y luego comenzá tus viñetas. Incluí un espacio entre el asterisco y el texto de tu viñeta. Después de cada viñeta, introducí dos espacios y luego presioná Enter/Return. Las sub-viñetas funcionan de la misma manera pero con sangría. Los números funcionan de la misma manera, pero en lugar de un asterisco, escribí 1), 2), etc. El texto de tu script de R Markdown se vería como mostramos a continuación.
 
 
 ```md
@@ -193,8 +193,8 @@ Aquí están mis viñetas (hay dos espacios después de los dos puntos):
 
 * Viñeta 1 (seguida de dos espacios y Enter/Return)
 * Viñeta 2 (seguida de dos espacios y Enter/Return)
-  * SubViñeta 1 (seguida de dos espacios y Enter/Return)
-  * SubViñeta 2 (seguida de dos espacios y Enter/Return)
+  * Sub-viñeta 1 (seguida de dos espacios y Enter/Return)
+  * Sub-viñeta 2 (seguida de dos espacios y Enter/Return)
 * Subbalanceo 2 (seguido de dos espacios y Enter/Return)
 
 ```
@@ -202,7 +202,7 @@ Aquí están mis viñetas (hay dos espacios después de los dos puntos):
 
 #### Comentar el texto {.unnumbered}
 
-Puedes "comentar" el texto de R Markdown del mismo modo que puede utilizar el "#" para comentar una línea de código R en un chunk de R. Simplemente resalta el texto y clica Ctrl+Mayús+c (Cmd+Mayús+c para Mac). El texto estará rodeado de flechas y se volverá verde. No aparecerá en tu salida.  
+Puedes desactivar o "esconder" el texto de R Markdown del mismo modo que puede utilizar el "#" para desactivar una línea de código en un chunk de R. Simplemente resalta el texto y clica Ctrl+Mayús+c (Cmd+Mayús+c para Mac). El texto aparecerá rodeado de flechas y se volverá verde. No aparecerá en tu salida.  
 
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
@@ -212,40 +212,40 @@ knitr::include_graphics(here::here("images", "markdown/rmarkdown_hide_text.png")
 
 ### Trozos de código (chunks) {#code-chunks} {.unnumbered}
 
-Las secciones del script que se dedican a ejecutar el código R se denominan "chunks". Aquí es donde se pueden cargar paquetes, importar datos y realizar la gestión y visualización de datos propiamente dicha. Puedes haber muchos "chunks" de código, por lo que pueden ayudarle a organizar su código R en partes, quizás intercaladas con texto. Para tener en cuenta: estos ‘trozos‘ parecerán tener un color de fondo ligeramente diferente al de la parte narrativa del documento.
+Las secciones del script que se dedican a ejecutar el código R se denominan "chunks" o trozos. Aquí es donde se pueden cargar paquetes, importar datos y realizar la gestión y visualización de datos propiamente dicha. Puede haber muchos trozos de código, por lo que puede ser de ayuda organizar tu código R en partes, quizás intercaladas con texto. Para tener en cuenta: estos trozos tendrán un color de fondo ligeramente diferente al de la parte narrativa del documento.
 
-Cada trozo se abre con una línea que comienza con tres marcas de acento grave y corchetes que contienen parámetros para el trozo (`{ }`). El chunk termina con otros tres tildes de acento grave.
+Cada trozo se abre con una línea que comienza con tres comillas invertidas y corchetes que contienen parámetros para el trozo (`{ }`). El trozo termina con otras tres comillas invertidas.
 
 Puedes crear un nuevo fragmento escribiendo tú mismo las marcas, utilizando el atajo de teclado "Ctrl + Alt + i" (o Cmd + Shift + r en Mac), o clicando en el icono verde 'insert a new code chunk' en la parte superior de tu editor de scripts.
 
-Algunas notas sobre el contenido de las llaves `{ }`:
+Algunas notas sobre el contenido de las corchetes `{ }`:
 
-* Empiezan por "r" para indicar que el nombre del idioma dentro del chunk es R
-* Después de la r puedes escribir opcionalmente un "nombre" de chunk - no es necesario pero puede ayudarte a organizar tu trabajo. Ten en cuenta que si nombras tus chunks, debes usar SIEMPRE nombres únicos o de lo contrario R se quejará cuando intentes procesarlos.
-* Las llaves pueden incluir también otras opciones, escritas como `tag=value`, como por ejemplo
+* Empiezan con una "r" para indicar que el nombre del idioma dentro del chunk es R
+* Después de la r puedes asignarle un "nombre" al chunk - no es necesario pero puede ayudarte a organizar tu trabajo. Ten en cuenta que si nombras tus chunks, debes usar SIEMPRE nombres únicos o de lo contrario R se quejará cuando intentes procesarlos.
+* Los corchetes pueden incluir también otras opciones, escritas como `tag=value`, como por ejemplo
 * `eval = FALSE` para no ejecutar el código R
-* `echo = FALSE` para no imprimir el código fuente de R del chunk en el documento de salida
-* `warning = FALSE` para no imprimir las advertencias producidas por el código R
-* `message = FALSE` para no imprimir ningún mensaje producido por el código R
-* `include = TRUE/FALSE` si se incluyen los resultados de los trozos (por ejemplo, los gráficos) en el documento
-* `out.width = ` y `out.height = ` - proporcionar en estilo `out.width = "75%"`
-* `fig.align = "center"` ajustar cómo se alinea una figura en la página
-* `fig.show='hold'` si tu chunk imprime múltiples figuras y quieres que se impriman una al lado de la otra (par con out.width = c("33%", "67%"). También puede establecer como fig.show='asis' para mostrarlas debajo del código que las genera, 'hide' para ocultarlas, o 'animate' para concatenar varias en una animación.
+     * `echo = FALSE` para no imprimir o esconder el código fuente de R del chunk en el documento de salida
+     * `warning = FALSE` para no imprimir las advertencias producidas por el código R
+     * `message = FALSE` para no imprimir ningún mensaje producido por el código R
+     * `include = TRUE/FALSE` para incluir (o no) los resultados generados por los trozos (por ejemplo, los gráficos) en el documento de salida
+     * `out.width = ` y `out.height = ` - asigna proporciones de ancho  y largo, por ejemplo `out.width = "75%"`
+     * `fig.align = "center"` ajusta cómo se alinea una figura en la página
+     * `fig.show = 'hold'` si tu chunk imprime múltiples figuras y querés imprimirlas una al lado de la otra usá también la función` out.width = c("33%", "67%")`. También podés establecer como `fig.show='asis'` para mostrarlas debajo del código que las genera, `'hide'` para ocultarlas, o `'animate'` para concatenar varias figuras en una animación.
 * La cabecera de un trozo debe escribirse en *una sola línea*
-* Intenta evitar puntos, barras bajas y espacios. Utiliza guiones ( - ) en su lugar si necesitas un separador. 
+* Intentá evitar puntos, barras bajas y espacios. Utiliza guiones ( - ) en su lugar si necesitas un separador. 
 
-Lee más extensamente sobre las opciones de **knitr** [aquí](https://yihui.org/knitr/options/).
+Leé más extensamente sobre las opciones de **knitr** [aquí](https://yihui.org/knitr/options/).
 
-Algunas de las opciones anteriores pueden configurarse con apuntar y clicar mediante los botones de configuración situados en la parte superior derecha del chunk. Aquí puedes especificar qué partes del chunk quieres que incluya el documento renderizado, es decir, el código, las salidas y las advertencias. Esto aparecerá como preferencias escritas dentro de los corchetes, por ejemplo, echo=FALSE si especifica que quiere 'Mostrar sólo la salida'.
+Algunas de estas opciones pueden configurarse usando los botones de configuración situados en la parte superior derecha del chunk. Aquí puedes especificar qué partes del chunk quieres incluir en el documento renderizado, es decir, el código, las salidas generadas y las advertencias. Estas preferencias aparecerán escritas como código dentro de los corchetes, por ejemplo, si especificás que querés mostrar sólo la salida (‘Show output only’) aparecerá `echo=FALSE` entre los corchetes.
 
 
 ```{r out.width = "80%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/3_chunk.png"))
 ```
 
-También hay dos flechas en la parte superior derecha de cada trozo, que son útiles para ejecutar el código dentro de un trozo, o todo el código en trozos anteriores. Pasa el cursor por encima de ellas para ver lo que hacen.
+También hay dos flechas en la parte superior derecha de cada trozo, que son útiles para ejecutar el código dentro de un trozo, o todo el código en trozos anteriores. Pasa el cursor por encima de estos iconos para ver lo que hacen.
 
-Para que las opciones globales se apliquen a todos los chunks del script, puede configurar esto dentro de su primer chunk de código R en el script. Por ejemplo, para que sólo se muestren las salidas de cada trozo de código y no el propio código, puede incluir este comando en el trozo de código R: 
+Para que las opciones globales se apliquen a todos los chunks del script, podés configurar esto dentro del primer chunk de código R en el script. Por ejemplo, para sólo muestrar las salidas generadas por cada trozo de código y no el propio código, podés incluir este comando en el trozo de código R: 
 
 ```{r, eval=F}
 knitr::opts_chunk$set(echo = FALSE) 
@@ -255,20 +255,18 @@ knitr::opts_chunk$set(echo = FALSE)
 
 #### Código R en el texto {.unnumbered}  
 
-También puede incluir un mínimo de código R dentro de los back-ticks. Dentro de los back-ticks, comience el código con "r" y un espacio, para que RStudio sepa que debe evaluar el código como código R. Vea el ejemplo siguiente.
+También se puede insertar un mínimo de código R entre comillas invertidas (back ticks) intercalado entre el texto narrativo. Dentro de las comillas invertidas, comenzá el código con la letra "r" y un espacio, para que RStudio sepa que debe evaluar el código como código R. Ver el siguiente ejemplo.
 
-El ejemplo siguiente muestra múltiples niveles de encabezamiento, viñetas, y utiliza el código R para la fecha actual (`Sys.Date()`) para evaluar en una fecha impresa.
+El ejemplo siguiente muestra múltiples niveles de encabezamiento, viñetas, y utiliza el código (`Sys.Date()`) para obtener y mostrar la fecha actual.
 
 ```{r out.width = "80%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/2_text.png"))
 ```
 
 
+El ejemplo anterior es sencillo (muestra la fecha actual), pero utilizando la misma sintaxis puede mostrar valores producidos por un código R más complejo (por ejemplo, para calcular el mínimo, la mediana o el máximo de una columna). También podés integrar objetos R o valores que han sido creados en trozos de código R anteriores.
 
-  
-El ejemplo anterior es sencillo (muestra la fecha actual), pero utilizando la misma sintaxis puede mostrar valores producidos por un código R más complejo (por ejemplo, para calcular el mínimo, la mediana o el máximo de una columna). También puede integrar objetos R o valores que fueron creados en trozos de código R anteriormente en el script.
-
-Como ejemplo, el siguiente script calcula la proporción de casos que tienen menos de 18 años, utilizando funciones **tidyverse**, y crea los objetos `less18`, `total` y `less18prop`. Este valor dinámico se inserta en el texto posterior. Vemos cómo queda cuando se teje en un documento de Word.
+Como ejemplo, el siguiente script calcula la proporción de casos que tienen menos de 18 años, utilizando funciones **tidyverse**, y crea los objetos `less18`, `total` y `less18prop`. Este valor dinámico se inserta en el texto narrativo. Vemos cómo queda cuando se teje en un documento de Word.
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/3_chunktext.png"))
@@ -277,19 +275,19 @@ knitr::include_graphics(here::here("images", "markdown/3_chunktext.png"))
 
 ### Imágenes {images} {.unnumbered} 
 
-Puedes incluir imágenes en su R Markdown de dos maneras:
+Hay dos maneras de incluir imágenes en R Markdown:
 
 ```{r, eval=F}
 ![]("path/to/image.png")  
 ```
 
-Si lo anterior no funciona, prueba a utilizar `knitr::include_graphics()`  
+Si el código anterior no funciona, probá utilizar `knitr::include_graphics()`  
 
 ```{r, eval=F}
 knitr::include_graphics("path/to/image.png")
 ```
 
-(recuerda que la ruta de tu archivo puede ser escrita usando el paquete **here**)
+(recordá que podes declarar la ruta de tu archivo usando el paquete **here**)
 
 ```{r, eval=F}
 knitr::include_graphics(here::here("path", "to", "image.png"))
@@ -298,14 +296,14 @@ knitr::include_graphics(here::here("path", "to", "image.png"))
 
 ### Tablas {#tables} {.unnumbered}
 
-Cree una tabla utilizando guiones ( - ) y barras ( | ). El número de guiones antes/entre las barras permite el número de espacios en la celda antes de que el texto comience a envolverse.
+Creá una tabla utilizando guiones ( - ) y barras ( | ). El número de guiones entre las barras determina el número de espacios en la celda a patrir del cual el texto comienza a envolverse.
 
 
 ```md
-Columna 1 |Columna  2 |Columna 3
+Column  1 |Column   2 |Column 3
 ----------|-----------|--------
-Celda A   |Celda B    |Celda C
-Celda D   |Celda E    |Celda F
+Cell A    |Cell B     |Cell C
+Cell D    |Cell E     |Cell F
 ```
 
 El código anterior produce la siguiente tabla: 
@@ -318,7 +316,7 @@ Cell D   |Cell E    |Cell F
 
 ### Secciones con pestañas {#tabbed-sections} {.unnumbered} 
 
-Para las salidas HTML, puedes organizar las secciones con "pestañas". Basta con añadir `.tabset` en las llaves `{ }` que se colocan *después de un encabezamiento*. Todos los subtítulos debajo de ese encabezado (hasta otro encabezado del mismo nivel) aparecerán como pestañas en las que el usuario puedes clicar. Lee más [aquí](https://bookdown.org/yihui/rmarkdown-cookbook/html-tabs.html)
+Para las salidas HTML, podés organizar las secciones con "pestañas". Basta con añadir `.tabset` entre las llaves `{ }` que se colocan *después de un encabezamiento*. Todos los subtítulos debajo de ese encabezado (hasta el próximo encabezado del mismo nivel) aparecerán como pestañas en las que el usuario puedes clicar. Lee más [aquí](https://bookdown.org/yihui/rmarkdown-cookbook/html-tabs.html)
 
 
 
@@ -329,7 +327,7 @@ knitr::include_graphics(here::here("images", "markdown/tabbed_view.gif"))
 ```
 
 
-Puedes añadir una opción adicional `.tabset-pills` después de `.tabset` para dar a las propias etiquetas una apariencia "en forma de píldora". Ten en cuenta que al ver la salida HTML con etiquetas, la funcionalidad de búsqueda Ctrl+f sólo buscará en las etiquetas "activas", no en las ocultas. 
+Puedes añadir una opción adicional `.tabset-pills` después de `.tabset` para dar a las pestañas una apariencia "en forma de píldora". Ten en cuenta que al ver la salida HTML con etiquetas, la funcionalidad de búsqueda Ctrl+f sólo buscará en las etiquetas "activas", no en las ocultas. 
 
 
 
@@ -338,27 +336,27 @@ Puedes añadir una opción adicional `.tabset-pills` después de `.tabset` para 
 <!-- ======================================================= -->
 ## Estructura de los archivos {#file-structure}
 
-There are several ways to structure your R Markdown and any associated R scripts. Each has advantages and disadvantages:  
+Hay varias maneras de estructurar el archivo de R Markdown y sus scripts de R asociados. Cada una tiene sus ventajas y desventajas:  
 
-* Self-contained R Markdown - everything needed for the report is imported or created within the R Markdown  
-  * Source other files - You can run external R scripts with the `source()` command and use their outputs in the Rmd  
-  * Child scripts - an alternate mechanism for `source()`  
-* Utilize a "runfile" - Run commands in an R script *prior to* rendering the R Markdown  
+* R Markdown autónomo - todo lo necesario para el informe se importa o se crea dentro del R Markdown  
+  * Ubicar otros archivos - Podés ejecutar scripts R externos con el comando `source()` y utilizar sus salidas en el Rmd
+  * Scripts hijos - un mecanismo alternativo para `source()`  
+* Utilizar un "archivo de ejecución" - Ejecutar comandos en un script R *antes* de renderizar el R Markdown
 
 
 ### Rmd autónomo {#self-contained-rmd} {.unnumbered}
 
-Para un informe relativamente sencillo, puedes optar por organizar tu script de R Markdown de manera que sea "autocontenido" y no implique ningún script externo.
+Para un informe relativamente sencillo, puedes optar por organizar tu script de R Markdown de manera que sea "autosuficiente" y no implique utilizar ningún script externo.
 
-Todo lo que necesitas para ejecutar el R Markdown se importa o se crea dentro del archivo Rmd, incluyendo todos los trozos de código y la carga de paquetes. Este enfoque "autocontenido" es apropiado cuando no necesitas hacer mucho procesamiento de datos (por ejemplo, traer un archivo de datos limpio o semilimpio) y la representación del R Markdown no tomará demasiado tiempo.
+Todo lo que se necesite para ejecutar el R Markdown se importa o se crea dentro del archivo Rmd, incluyendo todos los trozos de código y la carga de paquetes. Este enfoque "autosuficiente" es apropiado cuando no necesitás hacer mucho procesamiento de datos (por ejemplo, cuando se importa un archivo de datos limpio o semilimpio) y el procesamiento del R Markdown no tomará demasiado tiempo.
 
 En este escenario, una organización lógica del script de R Markdown podría ser:
 
 1.  Establecer las opciones globales de **knitr**
 2.  Cargar paquetes
-3.  Importar datos
+3.  Importar los datos
 4.  Procesar los datos
-5.  Producir resultados (tablas, gráficos, etc.)
+5.  Generar resultados (tablas, gráficos, etc.)
 6.  Guardar los resultados, si procede (.csv, .png, etc.)
 
 #### Source other files {.unnumbered}
