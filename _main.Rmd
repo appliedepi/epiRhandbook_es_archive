@@ -59,7 +59,7 @@ knitr::include_graphics(here::here("images", "Epi R Handbook banner beige 1500x5
 * Ayudar a profesionales de la epidemiología en su transición a R
 * Ser accesible en entornos con baja conectividad a Internet a través de una [**versión sin conexión**](#download-handbook-and-data)
  
-
+<p><strong>Idiomas:</strong> <a href="https://epirhandbook.com/en/">Inglés</a> <a href="https://epirhandbook.com/vn/">Vietnamita (Tiếng Việt)</a></p>
 
 <!-- * Use practical epi examples - cleaning case linelists, making transmission chains and epidemic curves, automated reports and dashboards, modeling incidence and making projections, demographic pyramids and rate standardization, record matching, outbreak detection, survey analysis, survival analysis, GIS basics, contact tracing, phylogenetic trees...   -->
 
@@ -172,7 +172,7 @@ Un agradecimiento especial a Médicos Sin Fronteras (MSF) Centro Operativo de Á
 
 ### Inspiración {-}  
 
-La multitud de tutoriales y viñetas que aportaron conocimientos para el desarrollo del contenido del manual se acreditan en sus respectivas páginas.
+Hay multitud de tutoriales y viñetas que aportaron conocimientos para el desarrollo del contenido del manual y se acreditan en sus respectivas páginas.
 
 De manera más general, las siguientes fuentes han servido de inspiración para este manual:
 [El proyecto "R4Epis"](https://r4epis.netlify.app/) (una colaboración entre MSF y RECON)  
@@ -196,8 +196,7 @@ De manera más general, las siguientes fuentes han servido de inspiración para 
 
 Los cursos académicos y los programas de formación en epidemiología pueden utilizar este manual con sus estudiantes. Si tienes preguntas sobre el uso que se le va a dar, envía un correo electrónico a **epiRhandbook@gmail.com**.
 
-
-### Citación {.unnumbered}
+### Cita sugerida {.unnumbered}
 
 Batra, Neale, et al. Manual de R para Epidemiología. 2021. <a rel="license" href="https://zenodo.org/badge/231610102.svg"><img alt="DOI" style="border-width:0" src="https://zenodo.org/badge/231610102.svg" /></a><br />
 
@@ -30433,7 +30432,7 @@ A continuación se muestran las primeras 50 filas de los datos:
 DT::datatable(head(sample_data,50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-### Limpiar e inspeccionar {#clean-and-inspect}  
+### Limpiar e inspeccionar {#clean-and-inspect} {.unnumbered} 
 
 Limpiamos e inspeccionamos nuestros datos: Para asignar los datos de muestra correctos al árbol filogenético, los valores de la columna `Sample_ID` en el dataframe `sample_data` deben coincidir con los valores de `tip.labels` en el archivo `tree`:
 
@@ -31462,55 +31461,54 @@ options(scipen=1, digits=7)
 <!--chapter:end:new_pages/cat_reports_dashboards.Rmd-->
 
 
-# Reports with R Markdown { }  
+Informes con R Markdown {#reports-with-r-markdown}
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/rmarkdown_overview.png"))
 ```
 
-R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, powerpoint, and other formats. 
+R Markdown es una herramienta ampliamente utilizada para crear documentos de salida automatizados, reproducibles y dignos de compartir, como por ejemplo, informes. Podés generar resultados estáticos o interactivos en Word, pdf, html, powerpoint y otros formatos.
 
-An R Markdown script intersperces R code and text such that the script actually  *becomes your output document*. You can create an entire formatted document, including narrative text (can be dynamic to change based on your data), tables, figures, bullets/numbers, bibliographies, etc. 
+Un script de R Markdown intercala código R y texto de tal manera que el script *se convierte en tu documento de salida*. Puedes crear un documento completo con formato, incluyendo texto narrativo (el texto puede ser dinámico y cambiar en función de sus datos), tablas, figuras, viñetas/números, bibliografías, etc.
 
-Such documents can be produced to update on a routine basis (e.g. daily surveillance reports) and/or run on subsets of data (e.g. reports for each jurisdiction).  
+Estos documentos pueden producirse para ser actualizados de forma rutinaria (por ejemplo, informes de vigilancia diarios) y/o ejecutarse sobre subconjuntos de datos (por ejemplo, informes para cada jurisdicción).
 
-Other pages in this handbook expand on this topic:  
+Otras páginas de este manual amplían este tema:
 
-* The page [Organizing routine reports] demonstrates how to routinize your report production with auto-generated time-stamped folders.  
-* The page [Dashboards with R Markdown] explains how to format a R Markdown report as a dashboard.  
+* La página [Organización de informes de rutina](#organizing-routine-reports) muestra cómo "rutinizar" la producción de informes con carpetas autogeneradas con marca de tiempo.
+* La página [Dashboards con R Markdown](#dashboards-with-r-markdown) explica cómo formatear un informe de R Markdown como un cuadro de mando o tablero de control.
 
-
-Of note, the [R4Epis](https://r4epis.netlify.app/) project has developed template R Markdown scripts for common outbreaks and surveys scenarios encountered at MSF project locations.  
+Cabe destacar que el proyecto [R4Epis](https://r4epis.netlify.app/) ha desarrollado plantillas de scripts R Markdown para los escenarios de brotes y encuestas de uso frcuente en lugares en donde MSF maneja proyectos.
 
 
 <!-- ======================================================= -->
-## Preparation {  }
+## Preparación {#preparation-31}
 
-**Background to R Markdown**
+**Antecedentes de R Markdown**
 
-To explain some of the concepts and packages involved:
+Explicamos algunos de los conceptos y paquetes involucrados:
 
-* **Markdown** is a “language” that allows you to write a document using plain text, that can be converted to html and other formats. It is not specific to R. Files written in Markdown have a ‘.md’ extension.
-* **R Markdown**: is a variation on markdown that _is specific to R_ - it allows you to write a document using markdown to produce text *and to embed R code and display their outputs*. R Markdown files have '.Rmd' extension.  
-* **rmarkdown - the package**: This is used by R to render the .Rmd file into the desired output. It's focus is converting the markdown (text) syntax, so we also need...
-* **knitr**: This R package will read the code chunks, execute it, and 'knit' it back into the document. This is how tables and graphs are included alongside the text.
-* **Pandoc**: Finally, pandoc actually convert the output into word/pdf/powerpoint etc. It is a software separate from R but is installed automatically with RStudio.  
+* **Markdown** es un "lenguaje" que permite escribir un documento en texto plano, que se puede convertir a html y otros formatos. No es específico de R. Los archivos escritos en Markdown tienen una extensión '.md'.
+* R **Markdown**: es una variación de markdown que *es específica de R* - te permite escribir un documento usando markdown para producir texto *y para integrar código R y mostrar sus resultados*. Los archivos R Markdown tienen la extensión '.Rmd'.
+* **rmarkdown - el paquete**: Usado por R para convertir el archivo .Rmd en el tipo de documento de salida deseado. Su objetivo es convertir la sintaxis markdown (texto), por lo que también necesitamos...
+* **knitr**: Este paquete de R leerá los trozos de código, los ejecutará y los "tejerá" dentro del documento. Así es como se incluyen las tablas y los gráficos junto al texto.
+* **Pandoc**: Por último, pandoc convierte el documento de salida en word/pdf/powerpoint, etc. Es un software independiente de R, y viene instalado automáticamente con RStudio.
 
-In sum, the process that happens *in the background* (you do not need to know all these steps!) involves feeding the .Rmd file to **knitr**, which executes the R code chunks and creates a new .md (markdown) file which includes the R code and its rendered output. The .md file is then processed by pandoc to create the finished product: a Microsoft Word document, HTML file, powerpoint document, pdf, etc.  
+En resumen, el proceso que ocurre *en segundo plano* (¡no es necesario que conozcas todos estos pasos!) consiste en alimentar el archivo .Rmd a **knitr**, que ejecuta los trozos de código R y crea un nuevo archivo .md (markdown) que incluye el código R y su salida renderizada. El archivo .md es entonces procesado por pandoc para crear el producto final: un documento de Microsoft Word, un archivo HTML, un documento powerpoint, un pdf, etc.
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/0_rmd.png"))
 ```
 
-(source: https://rmarkdown.rstudio.com/authoring_quick_tour.html):
+(fuente: https://rmarkdown.rstudio.com/authoring_quick_tour.html):
 
-**Installation**
+**Instalación**
 
-To create a R Markdown output, you need to have the following installed:
+Para crear una salida de R Markdown, necesitas tener instalado lo siguiente:
 
-* The **rmarkdown** package (**knitr** will also be installed automatically)  
-* Pandoc, which should come installed with RStudio. If you are not using RStudio, you can download Pandoc here: http://pandoc.org. 
-* If you want to generate PDF output (a bit trickier), you will need to install LaTeX. For R Markdown users who have not installed LaTeX before, we recommend that you install TinyTeX (https://yihui.name/tinytex/). You can use the following commands: 
+* El paquete **rmarkdown** (**knitr** también se instalará automáticamente)
+* Pandoc, que debería venir instalado con RStudio. Si no utilizas RStudio, podés descargar Pandoc aquí: http://pandoc.org .
+* Si querés generar una salida en PDF (un poco más complicado), necesitarás instalar LaTeX. Para los usuarios de R Markdown que no hayan instalado LaTeX antes, recomendamos que instalen TinyTeX (https://yihui.name/tinytex/)https://yihui.name/tinytex/). Puedes utilizar los siguientes comandos:
 
 ```{r, eval=F}
 pacman::p_load(tinytex)     # install tinytex package
@@ -31518,61 +31516,62 @@ tinytex::install_tinytex()  # R command to install TinyTeX software
 ```
 
 <!-- ======================================================= -->
-## Getting started {  }
+## Cómo empezar {#getting-started}
 
-### Install rmarkdown R package {.unnumbered}
+### Instalar el paquete R rmarkdown {#install-rmarkdown-r-package} {.unnumbered} 
 
-Install the **rmarkdown** R package. In this handbook we emphasize `p_load()` from **pacman**, which installs the package if necessary *and* loads it for use. You can also load installed packages with  `library()` from **base** R. See the page on [R basics] for more information on R packages.  
+Instalá el paquete R **rmarkdown**. En este manual destacamos p_load() de **pacman**, que instala el paquete si es necesario *y ademas* lo carga para su uso. También podés cargar los paquetes instalados con `library()` de R **base**. Consultá la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+
 
 ```{r, eval=F}
 pacman::p_load(rmarkdown)
 ```
 
-### Starting a new Rmd file {.unnumbered}
+### Iniciar un nuevo archivo Rmd {#starting-a-new-rmd-file} {.unnumbered}  
 
-In RStudio, open a new R markdown file, starting with ‘File’, then ‘New file’ then ‘R markdown…’. 
+En RStudio, abrí un nuevo archivo R markdown, comenzando con ‘File’, luego ‘New file’ luego ‘R markdown…'. 
 
 ```{r out.width = "50%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/1_gettingstarted.png"))
 ```
 
-R Studio will give you some output options to pick from. In the example below we select "HTML" because we want to create an html document. The title and the author names are not important. If the output document type you want is not one of these, don't worry - you can just pick any one and change it in the script later. 
+R Studio te dará algunas opciones de salida para elegir. En el ejemplo siguiente seleccionamos "HTML" porque queremos crear un documento html. El título y los nombres de los autores no son importantes. Si el tipo de documento de salida que desea no es uno de estos, no te preocupes - podés elegir cualquiera y cambiarlo en el script más tarde.
 
 ```{r out.width = "50%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/1_gettingstartedB.png"))
 ```
 
-This will open up a new .Rmd script.
+Esto abrirá un nuevo script .Rmd.
 
-### Important to know {.unnumbered}
+### Es importante saber {#important-to-know} {.unnumbered} 
  
-**The working directory**
+**El directorio de trabajo**
 
-The working directory of a markdown file is wherever the Rmd file itself is saved. For instance, if the R project is within `~/Documents/projectX ` and the Rmd file itself is in a subfolder `~/Documents/projectX/markdownfiles/markdown.Rmd`, the code `read.csv(“data.csv”)` within the markdown will look for a csv file in the `markdownfiles` folder, and not the root project folder where scripts within projects would normally automatically look.
+El directorio de trabajo de un archivo markdown es el lugar donde se guarda el propio archivo Rmd. Por ejemplo, si el proyecto R está dentro de `~/Documents/projectX` y el archivo Rmd en sí está en una subcarpeta `~/Documents/projectX/markdownfiles/markdown.Rmd`, el código `read.csv("data.csv")` dentro del markdown buscará un archivo csv en la carpeta `markdownfiles`, y no en la carpeta raíz del proyecto donde los scripts dentro de los proyectos normalmente buscarían archivos de manera automática.
 
-To refer to files elsewhere, you will either need to use the full file path or use the **here** package. The **here** package sets the working directory to the root folder of the R project and is explained in detail in the [R projects] and [Import and export] pages of this handbook. For instance, to import a file called "data.csv" from within the `projectX` folder, the code would be `import(here(“data.csv”))`. 
+Para referirse a archivos en otro lugar, tendrá que utilizar la ruta completa del archivo o utilizar el paquete **here**. El paquete **here** establece el directorio de trabajo en la carpeta raíz del proyecto R y se explica en detalle en las páginas de [proyectos R](#r-projects) e [importación y exportación](#import-and-export) de este manual. Por ejemplo, para importar un archivo llamado "data.csv" desde la carpeta `projectX`, el código sería `import(here("data.csv"))`.
 
-Note that use of `setwd()` in R Markdown scripts is not recommended – it only applies to the code chunk that it is written in. 
+Ten en cuenta que no se recomienda el uso de `setwd()` en los scripts de R Markdown - sólo se aplica al trozo de código en el que está escrito.
 
-**Working on a drive vs your computer**
+**Trabajar en una unidad versus tu ordenador**
 
-Because R Markdown can run into pandoc issues when running on a shared network drive, it is recommended that your folder is on your local machine, e.g. in a project within ‘My Documents’. If you use Git (much recommended!), this will be familiar. For more details, see the handbook pages on [R on network drives] and [Errors and help].  
+Debido a que R Markdown puede tener problemas con pandoc cuando se ejecuta en una unidad de red compartida, se recomienda que la carpeta esté ubicada en tu máquina local, por ejemplo, en un proyecto dentro de 'Mis Documentos'. Si utilizas Git (¡super recomendable!), esto te resultará familiar. Para más detalles, consulta las páginas del manual sobre [R en unidades de red](#r-on-network-drives) y [Errores y ayuda](#common-errors). 
 
 
 <!-- ======================================================= -->
-## R Markdown components {  }
+## Componentes de R Markdown {#r-markdown-components}
 
-An R Markdown document can be edited in RStudio just like a standard R script. When you start a new R Markdown script, RStudio tries to be helpful by showing a template which explains the different section of an R Markdown script. 
+Un documento R Markdown puede ser editado en RStudio igual que un script estándar de R. Cuando se inicia un nuevo script de R Markdown, RStudio intenta ayudarnos mostrando una plantilla que explica las diferentes secciones de un script de R Markdown.
 
-The below is what appears when starting a new Rmd script intended to produce an html output (as per previous section). 
+Lo que aparece a continuación es lo que veremos al iniciar un nuevo script Rmd destinado a producir un documento de salida en html (según la sección anterior).
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/2_defaultRMD.png"))
 ```
 
-As you can see, there are three basic components to an Rmd file: YAML, Markdown text, and R code chunks.  
+Como puedes ver, hay tres componentes básicos en un archivo Rmd: YAML, texto Markdown y trozos de código R.
 
-These will *create and become your document output*. See the diagram below:  
+Estos *crearán y se convertirán en la salida de su documento*. Consulta el siguiente diagrama:
 
 ```{r out.width = "100%", out.height="150%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/rmarkdown_translation.png"))
@@ -31580,13 +31579,13 @@ knitr::include_graphics(here::here("images", "markdown/rmarkdown_translation.png
 
 
 
-### YAML metadata {.unnumbered}
+### Metadatos YAML {#yaml-metadata} {.unnumbered}
 
-Referred to as the ‘YAML metadata’ or just ‘YAML’, this is at the top of the R Markdown document. This section of the script will tell your Rmd file what type of output to produce, formatting preferences, and other metadata such as document title, author, and date. There are other uses not mentioned here (but referred to in ‘Producing an output’). Note that indentation matters; tabs are not accepted but spaces are. 
+Denominado 'metadatos YAML' o simplemente 'YAML', se encuentra en la parte superior del documento R Markdown. Esta sección del script le dirá a su archivo Rmd qué tipo de salida producir, preferencias de formato y otros metadatos como el título del documento, el autor y la fecha. Hay otros usos que no se mencionan aquí (pero a los que se hace referencia en 'Producción del documento de salida'). Ten en cuenta que la sangría es importante; los tabuladores no se aceptan, pero los espacios sí.
 
-This section must begin with a line containing just three dashes `---` and must close with a line containing just three dashes `---`. YAML parameters comes in `key:value` pairs. The placement of colons in YAML is important - the `key:value` pairs are separated by colons (not equals signs!).  
+Esta sección debe comenzar con una línea que contenga sólo tres guiones `---` y debe cerrar con una línea que contenga sólo tres guiones `---`. Los parámetros YAML vienen en pares `key:value`. La colocación de los dos puntos en YAML es importante - los pares `key:value` están separados por dos puntos (¡no por signos de igualdad!).
 
-The YAML should begin with metadata for the document. The order of these primary YAML parameters (not indented) does not matter. For example:  
+El YAML debe comenzar con los metadatos del documento. El orden de estos parámetros YAML primarios (sin sangría) no importa. Por ejemplo:
 
 ```yaml
 title: "My document"
@@ -31594,78 +31593,78 @@ author: "Me"
 date: "`r Sys.Date()`"
 ```
 
-You can use R code in YAML values by writing it as in-line code (preceded by `r` within back-ticks) but also within quotes (see above example for `date: `).  
+Puedes utilizar código R en valores YAML escribiéndolo como código en línea (precedido por `r` entre comillas) pero también entre comillas (véase el ejemplo anterior para `date: `).
 
-In the image above, because we clicked that our default output would be an html file, we can see that the YAML says `output: html_document`. However we can also change this to say `powerpoint_presentation` or `word_document` or even `pdf_document`.  
-
-
-### Text {.unnumbered}
-
-This is the narrative of your document, including the titles and headings. It is written in the "markdown" language, which is used across many different software.  
-
-Below are the core ways to write this text. See more extensive documentation available on R Markdown "cheatsheet" at the [RStudio website](https://rstudio.com/resources/cheatsheets/).  
-
-#### New lines {.unnumbered}  
-
-Uniquely in R Markdown, to initiate a new line, enter *two spaces** at the end of the previous line and then Enter/Return.  
+En la imagen de arriba, porque hemos seleccionado el tipo de documento de salida como html, podemos ver que el YAML dice `output: html_document`. Sin embargo, también podemos cambiar esto escribir `powerpoint_presentation` o `word_document` o incluso `pdf_document`. 
 
 
+### Texto {#text} {.unnumbered}
 
-#### Case {.unnumbered}  
+Esta es la narrativa de t u documento, incluyendo los títulos y encabezados. Está escrito en el lenguaje "markdown", que se utiliza en muchos otros programas.
 
-Surround your normal text with these character to change how it appears in the output.  
+A continuación se presentan las formas principales de escribir este texto. Podés consultar material de referencia más detallado disponible en R Markdown "cheatsheet" en el [sitio web de RStudio](https://rstudio.com/resources/cheatsheets/). 
 
-* Underscores (`_text_`) or single asterisk (`*text*`) to _italicise_
-* Double asterisks (`**text**`) for **bold text**
-* Back-ticks (````text````) to display text as code  
+#### Nuevas líneas {.unnumbered}  
 
-The actual appearance of the font can be set by using specific templates (specified in the YAML metadata; see example tabs).  
+En R Markdown, para iniciar una nueva línea, introducí *dos espacios** al final de la línea anterior y luego Enter/Return. Esto es una particularidad de R Markdown.   
+
+
+#### Formato de texto {.unnumbered}  
+
+Rodea el texto normal con estos caracteres para cambiar su apariencia en la salida.
+
+* Guiones bajos (`_texto_`) o un asterisco simple (`*texto*`) para *poner en cursiva* (itálica)
+* Doble asterisco (`**texto**`) para el **texto en negrita**
+* Comillas invertidas `(texto)` para mostrar el texto como código
+
+El aspecto real de la fuente puede establecerse utilizando plantillas específicas (especificadas en los metadatos YAML; ver sub-secciones de este capitulo).
 
 #### Color {.unnumbered}  
 
-There is no simple mechanism to change the color of text in R Markdown. One work-around, *IF your output is an HTML file*, is to add an HTML line into the markdown text. The below HTML code will print a line of text in bold red.  
+No existe un mecanismo sencillo para cambiar el color del texto en R Markdown. Como solución, *si tu salida es un archivo HTML*, es añadir una línea de codigo HTML en el texto de Markdown. El siguiente código HTML imprimirá una línea de texto en negrita roja.
 
 ```md
-<span style="color: red;">**_DANGER:_** This is a warning.</span>  
+<span style="color: red;">**_PELIGRO:_** Esto es una advertencia.</span>  
 ```
 
-<span style="color: red;">**_DANGER:_** This is a warning.</span>  
+<span style="color: red;">**_PELIGRO:_** Esto es una advertencia.</span>  
 
 
-#### Titles and headings {.unnumbered}  
+#### Títulos y encabezamientos {.unnumbered}  
 
-A hash symbol in a text portion of a R Markdown script creates a heading. This is different than in a chunk of R code in the script, in which a hash symbol is a mechanism to comment/annotate/de-activate, as in a normal R script.  
+Un símbolo de almohadilla (hash #) delante de un texto en un script de R Markdown crea un encabezado. Esto es diferente que en un trozo de código R en el script, en el que un símbolo de almohadilla permite comentar/anotar/desactivar, como en un script normal de R.
 
-Different heading levels are established with different numbers of hash symbols at the start of a new line. One hash symbol is a title or primary heading. Two hash symbols are a second-level heading. Third- and fourth-level headings can be made with successively more hash symbols.
-
-```md
-# First-level heading / title
-
-## Second level heading  
-
-### Third-level heading
-```
-
-
-#### Bullets and numbering {.unnumbered}  
-
-Use asterisks (`*`) to created a bullets list. Finish the previous sentence, enter two spaces, Enter/Return *twice*, and then start your bullets. Include a space between the asterisk and your bullet text. After each bullet enter two spaces and then Enter/Return. Sub-bullets work the same way but are indented. Numbers work the same way but instead of an asterisk, write 1), 2), etc. Below is how your R Markdown script text might look.  
-
+Los distintos niveles de encabezamiento se establecen con diferentes números de símbolos de almohadilla al comienzo de una nueva línea. Un solo símbolo de almohadilla genera un título o encabezamiento primario. Dos símbolos hash generan un encabezamiento de segundo nivel. Los encabezamientos de tercer y cuarto nivel pueden hacerse con más símbolos hash sucesivamente.
 
 ```md
-Here are my bullets (there are two spaces after this colon):  
+# Encabezamiento / título de primer nivel
 
-* Bullet 1 (followed by two spaces and Enter/Return)  
-* Bullet 2 (followed by two spaces and Enter/Return)  
-  * Sub-bullet 1 (followed by two spaces and Enter/Return)  
-  * Sub-bullet 2 (followed by two spaces and Enter/Return)  
-  
+## Encabezamiento de segundo nivel
+
+### Encabezamiento de tercer nivel
 ```
 
 
-#### Comment out text {.unnumbered}
+#### Viñetas y numeración {.unnumbered}  
 
-You can "comment out" R Markdown text just as you can use the "#" to comment out a line of R code in an R chunk. Simply highlight the text and press Ctrl+Shift+c (Cmd+Shift+c for Mac). The text will be surrounded by arrows and turn green. It will not appear in your output.  
+Utilizá asteriscos (`*`) para crear una lista de viñetas. Completá la frase anterior, introducí dos espacios, presioná Enter/Return *dos veces*, y luego comenzá tus viñetas. Incluí un espacio entre el asterisco y el texto de tu viñeta. Después de cada viñeta, introducí dos espacios y luego presioná Enter/Return. Las sub-viñetas funcionan de la misma manera pero con sangría. Los números funcionan de la misma manera, pero en lugar de un asterisco, escribí 1), 2), etc. El texto de tu script de R Markdown se vería como mostramos a continuación.
+
+
+```md
+Aquí están mis viñetas (hay dos espacios después de los dos puntos):
+
+* Viñeta 1 (seguida de dos espacios y Enter/Return)
+* Viñeta 2 (seguida de dos espacios y Enter/Return)
+  * Sub-viñeta 1 (seguida de dos espacios y Enter/Return)
+  * Sub-viñeta 2 (seguida de dos espacios y Enter/Return)
+* Subbalanceo 2 (seguido de dos espacios y Enter/Return)
+
+```
+
+
+#### Comentar el texto {.unnumbered}
+
+Puedes desactivar o "esconder" el texto de R Markdown del mismo modo que puede utilizar el "#" para desactivar una línea de código en un chunk de R. Simplemente resalta el texto y clica Ctrl+Mayús+c (Cmd+Mayús+c para Mac). El texto aparecerá rodeado de flechas y se volverá verde. No aparecerá en tu salida.  
 
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
@@ -31673,44 +31672,42 @@ knitr::include_graphics(here::here("images", "markdown/rmarkdown_hide_text.png")
 ```
 
 
-### Code chunks {.unnumbered}
+### Trozos de código (chunks) {#code-chunks} {.unnumbered}
 
-Sections of the script that are dedicated to running R code are called "chunks". This is where you may load packages, import data, and perform the actual data management and visualisation. There may be many code chunks, so they can help you organize your R code into parts, perhaps interspersed with text. To note:
-These ‘chunks’ will appear to have a slightly different background colour from the narrative part of the document.  
+Las secciones del script que se dedican a ejecutar el código R se denominan "chunks" o trozos. Aquí es donde se pueden cargar paquetes, importar datos y realizar la gestión y visualización de datos propiamente dicha. Puede haber muchos trozos de código, por lo que puede ser de ayuda organizar tu código R en partes, quizás intercaladas con texto. Para tener en cuenta: estos trozos tendrán un color de fondo ligeramente diferente al de la parte narrativa del documento.
 
-Each chunk is opened with a line that starts with three back-ticks, and curly brackets that contain parameters for the chunk (`{ }`). The chunk ends with three more back-ticks.  
+Cada trozo se abre con una línea que comienza con tres comillas invertidas y corchetes que contienen parámetros para el trozo (`{ }`). El trozo termina con otras tres comillas invertidas.
 
-You can create a new chunk by typing it out yourself, by using the keyboard shortcut "Ctrl + Alt + i" (or Cmd + Shift + r in Mac), or by clicking the green 'insert a new code chunk' icon at the top of your script editor.
+Puedes crear un nuevo fragmento escribiendo tú mismo las marcas, utilizando el atajo de teclado "Ctrl + Alt + i" (o Cmd + Shift + r en Mac), o clicando en el icono verde 'insert a new code chunk' en la parte superior de tu editor de scripts.
 
-Some notes about the contents of the curly brackets `{ }`:
+Algunas notas sobre el contenido de las corchetes `{ }`:
 
-*	They start with ‘r’ to indicate that the language name within the chunk is R
-*	After the r you can optionally write a chunk "name" – these are not necessary but can help you organise your work. Note that if you name your chunks, you should ALWAYS use unique names or else R will complain when you try to render.  
-*	The curly brackets can include other options too, written as `tag=value`, such as:  
-  * `eval = FALSE` to not run the R code  
-  * `echo = FALSE` to not print the chunk's R source code in the output document  
-  * `warning = FALSE` to not print warnings produced by the R code  
-  * `message = FALSE` to not print any messages produced by the R code  
-  * `include =` either TRUE/FALSE whether to include chunk outputs (e.g. plots) in the document
-  * `out.width = ` and `out.height =` - provide in style `out.width = "75%"`  
-  * `fig.align = "center"` adjust how a figure is aligned across the page  
-  * `fig.show='hold'` if your chunk prints multiple figures and you want them printed next to each other (pair with `out.width = c("33%", "67%")`. Can also set as `fig.show='asis'` to show them below the code that generates them, `'hide'` to hide, or `'animate'` to concatenate multiple into an animation.  
-* A chunk header must be written in *one line*  
-* Try to avoid periods, underscores, and spaces. Use hyphens ( - ) instead if you need a separator.  
+* Empiezan con una "r" para indicar que el nombre del idioma dentro del chunk es R
+* Después de la r puedes asignarle un "nombre" al chunk - no es necesario pero puede ayudarte a organizar tu trabajo. Ten en cuenta que si nombras tus chunks, debes usar SIEMPRE nombres únicos o de lo contrario R se quejará cuando intentes procesarlos.
+* Los corchetes pueden incluir también otras opciones, escritas como `tag=value`, como por ejemplo
+* `eval = FALSE` para no ejecutar el código R
+     * `echo = FALSE` para no imprimir o esconder el código fuente de R del chunk en el documento de salida
+     * `warning = FALSE` para no imprimir las advertencias producidas por el código R
+     * `message = FALSE` para no imprimir ningún mensaje producido por el código R
+     * `include = TRUE/FALSE` para incluir (o no) los resultados generados por los trozos (por ejemplo, los gráficos) en el documento de salida
+     * `out.width = ` y `out.height = ` - asigna proporciones de ancho  y largo, por ejemplo `out.width = "75%"`
+     * `fig.align = "center"` ajusta cómo se alinea una figura en la página
+     * `fig.show = 'hold'` si tu chunk imprime múltiples figuras y querés imprimirlas una al lado de la otra usá también la función` out.width = c("33%", "67%")`. También podés establecer como `fig.show='asis'` para mostrarlas debajo del código que las genera, `'hide'` para ocultarlas, o `'animate'` para concatenar varias figuras en una animación.
+* La cabecera de un trozo debe escribirse en *una sola línea*
+* Intentá evitar puntos, barras bajas y espacios. Utiliza guiones ( - ) en su lugar si necesitas un separador. 
 
-Read more extensively about the **knitr** options [here](https://yihui.org/knitr/options/).  
+Leé más extensamente sobre las opciones de **knitr** [aquí](https://yihui.org/knitr/options/).
 
-Some of the above options can be configured with point-and-click using the setting buttons at the top right of the chunk. Here, you can specify which parts of the chunk you want the rendered document to include, namely the code, the outputs, and the warnings. This will come out as written preferences within the curly brackets, e.g. `echo=FALSE` if you specify you want to ‘Show output only’.  
+Algunas de estas opciones pueden configurarse usando los botones de configuración situados en la parte superior derecha del chunk. Aquí puedes especificar qué partes del chunk quieres incluir en el documento renderizado, es decir, el código, las salidas generadas y las advertencias. Estas preferencias aparecerán escritas como código dentro de los corchetes, por ejemplo, si especificás que querés mostrar sólo la salida (‘Show output only’) aparecerá `echo=FALSE` entre los corchetes.
 
 
 ```{r out.width = "80%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/3_chunk.png"))
 ```
 
-There are also two arrows at the top right of each chunk, which are useful to run code within a chunk, or all code in prior chunks. Hover over them to see what they do.
+También hay dos flechas en la parte superior derecha de cada trozo, que son útiles para ejecutar el código dentro de un trozo, o todo el código en trozos anteriores. Pasa el cursor por encima de estos iconos para ver lo que hacen.
 
-
-For global options to be applied to all chunks in the script, you can set this up within your very first R code chunk in the script. For instance, so that only the outputs are shown for each code chunk and not the code itself, you can include this command in the R code chunk:  
+Para que las opciones globales se apliquen a todos los chunks del script, podés configurar esto dentro del primer chunk de código R en el script. Por ejemplo, para sólo muestrar las salidas generadas por cada trozo de código y no el propio código, podés incluir este comando en el trozo de código R: 
 
 ```{r, eval=F}
 knitr::opts_chunk$set(echo = FALSE) 
@@ -31718,62 +31715,60 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 
-#### In-text R code {.unnumbered}  
+#### Código R en el texto {.unnumbered}  
 
-You can also include minimal R code within back-ticks. Within the back-ticks, begin the code with "r" and a space, so RStudio knows to evaluate the code as R code. See the example below.  
+También se puede insertar un mínimo de código R entre comillas invertidas (back ticks) intercalado entre el texto narrativo. Dentro de las comillas invertidas, comenzá el código con la letra "r" y un espacio, para que RStudio sepa que debe evaluar el código como código R. Ver el siguiente ejemplo.
 
-The example below shows multiple heading levels, bullets, and uses R code for the current date (`Sys.Date()`) to evaluate into a printed date.
+El ejemplo siguiente muestra múltiples niveles de encabezamiento, viñetas, y utiliza el código (`Sys.Date()`) para obtener y mostrar la fecha actual.
 
 ```{r out.width = "80%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/2_text.png"))
 ```
 
 
+El ejemplo anterior es sencillo (muestra la fecha actual), pero utilizando la misma sintaxis puede mostrar valores producidos por un código R más complejo (por ejemplo, para calcular el mínimo, la mediana o el máximo de una columna). También podés integrar objetos R o valores que han sido creados en trozos de código R anteriores.
 
-  
-The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g. to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks earlier in the script.  
-
-As an example, the script below calculates the proportion of cases that are aged less than 18 years old, using **tidyverse** functions, and creates the objects `less18`, `total`, and `less18prop`. This dynamic value is inserted into subsequent text. We see how it looks when knitted to a word document.
+Como ejemplo, el siguiente script calcula la proporción de casos que tienen menos de 18 años, utilizando funciones **tidyverse**, y crea los objetos `less18`, `total` y `less18prop`. Este valor dinámico se inserta en el texto narrativo. Vemos cómo queda cuando se teje en un documento de Word.
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/3_chunktext.png"))
 ```
 
 
-### Images {.unnumbered}  
+### Imágenes {images} {.unnumbered} 
 
-You can include images in your R Markdown one of two ways:  
+Hay dos maneras de incluir imágenes en R Markdown:
 
 ```{r, eval=F}
 ![]("path/to/image.png")  
 ```
 
-If the above does not work, try using `knitr::include_graphics()`  
+Si el código anterior no funciona, probá utilizar `knitr::include_graphics()`  
 
 ```{r, eval=F}
 knitr::include_graphics("path/to/image.png")
 ```
 
-(remember, your file path could be written using the **here** package)
+(recordá que podes declarar la ruta de tu archivo usando el paquete **here**)
 
 ```{r, eval=F}
 knitr::include_graphics(here::here("path", "to", "image.png"))
 ```
 
 
-### Tables {.unnumbered}  
+### Tablas {#tables} {.unnumbered}
 
-Create a table using hyphens ( - ) and bars ( | ). The number of hyphens before/between bars allow the number of spaces in the cell before the text begins to wrap.  
+Creá una tabla utilizando guiones ( - ) y barras ( | ). El número de guiones entre las barras determina el número de espacios en la celda a patrir del cual el texto comienza a envolverse.
 
 
 ```md
-Column 1 |Column  2 |Column 3
----------|----------|--------
-Cell A   |Cell B    |Cell C
-Cell D   |Cell E    |Cell F
+Column  1 |Column   2 |Column 3
+----------|-----------|--------
+Cell A    |Cell B     |Cell C
+Cell D    |Cell E     |Cell F
 ```
 
-The above code produces the table below:  
+El código anterior produce la siguiente tabla: 
 
 Column 1 |Column  2 |Column 3
 ---------|----------|--------
@@ -31781,9 +31776,9 @@ Cell A   |Cell B    |Cell C
 Cell D   |Cell E    |Cell F
 
 
-### Tabbed sections {.unnumbered}  
+### Secciones con pestañas {#tabbed-sections} {.unnumbered} 
 
-For HTML outputs, you can arrange the sections into "tabs". Simply add `.tabset` in the curly brackets `{ }` that are placed *after a heading*. Any sub-headings beneath that heading (until another heading of the same level) will appear as tabs that the user can click through. Read more [here](https://bookdown.org/yihui/rmarkdown-cookbook/html-tabs.html)  
+Para las salidas HTML, podés organizar las secciones con "pestañas". Basta con añadir `.tabset` entre las llaves `{ }` que se colocan *después de un encabezamiento*. Todos los subtítulos debajo de ese encabezado (hasta el próximo encabezado del mismo nivel) aparecerán como pestañas en las que el usuario puedes clicar. Lee más [aquí](https://bookdown.org/yihui/rmarkdown-cookbook/html-tabs.html)
 
 
 
@@ -31794,70 +31789,69 @@ knitr::include_graphics(here::here("images", "markdown/tabbed_view.gif"))
 ```
 
 
-You can add an additional option `.tabset-pills` after `.tabset` to give the tabs themselves a "pilled" appearance. Be aware that when viewing the tabbed HTML output, the Ctrl+f search functionality will only search "active" tabs, not hidden tabs.  
+Puedes añadir una opción adicional `.tabset-pills` después de `.tabset` para dar a las pestañas una apariencia "en forma de píldora". Ten en cuenta que al ver la salida HTML con etiquetas, la funcionalidad de búsqueda Ctrl+f sólo buscará en las etiquetas "activas", no en las ocultas. 
 
 
 
 
 
 <!-- ======================================================= -->
-## File structure {}
+## Estructura de los archivos {#file-structure}
 
-There are several ways to structure your R Markdown and any associated R scripts. Each has advantages and disadvantages:  
+Hay varias maneras de estructurar el archivo de R Markdown y sus scripts de R asociados. Cada una tiene sus ventajas y desventajas:  
 
-* Self-contained R Markdown - everything needed for the report is imported or created within the R Markdown  
-  * Source other files - You can run external R scripts with the `source()` command and use their outputs in the Rmd  
-  * Child scripts - an alternate mechanism for `source()`  
-* Utilize a "runfile" - Run commands in an R script *prior to* rendering the R Markdown  
+* R Markdown autónomo - todo lo necesario para el informe se importa o se crea dentro del R Markdown  
+  * Ubicar otros archivos - Podés ejecutar scripts R externos con el comando `source()` y utilizar sus salidas en el Rmd
+  * Scripts hijos - un mecanismo alternativo para `source()`  
+* Utilizar un "archivo de ejecución" - Ejecutar comandos en un script R *antes* de renderizar el R Markdown
 
 
-### Self-contained Rmd {.unnumbered}  
+### Rmd autónomo {#self-contained-rmd} {.unnumbered}
 
-For a relatively simple report, you may elect to organize your R Markdown script such that it is "self-contained" and does not involve any external scripts.  
+Para un informe relativamente sencillo, puedes optar por organizar tu script de R Markdown de manera que sea "autosuficiente" y no implique utilizar ningún script externo.
 
-Everything you need to run the R markdown is imported or created within the Rmd file, including all the code chunks and package loading. This "self-contained" approach is appropriate when you do not need to do much data processing (e.g. it brings in a clean or semi-clean data file) and the rendering of the R Markdown will not take too long.
+Todo lo que se necesite para ejecutar el R Markdown se importa o se crea dentro del archivo Rmd, incluyendo todos los trozos de código y la carga de paquetes. Este enfoque "autosuficiente" es apropiado cuando no necesitás hacer mucho procesamiento de datos (por ejemplo, cuando se importa un archivo de datos limpio o semilimpio) y el procesamiento del R Markdown no tomará demasiado tiempo.
 
-In this scenario, one logical organization of the R Markdown script might be:  
+En este escenario, una organización lógica del script de R Markdown podría ser:
 
-1) Set global **knitr** options  
-2) Load packages  
-3) Import data  
-4) Process data  
-5) Produce outputs (tables, plots, etc.)  
-6) Save outputs, if applicable (.csv, .png, etc.)  
+1.  Establecer las opciones globales de **knitr**
+2.  Cargar paquetes
+3.  Importar los datos
+4.  Procesar los datos
+5.  Generar resultados (tablas, gráficos, etc.)
+6.  Guardar los resultados, si procede (.csv, .png, etc.)
 
 #### Source other files {.unnumbered}
 
-One variation of the "self-contained" approach is to have R Markdown code chunks "source" (run) other R scripts. This can make your R Markdown script less cluttered, more simple, and easier to organize. It can also help if you want to display final figures at the beginning of the report. In this approach, the final R Markdown script simply combines pre-processed outputs into a document.  
+Una variación del enfoque "autocontenido" es hacer que los trozos de código R Markdown "originen" (ejecuten) otros scripts R. Esto puede hacer que tu script de R Markdown sea menos desordenado, más simple y más fácil de organizar. También puede ayudar si quieres mostrar las cifras finales al principio del informe. En este enfoque, el script de R Markdown final simplemente combina las salidas preprocesadas en un documento.
 
-One way to do this is by providing the R scripts (file path and name with extension) to the **base** R command `source()`.  
+Una forma de hacerlo es proporcionando los scripts de R (ruta del archivo y nombre con extensión) al comando R **base**  `source()`.
 
 ```{r, eval=F}
 source("your-script.R", local = knitr::knit_global())
 # or sys.source("your-script.R", envir = knitr::knit_global())
 ```
 
-Note that when using `source()` *within* the R Markdown, the external files will still be run *during the course of rendering your Rmd file*. Therefore, each script is run every time you render the report. Thus, having these `source()` commands *within* the R Markdown does not speed up your run time, nor does it greatly assist with de-bugging, as error produced will still be printed when producing the R Markdown.  
+Ten en cuenta que cuando se utiliza `source()` *dentro* de R Markdown, los archivos externos se seguirán ejecutando durante el *curso del procesamiento de tu archivo Rmd*. Por lo tanto, cada script se ejecuta cada vez que se procesa el informe. Por lo tanto, tener estos comandos `source()` *dentro del R Markdown* no acelera el tiempo de ejecución, ni ayuda mucho a la depuración, ya que el error producido todavía se imprimirá al producir el R Markdown.
 
-An alternative is to utilize the `child = ` **knitr** option. EXPLAIN MORE TO DO
+Una alternativa es utilizar la opción `child = ` **knitr**. EXPLICAR MÁS PARA HACER
 
-You must be aware of various R *environments*. Objects created within an environment will not necessarily be available to the environment used by the R Markdown.  
-
-
-
-### Runfile {.unnumbered}  
-
-This approach involves utilizing the R script that contains the `render()` command(s) to pre-process objects that feed into the R markdown.  
-
-For instance, you can load the packages, load and clean the data, and even create the graphs of interest prior to `render()`. These steps can occur in the R script, or in other scripts that are sourced. As long as these commands occur in the same RStudio session and objects are saved to the environment, the objects can then be called within the Rmd content. Then the R markdown itself will only be used for the final step - to produce the output with all the pre-processed objects. This is much easier to de-bug if something goes wrong.
-
-This approach is helpful for the following reasons:  
-
-* More informative error messages - these messages will be generated from the R script, not the R Markdown. R Markdown errors tend to tell you which chunk had a problem, but will not tell you which line.  
-* If applicable, you can run long processing steps in advance of the `render()` command - they will run only once. 
+Debes ser consciente de los distintos *entorno* de R. Los objetos creados dentro de un entorno no estarán necesariamente disponibles para el entorno utilizado por R Markdown.
 
 
-In the example below, we have a separate R script in which we pre-process a `data` object into the R Environment and then render the "create_output.Rmd" using `render()`.  
+### Ejecutar archivo {#runfile} {.unnumbered} 
+
+Este enfoque implica utilizar el script de R que contiene el comando(s) `render()` para preprocesar los objetos que se introducen en el R markdown.
+
+Por ejemplo, puede cargar los paquetes, cargar y limpiar los datos, e incluso crear los gráficos de interés antes de `render()`. Estos pasos pueden ocurrir en el script de R, o en otros scripts que se originan. Siempre y cuando estos comandos ocurran en la misma sesión de RStudio y los objetos se guarden en el entorno, los objetos pueden ser llamados dentro del contenido de Rmd. Entonces el propio R markdown sólo se utilizará para el paso final - para producir la salida con todos los objetos pre-procesados. Esto es mucho más fácil de depurar si algo va mal.
+
+Este enfoque es útil por las siguientes razones:
+
+* Mensajes de error más informativos - estos mensajes serán generados por el script de R, no por el R Markdown. Los errores de R Markdown tienden a decirle qué trozo tuvo un problema, pero no le dirán qué línea.
+* Si procede, puede ejecutar pasos de procesamiento largos antes del comando `render()` - se ejecutarán sólo una vez.
+
+En el ejemplo siguiente, tenemos un script de R separado en el que preprocesamos un objeto de `datos` en el entorno de R y luego procesamos "create_output.Rmd" usando `render()`.
+
 
 ```{r, eval=F}
 data <- import("datafile.csv") %>%       # Load data and save to environment
@@ -31870,33 +31864,33 @@ rmarkdown::render(input = "create_output.Rmd")   # Create Rmd file
 
 
 
-### Folder strucutre {.unnumbered}  
+### Estructura de carpetas {#folder-structure} {.unnumbered} 
 
-Workflow also concerns the overall folder structure, such as having an 'output' folder for created documents and figures, and 'data' or 'inputs' folders for cleaned data. We do not go into further detail here, but check out the [Organizing routine reports] page.  
-
-
+El flujo de trabajo también se refiere a la estructura general de las carpetas, como tener una carpeta de 'salida' para los documentos y figuras creados, y carpetas de 'datos' o 'entradas' para los datos depurados. No entramos en más detalles aquí, pero echa un vistazo a la página de [organización de los informes rutinarios](#organizing-routine-reports).
 
 
 
 
 
-## Producing the document  
-
-You can produce the document in the following ways:  
-
-* Manually by pressing the "Knit" button at the top of the RStudio script editor (fast and easy)  
-* Run the `render()` command (executed outside the R Markdown script)  
 
 
-### Option 1: "Knit" button {.unnumbered}  
+## Producir el documento {#producing-the-document}  
 
-When you have the Rmd file open, press the 'Knit' icon/button at the top of the file. 
+Puedes elaborar el documento de las siguientes maneras:
 
-R Studio will you show the progress within an ‘R Markdown’ tab near your R console. The document will automatically open when complete.  
+* Manualmente clicando sobre el botón "Knit" en la parte superior del editor de scripts de RStudio (rápido y fácil)
+* Ejecutar el comando `render()` (ejecutado fuera del script de R Markdown)  
 
-The document will be saved in the same folder as your R markdown script, and with the same file name (aside from the extension). This is obviously not ideal for version control (it will be over-written each tim you knit, unless moved manually), as you may then need to rename the file yourself (e.g. add a date).  
 
-This is RStudio’s shortcut button for the `render()` function from **rmarkdown**. This approach only compatible with a self-contained R markdown, where all the needed components exist or are sourced within the file.  
+### Opción 1: botón "Knit" {#option-1-knit-button} {.unnumbered}  
+
+Cuando tengas el archivo Rmd abierto, clica el botón 'Knit' en la parte superior del archivo.
+
+R Studio le mostrará el progreso dentro de una pestaña 'R Markdown' cerca de su consola R. El documento se abrirá automáticamente cuando esté completo.
+
+El documento se guardará en la misma carpeta que su script de R markdown, y con el mismo nombre de archivo (aparte de la extensión). Obviamente, esto no es ideal para el control de versiones (se sobreescribirá cada vez que se haga un punto, a menos que se mueva manualmente), ya que entonces puede que tengas que renombrar el archivo (por ejemplo, añadir una fecha).
+
+Este es el botón de acceso directo de RStudio para la función `render()` de **rmarkdown**. Este enfoque sólo es compatible con un R markdown autocontenido, donde todos los componentes necesarios existen o se originan dentro del archivo. 
 
 ```{r out.width = "90%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/4_progress.png"))
@@ -31904,25 +31898,25 @@ knitr::include_graphics(here::here("images", "markdown/4_progress.png"))
 
 
 
-### Option 2: `render()` command {.unnumbered}
+### Opción 2: comando `render()` {#option-2-render-command} {.unnumbered}
 
-Another way to produce your R Markdown output is to run the `render()` function (from the **rmarkdown** package). You must execute this command *outside* the R Markdown script - so either in a separate R script (often called a "run file"), or as a stand-alone command in the R Console. 
+Otra forma de producir su salida de R Markdown es ejecutar la función `render()` (del paquete **rmarkdown**). Debe ejecutar este comando *fuera* del script de R Markdown, ya sea en un script de R separado (a menudo llamado "archivo de ejecución"), o como un comando independiente en la consola de R.
 
 ```{r, eval=F}
 rmarkdown::render(input = "my_report.Rmd")
 ```
 
-As with "knit", the default settings will save the Rmd output to the same folder as the Rmd script, with the same file name (aside from the file extension). For instance “my_report.Rmd” when knitted will create “my_report.docx” if you are knitting to a word document. However, by using `render()` you have the option to use different settings. `render()` can accept arguments including:  
+Al igual que con "knit", la configuración por defecto guardará la salida Rmd en la misma carpeta que el script Rmd, con el mismo nombre de archivo (aparte de la extensión del archivo). Por ejemplo, "mi_informe.Rmd" cuando se procese creará "mi_informe.docx" si se procesa en un documento de Word. Sin embargo, al usar `render()` tiene la opción de usar diferentes configuraciones. `render()` puede aceptar argumentos que incluyen:
 
-* `output_format = ` This is the output format to convert to (e.g. `"html_document"`, `"pdf_document"`, `"word_document"`, or `"all"`). You can also specify this in the YAML inside the R Markdown script.  
-* `output_file = ` This is the name of the output file (and file path). This can be created via R functions like `here()` or `str_glue()` as demonstrated below.  
-* `output_dir = ` This is an output directory (folder) to save the file. This allows you to chose an alternative other than the directory the Rmd file is saved to.  
-* `output_options = ` You can provide a list of options that will override those in the script YAML (e.g. )
-* `output_yaml = ` You can provide path to a .yml file that contains YAML specifications  
-* `params = ` See the section on parameters below  
-* See the complete list [here](https://pkgs.rstudio.com/rmarkdown/reference/render.html)  
+* `output_format =` Este es el formato de salida al que se va a convertir (por ejemplo, `"html_document"`, `"pdf_document"`, `"word_document"`, o `"all"`). También puede especificar esto en el YAML dentro del script de R Markdown.
+* `output_file = ` Este es el nombre del archivo de salida (y la ruta del archivo). Se puede crear a través de funciones de R como `here()` o `str_glue()` como se demuestra a continuación.
+* `output_dir = `Este es un directorio de salida (carpeta) para guardar el archivo. Esto le permite elegir una alternativa distinta al directorio en el que se guarda el archivo Rmd.
+* `output_options = ` Puedes proporcionar una lista de opciones que anulen las del YAML del script (por ejemplo )
+* `output_yaml = ` Puedes proporcionar la ruta a un archivo .yml que contenga las especificaciones YAML
+* `params = ` Ver la sección de parámetros más abajo
+* Ver la lista completa [aquí](https://pkgs.rstudio.com/rmarkdown/reference/render.html)
 
-As one example, to improve version control, the following command will save the output file within an ‘outputs’ sub-folder, with the current date in the file name. To create the file name, the function `str_glue()` from the **stringr** package is use to 'glue' together static strings (written plainly) with dynamic R code (written in curly brackets). For instance if it is April 10th 2021, the file name from below will be “Report_2021-04-10.docx”. See the page on [Characters and strings] for more details on `str_glue()`.  
+Como ejemplo, para mejorar el control de versiones, el siguiente comando guardará el archivo de salida dentro de una subcarpeta 'outputs', con la fecha actual en el nombre del archivo. Para crear el nombre del archivo, se utiliza la función `str_glue()` del paquete **stringr** para "pegar" las cadenas estáticas (escritas sin formato) con el código dinámico de R (escrito entre llaves). Por ejemplo, si es 10 de abril de 2021, el nombre del archivo de abajo será "Informe_2021-04-10.docx". Consulta la página sobre [Caracteres y cadenas](#characters-and-strings) para obtener más detalles sobre `str_glue()`.
 
 ```{r, eval=F}
 rmarkdown::render(
@@ -31930,64 +31924,63 @@ rmarkdown::render(
   output_file = stringr::str_glue("outputs/Report_{Sys.Date()}.docx")) 
 ```
 
-As the file renders, the RStudio Console will show you the rendering progress up to 100%, and a final message to indicate that the rendering is complete. 
+A medida que el archivo se procesa, la consola de RStudio mostrará el progreso hasta el 100%, y un mensaje final para indicar que se ha completado.
 
 
 
-###  Options 3: **reportfactory**  package {.unnumbered}  
+###  Opción 3: paquete **reportfactory** {#options-3-reportfactory-package} {.unnumbered} 
 
-The R package **reportfactory** offers an alternative method of organising and compiling R Markdown reports *catered to scenarios where you run reports routinely (e.g. daily, weekly...).* It eases the compilation of multiple R Markdown files and the organization of their outputs. In essence, it provides a "factory" from which you can run the R Markdown reports, get automatically date- and time-stamped folders for the outputs, and have "light" version control.  
+El paquete de R **reportfactory** ofrece un método alternativo de organización y compilación de informes R Markdown *para situaciones en las que se ejecutan informes de forma rutinaria (por ejemplo, diariamente, semanalmente...).* Facilita la compilación de múltiples archivos R Markdown y la organización de sus resultados. En esencia, proporciona una "fábrica" desde la que se pueden ejecutar los informes R Markdown, obtener automáticamente carpetas con fecha y hora para los resultados, y tener un control de versiones "ligero".
 
-Read more about this work flow in the page on [Organizing routine reports].  
+Lea más sobre este flujo de trabajo en la página sobre la [organización de los informes de rutina](#organizing-routine-reports). 
 
 
 
 <!-- ======================================================= -->
-## Parameterised reports {  }
+## Informes parametrizados {#parameterised-reports}
 
-You can use parameterisation to make a report dynamic, such that it can be run with specific setting (e.g. a specific date or place or with certain knitting options). Below, we focus on the basics, but there is more [detail online](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html) about parameterized reports.
+Puedes utilizar la parametrización para hacer que un informe sea dinámico, de forma que pueda ejecutarse con una configuración específica (por ejemplo, una fecha o lugar concretos o con determinadas opciones de tejido). A continuación, nos centramos en los aspectos básicos, pero hay más [detalles en línea](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html) sobre los informes parametrizados.
 
-Using the Ebola linelist as an example, let’s say we want to run a standard surveillance report for each hospital each day. We show how one can do this using parameters.
+Utilizando linelist del ébola como ejemplo, digamos que queremos ejecutar un informe de vigilancia estándar para cada hospital cada día. Mostramos cómo se puede hacer esto usando parámetros.
 
-*Important: dynamic reports are also possible without the formal parameter structure (without `params:`), using simple R objects in an adjacent R script. This is explained at the end of this section.*
+*Importante: los informes dinámicos también son posibles sin la estructura formal de parámetros (sin params:), utilizando simples objetos R en un script adyacente de R. Esto se explica al final de esta sección.*
 
 
+### Establecer parámetros {#setting-parameters} {.unnumbered}
 
-### Setting parameters {.unnumbered}
+Tienes varias opciones para especificar los valores de los parámetros para tu salida de R Markdown.
 
-You have several options for specifying parameter values for your R Markdown output.  
+#### Opción 1: Establecer parámetros dentro de YAML {.unnumbered}
 
-#### Option 1: Set parameters within YAML {.unnumbered}
-
-Edit the YAML to include a `params: ` option, with indented statements for each parameter you want to define. In this example we create parameters `date` and `hospital`, for which we specify values. These values are subject to change each time the report is run. If you use the "Knit" button to produce the output, the parameters will have these default values. Likewise, if you use `render()` the parameters will have these default values unless otherwise specified in the `render()` command.  
+Edite el YAML para incluir una opción `params`:, con declaraciones sangradas para cada parámetro que desee definir. En este ejemplo creamos los parámetros `date` y `hospital`, para los que especificamos valores. Estos valores están sujetos a cambios cada vez que se ejecuta el informe. Si utiliza el botón "Knit" para producir la salida, los parámetros tendrán estos valores por defecto. Del mismo modo, si utiliza `render()` los parámetros tendrán estos valores por defecto a menos que se especifique lo contrario en el comando `render()`.
 
 
 ```yaml
 ---
-title: Surveillance report
+title: Informe de vigilancia
 output: html_document
 params:
  date: 2021-04-10
- hospital: Central Hospital
+ hospital: Hospital Central
 ---
 ```
 
-In the background, these parameter values are contained within a read-only list called `params`. Thus, you can insert the parameter values in R code as you would another R object/value in your environment. Simply type `params$` followed by the parameter name. For example `params$hospital` to represent the hospital name ("Central Hospital" by default).  
+En el fondo, estos valores de los parámetros están contenidos en una lista de sólo lectura llamada `params`. Así, puedes insertar los valores de los parámetros en el código de R como lo haría con otro objeto/valor de R en tu entorno. Simplemente escriba `params$` seguido del nombre del parámetro. Por ejemplo `params$hospital` para representar el nombre del hospital ("Hospital Central" por defecto).
 
-Note that parameters can also hold values `true` or `false`, and so these can be included in your **knitr** options for a R chunk. For example, you can set `{r, eval=params$run}` instead of `{r, eval=FALSE}`, and now whether the chunk runs or not depends on the value of a parameter `run:`.  
+Ten en cuenta que los parámetros también pueden tener valores `true` o `false`, y por lo tanto estos pueden ser incluidos en sus opciones de **knitr** para un chunk de R. Por ejemplo, puedes establecer `{r, eval=params$run}` en lugar de `{r, eval=FALSE}`, y ahora si el chunk se ejecuta o no depende del valor de un parámetro run:.
 
-Note that for parameters that are dates, they will be input as a string. So for `params$date` to be interpreted in R code it will likely need to be wrapped with `as.Date()` or a similar function to convert to class Date.  
-
-
+Ten en cuenta que para los parámetros que son fechas, serán introducidos como una cadena. Por lo tanto, para que `params$date` se interprete en el código de R, es probable que tenga que ser envuelto con `as.Date()` o una función similar para convertir al tipo Date.
 
 
-#### Option 2: Set parameters within `render()` {.unnumbered}  
 
-As mentioned above, as alternative to pressing the "Knit" button to produce the output is to execute the `render()` function from a separate script. In this later case, you can specify the parameters to be used in that rendering to the `params = ` argument of `render()`. 
 
-Note than any parameter values provided here will *overwrite* their default values if written within the YAML. We write the values in quotation marks as in this case they should be defined as character/string values.  
+#### Opción 2: Establecer los parámetros dentro de `render()` {.unnumbered}  
 
-The below command renders "surveillance_report.Rmd", specifies a dynamic output file name and folder, and provides a `list()` of two parameters and their values to the argument `params = `.  
+Como se ha mencionado anteriormente, como alternativa a clicar el botón "Knit" para producir la salida es ejecutar la función `render()` desde un script independiente. En este último caso, se pueden especificar los parámetros a utilizar con el argumento `params = ` de `render()`.
+
+Ten en cuenta que los valores de los parámetros proporcionados aquí *sobrescribirán* sus valores por defecto si se escriben en el YAML. Escribimos los valores entre comillas ya que en este caso deben ser definidos como valores de carácter/cadena.
+
+El siguiente comando renderiza "surveillance_report.Rmd", especifica un nombre de archivo de salida dinámico y una carpeta, y proporciona un `list()` de dos parámetros y sus valores al argumento `params = `.
 
 ```{r, eval=F}
 rmarkdown::render(
@@ -31997,17 +31990,17 @@ rmarkdown::render(
 ```
 
 
-#### Option 3: Set parameters using a Graphical User Interface {.unnumbered}  
+#### Opción 3: Establecer los parámetros mediante una interfaz gráfica de usuario {.unnumbered}  
 
-For a more interactive feel, you can also use the Graphical User Interface (GUI) to manually select values for parameters. To do this we can click the drop-down menu next to the ‘Knit’ button and choose ‘Knit with parameters’. 
+Para obtener una sensación más interactiva, también puedes utilizar la interfaz gráfica de usuario (GUI) para seleccionar manualmente los valores de los parámetros. Para ello, podemos clicar en el menú desplegable situado junto al botón ‘Knit’ y elegir ‘Knit with parameters’.
 
-A pop-up will appear allowing you to type in values for the parameters that are established in the document's YAML. 
+Aparecerá una ventana emergente que permitirá introducir los valores de los parámetros establecidos en el YAML del documento.
 
 ```{r out.width = "50%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/5_parametersGUI.png"))
 ```
 
-You can achieve the same through a `render()` command by specifying `params = "ask"`, as demonstrated below.  
+Puedes lograr lo mismo a través de un comando `render()` especificando `params = "ask"`, como se demuestra a continuación.
 
 ```{r, eval=F}
 rmarkdown::render(
@@ -32017,14 +32010,14 @@ rmarkdown::render(
 ```
 
 
-However, typing values into this pop-up window is subject to error and spelling mistakes. You may prefer to add restrictions to the values that can be entered through drop-down menus. You can do this by adding in the YAML several specifications for each `params: ` entry. 
+Sin embargo, la introducción de valores en esta ventana emergente está sujeta a errores y faltas de ortografía. Es posible que prefiera añadir restricciones a los valores que se pueden introducir a través de los menús desplegables. Puedes hacerlo añadiendo en el YAML varias especificaciones para cada entrada `params:`.
 
-* `label: ` is how the title for that particular drop-down menu  
-* `value: ` is the default (starting) value  
-* `input: ` set to `select` for drop-down menu  
-* `choices: ` Give the eligible values in the drop-down menu  
+* `label: ` es como el título para ese menú desplegable en particular
+* `value: ` es el valor por defecto (inicial)
+* `input: ` establecer `select` para el menú desplegable  
+* `choices: ` Indique los valores elegibles en el menú desplegable  
 
-Below, these specifications are written for the `hospital` parameter.  
+A continuación, estas especificaciones están escritas para el parámetro `hospital`  
 
 ```yaml
 ---
@@ -32040,7 +32033,7 @@ params:
 ---
 ```
 
-When knitting (either via the 'knit with parameters' button or by `render()`), the pop-up window will have drop-down options to select from.  
+Al procesarlo (con el botón 'knit with parameters' o con `render()`), la ventana emergente tendrá opciones desplegables para seleccionarlos.
 
 ```{r out.width = "50%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/5_parametersGUIB.png"))
@@ -32049,28 +32042,28 @@ knitr::include_graphics(here::here("images", "markdown/5_parametersGUIB.png"))
 
 
 
-### Parameterized example {.unnumbered} 
+### Ejemplo parametrizado {#parameterized-example} {.unnumbered}
 
-The following code creates parameters for `date` and `hospital`, which are used in the R Markdown as `params$date` and `params$hospital`, respectively.  
+El siguiente código crea parámetros para `date` y `hospital`, que se utilizan en el R Markdown como `params$date` y  `params$hospital`, respectivamente.
 
-In the resulting report output, see how the data are filtered to the specific hospital, and the plot title refers to the correct hospital and date. We use the "linelist_cleaned.rds" file here, but it would be particularly appropriate if the linelist itself also had a datestamp within it to align with parameterised date. 
+En la salida del informe resultante, vea cómo los datos se filtran al hospital específico, y el título del gráfico se refiere al hospital y a la fecha correctos. En este caso utilizamos el archivo "linelist_cleaned.rds", pero sería especialmente adecuado que la propia lista de líneas tuviera también un sello de fecha para alinearse con la fecha parametrizada.
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/6_Rmdexample.png"))
 ```
 
-Knitting this produces the final output with the default font and layout.
+Si se procesa esto se obtiene la salida final con la fuente y el diseño por defecto.
 
 ```{r out.width = "80%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/6_RmdexampleB.png"))
 ```
 
 
-### Parameterisation without `params` {.unnumbered}
+### Parametrización sin parámetros {#parameterisation-without-params} {.unnumbered}
 
-If you are rendering a R Markdown file with `render()` from a separate script, you can actually create the impact of parameterization without using the `params:` functionality.  
+Si estás procesazando un archivo R Markdown con `render()` desde un script separado, puede realmente crear el impacto de la parametrización sin usar la funcionalidad params:.
 
-For instance, in the *R script* that contains the `render()` command, you can simply define `hospital` and `date` as two R objects (values) before the `render()` command. In the R Markdown, you would not need to have a `params:` section in the YAML, and we would refer to the `date` object rather than `params$date` and `hospital` rather than `params$hospital`. 
+Por ejemplo, en el *script de R* que contiene el comando render(), puedes simplemente definir `hospital` y `date` como dos objetos R (valores) antes del comando `render()`. En el R Markdown, no sería necesario tener una sección `params:` en el YAML, y nos referiríamos al objeto `date` en lugar de `params$date` y a `hospital` en lugar de `params$hospital`.
 
 ```{r, eval=F}
 # This is a R script that is separate from the R Markdown
@@ -32083,17 +32076,16 @@ date <- "2021-04-10"
 rmarkdown::render(input = "create_output.Rmd") 
 ```
 
-Following this approach means means you can not “knit with parameters”, use the GUI, or include knitting options within the parameters. However it allows for simpler code, which may be advantageous.  
+Seguir este enfoque significa que no se puede procesar con “knit with parameters”, ni utilizar la interfaz gráfica , ni incluir opciones de procesamiento dentro de los parámetros. Sin embargo, permite simplificar el código, lo que puede ser ventajoso.
 
 
 <!-- ======================================================= -->
 
-## Looping reports  {  }
+## Informes en bucle  {#looping-reports}
 
-We may want to run a report multiple times, varying the input parameters, to produce a report for each jurisdictions/unit. This can be done using tools for *iteration*, which are explained in detail in the page on [Iteration, loops, and lists]. Options include the **purrr** package, or use of a *for loop* as explained below.  
+Es posible que queramos ejecutar un informe varias veces, variando los parámetros de entrada, para producir un informe para cada jurisdicción/unidad. Esto puede hacerse utilizando herramientas para la *iteración*, que se explican en detalle en la página sobre [Iteración, bucles y listas](#iteration-loops-and-lists). Las opciones incluyen el paquete **purrr**, o el uso de un *bucle for* como se explica a continuación.
 
-Below, we use a simple *for loop* to generate a surveillance report for all hospitals of interest. This is done with one command (instead of manually changing the hospital parameter one-at-a-time). The command to render the reports must exist in a separate script *outside* the report Rmd. This script will also contain defined objects to "loop through" - today’s date, and a vector of hospital names to loop through.  
-
+A continuación, utilizamos un simple *bucle for* para generar un informe de vigilancia para todos los hospitales de interés. Esto se hace con un solo comando (en lugar de cambiar manualmente el parámetro del hospital uno por uno). El comando para generar los informes debe existir en un script separado *fuera* del informe Rmd. Este script también contendrá objetos definidos para "hacer un bucle" - la fecha de hoy, y un vector de nombres de hospitales para hacer un bucle. 
 
 
 ```{r, eval=F}
@@ -32135,42 +32127,42 @@ for(i in 1:length(hospitals)){
 
 
 <!-- ======================================================= -->
-## Templates  
+## Plantillas {#templates}  
 
-By using a template document that contains any desired formatting, you can adjust the aesthetics of how the Rmd output will look. You can create for instance an MS Word or Powerpoint file that contains pages/slides with the desired dimensions, watermarks, backgrounds, and fonts. 
+Utilizando un documento de plantilla que contenga cualquier formato deseado, puede ajustar la estética del aspecto de la salida Rmd. Puedes crear, por ejemplo, un archivo de MS Word o Powerpoint que contenga páginas/diapositivas con las dimensiones, marcas de agua, fondos y fuentes deseadas.
 
-### Word documents {.unnumbered}
+### Documentos en Word {#word-documents} {.unnumbered}
 
-To create a template, start a new word document (or use an existing output with  formatting the suits you), and edit fonts by defining the Styles. In Style,Headings 1, 2, and 3 refer to the various markdown header levels (`# Header 1`, `## Header 2` and `### Header 3` respectively). Right click on the style and click 'modify' to change the font formatting as well as the paragraph (e.g. you can introduce page breaks before certain styles which can help with spacing). Other aspects of the word document such as margins, page size, headers etc, can be changed like a usual word document you are working directly within. 
+Para crear una plantilla, inicia un nuevo documento de Word (o utiliza uno ya existente con el formato que le convenga), y edita las fuentes definiendo los Estilos. En el Estilo, los encabezados 1, 2 y 3 se refieren a los distintos niveles de encabezado de markdown (`# Header 1`, `## Header 2` and `### Header 3` respectivamente). Clica con el botón derecho en el estilo y clica en 'modificar' para cambiar el formato de la fuente, así como el párrafo (por ejemplo, podés introducir saltos de página antes de ciertos estilos que pueden ayudar con el espaciado). Otros aspectos del documento de Word, como los márgenes, el tamaño de la página, los encabezados, etc., pueden modificarse como un documento de Word normal en el que se trabaja directamente. 
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/7_template.png"))
 ```
 
-### Powerpoint documents {.unnumbered}
+### Documentos en Powerpoint {#powerpoint-documents}
 
-As above, create a new slideset or use an existing powerpoint file with the desired formatting. For further editing, click on 'View' and 'Slide Master'. From here you can change the 'master' slide appearance by editing the text formatting in the text boxes, as well as the background/page dimensions for the overall page. 
+Como en el caso anterior, crea un nuevo conjunto de diapositivas o utiliza un archivo PowerPoint existente con el formato deseado. Para seguir editando, clica en "Ver" y "Patrón de diapositivas". Desde aquí puede cambiar la apariencia de la diapositiva "maestra" editando el formato del texto en los cuadros de texto, así como las dimensiones del fondo/página para la página en general.
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/8_ppttemplate.png"))
 ```
 
-Unfortunately, editing powerpoint files is slightly less flexible:
+Desgraciadamente, la edición de archivos PowerPoint es algo menos flexible:
 
-* A first level header (`# Header 1`) will automatically become the title of a new slide,
-* A `## Header 2` text will not come up as a subtitle but text within the slide's main textbox (unless you find a way to maniuplate the Master view). 
-* Outputted plots and tables will automatically go into new slides. You will need to combine them, for instance the the **patchwork** function to combine ggplots, so that they show up on the same page. See this [blog post](https://mattherman.info/blog/ppt-patchwork/) about using the **patchwork** package to put multiple images on one slide.  
+* Un encabezado de primer nivel (`# Header 1`) se convertirá automáticamente en el título de una nueva diapositiva,
+* El texto del `# Header 2` no aparecerá como subtítulo, sino como texto dentro del cuadro de texto principal de la diapositiva (a menos que encuentre una manera de maniplar la vista del Patrón).
+* Los gráficos y las tablas resultantes irán automáticamente a nuevas diapositivas. Tendrá que combinarlos, por ejemplo con la función **patchwork** para combinar ggplots, para que aparezcan en la misma página. Vea esta [entrada del blog](https://mattherman.info/blog/ppt-patchwork/) sobre el uso del paquete patchwork para poner múltiples imágenes en una diapositiva.
 
-See the [**officer** package](https://davidgohel.github.io/officer/) for a tool to work more in-depth with powerpoint presentations.  
-
-
+En el [paquete **oficcer **](https://davidgohel.github.io/officer/) encontrará una herramienta para trabajar más a fondo con las presentaciones de PowerPoint.
 
 
-### Integrating templates into the YAML {.unnumbered}
 
-Once a template is prepared, the detail of this can be added in the YAML of the Rmd underneath the 'output' line and underneath where the document type is specified (which goes to a separate line itself). Note `reference_doc` can be used for powerpoint slide templates.
 
-It is easiest to save the template in the same folder as where the Rmd file is (as in the example below), or in a subfolder within. 
+### Integración de plantillas en el YAML {#integrating-templates-into-the-yaml} {.unnumbered}
+
+Una vez preparada la plantilla, el detalle de la misma puede añadirse en el YAML del Rmd debajo de la línea 'output' y debajo de donde se especifica el tipo de documento (que va a una línea separada en sí). Ten en cuenta que `reference_doc` se puede utilizar para las plantillas de diapositivas de PowerPoint.
+
+Lo más fácil es guardar la plantilla en la misma carpeta en la que está el archivo Rmd (como en el ejemplo siguiente), o en una subcarpeta dentro de ella
 
 ```yaml
 ---
@@ -32186,17 +32178,17 @@ template:
 ---
 ```
 
-### Formatting HTML files {.unnumbered}
+### Formateo de archivos HTML {#formatting-html-files} {.unnumbered}
 
-HTML files do not use templates, but can have the styles configured within the YAML. HTMLs are interactive documents, and are particularly flexible. We cover some basic options here. 
+Los archivos HTML no utilizan plantillas, pero pueden tener los estilos configurados dentro del YAML. Los HTML son documentos interactivos, y son particularmente flexibles. Aquí cubrimos algunas opciones básicas.
 
-* Table of contents: We can add a table of contents with `toc: true` below, and also specify that it remains viewable ("floats") as you scroll, with `toc_float: true`.
+* Tabla de contenidos: Podemos añadir una tabla de contenidos con `toc: true` a continuación, y también especificar que permanezca visible ("flotante") al desplazarse, con `toc_float: true`.
 
-* Themes: We can refer to some pre-made themes, which come from a Bootswatch theme library. In the below example we use cerulean. Other options include: journal, flatly, darkly, readable, spacelab, united, cosmo, lumen, paper, sandstone, simplex, and yeti. 
+* Temas: Podemos referirnos a algunos temas prefabricados, que provienen de una biblioteca de temas de Bootswatch. En el siguiente ejemplo utilizamos cerulean. Otras opciones son: journal, flatly, darkly, readable, spacelab, united, cosmo, lumen, paper, sandstone, simplex y yeti.
 
-* Highlight: Configuring this changes the look of highlighted text (e.g. code within chunks that are shown). Supported styles include default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, breezedark, and textmate.  
+* Resaltar: Configurando esto se cambia el aspecto del texto resaltado (por ejemplo, el código dentro de los trozos que se muestran). Los estilos soportados son default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, breezedark y textmate.
 
-Here is an example of how to integrate the above options into the YAML.
+He aquí un ejemplo de cómo integrar las opciones anteriores en el YAML.
 
 ```yaml
 ---
@@ -32211,7 +32203,7 @@ output:
 ---
 ```
 
-Below are two examples of HTML outputs which both have floating tables of contents, but different theme and highlight styles selected:
+A continuación se muestran dos ejemplos de salidas HTML que tienen ambas tablas de contenido flotantes, pero diferentes estilos de tema y resaltado seleccionados:
 
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
@@ -32219,48 +32211,48 @@ knitr::include_graphics(here::here("images", "markdown/9_html.png"))
 ```
 
 
-## Dynamic content  
+## Contenido dinámico {#dynamic-content}  
 
-In an HTML output, your report content can be dynamic. Below are some examples:  
+En una salida HTML, el contenido de tu informe puede ser dinámico. A continuación, algunos ejemplos:
 
-### Tables {.unnumbered}  
+### Tablas {#tables-1} {.unnumbered} 
 
-In an HTML report, you can print data frame / tibbles such that the content is dynamic, with filters and scroll bars. There are several packages that offer this capability.  
+En un informe HTML, se puede imprimir un dataframe / tibbles de manera que el contenido sea dinámico, con filtros y barras de desplazamiento. Hay varios paquetes que ofrecen esta capacidad.
 
-To do this with the **DT** package, as is used throughout this handbook, you can insert a code chunk like this:  
+Para hacer esto con el paquete **DT**, como se utiliza a lo largo de este manual, se puede insertar un trozo de código como este:
 
 ```{r out.width = "100%", fig.align = "center", echo=F}
 knitr::include_graphics(here::here("images", "markdown/10_dynamictable.png"))
 ```
 
-The function `datatable()` will print the provided data frame as a dynamic table for the reader. You can set `rownames = FALSE` to simplify the far left-side of the table. `filter = "top"` provides a filter over each column. In the `option()` argument provide a list of other specifications. Below we include two: `pageLength = 5` set the number of rows that appear as 5 (the remaining rows can be viewed by paging through arrows), and `scrollX=TRUE` enables a scrollbar on the bottom of the table (for columns that extend too far to the right).  
+La función `datatable()` imprimirá el dataframe proporcionado como una tabla dinámica para el lector. Puedes establecer `rownames = FALSE` para simplificar el extremo izquierdo de la tabla. `filter = "top"` proporciona un filtro sobre cada columna. En el argumento `option()` proporciona una lista de otras especificaciones. A continuación incluimos dos: `pageLength = 5` establece el número de filas que aparecen como 5 (las filas restantes se pueden ver paginando a través de flechas), y `scrollX=TRUE` habilita una barra de desplazamiento en la parte inferior de la tabla (para las columnas que se extienden demasiado a la derecha).
 
-If your dataset is very large, consider only showing the top X rows by wrapping the data frame in `head()`.  
-
-
-### HTML widgets {.unnumbered}
-
-[HTML widgets for R](http://www.htmlwidgets.org/) are a special class of R packages that enable increased interactivity by utilizing JavaScript libraries. You can embed them in HTML R Markdown outputs.  
-
-Some common examples of these widgets include:  
-
-* Plotly (used in this handbook page and in the [Interative plots] page)
-* visNetwork (used in the [Transmission Chains] page of this handbook)  
-* Leaflet (used in the [GIS Basics] page of this handbook)  
-* dygraphs (useful for interactively showing time series data)  
-* DT (`datatable()`) (used to show dynamic tables with filter, sort, etc.)  
-
-The `ggplotly()` function from **plotly** is particularly easy to use. See the [Interactive plots] page. 
+Si tu conjunto de datos es muy grande, considera la posibilidad de mostrar sólo las X filas superiores envolviendo el dataframe en `head()`. 
 
 
-## Resources {  }
+### #Widgets HTML {#html-widgets} {.unnumbered}
 
-Further information can be found via:
+Los [widgets HTML para R](http://www.htmlwidgets.org/) son un tipo especial de paquetes de R que permiten una mayor interactividad utilizando bibliotecas de JavaScript. Puedes incrustarlos en salidas HTML R Markdown.
+
+Algunos ejemplos comunes de estos widgets son:
+
+* Plotly (utilizado en la página de este manual y en la página de [Plots interativos])
+* visNetwork (utilizado en la página de [cadenas de transmisión de](#transmission-chains) este manual)
+* Leaflet (Folleto) (utilizado en la página de [fundamentos del SIG](#gis-basics) de este manual)
+* dygraphs (útil para mostrar interactivamente los datos de las series temporales)
+* DT (`datatable()`) (se utiliza para mostrar tablas dinámicas con filtro, ordenación, etc.)
+
+La función `ggplotly()` de **plotly** es particularmente fácil de usar. Consulta la página de [gráficos interactivos](#interactive-plots-1).
+
+
+## Recursos {#resources}
+
+Puedes encontrar más información en:
 
 * https://bookdown.org/yihui/rmarkdown/
 * https://rmarkdown.rstudio.com/articles_intro.html
 
-A good explainer of markdown vs knitr vs Rmarkdown is here: https://stackoverflow.com/questions/40563479/relationship-between-r-markdown-knitr-pandoc-and-bookdown
+Una buena explicación de markdown vs knitr vs Rmarkdown está aquí: https://stackoverflow.com/questions/40563479/relationship-between-r-markdown-knitr-pandoc-and-bookdown
 
 
 ```{r include=FALSE, cache=FALSE}
@@ -32307,22 +32299,24 @@ options(scipen=1, digits=7)
 <!--chapter:end:new_pages/rmarkdown.Rmd-->
 
 
-# Organizing routine reports {  }  
+# Borrador. Organización de informes rutinarios {#organizing-routine-reports}
 
-This page covers the **reportfactory** package, which is an *accompaniment to using R Markdown for reports*. 
+<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
-In scenarios where you run reports routinely (daily, weekly, etc.), it eases the compilation of multiple R Markdown files and the organization of their outputs. In essence, it provides a "factory" from which you can run the R Markdown reports, get automatically date- and time-stamped folders for the outputs, and have "light" version control.  
+Esta página cubre el paquete **reportfactory**, que es un *complemento para el uso de R Markdown para los informes*.
 
-**reportfactory** is one of the packages developed by RECON (R Epidemics Consortium). Here is their [website](https://www.repidemicsconsortium.org/) and [Github](https://github.com/reconverse).  
+En situaciones en las que se ejecutan reportes de forma rutinaria (diariamente, semanalmente, etc.), facilita la compilación de múltiples archivos R Markdown y la organización de sus resultados. En esencia, proporciona una "fábrica" desde la que se pueden ejecutar los informes R Markdown, obtener automáticamente carpetas con fecha y hora para los resultados, y tener un control de versiones "ligero".
+
+**reportfactory** es uno de los paquetes desarrollados por RECON (R Epidemics Consortium). Aquí está su [sitio web](https://www.repidemicsconsortium.org/) y [Github](https://github.com/reconverse). 
 
 
-## Preparation
+## Preparación {#preparation-31}
 
-### Load packages {.unnumbered}  
+### Cargar paquetes {#load-packages-25}  
 
-From within RStudio, install the latest version of the **reportfactory** package from Github.  
+Desde RStudio, instala la última versión del paquete **reportfactory** desde Github.
 
-You can do this via the **pacman** package with `p_load_current_gh()` which will force intall of the latest version from Github. Provide the character string "reconverse/reportfactory", which specifies the Github organization (reconverse) and repository (reportfactory). You can also use `install_github()` from the **remotes** package, as an alternative.
+Puedes hacerlo a través del paquete **pacman** con p_load_current_gh() que forzará la instalación de la última versión desde Github. Proporcione la cadena de caracteres "reconverse/reportfactory", que especifica la organización de Github (reconverse) y el repositorio (reportfactory). También puede utilizar `install_github()` del paquete **remotes**, como alternativa.
 
 ```{r, eval=FALSE}
 # Install and load the latest version of the package from Github
@@ -32331,99 +32325,97 @@ pacman::p_load_current_gh("reconverse/reportfactory")
 ```
 
 
-## New factory  
+## New factory  {#new-factory}
 
-To create a new factory, run the function `new_factory()`. This will create a new self-contained R project folder. By default:  
+Para crear una nueva fábrica, ejecuta la función `new_factory()`. Esto creará una nueva carpeta de proyecto R autocontenida. Por defecto:
 
-* The factory will be added to your working directory
-* The name of the factory R project will be called "new_factory.Rproj"  
-* Your RStudio session will "move in" to this R project  
+* La fábrica se añadirá a tu directorio de trabajo
+* El nombre del proyecto R de la fábrica se llamará "nueva_fábrica.Rproj"
+* Tu sesión de RStudio se "trasladará" a este proyecto R
 
 ```{r, eval=F}
 # This will create the factory in the working directory
 new_factory()
 ```
 
-Looking inside the factory, you can see that sub-folders and some files were created automatically.  
+Mirando dentro de la fábrica, se puede ver que las subcarpetas y algunos archivos se crearon automáticamente.
 
 
 ```{r, warning=F, message=F, echo=F}
 knitr::include_graphics(here::here("images", "factory_new2.png"))
 ```
 
-* The *report_sources* folder will hold your R Markdown scripts, which generate your reports  
-* The *outputs* folder will hold the report outputs (e.g. HTML, Word, PDF, etc.)  
-* The *scripts* folder can be used to store other R scripts (e.g. that are sourced by your Rmd scripts)  
-* The *data* folder can be used to hold your data ("raw" and "clean" subfolders are included)  
-* A *.here* file, so you can use the **here** package to call files in sub-folders by their relation to this root folder (see [R projects] page for details)  
-* A *gitignore* file was created in case you link this R project to a Github repository (see [Version control and collaboration with Github])  
-* An empty README file, for if you use a Github repository  
+* La carpeta *report_sources* contendrá sus scripts R Markdown, que generan sus informes
+* La carpeta de *resultas* contendrá los resultados del informe (por ejemplo, HTML, Word, PDF, etc.)
+* La carpeta de *scripts* puede utilizarse para almacenar otros scripts de R (por ejemplo, los que se originan en sus scripts de Rmd)
+* La carpeta de *data* puede utilizarse para guardar sus datos (se incluyen las subcarpetas "raw" y "clean")
+* Un archivo *.here*, para que puedas utilizar el paquete **here** para llamar a los archivos de las subcarpetas por su relación con esta carpeta raíz (véase la página de [proyectos de R](#r-projects) para más detalles)
+* Se ha creado un archivo *gitignore* en caso de que se vincule este proyecto R a un repositorio de Github (ver [Control de versiones y colaboración con Github])
+* Un archivo README vacío, para si usas un repositorio de Github
 
 
-<span style="color: orange;">**_CAUTION:_** depending on your computer's setting, files such as ".here" may exist but be invisible.</span>  
+<span style="color: orange;">**_ATENCIÓN::_** dependiendo de la configuración de tu ordenador, los archivos como ".here" pueden existir pero estar ocultos.</span>  
 
-Of the default settings, below are several that you might want to adjust within the `new_factory()` command:  
+De los ajustes por defecto, a continuación hay varios que puede querer ajustar dentro del comando `new_factory()`: 
 
-* `factory = ` - Provide a name for the factory folder (default is "new_factory")  
-* `path = ` - Designate a file path for the new factory (default is the working directory)  
-* `report_sources = ` Provide an alternate name for the subfolder which holds the R Markdown scripts (default is "report_sources")  
-* `outputs = ` Provide an alternate name for the folder which holds the report outputs (default is "outputs")  
+* `factory = ` - Proporcionar un nombre para la carpeta de fábrica (por defecto es "new_factory")
+* `path = ` - Designa una ruta de archivo para la nueva fábrica (por defecto es el directorio de trabajo)
+* `report_sources = ` Proporcione un nombre alternativo para la subcarpeta que contiene los scripts R Markdown (por defecto es "report_sources")
+* `outputs = ` Proporcione un nombre alternativo para la carpeta que contiene los resultados del informe (por defecto es "outputs")
 
-See `?new_factory` for a complete list of the arguments.  
+Véase ?new_factory para una lista completa de los argumentos.
 
-
-When you create the new factory, your R session is transferred to the new R project, so you should again load the **reportfactory** package.  
+Cuando se crea la nueva fábrica, tu sesión de R se transfiere al nuevo proyecto R, por lo que debes cargar de nuevo el paquete **reportfactory**.
 
 ```{r, eval=FALSE}
 pacman::p_load(reportfactory)
 ```
 
-Now you can run a the `factory_overview()` command to see the internal structure (all folders and files) in the factory.  
+Ahora puede ejecutar el comando `factory_overview()` para ver la estructura interna (todas las carpetas y archivos) de la fábrica. 
 
 ```{r, eval=F}
 factory_overview()            # print overview of the factory to console
 ```
 
-The following "tree" of the factory's folders and files is printed to the R console. Note that in the "data" folder there are sub-folders for "raw" and "clean" data, and example CSV data. There is also "example_report.Rmd" in the "report_sources" folder.    
+El siguiente "árbol" de las carpetas y archivos de la fábrica se imprime en la consola de R. Observe que en la carpeta "data" hay subcarpetas para los datos "raw" y "clean", y datos CSV de ejemplo. También hay "example_report.Rmd" en la carpeta "report_sources". 
 
 ```{r, warning=F, message=F, echo=F}
 knitr::include_graphics(here::here("images", "factory_overview.png"))
 ```
 
 
-## Create a report  
+## Crear un informe {#create-a-report}
 
-From within the factory R project, create a R Markdown report just as you would normally, and save it into the "report_sources" folder. See the [R Markdown][Reports with R Markdown] page for instructions. For purposes of example, we have added the following to the factory:  
+Desde la fábrica del proyecto R, crea un informe R Markdown como lo haría normalmente, y guárdalo en la carpeta "report_sources". Consulta la página de [R Markdown](reports-with-r-markdown) para obtener instrucciones. A modo de ejemplo, hemos añadido lo siguiente a la fábrica:
 
-* A new R markdown script entitled "daily_sitrep.Rmd", saved within the "report_sources" folder  
-* Data for the report ("linelist_cleaned.rds"), saved to the "clean" sub-folder within the "data" folder  
+* Un nuevo script de R markdown titulado "daily_sitrep.Rmd", guardado dentro de la carpeta "report_sources".
+* Datos para el informe ("linelist_cleaned.rds"), guardados en la subcarpeta "clean" dentro de la carpeta "data"
 
-We can see using `factory_overview()` our R Markdown in the "report_sources" folder and the data file in the "clean" data folder (highlighted):
+Podemos ver usando factory_overview() nuestro R Markdown en la carpeta "report_sources" y el archivo de datos en la carpeta de datos "clean" (resaltado):
 
 ```{r, warning=F, message=F, echo=F}
 knitr::include_graphics(here::here("images", "factory_overview2.png"))
 ```
 
-Below is a screenshot of the beginning of the R Markdown "daily_sitrep.Rmd". You can see that the output format is set to be HTML, via the YAML header `output: html_document`. 
+A continuación se muestra una captura de pantalla del comienzo del R Markdown "daily_sitrep.Rmd". Puedes ver que el formato de salida está configurado para ser HTML, a través de la cabecera YAML `output: html_document`.
 
 ```{r, warning=F, message=F, echo=F}
 knitr::include_graphics(here::here("images", "factory_new_rmd.png"))
 ```
 
-In this simple script, there are commands to:  
+En este sencillo script, hay comandos para:
 
-* Load necessary packages  
-* Import the linelist data using a filepath from the **here** package (read more in the page on [Import and export])  
+* Cargar los paquetes necesarios
+* Importe los datos del listado utilizando una ruta de archivo del paquete **aquí** (lea más en la página sobre [importación y exportación](#import-and-export)) 
 
 ```{r, eval=F}
 linelist <- import(here("data", "clean", "linelist_cleaned.rds"))
 ```
 
-* Print a summary table of cases, and export it with `export()` as a .csv file  
-* Print an epicurve, and export it with `ggsave()` as a .png file  
+* Imprime una tabla resumen de los casos, y la exporta con `export()` como un archivo .csv
+* Imprimir una epicurva, y exportarla con `ggsave()` como un archivo .png
 
-
-You can review just the list of R Markdown reports in the "report_sources" folder with this command:  
+Puedes revisar sólo la lista de informes R Markdown en la carpeta "report_sources" con este comando:
 
 ```{r, eval=F}
 list_reports()
@@ -32431,34 +32423,35 @@ list_reports()
 
 
 
-## Compile  
+## Compilar   {#compile}
 
-In a report factory, to "compile" a R Markdown report means that the .Rmd script will be run and the output will be produced (as specified in the script YAML e.g. as HTML, Word, PDF, etc).  
+En una fábrica de informes, "compilar" un informe R Markdown significa que se ejecutará el script .Rmd y se producirá la salida (como se especifica en el script YAML, por ejemplo, como HTML, Word, PDF, etc.).
 
-*The factory will automatically create a date- and time-stamped folder for the outputs in the "outputs" folder.*  
+*La fábrica creará automáticamente una carpeta con fecha y hora para las salidas en la carpeta "outputs".*
 
-The report itself and any exported files produced by the script (e.g. csv, png, xlsx) will be saved into this folder. In addition, the Rmd script itself will be saved in this folder, so you have a record of that version of the script.  
+El propio informe y cualquier archivo exportado producido por el script (por ejemplo, csv, png, xlsx) se guardarán en esta carpeta. Además, el propio script Rmd se guardará en esta carpeta, para que tenga un registro de esa versión del script.
 
-This contrasts with the normal behavior of a "knitted" R Markdown, which saves outputs to the location of the Rmd script. This default behavior can result in crowded, messy folders. The factory aims to improve organization when one needs to run reports frequently.  
+Esto contrasta con el comportamiento normal de un R Markdown "tejido", que guarda las salidas en la ubicación del script Rmd. Este comportamiento por defecto puede resultar en carpetas abarrotadas y desordenadas. El objetivo de la fábrica es mejorar la organización cuando uno necesita ejecutar informes con frecuencia.
 
-### Compile by name {.unnumbered}  
+### Compilar por nombre {#compile-by-name}  
 
-You can compile a specific report by running `compile_reports()` and providing the Rmd script name (without .Rmd extension) to `reports = `. For simplicity, you can skip the `reports = ` and just write the R Markdown name in quotes, as below.  
+Puedes compilar un informe específico ejecutando `compile_reports()` y proporcionando el nombre del script Rmd (sin la extensión .Rmd) a `reports = `. Para simplificar, puede omitir `reports = ` y simplemente escribir el nombre R Markdown entre comillas, como se indica a continuación.  
 
 ```{r, warning=F, message=F, echo=F}
 knitr::include_graphics(here::here("images", "factory_compile1.png"))
 ```
 
 
-This command would compile only the "daily_sitrep.Rmd" report, saving the HTML report, and the .csv table and .png epicurve exports into a date- and time-stamped sub-folder specific to the report, within the "outputs" folder.  
+Este comando compilaría sólo el informe "daily_sitrep.Rmd", guardando el informe HTML, y las exportaciones de la tabla .csv y la epicurva .png en una subcarpeta con fecha y hora específicas del informe, dentro de la carpeta "outputs".
 
-Note that if you choose to provide the .Rmd extension, you must correctly type the extension as it is saved in the file name (.rmd vs. .Rmd).  
+Ten en cuenta que si elige proporcionar la extensión .Rmd, debe escribir correctamente la extensión tal y como se guarda en el nombre del archivo (.rmd vs. .Rmd).
 
-Also note that when you compile, you may see several files temporarily appear in the "report_sources" folder - but they will soon disappear as they are transferred to the correct "outputs" folder. 
+Ten en cuenta también que, al compilar, es posible que aparezcan temporalmente varios archivos en la carpeta "report_sources", pero pronto desaparecerán al ser transferidos a la carpeta "outputs" correcta.
 
-### Compile by number {.unnumbered}
+### Compilación por número {#compile-by-number}
 
-You can also specify the Rmd script to compile by providing a number or vector of numbers to `reports = `. The numbers must align with the order the reports appear when you run `list_reports()`.  
+También puede especificar el script Rmd a compilar proporcionando un número o vector de números a `reports = `. Los números deben alinearse con el orden en que aparecen los informes cuando se ejecuta `list_reports()`.
+
 
 ```{r, eval=F}
 # Compile the second and fourth Rmds in the "report_sources" folder
@@ -32467,18 +32460,18 @@ compile_reports(reports = c(2, 4))
 
 
 
-### Compile all {.unnumbered}
+### Compilar todos {#compile-all}
 
-You can compile *all* the R Markdown reports in the "report_sources" folder by setting the `reports = ` argument to TRUE.  
+Puedes compilar *todos* los informes R Markdown en la carpeta "report_sources" estableciendo el argumento `reports = `a TRUE.
 
 ```{r, warning=F, message=F, echo=F}
 knitr::include_graphics(here::here("images", "factory_compile_all.png"))
 ```
 
 
-### Compile from sub-folder {.unnumbered}  
+### Compilar desde la subcarpeta {#compile-from-sub-folder}  
 
-You can add sub-folders to the "report_sources" folder. To run an R Markdown report from a subfolder, simply provide the name of the folder to `subfolder = `. Below is an example of code to compile a Rmd report that lives in a sub_folder of "report_sources".  
+Puedes añadir subcarpetas a la carpeta "report_sources". Para ejecutar un informe R Markdown desde una subcarpeta, simplemente proporcione el nombre de la carpeta a `subfolder = `. A continuación se muestra un ejemplo de código para compilar un informe Rmd que vive en una subcarpeta de "report_sources".
 
 ```{r, eval=F}
 compile_reports(
@@ -32486,16 +32479,16 @@ compile_reports(
      subfolder = "for_partners")
 ```
 
-You can compile all Rmd reports within a subfolder by providing the subfolder name to `reports = `, with a slash on the end, as below.  
+Puedes compilar todos los informes Rmd dentro de una subcarpeta proporcionando el nombre de la subcarpeta a `reports = `, con una barra al final, como se indica a continuación.
 
 ```{r, eval=F}
 compile_reports(reports = "for_partners/")
 ```
 
 
-### Parameterization {.unnumbered}
+### Parametrización {#parameterization}
 
-As noted in the page on [Reports with R Markdown], you can run reports with specified parameters. You can pass these parameters as a list to `compile_reports()` via the `params = ` argument. For example, in this fictional report there are three parameters provided to the R Markdown reports.  
+Como se indicó en la página sobre [Informes con R Markdown](#reports-with-r-markdown), puede ejecutar informes con parámetros especificados. Puedes pasar estos parámetros como una lista a `compile_reports()` a través del argumento `params = `. Por ejemplo, en este informe ficticio hay tres parámetros proporcionados a los informes de R Markdown.
 
 ```{r, eval=F}
 compile_reports(
@@ -32508,15 +32501,14 @@ compile_reports(
 ```
 
 
-### Using a "run-file" {.unnumbered}  
+### Utilizar un "run-file" {#using-a-run-file}  
 
-If you have multiple reports to run, consider creating a R script that contains all the `compile_reports()` commands. A user can simply run all the commands in this R script and all the reports will compile. You can save this "run-file" to the "scripts" folder.  
+Si tienes varios informes que ejecutar, considera la posibilidad de crear un script de R que contenga todos los comandos `compile_reports()`. Un usuario puede simplemente ejecutar todos los comandos en este script de R y todos los informes se compilarán. Puedes guardar este "archivo de ejecución" en la carpeta "scripts".
 
 
+## Salidas {#outputs-1}   
 
-## Outputs  
-
-After we have compiled the reports a few times, the "outputs" folder might look like this (highlights added for clarity):  
+Después de haber compilado los informes unas cuantas veces, la carpeta "outputs" podría tener este aspecto (los resaltados se han añadido para mayor claridad): 
 
 
 ```{r, warning=F, message=F, echo=F}
@@ -32524,59 +32516,60 @@ knitr::include_graphics(here::here("images", "factory_overview_all.png"))
 ```
 
 
-* Within "outputs", sub-folders have been created for each Rmd report  
-* Within those, further sub-folders have been created for each unique compiling  
-  * These are date- and time-stamped ("2021-04-23_T11-07-36" means 23rd April 2021 at 11:07:36)  
-  * You can edit the date/time-stamp format. See `?compile_reports`
-* Within each date/time compiled folder, the report output is stored (e.g. HTML, PDF, Word) along with the Rmd script (version control!) and any other exported files (e.g. table.csv, epidemic_curve.png)  
+* Dentro de "outputs", se han creado subcarpetas para cada informe Rmd
+* Dentro de ellas, se han creado otras subcarpetas para cada compilación única
+  * Están marcados con fecha y hora ("2021-04-23_T11-07-36" significa 23 de abril de 2021 a las 11:07:36)
+  * Puedes editar el formato de la fecha/hora. Ver `?compile_reports`
+* Dentro de cada carpeta compilada de fecha/hora, se almacena el resultado del informe (por ejemplo, HTML, PDF, Word) junto con el script Rmd (¡control de versiones!) y cualquier otro archivo exportado (por ejemplo, table.csv, epidemic_curve.png)
 
-Here is a view inside one of the date/time-stamped folders, for the "daily_sitrep" report. The file path is highlighted in yellow for emphasis.  
+Esta es una vista dentro de una de las carpetas con fecha/hora, para el informe "daily_sitrep". La ruta del archivo está resaltada en amarillo para enfatizar.
+
 
 ```{r, warning=F, message=F, echo=F}
 knitr::include_graphics(here::here("images", "factory_compile_folder.png"))
 ```
 
 
-Finally, below is a screenshot of the HTML report output.  
+Por último, a continuación se muestra una captura de pantalla de la salida del informe HTML.
 
 
 ```{r, warning=F, message=F, echo=F}
 knitr::include_graphics(here::here("images", "factory_html.png"))
 ```
 
-You can use `list_outputs()` to review a list of the outputs.  
+Puedes utilizar `list_outputs()` para revisar una lista de las salidas.
 
 
 
 
-## Miscellaneous  
+## Miscelánea  {#miscellaneous-1} 
 
-### Knit {.unnumbered} 
+### Knit {#knit} 
 
-You can still "knit" one of your R Markdown reports by pressing the "Knit" button, if you want. If you do this, as by default, the outputs will appear in the folder where the Rmd is saved - the "report_sources" folder. In prior versions of **reportfactory**, having any non-Rmd files in "report_sources" would prevent compiling, but this is no longer the case. You can run `compile_reports()` and no error will occur.  
+Si lo deseas, puedes "procesar" uno de tus informes R Markdown clicando el botón "Knit". Si haces esto, como por defecto, las salidas aparecerán en la carpeta donde se guarda el Rmd - la carpeta "report_sources". En versiones anteriores de **reportfactory**, tener cualquier archivo que no sea Rmd en "report_sources" impediría la compilación, pero esto ya no es así. Puedes ejecutar `compile_reports()` y no se producirá ningún error. 
 
-### Scripts {.unnumbered}  
+### Scripts {#scripts-2}  
 
-We encourage you to utilize the "scripts" folder to store "runfiles" or .R scripts that are sourced by your .Rmd scripts. See the page on [R Markdown][Reports with R Markdown] for tips on how to structure your code across several files.  
+Te animamos a utilizar la carpeta "scripts" para almacenar "archivos de ejecución" o scripts .R que se originan en tus scripts .Rmd. Consulta la página sobre [R Markdown](#reports-with-r-markdown) para obtener consejos sobre cómo estructurar tu código en varios archivos. 
 
 
-### Extras {.unnumbered} 
+### Extras {#extras} 
 
-* With **reportfactory**, you can use the function `list_deps()` to list all packages required across all the reports in the entire factory.  
+* Con **reportfactory**, puede utilizar la función `list_deps()` para listar todos los paquetes requeridos en todos los informes de toda la fábrica.
 
-* There is an accompanying package in development called **rfextras** that offers more helper functions to assist you in building reports, such as:  
-  * `load_scripts()` - sources/loads all .R scripts in a given folder (the "scripts" folder by default)  
-  * `find_latest()` - finds the latest version of a file (e.g. the latest dataset)
+* Hay un paquete de acompañamiento en desarrollo llamado **rfextras** que ofrece más funciones de ayuda para asistirle en la construcción de informes, tales como:
+  * `load_scripts()` - carga todos los scripts .R en una carpeta determinada (la carpeta "scripts" por defecto)
+  * `find_latest() `- encuentra la última versión de un archivo (por ejemplo, el último conjunto de datos)
 
 
 
 
 <!-- ======================================================= -->
-## Resources {  }
+## Recursos {#resources-30}
 
-See the **reportfactory** package's [Github page](https://github.com/reconverse/reportfactory)
+Consulta la [página de Github del paquete **reportfactory**](https://github.com/reconverse/reportfactory)
 
-See the **rfextras** package's [Github page](https://github.com/reconhub/rfextras)  
+Consulta la [página de Github del paquete **rfextras**](https://github.com/reconhub/rfextras) 
 
 ```{r include=FALSE, cache=FALSE}
 
