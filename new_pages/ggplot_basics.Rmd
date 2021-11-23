@@ -610,9 +610,9 @@ Una nota sobre la especificación del título de la *leyenda*: No hay un argumen
 
 ## Temas {#ggplot_basics_themes} 
 
-Una de las mejores partes de **ggplot2** es el nivel de control que tienes sobre el gráfico - ¡puedes definir lo que quieras! Como se mencionó anteriormente, los aspectos de diseño del gráfico que *no está* relacionados con las formas/geometrías de los datos se ajustan dentro de la función `theme()`. Por ejemplo, el color de fondo del gráfico, la presencia/ausencia de líneas de cuadrícula, y la fuente/tamaño/color/alineación del texto (títulos, subtítulos, pie de gráfico, texto de los ejes...). Estos ajustes pueden realizarse de dos maneras:
+Una de las mejores partes de **ggplot2** es el nivel de control que tienes sobre el gráfico - ¡puedes definir lo que quieras! Como se mencionó anteriormente, los aspectos de diseño del gráfico que *no están* relacionados con las formas/geometrías de los datos se ajustan dentro de la función `theme()`. Por ejemplo, el color de fondo del gráfico, la presencia/ausencia de líneas de cuadrícula, y la fuente/tamaño/color/alineación del texto (títulos, subtítulos, pie de gráfico, texto de los ejes...). Estos ajustes pueden realizarse de dos maneras:
 
-* Añadiendo una función `theme_()` [*completa]*](https://ggplot2.tidyverse.org/reference/ggtheme.html) para realizar ajustes de barrido -- estas funciones de tema completo incluyen `theme_classic()`, `theme_minimal()`, `theme_dark()`, `theme_light() theme_grey()`, `theme_bw()` entre otras
+* Añadiendo una función `theme_()` [*completa*](https://ggplot2.tidyverse.org/reference/ggtheme.html) para realizar ajustes de barrido -- estas funciones de tema completo incluyen `theme_classic()`, `theme_minimal()`, `theme_dark()`, `theme_light() theme_grey()`, `theme_bw()` entre otras
 
 * Ajustando cada pequeño aspecto del gráfico individualmente dentro de `theme()`
 
@@ -655,36 +655,36 @@ La función `theme()` puede tomar un gran número de argumentos, cada uno de los
 1.  Dentro de `theme()` escribe el nombre del argumento del elemento del gráfico que queres editar, como `plot.title =`
 2.  Proporciona una función `element_()` al argumento
      + Lo más habitual es utilizar `element_text()`, pero también `element_rect()` para los colores de fondo del lienzo, o `element_blank()` para eliminar los elementos del gráfico
-4.  Dentro de la función `element_()`, escribi las asignaciones de argumentos para realizar los ajustes finos que desees
+4.  Dentro de la función `element_()`, escribí las asignaciones de argumentos para realizar los ajustes finos que desees
 
 Esa descripción es bastante abstracta, así que aquí hay algunos ejemplos.
 
-El siguiente gráfico parece tonto, pero sirve para mostrarte una variedad de formas en las que podes ajustar su gráfico.
+El siguiente gráfico parece tonto, pero sirve para mostrarte una variedad de formas en las que podés ajustar su gráfico.
 
 * Comenzamos con el gráfico `age_by_wt` definido anteriormente y añadimos `theme_classic()`
 * Para realizar ajustes más finos, añadimos `theme()` e incluimos un argumento por cada elemento del gráfico que queremos ajustar
 
 Puede ser util organizar los argumentos en secciones lógicas. A continuación se describen algunos argumentos utilizados:
 
-* `legend.position =` es el único argumento que acepta valores simples como "abajo", "arriba", "izquierda" y "derecha".Por lo general, los argumentos relacionados con el texto requieren que se coloquen los detalles *dentro de* `element_text()`.
+* `legend.position =` es el único argumento que acepta valores simples como “bottom”, “top”, “left”, y “right” (abajo, arriba, izquierda y derecha). Por lo general, los argumentos relacionados con el texto requieren que se coloquen los detalles *dentro de* `element_text()`.
 * Tamaño del título se ajusta con `element_text(size = 30)`
-* La alineación horizontal del pie del gráfico se logran con el argumento `element_text(hjust = 0)` (de derecha a izquierda)
+* La alineación horizontal del pie del gráfico se logra con el argumento `element_text(hjust = 0)` (de derecha a izquierda)
 * El subtítulo aparece en cursiva gracias al argumento `element_text(face = "italic")`
 
 ```{r, , warning=F, message=F}
 age_by_wt + 
-  theme_classic()+                                 # pre-defined theme adjustments
+  theme_classic()+                                 # ajustes temáticos predefinidos
   theme(
-    legend.position = "bottom",                    # move legend to bottom
+    legend.position = "bottom",                    # mover la leyenda a la parte inferior
     
-    plot.title = element_text(size = 30),          # size of title to 30
-    plot.caption = element_text(hjust = 0),        # left-align caption
-    plot.subtitle = element_text(face = "italic"), # italicize subtitle
+    plot.title = element_text(size = 30),          # tamaño del título a 30
+    plot.caption = element_text(hjust = 0),        # alinear el título a la izquierda
+    plot.subtitle = element_text(face = "italic"), # poner en cursiva el subtítulo
     
-    axis.text.x = element_text(color = "red", size = 15, angle = 90), # adjusts only x-axis text
-    axis.text.y = element_text(size = 15),         # adjusts only y-axis text
+    axis.text.x = element_text(color = "red", size = 15, angle = 90), # ajustar sólo el texto del eje-x
+    axis.text.y = element_text(size = 15),         # ajustar sólo el texto del eje-y
     
-    axis.title = element_text(size = 20)           # adjusts both axes titles
+    axis.title = element_text(size = 20)           # ajusta los títulos de ambos ejes
     )     
 ```
 
@@ -723,7 +723,7 @@ Consulta esta [sección sobre las escalas de color de la página de consejos de 
 
 
 
-## Piping en  **ggplot2**   
+## Pipes en **ggplot2**   
 
 Cuando se utilizan pipes para limpiar y transformar los datos, es fácil pasar los datos transformados a `ggplot()`.
 
