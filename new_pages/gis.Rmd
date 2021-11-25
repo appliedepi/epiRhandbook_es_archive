@@ -608,8 +608,7 @@ case_adm3_sf <- case_adm3 %>%                 # begin with cases & rate by admin
          admin2name, admin1name,
          cases, total, case_10kpop,
          geometry) %>%                        # keep geometry so polygons can be plotted
-  st_as_sf() %>%                              # convert to shapefile #jfmont
-  drop_na()%>%                                # dropping na in geometry #jfmont
+  drop_na(objectid)%>%                        # drop any empty rows
   st_as_sf()                                  # convert to shapefile #jfmont
   
 
