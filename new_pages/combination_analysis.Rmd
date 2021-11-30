@@ -1,5 +1,7 @@
 
-# Combinations analysis { }  
+# Borrador. Análisis de combinaciones {#combinations-analysis}
+
+<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
 ```{r echo=F, out.width= "75%", warning=F, message=F}
 pacman::p_load(tidyverse,
@@ -50,17 +52,17 @@ UpSetR::upset(
 
 
 
-This analysis plots the frequency of different **combinations** of values/responses. In this example, we plot the frequency at which cases exhibited various combinations of symptoms.  
+Este análisis traza la frecuencia de diferentes **combinaciones** de valores/respuestas. En este ejemplo, se traza la frecuencia con la que los casos mostraron varias combinaciones de síntomas.
 
-This analysis is also often called:  
+Este análisis también se suele llamar:
 
-* **"Multiple response analysis"**  
-* **"Sets analysis"**  
-* **"Combinations analysis"**  
+* **"Análisis de respuesta múltiple"**
+* **"Análisis de conjuntos"**
+* **"Análisis de combinaciones"**
 
-In the example plot above, five symptoms are shown. Below each vertical bar is a line and dots indicating the combination of symptoms reflected by the bar above. To the right, horizontal bars reflect the frequency of each individual symptom.  
+En el ejemplo del gráfico anterior, se muestran cinco síntomas. Debajo de cada barra vertical hay una línea y puntos que indican la combinación de síntomas que refleja la barra de arriba. A la derecha, las barras horizontales reflejan la frecuencia de cada síntoma individual.
 
-The first method we show uses the package **ggupset**, and the second uses the package **UpSetR**. 
+El primer método que mostramos utiliza el paquete **ggupset**, y el segundo utiliza el paquete **UpSetR**.
 
 
 
@@ -70,11 +72,11 @@ The first method we show uses the package **ggupset**, and the second uses the p
 
 
 <!-- ======================================================= -->
-## Preparation {  }
+## Preparación {#preparation}
 
-### Load packages {.unnumbered}
+### Cargar paquetes {.unnumbered}
 
-This code chunk shows the loading of packages required for the analyses. In this handbook we emphasize `p_load()` from **pacman**, which installs the package if necessary *and* loads it for use. You can also load installed packages with  `library()` from **base** R. See the page on [R basics] for more information on R packages.  
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r, warning=F, message=F}
 pacman::p_load(
@@ -84,11 +86,10 @@ pacman::p_load(
 ```
 
 <!-- ======================================================= -->
-### Import data {.unnumbered}  
+### Importar datos {.unnumbered}  
 
 
-To begin, we import the cleaned linelist of cases from a simulated Ebola epidemic. If you want to follow along, <a href='https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds' class='download-button'>click to download the "clean" linelist</a> (as .rds file). Import data with the `import()` function from the **rio** package (it handles many file types like .xlsx, .csv, .rds - see the [Import and export] page for details).  
-
+Para empezar, importamos la lista de casos limpia de una epidemia de ébola simulada. Si quieres seguir el proceso, [clica aquí para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds), (como archivo .rds). Importe los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - vea la página de [importación y exportación](#import-and-export) para más detalles).
 
 
 ```{r, echo=F}
@@ -102,7 +103,7 @@ linelist_sym <- import("linelist_cleaned.rds")
 ```
 
 
-This linelist includes five "yes/no" variables on reported symptoms. We will need to transform these variables a bit to use the **ggupset** package to make our plot. View the data (scroll to the right to see the symptoms variables).  
+Linelist incluye cinco variables "yes/no" sobre los síntomas declarados. Tendremos que transformar un poco estas variables para utilizar el paquete **ggupset** para hacer nuestro gráfico. Vea los datos (desplácese a la derecha para ver las variables de los síntomas).
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
@@ -112,9 +113,9 @@ DT::datatable(head(linelist_sym, 50), rownames = FALSE, filter="top", options = 
 
 
 <!-- ======================================================= -->
-### Re-format values {.unnumbered}  
+### Reformular los valores {.unnumbered}  
 
-To align with the format expected by **ggupset** we convert the "yes" and "no" the the actual symptom name, using `case_when()` from **dplyr**. If "no", we set the value as blank, so the values are eiter `NA` or the symptom.  
+Para alinearse con el formato esperado por **ggupset**, convertimos el "yes" y el "no" en el nombre real del síntoma, utilizando `case_when()` de **dplyr**. Si "no", establecemos el valor en blanco, por lo que los valores son NA o el síntoma.
  
 
 ```{r, warning=F, message=F}
@@ -145,12 +146,12 @@ linelist_sym_1 <- linelist_sym %>%
     )
 ```
 
-Now we make two final columns:  
+Ahora hacemos dos columnas finales:
 
-1. Concatenating (gluing together) all the symptoms of the patient (a character column)  
-2. Convert the above column to class *list*, so it can be accepted by **ggupset** to make the plot  
+1.  Concatenando (pegar) todos los síntomas del paciente (una columna de caracteres)
+2.  Convierte la columna anterior en una de tipo *lista*, para que pueda ser aceptada por **ggupset** para hacer la trama
 
-See the page on [Characters and strings] to learn more about the `unite()` function from **stringr**
+Consulta la página sobre [Caracteres y cadenas](#characters-and-strings) para saber más sobre la función `unite()` de **stringr**
 
 ```{r, warning=F, message=F}
 linelist_sym_1 <- linelist_sym_1 %>% 
@@ -165,7 +166,7 @@ linelist_sym_1 <- linelist_sym_1 %>%
     )
 ```
 
-View the new data. Note the two columns towards the right end - the pasted combined values, and the list
+Vea los nuevos datos. Observe las dos columnas del extremo derecho: los valores combinados pegados y la lista
 
 ```{r, echo=F, , warning=F, message=F}
 DT::datatable(head(linelist_sym_1,50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap')
@@ -173,16 +174,16 @@ DT::datatable(head(linelist_sym_1,50), rownames = FALSE, options = list(pageLeng
 
 
 <!-- ======================================================= -->
-## **ggupset** {  }
+## **ggupset** {#ggupset}
 
-Load the package
+Carga el paquete
 
 ```{r}
 pacman::p_load(ggupset)
 ```
 
 
-Create the plot. We begin with a `ggplot()` and `geom_bar()`, but then we add the special function `scale_x_upset()` from the **ggupset**.  
+Crear el gráfico. Comenzamos con `ggplot()` y `geom_bar()`, pero luego añadimos la función especial `scale_x_upset()` de **ggupset**.  
 
 ```{r, warning=F, message=F}
 ggplot(
@@ -202,24 +203,24 @@ labs(
 
 ```
   
-More information on **ggupset** can be found [online](https://rdrr.io/cran/ggupset/man/scale_x_upset.html) or offline in the package documentation in your RStudio Help tab `?ggupset`.  
+Puedes encontrar más información sobre ggupset [en línea](https://rdrr.io/cran/ggupset/man/scale_x_upset.html) o fuera de línea en la documentación del paquete en su pestaña de Ayuda de RStudio `?ggupset`.
 
 
 <!-- ======================================================= -->
-## `UpSetR` {  }
+## `UpSetR` {#upsetr}
 
-The **UpSetR** package allows more customization of the plot, but it can be more difficult to execute:
+El paquete **UpSetR** permite una mayor personalización de la trama, pero puede ser más difícil de ejecutar:
 
 
-**Load package**  
+**Cargar paquete**
 
 ```{r}
 pacman::p_load(UpSetR)
 ```
 
-**Data cleaning**  
+**Limpieza de datos**
 
-We must convert the `linelist` symptoms values to 1 / 0. 
+Debemos convertir los valores de los síntomas de `linelist` en 1 / 0.
 
 ```{r}
 # Make using upSetR
@@ -250,7 +251,7 @@ linelist_sym_2 <- linelist_sym %>%
     )
 ```
 
-Now make the plot using the custom function `upset()` - using only the symptoms columns. You must designate which "sets" to compare (the names of the symptom columns). Alternatively, use `nsets = ` and `order.by = "freq"` to only show the top X combinations.  
+Ahora haz el gráfico usando la función personalizada `upset()` - usando sólo las columnas de síntomas. Debe designar qué "conjuntos" comparar (los nombres de las columnas de síntomas). Alternativamente, utiliza `nsets = ` y `order.by = "freq"` para mostrar sólo las X combinaciones principales.
 
 ```{r, warning=F, message=F}
 
@@ -272,12 +273,12 @@ UpSetR::upset(
 
 
 <!-- ======================================================= -->
-## Resources {  }
+## Recursos {#resources}
 
-[The github page on UpSetR](https://github.com/hms-dbmi/UpSetR)  
+[La página de github de UpSetR](https://github.com/hms-dbmi/UpSetR)
 
-[A Shiny App version - you can upload your own data](https://gehlenborglab.shinyapps.io/upsetr/)  
+[Una versión de app Shiny: puedes cargar tus propios datos](https://gehlenborglab.shinyapps.io/upsetr/)
 
-[*documentation - difficult to interpret](https://cran.r-project.org/web/packages/UpSetR/UpSetR.pdf)  
+[*documentación - difícil de interpretar](https://cran.r-project.org/web/packages/UpSetR/UpSetR.pdf)
 
 
