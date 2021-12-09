@@ -4,20 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>6 R projects | El manual de R para la Epidemiología</title>
+<title>6 Proyectos en R | El manual de R para la Epidemiología</title>
 <meta name="author" content="El equipo del manual">
-<meta name="description" content="An R project enables your work to be bundled in a portable, self-contained folder. Within the project, all the relevant scripts, data files, figures/outputs, and history are stored in sub-folders...">
+<meta name="description" content="Un proyecto de R permite agrupar tu trabajo en una carpeta que contiene todos los archivos vínculados al mismo, facilitando su manejo. Dentro del proyecto, todos los scripts relevantes, los...">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="6 R projects | El manual de R para la Epidemiología">
+<meta property="og:title" content="6 Proyectos en R | El manual de R para la Epidemiología">
 <meta property="og:type" content="book">
-<meta property="og:description" content="An R project enables your work to be bundled in a portable, self-contained folder. Within the project, all the relevant scripts, data files, figures/outputs, and history are stored in sub-folders...">
+<meta property="og:description" content="Un proyecto de R permite agrupar tu trabajo en una carpeta que contiene todos los archivos vínculados al mismo, facilitando su manejo. Dentro del proyecto, todos los scripts relevantes, los...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="6 R projects | El manual de R para la Epidemiología">
-<meta name="twitter:description" content="An R project enables your work to be bundled in a portable, self-contained folder. Within the project, all the relevant scripts, data files, figures/outputs, and history are stored in sub-folders...">
+<meta name="twitter:title" content="6 Proyectos en R | El manual de R para la Epidemiología">
+<meta name="twitter:description" content="Un proyecto de R permite agrupar tu trabajo en una carpeta que contiene todos los archivos vínculados al mismo, facilitando su manejo. Dentro del proyecto, todos los scripts relevantes, los...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.18/datatables.js"></script><link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
@@ -25,7 +25,10 @@
 <script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="libs/tabwid-1.0.0/tabwid.css" rel="stylesheet">
-<script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script><script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script><script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
 <script src="libs/grViz-binding-1.0.6.1/grViz.js"></script><script src="libs/d3-4.5.0/d3.min.js"></script><script src="libs/sankey-1/sankey.js"></script><script src="libs/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script><script src="libs/plotly-binding-4.9.4.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><link href="libs/vis-4.20.1/vis.css" rel="stylesheet">
 <script src="libs/vis-4.20.1/vis.min.js"></script><script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script><link href="libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,17 +60,17 @@
 <li><a class="" href="editorial-and-technical-notes.html"><span class="header-section-number">1</span> Notas editoriales y técnicas</a></li>
 <li><a class="" href="download-handbook-and-data.html"><span class="header-section-number">2</span> Descargando el manual y los datos</a></li>
 <li class="book-part">Aspectos básicos</li>
-<li><a class="" href="r-basics.html"><span class="header-section-number">3</span> R Basics</a></li>
+<li><a class="" href="r-basics.html"><span class="header-section-number">3</span> Fundamentos de R</a></li>
 <li><a class="" href="transition-to-r.html"><span class="header-section-number">4</span> Transición a R</a></li>
-<li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Suggested packages</a></li>
-<li><a class="active" href="r-projects.html"><span class="header-section-number">6</span> R projects</a></li>
-<li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Import and export</a></li>
+<li><a class="" href="suggested-packages-1.html"><span class="header-section-number">5</span> Paquetes recomendados</a></li>
+<li><a class="active" href="r-projects.html"><span class="header-section-number">6</span> Proyectos en R</a></li>
+<li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Importación y exportación</a></li>
 <li class="book-part">Gestión de datos</li>
-<li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Cleaning data and core functions</a></li>
+<li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Limpieza de datos y funciones básicas</a></li>
 <li><a class="" href="working-with-dates.html"><span class="header-section-number">9</span> Working with dates</a></li>
-<li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Caracteres y cadenas</a></li>
+<li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
 <li><a class="" href="factors.html"><span class="header-section-number">11</span> Factors</a></li>
-<li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Pivoting data</a></li>
+<li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
 <li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Grouping data</a></li>
 <li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Joining data</a></li>
 <li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> De-duplication</a></li>
@@ -84,31 +87,32 @@
 <li><a class="" href="contact-tracing.html"><span class="header-section-number">25</span> Contact tracing</a></li>
 <li><a class="" href="survey-analysis.html"><span class="header-section-number">26</span> Survey analysis</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">27</span> Survival analysis</a></li>
+<li><a class="" href="gis-basics.html"><span class="header-section-number">28</span> Conceptos básicos de los SIG</a></li>
 <li class="book-part">Visualización de datos</li>
-<li><a class="" href="tables-for-presentation.html"><span class="header-section-number">28</span> Tables for presentation</a></li>
-<li><a class="" href="ggplot-basics.html"><span class="header-section-number">29</span> ggplot basics</a></li>
-<li><a class="" href="ggplot-tips.html"><span class="header-section-number">30</span> ggplot tips</a></li>
-<li><a class="" href="epidemic-curves.html"><span class="header-section-number">31</span> Epidemic curves</a></li>
-<li><a class="" href="demographic-pyramids-and-likert-scales.html"><span class="header-section-number">32</span> Demographic pyramids and Likert-scales</a></li>
-<li><a class="" href="heat-plots.html"><span class="header-section-number">33</span> Heat plots</a></li>
-<li><a class="" href="diagrams-and-charts.html"><span class="header-section-number">34</span> Diagrams and charts</a></li>
-<li><a class="" href="combinations-analysis.html"><span class="header-section-number">35</span> Combinations analysis</a></li>
-<li><a class="" href="transmission-chains.html"><span class="header-section-number">36</span> Transmission chains</a></li>
-<li><a class="" href="phylogenetic-trees.html"><span class="header-section-number">37</span> Phylogenetic trees</a></li>
-<li><a class="" href="interactive-plots.html"><span class="header-section-number">38</span> Interactive plots</a></li>
+<li><a class="" href="tables-for-presentation.html"><span class="header-section-number">29</span> Tables for presentation</a></li>
+<li><a class="" href="ggplot-basics.html"><span class="header-section-number">30</span> Conceptos básicos de ggplot</a></li>
+<li><a class="" href="ggplot-tips.html"><span class="header-section-number">31</span> ggplot tips</a></li>
+<li><a class="" href="epidemic-curves.html"><span class="header-section-number">32</span> Epidemic curves</a></li>
+<li><a class="" href="demographic-pyramids-and-likert-scales.html"><span class="header-section-number">33</span> Demographic pyramids and Likert-scales</a></li>
+<li><a class="" href="heat-plots.html"><span class="header-section-number">34</span> Heat plots</a></li>
+<li><a class="" href="diagrams-and-charts.html"><span class="header-section-number">35</span> Diagrams and charts</a></li>
+<li><a class="" href="combinations-analysis.html"><span class="header-section-number">36</span> Borrador. Análisis de combinaciones</a></li>
+<li><a class="" href="transmission-chains.html"><span class="header-section-number">37</span> Borrador. Cadenas de transmisión</a></li>
+<li><a class="" href="phylogenetic-trees-1.html"><span class="header-section-number">38</span> Árboles filogenéticos</a></li>
+<li><a class="" href="interactive-plots.html"><span class="header-section-number">39</span> Gráficos interactivos</a></li>
 <li class="book-part">Informes y Dashboards</li>
-<li><a class="" href="reports-with-r-markdown.html"><span class="header-section-number">39</span> Reports with R Markdown</a></li>
-<li><a class="" href="organizing-routine-reports.html"><span class="header-section-number">40</span> Organizing routine reports</a></li>
-<li><a class="" href="dashboards-with-r-markdown.html"><span class="header-section-number">41</span> Dashboards with R Markdown</a></li>
-<li><a class="" href="dashboards-with-shiny.html"><span class="header-section-number">42</span> Dashboards with Shiny</a></li>
+<li><a class="" href="reports-with-r-markdown.html"><span class="header-section-number">40</span> Informes con R Markdown</a></li>
+<li><a class="" href="organizing-routine-reports.html"><span class="header-section-number">41</span> Organización de informes rutinarios</a></li>
+<li><a class="" href="dashboards-with-r-markdown.html"><span class="header-section-number">42</span> Borrador. Dashboards con R Markdown</a></li>
+<li><a class="" href="dashboards-with-shiny.html"><span class="header-section-number">43</span> Borrador. Dashboards con Shiny</a></li>
 <li class="book-part">Miscelánea</li>
-<li><a class="" href="writing-functions-1.html"><span class="header-section-number">43</span> Writing functions</a></li>
-<li><a class="" href="directory-interactions.html"><span class="header-section-number">44</span> Directory interactions</a></li>
-<li><a class="" href="version-control-and-collaboration-with-git-and-github.html"><span class="header-section-number">45</span> Version control and collaboration with Git and Github</a></li>
-<li><a class="" href="common-errors.html"><span class="header-section-number">46</span> Common errors</a></li>
-<li><a class="" href="getting-help.html"><span class="header-section-number">47</span> Getting help</a></li>
-<li><a class="" href="r-on-network-drives.html"><span class="header-section-number">48</span> R on network drives</a></li>
-<li><a class="" href="data-table.html"><span class="header-section-number">49</span> Data Table</a></li>
+<li><a class="" href="writing-functions-1.html"><span class="header-section-number">44</span> Borrador. Escribir funciones</a></li>
+<li><a class="" href="directory-interactions.html"><span class="header-section-number">45</span> Borrador. Interacciones con directorios</a></li>
+<li><a class="" href="version-control-and-collaboration-with-git-and-github.html"><span class="header-section-number">46</span> Control de versiones y colaboración con Git y Github</a></li>
+<li><a class="" href="common-errors.html"><span class="header-section-number">47</span> Errores comunes</a></li>
+<li><a class="" href="getting-help.html"><span class="header-section-number">48</span> Cómo obtener ayuda</a></li>
+<li><a class="" href="r-on-network-drives.html"><span class="header-section-number">49</span> Borrador. R en redes locales</a></li>
+<li><a class="" href="data-table.html"><span class="header-section-number">50</span> Borrador. data.table</a></li>
 </ul>
 
         <div class="book-extra">
@@ -118,123 +122,119 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="r-projects" class="section level1" number="6">
 <h1>
-<span class="header-section-number">6</span> R projects<a class="anchor" aria-label="anchor" href="#r-projects"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> Proyectos en R<a class="anchor" aria-label="anchor" href="#r-projects"><i class="fas fa-link"></i></a>
 </h1>
-<p>An R project enables your work to be bundled in a portable, self-contained folder. Within the project, all the relevant scripts, data files, figures/outputs, and history are stored in sub-folders and importantly - the <em>working directory</em> is the project’s root folder.</p>
-<div id="suggested-use" class="section level2" number="6.1">
+<p>Un proyecto de R permite agrupar tu trabajo en una carpeta que contiene todos los archivos vínculados al mismo, facilitando su manejo. Dentro del proyecto, todos los scripts relevantes, los archivos de datos, las figuras/resultados y el historial se almacenan en subcarpetas y, lo que es más importante, el <em>directorio de trabajo</em> de dicho proyecto constituye la carpeta raíz del mismo.</p>
+<div id="uso-sugerido" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">6.1</span> Suggested use<a class="anchor" aria-label="anchor" href="#suggested-use"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> Uso sugerido<a class="anchor" aria-label="anchor" href="#uso-sugerido"><i class="fas fa-link"></i></a>
 </h2>
-<p>A common, efficient, and trouble-free way to use R is to combine these 3 elements. One discrete work project is hosted within one R project. Each element is described in the sections below.</p>
+<p>Una forma común, eficiente y sencilla de utilizar R es combinar 3 elementos. Un proyecto de trabajo concreto se aloja dentro de un proyecto R. Cada uno de los tres elementos anteriores se describe a continuación.</p>
 <ol style="list-style-type: decimal">
-<li>An <strong>R project</strong>
+<li>Un <strong>proyecto en R </strong>
+</li>
+</ol>
 <ul>
-<li>A self-contained working environment with folders for data, scripts, outputs, etc.<br>
-</li>
+<li>Un entorno de trabajo autónomo con carpetas para datos, scripts, salidas (outputs), etc</li>
 </ul>
-</li>
-<li>The <strong>here</strong> package for relative filepaths
+<ol start="2" style="list-style-type: decimal">
+<li>El paquete <strong>here</strong>, el cual se utiliza para indicar las rutas relativas de los archivos</li>
+</ol>
 <ul>
-<li>Filepaths are written relative to the root folder of the R project - see <a href="import-and-export.html#import-and-export">Import and export</a> for more information<br>
-</li>
+<li>Las rutas de los archivos se escriben en relación con la ubicación de la carpeta raíz del proyecto R - véase <a href="import-and-export.html#import-and-export">Importar y exportar</a> para más información</li>
 </ul>
-</li>
-<li>The <strong>rio</strong> package for importing/exporting
-<ul>
-<li>
-<code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> and <code><a href="https://rdrr.io/pkg/rio/man/export.html">export()</a></code> handle any file type by by its extension (e.g. .csv, .xlsx, .png)</li>
-</ul>
-</li>
+<ol start="3" style="list-style-type: decimal">
+<li>El paquete <strong>rio</strong> para importar/exportar
+-<code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> y <code><a href="https://rdrr.io/pkg/rio/man/export.html">export()</a></code> manejan cualquier tipo de archivo por su extensión (por ejemplo, .csv, .xlsx, .png)</li>
 </ol>
 <!-- ======================================================= -->
 </div>
-<div id="creating-an-r-project" class="section level2" number="6.2">
+<div id="creación-de-un-proyecto-r" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">6.2</span> Creating an R project<a class="anchor" aria-label="anchor" href="#creating-an-r-project"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> Creación de un proyecto R<a class="anchor" aria-label="anchor" href="#creaci%C3%B3n-de-un-proyecto-r"><i class="fas fa-link"></i></a>
 </h2>
-<p>To create an R project, select “New Project” from the File menu.</p>
+<p>Para crear un proyecto R, selecciona “New proyect” en el menú File (Archivo).</p>
 <ul>
-<li>If you want to create a new folder for the project, select “New directory” and indicate where you want it to be created.<br>
-</li>
-<li>If you want to create the project within an existing folder, click “Existing directory” and indicate the folder.<br>
-</li>
-<li>If you want to clone a Github repository, select the third option “Version Control” and then “Git”. See the page on <a href="version-control-and-collaboration-with-git-and-github.html#version-control-and-collaboration-with-git-and-github">Version control and collaboration with Git and Github</a> for further details.</li>
+<li>Si quieres crear una nueva carpeta para el proyecto, selecciona “New directory” e indica dónde quieres crear la carpeta.</li>
+<li>Si deseas crear el proyecto dentro de una carpeta existente, cliquea en “Existing Directory” e indica la carpeta.</li>
+<li>Si quieres clonar un repositorio de Github, selecciona la tercera opción “Version Control” y luego “Git”. Consulta la página <a href="version-control-and-collaboration-with-git-and-github.html#version-control-and-collaboration-with-git-and-github">Control de versiones y colaboración con Git y Github</a> para más detalles.</li>
 </ul>
 <div class="inline-figure"><img src="images/create_project.png" width="75%" style="display: block; margin: auto;"></div>
-<p>The R project you create will come in the form of a folder containing a <em>.Rproj</em> file. This file is a shortcut and likely the primary way you will open your project. You can also open a project by selecting “Open Project” from the File menu. Alternatively on the far upper right side of RStudio you will see an R project icon and a drop-down menu of available R projects.</p>
-<p>To exit from an R project, either open a new project, or close the project (File - Close Project).</p>
-<div id="switch-projects" class="section level3 unnumbered">
-<h3>Switch projects<a class="anchor" aria-label="anchor" href="#switch-projects"><i class="fas fa-link"></i></a>
-</h3>
-<p>To switch between projects, click the R project icon and drop-down menu at the very top-right of RStudio. You will see options to Close Project, Open Project, and a list of recent projects.</p>
+<p>El proyecto R que has creado estará en una carpeta que contiene un archivo <em>.Rproj</em>. Este archivo es un acceso directo y probablemente la forma más directa de abrir tu proyecto. También puedes abrir un proyecto seleccionando “Open Project” en el menú File. Alternativamente, en el extremo superior derecho de RStudio verás un icono de R projects y un menú desplegable de proyectos disponibles.</p>
+<p>Para salir de un proyecto R, abre un nuevo proyecto o cierra el proyecto actual (Archivo - Cerrar proyecto).</p>
+</div>
+<div id="cambiar-de-proyecto" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Cambiar de proyecto<a class="anchor" aria-label="anchor" href="#cambiar-de-proyecto"><i class="fas fa-link"></i></a>
+</h2>
+<p>Para cambiar entre proyectos, clica en el icono de R projects en el menú desplegable en la parte superior derecha de RStudio. Verás las opciones de Cerrar proyecto, Abrir proyecto y una lista de proyectos recientes.</p>
 <div class="inline-figure"><img src="images/Rproject_dropdown.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="settings" class="section level3 unnumbered">
-<h3>Settings<a class="anchor" aria-label="anchor" href="#settings"><i class="fas fa-link"></i></a>
-</h3>
-<p>It is generally advised that you start RStudio each time with a “clean slate” - that is, with your workspace <strong>not</strong> preserved from your previous session. This will mean that your objects and results will not persist session-to-session (you must re-create them by running your scripts). This is good, because it will force you to write better scripts and avoid errors in the long run.</p>
-<p>To set RStudio to have a “clean slate” each time at start-up:</p>
+<div id="ajustes" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Ajustes<a class="anchor" aria-label="anchor" href="#ajustes"><i class="fas fa-link"></i></a>
+</h2>
+<p>Generalmente se aconseja que inicies RStudio cada vez con una “pizarra limpia” - es decir, con tu espacio de trabajo <strong>no</strong> arrastrado de la sesión anterior. Esto significará que los objetos y resultados de una sesión no persistirán en la siguiente sesión (deberás volver a crearlos al ejecutar tus scripts). Esto es bueno, porque te obligará a escribir mejores scripts y evitar errores a largo plazo.</p>
+<p>Para configurar RStudio para que haga “borrón y cuenta nueva” cada vez que se inicie:</p>
 <ul>
-<li>Select “Project Options” from the Tools menu.<br>
-</li>
-<li>In the “General” tab, set RStudio to <strong>not</strong> restore .RData into workspace at startup, and to <strong>not</strong> save workspace to .RData on exit.</li>
+<li><p>Selecciona “Project Options” en el menú Tools (Herramientas).</p></li>
+<li><p>En la pestaña “General”, configura RStudio para que <strong>no</strong> restaure .RData en el espacio de trabajo al iniciar, y para que <strong>no</strong> guarde el espacio de trabajo en .RData al salir.</p></li>
 </ul>
 </div>
-<div id="organization" class="section level3 unnumbered">
-<h3>Organization<a class="anchor" aria-label="anchor" href="#organization"><i class="fas fa-link"></i></a>
-</h3>
-<p>It is common to have subfolders in your project. Consider having folders such as “data”, “scripts”, “figures”, “presentations”. You can add folders in the typical way you would add a new folder for your computer. Alternatively, see the page on <a href="directory-interactions.html#directory-interactions">Directory interactions</a> to learn how to create new folders with R commands.</p>
-</div>
-<div id="version-control" class="section level3 unnumbered">
-<h3>Version control<a class="anchor" aria-label="anchor" href="#version-control"><i class="fas fa-link"></i></a>
-</h3>
-<p>Consider a version control system. It could be something as simple as having dates on the names of scripts (e.g. “transmission_analysis_2020-10-03.R”) and an “archive” folder. Consider also having commented header text at the top of each script with a description, tags, authors, and change log.</p>
-<p>A more complicated method would involve using Github or a similar platform for version control. See the page on <a href="version-control-and-collaboration-with-git-and-github.html#version-control-and-collaboration-with-git-and-github">Version control and collaboration with Git and Github</a>.</p>
-<p>One tip is that you can search across an entire project or folder using the “Find in Files” tool (Edit menu). It can search and even replace strings across multiple files.</p>
-</div>
-</div>
-<div id="examples" class="section level2" number="6.3">
+<div id="organización" class="section level2" number="6.5">
 <h2>
-<span class="header-section-number">6.3</span> Examples<a class="anchor" aria-label="anchor" href="#examples"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.5</span> Organización<a class="anchor" aria-label="anchor" href="#organizaci%C3%B3n"><i class="fas fa-link"></i></a>
 </h2>
-<p>Below are some examples of import/export/saving using <code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> from within an R projct. Read more about using the <strong>here</strong> package in the <a href="import-and-export.html#import-and-export">Import and export</a> page.</p>
-<p><em>Importing <code>linelist_raw.xlsx</code> from the “data” folder in your R project</em></p>
+<p>Es habitual tener subcarpetas en tu proyecto. Piensa en tener carpetas como “datos”, “scripts”, “figuras” y “presentaciones”. Puedes añadir carpetas de la forma típica en que añadirías una nueva carpeta en tu ordenador. Alternativamente, puedes ver en la página sobre <a href="directory-interactions.html#directory-interactions">interacciones de directorios</a> para aprender a crear nuevas carpetas con los comandos de R.</p>
+</div>
+<div id="control-de-versiones" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Control de versiones<a class="anchor" aria-label="anchor" href="#control-de-versiones"><i class="fas fa-link"></i></a>
+</h2>
+<p>Considera utilizar un sistema de control de versiones. Podría ser algo tan simple como tener fechas en los nombres de los scripts (por ejemplo, “transmission_analysis_2020-10-03.R”) y una carpeta de “archivado”. También es buena idea tener un texto de cabecera agregando al comienzo de cada script una descripción, etiquetas, autores y un registro de cambios.</p>
+<p>Un método más complicado implicaría utilizar Github o una plataforma similar para el control de versiones. Consulta la página sobre <a href="version-control-and-collaboration-with-git-and-github.html#version-control-and-collaboration-with-git-and-github">Control de versiones y colaboración con Git y Github</a>.</p>
+<p>Un consejo es que puedes realizas búsquedas en todo un proyecto o carpeta utilizando la herramienta “Buscar en archivos” (menú Edición).
+Puedes buscar e incluso reemplazar líneas de script en varios archivos.</p>
+</div>
+<div id="ejemplos" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> Ejemplos<a class="anchor" aria-label="anchor" href="#ejemplos"><i class="fas fa-link"></i></a>
+</h2>
+<p>A continuación se muestran algunos ejemplos de importación/exportación/guardado utilizando <code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> desde un proyecto R. Lea más sobre el uso del paquete <strong>here</strong> en la página de <a href="import-and-export.html#import-and-export">importación y exportación</a>.</p>
+<p><em>Importación de <code>linelist_raw.xlsx</code> desde la carpeta “data” de tu proyecto R</em></p>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"linelist_raw.xlsx"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><em>Exporting the R object <code>linelist</code> as “my_linelist.rds” to the “clean” folder within the “data” folder in your R project.</em></p>
+<p><em>Exportar linelist de objetos de R como “my_linelist.rds” a la carpeta “clean” dentro de la carpeta “data” de tu proyecto R.</em></p>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/rio/man/export.html">export</a></span><span class="op">(</span><span class="va">linelist</span>, <span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"clean"</span>, <span class="st">"my_linelist.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><em>Saving the most recently printed plot as “epicurve_2021-02-15.png” within the “epicurves” folder in “outputs” folder in your R project.</em></p>
+<p><em>Guardando el último gráfico creado como “epicurve_2021-02-15.png” dentro de la carpeta “epicurves” en la carpeta “outputs” de tu proyecto R.</em></p>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggsave</span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"outputs"</span>, <span class="st">"epicurves"</span>, <span class="st">"epicurve_2021-02-15.png"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <!-- ======================================================= -->
 </div>
-<div id="resources" class="section level2" number="6.4">
+<div id="recursos" class="section level2" number="6.8">
 <h2>
-<span class="header-section-number">6.4</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.8</span> Recursos<a class="anchor" aria-label="anchor" href="#recursos"><i class="fas fa-link"></i></a>
 </h2>
-<p>RStudio webpage on <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">using R projects</a></p>
+<p>Página web de RStudio sobre <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">uso de proyectos R</a></p>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="suggested-packages-1.html"><span class="header-section-number">5</span> Suggested packages</a></div>
-<div class="next"><a href="import-and-export.html"><span class="header-section-number">7</span> Import and export</a></div>
+<div class="prev"><a href="suggested-packages-1.html"><span class="header-section-number">5</span> Paquetes recomendados</a></div>
+<div class="next"><a href="import-and-export.html"><span class="header-section-number">7</span> Importación y exportación</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#r-projects"><span class="header-section-number">6</span> R projects</a></li>
-<li><a class="nav-link" href="#suggested-use"><span class="header-section-number">6.1</span> Suggested use</a></li>
-<li>
-<a class="nav-link" href="#creating-an-r-project"><span class="header-section-number">6.2</span> Creating an R project</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#switch-projects">Switch projects</a></li>
-<li><a class="nav-link" href="#settings">Settings</a></li>
-<li><a class="nav-link" href="#organization">Organization</a></li>
-<li><a class="nav-link" href="#version-control">Version control</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#examples"><span class="header-section-number">6.3</span> Examples</a></li>
-<li><a class="nav-link" href="#resources"><span class="header-section-number">6.4</span> Resources</a></li>
+<li><a class="nav-link" href="#r-projects"><span class="header-section-number">6</span> Proyectos en R</a></li>
+<li><a class="nav-link" href="#uso-sugerido"><span class="header-section-number">6.1</span> Uso sugerido</a></li>
+<li><a class="nav-link" href="#creaci%C3%B3n-de-un-proyecto-r"><span class="header-section-number">6.2</span> Creación de un proyecto R</a></li>
+<li><a class="nav-link" href="#cambiar-de-proyecto"><span class="header-section-number">6.3</span> Cambiar de proyecto</a></li>
+<li><a class="nav-link" href="#ajustes"><span class="header-section-number">6.4</span> Ajustes</a></li>
+<li><a class="nav-link" href="#organizaci%C3%B3n"><span class="header-section-number">6.5</span> Organización</a></li>
+<li><a class="nav-link" href="#control-de-versiones"><span class="header-section-number">6.6</span> Control de versiones</a></li>
+<li><a class="nav-link" href="#ejemplos"><span class="header-section-number">6.7</span> Ejemplos</a></li>
+<li><a class="nav-link" href="#recursos"><span class="header-section-number">6.8</span> Recursos</a></li>
 </ul>
 
       <div class="book-extra">
@@ -251,7 +251,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-08-26.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-12-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

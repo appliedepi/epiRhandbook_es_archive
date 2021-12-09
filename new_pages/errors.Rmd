@@ -1,48 +1,45 @@
 
-# Common errors  
+# Errores comunes {#common-errors}
 
-This page includes a running list of common errors and suggests solutions for troubleshooting them.  
-
-
-## Interpreting error messages  
-
-R errors can be cryptic at times, so Google is your friend. Search the error message with "R" and look for recent posts in [StackExchange.com](StackExchange.com), [stackoverflow.com](stackoverflow.com), [community.rstudio.com](community.rstudio.com), twitter (#rstats), and other forums used by programmers to filed questions and answers. Try to find recent posts that have solved similar problems.  
-
-If after much searching you cannot find an answer to your problem, consider creating a *reproducible example* ("reprex") and posting the question yourself. See the page on [Getting help] for tips on how to create and post a reproducible example to forums. 
+Esta página incluye una lista actualizada de los errores más comunes y sugiere soluciones para solucionarlos.
 
 
-## Common errors  
+## Interpretación de los mensajes de error {#interpreting-error-messages}
 
-Below, we list some common errors and potential explanations/solutions. Some of these are borrowed from Noam Ross who analyzed the most common forum posts on Stack Overflow about R error messages (see analysis [here](https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md))  
+Los mensajes de error de R pueden ser crípticos a veces, así que Google es tu amigo. Busca el mensaje de error con "R" y busca publicaciones recientes en [StackExchange.com](https://stackexchange.com/), [stackoverflow.com](https://stackoverflow.com/), [community.rstudio.com](https://community.rstudio.com/), twitter (#rstats) y otros foros utilizados por los programadores para archivar preguntas y respuestas. Intenta encontrar publicaciones recientes que hayan resuelto problemas similares.
+
+Si después de mucho buscar no encuentras una respuesta a tu problema, considera la posibilidad de crear un ejemplo *reproducible* ("reprex") y publicar tú mismo la pregunta. Consulta la página sobre [Cómo obtener ayuda](#getting-help) para obtener consejos sobre cómo crear y publicar un ejemplo reproducible en los foros.
 
 
-### Typo errors {.unnumbered}  
+## Errores comunes  {#common-errors-1}
+
+A continuación, enumeramos algunos errores comunes y posibles explicaciones/soluciones. Algunos de ellos se han tomado prestados de Noam Ross, que analizó los mensajes más comunes del foro en Stack Overflow sobre los mensajes de error de R (véase el análisis [aquí](https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md)) 
+
+
+### Errores tipográficos {#typo-errors}  
 
 ```
 Error: unexpected symbol in:
 "  geom_histogram(stat = "identity")+
   tidyquant::geom_ma(n=7, size = 2, color = "red" lty"
 ```
-If you see "unexpected symbol", check for missing commas  
+Si aparece "unexpected symbol" (símbolo inesperado), comprueba si faltan comas
 
 
-
-### Package errors {.unnumbered}  
+### Errores del paquete {#package-errors}  
 
 ```
 could not find function "x"...
 ```
-This likely means that you typed the function name incorrectly, or forgot to install or load a package.
+Esto probablemente significa que has escrito mal el nombre de la función, o que has olvidado instalar o cargar un paquete.
 
 
 ```
 Error in select(data, var) : unused argument (var)
 ```
-You think you are using `dplyr::select()` but the `select()` function has been masked by `MASS::select()` - specify `dplyr::` or re-order your package loading so that dplyr is after all the others.
+Crees que estás usando dplyr::select() pero la función select() ha sido enmascarada por MASS::select() - especifica dplyr:: o reordena la carga de tu paquete para que dplyr esté después de todos los demás.
 
-Other common masking errors stem from: `plyr::summarise()` and `stats::filter()`. Consider using the [**conflicted** package](https://www.tidyverse.org/blog/2018/06/conflicted/).
-
-
+Otros errores de enmascaramiento comunes provienen de: plyr::summarise() y stats::filter(). Considere la posibilidad de utilizar el [paquete **conflicted**](https://www.tidyverse.org/blog/2018/06/conflicted/).
 
 
 ```
@@ -50,88 +47,88 @@ Error in install.packages : ERROR: failed to lock directory ‘C:\Users\Name\Doc
 Try removing ‘C:\Users\Name\Documents\R\win-library\4.0/00LOCK’
 ```
 
-If you get an error saying you need to remove an "00LOCK" file, go to your "R" library in your computer directory (e.g. R/win-library/) and look for a folder called "00LOCK". Delete this manually, and try installing the package again. A previous install process was probably interrupted, which led to this.  
+Si recibes un error diciendo que necesitas eliminar un archivo "00LOCK", ve a tu biblioteca "R" en el directorio de tu ordenador (por ejemplo, R/win-library/) y busca una carpeta llamada "00LOCK". Elimínala manualmente e intenta instalar el paquete de nuevo. Es probable que un proceso de instalación anterior se haya interrumpido, provocando este error.
 
 
 
 
-### Object errors {.unnumbered}  
+### Errores en los objetos {#object-errors}  
 
 ```
 No such file or directory:
 ```
-If you see an error like this when you try to export or import: Check the spelling of the file and filepath, and if the path contains slashes make sure they are forward `/` and not backward `\`. Also make sure you used the correct file extension (e.g. .csv, .xlsx).  
+Si ves un error como este cuando intentas exportar o importar: Compruebe la ortografía del archivo y de la ruta de acceso, y si la ruta contiene barras inclinadas, asegúrese de que son hacia delante `/` y no hacia atrás `\`. Asegúrate también de que has utilizado la extensión de archivo correcta (por ejemplo, .csv, .xlsx).
 
 
 ```
 object 'x' not found 
 ```
-This means that an object you are referencing does not exist. Perhaps code above did not run properly?  
+Esto significa que el objeto al que se hace referencia no existe. ¿Quizá el código anterior no se ha ejecutado correctamente? 
 
 
 ```
 Error in 'x': subscript out of bounds
 ```
-This means you tried to access something (an element of a vector or a list) that was not there.  
+Esto significa que has intentado acceder a algo (un elemento de un vector o una lista) que no estaba allí.  
 
 
 
 
-### Function syntax errors {.unnumbered}
+### Errores de sintaxis de las funciones {#function-syntax-errors}
 
 ```
-# ran recode without re-stating the x variable in mutate(x = recode(x, OLD = NEW)
+# ejecuta recode sin reiniciar la variable x en mutate(x = recode(x, OLD = NEW)
 Error: Problem with `mutate()` input `hospital`.
 x argument ".x" is missing, with no default
 i Input `hospital` is `recode(...)`.
 ```
-This error above (`argument .x is missing, with no default`) is common in `mutate()` if you are supplying a function like `recode()` or `replace_na()` where it expects you to provide the column name as the first argument. This is easy to forget.  
+Este error de arriba (`argument .x is missing, with no default`) es común en `mutate()` si estás suministrando una función como `recode()` o `replace_na()` donde se espera que proporciones el nombre de la columna como primer argumento. Esto es fácil de olvidar. 
 
 
 
-### Logic errors {.unnumbered}  
+### Errores lógicos {#logic-errors}  
 
 ```
 Error in if
 ```
 
-This likely means an `if` statement was applied to something that was not TRUE or FALSE.  
+Esto probablemente significa que se aplicó una sentencia `if` a algo que no era TRUE o FALSE.
 
 
-### Factor errors {.unnumbered}  
+### Errores de los factores {#factor-errors}  
 
 ```
-#Tried to add a value ("Missing") to a factor (with replace_na operating on a factor)
+#Trató de añadir un valor ("Missing") a un factor (con replace_na operando en un factor)
 Problem with `mutate()` input `age_cat`.
 i invalid factor level, NA generated
 i Input `age_cat` is `replace_na(age_cat, "Missing")`.invalid factor level, NA generated
 ```
-If you see this error about invalid factor levels, you likely have a column of class Factor (which contains pre-defined levels) and tried to add a new value to it. Convert it to class Character before adding a new value.  
+Si ve este error sobre niveles de factor no válidos, es probable que tengas una columna de tipo Factor (que contiene niveles predefinidos) y hayas intentado añadirle un nuevo valor. Conviértela al tipo Carácter antes de añadir un nuevo valor. 
 
 
-### Plotting errors {.unnumbered}  
+### Errores de trazado {#plotting-errors}  
 
 `Error: Insufficient values in manual scale. 3 needed but only 2 provided.`
-ggplot() scale_fill_manual() values = c("orange", "purple") ... insufficient for number of factor levels ... consider whether NA is now a factor level...
+ggplot() scale_fill_manual() values = c("orange", "purple") ... insuficiente para el número de niveles del factor ... considera si NA es ahora un nivel del factor...
 
 ```
 Can't add x object
 ```
-You probably have an extra `+` at the end of a ggplot command that you need to delete.
+Probablemente tienes un `+` extra al final de un comando ggplot que necesitas eliminar.
 
 
-### R Markdown errors {.unnumbered}  
+### Errores de R Markdown {#r-markdown-errors}  
 
-If the error message contains something like `Error in options[[sprintf("fig.%s", i)]]`, check that your knitr options at the top of each chunk correctly use the `out.width = ` or `out.height = ` and *not* `fig.width=` and `fig.height=`.
+Si el mensaje de error contiene algo como `Error en options[sprintf("fig.%s", i)]]`, comprueba que tus opciones knitr en la parte superior de cada chunk utilizan correctamente ` out.width = ` o `out.height = `y *no* `fig.width= ` y `fig.height= `.
 
-### Miscellaneous {.unnumbered}  
+### Miscelánea {#miscellaneous-2}  
 
-Consider whether you re-arranged piped **dplyr** verbs and didn't replace a pipe in the middle, or didn't remove a pipe from the end after re-arranging.
+Comprueba si has reordenado los verbos **dplyr** y no has reemplazado un pipe en el medio, o no has eliminado un pipe del final después de reordenar.
 
  
 
 
 <!-- ======================================================= -->
-## Resources { }
+## Resources {#resources-39}
 
-This is another blog post that lists common [R programming errors faced by beginners](https://www.r-bloggers.com/2016/06/common-r-programming-errors-faced-by-beginners/)
+Esta es otra entrada del blog que enumera los [errores comunes de programación en R a los que se enfrentan los principiantes](https://www.r-bloggers.com/2016/06/common-r-programming-errors-faced-by-beginners/) 

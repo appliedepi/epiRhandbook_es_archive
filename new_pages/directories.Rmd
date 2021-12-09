@@ -1,14 +1,16 @@
 
-# Directory interactions { }  
+# Borrador. Interacciones con directorios {#directory-interactions}  
 
-In this page we cover common scenarios where you create, interact with, save, and import with directories (folders).  
+<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
+
+En esta página cubrimos los escenarios comunes en los que se crea, se interactúa, se guarda y se importa con directorios (carpetas).
 
 
-## Preparation  
+## Preparación  {#preparation-38}
 
-### **fs** package {.unnumbered}  
+### Paquete **fs** {#fs-package}  
 
-The **fs** package is a **tidyverse** package that facilitate directory interactions, improving on some of the **base** R functions. In the sections below we will often use functions from **fs**.  
+El paquete fs es un paquete **tidyverse** que facilita las interacciones con los directorios, mejorando algunas de las funciones de R  **base**. En las secciones siguientes utilizaremos a menudo funciones de **fs**.
 
 ```{r}
 pacman::p_load(
@@ -19,11 +21,11 @@ pacman::p_load(
 ```
 
 
-### Print directory as a dendrogram tree {.unnumbered}  
+### Imprimir el directorio como un árbol de dendrogramas {#print-directory-as-a-dendrogram-tree}  
 
-Use the function `dir_tree()` from **fs**.  
+Utiliza la función `dir_tree()` de **fs**.
 
-Provide the folder filepath to `path = ` and decide whether you want to show only one level (`recurse = FALSE`) or all files in all sub-levels (`recurse = TRUE`). Below we use `here()` as shorthand for the R project and specify its sub-folder "data", which contains all the data used for this R handbook. We set it to display all files within "data" and its sub-folders (e.g. "cache", "epidemic models", "population", "shp", and "weather").  
+Proporciona la ruta de la carpeta a `path = ` y decide si quieres mostrar sólo un nivel (`recurse = FALSE`) o todos los archivos en todos los subniveles (`recurse = TRUE`). A continuación utilizamos `here()` como abreviatura del proyecto R y especificamos su subcarpeta "data", que contiene todos los datos utilizados para este manual de R. Lo configuramos para que muestre todos los archivos dentro de "data" y sus subcarpetas (por ejemplo, "cache", "epidemic models", "population", "shp" y "weather").
 
 
 ```{r}
@@ -31,40 +33,40 @@ fs::dir_tree(path = here("data"), recurse = TRUE)
 ```
 
 
-## List files in a directory  
+## Listar los archivos de un directorio {#list-files-in-a-directory}
 
-To list just the file names in a directory you can use `dir()` from **base** R. For example, this command lists the file names of the files in the "population" subfolder of the "data" folder in an R project. The relative filepath is provided using `here()` (which you can read about more in the [Import and export] page).  
+Para listar sólo los nombres de los archivos de un directorio puede utilizar `dir()` desde R **base.** Por ejemplo, este comando lista los nombres de los archivos de la subcarpeta "population" de la carpeta "data" en un proyecto R. La ruta relativa de los archivos se proporciona utilizando `here()` (sobre la que puede leer más en la página de [importación y exportación](#import-and-export)).  
 
 ```{r}
 # file names
 dir(here("data", "gis", "population"))
 ```
 
-To list the full file paths of the directory's files, you can use you can use `dir_ls()` from **fs**. A **base** R alternative is `list.files()`.  
+Para listar las rutas completas de los archivos del directorio, puede utilizar `dir_ls()` de **fs**. Una alternativa de R **base** es `list.files()`.
 
 ```{r}
 # file paths
 dir_ls(here("data", "gis", "population"))
 ```
 
-To get all the metadata information about each file in a directory, (e.g. path, modification date, etc.) you can use `dir_info()` from **fs**.  
+Para obtener toda la información de los metadatos de cada archivo en un directorio, (por ejemplo, la ruta, la fecha de modificación, etc.) puede utilizar `dir_info()` de **fs**.
 
-This can be particularly useful if you want to extract the last modification time of the file, for example if you want to import the most recent version of a file. For an example of this, see the [Import and export] page.     
+Esto puede ser especialmente útil si quiere extraer la última hora de modificación del archivo, por ejemplo si quiere importar la versión más reciente de un archivo. Para ver un ejemplo de esto, consulta la página de [importación y exportación](#import-and-export).
 
 ```{r, eval=F}
 # file info
 dir_info(here("data", "gis", "population"))
 ```
 
-Here is the data frame returned. Scroll to the right to see all the columns.  
+Aquí está el dataframe devuelto. Desplázate a la derecha para ver todas las columnas.  
 
 ```{r, echo=F}
 DT::datatable(dir_info(here("data", "gis", "population")), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-## File information  
+## Información sobre el archivo {#file-information}
 
-To extract metadata information about a specific file, you can use `file_info()` from **fs** (or `file.info()` from **base** R).  
+Para extraer información de metadatos sobre un archivo específico, puede utilizar `file_info()` de **fs** (o `file.info()` de R **base**).
 
 ```{r, eval=F}
 file_info(here("data", "case_linelists", "linelist_cleaned.rds"))
@@ -74,7 +76,7 @@ file_info(here("data", "case_linelists", "linelist_cleaned.rds"))
 DT::datatable(file_info(here("data", "case_linelists", "linelist_cleaned.rds")), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Here we use the `$` to index the result and return only the `modification_time` value.  
+Aquí usamos `$` para indexar el resultado y devolver sólo el valor de `modification_time`.
 
 ```{r}
 file_info(here("data", "case_linelists", "linelist_cleaned.rds"))$modification_time
@@ -83,106 +85,107 @@ file_info(here("data", "case_linelists", "linelist_cleaned.rds"))$modification_t
 
 
 
-## Check if exists  
+## Comprobar si existe  {#check-if-exists}
 
-### R objects {.unnumbered}  
+### Objetos R {#r-objects}  
 
-You can use `exists()` from **base** R to check whether an R object exists *within* R (supply the object name in quotes).  
+Puedes utilizar `exists()` de para comprobar si un objeto R existe *dentro* de R (proporcione el nombre del objeto entre comillas).
 
 ```{r}
 exists("linelist")
 ```
 
-Note that some **base** R packages use generic object names like "data" behind the scenes, that will appear as TRUE unless `inherit = FALSE` is specified. This is one reason to not name your dataset "data".  
+Ten en cuenta que algunos paquetes de R **base** utilizan nombres de objetos genéricos como "data" entre bastidores, que aparecerán como TRUE a menos que se especifique `inherit = FALSE`. Esta es una razón para no nombrar tu conjunto de datos como "data".
 
 ```{r}
 exists("data")
 exists("data", inherit = FALSE)
 ```
 
-If you are writing a function, you should use `missing()` from **base** R to check if an argument is present or not, instead of `exists()`.  
+Si está escribiendo una función, deberías utilizar `missing()` de R **base** para comprobar si un argumento está presente o no, en lugar de `exists()`.
 
 
 
-### Directories {.unnumbered}  
+### Directorios {#directories}  
 
-To check whether a directory exists, provide the file path (and file name) to `is_dir()` from **fs**. Scroll to the right to see that `TRUE` is printed.    
+Para comprobar si un directorio existe, proporcione la ruta del archivo (y el nombre del archivo) a `is_dir()` de **fs**. Desplázate a la derecha para ver que se imprime `TRUE`.
+
 
 ```{r}
 is_dir(here("data"))
 ```
 
-An alternative is `file.exists()` from **base** R.  
+Una alternativa de R **base** es `file.exists()`.
 
 
-### Files {.unnumbered}  
+### Files {#files}  
 
-To check if a specific file exists, use `is_file()` from **fs**. Scroll to the right to see that `TRUE` is printed.  
+Para comprobar si un archivo específico existe, utiliza `is_file()` de **fs**. Desplázate a la derecha para ver que se imprime `TRUE`. 
 
 ```{r}
 is_file(here("data", "case_linelists", "linelist_cleaned.rds"))
 ```
 
-A **base** R alternative is `file.exists()`.  
+Una alternativa de R **base** es `file.exists()`. 
 
 
+## Crear {#create}
 
-## Create  
+### Directorios {#directories-1}  
 
-### Directories {.unnumbered}  
-
-To create a new directory (folder) you can use `dir_create()` from **fs**. If the directory already exists, it will not be overwritten and no error will be returned. 
+Para crear un nuevo directorio (carpeta) puede utilizar `dir_create()` de **fs**. Si el directorio ya existe, no se sobrescribirá y no se devolverá ningún error.
 
 ```{r, eval=F}
 dir_create(here("data", "test"))
 ```
 
-An alternative is `dir.create()` from **base** R, which will show an error if the directory already exists. In contrast, `dir_create()` in this scenario will be silent.  
+Una alternativa es `dir.create()` de R **base**, que mostrará un error si el directorio ya existe. En cambio, `dir_create()` en este escenario será silencioso.
 
-### Files {.unnumbered}  
+### Archivos {#files-1}  
 
-You can create an (empty) file with `file_create()` from **fs**. If the file already exists, it will not be over-written or changed.  
+Puedes crear un archivo (vacío) con `file_create()` de **fs**. Si el archivo ya existe, no se sobreescribirá ni se modificará.
+
 
 ```{r, eval=F}
 file_create(here("data", "test.rds"))
 ```
 
-A **base** R alternative is `file.create()`. But if the file already exists, this option will truncate it. If you use `file_create()` the file will be left unchanged.  
+Una alternativa de R **base** es `file.create()`. Pero si el archivo ya existe, esta opción lo truncará. Si se utiliza `file_create()` el archivo se dejará sin cambios  
 
 
-### Create if does not exists {.unnumbered}  
-
-UNDER CONSTRUCTION  
+### Crear si no existe {#create-if-does-not-exists}  
 
 
-## Delete
-
-### R objects {.unnumbered}  
-
-Use `rm()` from **base** R to remove an R object.  
-
-### Directories {.unnumbered}  
-
-Use `dir_delete()` from **fs**. 
+EN CONSTRUCCIÓN
 
 
-### Files {.unnumbered}  
+## Borrar {#delete}
 
-You can delete files with `file_delete()` from **fs**.  
+### Objetos R {.unnumbered}  
+
+Utiliza `rm()` de R **base** para eliminar un objeto R. 
+
+### Directorios {.unnumbered}  
+
+Utiliza `dir_delete()` de **fs**.
 
 
+### Archivos {.unnumbered}  
 
-## Running other files  
+Puedes eliminar archivos con `file_delete()` de **fs**.
+
+
+## Ejecución de otros archivos  {#running-other-files}
 
 ### `source()` {.unnumbered}  
 
-To run one R script from another R script, you can use the `source()` command (from **base** R).
+Para ejecutar un script de R desde otro script de R, puedes utilizar el comando `source()` (de R **base**).
 
 ```{r, eval=F}
 source(here("scripts", "cleaning_scripts", "clean_testing_data.R"))
 ```
 
-This is equivalent to viewing the above R script and clicking the "Source" button in the upper-right of the script. This will execute the script but will do it silently (no output to the R console) unless specifically intended. See the page on [Interactive console] for examples of using `source()` to interact with a user via the R console in question-and-answer mode.  
+Esto equivale a ver el script de R anterior y clicar en el botón "Source" en la parte superior derecha del script. Esto ejecutará el script pero lo hará de forma silenciosa (sin salida a la consola de R) a menos que se pretenda específicamente. Consulta la página sobre [Consola interactiva] para ver ejemplos de uso de `source()` para interactuar con un usuario a través de la consola de R en modo de pregunta y respuesta.
 
 ```{r, fig.align = "center", out.height = '300%', echo=F}
 knitr::include_graphics(here::here("images", "source_button.png"))
@@ -191,15 +194,15 @@ knitr::include_graphics(here::here("images", "source_button.png"))
 
 ### `render()` {.unnumbered}  
 
-`render()` is a variation on `source()` most often used for R markdown scripts. You provide the `input = ` which is the R markdown file, and also the `output_format = ` (typically either "html_document", "pdf_document", "word_document", "") 
+`render()` es una variación de `source()` que se utiliza más a menudo para los scripts de R markdown. Tu proporcionas la `input = ` que es el archivo R markdown, y también `output_format = ` ("html_document", "pdf_document", "word_document", "")
 
-See the page on [Reports with R Markdown] for more details. Also see the documentation for `render()` [here](https://rmarkdown.rstudio.com/docs/reference/render.html) or by entering `?render`.  
+Mira la página sobre [Informes con R Markdown](#reports-with-r-markdown) para más detalles. También consulta la documentación de `render()` [aquí](https://rmarkdown.rstudio.com/docs/reference/render.html) o escribiendo `?render`.
 
 
 
-### Run files in a directory {.unnumbered}
+### Ejecutar archivos en un directorio{.unnumbered}
 
-You can create a *for loop* and use it to `source()` every file in a directory, as identified with `dir()`. 
+Puedes crear un *bucle for* y utilizarlo para `source()` cada archivo en un directorio, identificado con `dir()`. 
 
 ```{r, eval=F}
 for(script in dir(here("scripts"), pattern = ".R$")) {   # for each script name in the R Project's "scripts" folder (with .R extension)
@@ -207,7 +210,7 @@ for(script in dir(here("scripts"), pattern = ".R$")) {   # for each script name 
 }
 ```
 
-If you only want to run certain scripts, you can identify them by name like this:  
+Si sólo quieres ejecutar determinados scripts, puedes identificarlos por su nombre de la siguiente manera: 
 
 ```{r, eval=F}
 
@@ -225,27 +228,27 @@ for(script in scripts_to_run) {
 
 
 
-Here is a [comparison](https://cran.r-project.org/web/packages/fs/vignettes/function-comparisons.html) of the **fs** and **base** R functions.  
+Aquí puedes ver una [comparación](https://cran.r-project.org/web/packages/fs/vignettes/function-comparisons.html) de las funciones **fs** y R **base**.
 
-### Import files in a directory  {.unnumbered}
+### Importar archivos en un directorio {.unnumbered}
 
-See the page on [Import and export] for importing and exporting individual files.  
+Consulta la página sobre [importación y exportación](#import-and-export) para importar y exportar archivos individuales.
 
-Also see the [Import and export] page for methods to automatically import the most recent file, based on a date in the file name *or* by looking at the file meta-data.  
+Consulta también la página de [importación y exportación](#import-and-export) para conocer los métodos para importar automáticamente el archivo más reciente, basándose en una fecha del nombre del archivo *o* mirando los metadatos del mismo.
 
-See the page on [Iteration, loops, and lists] for an example with the package **purrr** demonstrating:  
+Consulta la página sobre [Iteración, bucles y listas](#iteration-loops-and-lists) para ver un ejemplo con el paquete **purrr** demostrando:
 
-* Splitting a data frame and saving it out as multiple CSV files  
-* Splitting a data frame and saving each part as a separate sheet within one Excel workbook  
-* Importing multiple CSV files and combining them into one dataframe  
-* Importing an Excel workbook with multiple sheets and combining them into one dataframe  
-
-
+* Dividir un dataframe y guardarlo como múltiples archivos CSV
+* Dividir un dataframe y guardar cada parte como una hoja separada dentro de un libro de Excel
+* Importar varios archivos CSV y combinarlos en un dataframe
+* Importar un libro de Excel con varias hojas y combinarlas en un dataframe
 
 
-## **base** R  
 
-See below the functions `list.files()` and `dir()`, which perform the same operation of listing files within a specified directory. You can specify `ignore.case =` or a specific pattern to look for. 
+
+## R **base**  {#base-r-4}
+
+Vea a continuación las funciones `list.files()` y `dir()`, que realizan la misma operación de listar archivos dentro de un directorio especificado. Puedes especificar `ignore.case = ` o un patrón específico para buscar.
 
 ```{r, eval=F}
 list.files(path = here("data"))
@@ -257,11 +260,11 @@ list.files(path = here("data"), pattern = "evd", ignore.case = TRUE)
 
 ```
 
-If a file is currently "open", it will display in your folder with a tilde in front, like "~$hospital_linelists.xlsx".  
+Si un archivo está actualmente "abierto", se mostrará en su carpeta con una tilde delante, como "\~$hospital_linelists.xlsx".  
 
 
 <!-- ======================================================= -->
-## Resources {  }
+## Resources {#resources-37}
 
 https://cran.r-project.org/web/packages/fs/vignettes/function-comparisons.html
 
