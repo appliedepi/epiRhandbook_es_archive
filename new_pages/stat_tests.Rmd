@@ -1,32 +1,34 @@
-# Simple statistical tests { }
+# Borrador. Tests estadísticos sencillos {#simple-statistical-tests}
+
+<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
 
-This page demonstrates how to conduct simple statistical tests using **base** R, **rstatix**, and **gtsummary**.  
+Esta página muestra cómo realizar tests estadísticos sencillos utilizando **R base**, **rstatix** y **gtsummary**.
 
-* T-test  
-* Shapiro-Wilk test  
-* Wilcoxon rank sum test  
-* Kruskal-Wallis test  
-* Chi-squared test  
-* Correlations between numeric variables  
+* Test-T
+* Test de Shapiro-Wilk
+* Test de suma de rangos de Wilcoxon
+* Test de Kruskal-Wallis
+* Test de Chi-cuadrado
+* Correlaciones entre variables numéricas
 
-...many other tests can be performed, but we showcase just these common ones and link to further documentation.  
+...se pueden realizar muchas otras pruebas, pero sólo mostramos estas comunes y enlazamos con más documentación.
 
-Each of the above packages bring certain advantages and disadvantages:  
+Cada uno de los paquetes mencionados aporta ciertas ventajas y desventajas:
 
-* Use **base** R functions to print a statistical outputs to the R Console  
-* Use **rstatix** functions to return results in a data frame, or if you want tests to run by group  
-* Use **gtsummary** if you want to quickly print publication-ready tables  
+* Utiliza las funciones  de R **base** para imprimir una salida estadística en la consola de R
+* Utiliza las funciones **rstatix** para devolver los resultados en un dataframe, o si deseas que las pruebas se ejecuten por grupos
+* Utiliza **gtsummary** si deseas imprimir rápidamente tablas listas para su publicación
 
 
 
 <!-- ======================================================= -->
-## Preparation {  }
+## Preparation {#preparation-9}
 
 
-### Load packages {.unnumbered}
+### Cargar paquetes {.unnumbered}
 
-This code chunk shows the loading of packages required for the analyses. In this handbook we emphasize `p_load()` from **pacman**, which installs the package if necessary *and* loads it for use. You can also load installed packages with  `library()` from **base** R. See the page on [R basics] for more information on R packages.  
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base** Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 
 ```{r}
@@ -43,9 +45,9 @@ pacman::p_load(
   )
 ```
 
-### Import data {.unnumbered}
+### Importar datos {.unnumbered}
 
-We import the dataset of cases from a simulated Ebola epidemic. If you want to follow along, <a href='https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds' class='download-button'>click to download the "clean" linelist</a> (as .rds file). Import your data with the `import()` function from the **rio** package (it accepts many file types like .xlsx, .rds, .csv - see the [Import and export] page for details).  
+Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar linelist "limpia"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa tus datos con la función `import()` del paquete **rio** (acepta muchos tipos de archivos como .xlsx, .rds, .csv - Mira la página de [importación y exportación](#import-and-export) para más detalles).
 
 
 ```{r, echo=F}
@@ -58,7 +60,7 @@ linelist <- rio::import(here::here("data", "case_linelists", "linelist_cleaned.r
 linelist <- import("linelist_cleaned.rds")
 ```
 
-The first 50 rows of the linelist are displayed below.
+A continuación se muestran las primeras 50 filas del listado.
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
@@ -69,45 +71,46 @@ DT::datatable(head(linelist, 50), rownames = FALSE, filter="top", options = list
 
 
 
-## **base** R {}
+## R **base** {#base-r-2}
 
-You can use **base** R functions to conduct statistical tests. The commands are relatively simple and results will print to the R Console for simple viewing. However, the outputs are usually lists and so are harder to manipulate if you want to use the results in subsequent operations. 
+Puedes utilizar las funciones de R **base** para realizar pruebas estadísticas. Los comandos son relativamente sencillos y los resultados se imprimen en la consola de R para su visualización. Sin embargo, las salidas suelen ser listas y, por lo tanto, son más difíciles de manipular si desea utilizar los resultados en operaciones posteriores.
 
-### T-tests {.unnumbered} 
+### Tests-T {.unnumbered} 
 
-A [t-test](https://en.wikipedia.org/wiki/Student%27s_t-test), also called "Student's t-Test", is typically used to determine if there is a significant difference between the means of some numeric variable between two groups. Here we'll show the syntax to do this test depending on whether the columns are in the same data frame.
+Un test [t](https://en.wikipedia.org/wiki/Student's_t-test), también llamada "Test t de Student", se utiliza normalmente para determinar si existe una diferencia significativa entre las medias de alguna variable numérica entre dos grupos. Aquí mostraremos la sintaxis para hacer esta prueba dependiendo de si las columnas están en el mismo dataframe.
 
-**Syntax 1:** This is the syntax when your numeric and categorical columns are in the same data frame. Provide the numeric column on the left side of the equation and the categorical column on the right side. Specify the dataset to `data = `. Optionally, set `paired = TRUE`, and `conf.level = ` (0.95 default), and `alternative = ` (either "two.sided", "less", or "greater"). Enter `?t.test` for more details.  
+**Sintaxis 1:** Esta es la sintaxis cuando tus columnas numéricas y categóricas están en el mismo dataframe. Proporcione la columna numérica en el lado izquierdo de la ecuación y la columna categórica en el lado derecho. Especifique los datos a `data =`. Opcionalmente, establece `paired = TRUE`, y `conf.level = ` (0.95 por defecto), y `alternative = ` (ya sea "two.sided", "less", o "greater"). Escribe `?t.test` para obtener más detalles.
 
 ```{r}
 ## compare mean age by outcome group with a t-test
 t.test(age_years ~ gender, data = linelist)
 ```
 
-**Syntax 2:** You can compare two separate numeric vectors using this alternative syntax. For example, if the two columns are in different data sets.  
+**Sintaxis 2:** Puedes comparar dos vectores numéricos separados utilizando esta sintaxis alternativa. Por ejemplo, si las dos columnas están en conjuntos de datos diferentes.
+  
 
 ```{r, eval=F}
 t.test(df1$age_years, df2$age_years)
 ```
 
-You can also use a t-test to determine whether a sample mean is significantly different from some specific value. Here we conduct a one-sample t-test with the known/hypothesized population mean as `mu = `:  
+También puedes utilizar un test-t para determinar si la media de una muestra es significativamente diferente de algún valor específico. Aquí realizamos una prueba t de una muestra con la media poblacional conocida/hipotética como `mu = `:
 
 ```{r, eval=F}
 t.test(linelist$age_years, mu = 45)
 ```
 
-### Shapiro-Wilk test {.unnumbered}  
+### Test de Shapiro-Wilk {.unnumbered}  
 
-The [Shapiro-Wilk test](https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test) can be used to determine whether a sample came from a normally-distributed population (an assumption of many other tests and analysis, such as the t-test). However, this can only be used on a sample between 3 and 5000 observations. For larger samples a [quantile-quantile plot](https://ggplot2.tidyverse.org/reference/geom_qq.html) may be helpful. 
+El [test de Shapiro-Wilk](https://en.wikipedia.org/wiki/Shapiro–Wilk_test) puede utilizarse para determinar si una muestra procede de una población distribuida normalmente (un supuesto de muchas otras pruebas y análisis, como la prueba t). Sin embargo, sólo puede utilizarse en una muestra de entre 3 y 5000 observaciones. Para muestras más grandes puede ser útil un [gráfico de cuantiles](https://ggplot2.tidyverse.org/reference/geom_qq.html).
 
 
 ```{r, eval=F}
 shapiro.test(linelist$age_years)
 ```
 
-### Wilcoxon rank sum test {.unnumbered}
+### Test de suma de rangos de Wilcoxon {.unnumbered}
 
-The Wilcoxon rank sum test, also called the [Mann–Whitney U test](https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test), is often used to help determine if two numeric samples are from the same distribution when their populations are not normally distributed or have unequal variance.
+El test de suma de rangos de Wilcoxon, también llamada [test U de Mann-Whitney](https://en.wikipedia.org/wiki/Mann–Whitney_U_test), se utiliza a menudo para ayudar a determinar si dos muestras numéricas proceden de la misma distribución cuando tus poblaciones no se distribuyen normalmente o tienen una varianza desigual.
 
 ```{r wilcox_base}
 
@@ -117,10 +120,9 @@ wilcox.test(age_years ~ outcome, data = linelist)
 ```
 
 
-### Kruskal-Wallis test {.unnumbered}
+### Test de Kruskal-Wallis {.unnumbered}
 
-
-The [Kruskal-Wallis test](https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance) is an extension of the Wilcoxon rank sum test that can be used to test for differences in the distribution of more than two samples. When only two samples are used it gives identical results to the Wilcoxon rank sum test. 
+El test de [Kruskal-Wallis](https://en.wikipedia.org/wiki/Kruskal–Wallis_one-way_analysis_of_variance) es una extensión del test de suma de rangos de Wilcoxon que puede utilizarse para comprobar las diferencias en la distribución de más de dos muestras. Cuando sólo se utilizan dos muestras, los resultados son idénticos a los del test de suma de rangos de Wilcoxon.
 
 ```{r }
 
@@ -129,9 +131,9 @@ kruskal.test(age_years ~ outcome, linelist)
 
 ```
 
-### Chi-squared test {.unnumbered} 
+### Test de Chi-cuadrado {.unnumbered} 
 
-[Pearson's Chi-squared test](https://en.wikipedia.org/wiki/Chi-squared_test) is used in testing for significant differences between categorical croups. 
+El [test de Chi-cuadrado de Pearson](https://en.wikipedia.org/wiki/Chi-squared_test) se utiliza para comprobar las diferencias significativas entre grupos categóricos.
 
 ```{r}
 
@@ -142,16 +144,16 @@ chisq.test(linelist$gender, linelist$outcome)
 
 
 
-## **rstatix** package {}
+## Paquete **rstatix** {#rstatix-package}
 
-The **rstatix** package offers the ability to run statistical tests and retrieve results in a "pipe-friendly" framework. The results are automatically in a data frame so that you can perform subsequent operations on the results. It is also easy to group the data being passed into the functions, so that the statistics are run for each group.  
+El paquete **rstatix** ofrece la posibilidad de ejecutar pruebas estadísticas y recuperar los resultados en un marco "amigable". Los resultados se encuentran automáticamente en un dataframe para que pueda realizar operaciones posteriores con los resultados. También es fácil agrupar los datos que se pasan a las funciones, de modo que las estadísticas se ejecutan para cada grupo.
 
 
 ### Summary statistics {.unnumbered}  
 
-The function `get_summary_stats()` is a quick way to return summary statistics. Simply pipe your dataset to this function and provide the columns to analyse. If no columns are specified, the statistics are calculated for all columns.  
+La función `get_summary_stats()` es una forma rápida de devolver estadísticas de resumen. Sólo tiene que enviar su conjunto de datos a esta función y proporcionar las columnas que desea analizar. Si no se especifica ninguna columna, las estadísticas se calculan para todas las columnas.
 
-By default, a full range of summary statistics are returned: n, max, min, median, 25%ile, 75%ile, IQR, median absolute deviation (mad), mean, standard deviation, standard error, and a confidence interval of the mean. 
+Por defecto, se devuelve una gama completa de estadísticas de resumen: n, max, min, mediana, 25%ile, 75%ile, IQR, desviación absoluta mediana (mad), media, desviación estándar, error estándar y un intervalo de confianza de la media.
 
 
 ```{r}
@@ -159,9 +161,9 @@ linelist %>%
   rstatix::get_summary_stats(age, temp)
 ```
 
-You can specify a subset of summary statistics to return by providing one of the following values to `type = `: "full", "common", "robust", "five_number", "mean_sd", "mean_se", "mean_ci", "median_iqr", "median_mad", "quantile", "mean", "median", "min", "max".  
+Puedes especificar un subconjunto de estadísticas de resumen a calcular proporcionando uno de los siguientes valores a `type = `: "full", "common", "robust", "five_number", "mean_sd", "mean_se", "mean_ci", "median_iqr", "median_mad", "quantile", "mean", "median", "min", "max".  
 
-It can be used with grouped data as well, such that a row is returned for each grouping-variable:  
+También puede utilizarse con datos agrupados, de forma que se devuelva una fila por cada variable de agrupación:
 
 ```{r}
 linelist %>%
@@ -169,25 +171,25 @@ linelist %>%
   rstatix::get_summary_stats(age, temp, type = "common")
 ```
 
-You can also use **rstatix** to conduct statistical tests:  
+También puede utilizar **rstatix** para realizar pruebas estadísticas:statistical tests:  
 
-### T-test {.unnumbered}  
+### Test-T {.unnumbered}  
 
-Use a formula syntax to specify the numeric and categorical columns:  
+Utiliza una sintaxis de fórmula para especificar las columnas numéricas y categóricas:
 
 ```{r}
 linelist %>% 
   t_test(age_years ~ gender)
 ```
 
-Or use `~ 1` and specify `mu = ` for a one-sample T-test. This can also be done by group.  
+O utiliza `~ 1` y especifique `mu = ` para un test-T de una muestra. Esto también puede hacerse por grupo.
 
 ```{r}
 linelist %>% 
   t_test(age_years ~ 1, mu = 30)
 ```
 
-If applicable, the statistical tests can be done by group, as shown below:  
+Si procede, las pruebas estadísticas pueden realizarse por grupos, como se muestra a continuación:
 
 ```{r}
 linelist %>% 
@@ -195,9 +197,9 @@ linelist %>%
   t_test(age_years ~ 1, mu = 18)
 ```
 
-### Shapiro-Wilk test {.unnumbered}  
+### Test de Shapiro-Wilk {.unnumbered}  
 
-As stated above, sample size must be between 3 and 5000.  
+Como ya se ha dicho, el tamaño de la muestra debe estar entre 3 y 5000.
 
 ```{r}
 linelist %>% 
@@ -205,7 +207,7 @@ linelist %>%
   shapiro_test(age_years)
 ```
 
-### Wilcoxon rank sum test {.unnumbered}  
+### Test de suma de rangos de Wilcoxon {.unnumbered}  
 
 ```{r}
 linelist %>% 
@@ -213,9 +215,9 @@ linelist %>%
 ```
 
 
-### Kruskal-Wallis test {.unnumbered}  
+### Test de Kruskal-Wallis {.unnumbered}  
 
-Also known as the Mann-Whitney U test.  
+También conocida como la prueba U de Mann-Whitney.
 
 ```{r}
 linelist %>% 
@@ -223,9 +225,9 @@ linelist %>%
 ```
 
 
-### Chi-squared test {.unnumbered}  
+### Test de Chi-cuadrado {.unnumbered}  
 
-The chi-square test function accepts a table, so first we create a cross-tabulation. There are many ways to create a cross-tabulation (see [Descriptive tables]) but here we use `tabyl()` from **janitor** and remove the left-most column of value labels before passing to `chisq_test()`.  
+La función para el test de chi-cuadrado acepta una tabla, así que primero creamos una tabulación cruzada. Hay muchas formas de crear una tabulación cruzada (véase [Tablas descriptivas](#descriptive-tables)), pero aquí utilizamos `tabyl()` de **janitor** y eliminamos la columna más a la izquierda de las etiquetas de valores antes de pasarla a `chisq_test()`.
 
 ```{r}
 linelist %>% 
@@ -235,8 +237,7 @@ linelist %>%
 
 ```
 
-Many many more functions and statistical tests can be run with **rstatix** functions. See the documentation for **rstatix** [online here](https://github.com/kassambara/rstatix) or by entering ?rstatix.  
-
+Se pueden ejecutar muchas más funciones y pruebas estadísticas con las funciones de rstatix. Consulta la documentación de **rstatix** [en línea aquí](https://github.com/kassambara/rstatix) o escribiendo `?rstatix`.
 
 
 
@@ -245,14 +246,11 @@ Many many more functions and statistical tests can be run with **rstatix** funct
 
 Use **gtsummary** if you are looking to add the results of a statistical test to a pretty table that was created with this package (as described in the **gtsummary** section of the [Descriptive tables](#tbl_gt) page).  
 
-Performing statistical tests of comparison with `tbl_summary` is done by adding the 
-`add_p` function to a table and specifying which test to use. It is possible to get p-values corrected for multiple testing by using the
-`add_q` function. Run `?tbl_summary` for details.  
+La realización de pruebas estadísticas de comparación con `tbl_summary` se lleva a cabo añadiendo la función `add_p` a una tabla y especificando qué prueba utilizar. Es posible obtener valores p corregidos para pruebas múltiples utilizando la función `add_q`. Ejecuta `?tbl_summary` para obtener más detalles.
 
-### Chi-squared test {.unnumbered}
+### Test de Chi-cuadrado {.unnumbered}
 
-Compare the proportions of a categorical variable in two groups. The default statistical test for `add_p()` when applied to a categorical variable is to perform a chi-squared test of independence with continuity correction, but if any expected call count is below 5 then a Fisher's exact test is used. 
-
+Compara las proporciones de una variable categórica en dos grupos. La prueba estadística por defecto de `add_p`() cuando se aplica a una variable categórica es realizar una prueba de independencia de chi-cuadrado con corrección de continuidad, pero si algún recuento de llamadas esperado es inferior a 5, se utiliza una prueba exacta de Fisher.
 ```{r chi_gt}
 linelist %>% 
   select(gender, outcome) %>%    # keep variables of interest
@@ -261,10 +259,9 @@ linelist %>%
 ```
 
 
-### T-tests {.unnumbered} 
+### Tests-T {.unnumbered} 
 
-Compare the difference in means for a continuous variable in two groups. 
-For example, compare the mean age by patient outcome. 
+Compara la diferencia de medias de una variable continua en dos grupos. Por ejemplo, compara la media de edad por resultado del paciente.
 
 ```{r ttest_gt}
 
@@ -278,12 +275,9 @@ linelist %>%
 
 ```
 
-### Wilcoxon rank sum test{.unnumbered}
+### Test de suma de rangos de Wilcoxon {.unnumbered}
 
-Compare the distribution of a continuous variable in two groups. The default 
-is to use the Wilcoxon rank sum test and the median (IQR) when comparing two 
-groups. However for non-normally distributed data or comparing multiple groups, 
-the Kruskal-wallis test is more appropriate. 
+Compara la distribución de una variable continua en dos grupos. Por defecto se utiliza la prueba de suma de rangos de Wilcoxon y la mediana (IQR) cuando se comparan dos grupos. Sin embargo, para datos no distribuidos normalmente o para comparar varios grupos, la prueba de Kruskal-wallis es más apropiada.
 
 ```{r wilcox_gt}
 
@@ -297,10 +291,9 @@ linelist %>%
 
 ```
 
-### Kruskal-wallis test {.unnumbered}
+### Test de Kruskal-Wallis {.unnumbered}
 
-Compare the distribution of a continuous variable in two or more groups, 
-regardless of whether the data is normally distributed. 
+Compara la distribución de una variable continua en dos o más grupos, independientemente de que los datos se distribuyan normalmente.
 
 ```{r kruskal_gt}
 
@@ -464,12 +457,9 @@ linelist %>%
 
 <!-- ======================================================= -->
 
-## Correlations 
+## Correlaciones {#correlations}
 
-Correlation between numeric variables can be investigated using the **tidyverse**  
-**corrr** package. It allows you to compute correlations using Pearson, Kendall
-tau or Spearman rho. The package creates a table and also has a function to 
-automatically plot the values. 
+La correlación entre variables numéricas puede investigarse con el paquete **corrr** de **tidyverse**. Permite calcular las correlaciones mediante los test de Pearson, tau de Kendall o rho de Spearman. El paquete crea una tabla y también tiene una función para trazar automáticamente los valores. 
 
 ```{r, warning=F, message=F}
 
@@ -493,11 +483,10 @@ rplot(correlation_tab)
 
 <!-- ======================================================= -->
 
-## Resources {  }
+## Recursos {#resources-11}
 
-Much of the information in this page is adapted from these resources and vignettes online:  
+Gran parte de la información de esta página está adaptada de estos recursos y viñetas en línea:
 
-[gtsummary](http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html)
-[dplyr](https://dplyr.tidyverse.org/articles/grouping.html)
-[corrr](https://corrr.tidymodels.org/articles/using-corrr.html)
-[sthda correlation](http://www.sthda.com/english/wiki/correlation-test-between-two-variables-in-r)
+[gtsummary](http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) [dplyr](https://dplyr.tidyverse.org/articles/grouping.html) 
+[corrr](https://corrr.tidymodels.org/articles/using-corrr.html) 
+[correlaciones en sthda ](http://www.sthda.com/english/wiki/correlation-test-between-two-variables-in-r)
