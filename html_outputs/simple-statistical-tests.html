@@ -4,36 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>18 Simple statistical tests | El manual de R para la Epidemiología</title>
+<title>1 Borrador. Tests estadísticos sencillos | El manual de R para la Epidemiología</title>
 <meta name="author" content="El equipo del manual">
-<meta name="description" content="This page demonstrates how to conduct simple statistical tests using base R, rstatix, and gtsummary. T-test Shapiro-Wilk test Wilcoxon rank sum test Kruskal-Wallis test Chi-squared test...">
-<meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="18 Simple statistical tests | El manual de R para la Epidemiología">
+<meta name="description" content="ADVERTENCIA: Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="1 Borrador. Tests estadísticos sencillos | El manual de R para la Epidemiología">
 <meta property="og:type" content="book">
-<meta property="og:description" content="This page demonstrates how to conduct simple statistical tests using base R, rstatix, and gtsummary. T-test Shapiro-Wilk test Wilcoxon rank sum test Kruskal-Wallis test Chi-squared test...">
+<meta property="og:description" content="ADVERTENCIA: Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="18 Simple statistical tests | El manual de R para la Epidemiología">
-<meta name="twitter:description" content="This page demonstrates how to conduct simple statistical tests using base R, rstatix, and gtsummary. T-test Shapiro-Wilk test Wilcoxon rank sum test Kruskal-Wallis test Chi-squared test...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="twitter:title" content="1 Borrador. Tests estadísticos sencillos | El manual de R para la Epidemiología">
+<meta name="twitter:description" content="ADVERTENCIA: Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.18/datatables.js"></script><link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.20/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
 <script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<link href="libs/tabwid-1.0.0/tabwid.css" rel="stylesheet">
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
-<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
-<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script><script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script><script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script><script src="libs/d3-4.5.0/d3.min.js"></script><script src="libs/sankey-1/sankey.js"></script><script src="libs/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script><script src="libs/plotly-binding-4.9.4.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><link href="libs/vis-4.20.1/vis.css" rel="stylesheet">
-<script src="libs/vis-4.20.1/vis.min.js"></script><script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script><link href="libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="libs/plotly-basic-1.57.1/plotly-basic-1.57.1.min.js"></script><script src="libs/plotly-cartesian-1.57.1/plotly-cartesian-1.57.1.min.js"></script><script src="libs/proj4js-2.3.15/proj4.js"></script><link href="libs/highcharts-8.1.2/css/motion.css" rel="stylesheet">
-<script src="libs/highcharts-8.1.2/highcharts.js"></script><script src="libs/highcharts-8.1.2/highcharts-3d.js"></script><script src="libs/highcharts-8.1.2/highcharts-more.js"></script><script src="libs/highcharts-8.1.2/modules/stock.js"></script><script src="libs/highcharts-8.1.2/modules/map.js"></script><script src="libs/highcharts-8.1.2/modules/annotations.js"></script><script src="libs/highcharts-8.1.2/modules/data.js"></script><script src="libs/highcharts-8.1.2/modules/drilldown.js"></script><script src="libs/highcharts-8.1.2/modules/item-series.js"></script><script src="libs/highcharts-8.1.2/modules/offline-exporting.js"></script><script src="libs/highcharts-8.1.2/modules/overlapping-datalabels.js"></script><script src="libs/highcharts-8.1.2/modules/exporting.js"></script><script src="libs/highcharts-8.1.2/modules/export-data.js"></script><script src="libs/highcharts-8.1.2/modules/funnel.js"></script><script src="libs/highcharts-8.1.2/modules/heatmap.js"></script><script src="libs/highcharts-8.1.2/modules/treemap.js"></script><script src="libs/highcharts-8.1.2/modules/sankey.js"></script><script src="libs/highcharts-8.1.2/modules/dependency-wheel.js"></script><script src="libs/highcharts-8.1.2/modules/organization.js"></script><script src="libs/highcharts-8.1.2/modules/solid-gauge.js"></script><script src="libs/highcharts-8.1.2/modules/streamgraph.js"></script><script src="libs/highcharts-8.1.2/modules/sunburst.js"></script><script src="libs/highcharts-8.1.2/modules/vector.js"></script><script src="libs/highcharts-8.1.2/modules/wordcloud.js"></script><script src="libs/highcharts-8.1.2/modules/xrange.js"></script><script src="libs/highcharts-8.1.2/modules/tilemap.js"></script><script src="libs/highcharts-8.1.2/modules/venn.js"></script><script src="libs/highcharts-8.1.2/modules/gantt.js"></script><script src="libs/highcharts-8.1.2/modules/timeline.js"></script><script src="libs/highcharts-8.1.2/modules/parallel-coordinates.js"></script><script src="libs/highcharts-8.1.2/modules/bullet.js"></script><script src="libs/highcharts-8.1.2/modules/coloraxis.js"></script><script src="libs/highcharts-8.1.2/modules/dumbbell.js"></script><script src="libs/highcharts-8.1.2/modules/lollipop.js"></script><script src="libs/highcharts-8.1.2/modules/series-label.js"></script><script src="libs/highcharts-8.1.2/plugins/motion.js"></script><script src="libs/highcharts-8.1.2/custom/reset.js"></script><script src="libs/highcharts-8.1.2/modules/boost.js"></script><script src="libs/highchart-binding-0.8.2/highchart.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style_bs4.css">
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style_bs4.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -67,17 +57,17 @@
 <li><a class="" href="import-and-export.html"><span class="header-section-number">7</span> Importación y exportación</a></li>
 <li class="book-part">Gestión de datos</li>
 <li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Limpieza de datos y funciones básicas</a></li>
-<li><a class="" href="working-with-dates.html"><span class="header-section-number">9</span> Working with dates</a></li>
+<li><a class="" href="working-with-dates.html"><span class="header-section-number">9</span> Borrador. Trabajar con fechas</a></li>
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
-<li><a class="" href="factors.html"><span class="header-section-number">11</span> Factors</a></li>
+<li><a class="" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Grouping data</a></li>
-<li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Joining data</a></li>
-<li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> De-duplication</a></li>
-<li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Iteration, loops, and lists</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
+<li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
+<li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplication</a></li>
+<li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
 <li class="book-part">Análisis</li>
-<li><a class="" href="descriptive-tables.html"><span class="header-section-number">17</span> Descriptive tables</a></li>
-<li><a class="active" href="simple-statistical-tests.html"><span class="header-section-number">18</span> Simple statistical tests</a></li>
+<li><a class="" href="descriptive-tables.html"><span class="header-section-number">17</span> Borrador. Tablas descriptivas</a></li>
+<li><a class="" href="simple-statistical-tests.html"><span class="header-section-number">18</span>Borrador. Tests estadísticos sencillos</a></li>
 <li><a class="" href="univariate-and-multivariable-regression.html"><span class="header-section-number">19</span> Univariate and multivariable regression</a></li>
 <li><a class="" href="missing-data.html"><span class="header-section-number">20</span> Missing data</a></li>
 <li><a class="" href="standardised-rates.html"><span class="header-section-number">21</span> Standardised rates</a></li>
@@ -106,7 +96,7 @@
 <li><a class="" href="dashboards-with-r-markdown.html"><span class="header-section-number">42</span> Borrador. Dashboards con R Markdown</a></li>
 <li><a class="" href="dashboards-with-shiny.html"><span class="header-section-number">43</span> Borrador. Dashboards con Shiny</a></li>
 <li class="book-part">Miscelánea</li>
-<li><a class="" href="writing-functions-1.html"><span class="header-section-number">44</span> Borrador. Escribir funciones</a></li>
+<li><a class="" href="writing-functions-1.html"><span class="header-section-number">44</span> Escribir funciones .</a></li>
 <li><a class="" href="directory-interactions.html"><span class="header-section-number">45</span> Borrador. Interacciones con directorios</a></li>
 <li><a class="" href="version-control-and-collaboration-with-git-and-github.html"><span class="header-section-number">46</span> Control de versiones y colaboración con Git y Github</a></li>
 <li><a class="" href="common-errors.html"><span class="header-section-number">47</span> Errores comunes</a></li>
@@ -114,48 +104,41 @@
 <li><a class="" href="r-on-network-drives.html"><span class="header-section-number">49</span> Borrador. R en redes locales</a></li>
 <li><a class="" href="data-table.html"><span class="header-section-number">50</span> Borrador. data.table</a></li>
 </ul>
-
         <div class="book-extra">
           
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="simple-statistical-tests" class="section level1" number="18">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="simple-statistical-tests" class="section level1" number="1">
 <h1>
-<span class="header-section-number">18</span> Simple statistical tests<a class="anchor" aria-label="anchor" href="#simple-statistical-tests"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1</span> Borrador. Tests estadísticos sencillos<a class="anchor" aria-label="anchor" href="#simple-statistical-tests"><i class="fas fa-link"></i></a>
 </h1>
-<p>This page demonstrates how to conduct simple statistical tests using <strong>base</strong> R, <strong>rstatix</strong>, and <strong>gtsummary</strong>.</p>
+<p><span style="color: red;"><strong><em>ADVERTENCIA:</em></strong> Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span></p>
+<p>Esta página muestra cómo realizar tests estadísticos sencillos utilizando <strong>R base</strong>, <strong>rstatix</strong> y <strong>gtsummary</strong>.</p>
 <ul>
-<li>T-test<br>
-</li>
-<li>Shapiro-Wilk test<br>
-</li>
-<li>Wilcoxon rank sum test<br>
-</li>
-<li>Kruskal-Wallis test<br>
-</li>
-<li>Chi-squared test<br>
-</li>
-<li>Correlations between numeric variables</li>
+<li>Test-T</li>
+<li>Test de Shapiro-Wilk</li>
+<li>Test de suma de rangos de Wilcoxon</li>
+<li>Test de Kruskal-Wallis</li>
+<li>Test de Chi-cuadrado</li>
+<li>Correlaciones entre variables numéricas</li>
 </ul>
-<p>…many other tests can be performed, but we showcase just these common ones and link to further documentation.</p>
-<p>Each of the above packages bring certain advantages and disadvantages:</p>
+<p>…se pueden realizar muchas otras pruebas, pero sólo mostramos estas comunes y enlazamos con más documentación.</p>
+<p>Cada uno de los paquetes mencionados aporta ciertas ventajas y desventajas:</p>
 <ul>
-<li>Use <strong>base</strong> R functions to print a statistical outputs to the R Console<br>
-</li>
-<li>Use <strong>rstatix</strong> functions to return results in a data frame, or if you want tests to run by group<br>
-</li>
-<li>Use <strong>gtsummary</strong> if you want to quickly print publication-ready tables</li>
+<li>Utiliza las funciones de R <strong>base</strong> para imprimir una salida estadística en la consola de R</li>
+<li>Utiliza las funciones <strong>rstatix</strong> para devolver los resultados en un dataframe, o si deseas que las pruebas se ejecuten por grupos</li>
+<li>Utiliza <strong>gtsummary</strong> si deseas imprimir rápidamente tablas listas para su publicación</li>
 </ul>
-<!-- ======================================================= --><div id="preparation-8" class="section level2" number="18.1">
+<!-- ======================================================= --><div id="preparation-9" class="section level2" number="1.1">
 <h2>
-<span class="header-section-number">18.1</span> Preparation<a class="anchor" aria-label="anchor" href="#preparation-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1</span> Preparation<a class="anchor" aria-label="anchor" href="#preparation-9"><i class="fas fa-link"></i></a>
 </h2>
-<div id="load-packages-8" class="section level3 unnumbered">
-<h3>Load packages<a class="anchor" aria-label="anchor" href="#load-packages-8"><i class="fas fa-link"></i></a>
+<div id="cargar-paquetes" class="section level3 unnumbered">
+<h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes"><i class="fas fa-link"></i></a>
 </h3>
-<p>This code chunk shows the loading of packages required for the analyses. In this handbook we emphasize <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> from <strong>pacman</strong>, which installs the package if necessary <em>and</em> loads it for use. You can also load installed packages with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> from <strong>base</strong> R. See the page on [R basics] for more information on R packages.</p>
-<div class="sourceCode" id="cb914"><pre class="downlit sourceCode r">
+<p>Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos <code>p_load()</code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para su uso. También puede cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de R <strong>base</strong> Consulta la página sobre <a href="#r-basics">fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span>
   <span class="va">rio</span>,          <span class="co"># File import</span>
   <span class="va">here</span>,         <span class="co"># File locator</span>
@@ -168,29 +151,29 @@
   <span class="va">flextable</span>     <span class="co"># converting tables to HTML</span>
   <span class="op">)</span></code></pre></div>
 </div>
-<div id="import-data-8" class="section level3 unnumbered">
-<h3>Import data<a class="anchor" aria-label="anchor" href="#import-data-8"><i class="fas fa-link"></i></a>
+<div id="importar-datos" class="section level3 unnumbered">
+<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos"><i class="fas fa-link"></i></a>
 </h3>
-<p>We import the dataset of cases from a simulated Ebola epidemic. If you want to follow along, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds" class="download-button">click to download the “clean” linelist</a> (as .rds file). Import your data with the <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> function from the <strong>rio</strong> package (it accepts many file types like .xlsx, .rds, .csv - see the [Import and export] page for details).</p>
-<div class="sourceCode" id="cb915"><pre class="downlit sourceCode r">
+<p>Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds">clica para descargar linelist “limpia”</a> (como archivo .rds). Importa tus datos con la función <code>import()</code> del paquete <strong>rio</strong> (acepta muchos tipos de archivos como .xlsx, .rds, .csv - Mira la página de <a href="#import-and-export">importación y exportación</a> para más detalles).</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import the linelist</span>
-<span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
-<p>The first 50 rows of the linelist are displayed below.</p>
-<div id="htmlwidget-9fbc2bb53e4a8e369149" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9fbc2bb53e4a8e369149">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"2\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1399075200000\" data-max=\"1406419200000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1399939200000\" data-max=\"1407024000000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1400025600000\" data-max=\"1407110400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1400371200000\" data-max=\"1410566400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-29&quot;,&quot;30-49&quot;,&quot;50-69&quot;,&quot;70+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-24&quot;,&quot;25-29&quot;,&quot;30-34&quot;,&quot;35-39&quot;,&quot;40-44&quot;,&quot;45-49&quot;,&quot;50-54&quot;,&quot;55-59&quot;,&quot;60-64&quot;,&quot;65-69&quot;,&quot;70-74&quot;,&quot;75-79&quot;,&quot;80-84&quot;,&quot;85+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"-13.2697246824573\" data-max=\"-13.209391925612\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"8.45171855856465\" data-max=\"8.48802917129884\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"100\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"11\" data-max=\"241\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"20\" data-max=\"24\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"35.9\" data-max=\"38\" data-scale=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"428.994082840237\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"2\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
+<p>A continuación se muestran las primeras 50 filas del listado.</p>
+<div id="htmlwidget-d653c2329562a5f950d9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d653c2329562a5f950d9">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1399075200000\" data-max=\"1406419200000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1399939200000\" data-max=\"1407024000000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1400025600000\" data-max=\"1407110400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1400371200000\" data-max=\"1410566400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-29&quot;,&quot;30-49&quot;,&quot;50-69&quot;,&quot;70+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-24&quot;,&quot;25-29&quot;,&quot;30-34&quot;,&quot;35-39&quot;,&quot;40-44&quot;,&quot;45-49&quot;,&quot;50-54&quot;,&quot;55-59&quot;,&quot;60-64&quot;,&quot;65-69&quot;,&quot;70-74&quot;,&quot;75-79&quot;,&quot;80-84&quot;,&quot;85+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-13.2697246824573\" data-max=\"-13.209391925612\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"8.45171855856465\" data-max=\"8.48802917129884\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"100\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"11\" data-max=\"241\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"20\" data-max=\"24\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"35.9\" data-max=\"38\" data-scale=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"428.994082840237\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"2\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<div id="base-r-2" class="section level2" number="18.2">
+<div id="base-r-2" class="section level2" number="1.2">
 <h2>
-<span class="header-section-number">18.2</span> <strong>base</strong> R<a class="anchor" aria-label="anchor" href="#base-r-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2</span> R <strong>base</strong><a class="anchor" aria-label="anchor" href="#base-r-2"><i class="fas fa-link"></i></a>
 </h2>
-<p>You can use <strong>base</strong> R functions to conduct statistical tests. The commands are relatively simple and results will print to the R Console for simple viewing. However, the outputs are usually lists and so are harder to manipulate if you want to use the results in subsequent operations.</p>
-<div id="t-tests" class="section level3 unnumbered">
-<h3>T-tests<a class="anchor" aria-label="anchor" href="#t-tests"><i class="fas fa-link"></i></a>
+<p>Puedes utilizar las funciones de R <strong>base</strong> para realizar pruebas estadísticas. Los comandos son relativamente sencillos y los resultados se imprimen en la consola de R para su visualización. Sin embargo, las salidas suelen ser listas y, por lo tanto, son más difíciles de manipular si desea utilizar los resultados en operaciones posteriores.</p>
+<div id="tests-t" class="section level3 unnumbered">
+<h3>Tests-T<a class="anchor" aria-label="anchor" href="#tests-t"><i class="fas fa-link"></i></a>
 </h3>
-<p>A <a href="https://en.wikipedia.org/wiki/Student%27s_t-test">t-test</a>, also called “Student’s t-Test”, is typically used to determine if there is a significant difference between the means of some numeric variable between two groups. Here we’ll show the syntax to do this test depending on whether the columns are in the same data frame.</p>
-<p><strong>Syntax 1:</strong> This is the syntax when your numeric and categorical columns are in the same data frame. Provide the numeric column on the left side of the equation and the categorical column on the right side. Specify the dataset to <code>data =</code>. Optionally, set <code>paired = TRUE</code>, and <code>conf.level =</code> (0.95 default), and <code>alternative =</code> (either “two.sided”, “less”, or “greater”). Enter <code><a href="https://rdrr.io/r/stats/t.test.html">?t.test</a></code> for more details.</p>
-<div class="sourceCode" id="cb916"><pre class="downlit sourceCode r">
+<p>Un test <a href="https://en.wikipedia.org/wiki/Student's_t-test">t</a>, también llamada “Test t de Student”, se utiliza normalmente para determinar si existe una diferencia significativa entre las medias de alguna variable numérica entre dos grupos. Aquí mostraremos la sintaxis para hacer esta prueba dependiendo de si las columnas están en el mismo dataframe.</p>
+<p><strong>Sintaxis 1:</strong> Esta es la sintaxis cuando tus columnas numéricas y categóricas están en el mismo dataframe. Proporcione la columna numérica en el lado izquierdo de la ecuación y la columna categórica en el lado derecho. Especifique los datos a <code>data =</code>. Opcionalmente, establece <code>paired = TRUE</code>, y <code>conf.level =</code> (0.95 por defecto), y <code>alternative =</code> (ya sea “two.sided”, “less”, o “greater”). Escribe <code><a href="https://rdrr.io/r/stats/t.test.html">?t.test</a></code> para obtener más detalles.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## compare mean age by outcome group with a t-test</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="va">gender</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -204,25 +187,25 @@
 ## sample estimates:
 ## mean in group f mean in group m 
 ##        12.60207        19.53701</code></pre>
-<p><strong>Syntax 2:</strong> You can compare two separate numeric vectors using this alternative syntax. For example, if the two columns are in different data sets.</p>
-<div class="sourceCode" id="cb918"><pre class="downlit sourceCode r">
+<p><strong>Sintaxis 2:</strong> Puedes comparar dos vectores numéricos separados utilizando esta sintaxis alternativa. Por ejemplo, si las dos columnas están en conjuntos de datos diferentes.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">age_years</span>, <span class="va">df2</span><span class="op">$</span><span class="va">age_years</span><span class="op">)</span></code></pre></div>
-<p>You can also use a t-test to determine whether a sample mean is significantly different from some specific value. Here we conduct a one-sample t-test with the known/hypothesized population mean as <code>mu =</code>:</p>
-<div class="sourceCode" id="cb919"><pre class="downlit sourceCode r">
+<p>También puedes utilizar un test-t para determinar si la media de una muestra es significativamente diferente de algún valor específico. Aquí realizamos una prueba t de una muestra con la media poblacional conocida/hipotética como <code>mu =</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">age_years</span>, mu <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="shapiro-wilk-test" class="section level3 unnumbered">
-<h3>Shapiro-Wilk test<a class="anchor" aria-label="anchor" href="#shapiro-wilk-test"><i class="fas fa-link"></i></a>
+<div id="test-de-shapiro-wilk" class="section level3 unnumbered">
+<h3>Test de Shapiro-Wilk<a class="anchor" aria-label="anchor" href="#test-de-shapiro-wilk"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">Shapiro-Wilk test</a> can be used to determine whether a sample came from a normally-distributed population (an assumption of many other tests and analysis, such as the t-test). However, this can only be used on a sample between 3 and 5000 observations. For larger samples a <a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">quantile-quantile plot</a> may be helpful.</p>
-<div class="sourceCode" id="cb920"><pre class="downlit sourceCode r">
+<p>El <a href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">test de Shapiro-Wilk</a> puede utilizarse para determinar si una muestra procede de una población distribuida normalmente (un supuesto de muchas otras pruebas y análisis, como la prueba t). Sin embargo, sólo puede utilizarse en una muestra de entre 3 y 5000 observaciones. Para muestras más grandes puede ser útil un <a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">gráfico de cuantiles</a>.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">age_years</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="wilcoxon-rank-sum-test" class="section level3 unnumbered">
-<h3>Wilcoxon rank sum test<a class="anchor" aria-label="anchor" href="#wilcoxon-rank-sum-test"><i class="fas fa-link"></i></a>
+<div id="test-de-suma-de-rangos-de-wilcoxon" class="section level3 unnumbered">
+<h3>Test de suma de rangos de Wilcoxon<a class="anchor" aria-label="anchor" href="#test-de-suma-de-rangos-de-wilcoxon"><i class="fas fa-link"></i></a>
 </h3>
-<p>The Wilcoxon rank sum test, also called the <a href="https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test">Mann–Whitney U test</a>, is often used to help determine if two numeric samples are from the same distribution when their populations are not normally distributed or have unequal variance.</p>
-<div class="sourceCode" id="cb921"><pre class="downlit sourceCode r">
+<p>El test de suma de rangos de Wilcoxon, también llamada <a href="https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test">test U de Mann-Whitney</a>, se utiliza a menudo para ayudar a determinar si dos muestras numéricas proceden de la misma distribución cuando tus poblaciones no se distribuyen normalmente o tienen una varianza desigual.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## compare age distribution by outcome group with a wilcox test</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="va">outcome</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -232,11 +215,11 @@
 ## W = 2501868, p-value = 0.8308
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
-<div id="kruskal-wallis-test" class="section level3 unnumbered">
-<h3>Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test"><i class="fas fa-link"></i></a>
+<div id="test-de-kruskal-wallis" class="section level3 unnumbered">
+<h3>Test de Kruskal-Wallis<a class="anchor" aria-label="anchor" href="#test-de-kruskal-wallis"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance">Kruskal-Wallis test</a> is an extension of the Wilcoxon rank sum test that can be used to test for differences in the distribution of more than two samples. When only two samples are used it gives identical results to the Wilcoxon rank sum test.</p>
-<div class="sourceCode" id="cb923"><pre class="downlit sourceCode r">
+<p>El test de <a href="https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance">Kruskal-Wallis</a> es una extensión del test de suma de rangos de Wilcoxon que puede utilizarse para comprobar las diferencias en la distribución de más de dos muestras. Cuando sólo se utilizan dos muestras, los resultados son idénticos a los del test de suma de rangos de Wilcoxon.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## compare age distribution by outcome group with a kruskal-wallis test</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="va">outcome</span>, <span class="va">linelist</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -245,11 +228,11 @@
 ## data:  age_years by outcome
 ## Kruskal-Wallis chi-squared = 0.045675, df = 1, p-value = 0.8308</code></pre>
 </div>
-<div id="chi-squared-test" class="section level3 unnumbered">
-<h3>Chi-squared test<a class="anchor" aria-label="anchor" href="#chi-squared-test"><i class="fas fa-link"></i></a>
+<div id="test-de-chi-cuadrado" class="section level3 unnumbered">
+<h3>Test de Chi-cuadrado<a class="anchor" aria-label="anchor" href="#test-de-chi-cuadrado"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="https://en.wikipedia.org/wiki/Chi-squared_test">Pearson’s Chi-squared test</a> is used in testing for significant differences between categorical croups.</p>
-<div class="sourceCode" id="cb925"><pre class="downlit sourceCode r">
+<p>El <a href="https://en.wikipedia.org/wiki/Chi-squared_test">test de Chi-cuadrado de Pearson</a> se utiliza para comprobar las diferencias significativas entre grupos categóricos.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## compare the proportions in each group with a chi-squared test</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">gender</span>, <span class="va">linelist</span><span class="op">$</span><span class="va">outcome</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -259,31 +242,31 @@
 ## X-squared = 0.0011841, df = 1, p-value = 0.9725</code></pre>
 </div>
 </div>
-<div id="rstatix-package" class="section level2" number="18.3">
+<div id="rstatix-package" class="section level2" number="1.3">
 <h2>
-<span class="header-section-number">18.3</span> <strong>rstatix</strong> package<a class="anchor" aria-label="anchor" href="#rstatix-package"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3</span> Paquete <strong>rstatix</strong><a class="anchor" aria-label="anchor" href="#rstatix-package"><i class="fas fa-link"></i></a>
 </h2>
-<p>The <strong>rstatix</strong> package offers the ability to run statistical tests and retrieve results in a “pipe-friendly” framework. The results are automatically in a data frame so that you can perform subsequent operations on the results. It is also easy to group the data being passed into the functions, so that the statistics are run for each group.</p>
-<div id="summary-statistics-2" class="section level3 unnumbered">
-<h3>Summary statistics<a class="anchor" aria-label="anchor" href="#summary-statistics-2"><i class="fas fa-link"></i></a>
+<p>El paquete <strong>rstatix</strong> ofrece la posibilidad de ejecutar pruebas estadísticas y recuperar los resultados en un marco “amigable”. Los resultados se encuentran automáticamente en un dataframe para que pueda realizar operaciones posteriores con los resultados. También es fácil agrupar los datos que se pasan a las funciones, de modo que las estadísticas se ejecutan para cada grupo.</p>
+<div id="summary-statistics" class="section level3 unnumbered">
+<h3>Summary statistics<a class="anchor" aria-label="anchor" href="#summary-statistics"><i class="fas fa-link"></i></a>
 </h3>
-<p>The function <code>get_summary_stats()</code> is a quick way to return summary statistics. Simply pipe your dataset to this function and provide the columns to analyse. If no columns are specified, the statistics are calculated for all columns.</p>
-<p>By default, a full range of summary statistics are returned: n, max, min, median, 25%ile, 75%ile, IQR, median absolute deviation (mad), mean, standard deviation, standard error, and a confidence interval of the mean.</p>
-<div class="sourceCode" id="cb927"><pre class="downlit sourceCode r">
+<p>La función <code>get_summary_stats()</code> es una forma rápida de devolver estadísticas de resumen. Sólo tiene que enviar su conjunto de datos a esta función y proporcionar las columnas que desea analizar. Si no se especifica ninguna columna, las estadísticas se calculan para todas las columnas.</p>
+<p>Por defecto, se devuelve una gama completa de estadísticas de resumen: n, max, min, mediana, 25%ile, 75%ile, IQR, desviación absoluta mediana (mad), media, desviación estándar, error estándar y un intervalo de confianza de la media.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span>
   <span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">temp</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 13
+<pre><code>## # A tibble: 2 × 13
 ##   variable     n   min   max median    q1    q3   iqr    mad  mean     sd    se    ci
 ##   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 age       5802   0    84     13     6    23      17 11.9    16.1 12.6   0.166 0.325
 ## 2 temp      5739  35.2  40.8   38.8  38.2  39.2     1  0.741  38.6  0.977 0.013 0.025</code></pre>
-<p>You can specify a subset of summary statistics to return by providing one of the following values to <code>type =</code>: “full”, “common”, “robust”, “five_number”, “mean_sd”, “mean_se”, “mean_ci”, “median_iqr”, “median_mad”, “quantile”, “mean”, “median”, “min”, “max”.</p>
-<p>It can be used with grouped data as well, such that a row is returned for each grouping-variable:</p>
-<div class="sourceCode" id="cb929"><pre class="downlit sourceCode r">
+<p>Puedes especificar un subconjunto de estadísticas de resumen a calcular proporcionando uno de los siguientes valores a <code>type =</code>: “full”, “common”, “robust”, “five_number”, “mean_sd”, “mean_se”, “mean_ci”, “median_iqr”, “median_mad”, “quantile”, “mean”, “median”, “min”, “max”.</p>
+<p>También puede utilizarse con datos agrupados, de forma que se devuelva una fila por cada variable de agrupación:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span>
   <span class="fu">group_by</span><span class="op">(</span><span class="va">hospital</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">temp</span>, type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 12 x 11
+<pre><code>## # A tibble: 12 × 11
 ##    hospital                             variable     n   min   max median   iqr  mean     sd    se    ci
 ##    &lt;chr&gt;                                &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ##  1 Central Hospital                     age        445   0    58     12    15    15.7 12.5   0.591 1.16 
@@ -298,115 +281,113 @@
 ## 10 Port Hospital                        temp      1713  35.5  40.6   38.8   1.1  38.6  0.981 0.024 0.046
 ## 11 St. Mark's Maternity Hospital (SMMH) age        420   0    84     12    15    15.7 12.4   0.606 1.19 
 ## 12 St. Mark's Maternity Hospital (SMMH) temp       410  35.9  40.6   38.8   1.1  38.5  0.983 0.049 0.095</code></pre>
-<p>You can also use <strong>rstatix</strong> to conduct statistical tests:</p>
+<p>También puede utilizar <strong>rstatix</strong> para realizar pruebas estadísticas:statistical tests:</p>
 </div>
-<div id="t-test" class="section level3 unnumbered">
-<h3>T-test<a class="anchor" aria-label="anchor" href="#t-test"><i class="fas fa-link"></i></a>
+<div id="test-t" class="section level3 unnumbered">
+<h3>Test-T<a class="anchor" aria-label="anchor" href="#test-t"><i class="fas fa-link"></i></a>
 </h3>
-<p>Use a formula syntax to specify the numeric and categorical columns:</p>
-<div class="sourceCode" id="cb931"><pre class="downlit sourceCode r">
+<p>Utiliza una sintaxis de fórmula para especificar las columnas numéricas y categóricas:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">t_test</span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="va">gender</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 10
+<pre><code>## # A tibble: 1 × 10
 ##   .y.       group1 group2    n1    n2 statistic    df        p    p.adj p.adj.signif
 ## * &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       
 ## 1 age_years f      m       2807  2803     -21.3 4902. 9.89e-97 9.89e-97 ****</code></pre>
-<p>Or use <code>~ 1</code> and specify <code>mu =</code> for a one-sample T-test. This can also be done by group.</p>
-<div class="sourceCode" id="cb933"><pre class="downlit sourceCode r">
+<p>O utiliza <code>~ 1</code> y especifique <code>mu =</code> para un test-T de una muestra. Esto también puede hacerse por grupo.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">t_test</span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="fl">1</span>, mu <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 7
+<pre><code>## # A tibble: 1 × 7
 ##   .y.       group1 group2         n statistic    df     p
 ## * &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 age_years 1      null model  5888     -84.2  5801     0</code></pre>
-<p>If applicable, the statistical tests can be done by group, as shown below:</p>
-<div class="sourceCode" id="cb935"><pre class="downlit sourceCode r">
+<p>Si procede, las pruebas estadísticas pueden realizarse por grupos, como se muestra a continuación:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">t_test</span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="fl">1</span>, mu <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 8
+<pre><code>## # A tibble: 3 × 8
 ##   gender .y.       group1 group2         n statistic    df         p
 ## * &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 f      age_years 1      null model  2807    -29.8   2806 7.52e-170
 ## 2 m      age_years 1      null model  2803      5.70  2802 1.34e-  8
 ## 3 &lt;NA&gt;   age_years 1      null model   278     -3.80   191 1.96e-  4</code></pre>
 </div>
-<div id="shapiro-wilk-test-1" class="section level3 unnumbered">
-<h3>Shapiro-Wilk test<a class="anchor" aria-label="anchor" href="#shapiro-wilk-test-1"><i class="fas fa-link"></i></a>
+<div id="test-de-shapiro-wilk-1" class="section level3 unnumbered">
+<h3>Test de Shapiro-Wilk<a class="anchor" aria-label="anchor" href="#test-de-shapiro-wilk-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>As stated above, sample size must be between 3 and 5000.</p>
-<div class="sourceCode" id="cb937"><pre class="downlit sourceCode r">
+<p>Como ya se ha dicho, el tamaño de la muestra debe estar entre 3 y 5000.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span> <span class="op">%&gt;%</span>            <span class="co"># first 500 rows of case linelist, for example only</span>
   <span class="fu">shapiro_test</span><span class="op">(</span><span class="va">age_years</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 3
+<pre><code>## # A tibble: 1 × 3
 ##   variable  statistic        p
 ##   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 age_years     0.917 6.67e-16</code></pre>
 </div>
-<div id="wilcoxon-rank-sum-test-1" class="section level3 unnumbered">
-<h3>Wilcoxon rank sum test<a class="anchor" aria-label="anchor" href="#wilcoxon-rank-sum-test-1"><i class="fas fa-link"></i></a>
+<div id="test-de-suma-de-rangos-de-wilcoxon-1" class="section level3 unnumbered">
+<h3>Test de suma de rangos de Wilcoxon<a class="anchor" aria-label="anchor" href="#test-de-suma-de-rangos-de-wilcoxon-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb939"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">wilcox_test</span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="va">gender</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 9
+<pre><code>## # A tibble: 1 × 9
 ##   .y.       group1 group2    n1    n2 statistic        p    p.adj p.adj.signif
 ## * &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       
 ## 1 age_years f      m       2807  2803   2829274 3.47e-74 3.47e-74 ****</code></pre>
 </div>
-<div id="kruskal-wallis-test-1" class="section level3 unnumbered">
-<h3>Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test-1"><i class="fas fa-link"></i></a>
+<div id="test-de-kruskal-wallis-1" class="section level3 unnumbered">
+<h3>Test de Kruskal-Wallis<a class="anchor" aria-label="anchor" href="#test-de-kruskal-wallis-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Also known as the Mann-Whitney U test.</p>
-<div class="sourceCode" id="cb941"><pre class="downlit sourceCode r">
+<p>También conocida como la prueba U de Mann-Whitney.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">kruskal_test</span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="va">outcome</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 6
+<pre><code>## # A tibble: 1 × 6
 ##   .y.           n statistic    df     p method        
 ## * &lt;chr&gt;     &lt;int&gt;     &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;         
 ## 1 age_years  5888    0.0457     1 0.831 Kruskal-Wallis</code></pre>
 </div>
-<div id="chi-squared-test-1" class="section level3 unnumbered">
-<h3>Chi-squared test<a class="anchor" aria-label="anchor" href="#chi-squared-test-1"><i class="fas fa-link"></i></a>
+<div id="test-de-chi-cuadrado-1" class="section level3 unnumbered">
+<h3>Test de Chi-cuadrado<a class="anchor" aria-label="anchor" href="#test-de-chi-cuadrado-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>The chi-square test function accepts a table, so first we create a cross-tabulation. There are many ways to create a cross-tabulation (see <a href="descriptive-tables.html#descriptive-tables">Descriptive tables</a>) but here we use <code>tabyl()</code> from <strong>janitor</strong> and remove the left-most column of value labels before passing to <code>chisq_test()</code>.</p>
-<div class="sourceCode" id="cb943"><pre class="downlit sourceCode r">
+<p>La función para el test de chi-cuadrado acepta una tabla, así que primero creamos una tabulación cruzada. Hay muchas formas de crear una tabulación cruzada (véase <a href="#descriptive-tables">Tablas descriptivas</a>), pero aquí utilizamos <code>tabyl()</code> de <strong>janitor</strong> y eliminamos la columna más a la izquierda de las etiquetas de valores antes de pasarla a <code>chisq_test()</code>.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">tabyl</span><span class="op">(</span><span class="va">gender</span>, <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">chisq_test</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 6
+<pre><code>## # A tibble: 1 × 6
 ##       n statistic     p    df method          p.signif
 ## * &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;   
 ## 1  5888      3.53 0.473     4 Chi-square test ns</code></pre>
-<p>Many many more functions and statistical tests can be run with <strong>rstatix</strong> functions. See the documentation for <strong>rstatix</strong> <a href="https://github.com/kassambara/rstatix">online here</a> or by entering ?rstatix.</p>
+<p>Se pueden ejecutar muchas más funciones y pruebas estadísticas con las funciones de rstatix. Consulta la documentación de <strong>rstatix</strong> <a href="https://github.com/kassambara/rstatix">en línea aquí</a> o escribiendo <code>?rstatix</code>.</p>
 </div>
 </div>
-<div id="stats_gt" class="section level2" number="18.4">
+<div id="stats_gt" class="section level2" number="1.4">
 <h2>
-<span class="header-section-number">18.4</span> <code>gtsummary</code> package<a class="anchor" aria-label="anchor" href="#stats_gt"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4</span> <code>gtsummary</code> package<a class="anchor" aria-label="anchor" href="#stats_gt"><i class="fas fa-link"></i></a>
 </h2>
-<p>Use <strong>gtsummary</strong> if you are looking to add the results of a statistical test to a pretty table that was created with this package (as described in the <strong>gtsummary</strong> section of the <a href="descriptive-tables.html#tbl_gt">Descriptive tables</a> page).</p>
-<p>Performing statistical tests of comparison with <code>tbl_summary</code> is done by adding the
-<code>add_p</code> function to a table and specifying which test to use. It is possible to get p-values corrected for multiple testing by using the
-<code>add_q</code> function. Run <code>?tbl_summary</code> for details.</p>
-<div id="chi-squared-test-2" class="section level3 unnumbered">
-<h3>Chi-squared test<a class="anchor" aria-label="anchor" href="#chi-squared-test-2"><i class="fas fa-link"></i></a>
+<p>Use <strong>gtsummary</strong> if you are looking to add the results of a statistical test to a pretty table that was created with this package (as described in the <strong>gtsummary</strong> section of the <a href="#tbl_gt">Descriptive tables</a> page).</p>
+<p>La realización de pruebas estadísticas de comparación con <code>tbl_summary</code> se lleva a cabo añadiendo la función <code>add_p</code> a una tabla y especificando qué prueba utilizar. Es posible obtener valores p corregidos para pruebas múltiples utilizando la función <code>add_q</code>. Ejecuta <code>?tbl_summary</code> para obtener más detalles.</p>
+<div id="test-de-chi-cuadrado-2" class="section level3 unnumbered">
+<h3>Test de Chi-cuadrado<a class="anchor" aria-label="anchor" href="#test-de-chi-cuadrado-2"><i class="fas fa-link"></i></a>
 </h3>
-<p>Compare the proportions of a categorical variable in two groups. The default statistical test for <code>add_p()</code> when applied to a categorical variable is to perform a chi-squared test of independence with continuity correction, but if any expected call count is below 5 then a Fisher’s exact test is used.</p>
-<div class="sourceCode" id="cb945"><pre class="downlit sourceCode r">
+<p>Compara las proporciones de una variable categórica en dos grupos. La prueba estadística por defecto de <code>add_p</code>() cuando se aplica a una variable categórica es realizar una prueba de independencia de chi-cuadrado con corrección de continuidad, pero si algún recuento de llamadas esperado es inferior a 5, se utiliza una prueba exacta de Fisher.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="va">gender</span>, <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>    <span class="co"># keep variables of interest</span>
   <span class="fu">tbl_summary</span><span class="op">(</span>by <span class="op">=</span> <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># produce summary table and specify grouping variable</span>
   <span class="fu">add_p</span><span class="op">(</span><span class="op">)</span>                        <span class="co"># specify what test to perform</span></code></pre></div>
 <pre><code>## 1323 observations missing `outcome` have been removed. To include these observations, use `forcats::fct_explicit_na()` on `outcome` column before passing to `tbl_summary()`.</code></pre>
-<div id="egxzdpuqrn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wrqctdmpgo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#egxzdpuqrn .gt_table {
+#wrqctdmpgo .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -431,7 +412,7 @@
   border-left-color: #D3D3D3;
 }
 
-#egxzdpuqrn .gt_heading {
+#wrqctdmpgo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -443,7 +424,7 @@
   border-right-color: #D3D3D3;
 }
 
-#egxzdpuqrn .gt_title {
+#wrqctdmpgo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -453,7 +434,7 @@
   border-bottom-width: 0;
 }
 
-#egxzdpuqrn .gt_subtitle {
+#wrqctdmpgo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -463,13 +444,13 @@
   border-top-width: 0;
 }
 
-#egxzdpuqrn .gt_bottom_border {
+#wrqctdmpgo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#egxzdpuqrn .gt_col_headings {
+#wrqctdmpgo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -484,7 +465,7 @@
   border-right-color: #D3D3D3;
 }
 
-#egxzdpuqrn .gt_col_heading {
+#wrqctdmpgo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -504,7 +485,7 @@
   overflow-x: hidden;
 }
 
-#egxzdpuqrn .gt_column_spanner_outer {
+#wrqctdmpgo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -516,15 +497,15 @@
   padding-right: 4px;
 }
 
-#egxzdpuqrn .gt_column_spanner_outer:first-child {
+#wrqctdmpgo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#egxzdpuqrn .gt_column_spanner_outer:last-child {
+#wrqctdmpgo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#egxzdpuqrn .gt_column_spanner {
+#wrqctdmpgo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -536,7 +517,7 @@
   width: 100%;
 }
 
-#egxzdpuqrn .gt_group_heading {
+#wrqctdmpgo .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -558,7 +539,7 @@
   vertical-align: middle;
 }
 
-#egxzdpuqrn .gt_empty_group_heading {
+#wrqctdmpgo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -573,15 +554,15 @@
   vertical-align: middle;
 }
 
-#egxzdpuqrn .gt_from_md > :first-child {
+#wrqctdmpgo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#egxzdpuqrn .gt_from_md > :last-child {
+#wrqctdmpgo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#egxzdpuqrn .gt_row {
+#wrqctdmpgo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -600,7 +581,7 @@
   overflow-x: hidden;
 }
 
-#egxzdpuqrn .gt_stub {
+#wrqctdmpgo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -612,7 +593,7 @@
   padding-left: 12px;
 }
 
-#egxzdpuqrn .gt_summary_row {
+#wrqctdmpgo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -622,7 +603,7 @@
   padding-right: 5px;
 }
 
-#egxzdpuqrn .gt_first_summary_row {
+#wrqctdmpgo .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -632,7 +613,7 @@
   border-top-color: #D3D3D3;
 }
 
-#egxzdpuqrn .gt_grand_summary_row {
+#wrqctdmpgo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -642,7 +623,7 @@
   padding-right: 5px;
 }
 
-#egxzdpuqrn .gt_first_grand_summary_row {
+#wrqctdmpgo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,11 +633,11 @@
   border-top-color: #D3D3D3;
 }
 
-#egxzdpuqrn .gt_striped {
+#wrqctdmpgo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#egxzdpuqrn .gt_table_body {
+#wrqctdmpgo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -665,7 +646,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#egxzdpuqrn .gt_footnotes {
+#wrqctdmpgo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -679,13 +660,13 @@
   border-right-color: #D3D3D3;
 }
 
-#egxzdpuqrn .gt_footnote {
+#wrqctdmpgo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#egxzdpuqrn .gt_sourcenotes {
+#wrqctdmpgo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -699,41 +680,41 @@
   border-right-color: #D3D3D3;
 }
 
-#egxzdpuqrn .gt_sourcenote {
+#wrqctdmpgo .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#egxzdpuqrn .gt_left {
+#wrqctdmpgo .gt_left {
   text-align: left;
 }
 
-#egxzdpuqrn .gt_center {
+#wrqctdmpgo .gt_center {
   text-align: center;
 }
 
-#egxzdpuqrn .gt_right {
+#wrqctdmpgo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#egxzdpuqrn .gt_font_normal {
+#wrqctdmpgo .gt_font_normal {
   font-weight: normal;
 }
 
-#egxzdpuqrn .gt_font_bold {
+#wrqctdmpgo .gt_font_bold {
   font-weight: bold;
 }
 
-#egxzdpuqrn .gt_font_italic {
+#wrqctdmpgo .gt_font_italic {
   font-style: italic;
 }
 
-#egxzdpuqrn .gt_super {
+#wrqctdmpgo .gt_super {
   font-size: 65%;
 }
 
-#egxzdpuqrn .gt_footnote_marks {
+#wrqctdmpgo .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -797,12 +778,11 @@
 </table></div>
 </div>
 </div>
-<div id="t-tests-1" class="section level3 unnumbered">
-<h3>T-tests<a class="anchor" aria-label="anchor" href="#t-tests-1"><i class="fas fa-link"></i></a>
+<div id="tests-t-1" class="section level3 unnumbered">
+<h3>Tests-T<a class="anchor" aria-label="anchor" href="#tests-t-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Compare the difference in means for a continuous variable in two groups.
-For example, compare the mean age by patient outcome.</p>
-<div class="sourceCode" id="cb947"><pre class="downlit sourceCode r">
+<p>Compara la diferencia de medias de una variable continua en dos grupos. Por ejemplo, compara la media de edad por resultado del paciente.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="va">age_years</span>, <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>             <span class="co"># keep variables of interest</span>
   <span class="fu">tbl_summary</span><span class="op">(</span>                               <span class="co"># produce summary table</span>
@@ -810,12 +790,12 @@ For example, compare the mean age by patient outcome.</p>
     by <span class="op">=</span> <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>                        <span class="co"># specify the grouping variable</span>
   <span class="fu">add_p</span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="st">"t.test"</span><span class="op">)</span>                <span class="co"># specify what tests to perform</span></code></pre></div>
 <pre><code>## 1323 observations missing `outcome` have been removed. To include these observations, use `forcats::fct_explicit_na()` on `outcome` column before passing to `tbl_summary()`.</code></pre>
-<div id="jmjffsteea" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gnilwwswxk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jmjffsteea .gt_table {
+#gnilwwswxk .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -840,7 +820,7 @@ For example, compare the mean age by patient outcome.</p>
   border-left-color: #D3D3D3;
 }
 
-#jmjffsteea .gt_heading {
+#gnilwwswxk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -852,7 +832,7 @@ For example, compare the mean age by patient outcome.</p>
   border-right-color: #D3D3D3;
 }
 
-#jmjffsteea .gt_title {
+#gnilwwswxk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -862,7 +842,7 @@ For example, compare the mean age by patient outcome.</p>
   border-bottom-width: 0;
 }
 
-#jmjffsteea .gt_subtitle {
+#gnilwwswxk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -872,13 +852,13 @@ For example, compare the mean age by patient outcome.</p>
   border-top-width: 0;
 }
 
-#jmjffsteea .gt_bottom_border {
+#gnilwwswxk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jmjffsteea .gt_col_headings {
+#gnilwwswxk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -893,7 +873,7 @@ For example, compare the mean age by patient outcome.</p>
   border-right-color: #D3D3D3;
 }
 
-#jmjffsteea .gt_col_heading {
+#gnilwwswxk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -913,7 +893,7 @@ For example, compare the mean age by patient outcome.</p>
   overflow-x: hidden;
 }
 
-#jmjffsteea .gt_column_spanner_outer {
+#gnilwwswxk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -925,15 +905,15 @@ For example, compare the mean age by patient outcome.</p>
   padding-right: 4px;
 }
 
-#jmjffsteea .gt_column_spanner_outer:first-child {
+#gnilwwswxk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jmjffsteea .gt_column_spanner_outer:last-child {
+#gnilwwswxk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jmjffsteea .gt_column_spanner {
+#gnilwwswxk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -945,7 +925,7 @@ For example, compare the mean age by patient outcome.</p>
   width: 100%;
 }
 
-#jmjffsteea .gt_group_heading {
+#gnilwwswxk .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -967,7 +947,7 @@ For example, compare the mean age by patient outcome.</p>
   vertical-align: middle;
 }
 
-#jmjffsteea .gt_empty_group_heading {
+#gnilwwswxk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -982,15 +962,15 @@ For example, compare the mean age by patient outcome.</p>
   vertical-align: middle;
 }
 
-#jmjffsteea .gt_from_md > :first-child {
+#gnilwwswxk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jmjffsteea .gt_from_md > :last-child {
+#gnilwwswxk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jmjffsteea .gt_row {
+#gnilwwswxk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1009,7 +989,7 @@ For example, compare the mean age by patient outcome.</p>
   overflow-x: hidden;
 }
 
-#jmjffsteea .gt_stub {
+#gnilwwswxk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1021,7 +1001,7 @@ For example, compare the mean age by patient outcome.</p>
   padding-left: 12px;
 }
 
-#jmjffsteea .gt_summary_row {
+#gnilwwswxk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1031,7 +1011,7 @@ For example, compare the mean age by patient outcome.</p>
   padding-right: 5px;
 }
 
-#jmjffsteea .gt_first_summary_row {
+#gnilwwswxk .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1041,7 +1021,7 @@ For example, compare the mean age by patient outcome.</p>
   border-top-color: #D3D3D3;
 }
 
-#jmjffsteea .gt_grand_summary_row {
+#gnilwwswxk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1051,7 +1031,7 @@ For example, compare the mean age by patient outcome.</p>
   padding-right: 5px;
 }
 
-#jmjffsteea .gt_first_grand_summary_row {
+#gnilwwswxk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1061,11 +1041,11 @@ For example, compare the mean age by patient outcome.</p>
   border-top-color: #D3D3D3;
 }
 
-#jmjffsteea .gt_striped {
+#gnilwwswxk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jmjffsteea .gt_table_body {
+#gnilwwswxk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1074,7 +1054,7 @@ For example, compare the mean age by patient outcome.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#jmjffsteea .gt_footnotes {
+#gnilwwswxk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1088,13 +1068,13 @@ For example, compare the mean age by patient outcome.</p>
   border-right-color: #D3D3D3;
 }
 
-#jmjffsteea .gt_footnote {
+#gnilwwswxk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#jmjffsteea .gt_sourcenotes {
+#gnilwwswxk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1108,41 +1088,41 @@ For example, compare the mean age by patient outcome.</p>
   border-right-color: #D3D3D3;
 }
 
-#jmjffsteea .gt_sourcenote {
+#gnilwwswxk .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#jmjffsteea .gt_left {
+#gnilwwswxk .gt_left {
   text-align: left;
 }
 
-#jmjffsteea .gt_center {
+#gnilwwswxk .gt_center {
   text-align: center;
 }
 
-#jmjffsteea .gt_right {
+#gnilwwswxk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jmjffsteea .gt_font_normal {
+#gnilwwswxk .gt_font_normal {
   font-weight: normal;
 }
 
-#jmjffsteea .gt_font_bold {
+#gnilwwswxk .gt_font_bold {
   font-weight: bold;
 }
 
-#jmjffsteea .gt_font_italic {
+#gnilwwswxk .gt_font_italic {
   font-style: italic;
 }
 
-#jmjffsteea .gt_super {
+#gnilwwswxk .gt_super {
   font-size: 65%;
 }
 
-#jmjffsteea .gt_footnote_marks {
+#gnilwwswxk .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1194,14 +1174,11 @@ For example, compare the mean age by patient outcome.</p>
 </table></div>
 </div>
 </div>
-<div id="wilcoxon-rank-sum-test-2" class="section level3 unnumbered">
-<h3>Wilcoxon rank sum test<a class="anchor" aria-label="anchor" href="#wilcoxon-rank-sum-test-2"><i class="fas fa-link"></i></a>
+<div id="test-de-suma-de-rangos-de-wilcoxon-2" class="section level3 unnumbered">
+<h3>Test de suma de rangos de Wilcoxon<a class="anchor" aria-label="anchor" href="#test-de-suma-de-rangos-de-wilcoxon-2"><i class="fas fa-link"></i></a>
 </h3>
-<p>Compare the distribution of a continuous variable in two groups. The default
-is to use the Wilcoxon rank sum test and the median (IQR) when comparing two
-groups. However for non-normally distributed data or comparing multiple groups,
-the Kruskal-wallis test is more appropriate.</p>
-<div class="sourceCode" id="cb949"><pre class="downlit sourceCode r">
+<p>Compara la distribución de una variable continua en dos grupos. Por defecto se utiliza la prueba de suma de rangos de Wilcoxon y la mediana (IQR) cuando se comparan dos grupos. Sin embargo, para datos no distribuidos normalmente o para comparar varios grupos, la prueba de Kruskal-wallis es más apropiada.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="va">age_years</span>, <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>                       <span class="co"># keep variables of interest</span>
   <span class="fu">tbl_summary</span><span class="op">(</span>                                         <span class="co"># produce summary table</span>
@@ -1209,12 +1186,12 @@ the Kruskal-wallis test is more appropriate.</p>
     by <span class="op">=</span> <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>                                  <span class="co"># specify the grouping variable</span>
   <span class="fu">add_p</span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="st">"wilcox.test"</span><span class="op">)</span>                     <span class="co"># specify what test to perform (default so could leave brackets empty)</span></code></pre></div>
 <pre><code>## 1323 observations missing `outcome` have been removed. To include these observations, use `forcats::fct_explicit_na()` on `outcome` column before passing to `tbl_summary()`.</code></pre>
-<div id="imeoqufdsd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="efhzsuxptj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#imeoqufdsd .gt_table {
+#efhzsuxptj .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1239,7 +1216,7 @@ the Kruskal-wallis test is more appropriate.</p>
   border-left-color: #D3D3D3;
 }
 
-#imeoqufdsd .gt_heading {
+#efhzsuxptj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1251,7 +1228,7 @@ the Kruskal-wallis test is more appropriate.</p>
   border-right-color: #D3D3D3;
 }
 
-#imeoqufdsd .gt_title {
+#efhzsuxptj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1261,7 +1238,7 @@ the Kruskal-wallis test is more appropriate.</p>
   border-bottom-width: 0;
 }
 
-#imeoqufdsd .gt_subtitle {
+#efhzsuxptj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1271,13 +1248,13 @@ the Kruskal-wallis test is more appropriate.</p>
   border-top-width: 0;
 }
 
-#imeoqufdsd .gt_bottom_border {
+#efhzsuxptj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#imeoqufdsd .gt_col_headings {
+#efhzsuxptj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1292,7 +1269,7 @@ the Kruskal-wallis test is more appropriate.</p>
   border-right-color: #D3D3D3;
 }
 
-#imeoqufdsd .gt_col_heading {
+#efhzsuxptj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1312,7 +1289,7 @@ the Kruskal-wallis test is more appropriate.</p>
   overflow-x: hidden;
 }
 
-#imeoqufdsd .gt_column_spanner_outer {
+#efhzsuxptj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1324,15 +1301,15 @@ the Kruskal-wallis test is more appropriate.</p>
   padding-right: 4px;
 }
 
-#imeoqufdsd .gt_column_spanner_outer:first-child {
+#efhzsuxptj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#imeoqufdsd .gt_column_spanner_outer:last-child {
+#efhzsuxptj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#imeoqufdsd .gt_column_spanner {
+#efhzsuxptj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1344,7 +1321,7 @@ the Kruskal-wallis test is more appropriate.</p>
   width: 100%;
 }
 
-#imeoqufdsd .gt_group_heading {
+#efhzsuxptj .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1366,7 +1343,7 @@ the Kruskal-wallis test is more appropriate.</p>
   vertical-align: middle;
 }
 
-#imeoqufdsd .gt_empty_group_heading {
+#efhzsuxptj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1381,15 +1358,15 @@ the Kruskal-wallis test is more appropriate.</p>
   vertical-align: middle;
 }
 
-#imeoqufdsd .gt_from_md > :first-child {
+#efhzsuxptj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#imeoqufdsd .gt_from_md > :last-child {
+#efhzsuxptj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#imeoqufdsd .gt_row {
+#efhzsuxptj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1408,7 +1385,7 @@ the Kruskal-wallis test is more appropriate.</p>
   overflow-x: hidden;
 }
 
-#imeoqufdsd .gt_stub {
+#efhzsuxptj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1420,7 +1397,7 @@ the Kruskal-wallis test is more appropriate.</p>
   padding-left: 12px;
 }
 
-#imeoqufdsd .gt_summary_row {
+#efhzsuxptj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1430,7 +1407,7 @@ the Kruskal-wallis test is more appropriate.</p>
   padding-right: 5px;
 }
 
-#imeoqufdsd .gt_first_summary_row {
+#efhzsuxptj .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1440,7 +1417,7 @@ the Kruskal-wallis test is more appropriate.</p>
   border-top-color: #D3D3D3;
 }
 
-#imeoqufdsd .gt_grand_summary_row {
+#efhzsuxptj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1450,7 +1427,7 @@ the Kruskal-wallis test is more appropriate.</p>
   padding-right: 5px;
 }
 
-#imeoqufdsd .gt_first_grand_summary_row {
+#efhzsuxptj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1460,11 +1437,11 @@ the Kruskal-wallis test is more appropriate.</p>
   border-top-color: #D3D3D3;
 }
 
-#imeoqufdsd .gt_striped {
+#efhzsuxptj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#imeoqufdsd .gt_table_body {
+#efhzsuxptj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1473,7 +1450,7 @@ the Kruskal-wallis test is more appropriate.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#imeoqufdsd .gt_footnotes {
+#efhzsuxptj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1487,13 +1464,13 @@ the Kruskal-wallis test is more appropriate.</p>
   border-right-color: #D3D3D3;
 }
 
-#imeoqufdsd .gt_footnote {
+#efhzsuxptj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#imeoqufdsd .gt_sourcenotes {
+#efhzsuxptj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1507,41 +1484,41 @@ the Kruskal-wallis test is more appropriate.</p>
   border-right-color: #D3D3D3;
 }
 
-#imeoqufdsd .gt_sourcenote {
+#efhzsuxptj .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#imeoqufdsd .gt_left {
+#efhzsuxptj .gt_left {
   text-align: left;
 }
 
-#imeoqufdsd .gt_center {
+#efhzsuxptj .gt_center {
   text-align: center;
 }
 
-#imeoqufdsd .gt_right {
+#efhzsuxptj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#imeoqufdsd .gt_font_normal {
+#efhzsuxptj .gt_font_normal {
   font-weight: normal;
 }
 
-#imeoqufdsd .gt_font_bold {
+#efhzsuxptj .gt_font_bold {
   font-weight: bold;
 }
 
-#imeoqufdsd .gt_font_italic {
+#efhzsuxptj .gt_font_italic {
   font-style: italic;
 }
 
-#imeoqufdsd .gt_super {
+#efhzsuxptj .gt_super {
   font-size: 65%;
 }
 
-#imeoqufdsd .gt_footnote_marks {
+#efhzsuxptj .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1593,12 +1570,11 @@ the Kruskal-wallis test is more appropriate.</p>
 </table></div>
 </div>
 </div>
-<div id="kruskal-wallis-test-2" class="section level3 unnumbered">
-<h3>Kruskal-wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test-2"><i class="fas fa-link"></i></a>
+<div id="test-de-kruskal-wallis-2" class="section level3 unnumbered">
+<h3>Test de Kruskal-Wallis<a class="anchor" aria-label="anchor" href="#test-de-kruskal-wallis-2"><i class="fas fa-link"></i></a>
 </h3>
-<p>Compare the distribution of a continuous variable in two or more groups,
-regardless of whether the data is normally distributed.</p>
-<div class="sourceCode" id="cb951"><pre class="downlit sourceCode r">
+<p>Compara la distribución de una variable continua en dos o más grupos, independientemente de que los datos se distribuyan normalmente.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="va">age_years</span>, <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>                       <span class="co"># keep variables of interest</span>
   <span class="fu">tbl_summary</span><span class="op">(</span>                                         <span class="co"># produce summary table</span>
@@ -1606,12 +1582,12 @@ regardless of whether the data is normally distributed.</p>
     by <span class="op">=</span> <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span>                                  <span class="co"># specify the grouping variable</span>
   <span class="fu">add_p</span><span class="op">(</span><span class="va">age_years</span> <span class="op">~</span> <span class="st">"kruskal.test"</span><span class="op">)</span>                    <span class="co"># specify what test to perform</span></code></pre></div>
 <pre><code>## 1323 observations missing `outcome` have been removed. To include these observations, use `forcats::fct_explicit_na()` on `outcome` column before passing to `tbl_summary()`.</code></pre>
-<div id="rxaasxxurq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qchhtaoayd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#rxaasxxurq .gt_table {
+#qchhtaoayd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1636,7 +1612,7 @@ regardless of whether the data is normally distributed.</p>
   border-left-color: #D3D3D3;
 }
 
-#rxaasxxurq .gt_heading {
+#qchhtaoayd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1648,7 +1624,7 @@ regardless of whether the data is normally distributed.</p>
   border-right-color: #D3D3D3;
 }
 
-#rxaasxxurq .gt_title {
+#qchhtaoayd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1658,7 +1634,7 @@ regardless of whether the data is normally distributed.</p>
   border-bottom-width: 0;
 }
 
-#rxaasxxurq .gt_subtitle {
+#qchhtaoayd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1668,13 +1644,13 @@ regardless of whether the data is normally distributed.</p>
   border-top-width: 0;
 }
 
-#rxaasxxurq .gt_bottom_border {
+#qchhtaoayd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rxaasxxurq .gt_col_headings {
+#qchhtaoayd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1689,7 +1665,7 @@ regardless of whether the data is normally distributed.</p>
   border-right-color: #D3D3D3;
 }
 
-#rxaasxxurq .gt_col_heading {
+#qchhtaoayd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1709,7 +1685,7 @@ regardless of whether the data is normally distributed.</p>
   overflow-x: hidden;
 }
 
-#rxaasxxurq .gt_column_spanner_outer {
+#qchhtaoayd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1721,15 +1697,15 @@ regardless of whether the data is normally distributed.</p>
   padding-right: 4px;
 }
 
-#rxaasxxurq .gt_column_spanner_outer:first-child {
+#qchhtaoayd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rxaasxxurq .gt_column_spanner_outer:last-child {
+#qchhtaoayd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rxaasxxurq .gt_column_spanner {
+#qchhtaoayd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1741,7 +1717,7 @@ regardless of whether the data is normally distributed.</p>
   width: 100%;
 }
 
-#rxaasxxurq .gt_group_heading {
+#qchhtaoayd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1763,7 +1739,7 @@ regardless of whether the data is normally distributed.</p>
   vertical-align: middle;
 }
 
-#rxaasxxurq .gt_empty_group_heading {
+#qchhtaoayd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1778,15 +1754,15 @@ regardless of whether the data is normally distributed.</p>
   vertical-align: middle;
 }
 
-#rxaasxxurq .gt_from_md > :first-child {
+#qchhtaoayd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rxaasxxurq .gt_from_md > :last-child {
+#qchhtaoayd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rxaasxxurq .gt_row {
+#qchhtaoayd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1805,7 +1781,7 @@ regardless of whether the data is normally distributed.</p>
   overflow-x: hidden;
 }
 
-#rxaasxxurq .gt_stub {
+#qchhtaoayd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1817,7 +1793,7 @@ regardless of whether the data is normally distributed.</p>
   padding-left: 12px;
 }
 
-#rxaasxxurq .gt_summary_row {
+#qchhtaoayd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1827,7 +1803,7 @@ regardless of whether the data is normally distributed.</p>
   padding-right: 5px;
 }
 
-#rxaasxxurq .gt_first_summary_row {
+#qchhtaoayd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1837,7 +1813,7 @@ regardless of whether the data is normally distributed.</p>
   border-top-color: #D3D3D3;
 }
 
-#rxaasxxurq .gt_grand_summary_row {
+#qchhtaoayd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1847,7 +1823,7 @@ regardless of whether the data is normally distributed.</p>
   padding-right: 5px;
 }
 
-#rxaasxxurq .gt_first_grand_summary_row {
+#qchhtaoayd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1857,11 +1833,11 @@ regardless of whether the data is normally distributed.</p>
   border-top-color: #D3D3D3;
 }
 
-#rxaasxxurq .gt_striped {
+#qchhtaoayd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rxaasxxurq .gt_table_body {
+#qchhtaoayd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1870,7 +1846,7 @@ regardless of whether the data is normally distributed.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#rxaasxxurq .gt_footnotes {
+#qchhtaoayd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1884,13 +1860,13 @@ regardless of whether the data is normally distributed.</p>
   border-right-color: #D3D3D3;
 }
 
-#rxaasxxurq .gt_footnote {
+#qchhtaoayd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#rxaasxxurq .gt_sourcenotes {
+#qchhtaoayd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1904,41 +1880,41 @@ regardless of whether the data is normally distributed.</p>
   border-right-color: #D3D3D3;
 }
 
-#rxaasxxurq .gt_sourcenote {
+#qchhtaoayd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#rxaasxxurq .gt_left {
+#qchhtaoayd .gt_left {
   text-align: left;
 }
 
-#rxaasxxurq .gt_center {
+#qchhtaoayd .gt_center {
   text-align: center;
 }
 
-#rxaasxxurq .gt_right {
+#qchhtaoayd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rxaasxxurq .gt_font_normal {
+#qchhtaoayd .gt_font_normal {
   font-weight: normal;
 }
 
-#rxaasxxurq .gt_font_bold {
+#qchhtaoayd .gt_font_bold {
   font-weight: bold;
 }
 
-#rxaasxxurq .gt_font_italic {
+#qchhtaoayd .gt_font_italic {
   font-style: italic;
 }
 
-#rxaasxxurq .gt_super {
+#qchhtaoayd .gt_super {
   font-size: 65%;
 }
 
-#rxaasxxurq .gt_footnote_marks {
+#qchhtaoayd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2116,20 +2092,18 @@ regardless of whether the data is normally distributed.</p>
 <!-- ======================================================= -->
 </div>
 </div>
-<div id="correlations" class="section level2" number="18.5">
+<div id="correlations" class="section level2" number="1.5">
 <h2>
-<span class="header-section-number">18.5</span> Correlations<a class="anchor" aria-label="anchor" href="#correlations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5</span> Correlaciones<a class="anchor" aria-label="anchor" href="#correlations"><i class="fas fa-link"></i></a>
 </h2>
-<p>Correlation between numeric variables can be investigated using the <strong>tidyverse</strong><br><strong>corrr</strong> package. It allows you to compute correlations using Pearson, Kendall
-tau or Spearman rho. The package creates a table and also has a function to
-automatically plot the values.</p>
-<div class="sourceCode" id="cb953"><pre class="downlit sourceCode r">
+<p>La correlación entre variables numéricas puede investigarse con el paquete <strong>corrr</strong> de <strong>tidyverse</strong>. Permite calcular las correlaciones mediante los test de Pearson, tau de Kendall o rho de Spearman. El paquete crea una tabla y también tiene una función para trazar automáticamente los valores.</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">correlation_tab</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="va">generation</span>, <span class="va">age</span>, <span class="va">ct_blood</span>, <span class="va">days_onset_hosp</span>, <span class="va">wt_kg</span>, <span class="va">ht_cm</span><span class="op">)</span> <span class="op">%&gt;%</span>   <span class="co"># keep numeric variables of interest</span>
   <span class="fu">correlate</span><span class="op">(</span><span class="op">)</span>      <span class="co"># create correlation table (using default pearson)</span>
 
 <span class="va">correlation_tab</span>    <span class="co"># print</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
+<pre><code>## # A tibble: 6 × 7
 ##   term            generation       age ct_blood days_onset_hosp    wt_kg    ht_cm
 ##   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 generation        NA       -0.0222    0.179         -0.288    -0.0302  -0.00942
@@ -2138,14 +2112,14 @@ automatically plot the values.</p>
 ## 4 days_onset_hosp   -0.288   -0.000635 -0.600         NA         0.0153  -0.00953
 ## 5 wt_kg             -0.0302   0.833    -0.00636        0.0153   NA        0.884  
 ## 6 ht_cm             -0.00942  0.877     0.0181        -0.00953   0.884   NA</code></pre>
-<div class="sourceCode" id="cb955"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## remove duplicate entries (the table above is mirrored) </span>
 <span class="va">correlation_tab</span> <span class="op">&lt;-</span> <span class="va">correlation_tab</span> <span class="op">%&gt;%</span> 
   <span class="fu">shave</span><span class="op">(</span><span class="op">)</span>
 
 <span class="co">## view correlation table </span>
 <span class="va">correlation_tab</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
+<pre><code>## # A tibble: 6 × 7
 ##   term            generation       age ct_blood days_onset_hosp  wt_kg ht_cm
 ##   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ## 1 generation        NA       NA        NA              NA       NA        NA
@@ -2154,66 +2128,65 @@ automatically plot the values.</p>
 ## 4 days_onset_hosp   -0.288   -0.000635 -0.600          NA       NA        NA
 ## 5 wt_kg             -0.0302   0.833    -0.00636         0.0153  NA        NA
 ## 6 ht_cm             -0.00942  0.877     0.0181         -0.00953  0.884    NA</code></pre>
-<div class="sourceCode" id="cb957"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## plot correlations </span>
 <span class="fu">rplot</span><span class="op">(</span><span class="va">correlation_tab</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-730-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672"></div>
 <!-- ======================================================= -->
 </div>
-<div id="resources-10" class="section level2" number="18.6">
+<div id="resources-11" class="section level2" number="1.6">
 <h2>
-<span class="header-section-number">18.6</span> Resources<a class="anchor" aria-label="anchor" href="#resources-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6</span> Recursos<a class="anchor" aria-label="anchor" href="#resources-11"><i class="fas fa-link"></i></a>
 </h2>
-<p>Much of the information in this page is adapted from these resources and vignettes online:</p>
-<p><a href="http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html">gtsummary</a>
-<a href="https://dplyr.tidyverse.org/articles/grouping.html">dplyr</a>
+<p>Gran parte de la información de esta página está adaptada de estos recursos y viñetas en línea:</p>
+<p><a href="http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html">gtsummary</a> <a href="https://dplyr.tidyverse.org/articles/grouping.html">dplyr</a>
 <a href="https://corrr.tidymodels.org/articles/using-corrr.html">corrr</a>
-<a href="http://www.sthda.com/english/wiki/correlation-test-between-two-variables-in-r">sthda correlation</a></p>
+<a href="http://www.sthda.com/english/wiki/correlation-test-between-two-variables-in-r">correlaciones en sthda</a></p>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="descriptive-tables.html"><span class="header-section-number">17</span> Descriptive tables</a></div>
-<div class="next"><a href="univariate-and-multivariable-regression.html"><span class="header-section-number">19</span> Univariate and multivariable regression</a></div>
+<div class="prev"><a href="index.html"></a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simple-statistical-tests"><span class="header-section-number">18</span> Simple statistical tests</a></li>
+<li><a class="nav-link" href="#simple-statistical-tests"><span class="header-section-number">1</span> Borrador. Tests estadísticos sencillos</a></li>
 <li>
-<a class="nav-link" href="#preparation-8"><span class="header-section-number">18.1</span> Preparation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#load-packages-8">Load packages</a></li>
-<li><a class="nav-link" href="#import-data-8">Import data</a></li>
+<a class="nav-link" href="#preparation-9"><span class="header-section-number">1.1</span> Preparation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cargar-paquetes">Cargar paquetes</a></li>
+<li><a class="nav-link" href="#importar-datos">Importar datos</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#base-r-2"><span class="header-section-number">18.2</span> base R</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#t-tests">T-tests</a></li>
-<li><a class="nav-link" href="#shapiro-wilk-test">Shapiro-Wilk test</a></li>
-<li><a class="nav-link" href="#wilcoxon-rank-sum-test">Wilcoxon rank sum test</a></li>
-<li><a class="nav-link" href="#kruskal-wallis-test">Kruskal-Wallis test</a></li>
-<li><a class="nav-link" href="#chi-squared-test">Chi-squared test</a></li>
+<a class="nav-link" href="#base-r-2"><span class="header-section-number">1.2</span> R base</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#tests-t">Tests-T</a></li>
+<li><a class="nav-link" href="#test-de-shapiro-wilk">Test de Shapiro-Wilk</a></li>
+<li><a class="nav-link" href="#test-de-suma-de-rangos-de-wilcoxon">Test de suma de rangos de Wilcoxon</a></li>
+<li><a class="nav-link" href="#test-de-kruskal-wallis">Test de Kruskal-Wallis</a></li>
+<li><a class="nav-link" href="#test-de-chi-cuadrado">Test de Chi-cuadrado</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#rstatix-package"><span class="header-section-number">18.3</span> rstatix package</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#summary-statistics-2">Summary statistics</a></li>
-<li><a class="nav-link" href="#t-test">T-test</a></li>
-<li><a class="nav-link" href="#shapiro-wilk-test-1">Shapiro-Wilk test</a></li>
-<li><a class="nav-link" href="#wilcoxon-rank-sum-test-1">Wilcoxon rank sum test</a></li>
-<li><a class="nav-link" href="#kruskal-wallis-test-1">Kruskal-Wallis test</a></li>
-<li><a class="nav-link" href="#chi-squared-test-1">Chi-squared test</a></li>
+<a class="nav-link" href="#rstatix-package"><span class="header-section-number">1.3</span> Paquete rstatix</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#summary-statistics">Summary statistics</a></li>
+<li><a class="nav-link" href="#test-t">Test-T</a></li>
+<li><a class="nav-link" href="#test-de-shapiro-wilk-1">Test de Shapiro-Wilk</a></li>
+<li><a class="nav-link" href="#test-de-suma-de-rangos-de-wilcoxon-1">Test de suma de rangos de Wilcoxon</a></li>
+<li><a class="nav-link" href="#test-de-kruskal-wallis-1">Test de Kruskal-Wallis</a></li>
+<li><a class="nav-link" href="#test-de-chi-cuadrado-1">Test de Chi-cuadrado</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#stats_gt"><span class="header-section-number">18.4</span> gtsummary package</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#chi-squared-test-2">Chi-squared test</a></li>
-<li><a class="nav-link" href="#t-tests-1">T-tests</a></li>
-<li><a class="nav-link" href="#wilcoxon-rank-sum-test-2">Wilcoxon rank sum test</a></li>
-<li><a class="nav-link" href="#kruskal-wallis-test-2">Kruskal-wallis test</a></li>
+<a class="nav-link" href="#stats_gt"><span class="header-section-number">1.4</span> gtsummary package</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#test-de-chi-cuadrado-2">Test de Chi-cuadrado</a></li>
+<li><a class="nav-link" href="#tests-t-1">Tests-T</a></li>
+<li><a class="nav-link" href="#test-de-suma-de-rangos-de-wilcoxon-2">Test de suma de rangos de Wilcoxon</a></li>
+<li><a class="nav-link" href="#test-de-kruskal-wallis-2">Test de Kruskal-Wallis</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#correlations"><span class="header-section-number">18.5</span> Correlations</a></li>
-<li><a class="nav-link" href="#resources-10"><span class="header-section-number">18.6</span> Resources</a></li>
+<li><a class="nav-link" href="#correlations"><span class="header-section-number">1.5</span> Correlaciones</a></li>
+<li><a class="nav-link" href="#resources-11"><span class="header-section-number">1.6</span> Recursos</a></li>
 </ul>
 
       <div class="book-extra">
@@ -2230,7 +2203,7 @@ automatically plot the values.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-12-02.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2021-12-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -2238,34 +2211,6 @@ automatically plot the values.</p>
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>
