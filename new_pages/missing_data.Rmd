@@ -1,27 +1,29 @@
 
-# Missing data { }
+# Borrador. Valores faltantes {#missing-data}
 
 ```{r, out.width=c("50%"), echo=F}
 knitr::include_graphics(here::here("images", "missingness.png"))
 knitr::include_graphics(here::here("images", "missingness_overview.png"))
 ```
 
-This page will cover how to:  
+<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
-1) Assess missingness  
-2) Filter out rows by missingness  
-3) Plot missingness over time  
-4) Handle how `NA` is displayed in plots  
-5) Perform missing value imputation: MCAR, MAR, MNAR  
+En esta página se explica cómo:
+
+1.  Evaluar la falta de información
+2.  Filtrar las filas por falta de datos
+3.  Representar la falta de datos a lo largo del tiempo
+4.  Manejar cómo se muestra `NA` en los gráficos
+5.  Realizar la imputación de valores faltantes: MCAR, MAR, MNAR
 
 
 
 <!-- ======================================================= -->
-## Preparation { }
+## Preparación {#preparation-10 }
 
-### Load packages {.unnumbered}  
+### Cargar paquetes {.unnumbered}  
 
-This code chunk shows the loading of packages required for the analyses. In this handbook we emphasize `p_load()` from **pacman**, which installs the package if necessary *and* loads it for use. You can also load installed packages with  `library()` from **base** R. See the page on [R basics] for more information on R packages.  
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para tu uso. También puede cargar los paquetes instalados con `library()` de de R **base** Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r}
 pacman::p_load(
@@ -33,9 +35,9 @@ pacman::p_load(
 ```
 
 
-### Import data {.unnumbered}
+### Importar datos {.unnumbered}
 
-We import the dataset of cases from a simulated Ebola epidemic. If you want to follow along, <a href='https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds' class='download-button'>click to download the "clean" linelist</a> (as .rds file). Import your data with the `import()` function from the **rio** package (it accepts many file types like .xlsx, .rds, .csv - see the [Import and export] page for details).  
+Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar `linelist` "limpia"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa tus datos con la función `import()` del paquete **rio** (acepta muchos tipos de archivos como .xlsx, .rds, .csv - Mira la página de [importación y exportación](#import-and-export) para más detalles).
 
 ```{r, echo=F}
 # import the linelist into R
@@ -47,7 +49,7 @@ linelist <- rio::import(here::here("data", "case_linelists", "linelist_cleaned.r
 linelist <- import("linelist_cleaned.rds")
 ```
 
-The first 50 rows of the linelist are displayed below.
+A continuación se muestran las primeras 50 filas de `linelist`.
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
@@ -55,32 +57,32 @@ DT::datatable(head(linelist, 50), rownames = FALSE, filter="top", options = list
 ```
 
 
-### Convert missing on import {.unnumbered}  
+### Convertir valores faltantes en la importación {.unnumbered}  
+Convertir valores faltantes en la importación
 
-When importing your data, be aware of values that should be classified as missing. For example, 99, 999, "Missing", blank cells (""), or cells with an empty space (" "). You can convert these to `NA` (R's version of missing data) during the data import command.  
-See the page on importing page section on [Missing data](#import_missing) for details, as the exact syntax varies by file type.  
+Al importar los datos, ten en cuenta los valores que deben clasificarse como ausentes. Por ejemplo, 99, 999, "Missing", celdas en blanco ("") o celdas con un espacio vacío (" "). Puedes convertirlos en `NA` (la versión de R de los valores faltantes) durante el comando de importación de datos.
+Consulta la página sobre la importación de la sección de [datos faltantes](#import_missing) para obtener más detalles, ya que la sintaxis exacta varía según el tipo de archivo. 
 
 
 <!-- ======================================================= -->
-## Missing values in R { }
+## Valores faltantes en R {#missing-values-in-r}
 
 Below we explore ways that missingness is presented and assessed in R, along with some adjacent values and functions.  
 
 ### `NA` {.unnumbered}  
 
-In R, missing values are represented by a reserved (special) value - `NA`. Note that this is typed *without* quotes. "NA" is different and is just a normal character value (also a Beatles lyric from the song Hey Jude).  
+En R, los valores faltantes se representan con un valor reservado (especial): `NA`. Ten en cuenta que se escribe *sin* comillas. "NA" es diferente y es sólo un valor de carácter normal (también una letra de los Beatles de la canción Hey Jude).
 
-Your data may have other ways of representing missingness, such as "99", or "Missing", or "Unknown" - you may even have empty character value "" which looks "blank", or a single space " ". Be aware of these and consider whether to [convert them to `NA` during import](#import_missing) or during data cleaning with `na_if()`.  
+Tus datos pueden tener otras formas de representar la falta, como "99", o "Missing", o "Desconocido" - incluso puedes tener el valor de carácter vacío "" que parece "en blanco", o un solo espacio " ". Se consciente de ello y considera la posibilidad de [convertirlos en `NA` durante la importación](#import_missing) o durante la limpieza de datos con `na_if()`.
 
-In your data cleaning, you may also want to convert the other way - changing all `NA` to "Missing" or similar with `replace_na()` or with `fct_explicit_na()` for factors.  
-
-
+En tu limpieza de datos, también puedes convertir en el otro sentido - cambiando todos los `NA` a "Missing" o similar con `replace_na()` o con `fct_explicit_na()` para los factores.
 
 
-### Versions of `NA` {.unnumbered}  
+### Versiones de `NA` {.unnumbered}  
 
-Most of the time, `NA` represents a missing value and everything works fine. However, in some circumstances you may encounter the need for *variations* of `NA` specific to an object class (character, numeric, etc). This will be rare, but you should be aware.    
-The typical scenario for this is when creating a new column with the **dplyr** function `case_when()`. As described in the [Cleaning data and core functions](#clean_case_when) page, this function evaluates every row in the data frame, assess whether the rows meets specified logical criteria (right side of the code), and assigns the correct new value (left side of the code). *Importantly: all values on the right side must be the same class*.  
+La mayoría de las veces, `NA` representa un valor que falta y todo funciona bien. Sin embargo, en algunas circunstancias puede encontrar la necesidad de *variaciones* de `NA` específicas para un tipo de objeto (carácter, numérico, etc.). Esto será poco frecuente, pero debe tenerlo en cuenta.
+
+El escenario típico para esto es cuando se crea una nueva columna con la función **dplyr** `case_when()`. Como se describe en la página de [Limpieza de datos y funciones básicas](#clean_case_when), esta función evalúa cada fila del dataframe, valora si las filas cumplen con los criterios lógicos especificados (lado derecho del código), y asigna el nuevo valor correcto (lado izquierdo del código). *Importante: todos los valores del lado derecho deben ser del mismo tipo*. 
 
 ```{r, eval=F}
 linelist <- linelist %>% 
@@ -93,13 +95,13 @@ linelist <- linelist %>%
     TRUE                 ~ NA_real_)) # any other circumstance, assign missing
 ```
 
-If you want `NA` on the right side, you may need to specify one of the special `NA` options listed below. If the other right side values are character, consider using "Missing" instead or otherwise use `NA_character_`. If they are all numeric, use `NA_real_`. If they are all dates or logical, you can use `NA`.  
+Si deseas `NA` en el lado derecho, es posible que tenga que especificar una de las opciones especiales de `NA` que se indican a continuación. Si los otros valores del lado derecho son caracteres, considere usar "Missing" en tu lugar o, de lo contrario, usa `NA_character_`. Si todos son numéricos, utiliza `NA_real_`. Si todos son fechas o lógicos, puede utilizar `NA`.
 
-* `NA` - use for dates or logical TRUE/FALSE 
-* `NA_character_` - use for characters  
-* `NA_real_`  - use for numeric
+* `NA` - utilizar para fechas o TRUE/FALSE lógico
+* `NA_character_` - utilizar para caracteres
+* `NA_real_` - uso para numérico
 
-Again, it is not likely you will encounter these variations *unless* you are using `case_when()` to create a new column. See the [R documentation on NA](https://stat.ethz.ch/R-manual/R-devel/library/base/html/NA.html) for more information. 
+De nuevo, no es probable que se encuentre con estas variaciones *a menos que* esté utilizando `case_when()` para crear una nueva columna. Consulta la [documentación de R sobre NA](https://stat.ethz.ch/R-manual/R-devel/library/base/html/NA.html) para obtener más información.
 
 
 
@@ -107,27 +109,26 @@ Again, it is not likely you will encounter these variations *unless* you are usi
 
 ### `NULL` {.unnumbered}  
 
-`NULL` is another reserved value in R. It is the logical representation of a statement that is neither true nor false. It is returned by expressions or functions whose values are undefined. Generally do not assign NULL as a value, unless writing functions or perhaps writing a [**shiny** app][Dashboards with Shiny] to return `NULL` in specific scenarios.  
+`NULL` es otro valor reservado en R. Es la representación lógica de una declaración que no es ni verdadera ni falsa. Es devuelto por expresiones o funciones cuyos valores son indefinidos. Generalmente no asignes NULL como valor, a menos que escribas funciones o quizás escribas una [aplicación **Shiny**](#dashboards-with-shiny) para devolver `NULL` en escenarios específicos.
 
-Null-ness can be assessed using `is.null()` and conversion can made with `as.null()`.  
+La nulidad puede evaluarse con `is.null()` y la conversión puede hacerse con `as.null()`.
 
-See this [blog post](https://www.r-bloggers.com/2010/04/r-na-vs-null/) on the difference between `NULL` and `NA`.  
+Véase esta [entrada del blog](https://www.r-bloggers.com/2010/04/r-na-vs-null/) sobre la diferencia entre `NULL` y `NA`.
 
 
 
 
 ### `NaN` {.unnumbered}  
 
-Impossible values are represented by the special value `NaN`. An example of this is when you force R to divide 0 by 0. You can assess this with `is.nan()`. You may also encounter complementary functions including `is.infinite()` and `is.finite()`.  
-
+Los valores imposibles se representan con el valor especial `NaN`. Un ejemplo de esto es cuando se fuerza a R a dividir 0 entre 0. Puedes evaluar esto con `is.nan()`. También puede encontrar funciones complementarias incluyendo `is.infinite()` y `is.finite()`.
 
 ### `Inf` {.unnumbered}  
 
-`Inf` represents an infinite value, such as when you divide a number by 0.  
+`Inf` representa un valor infinito, como cuando se divide un número por 0.
 
-As an example of how this might impact your work: let's say you have a vector/column `z` that contains these values: `z <- c(1, 22, NA, Inf, NaN, 5)`
+Como ejemplo de cómo esto podría afectar a tu trabajo: digamos que tienes un vector/columna z que contiene estos valores: `z <- c(1, 22, NA, Inf, NaN, 5)`
 
-If you want to use `max()` on the column to find the highest value, you can use the `na.rm = TRUE` to remove the `NA` from the calculation, but the `Inf` and `NaN` remain and `Inf` will be returned. To resolve this, you can use brackets `[ ]` and `is.finite()` to subset such that only finite values are used for the calculation: `max(z[is.finite(z)])`.  
+Si deseas utilizar `max()` en la columna para encontrar el valor más alto, puede utilizar el `na.rm = TRUE` para eliminar el `NA` del cálculo, pero el `Inf` y el` NaN` permanecen y se devolverá `Inf`. Para resolver esto, puede utilizar los corchetes `[ ]` y `is.finite()` para subconjuntar de manera que sólo se utilicen valores finitos para el cálculo: `max(z[is.finite(z)])`.
 
 ```{r, eval=F}
 z <- c(1, 22, NA, Inf, NaN, 5)
@@ -137,10 +138,10 @@ max(z[is.finite(z)])             # returns 22
 ```
 
 
-### Examples {.unnumbered}  
+### Ejemplos {.unnumbered}  
 
 
-R command | Outcome
+Comando R | Resultado
 ----------|--------------
 `5 / 0` | `Inf`  
 `0 / 0` | `NaN`  
@@ -153,13 +154,13 @@ R command | Outcome
 `class(Inf)` | "numeric"  
 `class(NULL)` | "NULL"  
 
-"NAs introduced by coercion" is a common warning message. This can happen if you attempt to make an illegal conversion like inserting a character value into a vector that is otherwise numeric.  
+"NAs introducidos por coerción" es un mensaje de advertencia común. Esto puede ocurrir si se intenta hacer una conversión ilegal como insertar un valor de carácter en un vector que de otra manera es numérico.
 
 ```{r}
 as.numeric(c("10", "20", "thirty", "40"))
 ```
 
-`NULL` is ignored in a vector.  
+`NULL` se ignora en un vector.
 
 ```{r}
 my_vector <- c(25, NA, 10, NULL)  # define
@@ -167,7 +168,7 @@ my_vector                         # print
 ```
 
 
-Variance of one number results in `NA`.  
+La varianza de un número da como resultado `NA`.
 
 ```{r}
 var(22)
@@ -175,14 +176,14 @@ var(22)
 
 
 <!-- ======================================================= -->
-## Useful functions { }
+## Funciones útiles {#useful-functions}
 
-The following are useful **base** R functions when assessing or handling missing values:  
+Las siguientes son funciones de R **base** muy útiles a la hora de evaluar o manejar los valores faltantes:
 
 
-### `is.na()` and `!is.na()` {.unnumbered}  
+### `is.na()` y `!is.na()` {.unnumbered}  
 
-Use `is.na()`to identify missing values, or use its opposite (with `!` in front) to identify non-missing values. These both return a logical value (`TRUE` or `FALSE`). Remember that you can `sum()` the resulting vector to count the number `TRUE`, e.g. `sum(is.na(linelist$date_outcome))`.    
+Utiliza `is.na()` para identificar los valores que faltan, o utiliza tu opuesto (con `!` delante) para identificar los valores que no faltan. Ambos devuelven un valor lógico (`TRUE` o `FALSE`). Recuerda que puedes `sum()` el vector resultante para contar el número de `TRUE`, por ejemplo, `sum(is.na(linelist$date_outcome))`.   
 
 ```{r}
 my_vector <- c(1, 4, 56, NA, 5, NA, 22)
@@ -194,8 +195,7 @@ sum(is.na(my_vector))
 
 ### `na.omit()` {.unnumbered}  
 
-This function, if applied to a data frame, will remove rows with *any* missing values. It is also from **base** R.  
-If applied to a vector, it will remove `NA` values from the vector it is applied to. For example:  
+Esta función, si se aplica a un dataframe, eliminará *las* filas con valores faltantes. También es de R **base**. Si se aplica a un vector, eliminará los valores `NA` del vector al que se aplica. Por ejemplo:
 
 ```{r}
 na.omit(my_vector)
@@ -203,7 +203,7 @@ na.omit(my_vector)
 
 ### `drop_na()` {.unnumbered}  
 
-This is a **tidyr** function that is useful in a [data cleaning pipeline][Cleaning data and core functions]. If run with the parentheses empty, it removes rows with *any* missing values. If column names are specified in the parentheses, rows with missing values in those columns will be dropped. You can also use "tidyselect" syntax to specify the columns.  
+Esta es una función **tidyr** que es útil en un [proceso de limpieza de datos](#cleaning-data-and-core-functions). Si se ejecuta con los paréntesis vacíos, elimina *las* filas con valores faltantes. Si se especifican los nombres de las columnas en los paréntesis, se eliminarán las filas con valores faltantes en esas columnas. También puede utilizar la sintaxis "tidyselect" para especificar las columnas. 
 
 ```{r, eval=F}
 linelist %>% 
@@ -213,9 +213,9 @@ linelist %>%
 
 ### `na.rm = TRUE` {.unnumbered}  
 
-When you run a mathematical function such as `max()`, `min()`, `sum()` or `mean()`, if there are any `NA` values present the returned value will be `NA`. This default behavior is intentional, so that you are alerted if any of your data are missing.  
+Cuando se ejecuta una función matemática como `max()`, `min()`, `sum()` o `mean()`, si hay algún valor `NA` presente el valor devuelto será NA. Este comportamiento por defecto es intencionado, para que se le avise si falta algún dato.
 
-You can avoid this by removing missing values from the calculation. To do this, include the argument `na.rm = TRUE` ("na.rm" stands for "remove `NA`").  
+Puedes evitarlo eliminando los valores faltantes del cálculo. Para ello, incluya el argumento `na.rm = TRUE` ("na.rm" significa "eliminar NA").
 
 
 ```{r}
@@ -229,25 +229,25 @@ mean(my_vector, na.rm = TRUE)
 
 
 <!-- ======================================================= -->
-## Assess missingness in a data frame { }
+## Evaluar la ausencia de datos en un dataframe {#assess-missingness-in-a-data-frame}
 
-You can use the package **naniar** to assess and visualize missingness in the data frame `linelist`.  
+Puedes utilizar el paquete **naniar** para evaluar y visualizar la falta de datos del dataframe `linelist`. 
 
 ```{r}
 # install and/or load package
 pacman::p_load(naniar)
 ```
 
-### Quantifying missingness {.unnumbered}
+### Cuantificación de la ausencia de datos {.unnumbered}
 
-To find the percent of all values that are missing use `pct_miss()`. Use `n_miss()` to get the number of missing values.  
+Para encontrar el porcentaje de todos los valores que faltan utiliza `pct_miss()`. Utiliza `n_miss()` para obtener el número de valores faltantes.  
 
 ```{r}
 # percent of ALL data frame values that are missing
 pct_miss(linelist)
 ```
 
-The two functions below return the percent of rows with any missing value, or that are entirely complete, respectively. Remember that `NA` means missing, and that ``""` or `" "` will not be counted as missing.  
+Las dos funciones siguientes devuelven el porcentaje de filas con algún valor ausente, o que están totalmente completas, respectivamente. Recuerda que `NA` significa que falta, y que `""` o `" "` no se contarán como faltantes.
 
 ```{r}
 # Percent of rows with any value missing
@@ -261,20 +261,20 @@ pct_complete_case(linelist) # use n_complete() for counts
 
 
 
-### Visualizing missingness {.unnumbered}  
+### Visualización de faltantes {.unnumbered}  
 
-The `gg_miss_var()` function will show you the number (or %) of missing values in each column. A few nuances:  
+La función `gg_miss_var()` le mostrará el número (o %) de valores faltantes en cada columna. Algunos matices:
 
-* You can add a column name (not in quote) to the argument `facet = ` to see the plot by groups  
-* By default, counts are shown instead of percents, change this with `show_pct = TRUE`  
-* You can add axis and title labels as for a normal `ggplot()` with `+ labs(...)`  
+* Puedes añadir un nombre de columna (no entre comillas) al argumento `facet = ` para ver el gráfico por grupos
+* Por defecto, se muestran los recuentos en lugar de los porcentajes, cámbielo con `show_pct = TRUE`
+* Puedes añadir etiquetas de eje y de título como para un `ggplot()` normal con `+ labs(...)` 
 
 
 ```{r}
 gg_miss_var(linelist, show_pct = TRUE)
 ```
 
-Here the data are piped `%>%` into the function. The `facet = ` argument is also used to split the data.  
+Aquí los datos son canalizados `%>%` en la función. El argumento `facet = ` también se utiliza para dividir los datos.
 
 ```{r}
 linelist %>% 
@@ -282,7 +282,7 @@ linelist %>%
 ```
 
 
-You can use `vis_miss()` to visualize the data frame as a heatmap, showing whether each value is missing or not. You can also `select()` certain columns from the data frame and provide only those columns to the function.    
+Puedes utilizar `vis_miss()` para visualizar el dataframe como un mapa de calor, mostrando si cada valor falta o no. También puede `select()` determinadas columnas del dataframe y proporcionar sólo esas columnas a la función.
 
 ```{r}
 # Heatplot of missingness across the entire data frame  
@@ -290,13 +290,13 @@ vis_miss(linelist)
 ```
 
 
-### Explore and visualize missingness relationships {.unnumbered} 
+### Explorar y visualizar las relaciones de datos faltantes {.unnumbered} 
 
-How do you visualize something that is not there??? By default, `ggplot()` removes points with missing values from plots.  
+¿Cómo se visualiza algo que no existe? Por defecto, `ggplot()` elimina los puntos con valores faltantes de los gráficos.
 
-**naniar** offers a solution via `geom_miss_point()`. When creating a scatterplot of two columns, records with one of the values missing and the other value present are shown by setting the missing values to 10% lower than the lowest value in the column, and coloring them distinctly.  
+**naniar** ofrece una solución mediante `geom_miss_point()`. Al crear un gráfico de dispersión de dos columnas, los registros con uno de los valores ausentes y el otro valor presente se muestran estableciendo los valores ausentes en un 10% más bajo que el valor más bajo de la columna, y coloreándolos de forma distinta.
 
-In the scatterplot below, the red dots are records where the value for one column is present but the value for the other column is missing. This allows you to see the distribution of missing values in relation to the non-missing values.  
+En el gráfico de dispersión que aparece a continuación, los puntos rojos son registros en los que el valor de una columna está presente pero falta el valor de la otra columna. Esto permite ver la distribución de los valores que faltan en relación con los valores que no faltan.
 
 
 
@@ -307,14 +307,14 @@ ggplot(
   geom_miss_point()
 ```
 
-To assess missingness in the data frame *stratified by another column*, consider `gg_miss_fct()`, which returns a heatmap of percent missingness in the data frame *by a factor/categorical (or date) column*:  
+Para evaluar la ausencia en el dataframe *estratificado por otra columna*, considere `gg_miss_fct()`, que devuelve un mapa de calor del porcentaje de ausencia en el dataframe *por una columna de factor/categoría (o fecha)*:
 
 ```{r}
 gg_miss_fct(linelist, age_cat5)
 ```
 
 
-This function can also be used with a date column to see how missingness has changed over time:  
+Esta función también se puede utilizar con una columna de fechas para ver cómo ha cambiado la falta en el tiempo:  
 
 ```{r}
 gg_miss_fct(linelist, date_onset)
@@ -323,9 +323,9 @@ gg_miss_fct(linelist, date_onset)
 
 
 
-### "Shadow" columns {.unnumbered}
+### "Sombra" de las columnas {.unnumbered}
 
-Another way to visualize missingness in one column by values in a second column is using the "shadow" that **naniar** can create. `bind_shadow()` creates a binary `NA`/not `NA` column for every existing column, and binds all these new columns to the original dataset with the appendix "_NA". This doubles the number of columns - see below:  
+Otra forma de visualizar la ausencia de valores en una columna es mediante una segunda columna que sea como una "sombra" de esta  que puede crear **naniar**. `bind_shadow()` crea una columna binaria `NA`/no `NA` para cada columna existente, y vincula todas estas nuevas columnas al conjunto de datos original con el apéndice "_NA". Esto duplica el número de columnas - ver más abajo:
 
 
 ```{r}
@@ -335,9 +335,9 @@ shadowed_linelist <- linelist %>%
 names(shadowed_linelist)
 ```
 
-These "shadow" columns can be used to plot the proportion of values that are missing, by any another column.  
+Estas  "sombras" de las columnas pueden utilizarse para trazar la proporción de valores que faltan, por cualquier otra columna.
 
-For example, the plot below shows the proportion of records missing `days_onset_hosp` (number of days from symptom onset to hospitalisation), by that record's value in `date_hospitalisation`. Essentially, you are plotting the density of the x-axis column, but stratifying the results (`color = `) by a shadow column of interest. This analysis works best if the x-axis is a numeric or date column.  
+Por ejemplo, el siguiente gráfico muestra la proporción de registros que carecen de `days_onset_hosp` (número de días desde el inicio de los síntomas hasta la hospitalización), según el valor de ese registro en `date_hospitalisation`. Esencialmente, se está trazando la densidad de la columna del eje x, pero estratificando los resultados (`color =` ) por una columna de sombra de interés. Este análisis funciona mejor si el eje-x es una columna numérica o de fecha.
 
 
 ```{r, message = F}
@@ -347,7 +347,7 @@ ggplot(data = shadowed_linelist,          # data frame with shadow columns
   geom_density()                          # plots the density curves
 ```
 
-You can also use these "shadow" columns to stratify a statistical summary, as shown below:
+También puedes utilizar estas columnas "sombra" para estratificar un resumen estadístico, como se muestra a continuación:
 
 ```{r}
 linelist %>%
@@ -364,12 +364,12 @@ linelist %>%
 ```
 
 
-An alternative way to plot the proportion of a column's values that are missing over time is shown below. It does *not* involve **naniar**. This example shows percent of weekly observations that are missing).  
+A continuación se muestra una forma alternativa de trazar la proporción de los valores de una columna que faltan a lo largo del tiempo. *No* implica **naniar**. Este ejemplo muestra el porcentaje de observaciones semanales que faltan).
 
-1) Aggregate the data into a useful time unit (days, weeks, etc.), summarizing the proportion of observations with `NA` (and any other values of interest)  
-2) Plot the proportion missing as a line using `ggplot()`  
+1.  Agregue los datos en una unidad de tiempo útil (días, semanas, etc.), resumiendo la proporción de observaciones con `NA` (y cualquier otro valor de interés)
+2.  Trazar la proporción que falta como una línea usando `ggplot()`
 
-Below, we take the linelist, add a new column for week, group the data by week, and then calculate the percent of that week's records where the value is missing. (note: if you want % of 7 days the calculation would be slightly different).  
+A continuación, tomamos `linelist`, añadimos una nueva columna para la semana, agrupamos los datos por semana y luego calculamos el porcentaje de registros de esa semana en los que falta el valor. (Nota: si se deseas el porcentaje de 7 días el cálculo sería ligeramente diferente).
 
 ```{r}
 outcome_missing <- linelist %>%
@@ -388,7 +388,7 @@ outcome_missing <- linelist %>%
   filter(stringr::str_detect(statistic, "_p_"))                  # keep only the proportion values
 ```
 
-Then we plot the proportion missing as a line, by week. The [ggplot basics] page if you are unfamiliar with the **ggplot2** plotting package.  
+Entonces, trazamos la proporción que falta como una línea, por semana. La página de [fundamentos de ggplot](#ggplot-basics) si no está familiarizado con el paquete de trazado **ggplot2**.
 
 ```{r, message=F, warning=F}
 ggplot(data = outcome_missing)+
@@ -412,14 +412,13 @@ ggplot(data = outcome_missing)+
 
 
 <!-- ======================================================= -->
-## Using data with missing values  
+## Uso de datos con valores faltantes {#using-data-with-missing-values} 
 
+### Filtrar las filas con valores faltantes {.unnumbered}
 
-### Filter out rows with missing values {.unnumbered}
+Para eliminar rápidamente las filas con valores faltantes, utiliza la función **dplyr** `drop_na()`.
 
-To quickly remove rows with missing values, use the **dplyr** function `drop_na()`.  
-
-The original `linelist` has ` nrow(linelist)` rows. The adjusted number of rows is shown below:  
+`linelist` original tiene ` nrow(linelist)` filas. El número ajustado de filas se muestra a continuación:
 
 ```{r}
 linelist %>% 
@@ -427,7 +426,7 @@ linelist %>%
   nrow()
 ```
 
-You can specify to drop rows with missingness in certain columns:  
+Puedes especificar que se eliminen las filas que faltan en determinadas columnas:
 
 ```{r}
 linelist %>% 
@@ -435,7 +434,7 @@ linelist %>%
   nrow()
 ```
 
-You can list columns one after the other, or use ["tidyselect" helper functions](#clean_tidyselect):  
+Puedes listar las columnas una tras otra, o utilizar [las funciones de ayuda "tidyselect"](#clean_tidyselect):
 
 ```{r}
 linelist %>% 
@@ -446,14 +445,14 @@ linelist %>%
 
 
 <!-- ======================================================= -->
-### Handling `NA` in `ggplot()` {.unnumbered}
+### Manejo de `NA` en `ggplot()` {.unnumbered}
 
-It is often wise to report the number of values excluded from a plot in a caption. Below is an example:  
+A menudo es conveniente informar del número de valores excluidos de un gráfico en un pie de foto. A continuación se muestra un ejemplo:
 
-In `ggplot()`, you can add `labs()` and within it a `caption = `. In the caption, you can use `str_glue()` from **stringr** package to paste values together into a sentence dynamically so they will adjust to the data. An example is below:  
+En `ggplot()`, puedes añadir `labs()` y dentro de él un `caption = `. En el pié, puedes usar `str_glue()` del paquete **stringr** para pegar los valores juntos en una frase de forma dinámica para que se ajusten a los datos. Un ejemplo es el siguiente:
 
-* Note the use of `\n` for a new line.  
-* Note that if multiple column would contribute to values not being plotted (e.g. age or sex if those are reflected in the plot), then you must filter on those columns as well to correctly calculate the number not shown.  
+* Observa el uso de `\n` para una nueva línea.
+* Ten en cuenta que si varias columnas contribuyen a que los valores no se muestren (por ejemplo, la edad o el sexo si se reflejan en el gráfico), deberá filtrar también esas columnas para calcular correctamente el número no mostrado.
 
 ```{r, eval=F}
 labs(
@@ -465,13 +464,13 @@ labs(
   {nrow(central_data %>% filter(is.na(date_onset)))} cases missing date of onset and not shown."))  
 ```
 
-Sometimes, it can be easier to save the string as an object in commands prior to the `ggplot()` command, and simply reference the named string object within the `str_glue()`.  
+A veces, puede ser más fácil guardar la cadena como un objeto en comandos anteriores al comando `ggplot()`, y simplemente referenciar el objeto de cadena nombrado dentro de `str_glue()`.
 
 
 <!-- ======================================================= -->
-### `NA` in factors {.unnumbered}
+### `NA` en los factores {.unnumbered}
 
-If your column of interest is a factor, use `fct_explicit_na()` from the **forcats** package to convert `NA` values to a character value. See more detail in the [Factors] page. By default, the new value is "(Missing)" but this can be adjusted via the `na_level =` argument.   
+Si tu columna de interés es un factor, utiliza `fct_explicit_na()` del paquete **forcats** para convertir los valores `NA` en un valor de carácter. Mira más detalles en la página de [Factores](#factors). Por defecto, el nuevo valor es "(Missing)" pero puede ajustarse mediante el argumento `na_level = `.
 
 ```{r}
 pacman::p_load(forcats)   # load package
@@ -485,58 +484,57 @@ levels(linelist$gender)
 
 
 <!-- ======================================================= -->
-## Imputation { }
+## Imputación {#imputation}
 
+A veces, al analizar los datos, será importante "rellenar los huecos" e imputar los datos que faltan Aunque siempre se puede analizar simplemente unos datos después de eliminar todos los valores que faltan, esto puede causar problemas de muchas maneras. He aquí dos ejemplos:
 
-Sometimes, when analyzing your data, it will be important to "fill in the gaps" and impute missing data While you can always simply analyze a dataset after removing all missing values, this can cause problems in many ways. Here are two examples: 
+1)  Al eliminar todas las observaciones con valores faltantes o las variables con una gran cantidad de valores faltantes, podría reducir tu potencia o tu capacidad para realizar algunos tipos de análisis. Por ejemplo, como descubrimos antes, sólo una pequeña fracción de las observaciones de nuestro conjunto de datos de listas de líneas no tiene valores faltantes en todas nuestras variables. Si elimináramos la mayor parte de nuestro conjunto de datos, perderíamos mucha información. Además, la mayoría de nuestras variables tienen una cierta cantidad de valores faltantes; para la mayoría de los análisis, probablemente no sea razonable eliminar todas las variables que tienen muchos valores faltantes.
 
-1) By removing all observations with missing values or variables with a large amount of missing data, you might reduce your power or ability to do some types of analysis. For example, as we discovered earlier, only a small fraction of the observations in our linelist dataset have no missing data across all of our variables. If we removed the majority of our dataset we'd be losing a lot of information! And, most of our variables have some amount of missing data--for most analysis it's probably not reasonable to drop every variable that has a lot of missing data either.
+2)  Dependiendo de la razón por la que faltan datos, el análisis de los datos que no faltan podría conducir a resultados sesgados o engañosos. Por ejemplo, como hemos sabido antes, nos faltan datos de algunos pacientes sobre si han tenido algunos síntomas importantes como fiebre o tos. Pero, como una posibilidad, tal vez esa información no se registró para las personas que obviamente no estaban muy enfermas. En ese caso, si elimináramos estas observaciones, estaríamos excluyendo a algunas de las personas más sanas de nuestro conjunto de datos, lo que podría sesgar los resultados.
 
-2) Depending on why your data is missing, analysis of only non-missing data might lead to biased or misleading results. For example, as we learned earlier we are missing data for some patients about whether they've had some important symptoms like fever or cough. But, as one possibility, maybe that information wasn't recorded for people that just obviously weren't very sick. In that case, if we just removed these observations we'd be excluding some of the healthiest people in our dataset and that might really bias any results.
+Es importante pensar en por qué pueden faltar datos, además de ver cuántos faltan. Esto puede ayudarle a decidir la importancia de imputar los datos que faltan, así como el método de imputación de los datos que faltan que puede ser mejor en tu situación.
 
-It's important to think about why your data might be missing in addition to seeing how much is missing. Doing this can help you decide how important it might be to impute missing data, and also which method of imputing missing data might be best in your situation.
+### Tipos de datos faltantes {.unnumbered}
 
-### Types of missing data {.unnumbered}
+A continuación se presentan tres tipos generales de datos faltantes:
 
-Here are three general types of missing data:
+1)  **Falta completamente al azar** (MCAR). Esto significa que no existe ninguna relación entre la probabilidad de que falten datos y cualquiera de las otras variables de los datos. La probabilidad de que falte es la misma para todos los casos. Pero, si tiene una fuerte razón para creer que sus datos son MCAR, analizar sólo los datos no ausentes sin imputar no sesgará sus resultados (aunque puede perder algo de potencia). TODO: considerar la discusión de las pruebas estadísticas para MCAR].
 
-1) **Missing Completely at Random** (MCAR). This means that there is no relationship between the probability of data being missing and any of the other variables in your data. The probability of being missing is the same for all cases This is a rare situation. But, if you have strong reason to believe your data is MCAR analyzing only non-missing data without imputing won't bias your results (although you may lose some power). [TODO: consider discussing statistical tests for MCAR]
+2)  Falta al **azar (MAR**). Este nombre es, en realidad, un poco engañoso, ya que MAR significa que los datos faltan de forma sistemática y predecible en función del resto de la información que se tiene. Por ejemplo, puede que todas las observaciones de nuestro conjunto de datos con un valor ausente de fiebre no se hayan registrado porque se asumió que todos los pacientes con escalofríos y dolores tenían fiebre, por lo que nunca se les tomó la temperatura. Si es cierto, podríamos predecir fácilmente que cada observación que falta con escalofríos y dolores también tiene fiebre y utilizar esta información para imputar nuestros datos que faltan. En la práctica, esto es más bien un espectro. Quizá si un paciente tiene escalofríos y dolores, es más probable que también tenga fiebre si no se le toma la temperatura, pero no siempre. Esto sigue siendo predecible aunque no sea perfectamente predecible. Este es un tipo común de valores faltantes
 
-2) **Missing at Random** (MAR). This name is actually a bit misleading as MAR means that your data is missing in a systematic, predictable way based on the other information you have. For example, maybe every observation in our dataset with a missing value for fever was actually not recorded because every patient with chills and and aches was just assumed to have a fever so their temperature was never taken. If true, we could easily predict that every missing observation with chills and aches has a fever as well and use this information to impute our missing data. In practice, this is more of a spectrum. Maybe if a patient had both chills and aches they were more likely to have a fever as well if they didn't have their temperature taken, but not always. This is still predictable even if it isn't perfectly predictable. This is a common type of missing data 
+3)  **Desaparición no aleatoria** (MNAR). A veces, también se denomina Falta no aleatoria (**NMAR**). Esto supone que la probabilidad de que falte un valor NO es sistemática ni predecible utilizando el resto de la información que tenemos, pero tampoco falta al azar. En esta situación, los datos faltan por razones desconocidas o por razones de las que no se tiene ninguna información. Por ejemplo, en nuestro conjunto de datos puede faltar información sobre la edad porque algunos pacientes muy mayores no saben o se niegan a decir tu edad. En esta situación, los datos que faltan sobre la edad están relacionados con el propio valor (y, por tanto, no son aleatorios) y no son predecibles en función del resto de la información que tenemos. El MNAR es complejo y, a menudo, la mejor manera de afrontarlo es intentar recopilar más datos o información sobre el motivo por el que faltan los datos en lugar de intentar imputarlos.
 
-3) **Missing not at Random** (MNAR). Sometimes, this is also called **Not Missing at Random** (NMAR). This assumes that the probability of a value being missing is NOT systematic or predictable using the other information we have but also isn't missing randomly. In this situation data is missing for unknown reasons or for reasons you don't have any information about. For example, in our dataset maybe information on age is missing because some very elderly patients either don't know or refuse to say how old they are. In this situation, missing data on age is related to the value itself (and thus isn't random) and isn't predictable based on the other information we have. MNAR is complex and often the best way of dealing with this is to try to collect more data or information about why the data is missing rather than attempt to impute it. 
+En general, la imputación de datos MCAR suele ser bastante sencilla, mientras que la MNAR es muy difícil, si no imposible. Muchos de los métodos comunes de imputación de datos asumen MAR.
 
-In general, imputing MCAR data is often fairly simple, while MNAR is very challenging if not impossible. Many of the common data imputation methods assume MAR. 
+### Paquetes útiles {.unnumbered}
 
-### Useful packages {.unnumbered}
+Algunos paquetes útiles para la imputación de valores faltantes son Mmisc, missForest (que utiliza bosques aleatorios para imputar los valores faltantes) y mice (Imputación multivariada por ecuaciones encadenadas). Para esta sección sólo utilizaremos el paquete mice, que implementa una variedad de técnicas. El mantenedor del paquete mice ha publicado un libro en línea sobre la imputación de valores faltantes que entra en [más detalle aquí](https://stefvanbuuren.name/fimd/)https://stefvanbuuren.name/fimd/).
 
-Some useful packages for imputing missing data are Mmisc, missForest (which uses random forests to impute missing data), and mice (Multivariate Imputation by Chained Equations). For this section we'll just use the mice package, which implements a variety of techniques. The maintainer of the mice package has published an online book about imputing missing data that goes into more detail here (https://stefvanbuuren.name/fimd/).  
-
-Here is the code to load the mice package:
+Este es el código para cargar el paquete **mice** :
 
 ```{r}
 pacman::p_load(mice)
 ```
 
-### Mean Imputation {.unnumbered}
+### Imputación de la media {.unnumbered}
 
-Sometimes if you are doing a simple analysis or you have strong reason to think you can assume MCAR, you can simply set missing numerical values to the mean of that variable. Perhaps we can assume that missing temperature measurements in our dataset were either MCAR or were just normal values. Here is the code to create a new variable that replaces missing temperature values with the mean temperature value in our dataset. However, in many situations replacing data with the mean can lead to bias, so be careful.
+A veces, si estás haciendo un análisis simple o tiene una razón de peso para pensar que puede asumir MCAR, puede simplemente establecer los valores numéricos que faltan a la media de esa variable. Tal vez podamos asumir que las mediciones de temperatura que faltan en nuestro conjunto de datos eran MCAR o eran simplemente valores normales. Aquí está el código para crear una nueva variable que reemplaza los valores de temperatura faltantes con el valor medio de la temperatura en nuestro conjunto de datos. Sin embargo, en muchas situaciones reemplazar los datos con la media puede conducir a un sesgo, así que tenga cuidado.
 
 ```{r}
 linelist <- linelist %>%
   mutate(temp_replace_na_with_mean = replace_na(temp, mean(temp, na.rm = T)))
 ```
 
-You could also do a similar process for replacing categorical data with a specific value. For our dataset, imagine you knew that all observations with a missing value for their outcome (which can be "Death" or "Recover") were actually people that died (note: this is not actually true for this dataset):
+También puede realizar un proceso similar para sustituir los datos categóricos por un valor específico. Para nuestro conjunto de datos, imagine que sabe que todas las observaciones con un valor faltante para tu resultado (que puede ser "Muerte" o "Recuperación") son en realidad personas que han muerto (nota: esto no es realmente cierto para este conjunto de datos):
 
 ```{r}
 linelist <- linelist %>%
   mutate(outcome_replace_na_with_death = replace_na(outcome, "Death"))
 ```
 
-### Regression imputation {.unnumbered}
+### Imputación de la regresión {.unnumbered}
 
-A somewhat more advanced method is to use some sort of statistical model to predict what a missing value is likely to be and replace it with the predicted value. Here is an example of creating predicted values for all the observations where temperature is missing, but age and fever are not, using simple linear regression using fever status and age in years as predictors. In practice you'd want to use a better model than this sort of simple approach.
+Un método algo más avanzado consiste en utilizar algún tipo de modelo estadístico para predecir cuál es el valor que falta y sustituirlo por el valor predicho. Este es un ejemplo de creación de valores predichos para todas las observaciones en las que falta la temperatura, pero no la edad ni la fiebre, mediante una simple regresión lineal que utiliza el estado de la fiebre y la edad en años como predictores. En la práctica, es conveniente utilizar un modelo mejor que este tipo de enfoque simple.
 
 ```{r, warning=F, message=F}
 simple_temperature_model_fit <- lm(temp ~ fever + age_years, data = linelist)
@@ -546,7 +544,7 @@ predictions_for_missing_temps <- predict(simple_temperature_model_fit,
                                         newdata = linelist %>% filter(is.na(temp))) 
 ```
 
-Or, using the same modeling approach through the mice package to create imputed values for the missing temperature observations:
+O bien, utilizando el mismo enfoque de modelización a través del paquete **mice** para crear valores imputados para las observaciones de temperatura que faltan:
 
 ```{r}
 model_dataset <- linelist %>%
@@ -563,13 +561,13 @@ temp_imputed_values <- temp_imputed$imp$temp
 ```
 
 
-This is the same type of approach by some more advanced methods like using the missForest package to replace missing data with predicted values. In that case, the prediction model is a random forest instead of a linear regression. You can use other types of models to do this as well. However, while this approach works well under MCAR you should be a bit careful if you believe MAR or MNAR more accurately describes your situation. The quality of your imputation will depend on how good your prediction model is and even with a very good model the variability of your imputed data may be underestimated. 
+Este es el mismo tipo de enfoque de algunos métodos más avanzados, como el uso del paquete **missForest** para sustituir los datos que faltan por valores predichos. En ese caso, el modelo de predicción es un bosque aleatorio en lugar de una regresión lineal. También se pueden utilizar otros tipos de modelos para hacer esto. Sin embargo, aunque este enfoque funciona bien con MCAR, debe tener un poco de cuidado si crees que MAR o MNAR describen con más precisión tu situación. La calidad de tu imputación dependerá de lo bueno que sea tu modelo de predicción e incluso con un modelo muy bueno la variabilidad de sus datos imputados puede estar subestimada.
 
-### LOCF and BOCF {.unnumbered}
+### LOCF y BOCF {.unnumbered}
 
-Last observation carried forward (LOCF) and baseline observation carried forward (BOCF) are imputation methods for time series/longitudinal data. The idea is to take the previous observed value as a replacement for the missing data. When multiple values are missing in succession, the method searches for the last observed value.
+La última observación trasladada (LOCF) y la observación de referencia trasladada (BOCF) son métodos de imputación para datos de series temporales/longitudinales. La idea es tomar el valor observado anterior como reemplazo de los datos que faltan. Cuando faltan varios valores sucesivamente, el método busca el último valor observado.
 
-The `fill()` function from the **tidyr** package can be used for both LOCF and BOCF imputation (however, other packages such as **HMISC**, **zoo**, and **data.table** also include methods for doing this). To show the `fill()` syntax we'll make up a simple time series dataset containing the number of cases of a disease for each quarter of the years 2000 and 2001. However, the year value for subsequent quarters after Q1 are missing so we'll need to impute them. The `fill()` junction is also demonstrated in the [Pivoting data] page.  
+La función `fill()` del paquete **tidyr** puede utilizarse para la imputación LOCF y BOCF (sin embargo, otros paquetes como **HMISC**, **zoo** y **data.table** también incluyen métodos para hacerlo). Para mostrar la sintaxis de `fill()`, crearemos un sencillo conjunto de datos de series temporales que contenga el número de casos de una enfermedad para cada trimestre de los años 2000 y 2001. Sin embargo, falta el valor del año para los trimestres posteriores al primero, por lo que tendremos que imputarlos. La unión `fill()` también se demuestra en la página [Pivoting data](#pivoting-data).
 
 ```{r}
 #creating our simple dataset
@@ -589,7 +587,7 @@ disease %>% fill(year)
 
 ```
 
-Note: make sure your data are sorted correctly before using the `fill()` function. `fill()`  defaults to filling "down" but you can also impute values in different directions by changing the `.direction` parameter. We can make a similar dataset where the year value is recorded only at the end of the year and missing for earlier quarters: 
+Nota: asegúrate de que tus datos están correctamente ordenados antes de utilizar la función `fill()`. `fill()` rellena por defecto "hacia abajo", pero también puede imputar valores en diferentes direcciones cambiando el parámetro `.direction`. Podemos hacer unos datos similar en el que el valor del año se registra sólo al final del año y falta para los trimestres anteriores:
 
 ```{r}
 #creating our slightly different dataset
@@ -608,18 +606,18 @@ disease <- tibble::tribble(
 disease %>% fill(year, .direction = "up")
 
 ```
-In this example, LOCF and BOCF are clearly the right things to do, but in more complicated situations it may be harder to decide if these methods are appropriate. For example, you may have missing laboratory values for a hospital patient after the first day. Sometimes, this can mean the lab values didn't change...but it could also mean the patient recovered and their values would be very different after the first day! Use these methods with caution.
+En este ejemplo, LOCF y BOCF son claramente lo correcto, pero en situaciones más complicadas puede ser más difícil decidir si estos métodos son apropiados. Por ejemplo, es posible que falten valores de laboratorio para un paciente del hospital después del primer día. A veces, esto puede significar que los valores de laboratorio no cambiaron... ¡pero también podría significar que el paciente se recuperó y sus valores serían muy diferentes después del primer día! Utiliza estos métodos con precaución.
 
 
-### Multiple Imputation {.unnumbered}
+### Imputación múltiple {.unnumbered}
 
-The online book we mentioned earlier by the author of the mice package (https://stefvanbuuren.name/fimd/) contains a detailed explanation of multiple imputation and why you'd want to use it. But, here is a basic explanation of the method:
+El [libro en línea que mencionamos antes](https://stefvanbuuren.name/fimd/), escrito por el autor del paquete **mice**  contiene una explicación detallada de la imputación múltiple y de los motivos por los que conviene utilizarla. Pero, aquí hay una explicación básica del método:
 
-When you do multiple imputation, you create multiple datasets with the missing values imputed to plausible data values (depending on your research data you might want to create more or less of these imputed datasets, but the mice package sets the default number to 5). The difference is that rather than a single, specific value each imputed value is drawn from an estimated distribution (so it includes some randomness). As a result, each of these datasets will have slightly different different imputed values (however, the non-missing data will be the same in each of these imputed datasets). You still use some sort of predictive model to do the imputation in each of these new datasets (mice has many options for prediction methods including *Predictive Mean Matching*, *logistic regression*, and *random forest*) but the mice package can take care of many of the modeling details. 
+Cuando se realiza una imputación múltiple, se crean múltiples conjuntos de datos con los valores faltantes imputados a valores de datos plausibles (dependiendo de los datos de tu investigación, puede querer crear más o menos de estos conjuntos de datos imputados, pero el paquete **mice** establece el número por defecto en 5). La diferencia es que, en lugar de un valor único y específico, cada valor imputado se extrae de una distribución estimada (por lo que incluye cierta aleatoriedad). Como resultado, cada uno de estos conjuntos de datos tendrá valores imputados ligeramente diferentes (sin embargo, los datos no ausentes serán los mismos en cada uno de estos conjuntos de datos imputados). Todavía se utiliza algún tipo de modelo predictivo para hacer la imputación en cada uno de estos nuevos conjuntos de datos (mice tiene muchas opciones para los métodos de predicción, incluyendo *Predictive Mean Matching*, *regresión logística* y *random forest*), pero el paquete mice puede encargarse de muchos de los detalles del modelado.
 
-Then, once you have created these new imputed datasets, you can apply then apply whatever statistical model or analysis you were planning to do for each of these new imputed datasets and pool the results of these models together. This works very well to reduce bias in both MCAR and many MAR settings and often results in more accurate standard error estimates.
+Entonces, una vez que haya creado estos nuevos conjuntos de datos imputados, puede aplicar cualquier modelo estadístico o análisis que estuviera planeando hacer para cada uno de estos nuevos conjuntos de datos imputados y juntar los resultados de estos modelos. Esto funciona muy bien para reducir el sesgo tanto en MCAR como en muchas configuraciones de MAR y a menudo resulta en estimaciones de error estándar más precisas.
 
-Here is an example of applying the Multiple Imputation process to predict temperature in our linelist dataset using a age and fever status (our simplified model_dataset from above):  
+He aquí un ejemplo de aplicación del proceso de Imputación Múltiple para predecir la temperatura en nuestro conjunto de datos de `linelist` utilizando una edad y un estado de fiebre (nuestro conjunto de datos modelo simplificado de arriba): 
 
 ```{r}
 # imputing missing values for all variables in our model_dataset, and creating 10 new imputed datasets
@@ -634,17 +632,17 @@ model_fit <- with(multiple_imputation, lm(temp ~ age_years + fever))
 base::summary(mice::pool(model_fit))
 ```
 
-Here we used the mice default method of imputation, which is Predictive Mean Matching. We then used these imputed datasets to separately estimate and then pool results from simple linear regressions on each of these datasets. There are many details we've glossed over and many settings you can adjust during the Multiple Imputation process while using the mice package. For example, you won't always have numerical data and might need to use other imputation methods (you can still use the mice package for many other types of data and methods). But, for a more robust analysis when missing data is a significant concern, Multiple Imputation is good solution that isn't always much more work than doing a complete case analysis. 
+En este caso, utilizamos el método de imputación por defecto del ratón, que es el de Coincidencia de Medias Predictivas. A continuación, utilizamos estos conjuntos de datos imputados para estimar por separado y luego agrupar los resultados de las regresiones lineales simples en cada uno de estos conjuntos de datos. Hay muchos detalles que hemos pasado por alto y muchas configuraciones que puede ajustar durante el proceso de Imputación Múltiple mientras utiliza el paquete **mice**. Por ejemplo, no siempre tendrá datos numéricos y podría necesitar utilizar otros métodos de imputación (puede seguir utilizando el paquete mice para muchos otros tipos de datos y métodos). Pero, para un análisis más robusto cuando los datos faltantes son una preocupación significativa, la Imputación Múltiple es una buena solución que no siempre es mucho más trabajo que hacer un análisis de caso completo.
 
 
 
 
 
 <!-- ======================================================= -->
-## Resources { }
+## Recursos {#resources-12}
 
-Vignette on the [naniar package](https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html)
+Viñeta sobre el [paquete naniar](https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html)
 
-Gallery of [missing value visualizations](https://cran.r-project.org/web/packages/naniar/vignettes/naniar-visualisation.html)
+Galería de [visualizaciones de valores faltantes](https://cran.r-project.org/web/packages/naniar/vignettes/naniar-visualisation.html)
 
-[Online book](https://stefvanbuuren.name/fimd/) about multiple imputation in R by the maintainer of the **mice** package 
+[Libro en línea](https://stefvanbuuren.name/fimd/) sobre imputación múltiple en R por el mantenedor del paquete **mice**
