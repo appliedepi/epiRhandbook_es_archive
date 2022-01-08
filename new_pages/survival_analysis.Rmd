@@ -2,7 +2,7 @@
 <!-- ======================================================= -->
 <!-- ======================================================= -->
 <!-- ======================================================= -->
-# Survival analysis { }  
+# Borrador. Análisis de supervivencia {#survival-analysis}
 
 
 ```{r out.width = c('75%'), fig.align='center', fig.show='hold', echo=F}
@@ -10,19 +10,17 @@ knitr::include_graphics(here::here("images", "survival_analysis.png"))
 ```
 
 <!-- ======================================================= -->
-## Overview {}
+<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
+## Resumen {#overview-5}
 
-*Survival analysis* focuses on describing for a given individual or group of individuals, a defined point of event called **_the failure_** (occurrence of a disease, cure from a disease, death, relapse after response to treatment...) that occurs after a period of time called **_failure time_** (or  **_follow-up time_** in cohort/population-based studies) during which individuals are observed. To determine the failure time, it is then necessary to define a time of origin (that can be the inclusion date, the date of diagnosis...). 
+El *análisis de supervivencia* se centra en la descripción, para un individuo o grupo de individuos determinado, de un punto definido de acontecimiento denominado **_the failure_** (aparición de una enfermedad, curación de una enfermedad, muerte, recaída tras la respuesta al tratamiento...) que se produce tras un periodo de tiempo denominado **_failure time_** (o  **_follow-up time_** (tiempo de seguimiento en los estudios basados en cohortes/poblaciones) durante el cual se observa a los individuos. Para determinar el tiempo de fracaso, es necesario definir un tiempo de origen (que puede ser la fecha de inclusión, la fecha de diagnóstico...).
 
-The target of inference for survival analysis is then the time between an origin and an event.
-In current medical research, it is widely used in clinical studies to assess the effect of a treatment for instance, or in cancer epidemiology to assess a large variety of cancer survival measures. 
+El objetivo de la inferencia para el análisis de supervivencia es entonces el tiempo entre un origen y un evento. En la investigación médica actual, se utiliza ampliamente en los estudios clínicos para evaluar el efecto de un tratamiento, por ejemplo, o en la epidemiología del cáncer para evaluar una gran variedad de medidas de supervivencia del cáncer.
 
+Suele expresarse mediante la ***probabilidad de supervivencia*** (survival probability), que es la probabilidad de que el suceso de interés no haya ocurrido en una duración t.
 
-It is usually expressed through the **_survival probability_** which is the probability that the event of interest has not occurred by a duration t.
-
-
-**_Censoring_**: Censoring occurs when at the end of follow-up, some of the individuals have not had the event of interest, and thus their true time to event is unknown. We will mostly focus on right censoring here but for more details on censoring and survival analysis in general, you can see references. 
+***Censura***: La censura se produce cuando al final del seguimiento, algunos de los individuos no han tenido el evento de interés, y por lo tanto su verdadero tiempo hasta el evento es desconocido. Aquí nos centraremos principalmente en la censura derecha, pero para más detalles sobre la censura y el análisis de supervivencia en general, puedes consultar las referencias.
 
 
 ```{r echo=F, eval=F, out.width = "80%", out.height="80%", fig.align = "center"}
@@ -34,13 +32,13 @@ It is usually expressed through the **_survival probability_** which is the prob
 ```  
 
 <!-- ======================================================= -->
-## Preparation {  }
+## Preparación {#preparation-17}
 
-### Load packages {.unnumbered}  
+### Cargar paquetes {.unnumbered}  
 
-To run survival analyses in R, one the most widely used package is the **survival** package. We first install it and then load it as well as the other packages that will be used in this section:
+Para realizar análisis de supervivencia en R, uno de los paquetes más utilizados es el de **survival**. Primero lo instalamos y luego lo cargamos, así como los demás paquetes que se utilizarán en esta sección:
 
-In this handbook we emphasize `p_load()` from **pacman**, which installs the package if necessary *and* loads it for use. You can also load installed packages with  `library()` from **base** R. See the page on [R basics] for more information on R packages.  
+En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r, echo=F, message=FALSE, warning=FALSE}
 
@@ -62,12 +60,12 @@ pacman::p_load(
 ```
 
 
-This page explores survival analyses using the linelist used in most of the previous pages and on which we apply some changes to have a proper survival data.
+Esta página explora los análisis de supervivencia sobre `linelist` utilizada en la mayoría de las páginas anteriores y sobre el que aplicamos algunos cambios para tener unos datos de supervivencia adecuados.
 
 
-### Import dataset {.unnumbered}  
+### Importar los datos {.unnumbered}  
 
-We import the dataset of cases from a simulated Ebola epidemic. If you want to follow along, <a href='https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds' class='download-button'>click to download the "clean" linelist</a> (as .rds file). Import data with the `import()` function from the **rio** package (it handles many file types like .xlsx, .csv, .rds - see the [Import and export] page for details).  
+Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar linelist "limpia"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - Mira la página de [importación y exportación](#import-and-export) para más detalles).
 
 ```{r echo=F}
 # import linelist
@@ -79,28 +77,29 @@ linelist_case_data <- rio::import(here::here("data", "case_linelists", "linelist
 linelist_case_data <- rio::import("linelist_cleaned.rds")
 ```
 
-### Data management and transformation {.unnumbered}
+### Gestión y transformación de datos {.unnumbered}
 
-In short, survival data can be described as having the following three characteristics:
+En resumen, los datos de supervivencia pueden describirse con las tres características siguientes:
 
-1) the dependent variable or response is the waiting time until the occurrence of a well-defined event,
-2) observations are censored, in the sense that for some units the event of interest has not occurred at the time the data are analyzed, and 
-3) there are predictors or explanatory variables whose effect on the waiting time we wish to assess or control. 
+1)  la variable dependiente o respuesta es el tiempo de espera hasta la ocurrencia de un evento bien definido,
+2)  bservaciones censuradas, en el sentido de que para algunas unidades el evento de interés no ha ocurrido en el momento en que se analizan los datos, y
+3.  existen predictores o variables explicativas cuyo efecto sobre el tiempo de espera queremos evaluar o controlar.
 
-Thus, we will create different variables needed to respect that structure and run the survival analysis.
+Así, crearemos las diferentes variables necesarias para respetar esa estructura y ejecutaremos el análisis de supervivencia.
 
-We define:
+Definiremos:
 
-- a new data frame `linelist_surv` for this analysis  
-- our event of interest as being "death" (hence our survival probability will be the probability of being alive after a certain time after the time of origin),
-- the follow-up time (`futime`) as the time between the time of onset and the time of outcome *in days*,
-- censored patients as those who recovered or for whom the final outcome is not known ie the event "death" was not observed (`event=0`).
+- un nuevo dataframe `linelist_surv` para este análisis
+- nuestro evento de interés como "death" (por lo tanto, nuestra probabilidad de supervivencia será la probabilidad de estar vivo después de un cierto tiempo después del momento de origen),
+- el tiempo de seguimiento (`futime`) como el tiempo transcurrido entre el momento del inicio y el momento del desenlace *en días*,
+- pacientes censurados son aquellos que se recuperaron o para los que no se conoce el resultado final, es decir, no se observó el evento "muerte" (`evento=0`).
 
-<span style="color: orange;">**_CAUTION:_** Since in a real cohort study, the information on the time of origin and the end of the follow-up is known given individuals are observed, we will remove observations where the date of onset or the date of outcome is unknown. Also the cases where the date of onset is later than the date of outcome will be removed since they are considered as wrong.</span>
 
-<span style="color: darkgreen;">**_TIP:_** Given that filtering to greater than (>) or less than (<) a date can remove rows with missing values, applying the filter on the wrong dates will also remove the rows with missing dates.</span>
+<span style="color: orange;">***PRECAUCIÓN:*** Dado que en un estudio de cohortes real, la información sobre el momento de origen y el final del seguimiento se conoce dado que los individuos son observados, eliminaremos las observaciones en las que se desconozca la fecha de inicio o la fecha de desenlace. También se eliminarán los casos en los que la fecha de inicio sea posterior a la fecha de desenlace, ya que se consideran erróneos.</span>
 
-We then use `case_when()` to create a column `age_cat_small` in which there are only 3 age categories.
+<span style="color: darkgreen;">***CONSEJO:*** Dado que el filtrado a mayor (>) o menor (<) de una fecha puede eliminar las filas con valores faltantes, la aplicación del filtro en las fechas incorrectas también eliminará las filas con fechas faltantes.</span>
+
+A continuación, utilizamos `case_when()` para crear una `columna age_cat_small` en la que sólo hay 3 categorías de edad.
 
 ```{r }
 #create a new data called linelist_surv from the linelist_case_data
@@ -133,7 +132,7 @@ linelist_surv <-  linelist_case_data %>%
 ```
 
 
-<span style="color: darkgreen;">**_TIP:_** We can verify the new columns we have created by doing a summary on the `futime` and a cross-tabulation between `event` and `outcome` from which it was created. Besides this verification it is a good habit to communicate the median follow-up time when interpreting survival analysis results.</span>
+<span style="color: darkgreen;">***CONSEJO:*** Podemos verificar las nuevas columnas que hemos creado haciendo un resumen sobre el `futime` y una tabulación cruzada entre `event` y `outcome` a partir del cual se ha creado. Además de esta verificación, es un buen hábito comunicar la mediana del tiempo de seguimiento al interpretar los resultados del análisis de supervivencia.</span>
 
 ```{r }
 
@@ -145,14 +144,14 @@ linelist_surv %>%
   tabyl(outcome, event)
 ```
 
-Now we cross-tabulate the new age_cat_small var and the old age_cat col to ensure correct assingments  
+Ahora cruzamos la nueva var de `age_cat_small` y la antigua columna `age_cat` para asegurarnos de que las asignaciones son correctas  
 
 ```{r}
 linelist_surv %>% 
   tabyl(age_cat_small, age_cat)
 ```
 
-Now we review the 10 first observations of the `linelist_surv` data looking at specific variables (including those newly created).  
+Ahora revisamos las 10 primeras observaciones de los datos de `linelist_surv` mirando las variables específicas (incluyendo las de nueva creación). 
 
 
 ```{r}
@@ -161,7 +160,7 @@ linelist_surv %>%
   head(10)
 ```
 
-We can also cross-tabulate the columns `age_cat_small` and `gender` to have more details on the distribution of this new column by gender. We use `tabyl()` and the *adorn* functions from **janitor** as described in the [Descriptive tables] page. 
+También podemos cruzar las columnas `age_cat_small` y `gender` para tener más detalles sobre la distribución de esta nueva columna por género. Utilizamos `tabyl()` y las funciones de *adorno* de **janitor** como se describe en la página de [tablas descriptivas](#descriptive-tables).
 
 <!-- For this we use the `stat.table()` function of the **Epi** package. -->
 
@@ -200,14 +199,14 @@ linelist_surv %>%
 
 
 <!-- ======================================================= -->
-## Basics of survival analysis {}
+## Fundamentos del análisis de supervivencia {#basics-of-survival-analysis}
 
 
-### Building a surv-type object {.unnumbered}
+### Construir un objeto de tipo surv-type {.unnumbered}
 
-We will first use `Surv()` from **survival** to build a survival object from the follow-up time and event columns.  
+Primero utilizaremos `Surv()` de **survival** para construir un objeto de supervivencia a partir de las columnas de tiempo de seguimiento y evento.
 
-The result of such a step is to produce an object of type *Surv* that condenses the time information and whether the event of interest (death) was observed. This object will ultimately be used in the right-hand side of subsequent model formulae (see [documentation](https://cran.r-project.org/web/packages/survival/vignettes/survival.pdf)).  
+El resultado de este paso es producir un objeto de tipo *Surv* que condensa la información de tiempo y si el evento de interés (muerte) fue observado. Este objeto se utilizará en última instancia en el lado derecho de las fórmulas posteriores del modelo ([véase la documentación](https://cran.r-project.org/web/packages/survival/vignettes/survival.pdf)). 
 
 
 ```{r survobj }
@@ -225,7 +224,7 @@ survobj <- Surv(time = linelist_surv$futime,
 <!-- ``` -->
 
 
-To review, here are the first 10 rows of the `linelist_surv` data, viewing only some important columns.  
+Puedes revisar las primeras 10 filas de los datos de `linelist_surv`, viendo sólo algunas columnas importantes.  
 
 ```{r}
 linelist_surv %>% 
@@ -233,7 +232,7 @@ linelist_surv %>%
   head(10)
 ```
 
-And here are the first 10 elements of `survobj`. It prints as essentially a vector of follow-up time, with "+" to represent if an observation was right-censored. See how the numbers align above and below.  
+Y aquí están los primeros 10 elementos de `survobj`. Se imprime como esencialmente un vector de tiempo de seguimiento, con "+" para representar si una observación fue censurada a la derecha. Mira cómo los números se alinean arriba y abajo.  
 
 ```{r}
 #print the 50 first elements of the vector to see how it presents
@@ -241,20 +240,20 @@ head(survobj, 10)
 ```
 
 
-### Running initial analyses {.unnumbered}
+### Realización de los primeros análisis {.unnumbered}
 
-We then start our analysis using the `survfit()` function to produce a *survfit object*, which fits the default calculations for **_Kaplan Meier_** (KM) estimates of the overall (marginal) survival curve, which are in fact a step function with jumps at observed event times. The final *survfit object*  contains one or more survival curves and is created using the *Surv* object as a response variable in the model formula.  
+A continuación, iniciamos nuestro análisis utilizando la función `survfit()` para producir un *objeto survfit*, que se ajusta a los cálculos por defecto para las estimaciones de ***Kaplan Meier*** (KM) de la curva de supervivencia global (marginal), que son de hecho una función escalonada con saltos en los tiempos de los eventos observados. El *objeto survfit* final contiene una o más curvas de supervivencia y se crea utilizando el objeto *Surv* como variable de respuesta en la fórmula del modelo.
 
-<span style="color: black;">**_NOTE:_** The Kaplan-Meier estimate is a nonparametric maximum likelihood estimate (MLE) of the survival function. . (see resources for more information).</span>
+<span style="color: black;">***NOTA:*** La estimación de Kaplan-Meier es una estimación no paramétrica de máxima verosimilitud (MLE) de la función de supervivencia. (ver recursos para más información).</span>
 
-The summary of this *survfit object* will give what is called a *life table*. For each time step of the follow-up (`time`) where an event happened (in ascending order):  
+El resumen de este *objeto survfit* dará lo que se llama una *tabla de vida*. Para cada paso de tiempo del seguimiento (tiempo) en el que ocurrió un evento (en orden ascendente):
 
-* the number of people who were at risk of developing the event (people who did not have the event yet nor were censored: `n.risk`)  
-* those who did develop the event  (`n.event`)  
-* and from the above: the probability of *not* developing the event (probability of not dying, or of surviving past that specific time)  
-* finally, the standard error and the confidence interval for that probability are derived and displayed  
+* el número de personas que estaban en riesgo de desarrollar el evento (personas que aún no tenían el evento ni estaban censuradas: n.riesgo)
+* los que sí desarrollaron el evento (`n.event`)
+* y de lo anterior: la probabilidad de *no* desarrollar el evento (probabilidad de no morir, o de sobrevivir más allá de ese tiempo específico)
+* por último, se obtienen y muestran el error estándar y el intervalo de confianza de esa probabilidad
 
-We fit the KM estimates using the formula where the previously Surv object "survobj" is the response variable. "~ 1" precises we run the model for the overall survival.  
+Ajustamos las estimaciones de KM mediante la fórmula en la que el objeto Surv "survobj" anterior es la variable de respuesta. "~ 1" precisa que ejecutamos el modelo para la supervivencia global.
 
 ```{r fit}
 # fit the KM estimates using a formula where the Surv object "survobj" is the response variable.
@@ -267,7 +266,7 @@ summary(linelistsurv_fit)
 ```
 
 
-While using `summary()` we can add the option `times` and  specify certain times at which we want to see the survival information 
+Al utilizar `summary()` podemos añadir la opción `times` y especificar ciertos tiempos en los que queremos ver la información de supervivencia
 
 ```{r print_spec_times}
 
@@ -277,9 +276,9 @@ summary(linelistsurv_fit, times = c(5,10,20,30,60))
 ```
 
 
-We can also use the `print()` function. The `print.rmean = TRUE` argument is used to obtain the mean survival time and its standard error (se).
+También podemos utilizar la función `print()`. El argumento `print.rmean = TRUE` se utiliza para obtener el tiempo medio de supervivencia y su error estándar (se).
 
-<span style="color: black;">**_NOTE:_** The restricted mean survival time (RMST) is a specific survival measure more and more used in cancer survival analysis and which is often defined as the area under the survival curve, given we observe patients up to restricted time T (more details in Resources section).
+***NOTA:*** El tiempo medio de supervivencia restringido (RMST) es una medida de supervivencia específica cada vez más utilizada en el análisis de supervivencia del cáncer y que suele definirse como el área bajo la curva de supervivencia, dado que observamos a los pacientes hasta el tiempo restringido T (más detalles en la sección Recursos).
 
 
 ```{r, mean_survtime}
@@ -289,14 +288,14 @@ print(linelistsurv_fit, print.rmean = TRUE)
 ```
 
 
-<span style="color: darkgreen;">**_TIP:_** We can create the *surv object* directly in the `survfit()` function and save a line of code. This will then look like: `linelistsurv_quick <-  survfit(Surv(futime, event) ~ 1, data=linelist_surv)`.</span>
+<span style="color: darkgreen;">***CONSEJO:*** Podemos crear el *objeto surv* directamente en la función `survfit()` y ahorrarnos una línea de código. Esto se verá como: `linelistsurv_quick <- survfit(Surv(futime, event) ~ 1, data=linelist_surv)`.</span>
 
 
-### Cumulative hazard {.unnumbered}  
+### Peligro acumulado {.unnumbered}  
 
-Besides the `summary()` function, we can also use the `str()` function that gives more details on the structure of the `survfit()` object. It is a list of 16 elements.  
+Además de la función `summary()`, también podemos utilizar la función `str()` que da más detalles sobre la estructura del objeto `survfit()`. Se trata de una lista de 16 elementos.
 
-Among these elements is an important one: `cumhaz`, which is a numeric vector. This could be plotted to allow show the **_cumulative hazard_**, with the **_hazard_** being the **_instantaneous rate of event occurrence_** (see references).
+Entre estos elementos hay uno importante: el `cumhaz`, que es un vector numérico. Se puede trazar para mostrar el ***peligro acumulado,*** siendo el ***peligro*** la ***tasa instantánea de ocurrencia del evento*** (ver referencias).
 
 ```{r fit_struct}
 
@@ -305,13 +304,13 @@ str(linelistsurv_fit)
 ```
 
 <!-- ======================================================= -->
-### Plotting Kaplan-Meir curves  {.unnumbered}
+### Trazado de curvas de Kaplan-Meir  {.unnumbered}
 
-Once the KM estimates are fitted, we can visualize the probability of being alive through a given time using the basic `plot()` function that draws the "Kaplan-Meier curve". In other words, the curve below is a conventional illustration of the survival experience in the whole patient group.
+Una vez ajustadas las estimaciones de KM, podemos visualizar la probabilidad de estar vivo a lo largo de un tiempo determinado utilizando la función básica `plot()` que dibuja la "curva de Kaplan-Meier". En otras palabras, la curva de abajo es una ilustración convencional de la experiencia de supervivencia en todo el grupo de pacientes.
 
-We can quickly verify the follow-up time min and max on the curve.  
+Podemos verificar rápidamente el tiempo de seguimiento mínimo y máximo en la curva.
 
-An easy way to interpret is to say that at time zero, all the participants are still alive and survival probability is then 100%. This probability decreases over time as patients die. The proportion of participants surviving past 60 days of follow-up is around 40%.
+Una forma fácil de interpretarlo es decir que en el momento cero, todos los participantes siguen vivos y la probabilidad de supervivencia es entonces del 100%. Esta probabilidad disminuye con el tiempo a medida que los pacientes mueren. La proporción de participantes que sobreviven más allá de los 60 días de seguimiento se sitúa en torno al 40%.
 
 ```{r }
 
@@ -323,9 +322,9 @@ plot(linelistsurv_fit,
 
 ```
 
-The confidence interval of the KM survival estimates are also plotted by default and can be dismissed by adding the option `conf.int = FALSE` to the `plot()` command.
+El intervalo de confianza de las estimaciones de supervivencia de KM también se traza por defecto y puede descartarse añadiendo la opción `conf.int = FALSE` al comando `plot()`.
 
-Since the event of interest is "death", drawing a curve describing the complements of the survival proportions will lead to drawing the cumulative mortality proportions. This can be done with `lines()`, which adds information to an existing plot.  
+Dado que el evento de interés es "death", dibujar una curva que describa los complementos de las proporciones de supervivencia llevará a dibujar las proporciones de mortalidad acumulada. Esto puede hacerse con `lines()`, que añade información a un gráfico existente.  
 
 
 ```{r}
@@ -361,17 +360,17 @@ legend(
 ```
 
 <!-- ======================================================= -->
-## Comparison of survival curves 
+## Comparación de las curvas de supervivencia {#comparison-of-survival-curves}
 
-To compare the survival within different groups of our observed participants or patients, we might need to first look at their respective survival curves and then run tests to evaluate the difference between independent groups. This comparison can concern groups based on gender, age, treatment, comorbidity...
+Para comparar la supervivencia dentro de los diferentes grupos de nuestros participantes o pacientes observados, es posible que tengamos que observar primero sus respectivas curvas de supervivencia y luego realizar pruebas para evaluar la diferencia entre grupos independientes. Esta comparación puede referirse a grupos basados en el género, la edad, el tratamiento, la comorbilidad...
 
-### Log rank test {.unnumbered}
+### test Log rank {.unnumbered}
 
-The log rank test is a popular test that compares the entire survival experience between two or more *independent* groups and can be thought of as a test of whether the survival curves are identical (overlapping) or not (null hypothesis of no difference in survival between the groups). The `survdiff()` function of the **survival package** allows running the log-rank test when we specify `rho = 0` (which is the default). The test results gives a chi-square statistic along with a p-value since the log rank statistic is approximately distributed as a chi-square test statistic.
+El test Log rank (de rango logarítmico) es una prueba popular que compara toda la experiencia de supervivencia entre dos o más grupos *independientes* y puede considerarse como una prueba de si las curvas de supervivencia son idénticas (se superponen) o no (hipótesis nula de no diferencia de supervivencia entre los grupos). La función `survdiff()` del paquete **survival** permite ejecutar el test Log rank cuando especificamos `rho = 0` (que es el valor predeterminado). Los resultados de la prueba dan un estadístico chi-cuadrado junto con un valor-p, ya que el estadístico log rank se distribuye aproximadamente como un test estadístico de chi-cuadrado.
 
-We first try to compare the survival curves by gender group. For this, we first try to visualize it (check whether the two survival curves are overlapping). A new *survfit object*  will be created with a slightly different formula. Then the *survdiff object* will be created.
+En primer lugar, tratamos de comparar las curvas de supervivencia por grupos de género. Para ello, primero intentamos visualizarlo (comprobar si las dos curvas de supervivencia se superponen). Se creará un nuevo *objeto survfit* con una fórmula ligeramente diferente. Luego se creará el *objeto survdiff*.
 
-By supplying ` ~ gender` as the right side of the formula, we no longer plot the overall survival but instead by gender.  
+Al suministrar ` ~ gender` como lado derecho de la fórmula, ya no trazamos la supervivencia global sino por género.
 
 
 ```{r comp_surv, warning=FALSE}
@@ -380,7 +379,7 @@ By supplying ` ~ gender` as the right side of the formula, we no longer plot the
 linelistsurv_fit_sex <-  survfit(Surv(futime, event) ~ gender, data = linelist_surv)
 ```
 
-Now we can plot the survival curves by gender. Have a look at the *order* of the strata levels in the gender column before defining your colors and legend.  
+Ahora podemos trazar las curvas de supervivencia por género. Observa el *orden* de los niveles de los estratos en la columna de género antes de definir los colores y la leyenda.
 
 ```{r}
 # set colors
@@ -403,7 +402,7 @@ legend(
   bty = "n")
 ```
 
-And now we can compute the test of the difference between the survival curves using `survdiff()`
+Y ahora podemos calcular la prueba de la diferencia entre las curvas de supervivencia utilizando `survdiff()`
 
 ```{r}
 #compute the test of the difference between the survival curves
@@ -414,11 +413,11 @@ survival::survdiff(
 
 ```
 
-We see that the survival curve for women and the one for men overlap and the log-rank test does not give evidence of a survival difference between women and men.
+Vemos que la curva de supervivencia de las mujeres y la de los hombres se superponen y la prueba de rango logarítmico no da pruebas de una diferencia de supervivencia entre mujeres y hombres.
 
-Some other R packages allow illustrating survival curves for different groups and testing the difference all at once. Using the `ggsurvplot()` function from the **survminer** package, we can also include in our curve the printed risk tables for each group, as well the p-value from the log-rank test. 
+Algunos otros paquetes de R permiten ilustrar curvas de supervivencia para diferentes grupos y probar la diferencia de una sola vez. Utilizando la función `ggsurvplot()` del paquete **survminer**, también podemos incluir en nuestra curva las tablas de riesgo impresas para cada grupo, así como el valor p del test log-rank.
 
-<span style="color: orange;">**_CAUTION:_** **survminer** functions require that you specify the survival object *and* again specify the data used to fit the survival object. Remember to do this to avoid non-specific error messages. </span>
+<span style="color: orange;">***PRECAUCIÓN:*** las funciones de **survminer** requieren que especifiques el objeto de supervivencia *y* que vuelva a especificar los datos utilizados para ajustar el objeto de supervivencia. Recuerde hacer esto para evitar mensajes de error no específicos. </span>
 
 ```{r, warning=F, message=F}
 
@@ -444,9 +443,9 @@ survminer::ggsurvplot(
 ```
 
 
-We may also want to test for differences in survival by the source of infection (source of contamination).  
+También podemos comprobar si hay diferencias en la supervivencia según la fuente de infección (fuente de contaminación).
 
-In this case, the Log rank test gives enough evidence of a difference in the survival probabilities at `alpha= 0.005`. The survival probabilities for patients that were infected at funerals are higher than the survival probabilities for patients that got infected in other places, suggesting a survival benefit.
+En este caso, la prueba de rango logarítmico da pruebas suficientes de una diferencia en las probabilidades de supervivencia a `alfa= 0,005`. Las probabilidades de supervivencia de los pacientes que se infectaron en los funerales son mayores que las de los pacientes que se infectaron en otros lugares, lo que sugiere un beneficio para la supervivencia.
 
 ```{r}
 
@@ -479,33 +478,33 @@ ggsurvplot(
 ```
 
 <!-- ======================================================= -->
-## Cox regression analysis {}
+## Análisis de regresión de Cox {#cox-regression-analysis}
 
-Cox proportional hazards regression is one of the most popular regression techniques for survival analysis. Other models  can also be used since the Cox model requires *important assumptions* that need to be verified for an appropriate use such as the proportional hazards assumption: see references. 
+La regresión de riesgos proporcionales de Cox es una de las técnicas de regresión más populares para el análisis de supervivencia. También se pueden utilizar otros modelos, ya que el modelo de Cox requiere *supuestos importantes* que deben verificarse para un uso adecuado, como el supuesto de riesgos proporcionales: véanse las referencias.
 
-In a Cox proportional hazards regression model, the measure of effect is the **_hazard rate_** (HR), which is the risk of failure (or the risk of death in our example), given that the participant has survived up to a specific time.  Usually, we are interested in comparing *independent* groups with respect to their hazards, and we use a hazard ratio, which is analogous to an odds ratio in the setting of multiple logistic regression analysis. The `cox.ph()` function from the **survival** package is used to fit the model. The function `cox.zph()` from **survival** package may be used to test the proportional hazards assumption for a Cox regression model fit. 
+En un modelo de regresión de riesgos proporcionales de Cox, la medida del efecto es la tasa de ***riesgo (***HR), que es el riesgo de fracaso (o el riesgo de muerte en nuestro ejemplo), dado que el participante ha sobrevivido hasta un momento específico. Normalmente, estamos interesados en comparar grupos *independientes* con respecto a sus riesgos, y utilizamos una razón de riesgo, que es análoga a una razón de probabilidades en el entorno del análisis de regresión logística múltiple. La función `cox.ph()` del paquete de supervivencia se utiliza para ajustar el modelo. La función `cox.zph()` del paquete de **survival** puede utilizarse para probar la suposición de riesgos proporcionales para un ajuste del modelo de regresión de Cox.
 
-<span style="color: black;">**_NOTE:_** A probability must lie in the range 0 to 1. However, the hazard represents the expected number of events per one unit of time. 
+<span style="color: black;">***NOTA:*** Una probabilidad debe estar en el rango de 0 a 1. Sin embargo, el peligro representa el número esperado de eventos por una unidad de tiempo.
 
-* If the hazard ratio for a predictor is close to 1 then that predictor does not affect survival,
-* if the HR is less than 1, then the predictor is protective (i.e., associated with improved survival),
-* and if the HR is greater than 1, then the predictor is associated with increased risk (or decreased survival).</span> 
+* Si la razón de riesgo de un predictor es cercana a 1, entonces ese predictor no afecta a la supervivencia,
+* si el HR es inferior a 1, entonces el predictor es protector (es decir, está asociado a una mejor supervivencia),
+* y si el HR es mayor que 1, entonces el predictor se asocia a un mayor riesgo (o a una menor supervivencia).</span> 
 
-### Fitting a Cox model {.unnumbered}
+### Ajuste de un modelo de Cox {.unnumbered}
 
-We can first fit a model to assess the effect of age and gender on the survival. By just printing the model, we have the information on:
+Primero podemos ajustar un modelo para evaluar el efecto de la edad y el sexo en la supervivencia. Con sólo imprimir el modelo, tenemos la información sobre:
 
-  + the estimated regression coefficients `coef` which quantifies the association between the predictors and the outcome,
-  + their exponential (for interpretability, `exp(coef)`) which produces the *hazard ratio*,
-  + their standard error `se(coef)`,
-  + the z-score: how many standard errors is the estimated coefficient away from  0,
-  + and the p-value:  the probability that the estimated coefficient could be 0.
-  
-The `summary()` function applied to the cox model object gives more information, such as the confidence interval of the estimated HR and the different test scores.
+  + los coeficientes de regresión estimados `coef` que cuantifican la asociación entre los predictores y el resultado,
+  + su exponencial (para tu interpretación, `exp(coef)`) que produce la *razón de riesgo*,
+  + su error estándar `se(coef)`,
+  + la puntuación z: cuántos errores estándar se aleja el coeficiente estimado de 0,
+  + y el valor- p: la probabilidad de que el coeficiente estimado sea 0.
 
-The effect of the first covariate `gender`  is presented in the first row. `genderm` (male) is printed, implying that the first strata level ("f"), i.e the female group, is the reference group for the gender. Thus the interpretation of the test parameter is that of men compared to women. The p-value indicates there was not enough evidence of an effect of the gender on the expected hazard or of an association between gender and all-cause mortality.
+La función `summary()` aplicada al objeto del modelo cox ofrece más información, como el intervalo de confianza de la HR estimada y las diferentes puntuaciones de la prueba.
 
-The same lack of evidence is noted regarding age-group.
+El efecto de la primera covariable, `gender`, se presenta en la primera fila. Se imprime `genderm` (masculino), lo que implica que el primer nivel de estrato ("f"), es decir, el grupo femenino, es el grupo de referencia para el género. Por lo tanto, la interpretación del parámetro de la prueba es la de los hombres en comparación con las mujeres. El valor p indica que no hay pruebas suficientes de un efecto del género sobre el peligro esperado o de una asociación entre el género y la mortalidad por todas las causas.
+
+La misma falta de pruebas se observa en relación con el grupo de edad.
 
 ```{r coxmodel_agesex}
 
@@ -526,7 +525,7 @@ summary(linelistsurv_cox_sexage)
 ```
 
 
-It was interesting to run the model and look at the results but a first look to verify whether the proportional hazards assumptions is respected could help saving time.
+Fue interesante ejecutar el modelo y observar los resultados, pero un primer vistazo para verificar si se respetan los supuestos de riesgos proporcionales podría ayudar a ahorrar tiempo.
 
 ```{r test_assumption}
 
@@ -536,11 +535,11 @@ test_ph_sexage
 ```
 
 
-<span style="color: black;">**_NOTE:_** A second argument called *method* can be specified when computing the cox model, that determines how ties are handled. The *default* is "efron", and the other options are "breslow" and "exact".</span>
+<span style="color: black;">***NOTA:*** Se puede especificar un segundo argumento llamado *método* cuando se calcula el modelo cox, que determina cómo se manejan los empates. El *valor por defecto* es "efron", y las otras opciones son "breslow" y "exact".</span>
 
-In another model we add more risk factors such as the source of infection and the number of days between date of onset and admission. This time, we first  verify the proportional hazards assumption before going forward.
+En otro modelo añadimos más factores de riesgo, como el origen de la infección y el número de días entre la fecha de inicio y el ingreso. Esta vez, primero verificamos la hipótesis de riesgos proporcionales antes de seguir adelante.
 
-In this model, we have included a continuous predictor (`days_onset_hosp`). In this case we interpret the parameter estimates as the increase in the expected log of the relative hazard for each one unit increase in the predictor, holding other predictors constant. We first verify the proportional hazards assumption.  
+En este modelo, hemos incluido un predictor continuo (`days_onset_hosp`). En este caso, interpretamos las estimaciones de los parámetros como el aumento del logaritmo esperado del riesgo relativo por cada aumento de una unidad en el predictor, manteniendo los demás predictores constantes. Primero verificamos el supuesto de riesgos proporcionales.
 
 ```{r coxmodel_fit_ph,  message=FALSE}
 
@@ -556,7 +555,7 @@ linelistsurv_ph_test <- cox.zph(linelistsurv_cox)
 linelistsurv_ph_test
 ```
 
-The graphical verification of this assumption may be performed with the function `ggcoxzph()` from the **survminer** package. 
+La verificación gráfica de esta suposición puede realizarse con la función `ggcoxzph()` del paquete **survminer**.
 
 ```{r}
 survminer::ggcoxzph(linelistsurv_ph_test)
@@ -564,9 +563,9 @@ survminer::ggcoxzph(linelistsurv_ph_test)
 ```
 
 
-The model results indicate there is a negative association between onset to admission duration and all-cause mortality. The expected hazard is 0.9 times lower in a person who who is one day later admitted than another, holding gender constant. Or in a more straightforward explanation, a one unit increase in the duration of onset to admission is associated with a 10.7% (`coef *100`) decrease in the risk of death.
+Los resultados del modelo indican que existe una asociación negativa entre la duración del inicio del ingreso y la mortalidad por todas las causas. El riesgo esperado es 0,9 veces menor en una persona que ingresa un día más tarde que otra, manteniendo el género constante. O, en una explicación más directa, un aumento de una unidad en la duración del inicio al ingreso se asocia con una disminución del 10,7% (`coef *100`) en el riesgo de muerte.
 
-Results show also a positive association between the source of infection and the all-cause mortality. Which is to say there is an increased risk of death (1.21x) for patients that got a source of infection other than funerals.
+Los resultados muestran también una asociación positiva entre la fuente de infección y la mortalidad por todas las causas. Es decir, hay un mayor riesgo de muerte (1,21 veces) para los pacientes que tuvieron una fuente de infección distinta de los funerales.
 
 
 ```{r coxmodel_summary,  message=FALSE}
@@ -577,7 +576,7 @@ summary(linelistsurv_cox)
 ```
 
 
-We can verify this relationship with a table:  
+Podemos comprobar esta relación con una tabla:
 
 
 ```{r}
@@ -589,14 +588,14 @@ linelist_case_data %>%
 ```
 
 
-We would need to consider and investigate why this association exists in the data. One possible explanation could be that patients who live long enough to be admitted later had less severe disease to begin with. Another perhaps more likely explanation is that since we used a simulated fake dataset, this pattern does not reflect reality!  
+Habría que considerar e investigar por qué existe esta asociación en los datos. Una posible explicación podría ser que los pacientes que viven lo suficiente como para ser ingresados más tarde tenían una enfermedad menos grave para empezar. Otra explicación, quizá más probable, es que, dado que utilizamos unos datos falsos simulados, este patrón no refleja la realidad.
 
 
 <!-- ======================================================= -->
 
 ### Forest plots {.unnumbered}
 
-We can then visualize the results of the cox model using the practical forest plots with the `ggforest()` function of the **survminer package**.
+A continuación, podemos visualizar los resultados del modelo cox utilizando los prácticos gráficos de bosque con la función `ggforest()` del **paquete survminer**.
 
 ```{r forestp}
 
@@ -605,56 +604,56 @@ ggforest(linelistsurv_cox, data = linelist_surv)
 ```
 
 <!-- ======================================================= -->
-## Time-dependent covariates in survival models {}
+## Covariables dependientes del tiempo en los modelos de supervivencia {#time-dependent-covariates-in-survival-models}
 
-Some of the following sections have been adapted with permission from an excellent [introduction to survival analysis in R](https://www.emilyzabor.com/tutorials/survival_analysis_in_r_tutorial.html) by [Dr. Emily Zabor](https://www.emilyzabor.com/) 
+Algunas de las siguientes secciones han sido adaptadas con permiso de una excelente [introducción al análisis de supervivencia en R](https://www.emilyzabor.com/tutorials/survival_analysis_in_r_tutorial.html) por [la Dra. Emily Zabor](https://www.emilyzabor.com/)
 
-In the last section we covered using Cox regression to examine associations between covariates of interest and survival outcomes.But these analyses rely on the covariate being measured at baseline, that is, before follow-up time for the event begins.
+En la última sección hemos tratado el uso de la regresión de Cox para examinar las asociaciones entre las covariables de interés y los resultados de supervivencia, pero estos análisis dependen de que la covariable se mida en la línea de base, es decir, antes de que comience el tiempo de seguimiento del evento.
 
-What happens if you are interested in a covariate that is measured **after** follow-up time begins? Or, what if you have a covariate that can change over time?
+¿Qué ocurre si está interesado en una covariable que se mide **después del** tiempo de seguimiento? O, ¿qué pasa si tiene una covariable que puede cambiar con el tiempo?
 
-For example, maybe you are working with clinical data where you repeated measures of hospital laboratory values that can change over time. This is an example of a **Time Dependent Covariate**. In order to address this you need a special setup, but fortunately the cox model is very flexible and this type of data can also be modeled with tools from the **survival** package. 
+Por ejemplo, tal vez esté trabajando con datos clínicos en los que repite medidas de valores de laboratorio del hospital que pueden cambiar con el tiempo. Este es un ejemplo de una **covariable dependiente del tiempo**. Para abordar esto se necesita una configuración especial, pero afortunadamente el modelo cox es muy flexible y este tipo de datos también puede ser modelado con herramientas del paquete de **survival**.
 
-### Time-dependent covariate setup {.unnumbered} 
+### Configuración de covariables dependientes del tiempo {.unnumbered} 
 
-Analysis of time-dependent covariates in R requires setup of a special dataset. If interested, see the more detailed paper on this by the author of the **survival** package [Using Time Dependent Covariates and Time Dependent Coefficients in the Cox Model](https://cran.r-project.org/web/packages/survival/vignettes/timedep.pdf).
+El análisis de covariables dependientes del tiempo en R requiere la configuración de unos datos especial. Si está interesado, Mira el documento más detallado sobre esto por el autor del paquete **survival** [Using Time Dependent Covariates and Time Dependent Coefficients in the Cox Model](https://cran.r-project.org/web/packages/survival/vignettes/timedep.pdf).
 
-For this, we'll use a new dataset from the `SemiCompRisks` package named `BMT`, which includes data on 137 bone marrow transplant patients. The variables we'll focus on are:  
+Para ello, utilizaremos un nuevo conjunto de datos del paquete **SemiCompRisks** denominado `BMT`, que incluye datos de 137 pacientes de trasplante de médula ósea. Las variables en las que nos centraremos son:
 
-* `T1`  - time (in days) to death or last follow-up  
-* `delta1` - death indicator; 1-Dead, 0-Alive  
-* `TA` -  time (in days) to acute graft-versus-host disease  
-* `deltaA` -  acute graft-versus-host disease indicator;  
-  * 1 - Developed acute graft-versus-host disease  
-  * 0 - Never developed acute graft-versus-host disease
+* `T1` - tiempo (en días) hasta la muerte o el último seguimiento
+* `delta1` - indicador de muerte; 1-Muerto, 0-Vivo
+* `TA` - tiempo (en días) hasta la enfermedad de injerto contra huésped aguda
+* `deltaA` - indicador de la enfermedad de injerto contra huésped aguda;
+  * 1 - Desarrolló la enfermedad de injerto contra huésped aguda
+  * 0 - Nunca desarrolló la enfermedad de injerto contra huésped aguda
 
-We'll load this dataset from the **survival** package using the **base** R command `data()`, which can be used for loading data that is already included in a R package that is loaded. The data frame `BMT` will appear in your R environment.  
+Cargaremos este conjunto de datos del paquete **survival** utilizando el comando DE R **base** `data()`, que puede utilizarse para cargar datos que ya están incluidos en un paquete de R que se ha cargado. El dataframe `BMT` aparecerá en tu entorno de R.
 
 ```{r}
 data(BMT, package = "SemiCompRisks")
 ```
 
-#### Add unique patient identifier {.unnumbered}  
+#### Añadir un identificador único de paciente {.unnumbered}  
 
-There is no unique ID column in the `BMT` data, which is needed to create the type of dataset we want. So we use the function `rowid_to_column()` from the **tidyverse** package **tibble** to create a new id column called `my_id` (adds column at start of data frame with sequential row ids, starting at 1). We name the data frame `bmt`.  
+No hay una columna de identificación única en los datos de `BMT`, que es necesaria para crear el tipo de conjunto de datos que queremos. Así que utilizamos la función `rowid_to_column()` del paquete **tibble** de **tidyverse** para crear una nueva columna de identificación llamada `my_id` (añade una columna al principio del dataframe con identificadores de fila secuenciales, empezando por el 1). Llamamos al dataframe `bmt`.
 
 ```{r}
 bmt <- rowid_to_column(BMT, "my_id")
 ```
 
-The dataset now looks like this:  
+El conjunto de datos tiene ahora este aspecto:
 
 ```{r message=FALSE, echo=F}
 DT::datatable(bmt, rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-#### Expand patient rows {.unnumbered}  
+#### Ampliar las filas de pacientes {.unnumbered}  
 
-Next, we'll use the `tmerge()` function with the `event()` and `tdc()` helper functions to create the restructured dataset. Our goal is to restructure the dataset to create a separate row for each patient for each time interval where they have a different value for `deltaA`. In this case, each patient can have at most two rows depending on whether they developed acute graft-versus-host disease during the data collection period. We'll call our new indicator for the development of acute graft-versus-host disease `agvhd`.
+A continuación, utilizaremos la función `tmerge()` con las funciones de ayuda `event()` y `tdc()` para crear el conjunto de datos reestructurado. Nuestro objetivo es reestructurar el conjunto de datos para crear una fila separada para cada paciente por cada intervalo de tiempo en el que tengan un valor diferente de `deltaA`. En este caso, cada paciente puede tener como máximo dos filas dependiendo de si desarrollaron la enfermedad aguda de injerto contra huésped durante el periodo de recogida de datos. Llamaremos a nuestro nuevo indicador para el desarrollo de la enfermedad aguda de injerto contra huésped `agvhd`.
 
-- `tmerge()` creates a long dataset with multiple time intervals for the different covariate values for each patient
-- `event()` creates the new event indicator to go with the newly-created time intervals
-- `tdc()` creates the time-dependent covariate column, `agvhd`, to go with the newly created time intervals
+* `tmerge()` crea unos datos largo con múltiples intervalos de tiempo para los diferentes valores de las covariables de cada paciente
+* `event()` crea el nuevo indicador de eventos para que vaya con los intervalos de tiempo recién creados
+* `tdc()` crea la columna de covarianza dependiente del tiempo, `agvhd`, para que vaya con los intervalos de tiempo recién creados
 
 ```{r}
 td_dat <- 
@@ -667,9 +666,9 @@ td_dat <-
     )
 ```
 
-To see what this does, let's look at the data for the first 5 individual patients.
+Para ver qué hace esto, veamos los datos de los 5 primeros pacientes individuales.
 
-The variables of interest in the original data looked like this:
+Las variables de interés en los datos originales tenían este aspecto:
 
 ```{r}
 bmt %>% 
@@ -677,18 +676,18 @@ bmt %>%
   filter(my_id %in% seq(1, 5))
 ```
 
-The new dataset for these same patients looks like this:
+El nuevo conjunto de datos para estos mismos pacientes tiene el siguiente aspecto:
 
 ```{r}
 td_dat %>% 
   filter(my_id %in% seq(1, 5))
 ```
 
-Now some of our patients have two rows in the dataset corresponding to intervals where they have a different value of our new variable, `agvhd`. For example, Patient 1 now has two rows with a `agvhd` value of zero from time 0 to time 67, and a value of 1 from time 67 to time 2081. 
+Ahora algunos de nuestros pacientes tienen dos filas en el conjunto de datos correspondientes a intervalos en los que tienen un valor diferente de nuestra nueva variable, agvhd. Por ejemplo, el paciente 1 tiene ahora dos filas con un valor de agvhd de cero desde el tiempo 0 hasta el tiempo 67, y un valor de 1 desde el tiempo 67 hasta el tiempo 2081.
 
-### Cox regression with time-dependent covariates {.unnumbered} 
+### Regresión de Cox con covariables dependientes del tiempo {.unnumbered} 
 
-Now that we've reshaped our data and added the new time-dependent `aghvd` variable, let's fit a simple single variable cox regression model. We can use the same `coxph()` function as before, we just need to change our `Surv()` function to specify both the start and stop time for each interval using the `time1 = ` and `time2 = ` arguments. 
+Ahora que hemos remodelado nuestros datos y añadido la nueva variable `aghvd` dependiente del tiempo, vamos a ajustar un modelo de regresión cox simple de una sola variable. Podemos utilizar la misma función `coxph()` que antes, sólo tenemos que cambiar nuestra función `Surv()` para especificar tanto el tiempo de inicio como el de finalización de cada intervalo utilizando los argumentos `time1 = ` y `time2 = `.
 
 
 ```{r}
@@ -700,7 +699,7 @@ bmt_td_model = coxph(
 summary(bmt_td_model)
 ```
 
-Again, we'll visualize our cox model results using the `ggforest()` function from the **survminer package**.:
+De nuevo, visualizaremos los resultados de nuestro modelo cox utilizando la función `ggforest()` del paquete **urvminer**.:
 
 ```{r}
 
@@ -708,23 +707,23 @@ ggforest(bmt_td_model, data = td_dat)
 
 ```
 
-As you can see from the forest plot, confidence interval, and p-value, there does not appear to be a strong association between death and acute graft-versus-host disease in the context of our simple model. 
+Como se puede ver en el gráfico de bosque, el intervalo de confianza y el valor-p p, no parece haber una fuerte asociación entre la muerte y la enfermedad de injerto contra huésped aguda en el contexto de nuestro modelo simple.
 
 <!-- ======================================================= -->
-## Resources {  }
+## Recursos {#resources-19}
 
-[Survival Analysis Part I: Basic concepts and first analyses](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2394262/)
+[Análisis de supervivencia Parte I: Conceptos básicos y primeros análisis](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2394262/)
 
-[Survival Analysis in R](https://www.emilyzabor.com/tutorials/survival_analysis_in_r_tutorial.html)
+[Análisis de supervivencia en R](https://www.emilyzabor.com/tutorials/survival_analysis_in_r_tutorial.html)
 
-[Survival analysis in infectious disease research: Describing events in time](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2954271/)
+[Análisis de supervivencia en la investigación de enfermedades infecciosas: Descripción de eventos en el tiempo](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2954271/)
 
-[Chapter on advanced survival models Princeton](https://data.princeton.edu/wws509/notes/c7.pdf)
+[Capítulo sobre modelos de supervivencia avanzados Princeton](https://data.princeton.edu/wws509/notes/c7.pdf)
 
-[Using Time Dependent Covariates and Time Dependent Coefficients in the Cox Model](https://cran.r-project.org/web/packages/survival/vignettes/timedep.pdf)
+[Uso de covariables y coeficientes dependientes del tiempo en el modelo de Cox](https://cran.r-project.org/web/packages/survival/vignettes/timedep.pdf)
 
-[Survival analysis cheatsheet R](https://publicifsv.sund.ku.dk/~ts/survival/survival-cheat.pdf)
+[Hoja de trucos de análisis de supervivencia con R](https://publicifsv.sund.ku.dk/~ts/survival/survival-cheat.pdf)
 
-[Survminer cheatsheet](https://paulvanderlaken.files.wordpress.com/2017/08/survminer_cheatsheet.pdf)
+[Hoja de trucos de Survminer](https://paulvanderlaken.files.wordpress.com/2017/08/survminer_cheatsheet.pdf)
 
-[Paper on different survival measures for cancer registry data with Rcode provided as supplementary materials](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6322561/)
+[Documento sobre diferentes medidas de supervivencia para datos de registros de cáncer con Rcode proporcionado como material suplementario](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6322561/)
