@@ -1,5 +1,5 @@
 
-# Tables for presentation { }  
+# Borrador. Tablas para presentaciones {#tables-for-presentation}
 
 
 ```{r echo=FALSE, fig.show='hold', message=FALSE, warning=FALSE, out.width=c('50%', '50%')}
@@ -97,22 +97,22 @@ table <- linelist %>%
 table
 ```
 
+<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
-This page demonstrates how to convert summary data frames into presentation-ready tables with the **flextable** package. These tables can be inserted into powerpoint slides, HTML pages, PDF or Word documents, etc.  
+Esta página muestra cómo convertir dataframes con datos agrupados en tablas listas para su presentación con el paquete **flextable**. Estas tablas pueden insertarse en diapositivas de PowerPoint, páginas HTML, documentos PDF o Word, etc.
 
-Understand that *before* using **flextable**, you must create the summary table as a data frame. Use methods from the [Descriptive tables] and [Pivoting data] pages such as tabulations, cross-tabulations, pivoting, and calculating descriptive statistics. The resulting data frame can then be passed to **flextable** for display formatting.  
+Comprende que *antes de* utilizar **flextable**, debe crear la tabla resumen como un dataframe. Utiliza los métodos de las páginas [Tablas descriptivas](#descriptive-tables) y [Pivotar de datos](#pivoting-data), como tabulaciones, tabulaciones cruzadas, pivoteo y cálculo de estadísticas descriptivas. El dataframe resultante puede pasarse a **flextable** para ponerle el formato.
 
-
-There are many other R packages that can be used to craft tables for presentation - we chose to highlight **flextable** in this page. An example using the **knitr** package and its `kable()` function can be found in the [Contact Tracing] page. Likewise, the **DT** package is highlighted in the page [Dashboards with Shiny]. Others such as **GT** and **huxtable** are mentione in the [Suggested packages] page.  
+Hay muchos otros paquetes de R que se pueden utilizar para elaborar tablas para su presentación - hemos elegido destacar **flextable** en esta página. Un ejemplo que utiliza el paquete **knitr** y su función `kable()` se puede encontrar en la página [Seguimiento de contactos](#contact-tracing-1). Asimismo, el paquete **DT** se destaca en la página [Dashboards con Shiny](#dashboards-with-shiny). Otros como **GT** y **huxtable** se mencionan en la página de [Paquetes recomendados](#suggested-packages-1).
 
 
 
 <!-- ======================================================= -->
-## Preparation {  }
+## Preparación {#preparation-18}
 
-### Load packages {.unnumbered} 
+### Cargar paquetes {.unnumbered} 
 
-Install and load **flextable**. In this handbook we emphasize `p_load()` from **pacman**, which installs the package if necessary *and* loads it for use. You can also load packages with `library()` from **base** R. See the page on [R basics] for more information on R packages.  
+Instala y carga **flextable**. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para tu uso. También puede cargar paquetes con `library()` desde de R **base** Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R. 
 
 ```{r}
 pacman::p_load(
@@ -124,9 +124,9 @@ pacman::p_load(
 
 ```
 
-### Import data {.unnumbered}  
+### Importar datos {.unnumbered}  
 
-To begin, we import the cleaned linelist of cases from a simulated Ebola epidemic. If you want to follow along, <a href='https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds' class='download-button'>click to download the "clean" linelist</a> (as .rds file). Import data with the `import()` function from the **rio** package (it handles many file types like .xlsx, .csv, .rds - see the [Import and export] page for details). 
+Para empezar, importamos la lista de casos limpia de una epidemia de ébola simulada. Si quieres seguir el proceso, [clica aquí para descargar linelist "limpio" ](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds)(como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - Mira la página de [importación y exportación](#import-and-export) para más detalles).
 
 
 ```{r, echo=F}
@@ -139,18 +139,18 @@ linelist <- rio::import(here::here("data", "case_linelists", "linelist_cleaned.r
 linelist <- import("linelist_cleaned.rds")
 ```
 
-The first 50 rows of the linelist are displayed below.
+A continuación se muestran las primeras 50 filas de `linelist`.
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
 DT::datatable(head(linelist, 50), rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-### Prepare table {.unnumbered}  
+### Preparar la tabla {.unnumbered}  
 
-*Before* beginning to use **flextable** you will need to *create* your table as a data frame. See the page on [Descriptive tables] and [Pivoting data] to learn how to create a data frame using packages such as **janitor** and **dplyr**. You must arrange the content in rows and columns as you want it displayed. Then, the data frame will be passed to **flextable** to display it with colors, headers, fonts, etc. 
-  
-Below is an example from the [Descriptive tables] page of converting the case `linelist` into a data frame that summarises patient outcomes and CT values by hospital, with a Totals row at the bottom. The output is saved as `table`.  
+*Antes de* empezar a utilizar **flextable** tendrás que *crear* tu tabla como un dataframe. Consulta la página sobre [Tablas descriptivas](#descriptive-tables) y [Pivotar datos](#pivoting-data) para aprender a crear un dataframe utilizando paquetes como **janitor** y **dplyr**. Debes organizar el contenido en filas y columnas tal y como quieres que se muestre. Luego, el dataframe se pasará a **flextable** para mostrarlo con colores, encabezados, fuentes, etc.
+
+A continuación se muestra un ejemplo de la página de [tablas descriptivas](#descriptive-tables) para convertir la lista de casos en un dataframe que resume los resultados de los pacientes y los valores de TC por hospital, con una fila de totales en la parte inferior. El resultado se guarda como `table`. 
 
 ```{r message=FALSE, warning=FALSE}
 table <- linelist %>% 
@@ -196,11 +196,11 @@ table  # print
 
 
 <!-- ======================================================= -->
-## Basic flextable {  }
+## Flextable básica {#basic-flextable}
 
-### Create a flextable {.unnumbered}  
+### Crear una flextble {.unnumbered}  
 
-To create and manage **flextable** objects, we first pass the data frame through the `flextable()` function. We save the result as `my_table`.  
+Para crear y gestionar los objetos de **flextable**, primero pasamos el dataframe por la función `flextable()`. Guardamos el resultado como `my_table`.
 
 ```{r}
 
@@ -209,25 +209,25 @@ my_table
 
 ```
 
-After doing this, we can progressively pipe the `my_table` object through more **flextable** formatting functions.  
+Después de hacer esto, podemos canalizar progresivamente el objeto `my_table` a través de más funciones de formato de **flextable**.
 
-In this page for sake of clarity we will save the table at intermediate steps as `my_table`, adding **flextable** functions bit-by-bit. If you want to see *all* the code from beginning to end written in one chunk, visit the [All code together](#tbl_pres_all) section below.  
+En esta página, para mayor claridad, guardaremos la tabla en pasos intermedios como `my_table`, añadiendo las funciones de **flextable** bit a bit. Si quieres ver *todo* el código de principio a fin escrito en un solo trozo, visita la sección [Todo el código junto](#tbl_pres_all) más abajo.
 
-The general syntax of each line of **flextable** code is as follows:
+La sintaxis general de cada línea de código de **flextable** es la siguiente:
 
-* `function(table, i = X, j = X, part = "X")`, where:
-  * The 'function' can be one of many different functions, such as `width()` to determine column widths, `bg()` to set background colours, `align()` to set whether text is centre/right/left aligned, and so on. 
-  * `table = ` is the name of the data frame, although does not need to be stated if the data frame is piped into the function.
-  * `part = ` refers to which part of the table the function is being applied to. E.g. "header", "body" or "all". 
-  * `i = ` specifies the *row* to apply the function to, where 'X' is the row number. If multiple rows, e.g. the first to third rows, one can specify: `i = c(1:3)`. Note if 'body' is selected, the first row starts from underneath the header section.
-  * `j = ` specifies the *column* to apply the function to, where 'x' is the column number or name. If multiple columns, e.g. the fifth and sixth, one can specify: `j = c(5,6)`. 
-  
-You can find the complete list of **flextable** formatting function [here](https://davidgohel.github.io/flextable/reference/index.html) or review the documentation by entering `?flextable`.  
+* `function(table,`i`= X, j = X, part = "X")`, donde:
+  * La "function" puede ser una de muchas funciones diferentes, como `width()` para determinar el ancho de las columnas, `bg()` para establecer los colores de fondo, `align()` para establecer si el texto está alineado al centro/derecha/izquierda, etc.
+  * `table = ` es el nombre del dataframe, aunque no es necesario indicarlo si el dataframe se introduce en la función.
+  * `part = ` se refiere a la parte de la tabla a la que se aplica la función. Por ejemplo,  "header", "body" o "all".
+  * `i= ` especifica la *fila* a la que se aplicará la función, donde 'X' es el número de fila. Si se trata de varias filas, por ejemplo de la primera a la tercera, se puede especificar:`i = c(1:3)`. Ten en cuenta que si se selecciona "body", la primera fila empieza por debajo de la sección de cabecera.
+  * `j = ` especifica la *columna* a la que se aplicará la función, donde 'x' es el número o nombre de la columna. Si hay varias columnas, por ejemplo la quinta y la sexta, se puede especificar: `j = c(5,6)`.
+
+Puedes encontrar la lista completa de funciones de formato de **flextable** [aquí](https://davidgohel.github.io/flextable/reference/index.html) o revisar la documentación escribiendo `?flextable`.
 
 
-### Column width {.unnumbered}
+### Ancho de columna {.unnumbered}
 
-We can use the `autofit()` function, which nicely stretches out the table so that each cell only has one row of text. The function `qflextable()` is a convenient shorthand for `flextable()` and `autofit()`.  
+Podemos utilizar la función `autofit()`, que estira la tabla de forma que cada celda sólo tiene una fila de texto. La función `qflextable()` es una abreviatura conveniente para `flextable()` y `autofit()`.
 
 ```{r}
 
@@ -235,9 +235,9 @@ my_table %>% autofit()
 
 ```
 
-However, this might not always be appropriate, especially if there are very long values within cells, meaning the table might not fit on the page. 
+Sin embargo, esto podría no ser siempre apropiado, especialmente si hay valores muy largos dentro de las celdas, lo que significa que la tabla podría no caber en la página.
 
-Instead, we can specify widths with the `width()` function. It can take some playing around to know what width value to put. In the example below, we specify different widths for column 1, column 2, and columns 4 to 8. 
+En cambio, podemos especificar el ancho con la función `width()`. Puede ser necesario jugar un poco para saber qué valor de anchura poner. En el ejemplo siguiente, especificamos diferentes anchos para la columna 1, la columna 2 y las columnas 4 a 8.
 
 ```{r}
 
@@ -250,15 +250,15 @@ my_table
   
 ```
 
-### Column headers {.unnumbered}
+### Encabezados de columna {.unnumbered}
 
-We want more clearer headers for easier interpretation of the table contents.
+Queremos encabezados más claros para facilitar la interpretación del contenido de la tabla.
 
-For this table, we will want to add a second header layer so that columns covering the same subgroups can be grouped together. We do this with the `add_header_row()` function with `top = TRUE`. We provide the new name of each column to `values = `, leaving empty values `""` for columns we know we will merge together later.  
+Para esta tabla, querremos añadir una segunda capa de cabecera para que las columnas que cubren los mismos subgrupos puedan agruparse. Lo hacemos con la función `add_header_row()` con `top = TRUE`. Proporcionamos el nuevo nombre de cada columna a `values =` , dejando los valores vacíos `""` para las columnas que sabemos que vamos a fusionar más tarde.
 
-We also rename the header names in the now-second header in a separate `set_header_labels()` command.  
+También renombramos los nombres de las cabeceras en la ahora segunda cabecera en un comando separado `set_header_labels()`.
 
-Finally, to "combine" certain column headers in the top header we use `merge_at()` to merge the column headers in the top header row.  
+Por último, para "combinar" ciertas cabeceras de columna en la cabecera superior utilizamos `merge_at()` para fusionar las cabeceras de columna en la fila de la cabecera superior.
 
 ```{r}
 my_table <- my_table %>% 
@@ -291,15 +291,15 @@ my_table  # print
 
 ```
 
-### Borders and background {.unnumbered}  
+### Bordes y fondos {.unnumbered}  
 
-You can adjust the borders, internal lines, etc. with various **flextable** functions. It is often easier to start by removing all existing borders with `border_remove()`.  
+Puedes ajustar los bordes, las líneas internas, etc. con varias funciones de **flextable**. A menudo es más fácil empezar eliminando todos los bordes existentes con `border_remove()`.
 
-Then, you can apply default border themes by passing the table to `theme_box()`, `theme_booktabs()`, or `theme_alafoli()`.  
+A continuación, puede aplicar los temas de borde por defecto pasando la tabla a `theme_box()`, `theme_booktabs()` o `theme_alafoli()`.
 
-You can add vertical and horizontal lines with a variety of functions. `hline()` and `vline()` add lines to a specified row or column, respectively. Within each, you must specify the `part = ` as either "all", "body", or "header". For vertical lines, specify the column to `j = `, and for horizontal lines the row to `i = `. Other functions like `vline_right()`, `vline_left()`, `hline_top()`, and `hline_bottom()` add lines to the outsides only.  
+Puedes añadir líneas verticales y horizontales con una variedad de funciones. `hline()` y `vline()` añaden líneas a una fila o columna especificada, respectivamente. Dentro de cada una, debe especificar la `part = ` como "all", "body", o "header". Para las líneas verticales, especifique la columna a j =, y para las líneas horizontales la fila a `i = `. Otras funciones como `vline_right()`, `vline_left()`, `hline_top()`, y `hline_bottom()` añaden líneas sólo a los lados.
 
-In all of these functions, the actual line style itself must be specified to `border = ` and must be the output of a separate command using the `fp_border()` function from the **officer** package. This function helps you define the width and color of the line. You can define this above the table commands, as shown below.  
+En todas estas funciones, el propio estilo de línea debe especificarse a `border = ` y debe ser la salida de un comando separado utilizando la función `fp_border()` del paquete **officer**. Esta función le ayuda a definir el ancho y el color de la línea. Puedes definirlo sobre los comandos de la tabla, como se muestra a continuación.
 
 ```{r}
 # define style for border line
@@ -321,9 +321,9 @@ my_table <- my_table %>%
 my_table
 ```
 
-### Font and alignment {.unnumbered}
+### Fuente y alineación {.unnumbered}
 
-We centre-align all columns aside from the left-most column with the hospital names, using the `align()` function from **flextable**.
+Alineamos en el centro todas las columnas, excepto la más a la izquierda, con los nombres de los hospitales, utilizando la función `align()` de **flextable**.
 
 ```{r}
 my_table <- my_table %>% 
@@ -331,7 +331,7 @@ my_table <- my_table %>%
 my_table
 ```
 
-Additionally, we can increase the header font size and change then to bold. We can also change the total row to bold.  
+Además, podemos aumentar el tamaño de la fuente de la cabecera y cambiarla a negrita. También podemos cambiar la fila total a negrita. 
 
 ```{r}
 
@@ -344,17 +344,16 @@ my_table
 
 ```
 
-
-We can ensure that the proportion columns display only one decimal place using the function `colformat_num()`. Note this could also have been done at data management stage with the `round()` function. 
+Podemos asegurar que las columnas de proporción muestren sólo un decimal utilizando la función `colformat_num()`. Ten en cuenta que esto también podría haberse hecho en la fase de gestión de datos con la función `round()`.
 
 ```{r}
 my_table <- colformat_num(my_table, j = c(4,7), digits = 1)
 my_table
 ```
 
-### Merge cells {.unnumbered}  
+### Fusionar celdas {.unnumbered}  
 
-Just as we merge cells horizontally in the header row, we can also merge cells vertically using `merge_at()` and specifying the rows (`i`) and column (`j`). Here we merge the "Hospital" and "Total cases with known outcome" values vertically to give them more space.   
+Al igual que fusionamos celdas horizontalmente en la fila de la cabecera, también podemos fusionar celdas verticalmente utilizando `merge_at()` y especificando las filas (`i`) y la columna (`j`). Aquí fusionamos los valores "Hospital" y "Total cases with known outcome" verticalmente para darles más espacio.
 
 ```{r}
 my_table <- my_table %>% 
@@ -364,9 +363,9 @@ my_table <- my_table %>%
 my_table
 ```
 
-### Background color {.unnumbered}
+### Color de fondo {.unnumbered}
 
-To distinguish the content of the table from the headers, we may want to add additional formatting. e.g. changing the background color. In this example we change the table body to gray.
+Para distinguir el contenido de la tabla de las cabeceras, es posible que queramos añadir un formato adicional, por ejemplo, cambiando el color de fondo. En este ejemplo cambiamos el cuerpo de la tabla a gris.
 
 ```{r}
 my_table <- my_table %>% 
@@ -377,9 +376,9 @@ my_table
 
 
 <!-- ======================================================= -->
-## Conditional formatting {  }
+## Formato condicional {#conditional-formatting}
 
-We can highlight all values in a column that meet a certain rule, e.g. where more than 55% of cases died. Simply put the criteria to the `i = ` or `j = ` argument, preceded by a tilde `~`. Reference the column in the data frame, not the display heading values.  
+Podemos resaltar todos los valores de una columna que cumplan una determinada regla, por ejemplo, que más del 55% de los casos hayan muerto. Basta con poner el criterio en el argumento `i = ` o `j = `, precedido de una tilde `~`. Haga referencia a la columna en el dataframe, no a los valores del encabezamiento de la pantalla.
 
 ```{r}
 
@@ -388,9 +387,7 @@ my_table %>%
 
 ```
 
-
-
-Or, we can highlight the entire row meeting a certain criterion, such as a hospital of interest. To do this we just remove the column (`j`) specification so the criteria apply to all columns.
+O bien, podemos resaltar toda la fila que cumpla un determinado criterio, como un hospital de interés. Para ello, basta con eliminar la especificación de la columna (`j`) para que los criterios se apliquen a todas las columnas.
 
 
 ```{r}
@@ -400,10 +397,9 @@ my_table %>%
 
 ```
 
-## All code together {#tbl_pres_all}  
+## Todo el código junto {#tbl_pres_all}  
 
-
-Below we show all the code from the above sections together.  
+A continuación mostramos todo el código de las secciones anteriores juntas.
 
 ```{r}  
 
@@ -496,20 +492,20 @@ table
 
 
 <!-- ======================================================= -->
-## Saving your table {  }
+## Guardar tu tabla {#saving-your-table}
 
-There are different ways the table can be integrated into your output. 
+Hay diferentes maneras de integrar la tabla en tu salida.
 
-### Save single table {.unnumbered}
+### Guardar una tabla {.unnumbered}
 
-You can export the tables to Word, PowerPoint or HTML or as an image (PNG) files. To do this, use one of the following functions:
+Puedes exportar las tablas a Word, PowerPoint o HTML o como archivos de imagen (PNG). Para ello, utiliza una de las siguientes funciones:
 
 * `save_as_docx()`  
 * `save_as_pptx()`  
 * `save_as_image()`  
 * `save_as_html()`  
 
-For instance below we save our table as a word document. Note the syntax of the first argument - you can just provide the name of your flextable object e.g. `my_table`, or you can give is a "name" as shown below (the name is "my table"). If name, this will appear as the title of the table in Word. We also demonstrate code to save as PNG image.  
+Por ejemplo, a continuación guardamos nuestra tabla como un documento de Word. Ten en cuenta la sintaxis del primer argumento - puede proporcionar simplemente el nombre de tu objeto flextable, por ejemplo, `my_table`, o puedes darle un "nombre" como se muestra a continuación (el nombre es "my_table"). Si el nombre, este aparecerá como el título de la tabla en Word. También demostramos el código para guardar como imagen PNG.
 
 ```{r message=FALSE, warning=FALSE, eval=F}
 # Edit the 'my table' as needed for the title of table.  
@@ -518,26 +514,25 @@ save_as_docx("my table" = my_table, path = "file.docx")
 save_as_image(my_table, path = "file.png")
 ```
 
-Note the packages `webshot` or `webshot2` are required to save a flextable as an image. Images may come out with transparent backgrounds.
+Ten en cuenta que los paquetes `webshot` o `webshot2` son necesarios para guardar una tabla flexible como imagen. Las imágenes pueden salir con fondos transparentes.
 
-If you want to view a 'live' version of the **flextable** output in the intended document format, use `print()` and specify one of the below to `preview = `. The document will "pop-up" open on your computer in the specified software program, but will not be saved. This can be useful to check if the table fits in one page/slide or so you can quickly copy it into another document, you can use the print method with the argument preview set to “pptx” or “docx”.  
+Si deseas ver una versión "en vivo" de la salida de la **flextable** en el formato de documento previsto, utiliza `print()` y especifica uno de los siguientes para `preview = `. El documento se "abrirá" en tu ordenador en el programa de software especificado, pero no se guardará. Esto puede ser útil para comprobar si la tabla cabe en una página/diapositiva o para poder copiarla rápidamente en otro documento, puedes utilizar el método de impresión con el argumento vista previa establecido en "pptx" o "docx".
 
 ```{r, eval=F}
 print(my_table, preview = "docx") # Word document example
 print(my_table, preview = "pptx") # Powerpoint example
 ```
 
-### Print table in R markdown {.unnumbered}  
+### Imprimir tabla en R markdown {.unnumbered}  
 
-This table can be integrated into your an automated document, an R markdown output, if the table object is called within the R markdown chunk. This means the table can be updated as part of a report where the data might change, so the numbers can be refreshed.
+Esta tabla puede integrarse en un documento automatizado, una salida de R markdown, si el objeto tabla se llama dentro del chunk de R markdown. Esto significa que la tabla puede actualizarse como parte de un informe en el que los datos podrían cambiar, por lo que los números pueden actualizarse.
 
-See detail in the [Reports with R Markdown] page of this handbook. 
+Mira los detalles en la página de [Informes con R Markdown](#reports-with-r-markdown) de este manual.
 
 <!-- ======================================================= -->
-## Resources {  }
+## Recursos {#resources-20}
 
-The full **flextable** book is here: https://ardata-fr.github.io/flextable-book/
-The Github site is [here](https://davidgohel.github.io/flextable/)  
-A manual of all the **flextable** functions can be found [here](https://davidgohel.github.io/flextable/reference/index.html)
+El libro completo de la **flextable** está en: https://ardata-fr.github.io/flextable-book/  El sitio Github está [aquí](https://davidgohel.github.io/flextable/)
+Un manual de todas las funciones de **flextable** puede encontrarse [aquí](https://davidgohel.github.io/flextable/reference/index.html)
 
-A gallery of beautiful example **flextable** tables with code can be accessed [here](https://ardata-fr.github.io/flextable-gallery/gallery/)  
+Puedes acceder a una galería de bonitos ejemplos de **flextable**s con código [aquí](https://ardata-fr.github.io/flextable-gallery/gallery/)
