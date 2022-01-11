@@ -120,7 +120,7 @@ Nota: El enfoque principal de esta página del SIG se centra en el contexto de r
 
 ### Cargar paquetes {#load-packages-18}
 
-Este trozo de código muestra la carga de los paquetes necesarios para el análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con `library()` de R **base.** Consulta la página sobre [los fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra cómo puedes cargar de los paquetes necesarios para el análisis espacial que vamos a realizar. En este manual destacamos la función `p_load()` del paquete **pacman**: esta instala el paquete (si aún no está instalado) *y* lo carga para su uso. También puedes cargar los paquetes uno por uno  con la funcion `library()` de R **base.**, si ya los tienes instalados. Consulta la página sobre [los Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r}
 pacman::p_load(
@@ -136,15 +136,15 @@ pacman::p_load(
                   
 ```
 
-Puedes ver un resumen de todos los paquetes de R que se ocupan de los datos espaciales en el siguiente enlace de CRAN ["Spatial Task View"](https://cran.r-project.org/web/views/Spatial.html).
+En este enlace de CRAN ["Spatial Task View"](https://cran.r-project.org/web/views/Spatial.html) puedes ver un resumen de todos los paquetes de R que pueden trabajar con datos espaciales. 
 
-### Datos de casos de una muestra {#sample-case-data}
+### Ejemplos con una base de datos {#sample-case-data}
 
-Para fines de demostración, trabajaremos con una muestra aleatoria de 1000 casos del brote de Ebola simulado en el dataframe `linelist` (computacionalmente, trabajar con menos casos hace más fácil mostrarlos en este manual). Si quieres seguir el proceso, [clica para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds).
+A muestra de ejemplo, trabajaremos con una muestra aleatoria de 1000 casos del brote de ébola simulado en el dataframe `linelist` (computacionalmente, una base de datos pequeña hace que sea más fácil trabajar con este ejemplo). Si quieres seguir el proceso, [clica para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds).
 
-Dado que estamos tomando una muestra aleatoria de los casos, sus resultados pueden ser ligeramente diferentes de los que se muestran aquí cuando ejecutes el código por tu cuenta.
+Los resultados que tengas al correr el código de este ejercicio puede que sean un poco diferentes de los que se aquí mostramos. Esto es porque vamos a estar trabajando con una muestra aleatoria de los casos.
 
-Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - ver la página de [importación y exportación](#import-and-export) para más detalles).
+Importa los datos con la función `import()` del paquete **rio** (este paquete puede manejar muchos tipos de archivos, como .xlsx, .csv, .rds - véase la página de [importación y exportación](#import-and-export) para más detalles).
 
 ```{r, echo=F}
 # import clean case linelist
@@ -156,7 +156,7 @@ linelist <- rio::import(here::here("data", "case_linelists", "linelist_cleaned.r
 linelist <- import("linelist_cleaned.rds")  
 ```
 
-A continuación, seleccionamos una muestra aleatoria de 1000 filas utilizando `sample()` de R **base**.
+Para seleccionar la muestra aleatoria de 1000 filas utiliza `sample()` de R **base**.
 
 ```{r}
 # generate 1000 random row numbers, from the number of rows in linelist
@@ -166,9 +166,9 @@ sample_rows <- sample(nrow(linelist), 1000)
 linelist <- linelist[sample_rows,]
 ```
 
-Ahora queremos convertir este `linelist`, que es de tipo dataframe, en un objeto de tipo "sf" (spatial features). Dado que linelist tiene dos columnas "lon" y "lat" que representan la longitud y latitud de la residencia de cada caso, esto será fácil.
+Ahora queremos convertir este `linelist`, que es de tipo "dataframe", en un objeto de tipo "sf" (spatial features, por sus siglas en inglés). Dado que linelist tiene dos columnas "lon" y "lat" que representan la longitud y latitud de la residencia de cada caso, esto será fácil.
 
-Utilizamos el paquete **sf** (spatial features) y su función `st_as_sf()` para crear el nuevo objeto que llamamos `linelist_sf`. Este nuevo objeto tiene esencialmente el mismo aspecto que linelist, pero las columnas lon y lat han sido designadas como columnas de coordenadas, y se ha asignado un sistema de referencia de coordenadas (CRS) para cuando se muestren los puntos. El 4326 identifica nuestras coordenadas como basadas en el [Sistema Geodésico Mundial 1984 (WGS84)](https://gisgeography.com/wgs84-world-geodetic-system/) - que es el estándar para las coordenadas GPS.
+Utilizamos la función `st_as_sf()` del paquete **sf** (spatial features) para crear el nuevo objeto que llamamos `linelist_sf`. Este nuevo objeto tiene el mismo aspecto que la linelist, pero las columnas lon y lat han sido designadas como columnas de coordenadas, y se ha asignado un sistema de referencia de coordenadas (CRS) para poder visualizar los puntos. Este CRS es el númermo 4326 que corresponde a coordenadas especificas basadas en el [Sistema Geodésico Mundial 1984 (WGS84)](https://gisgeography.com/wgs84-world-geodetic-system/) - que es el estándar para las coordenadas GPS.
 
 ```{r}
 # Create sf object
@@ -186,7 +186,7 @@ DT::datatable(head(linelist_sf, 10), rownames = FALSE, options = list(pageLength
 
 **Sierra Leona: Archivos shapefiles de los límites administrativos**
 
-De antemano, hemos descargado todos los límites administrativos de Sierra Leona del [sitio web de](https://data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries) Humanitarian Data Exchange (HDX). Como alternativa, puedes descargar estos y todos los demás datos de ejemplo para este manual a través de nuestro paquete R, como se explica en la página [descargando el manual y los datos](#download-handbook-and-data).
+Primero, descárgate todos los límites administrativos de Sierra Leona del sitio web de [Humanitarian Data Exchange (HDX)](https://data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries). Como alternativa, también te puedes descargar estos archivos y todos los demás datos de ejemplo que usamos para este manual a través de nuestro paquete R, como se explica en la página [descargando el manual y los datos](#download-handbook-and-data).
 
 Ahora vamos a hacer lo siguiente para guardar el shapefile del nivel administrativo 3 en R:
 
@@ -194,7 +194,7 @@ Ahora vamos a hacer lo siguiente para guardar el shapefile del nivel administrat
 2.  Limpiar los nombres de las columnas
 3.  Filtrar las filas para mantener sólo las áreas de interés
 
-Para importar un shapefile utilizamos la función `read_sf()` de **sf**. Se le proporciona la ruta del archivo a través de `here()`. - En nuestro caso el archivo se encuentra dentro de nuestro proyecto R en las subcarpetas "data", "gis" y "shp", con nombre de archivo "sle_adm3.shp" (para más información ver las páginas sobre [Importación y exportación](#import-and-export) y [proyectos R](#r-projects)). Tendrás que proporcionar tu ruta de los archivos.
+Para importar un shapefile utilizamos la función `read_sf()` del paquete **sf**, y usamos la función `here()` para que R encuentre el archivo. En nuestro caso, el archivo se encuentra dentro de nuestro proyecto R en las subcarpetas "data", "gis" y "shp", con nombre de archivo "sle_adm3.shp" (para más información ver las páginas sobre [Importación y exportación](#import-and-export) y [proyectos R](#r-projects)). En tu caso, tendrás que indicar la localización específica donde tienes tus archivos en tu ordenador.
 
 ```{r, echo=F}
 sle_adm3_raw <- sf::read_sf(here("data", "gis", "shp", "sle_adm3.shp"))
@@ -220,7 +220,8 @@ DT::datatable(head(sle_adm3, 50), rownames = FALSE, options = list(pageLength = 
 
 **Sierra Leona: Población por ADM3**
 
-Estos datos pueden descargarse de nuevo de HDX (enlace [aquí](https://data.humdata.org/dataset/sierra-leone-population)) o a través de nuestro paquete R **epirhandbook** como se explica [en esta página](#download-handbook-and-data). Utilizamos `import()` para cargar el archivo .csv. También pasamos el archivo importado a `clean_names()` para estandarizar la sintaxis de los nombres de las columnas.
+Al igual que hemos hecho antes, te puedes descargar estos datos 
+de [HDX](https://data.humdata.org/dataset/sierra-leone-population)) o a través de nuestro paquete R **epirhandbook** como se explica [en esta página](#download-handbook-and-data). Utilizamos `import()` para cargar el archivo .csv. Al igual que antes, pasamos el archivo importado a `clean_names()` para estandarizar la sintaxis de los nombres de las columnas.
 
 ```{r}
 # Population by ADM3
@@ -228,7 +229,7 @@ sle_adm3_pop <- import(here("data", "gis", "population", "sle_admpop_adm3_2020.c
   clean_names()
 ```
 
-Este es el aspecto del archivo de población. Desplázate a la derecha para ver cómo cada jurisdicción tiene columnas con la población `male`, `female`, y la población `total` y el desglose de la población en columnas por grupos de edad.
+Este es el aspecto del archivo de población. *Desplázate a la derecha* para ver cómo cada jurisdicción tiene columnas con la población `male`, `female`, y la población `total` y el desglose de la población en columnas por grupos de edad.
 
 ```{r message=FALSE, echo=F}
 # display the population as a table
@@ -239,7 +240,7 @@ DT::datatable(head(sle_adm3_pop, 50), rownames = FALSE, options = list(pageLengt
 
 **Sierra Leone: Health facility data from OpenStreetMap**
 
-Una vez más, hemos descargado las ubicaciones de los centros sanitarios desde el HDX [aquí](https://data.humdata.org/dataset/hotosm_sierra_leone_health_facilities) o mediante las instrucciones de la página [descarga de manuales y datos](#download-handbook-and-data).
+Una vez más, hemos descargado la localización de los centros sanitarios desde el HDX [aquí](https://data.humdata.org/dataset/hotosm_sierra_leone_health_facilities) o mediante las instrucciones de la página [descarga de manuales y datos](#download-handbook-and-data).
 
 Importamos el shapefile de puntos de las instalaciones con `read_sf()`, limpiamos de nuevo los nombres de las columnas y filtramos para mantener sólo los puntos etiquetados como "hospital", "clinic" o "doctors".
 
@@ -250,7 +251,7 @@ sle_hf <- sf::read_sf(here("data", "gis", "shp", "sle_hf.shp")) %>%
   filter(amenity %in% c("hospital", "clinic", "doctors"))
 ```
 
-Aquí está el dataframe resultante -- *desplázate a la derecha* para ver el nombre de la instalación y las coordenadas `geométricas`.
+Aquí está el dataframe resultante -- *desplázate a la derecha* para ver el nombre de la instalación y las coordenadas geométricas (`geometry`).
 
 ```{r message=FALSE, echo=F}
 # display the population as a table
@@ -261,28 +262,28 @@ DT::datatable(head(sle_hf, 50), rownames = FALSE, options = list(pageLength = 5,
 
 ## Trazado de coordenadas {#plotting-coordinates}
 
-La forma más sencilla de representar las coordenadas X-Y (longitud/latitud, puntos), en este caso de los casos, es dibujarlas como puntos directamente desde el objeto `linelist_sf` que creamos en la sección de preparación.
+La forma más sencilla de representar las coordenadas X-Y (longitud/latitud, puntos) de los casos es dibujarlas como puntos directamente desde el objeto `linelist_sf` que ya creamos en la sección de preparación.
 
-El paquete **tmap** ofrece capacidades de mapeo simples tanto para el modo estático (modo "plot") como para el interactivo (modo "view") con sólo unas pocas líneas de código. La sintaxis de **tmap** es similar a la de **ggplot2**, de forma que los comandos se añaden unos a otros con `+`. Lee más detalles en esta [viñeta](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html).
+El paquete **tmap** nos permite visualizar este tipo de informacion tanto de modo estático (modo "plot") como de modo interactivo (modo "view") con sólo unas pocas líneas de código. La sintaxis de **tmap** es similar a la de **ggplot2**, de forma que los comandos se añaden unos a otros con `+`. Lee más detalles en esta [viñeta](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html).
 
-1.  Establecer el modo **tmap**. En este caso utilizaremos el modo "plot", que produce salidas estáticas.
+1.  Lo primero es establecer qué modo **tmap** queremos. En este caso utilizaremos el modo "plot", que produce salidas estáticas.
 
 ```{r, warning = F, message=F}
 tmap_mode("plot") # choose either "view" or "plot"
 ```
 
-A continuación, los puntos se trazan solos. `tm_shape()` está con el objeto `linelist_sf`. A continuación, añadimos puntos mediante `tm_dots()`, especificando el tamaño y el color. Como `linelist_sf` es un objeto sf, ya hemos designado las dos columnas que contienen las coordenadas lat/long y el sistema de referencia de coordenadas (CRS):
+Abajo puedes ver que, por ahora, sólo estamos trazando los puntos. Utilizamos el `tm_shape()` con el objeto `linelist_sf`. A continuación, añadimos la informacion de los puntos mediante `tm_dots()`, especificando el tamaño y el color deseados. Recuerda que el `linelist_sf` es un objeto sf, con lo que ya tenemos designadas las dos columnas que contienen las coordenadas lat/long y el sistema de referencia de coordenadas (CRS):
 
 ```{r, warning = F, message=F}
 # Just the cases (points)
 tm_shape(linelist_sf) + tm_dots(size=0.08, col='blue')
 ```
 
-Por sí solos, los puntos no nos dicen mucho. Así que también deberíamos dibujar los límites administrativos:
+Por sí solos, los puntos no nos dicen mucho. Así que también tenemos que dibujar los límites administrativos:
 
-De nuevo utilizamos `tm_shape()` (ver [documentación](https://www.rdocumentation.org/packages/tmap/versions/3.3/topics/tm_shape)) pero en lugar de proporcionar el shapefile de los puntos de los caso, proporcionamos el shapefile de los límites administrativos (polígonos).
+Para esto, vamos a usar `tm_shape()` (ver [documentación](https://www.rdocumentation.org/packages/tmap/versions/3.3/topics/tm_shape)), pero en vez de proporcionar el shapefile de los puntos de los casos, proporcionamos el shapefile de los límites administrativos (polígonos).
 
-Con el argumento `bbox =`(bbox significa "bounding box") podemos especificar los límites de las coordenadas. Primero mostramos la visualización del mapa sin `bbox`, y luego con él.
+Con el argumento `bbox =`(bbox significa "bounding box") podemos especificar los límites de las coordenadas, lo cual nos ayuda a hacer zoom a una zona específica de interés. Primero mostramos la visualización del mapa sin `bbox`, y luego con él.
 
 ```{r, out.width = c('50%', '50%'), fig.show='hold', warning=F, message=F}
 # Just the administrative boundaries (polygons)
@@ -303,7 +304,7 @@ tm_shape(sle_adm3,
 
 ```
 
-Y ahora tanto los puntos como los polígonos juntos:
+Con esto ya podemos trazar los puntos y los polígonos juntos:
 
 ```{r, warning=F, message=FALSE}
 # All together
@@ -323,9 +324,9 @@ Para leer una buena comparación de las opciones de mapeo en R, consulta esta [e
 
 ## Uniones espaciales {#spatial-joins}
 
-Es posible que estés familiarizado con la *unión de* datos de unos datos a otro. En la página [unión de datos](#joining-data) de este manual se tratan varios métodos. Una unión espacial tiene un propósito similar, pero aprovecha las relaciones espaciales. En lugar de confiar en los valores comunes de las columnas para hacer coincidir correctamente las observaciones, puede utilizar sus relaciones espaciales, como que una característica esté *dentro de* otra, o que *sea la vecina más cercana* de otra, o que esté dentro de un *buffer* de un determinado radio de otra, etc.
+Es posible que estés familiarizado con la *unión* de datos entre bases de datos. En la página [unión de datos](#joining-data) de este manual se trata varios métodos. Una unión espacial tiene un propósito similar, pero aprovecha las relaciones espaciales entre bases de datos. En lugar de confiar en los valores comunes de las columnas para hacer coincidir correctamente las observaciones, puede utilizar distintos tipos de relaciones espaciales, como por ejemplo que una característica esté *contenida dentro de* otra, que *sea la "vecina más cercana"* de otra característica, o que esté dentro de un *buffer* de determinado radio de otra.
 
-El paquete **sf** ofrece varios métodos para las uniones espaciales. Consulta más documentación sobre el método st_join y los tipos de uniones espaciales en esta [referencia](https://r-spatial.github.io/sf/reference/geos_binary_pred.html).
+El paquete **sf** ofrece varios métodos para las uniones espaciales. Puedes explorar la documentación del método `st_join()` y otros tipos de uniones espaciales en esta [referencia](https://r-spatial.github.io/sf/reference/geos_binary_pred.html).
 
 ### Puntos en el polígono {#points-in-polygon}
 
