@@ -1,36 +1,36 @@
 
-# Epidemic curves { }  
+# Curvas epidémicas {#epidemic-curves}
 
 ```{r, out.width=c('75%'), echo=F, message=F}
 knitr::include_graphics(here::here("images", "epicurve_top.png"))
 ```    
 
+<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
-An epidemic curve (also known as an "epi curve") is a core epidemiological chart typically used to visualize the temporal pattern of illness onset among a cluster or epidemic of cases.  
+Una curva epidémica (también conocida como "curva epi") es un gráfico epidemiológico básico que se suele utilizar para visualizar el patrón temporal de aparición de la enfermedad entre un grupo o epidemia de casos.
 
-Analysis of the epicurve can reveal temporal trends, outliers, the magnitude of the outbreak, the most likely time period of exposure, time intervals between case generations, and can even help identify the mode of transmission of an unidentified disease (e.g. point source, continuous common source, person-to-person propagation). One online lesson on interpretation of epi curves can be found at the website of the [US CDC](https://www.cdc.gov/training/quicklearns/epimode/index.html).    
+El análisis de la epicurva puede revelar tendencias temporales, valores atípicos, la magnitud del brote, el periodo de exposición más probable, los intervalos de tiempo entre las generaciones de casos, e incluso puede ayudar a identificar el modo de transmisión de una enfermedad no identificada (por ejemplo, fuente puntual, fuente común continua, propagación de persona a persona). En el sitio web de los [CDC de EE.UU.](https://www.cdc.gov/training/quicklearns/epimode/index.html) se puede encontrar una lección en línea sobre la interpretación de las epicurvas.
 
-In this page we demonstrate two approaches to producing epicurves in R:  
+En esta página mostramos dos enfoques para producir epicurvas en R:
 
-* The **incidence2** package, which can produce an epi curve with simple commands  
-* The **ggplot2** package, which allows for advanced customizability via more complex commands  
+* El paquete **incidence2**, que puede producir una curva epi con simples comandos
+* El paquete **ggplot2**, que permite una personalización avanzada mediante comandos más complejos
 
-Also addressed are specific use-cases such as:  
+También se abordan casos de uso específicos como:
 
-* Plotting aggregated count data  
-* Faceting or producing small-multiples  
-* Applying moving averages  
-* Showing which data are "tentative" or subject to reporting delays  
-* Overlaying cumulative case incidence using a second axis  
+* Trazado de datos de recuento agregados
+* Facetado o producción de múltiplos gráficos pequeños
+* Aplicación de medias móviles
+* Mostrar qué datos son "provisionales" o están sujetos a retrasos en la presentación de informes
+* Superposición de la incidencia de casos acumulados mediante un segundo eje
 
 <!-- ======================================================= -->
-## Preparation
+## Preparación {#preparation-24}
 
 
-### Packages {.unnumbered}  
+### Paquetes {.unnumbered}  
 
-This code chunk shows the loading of packages required for the analyses. In this handbook we emphasize `p_load()` from **pacman**, which installs the package if necessary *and* loads it for use. You can also load installed packages with  `library()` from **base** R. See the page on [R basics] for more information on R packages.  
-
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 ```{r message=F, warning=F}
 pacman::p_load(
   rio,          # file import/export
@@ -47,14 +47,14 @@ pacman::p_load(
 ```
 
 
-### Import data {.unnumbered}
+### Importar datos {.unnumbered}
 
-Two example datasets are used in this section:  
+En esta sección se utilizan dos conjuntos de datos de ejemplo:
 
-* Linelist of individual cases from a simulated epidemic  
-* Aggregated counts by hospital from the same simulated epidemic  
+* `Linelist` con casos individuales de una epidemia simulada
+* Recuentos agregados por hospital de la misma epidemia simulada
 
-The datasets are imported using the `import()` function from the **rio** package. See the page on [Import and export] for various ways to import data.  
+Los datos se importan mediante la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos.
 
 
 ```{r, echo=F, message=F}
@@ -70,15 +70,15 @@ count_data <- linelist %>%
 ```
 
 
-**Case linelist**
+**`Linelist` con casos**
 
-We import the dataset of cases from a simulated Ebola epidemic. If you want to follow along, <a href='https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds' class='download-button'>click to download the "clean" linelist</a> (as .rds file). Import your data with the `import()` function from the **rio** package (it accepts many file types like .xlsx, .rds, .csv - see the [Import and export] page for details).  
+Importamos los datos de casos de una epidemia de ébola simulada. Si deseas descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página de [descarga de manuales y datos](#download-handbook-and-data). Asumimos que el archivo está en el directorio de trabajo, por lo que no se especifican subcarpetas en esta ruta de archivo.  
 
 ```{r, eval=F}
 linelist <- import("linelist_cleaned.rds")
 ```
 
-The first 50 rows are displayed below.
+A continuación se muestran las primeras 50 filas.
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
@@ -87,9 +87,9 @@ DT::datatable(head(linelist, 50), rownames = FALSE, options = list(pageLength = 
 
 
 
-**Case counts aggregated by hospital**  
+**Recuentos de casos agregados por hospital**
 
-For the purposes of the handbook, the dataset of weekly aggregated counts by hospital is created from the `linelist` with the following code. 
+A efectos del manual, los datos de recuentos semanales agregados por hospital se crean a partir de  `linelist` con el siguiente código.
 
 ```{r, eval=F}
 # import the counts data into R
@@ -100,7 +100,7 @@ count_data <- linelist %>%
   ungroup()
 ```
 
-The first 50 rows are displayed below:  
+A continuación se muestran las primeras 50 filas:
 
 ```{r message=FALSE, echo=F}
 # display the linelist data as a table
@@ -110,9 +110,9 @@ DT::datatable(head(count_data, 50), rownames = FALSE, options = list(pageLength 
 
 
 
-### Set parameters {.unnumbered}
+### Establecer parámetros {.unnumbered}
 
-For production of a report, you may want to set editable parameters such as the date for which the data is current (the "data date"). You can then reference the object `data_date` in your code when applying filters or in dynamic captions.
+Para la producción de un informe, es posible que desees establecer parámetros editables como la fecha para la que los datos son actuales (la "data_date"). A continuación, puedes hacer referencia al objeto `data_date` en tu código cuando apliques filtros o en subtítulos dinámicos.
 
 ```{r set_parameters}
 ## set the report date for the report
@@ -122,9 +122,9 @@ data_date <- as.Date("2015-05-15")
 
 
 
-### Verify dates {.unnumbered}
+### Verificar las fechas {.unnumbered}
 
-Verify that each relevant date column is class Date and has an appropriate range of values. You can do this simply using `hist()` for histograms, or `range()` with `na.rm=TRUE`, or with `ggplot()` as below.  
+Verifica que cada columna de fecha relevante es de tipo Date y tiene un rango de valores apropiado. Puedes hacerlo simplemente utilizando `hist()` para histogramas, o `range()` con `na.rm=TRUE`, o con `ggplot()` como se indica a continuación.
 
 ```{r, out.width = c('50%', '50%', '50%'), fig.show='hold', warning=F, message=F}
 # check range of onset dates
@@ -135,26 +135,25 @@ ggplot(data = linelist)+
 
 
 <!-- ======================================================= -->
-## Epicurves with **incidence2** package { }
+## Epicurves con el paquete de **incidencia2** {#epicurves-with-incidence2-package}
 
-Below we demonstrate how to make epicurves using the **incidence2** package. The authors of this package have tried to allow the user to create and modify epicurves without needing to know **ggplot2** syntax. Much of this page is adapted from the package vignettes, which can be found at the **incidence2** [github page](https://github.com/reconhub/incidence2).   
+A continuación mostramos cómo hacer epicurvas utilizando el paquete **incidence2**. Los autores de este paquete han intentado que el usuario pueda crear y modificar epicurvas sin necesidad de conocer la sintaxis de **ggplot2**. Gran parte de esta página está adaptada de las viñetas del paquete, que se pueden encontrar en la [página de github de **incidence2**](https://github.com/reconhub/incidence2).
 
 
 <!-- ======================================================= -->
-### Simple example {.unnumbered}
+### Ejemplo sencillo {.unnumbered}
 
-**2 steps are required to plot an epidemic curve with the *incidence2* package:**  
+**Se requieren 2 pasos para trazar una curva epidémica con el paquete *incidence2*:**
 
-1) **Create** an *incidence object* (using the function `incidence()`)  
-    + Provide the data  
-    + Specify the date column to `date_index = `  
-    + Specify the `interval = ` into which the cases should be aggregated (daily, weekly, monthly..)  
-    + Specify any grouping columns (e.g. gender, hospital, outcome)  
-2) **Plot** the incidence object  
-    + Specify labels, colors, titles, etc.  
+1)  **Crear** un *objeto de incidencia* (utilizando la función `incidence()`)
+     + Proporcionar los datos
+     + Especificar la columna de fecha a `date_index = `
+     + Especificar el `interval = ` en el que deben agregarse los casos (diario, semanal, mensual..)
+     + Especificar cualquier columna de agrupación (por ejemplo, sexo, hospital, resultado)
+2.  **Trazar** el objeto de incidencia
+     + Especificar etiquetas, colores, títulos, etc.
 
-
-Below, we load the **incidence2** package, create the incidence object from the `linelist` on column `date_onset` and aggregated cases by day. We then print a summary of the incidence object. 
+A continuación, cargamos el paquete **incidence2**, creamos el objeto de incidencia a partir de `linelist` en la columna `date_onset` y agregamos los casos por día. A continuación, imprimimos un resumen del objeto de incidencia.
 
 ```{r, warning=F, message=F}
 # load incidence2 package
@@ -168,58 +167,58 @@ epi_day <- incidence(       # create incidence object
   )
 ```
 
-The **incidence2** object itself looks like a tibble (like a data frame) and can be printed or further manipulated like a data frame.  
+El objeto **incidencia2** tiene el aspecto de un tibble (como una trama de datos) y puede imprimirse o manipularse como un dataframe. 
 
 ```{r}
 class(epi_day)
 ```
 
-Here is what it looks like when printed. It has a `date_index` column and a `count` column.  
+Este es el aspecto que tiene cuando se imprime. Tiene una columna `date_index` y una columna `count`.
 
 ```{r}
 epi_day
 ```
 
-You can also print a summary of the object:  
+También puedes imprimir un resumen del objeto:
 
 ```{r}
 # print summary of the incidence object
 summary(epi_day)
 ```
 
-To *plot* the *incidence* object, use `plot()` on the *name of the incidence object*. In the background, the function `plot.incidence2()` is called, so to read the **incidence2**-specific documentation you would run `?plot.incidence2`.  
+Para *trazar* el objeto de incidencia, utiliza `plot`() en el *nombre del objeto de incidencia*. En segundo plano, se llama a la función `plot.incidence2()`, por lo que para leer la documentación específica de incidence2** se ejecutaría `?plot.incidence2.`
 
 ```{r}
 # plot the incidence object
 plot(epi_day)
 ```
 
-If you notice lots of tiny white vertical lines, try to adjust the size of your image. For example, if you export your plot with `ggsave()`, you can provide numbers to `width = ` and `height = `. If you widen the plot those lines may disappear.    
+Si notas muchas líneas blancas verticales diminutas, intenta ajustar el tamaño de la imagen. Por ejemplo, si exportas el gráfico con `ggsave()`, puede proporcionar números a `width = ` y `height = `. Si amplías el gráfico esas líneas pueden desaparecer.   
 
 
 
-### Change time interval of case aggregation {.unnumbered}  
-The `interval = ` argument of `incidence()` defines how the observations are grouped into vertical bars. 
+### Cambiar el intervalo de tiempo de la agregación de casos {.unnumbered}  
+El argumento `interval = ` de `incidence()` define cómo se agrupan las observaciones en barras verticales.
 
-**Specify interval**  
+**Especificar el intervalo**
 
-**incidence2** provides flexibility and understandable syntax for specifying how you want to aggregate your cases into epicurve bars. Provide a value like the ones below to the `interval = ` argument. You can write any of the below as plural (e.g. "week**s**"), and you can add numbers before (e.g. "3 months").  
+**incidence2** proporciona flexibilidad y una sintaxis comprensible para especificar cómo quieres agregar tus casos en barras epicúreas. Proporcione un valor como los siguientes al argumento `interval = `. Puedes escribir cualquiera de los siguientes en plural (por ejemplo, "week**s**"), y puedes añadir números antes (por ejemplo, "3 monts"). 
 
-Argument option | Further explanation 
+Opción de argumento | Más explicaciones 
 ------------------- | ------------------------------------ |
-Number (1, 7, 13, 14, etc.) | Number of days per interval  
-"week" | note: Monday start day is default
-"2 weeks" | or 3, 4, 5...
-"Sunday week" | weeks beginning on Sundays (could also use Thursday, etc.)
-"2 Sunday weeks" | or 3, 4, 5...
-"MMWRweek" | week starts on Sundays - see US CDC
-"month" | 1st of month
-"quarter" | 1st of month of quarter
-"2 months" | or 3, 4, 5...
-"year" | 1st day of calendar year
+Número (1, 7, 13, 14, etc.) | Número de días por intervalo  
+"week" | nota: el lunes es el día de inicio predeterminad
+"2 weeks" | o 3, 4, 5...
+"Sunday week" | semanas que comienzan en domingo (también se puede utilizar el Thursday, etc.) 
+"2 Sunday weeks" | o 3, 4, 5...
+"MMWRweek" | la semana comienza en domingo - ver US CDC
+"month" | El 1 de mes 
+"quarter" | 1er mes del trimestre  
+"2 months" | o 3, 4, 5...
+"year" | Primer día del año natural 
 
 
-Below are examples of how different intervals look when applied to the linelist. Note how the default format and frequency of the date *labels* on the x-axis change as the date interval changes.  
+A continuación se muestran ejemplos de cómo se ven los diferentes intervalos cuando se aplican a linelist. Observe cómo el formato por defecto y la frecuencia de las *etiquetas de* fecha en el eje-x cambian a medida que cambia el intervalo de fecha.
 
 ```{r incidence, out.width=c('50%', '50%', '50%', '50%'), fig.show='hold', warning=F, message=F}
 # Create the incidence objects (with different intervals)
@@ -259,23 +258,23 @@ plot(epi_year)+    labs(title = "Years")
 
 <!-- If you want the intervals to begin at the first case, you can add the argument `standard = TRUE` to the `incidence()` command. This only works if the interval is either "week", "month", "quarter" or "year".   -->
 
-**First date**
+**Primera fecha**
 
-You can optionally specify a value of class Date (e.g. `as.Date("2016-05-01")`) to `firstdate = ` in the `incidence()` command. If given, the data will be trimmed to this range and the intervals will begin on this date. 
+Puedes especificar opcionalmente un valor de tipo Date (por ejemplo, `as.Date("2016-05-01")`) a `firstdate = ` en el comando `incidence()`. Si se da, los datos se recortarán a este rango y los intervalos comenzarán en esta fecha.
 
 
 
-### Groups {.unnumbered}
+### Grupos {.unnumbered}
 
-Groups are specified in the `incidence()` command, and can be used to color the bars or to facet the data. To specify groups in your data provide the column name(s) to the `groups =` argument in the `incidence()` command (no quotes around the column name). If specifying multiple columns, put their names within `c()`.
+Los grupos se especifican en el comando `incidence()`, y pueden utilizarse para colorear las barras o para facetar los datos. Para especificar los grupos en tus datos, escribe el nombre de la(s) columna(s) en el argumento `groups = ` del comando `incidence()` (sin comillas alrededor del nombre de la columna). Si especificas varias columnas, pon sus nombres dentro de `c()`.
 
-You can specify that cases with missing values in the grouping columns be listed as a distinct `NA` group by setting `na_as_group = TRUE`. Otherwise, they will be excluded from the plot.   
+Puedes especificar que los casos con valores faltantes en las columnas de agrupación sean listados como un grupo `NA` distinto estableciendo `na_as_group = TRUE`. De lo contrario, se excluirán del gráfico.
 
-* To *color the bars by a grouping column*, you must again provide the column name to `fill = ` in the `plot()` command.  
+* Para *colorear las barras por una columna de agrupación*, debes proporcionar de nuevo el nombre de la columna en `fill = ` del comando `plot()`.
 
-* To *facet based on a grouping column*, see the section below on facets with **incidence2**.  
+* Para *crear una faceta basada en una columna de agrupación*, consulta la sección siguiente sobre facetas con **incidence2**.
 
-In the example below, the cases in the whole outbreak are grouped by their age category. Missing values are included as a group. The epicurve interval is weeks.  
+En el ejemplo siguiente, los casos de todo el brote se agrupan por su categoría de edad. Los valores faltantes se incluyen como grupo. El intervalo de la epicurva es de semanas.
 
 
 ```{r, message=F, warning=F}
@@ -293,9 +292,9 @@ plot(
   fill = age_cat)+          # age_cat is used for bar fill color (must have been set as a groups column above)
 labs(fill = "Age Category") # change legend title from default "age_cat" (this is a ggplot2 modification)
 ```
-<span style="color: darkgreen;">**_TIP:_** Change the title of the legend by adding `+` the **ggplot2** command `labs(fill = "your title")` to your **incidence2** plot.</span>  
+<span style="color: darkgreen;">***CONSEJO:*** Cambia el título de la leyenda añadiendo `+` el comando de **ggplot2** `labs(fill = "su título")`</span>  
 
-You can also have the grouped bars display side-by-side by setting `stack = FALSE` in `plot()`, as shown below:  
+También puedes hacer que las barras agrupadas se muestren una al lado de la otra estableciendo `stack = FALSE` en `plot()`, como se muestra a continuación:
 
 ```{r, warning=F, message=F}
 # Make incidence object of monthly counts. 
@@ -312,20 +311,20 @@ plot(
   stack = FALSE)    # side-by-side (not stacked)
 ``` 
 
-You can set the `na_as_group = ` argument to FALSE in the `incidence()` command to remove rows with missing values from the plot.  
+Puedes establecer el argumento `na_as_group = ` a FALSE en el comando `incidence()` para eliminar las filas con valores faltantes del gráfico. 
 
 
 
 
-### Filtered data {.unnumbered}
+### Datos filtrados {.unnumbered}
 
-To plot the epicurve of a subset of data:  
+Para trazar la epicurva de un subconjunto de datos:
 
-1) Filter the linelist data  
-2) Provide the filtered data to the `incidence()` command  
-3) Plot the incidence object
+1)  Filtrar los datos del listado
+2)  Proporcionar los datos filtrados al comando `incidence()`
+3)  Trazar el objeto de incidencia
 
-The example below uses data filtered to show only cases at Central Hospital.  
+El ejemplo siguiente utiliza datos filtrados para mostrar sólo los casos del Central Hospital.
 
 ```{r, warning=F, message=F}
 # filter the linelist
@@ -342,11 +341,11 @@ plot(central_outbreak, title = "Weekly case incidence at Central Hospital")
 
 
 
-### Aggregated counts {.unnumbered}
+### Recuentos agregados {.unnumbered}
 
-If your original data are aggregated (counts), provide the name of the column that contains the case counts to the `count = ` argument when creating the incidence object with `incidence()`.  
+Si los datos originales son agregados (recuentos), proporciona el nombre de la columna que contiene los recuentos de casos al argumento `count =` cuando crees el objeto de incidencia con `incidence()`.
 
-For example, this data frame `count_data` is the linelist aggregated into daily counts by hospital. The first 50 rows look like this:  
+Por ejemplo, este dataframe `count_data` son casos de `linelist` agregados en recuentos diarios por hospital. Las primeras 50 filas tienen este aspecto: 
 
 ```{r message=FALSE, echo=F}
 DT::datatable(head(count_data,50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
@@ -371,15 +370,17 @@ plot(epi_counts,                      # incidence object
 
 
 
-### Facets/small multiples {.unnumbered}  
+### Facetas/pequeños múltiplos {.unnumbered}  
 
-To facet the data by group (i.e. produce "small multiples"):  
+Facetar los datos por grupos (es decir, producir "pequeños múltiples"):
 
-1) Specify the faceting column to `groups = ` when you create the incidence object  
-2) Use the `facet_plot()` command instead of `plot()`  
-3) Specify which grouping columns to use as `fill = ` and which to use as `facets = `  
+1.  Especificar la columna a facetar en `groups = ` 
 
-Below, we set both columns `hospital` and `outcome` as grouping columns in the `incidence()` command. Then, in `facet_plot()` we plot the epicurve, specifying that we want a different epicurve for each hospital and that within each epicurve the bars should be stacked and colored by outcome.  
+2.  Utilizar el comando facet_plot() en lugar de `plot()`
+
+3.  Especificar qué columnas de agrupación utilizar como `fill = ` y cuáles utilizar como `facets = `
+
+A continuación, establecemos las columnas `hospital` y  `outcome` como columnas de agrupación en el comando `incidence()`. A continuación, en `facet_plot()` trazamos la epicurva, especificando que queremos una epicurva diferente para cada hospital y que dentro de cada epicurva las barras deben estar apiladas y coloreadas por `outcome`.
  
 
 ```{r, warning=F, message=F}
@@ -398,72 +399,72 @@ incidence2::facet_plot(
 
 ```
 
-Note that the package **ggtree** (used for displaying phylogenetic trees) also has a function `facet_plot()` - this is why we specified `incidence2::facet_plot()` above.  
+Ten en cuenta que el paquete **ggtree** (utilizado para mostrar árboles filogenéticos) también tiene una función `facet_plot()` - por eso especificamos incidence2::facet_plot() arriba.
 
 
 
-### Modifications with `plot()` {.unnumbered} 
+### Modificaciones con `plot()` {.unnumbered} 
 
-An epicurve produced by **incidence2** can be modified via these arguments *within the `plot()` function*.  
+Una epicurva producida por **incidence2** puede ser modificada a través de estos argumentos *dentro de la función `plot()`*.
 
-**Here are `plot()` arguments that modify the appearance of the bars:**  
+**Aquí están los argumentos de `plot()` que modifican la apariencia de las barras:**
 
-Argument | Description | Examples
+Argumento | Descripción | Ejemplos
 ------------------|---------------------------------------|-------------------
-`fill = `|Bar color. Either a color name or a column name previously specified to `groups = ` in the `incidence()` command|`fill = "red"`, or `fill = gender`  
-`color = ` |Color around each bar, or around each grouping within a bar|`border = "white"` 
-`legend = `|Location of legend|One of "bottom", "top", "left", "right", or "none"  
-`alpha = `|Transparency of bars/boxes|1 is fully opaque, 0 is fully transparent
-`width = `|Value between 0 and 1 indicating the relative size of the bars to their time interval|`width = .7`  
-`show_cases = `|Logical; if TRUE, each case shows as a box. Displays best on smaller outbreaks.|`show_cases = TRUE`  
+`fill = `|Color de la barra. Nombre de color o Nombre de la columna previamente especificada en `groups = ` en el comando `incidence()` |`fill = "red"`, o `fill = gender`  
+`color = ` |Colorea alrededor de cada barra, o de cada agrupación dentro de una barra|`border = "white"` 
+`legend = `|Ubicación de la leyenda|Puede ser "bottom", "top", "left", "right", o "none"  
+`alpha = `|Transparencia de las barras/cajas|1 es totalmente opaco, 0 es totalmente transparente
+`width = `|Valor entre 0 y 1 que indica el tamaño de las barras relativo a su intervalo de tiempo|`width = .7`  
+`show_cases = `|Lógico; si es TRUE, cada caso se muestra como una caja. Muestra mejor en brotes pequeños.|`show_cases = TRUE`  
 
-**Here are `plot()` arguments that modify the date axis:**  
+**Aquí están los argumentos de `plot()` que modifican el eje de la fecha:**
 
-Argument(s)|Description
+Argumento(s)|Descripción
 ----------------------|----------------------------------------------------
-`centre_dates = `|TRUE/FALSE as to whether date displays appear under center of bars, or at beginning of bars  
-`date_format = `|Adjust the date display format using strptime ("%") syntax. Only works if `centre_dates = FALSE` (details below).  
-`n.breaks = `|Approximate number of x-axis label breaks desired.  
-`angle = `|Angle of x-axis date labels (number of degrees)  
-`size = `|Size of text in points  
+`centre_dates = `|TRUE/FALSE en cuanto a si la fecha aparece bajo el centro de las barras, o al principio de las mismas     
+`date_format = `| Ajusta el formato de visualización de la fecha con la sintaxis strptime ("%"). Sólo funciona si `centre_dates = FALSE` (detalles más abajo). 
+`n.breaks = `|Número aproximado de interrupciones de la etiqueta del eje-x  
+`angle = `|Ángulo de las etiquetas de fecha del eje-x (número de grados)  
+`size = `|Tamaño del texto en puntos 
 
-Note that the `date_breaks = ` argument only works if `centre_dates = FALSE`. Provide a character value in quotation marks using the strptime syntax below, as detailed in the [Working with dates] page. You can use `\n` for a "newline".  
+Ten en cuenta que el argumento `date_breaks = ` sólo funciona si `centre_dates = FALSE`. Proporciona un valor de carácter entre comillas utilizando la sintaxis strptime que se indica a continuación, como se detalla en la página [Trabajar con fechas](#working-with-dates-1). Puedes utilizar `\n` para una "nueva línea".
 
-%d = Day number of month (5, 17, 28, etc.)  
-%j = Day number of the year (Julian day 001-366)  
-%a = Abbreviated weekday (Mon, Tue, Wed, etc.)  
-%A = Full weekday (Monday, Tuesday, etc.)  
-%w = Weekday number (0-6, Sunday is 0)  
-%u = Weekday number (1-7, Monday is 1)  
-%W = Week number (00-53, Monday is week start)  
-%U = Week number (01-53, Sunday is week start)  
-%m = Month number (e.g. 01, 02, 03, 04)  
-%b = Abbreviated month (Jan, Feb, etc.)  
-%B = Full month (January, February, etc.)  
-%y = 2-digit year  (e.g. 89)  
-%Y = 4-digit year  (e.g. 1989)  
-%h = hours (24-hr clock)  
-%m = minutes  
-%s = seconds  
-%z = offset from GMT  
-%Z = Time zone (character)
+%d = Número de día del mes (5, 17, 28, etc.)
+%j = Número de día del año (día juliano 001-366)
+%a = Día de la semana abreviado (Mon, Tue, Wed, etc.)
+%A = Día de la semana completo (Monday, Tuesday, etc.))
+%w = Número del día de la semana (0-6, el domingo es 0)
+%u = Número del día de la semana (1-7, el lunes es 1)
+%W = Número de la semana (00-53, el lunes es el comienzo de la semana)
+%U = Número de la semana (01-53, el domingo es el comienzo de la semana)
+%m = Número del mes (ej. 01, 02, 03, 04)
+%b = Mes abreviado (Jan, Feb, etc. )
+%B = Mes completo (January, February, etc.)
+%y = Año de 2 dígitos (por ejemplo, 89)
+%Y = Año de 4 dígitos (por ejemplo, 1989)
+%h = horas (reloj de 24 horas)
+%m = minutos
+%s = segundos
+%z = desviación de GMT
+%Z = Zona horaria (carácter)
 
 
 <!-- <span style="color: darkgreen;">**_TIP:_** For breaks every "nth" interval (e.g. every 4th), use `n.breaks = nrow(i)/n` (where “i” is your incidence object name and “n” is a number). If your data are grouped, you will need to multiply "n" by the number of unique groups.</span>   -->
 
 
 
-**Here are `plot()` arguments that modify plot labels:**
+**Estos son los argumentos de `plot()` que modifican las etiquetas de los gráficos:**
 
-Argument(s)|Description
+Argumento(s)|Descripción
 ----------------------|----------------------------------------------------
-`title = `|Title of plot|`title = "Epidemic curve of Acute Jaundice Syndrome (AJS)"`
-`xlab = `|Title of x-axis|`xlab = "Date of onset"`  
-`ylab = `|Title of y-axis|`ylab = "Daily case"`  
-`size = `|Size of x-axis text in pts (use ggplot's theme() to adjust other sizes)  
+`title = `|Título del gráfico
+`xlab = `|Título del eje-x
+`ylab = `|Título del eje-y 
+`size = `|Tamaño del texto del eje-x en pts (utiliza ggplot's theme() para ajustar otros tamaños)  
 
 
-An example using many of the above arguments:  
+Un ejemplo que utiliza muchos de los argumentos anteriores:
 
 ```{r, warning=F, message=F}
 # filter the linelist
@@ -494,20 +495,20 @@ plot(
   )
 ```
 
-To further adjust plot appearance, see the section below on modifications with `ggplot()`.  
+Para ajustar aún más la apariencia del gráfico, consulta la sección siguiente sobre modificaciones con `ggplot()`.
 
 
 
 
 
 
-### Modifications with ggplot2 {.unnumbered}
+### Modificaciones con ggplot2 {.unnumbered}
 
-You can further modify an **incidence2** plot by adding **ggplot2** modifications with a `+` after the close of the incidence `plot()` function, as demonstrated below.  
+Puedes modificar aún más un gráfico de **incidence2** añadiendo modificaciones de **ggplot2** con un `+` después del cierre de la función `plot()` de **incidence**, como se demuestra a continuación.
 
-Below, the **incidence2** plot finishes and then **ggplot2** commands are used to modify the axes, add a caption, and adjust the bold font and text size.  
+A continuación, el gráfico de **incidence2** termina y luego se utilizan los comandos de **ggplot2** para modificar los ejes, añadir una leyenda y ajustar la fuente en negrita y el tamaño del texto.
 
-Note that if you add `scale_x_date()`, most date formatting from `plot()` will be overwritten. See the `ggplot()` epicurves section and the Handbook page [ggplot tips] for more options.  
+Ten en cuenta que si añades `scale_x_date()`, la mayor parte del formato de fecha de `plot()` se sobrescribirá. Consulta la sección de epicurvas de `ggplot()` y la página del Manual [Consejos de ggplot](#ggplot-tips) para más opciones.
 
 ```{r, warning=F, message=F}
 # filter the linelist
@@ -564,11 +565,11 @@ plot(
 
 
 
-### Change colors  {.unnumbered}  
+### Cambiar los colores  {.unnumbered}  
 
-#### Specify a palette {.unnumbered}  
+#### Especificar una paleta {.unnumbered}  
 
-Provide the name of a pre-defined palette to the `col_pal = ` argument in `plot()`. The **incidence2** package comes with 2 pre-defined paletted: "vibrant" and "muted". In "vibrant" the first 6 colors and distinct and in "muted" the first 9 colors are distinct. After these numbers, the colors are interpolations/intermediaries of other colors. These pre-defined palettes can be found at [this website](https://personal.sron.nl/~pault/#sec:qualitative). The palettes exclude grey, which is reserved for missing data (use `na_color = ` to change this default).  
+Proporcione el nombre de una paleta predefinida al argumento `col_pal = ` en `plot()`. El paquete **incidence2** viene con 2 paletas predefinidas: "vibrant" y "muted". En "vibrant" los primeros 6 colores son distintos y en "muted" los primeros 9 colores son distintos. Después de estos números, los colores son interpolaciones/intermediarios de otros colores. Estas paletas predefinidas se pueden encontrar en [este sitio web](https://personal.sron.nl/~pault/#sec:qualitative). Las paletas excluyen el gris, que está reservado para los datos que faltan (utiliza `na_color = ` para cambiar este valor por defecto).
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning = F, message = F}
 # Create incidence object, with data grouped by age category  
@@ -585,7 +586,7 @@ plot(age_outbreak, fill = age_cat, title = "'vibrant' default incidence2 palette
 #plot(age_outbreak, fill = age_cat, col_pal = muted, title = "'muted' incidence2 palette")
 ```
 
-You can also use one of the **base** R palettes (put the name of the palette *without* quotes).  
+También puedes utilizar una de las paletas de R **base** (pon el nombre de la paleta *sin* comillas). 
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning = F, message = F}
 # plot with base R palette
@@ -595,7 +596,7 @@ plot(age_outbreak, fill = age_cat, col_pal = heat.colors, title = "base R heat.c
 plot(age_outbreak, fill = age_cat, col_pal = rainbow, title = "base R rainbow palette")
 ```
 
-You can also add a color palette from the **viridis** package or **RColorBrewer** package. First those packages must be loaded, then add their respective `scale_fill_*()` functions with a `+`, as shown below.
+También puedes añadir una paleta de colores del paquete **viridis** o del paquete **RColorBrewer**. Primero hay que cargar esos paquetes, y luego añadir sus respectivas funciones `scale_fill_*()` con un `+`, como se muestra a continuación.
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning = F, message = F}
 pacman::p_load(RColorBrewer, viridis)
@@ -616,9 +617,9 @@ plot(age_outbreak, fill = age_cat, title = "RColorBrewer palette")+
 ```
 
 
-#### Specify manually {.unnumbered}  
+#### Especificar manualmente {.unnumbered}  
 
-To specify colors manually, add the **ggplot2** function `scale_fill_manual()` to the `plot()` with a `+` and provide the vector of colors names or HEX codes to the argument `values = `. The number of colors listed must equal the number of groups. Be aware of whether missing values are a group - they can be converted to a character value like "Missing" during your data preparation with the function `fct_explicit_na()` as explained in the page on [Factors].  
+Para especificar los colores manualmente, añade la función `scale_fill_manual()` de **ggplot2** a la función `plot()` con un `+` y proporciona el vector de nombres de colores o códigos HEX al argumento `values = `. El número de colores listados debe ser igual al número de grupos. Ten en cuenta si los valores faltantes son un grupo - pueden ser convertidos a un valor de carácter como "Missing" durante la preparación de los datos con la función `fct_explicit_na()` como se explica en la página sobre [Factores](#factors).
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning=F, message=F}
 # manual colors
@@ -628,7 +629,7 @@ plot(age_outbreak, fill = age_cat, title = "Manually-specified colors")+
     name = "Age Category")      # Name for legend
 ```
 
-As mentioned in the [ggplot tips] page, you can create your own palettes using `colorRampPalette()` on a vector of colors and specifying the number of colors you want in return. This is a good way to get many colors in a ramp by specifying a few.  
+Como se menciona en la página de [consejos de ggplot](#ggplot-tips), puede crear sus propias paletas utilizando `colorRampPalette()` sobre un vector de colores y especificando el número de colores que deseas. Esta es una buena manera de obtener muchos colores en una rampa especificando unos pocos.  
 
 ```{r}
 my_cols <- c("darkgreen", "darkblue", "purple", "grey", "yellow", "orange")
@@ -637,11 +638,11 @@ my_palette
 ```
           
           
-### Adjust level order {.unnumbered}  
+### Ajustar el orden de los niveles {.unnumbered}  
 
-To adjust the order of group appearance (on plot and in legend), the grouping column must be class Factor. See the page on [Factors] for more information.  
+Para ajustar el orden de aparición de los grupos (en el gráfico y en la leyenda), la columna de agrupación debe ser de tipo Factor. Consulta la página sobre [Factores](#factors) para obtener más información.
 
-First, let's see a weekly epicurve by hospital with the default ordering:  
+En primer lugar, veamos una epicurva semanal por hospital con la ordenación por defecto: 
 
 ```{r, message=F, warning=F}
 # ORIGINAL - hospital NOT as factor
@@ -658,14 +659,14 @@ hospital_outbreak <- incidence(
 plot(hospital_outbreak, fill = hospital, title = "ORIGINAL - hospital not a factor")
 ```
 
-Now, to adjust the order so that "Missing" and "Other" are at the top of the epicurve we can do the following:  
+Ahora, para ajustar el orden de manera que los "Faltantes" y "Otros" estén en la parte superior de la epicurva podemos hacer lo siguiente:
 
-* Load the package **forcats**, to work with factors  
-* Adjust the dataset - in this case we'll define a new dataset (`plot_data`) in which:  
-  * the `gender` column is defined as a factor the order of levels are set with `fct_relevel()` so that "Other" and "Missing" are first, so they appear at the top of the bars  
-* The incidence object is created and plotted as before  
-* We add **ggplot2** modifications  
-  * `scale_fill_manual()` to manually assign colors so that "Missing" is grey and "Other" is beige  
+* Cargar el paquete **forcats**, para trabajar con factores
+* Ajustar los datos - en este caso vamos a definir un nuevo dataset (`plot_data`) en el que:
+  * la columna `gender` se define como un factor el orden de los niveles se establecen con `fct_relevel()` de manera que "Other" y "Missing" son los primeros, por lo que aparecen en la parte superior de las barras
+* El objeto de incidencia se crea y se traza como antes
+* Añadimos modificaciones de **ggplot2 **
+  * `scale_fill_manual()` para asignar manualmente los colores para que "Missing" sea gris y "Other" sea beige
  
 
 
@@ -704,17 +705,17 @@ plot(hospital_outbreak_mod, fill = hospital)+
       fill = "Hospital")                         # title of legend     
 ```
 
-<span style="color: darkgreen;">**_TIP:_** If you want to reverse the order of the legend only, add this **ggplot2** command `guides(fill = guide_legend(reverse = TRUE))`.</span>  
+<span style="color: darkgreen;">***CONSEJO:*** Si deseas invertir el orden de la leyenda solamente, añade este comando `guides(fill = guide_legend(reverse = TRUE))`de **ggplot2**.</span>  
 
 
 
-### Vertical gridlines {.unnumbered}  
+### Líneas de cuadrícula verticales {.unnumbered}  
 
-If you plot with default **incidence2** settings, you may notice that the vertical gridlines appear at each date label and once between each date label. This can result in gridlines intersecting with the top of some bars.  
+Si utilizas la configuración predeterminada de la **incidence2**, puedes observar que las líneas de cuadrícula verticales aparecen en cada etiqueta de fecha y una vez entre cada etiqueta de fecha. Esto puede dar lugar a que las líneas de cuadrícula se crucen con la parte superior de algunas barras.
 
 <!-- [TO DO Note this paragraph is not applicable with version 1.0.0 of incidence2). You can specify the interval for the gridlines by adding **ggplot2**'s `scale_x_date()` command to your **incidence2** plot. Within it, specify the intervals for `date_breaks = ` and `date_minor_breaks = ` (e.g. "weeks" or "3 weeks" or "months"). Note that use of `scale_x_date()` will over-ride any formatting of the date labels in `plot()`, so you will need to specify any string format to `date_labels = ` as below.   -->
 
-You can remove all gridlines by adding the **ggplot2** command `theme_classic()`.  
+Puedes eliminar todas las líneas de la cuadrícula añadiendo el comando `theme_classic()` de **ggplot2**.
 
 ```{r, warning=F, message=F, out.width = c('50%', '50%', '50%'), fig.show='hold'}
 # make incidence object
@@ -740,11 +741,11 @@ plot(a, title = "No lines")+
   theme_classic()                 # remove all gridlines
 ```
 
-Note however, that if using weeks, the `date_breaks` and `date_minor_breaks` arguments only work for *Monday* weeks. If your weeks are by another day of the week you will need to manually provide a vector of dates to the `breaks = ` and `minor_breaks = ` arguments instead. See the **ggplot2** section for examples of this using `seq.Date()`.
+Ten en cuenta, sin embargo, que si utiliza semanas, los argumentos `date_breaks` y `date_minor_breaks` sólo funcionan para las semanas del *lunes*. Si tus semanas emepiezan por otro día de la semana tendrás que proporcionar manualmente un vector de fechas a los argumentos `breaks = ` y `minor_breaks = `. Consulta la sección de **ggplot2** para ver ejemplos de esto utilizando `seq.Date()`.
 
-### Cumulative incidence {.unnumbered}  
+### Incidencia acumulada {.unnumbered}  
 
-In previous versions of **incidence2** you could use the `cumulate()` function. This has been removed in the most recent version of the package. 
+En versiones anteriores de **incidence2** se podía usar la función `cumulate()`. Esto se ha eliminado en la versión más reciente del paquete. 
 
 <!-- You can easily produce a plot of cumulative incidence by passing the incidence object to the **incidence2** command `cumulate()` and then to `plot()`. This also works with `facet_plot()`. -->
 
@@ -764,11 +765,11 @@ In previous versions of **incidence2** you could use the `cumulate()` function. 
 <!-- ``` -->
 
 
-See the section farther down on this page for alternative method to plot cumulative incidence with **ggplot2** - for example to overlay a cumulative incidence line over an epicurve.  
+Ver la sección más abajo en esta página para el método alternativo para trazar la incidencia acumulativa con **ggplot2** - por ejemplo para superponer una línea de incidencia acumulativa sobre una epicurva. 
 
-### Rolling average  {.unnumbered}
+### Media móvil  {.unnumbered}
 
-You can add a rolling average to an **incidence2** plot easily with `add_rolling_average()` from the **i2extras** package. Pass your incidence2 object to this function, and then to `plot()`. Set `before = ` as the number of previous days you want included in the rolling average (default is 2). If your data are grouped, the rolling average will be calculated per group. 
+Puedes añadir una media móvil a un gráfico de **incidence2** fácilmente con `add_rolling_average()` del paquete **i2extras**. Pasa tu objeto incidence2 a esta función, y luego a `plot()`. Establece en `before =`  el número de días anteriores que deseas incluir en la media móvil (por defecto es 2). Si tus datos están agrupados, la media móvil se calculará por grupo.
 
 ```{r, warning=F, message=F}
 rolling_avg <- incidence(                    # make incidence object
@@ -786,11 +787,11 @@ rolling_avg <- incidence(                    # make incidence object
 plot(rolling_avg) # faceted automatically because rolling average on groups
 ```
 
-To learn how to apply rolling averages more generally on data, see the Handbook page on [Moving averages].  
+Para aprender a aplicar las medias móviles de forma más general sobre los datos, consulta la página del Manual sobre [medias móviles](#moving-averages-1).
 
 
 <!-- ======================================================= -->
-## Epicurves with ggplot2 { }
+## Epicurves with ggplot2 {#epicurves-with-ggplot2}
 
 Using `ggplot()` to build your epicurve allows for more flexibility and customization, but requires more effort and understanding of how `ggplot()` works.  
 
@@ -1830,7 +1831,7 @@ ggplot(central_data2) +
 
 
 
-## Tentative data  
+## Tentative data  {#tentative-data}
 
 
 The most recent data shown in epicurves should often be marked as tentative, or subject to reporting delays. This can be done in by adding a vertical line and/or rectangle over a specified number of days. Here are two options:  
@@ -1957,7 +1958,7 @@ ggplot(plot_data, aes(x = date_onset, fill = tentative)) +
 ```
 
 
-## Multi-level date labels  
+## Multi-level date labels  {#multi-level-date-labels}
 
 If you want multi-level date labels (e.g. month and year) *without duplicating the lower label levels*, consider one of the approaches below:  
 
@@ -2046,7 +2047,7 @@ The above techniques were adapted from [this](https://stackoverflow.com/question
 
 
 <!-- ======================================================= -->
-## Dual-axis { }  
+## Dual-axis {#dual-axis}  
 
 Although there are fierce discussions about the validity of dual axes within the data visualization community, many epi supervisors still want to see an epicurve or similar chart with a percent overlaid with a second axis. This is discussed more extensively in the [ggplot tips] page, but one example using the **cowplot** method is shown below:  
 
@@ -2133,7 +2134,7 @@ ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 
 
 
-## Cumulative Incidence {}
+## Cumulative Incidence {#cumulative-incidence-1}
 
 Note: If using **incidence2**, see the section on how you can produce cumulative incidence with a simple function. This page will address how to calculate cumulative incidence and plot it with `ggplot()`.  
 
@@ -2216,7 +2217,7 @@ ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 
 
 <!-- ======================================================= -->
-## Resources { }
+## Resources {#resources-25}
 
 
 
