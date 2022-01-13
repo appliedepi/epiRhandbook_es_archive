@@ -1,10 +1,11 @@
 
-# Moving averages { }  
+# Borrador. Medias Móviles {#moving-averages}
 
 ```{r, out.width=c("100%"), echo=F}
 knitr::include_graphics(here::here("images", "moving_avg_epicurve.png"))
 ```
 
+<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
 This page will cover two methods to calculate and visualize moving averages:  
 
@@ -14,11 +15,11 @@ This page will cover two methods to calculate and visualize moving averages:
 
 
 <!-- ======================================================= -->
-## Preparation {  }
+## Preparaciónn {#preparation-12}
 
-### Load packages {.unnumbered}
+### Cargar paquetes {.unnumbered}
 
-This code chunk shows the loading of packages required for the analyses. In this handbook we emphasize `p_load()` from **pacman**, which installs the package if necessary *and* loads it for use. You can also load installed packages with  `library()` from **base** R. See the page on [R basics] for more information on R packages. 
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con library() de R**base**. Consulta la página sobre [fundamentos de R]](#r-basics) para obtener más información sobre los paquetes de R.
 
 
 ```{r}
@@ -30,9 +31,9 @@ pacman::p_load(
 ```
 
 
-### Import data {.unnumbered}
+### Importar datos {.unnumbered}
 
-We import the dataset of cases from a simulated Ebola epidemic. If you want to follow along, <a href='https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds' class='download-button'>click to download the "clean" linelist</a> (as .rds file). Import data with the `import()` function from the **rio** package (it handles many file types like .xlsx, .csv, .rds - see the [Import and export] page for details).  
+Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar linelist "limpio"]](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - mira la página de [importación y exportación]](#import-and-export) para más detalles).  
 
 
 ```{r, echo=F}
@@ -45,7 +46,7 @@ linelist <- rio::import(here::here("data", "case_linelists", "linelist_cleaned.r
 linelist <- import("linelist_cleaned.xlsx")
 ```
 
-The first 50 rows of the linelist are displayed below.
+A continuación se muestran las primeras 50 filas del listado.
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
@@ -54,69 +55,69 @@ DT::datatable(head(linelist, 50), rownames = FALSE, filter="top", options = list
 
 
 <!-- ======================================================= -->
-## Calculate with **slider** {  }
+## Calcular con **slider** {#calculate-with-slider}
 
-**Use this approach to calculate a moving average in a data frame prior to plotting.**  
+**Utiliza este enfoque para calcular una media móvil en un dataframe antes de trazarla.**
 
-The **slider** package provides several "sliding window" functions to compute rolling averages, cumulative sums, rolling regressions, etc. It treats a data frame as a vector of rows, allowing iteration row-wise over a data frame.   
+El paquete **slider** proporciona varias funciones de "ventana deslizante" para calcular medias móviles, sumas acumulativas, regresiones móviles, etc. Trata un dataframe como un vector de filas, permitiendo la iteración por filas sobre un dataframe.
 
-Here are some of the common functions:  
+Estas son algunas de las funciones más comunes:
 
-* `slide_dbl()` - iterates through a *numeric* (hence "_dbl") column performing an operation using a sliding window  
-  * `slide_sum()` - rolling sum shortcut function for `slide_dbl()`  
-  * `slide_mean()` - rolling average shortcut function for `slide_dbl()` 
-* `slide_index_dbl()` - applies the rolling window on a numeric column using a separate column to *index* the window progression (useful if rolling by date with some dates absent)  
-  * `slide_index_sum()` - rolling sum shortcut function with indexing  
-  * `slide_index_mean()` - rolling mean shortcut function with indexing  
-  
-The **slider** package has many other functions that are covered in the Resources section of this page. We briefly touch upon the most common.  
+* `slide_dbl()` - itera a través de una columna *numérica* (de ahí "_dbl") realizando una operación mediante una ventana deslizante
+  * `slide_sum()` - función abreviada de suma rodante para `slide_dbl()`
+  * `slide_mean()` - función abreviada de media móvil para `slide_dbl()`
+* `slide_index_dbl()` - aplica la ventana rodante en una columna numérica utilizando una columna separada para *indexar* la progresión de la ventana (útil si se rueda por fecha con algunas fechas ausentes)
+  * `slide_index_sum()` - Función abreviada de suma rodante con indexación
+  * `slide_index_mean()` - Función de acceso directo a la media móvil con indexación
 
-**Core arguments**  
+El paquete **slider** tiene muchas otras funciones que se tratan en la sección de Recursos de esta página. Tocamos brevemente las más comunes.
 
-* `.x`, the first argument by default, is the vector to iterate over and to apply the function to  
-* `.i = ` for the "index" versions of the **slider** functions - provide a column to "index" the roll on (see section [below](#roll_index))  
-* `.f = `, the second argument by default, either:  
-  * A function, written without parentheses, like `mean`, or  
-  * A formula, which will be converted into a function. For example `~ .x - mean(.x)` will return the result of the current value minus the mean of the window's value  
-  
-* For more details see this [reference material](https://davisvaughan.github.io/slider/reference/slide.html)
+**Argumentos básicos**
 
+* `.x`, el primer argumento por defecto, es el vector sobre el que iterar y al que aplicar la función
+* `.i = ` para las versiones de "índice" de las funciones de **deslizamiento** - proporciona una columna para "indexar" el rollo (véase la sección [siguiente]](#roll_index))
+* `.f =` , el segundo argumento por defecto, bien:
+  * Una función, escrita sin paréntesis, como `mean`, o
+  * Una fórmula, que se convertirá en una función. Por ejemplo `~ .x - mean(.x)` devolverá el resultado del valor actual menos la media del valor de la ventana
 
-
-**Window size**  
-
-Specify the size of the window by using either `.before`, `.after`, or both arguments:   
-
-* `.before = ` - Provide an integer  
-* `.after = ` - Provide an integer  
-* `.complete = ` - Set this to `TRUE` if you only want calculation performed on complete windows  
-
-For example, to achieve a 7-day window including the current value and the six previous, use `.before = 6`. To achieve a "centered" window provide the same number to both `.before = ` and `.after = `.    
-
-By default, `.complete = ` will be FALSE so if the full window of rows does not exist, the functions will use available rows to perform the calculation. Setting to TRUE restricts so calculations are only performed on complete windows.  
-
-**Expanding window**  
-
-To achieve *cumulative* operations, set the `.before = ` argument to `Inf`. This will conduct the operation on the current value and all coming before.  
+* Para más detalles, consulta este [material de referencia]](https://davisvaughan.github.io/slider/reference/slide.html)
 
 
 
+**Tamaño de la ventana**
+
+Especifica el tamaño de la ventana utilizando los argumentos `.before`, `.after`, o ambos:
+
+* `.before = ` - Proporcionar un número entero
+* `.after = `- Proporcionar un número entero
+* `.complete = `- Pon este valor a `TRUE` si sólo quieres que se realicen cálculos en ventanas completas
+
+Por ejemplo, para conseguir una ventana de 7 días que incluya el valor actual y los seis anteriores, utiliza `.before = 6`. Para conseguir una ventana "centrada" proporcione el mismo número tanto a `.before = ` como a `.after = `.
+
+Por defecto, `.complete = ` será FALSE por lo que si la ventana completa de filas no existe, las funciones utilizarán las filas disponibles para realizar el cálculo. Si se ajusta a `TRUE`, los cálculos sólo se realizan en ventanas completas.
+
+**Ventana expansiva**
+
+Para lograr operaciones *acumulativas*, establece el argumento `.before = ` en `Inf`. Esto realizará la operación sobre el valor actual y todos los que vengan antes. 
 
 
-### Rolling by date  {#roll_index .unnumbered}  
-
-The most likely use-case of a rolling calculation in applied epidemiology is to examine a metric *over time*. For example, a rolling measurement of case incidence, based on daily case counts. 
-
-If you have clean time series data with values for every date, you may be OK to use `slide_dbl()`, as demonstrated here in the [Time series and outbreak detection](#timeseries_moving) page.  
-
-However, in many applied epidemiology circumstances you may have dates absent from your data, where there are no events recorded. In these cases, it is best to use the "index" versions of the **slider** functions.  
 
 
-### Indexed data {.unnumbered}  
 
-Below, we show an example using `slide_index_dbl()` on the case linelist. Let us say that our objective is to calculate a rolling 7-day incidence - the sum of cases using a rolling 7-day window. If you are looking for an example of rolling average, see the section below on [grouped rolling](#roll_slider_group).    
+### Balancear por fecha  {#roll_index .unnumbered}  
 
-To begin, the dataset `daily_counts` is created to reflect the daily case counts from the `linelist`, as calculated with `count()` from **dplyr**.  
+El caso más probable de uso de un cálculo rotativo en epidemiología aplicada es examinar una medida a lo *largo del tiempo*. Por ejemplo, una medición continua de la incidencia de casos, basada en el recuento diario de casos.
+
+Si tienes datos de series temporales limpios con valores para cada fecha, puede estar bien utilizar `slide_dbl()`, como se demuestra aquí en la página de [series temporales y detección de brotes]](#timeseries_moving).
+
+Sin embargo, en muchas circunstancias de epidemiología aplicada puede haber fechas ausentes en los datos, donde no hay eventos registrados. En estos casos, es mejor utilizar las versiones "index" de las funciones **slider**. 
+
+
+### Datos indexados {.unnumbered}  
+
+A continuación, mostramos un ejemplo utilizando `slide_index_dbl()` en la lista de casos. Digamos que nuestro objetivo es calcular una incidencia rodante de 7 días - la suma de casos utilizando una ventana rodante de 7 días. Si estás buscando un ejemplo de media rodante, mira la sección de abajo sobre [balanceo agrupado]](#roll_slider_group).
+
+Para empezar, se crean los datos `daily_counts` para reflejar los recuentos diarios de casos de `linelist`, calculados con `count()` de **dplyr**.
 
 ```{r}
 # make dataset of daily counts
@@ -125,7 +126,7 @@ daily_counts <- linelist %>%
 ```
 
 
-Here is the `daily_counts` data frame - there are ` nrow(daily_counts)` rows, each day is represented by one row, but especially early in the epidemic *some days are not present (there were no cases admitted on those days)*.  
+Aquí está el dataframe `daily_counts` - hay `nrow(daily_counts)` filas, cada día está representado por una fila, pero especialmente al principio de la epidemia *algunos días no están presentes (no hubo casos admitidos en esos días)*.
 
 
 ```{r, echo=F}
@@ -134,13 +135,13 @@ DT::datatable(daily_counts, rownames = FALSE, options = list(pageLength = 6, scr
 
 
 
-It is crucial to recognize that a standard rolling function (like `slide_dbl()` would use a window of 7 *rows*, not 7 *days*. So, if there are any absent dates, some windows will actually extend more than 7 calendar days!  
+Es crucial reconocer que una función estándar de balanceo (como `slide_dbl()` utilizaría una ventana de 7 *filas*, no de 7 *días*. Por lo tanto, si hay fechas ausentes, ¡algunas ventanas se extenderán realmente más de 7 días naturales!
 
-A "smart" rolling window can be achieved with `slide_index_dbl()`. The "index" means that the function uses a *separate column* as an "index" for the rolling window. The window is not simply based on the rows of the data frame.  
+Se puede conseguir una ventana móvil "inteligente" con `slide_index_dbl()`. El "índex" significa que la función utiliza una *columna independiente* como "index" para la ventana móvil. La ventana no se basa simplemente en las filas del dataframe.
 
-If the index column is a date, you have the added ability to specify the window extent to `.before = ` and/or `.after = ` in units of **lubridate** `days()` or `months()`. If you do these things, the function will include absent days in the windows as if they were there (as `NA` values).  
+Si la columna índex es una fecha, tiene la posibilidad añadida de especificar la extensión de la ventana a `.before = ` y/o `.after = ` en unidades de `days()` o `months()` de **lubridate**. Si hace sestas cosas, la función incluirá los días ausentes en las ventanas como si estuvieran allí (como valores `NA`).
 
-Let's show a comparison. Below, we calculate rolling 7-day case incidence with regular and indexed windows.  
+Mostremos una comparación. A continuación, calculamos la incidencia móvil de casos de 7 días con ventanas regulares e indexadas.
 
 
 ```{r}
@@ -164,7 +165,7 @@ rolling <- daily_counts %>%
 
 ```
 
-Observe how in the regular column for the first 7 rows the count steadily increases *despite the rows not being within 7 days of each other*! The adjacent "indexed" column accounts for these absent calendar days, so its 7-day sums are much lower, at least in this period of the epidemic when the cases a farther between.  
+Fíjate cómo en la columna normal de las 7 primeras filas el recuento aumenta constantemente a *pesar de que las filas no tienen 7 días de diferencia*. La columna adyacente "indexada" tiene en cuenta estos días naturales ausentes, por lo que sus sumas de 7 días son mucho menores, al menos en este periodo de la epidemia en el que los casos están más alejados.
 
 ```{r, echo=F}
 DT::datatable(rolling, rownames = FALSE, options = list(pageLength = 12, scrollX=T) )
@@ -172,7 +173,7 @@ DT::datatable(rolling, rownames = FALSE, options = list(pageLength = 12, scrollX
 
 
 
-Now you can plot these data using `ggplot()`:  
+Ahora puede trazar estos datos utilizando `ggplot()`: 
 
 ```{r}
 ggplot(data = rolling)+
@@ -211,15 +212,15 @@ ggplot(data = rolling)+
 <!-- ``` -->
 
 
-### Rolling by group {#roll_slider_group .unnumbered}  
+### Balanceando por grupo {#roll_slider_group .unnumbered}  
 
-If you group your data prior to using a **slider** function, the sliding windows will be applied by group. Be careful to arrange your rows in the desired order *by group*.  
+Si agrupas los datos antes de utilizar una función **slider**, las ventanas deslizantes se aplicarán por grupo. Ten cuidado de organizar las filas en el orden deseado *por grupo*.
 
-Each time a new group begins, the sliding window will re-start. Therefore, one nuance to be aware of is that if your data are grouped *and* you have set `.complete = TRUE`, you will have empty values at each transition between groups. As the function moved downward through the rows, every transition in the grouping column will re-start the accrual of the minimum window size to allow a calculation.  
+Cada vez que se inicia un nuevo grupo, la ventana deslizante se reinicia. Por lo tanto, un matiz a tener en cuenta es que si tus datos están agrupados *y* has establecido `.complete = TRUE`, tendrás valores vacíos en cada transición entre grupos. A medida que la función se desplaza hacia abajo a través de las filas, cada transición en la columna de agrupación reiniciará la acumulación del tamaño mínimo de la ventana para permitir un cálculo.
 
-See handbook page on [Grouping data] for details on grouping data.
+Consulta la página del manual sobre [Agrupar datos]](#grouping-data) para obtener detalles sobre la agrupación de datos.
 
-Below, we count linelist cases by date *and* by hospital. Then we arrange the rows in ascending order, first ordering by hospital and then within that by date. Next we set `group_by()`. Then we can create our new rolling average. 
+A continuación, contamos los casos del listado por fecha *y* por hospital. Luego ordenamos las filas en orden ascendente, primero ordenando por hospital y luego dentro de éste por fecha. A continuación establecemos `group_by()`. Entonces podemos crear nuestra nueva media móvil.
 
 
 ```{r}
@@ -242,14 +243,14 @@ grouped_roll <- linelist %>%
 
 ```
 
-Here is the new dataset:  
+Aquí está el nuevo conjunto de datos:  
 
 ```{r, echo=F}
 DT::datatable(grouped_roll, rownames = FALSE, options = list(pageLength = 12, scrollX=T) )
 ```
 
 
-We can now plot the moving averages, displaying the data by group by specifying `~ hospital` to `facet_wrap()` in `ggplot()`. For fun, we plot two geometries - a `geom_col()` showing the daily case counts and a `geom_line()` showing the 7-day moving average.  
+Ahora podemos trazar las medias móviles, mostrando los datos por grupo especificando `~ hospital` a `facet_wrap()` en `ggplot()`. Para divertirnos, trazamos dos geometrías: una `geom_col()` que muestra los recuentos de casos diarios y una `geom_line()` que muestra la media móvil de 7 días.
 
 
 ```{r, warning=F, message=F}
@@ -276,7 +277,7 @@ ggplot(data = grouped_roll)+
 ```
 
 
-<span style="color: red;">**_DANGER:_** If you get an error saying *"slide() was deprecated in tsibble 0.9.0 and is now defunct. Please use slider::slide() instead."*, it means that the `slide()` function from the **tsibble** package is masking the `slide()` function from **slider** package. Fix this by specifying the package in the command, such as `slider::slide_dbl()`.</span>
+<span style="color: red;">***PELIGRO:*** Si obtienes un error que dice *"slide() was deprecated in tsibble 0.9.0 and is now defunct. Please use slider::slide() instead."*, significa que la función `slide()` del paquete **tsibble** está enmascarando la función `slide()` del paquete **slider**. Soluciona esto especificando el paquete en el comando, como `slider::slide_dbl()`.</span>
 
 
 
@@ -322,17 +323,17 @@ ggplot(data = grouped_roll)+
 
 
 <!-- ======================================================= -->
-## Calculate with **tidyquant** within `ggplot()` {  }
+## Calcular con **tidyquant** dentro de `ggplot()`{#calculate-with-tidyquant-within-ggplot}
 
-The package **tidyquant** offers another approach to calculating moving averages - this time from *within* a `ggplot()` command itself.  
+El paquete **tidyquant** ofrece otro enfoque para calcular las medias móviles, esta vez *dentro* del comando `ggplot()`.
 
-Below the `linelist` data are counted by date of onset, and this is plotted as a faded line (`alpha` < 1). Overlaid on top is a line created with `geom_ma()` from the package **tidyquant**, with a set window of 7 days (`n = 7`) with specified color and thickness.  
+Bajo `linelist`, los datos se cuentan por fecha de inicio, y esto se traza como una línea descolorida (`alpha` < 1). Encima hay una línea creada con `geom_ma()` del paquete **tidyquant**, con una ventana de 7 días (`n = 7`) con el color y el grosor especificados.
 
-By default `geom_ma()` uses a simple moving average (`ma_fun = "SMA"`), but other types can be specified, such as:  
+Por defecto `geom_ma()` utiliza una media móvil simple (`ma_fun = "SMA"`), pero se pueden especificar otros tipos, como:
 
-* "EMA" - exponential moving average (more weight to recent observations)  
-* "WMA" - weighted moving average (`wts` are used to weight observations in the moving average)  
-* Others can be found in the function documentation  
+* "EMA" - media móvil exponencial (más peso a las observaciones recientes)
+* "WMA" - media móvil ponderada (los `wts` se utilizan para ponderar las observaciones en la media móvil)
+* Otros se pueden encontrar en la documentación de la función
 
 ```{r}
 linelist %>% 
@@ -350,7 +351,7 @@ linelist %>%
   theme_minimal()                       # simple background
 ```
 
-See this [vignette](https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ04-charting-with-tidyquant.html) for more details on the options available within **tidyquant**.  
+Consulta esta [viñeta](https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ04-charting-with-tidyquant.html) para obtener más detalles sobre las opciones disponibles en **tidyquant**.
 
 
 <!-- ## Rolling regression  -->
@@ -377,18 +378,15 @@ See this [vignette](https://cran.r-project.org/web/packages/tidyquant/vignettes/
 
 
 <!-- ======================================================= -->
-## Resources {  }
+## Recursos {#resources-14}
 
+Consulta la útil [viñeta en línea del paquete  **slider**](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) 
 
-See the helpful online [vignette for the **slider** package](https://cran.r-project.org/web/packages/slider/vignettes/slider.html)  
+La [página github del]](https://github.com/DavisVaughan/slider) **slider**
 
-The **slider** [github page](https://github.com/DavisVaughan/slider)
+Una [viñeta]](https://davisvaughan.github.io/slider/articles/slider.html) **slider**
 
-A **slider** [vignette](https://davisvaughan.github.io/slider/articles/slider.html)  
+[viñeta tidyquant]](https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ04-charting-with-tidyquant.html)
 
-[tidyquant vignette](https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ04-charting-with-tidyquant.html)
-
-If your use case requires that you “skip over” weekends and even holidays, you might like **almanac** package.
-
-
+Si tu caso de uso requiere que te "saltes" los fines de semana e incluso los días festivos, puede que te guste el paquete **almanac**. 
 
