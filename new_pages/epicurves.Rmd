@@ -791,13 +791,13 @@ Para aprender a aplicar las medias móviles de forma más general sobre los dato
 
 
 <!-- ======================================================= -->
-## Epicurves with ggplot2 {#epicurves-with-ggplot2}
+## Epicurvas con ggplot2 {#epicurves-with-ggplot2}
 
-Using `ggplot()` to build your epicurve allows for more flexibility and customization, but requires more effort and understanding of how `ggplot()` works.  
+El uso de `ggplot()` para construir tu epicurva permite más flexibilidad y personalización, pero requiere más esfuerzo y comprensión de cómo funciona `ggplot()`.
 
-Unlike using the **incidence2** package, you must *manually* control the aggregation of the cases by time (into weeks, months, etc) *and* the intervals of the labels on the date axis. This must be carefully managed.  
+A diferencia de lo que ocurre con el paquete **incidence2**, hay que controlar *manualmente* la agregación de los casos por tiempo (en semanas, meses, etc.) *y* los intervalos de las etiquetas en el eje de fechas. Esto debe gestionarse cuidadosamente.
 
-These examples use a subset of the `linelist` dataset - only the cases from Central Hospital.  
+Estos ejemplos utilizan un subconjunto de los datos de `linelist`: sólo los casos del Hospital Central.
 
 
 ```{r, echo=F}
@@ -823,15 +823,15 @@ To produce an epicurve with `ggplot()` there are three main elements:
 * Themes for the plot appearance, including titles, labels, captions, etc.
 
 
-### Specify case bins {.unnumbered}  
+### Especificaciones de las barras {.unnumbered}  
 
-Here we show how to specify how cases will be aggregated into histogram bins ("bars"). It is important to recognize that the aggregation of cases into histogram bins is **not** necessarily the same intervals as the dates that will appear on the x-axis. 
+Aquí mostramos cómo especificar cómo se agregarán los casos en los intervalos del histograma ("barras"). Es importante reconocer que la agregación de los casos en los intervalos del histograma **no son** necesariamente los mismos intervalos que las fechas que aparecerán en el eje-x.
 
-Below is perhaps the most simple code to produce daily and weekly epicurves.  
+A continuación se muestra el código más sencillo para producir epicurvas diarias y semanales.
 
-In the over-arching `ggplot()` command the dataset is provided to `data = `. Onto this foundation, the geometry of a histogram is added with a `+`. Within the `geom_histogram()`, we map the aesthetics such that the column `date_onset` is mapped to the x-axis. Also within the `geom_histogram()` but *not* within `aes()` we set the `binwidth =` of the histogram bins, in days. If this **ggplot2** syntax is confusing, review the page on [ggplot basics].  
+En el comando general `ggplot()` se proporciona el conjunto de datos en `data = `. Sobre esta base, se añade la geometría de un histograma con un `+`. Dentro de `geom_histogram()`, mapeamos la estética de tal manera que la columna `date_onset` se mapea al eje-x. También dentro de `geom_histogram()` pero *no* dentro de `aes()` establecemos la anchura de las barras del histograma con  `binwidth = `, en días. Si esta sintaxis de **ggplot2** es confusa, revisa la página sobre [Conceptos básicos de ggplot](#ggplot-basics).
 
-<span style="color: orange;">**_CAUTION:_** Plotting weekly cases by using `binwidth = 7` starts the first 7-day bin at the first case, which could be any day of the week! To create specific weeks, see section below .</span>
+<span style="color: orange;">***PRECAUCIÓN:*** El trazado de casos semanales mediante el uso de `binwidth = 7` inicia la primera barra  de 7 días en el primer caso, ¡que podría ser cualquier día de la semana! Para crear semanas específicas, véase la sección siguiente.</span>
 
 
 ``` {r ggplot_simple,  out.width = c('50%', '50%'), fig.show='hold', warning= F, message = F}
@@ -850,15 +850,15 @@ ggplot(data = central_data) +          # set data
   labs(title = "Central Hospital - 7-day bins, starting at first case") # title
 ```
 
-Let us note that the first case in this Central Hospital dataset had symptom onset on:  
+Observamos que el primer caso de este conjunto de datos del Hospital Central tuvo un inicio de síntomas el:
 
 ```{r}
 format(min(central_data$date_onset, na.rm=T), "%A %d %b, %Y")
 ```
 
-**To manually specify the histogram bin breaks, do *not* use the `binwidth = ` argument, and instead supply a vector of dates to `breaks = `.**  
+**Para especificar manualmente las pausas del histograma, *no* utilices el argumento `binwidth = `, y en su lugar suministre un vector de fechas a `breaks = `.**
 
-Create the vector of dates with the **base** R function `seq.Date()`. This function expects arguments `to = `, `from = `, and `by = `. For example, the command below returns monthly dates starting at Jan 15 and ending by June 28.
+Crea el vector de fechas con la función `seq.Date()` de R **base** . Esta función espera argumentos `to = `, `from = `, y `by = `. Por ejemplo, el comando siguiente devuelve fechas mensuales que comienzan en el 15 de enero y terminan en el 28 de junio.
 
 ```{r}
 monthly_breaks <- seq.Date(from = as.Date("2014-02-01"),
@@ -868,7 +868,7 @@ monthly_breaks <- seq.Date(from = as.Date("2014-02-01"),
 monthly_breaks   # print
 ```
 
-This vector can be provided to `geom_histogram()` as `breaks = `:  
+Este vector puede proporcionarse a `geom_histogram()` como  `breaks = `:
 
 ```{r, warning=F, message=F}
 # monthly 
@@ -879,7 +879,7 @@ ggplot(data = central_data) +
   labs(title = "Monthly case bins")   # title
 ```
 
-A simple weekly date sequence can be returned by setting `by = "week"`. For example: 
+Una simple secuencia de fechas semanales puede ser devuelta estableciendo  `by = "week"`. Por ejemplo:
 
 ```{r}
 weekly_breaks <- seq.Date(from = as.Date("2014-02-01"),
@@ -888,7 +888,7 @@ weekly_breaks <- seq.Date(from = as.Date("2014-02-01"),
 ```
 
  
-An alternative to supplying specific start and end dates is to write *dynamic* code so that weekly bins begin *the Monday before the first case*. **We will use these date vectors throughout the examples below.**  
+Una alternativa a la provisión de fechas específicas de inicio y fin es escribir un código *dinámico* para que los intervalos semanales comiencen *el lunes anterior al primer caso*. **Utilizaremos estos vectores de fechas a lo largo de los ejemplos siguientes.** 
      
 ```{r}
 # Sequence of weekly Monday dates for CENTRAL HOSPITAL
@@ -898,14 +898,14 @@ weekly_breaks_central <- seq.Date(
   by   = "week")
 ```  
 
-Let's unpack the rather daunting code above:  
+Descompongamos el código anterior, que es bastante desalentador:
 
-* The "from" value (earliest date of the sequence) is created as follows: the minimum date value (`min()` with `na.rm=TRUE`) in the column `date_onset` is fed to `floor_date()` from the **lubridate** package. `floor_date()` set to "week" returns the start date of that cases's "week", given that the start day of each week is a Monday (`week_start = 1`).  
-* Likewise, the "to" value (end date of the sequence) is created using the inverse function `ceiling_date()` to return the Monday *after* the last case.  
-* The "by" argument of `seq.Date()` can be set to any number of days, weeks, or months.   
-* Use `week_start = 7` for Sunday weeks  
+* El valor "from" (fecha más temprana) se crea de la siguiente manera: el valor mínimo de fecha (`min()` con `na.rm=TRUE`) en la columna `date_onset` se introduce en `floor_date()` del paquete **lubridate.** `floor_date()` ajustado a "week" devuelve la fecha de inicio de la "semana" de esos casos, dado que el día de inicio de cada semana es un lunes (`week_start = 1`).
+* Asimismo, el valor "to" (fecha final) se crea utilizando la función inversa `ceiling_date()` para devolver el lunes *posterior* al último caso.
+* El argumento "by" de `seq.Date()` puede establecerse en cualquier número de días, semanas o meses.
+* Utiliza `week_start = 7` para las semanas de domingo
 
-As we will use these date vectors throughout this page, we also define one for the whole outbreak (the above is for Central Hospital only).  
+Como vamos a utilizar estos vectores de fechas a lo largo de esta página, también definimos uno para todo el brote (el anterior es sólo para el Hospital Central).
 
 ```{r}
 # Sequence for the entire outbreak
@@ -915,24 +915,24 @@ weekly_breaks_all <- seq.Date(
   by   = "week")
 ```
 
-These `seq.Date()` outputs can be used to create histogram bin breaks, but also the breaks for the date labels, which may be independent from the bins. Read more about the date labels in later sections.  
+Estas salidas de `seq.Date()` pueden utilizarse para crear los saltos de las casillas del histograma, pero también los saltos de las etiquetas de fecha, que pueden ser independientes de las casillas. Lea más sobre las etiquetas de fecha en secciones posteriores.
 
-<span style="color: darkgreen;">**_TIP:_** For a more simple `ggplot()` command, save the bin breaks and date label breaks as named vectors in advance, and simply provide their names to `breaks = `.</span>  
-
-
+<span style="color: darkgreen;">***SUGERENCIA:*** Para un comando `ggplot()` más sencillo, guarde los saltos de cubo y los saltos de etiqueta de fecha como vectores con nombre por adelantado, y simplemente proporcione sus nombres a `breaks = `..</span>  
 
 
 
 
 
-### Weekly epicurve example {.unnumbered}  
 
-**Below is detailed example code to produce weekly epicurves for Monday weeks, with aligned bars, date labels, and vertical gridlines.** This section is for the user who needs code quickly. To understand each aspect (themes, date labels, etc.) in-depth, continue to the subsequent sections. Of note:  
 
-* The *histogram bin breaks* are defined with `seq.Date()` as explained above to begin the Monday before the earliest case and to end the Monday after the last case  
-* The interval of *date labels* is specified by `date_breaks =` within `scale_x_date()`  
-* The interval of minor vertical gridlines between date labels is specified to `date_minor_breaks = `  
-* `expand = c(0,0)` in the x and y scales removes excess space on each side of the axes, which also ensures the date labels begin from the first bar.  
+### Ejemplo de epicurva semanal {.unnumbered}  
+
+**A continuación se muestra un código de ejemplo detallado para producir epicurvas semanales para las semanas del lunes, con barras alineadas, etiquetas de fecha y líneas de cuadrícula verticales.** Esta sección es para el usuario que necesita el código rápidamente. Para entender cada aspecto (temas, etiquetas de fecha, etc.) en profundidad, continúa con las secciones siguientes. Es importante tener en cuenta:
+
+* Las *pausas del histograma* se definen con `seq.Date()`, como se ha explicado anteriormente, para comenzar el lunes anterior al caso más antiguo y terminar el lunes posterior al último caso
+* El intervalo de las *etiquetas de fecha* se especifica mediante `date_breaks = `  dentro de `scale_x_date()`
+* El intervalo de líneas verticales menores entre etiquetas de fecha se especifica en `date_minor_breaks =`
+* `expand = c(0,0)` en los ejes x e y elimina el exceso de espacio a cada lado de los ejes, lo que también asegura que las etiquetas de fecha comiencen desde la primera barra.
 
 ```{r, warning=F, message=F}
 # TOTAL MONDAY WEEK ALIGNMENT
@@ -989,14 +989,14 @@ ggplot(data = central_data) +
 ```
 
 
-#### Sunday weeks {.unnumbered}  
+#### Semanas dominicales {.unnumbered}  
 
-To achieve the above plot for Sunday weeks a few modifications are needed, because the `date_breaks = "weeks"` only work for Monday weeks.  
+Para conseguir el gráfico anterior para las semanas desde los domingos son necesarias algunas modificaciones, ya que los `date_breaks = "weeks"` sólo funcionan para las semanas de los lunes.
 
-* The break points of the *histogram bins* must be set to Sundays (`week_start = 7`)  
-* Within `scale_x_date()`, the similar date breaks should be provided to `breaks =` and `minor_breaks = ` to ensure the date labels and vertical gridlines align on Sundays.  
+* Los puntos de ruptura de las *franjas del histograma* deben fijarse en los domingos (`week_start = 7`)
+* Dentro de `scale_x_date()`, los saltos de fecha similares deben proporcionarse a `breaks = ` y `minor_breaks = ` para asegurar que las etiquetas de fecha y las líneas verticales de la cuadrícula se alineen los domingos.
 
-For example, the `scale_x_date()` command for Sunday weeks could look like this:  
+Por ejemplo, el comando `scale_x_date()` para las semanas del domingo podría tener este aspecto:
 
 ```{r, eval=F}
 scale_x_date(
@@ -1021,21 +1021,21 @@ scale_x_date(
 
 
 
-### Group/color by value {.unnumbered}
+### Agrupar/colorear por valor {.unnumbered}
 
-The histogram bars can be colored by group and "stacked". To designate the grouping column, make the following changes. See the [ggplot basics] page for details.  
+Las barras del histograma pueden colorearse por grupos y "apilarse". Para designar la columna de agrupación, haz los siguientes cambios. Consulta la página de [Conceptos básicos de ggplot](#ggplot-basics) para más detalles.
 
-* Within the histogram aesthetic mapping `aes()`, map the column name to the `group = ` and `fill = ` arguments  
-* Remove any `fill = ` argument *outside* of `aes()`, as it will override the one inside  
-* Arguments *inside* `aes()` will apply *by group*, whereas any *outside* will apply to all bars (e.g. you may still want `color = ` outside, so each bar has the same border)  
+* Dentro del mapeo estético del histograma `aes()`, asigne el nombre de la columna a los argumentos `group =` y `fill = `
+* Elimina cualquier argumento `fill = ` *fuera* de `aes()`, ya que anulará el de dentro
+* Los argumentos *dentro de* `aes()` se aplicarán *por grupo*, mientras que los de *fuera* se aplicarán a todas las barras (por ejemplo, es posible que quieras `color = ` fuera, para que cada barra tenga el mismo borde)
 
-Here is what the `aes()` command would look like to group and color the bars by gender:  
+Este es el aspecto que tendría el comando `aes()` para agrupar y colorear las barras por gender:
 
 ```{r, eval=F}
 aes(x = date_onset, group = gender, fill = gender)
 ```
 
-Here it is applied:  
+Aquí se aplica: 
 
 ```{r, warning=F, message=F}
 ggplot(data = linelist) +     # begin with linelist (many hospitals)
@@ -1055,14 +1055,14 @@ ggplot(data = linelist) +     # begin with linelist (many hospitals)
 ```
 
 
-### Adjust colors {.unnumbered}  
+### Ajustar los colores {.unnumbered}  
 
-* To *manually* set the fill for each group, use `scale_fill_manual()` (note: `scale_color_manual()` is different!).
-  * Use the `values = ` argument to apply a vector of colors.  
-  * Use `na.value = ` to specify a color for `NA` values.  
-  * Use the `labels = ` argument to change the text of legend items. To be safe, provide as a named vector like `c("old" = "new", "old" = "new")` or adjust the values in the data itself.  
-  * Use `name = ` to give a proper title to the legend  
-* For more tips on color scales and palettes, see the page on [ggplot basics].  
+* Para establecer *manualmente* el relleno de cada grupo, utiliza `scale_fill_manual()` (nota: `scale_color_manual()` es diferente).
+  * Utiliza el argumento `values = ` para aplicar un vector de colores.
+  * Utiliza `na.value = ` para especificar un color para los valores `NA`.
+  * Utiliza el argumento `labels = ` para cambiar el texto de los elementos de la leyenda. Para estar seguro, proporcione como un vector con nombre como `c("old" = "new", "old" = "new")` o ajusta los valores en los propios datos.
+  * Utiliza `name = ` para dar un título adecuado a la leyenda
+* Para obtener más consejos sobre las escalas y paletas de colores, consulta la página sobre [Conceptos básicos de ggplot](#ggplot-basics).  
 
 ```{r, warning=F, message=F}
 ggplot(data = linelist)+           # begin with linelist (many hospitals)
@@ -1089,11 +1089,11 @@ ggplot(data = linelist)+           # begin with linelist (many hospitals)
 
 
 
-### Adjust level order {.unnumbered}  
+### Ajustar el orden de los niveles {.unnumbered}  
 
-The order in which grouped bars are stacked is best adjusted by classifying the grouping column as class Factor. You can then designate the factor level order (and their display labels). See the page on [Factors] or [ggplot tips] for details.  
+El orden en que se apilan las barras agrupadas se ajusta mejor clasificando la columna de agrupación como tipo Factor. A continuación, puedes designar el orden de los niveles de los factores (y sus etiquetas de visualización). Consulta la página sobre [Factores](#factors) o [consejos de ggplot](#ggplot-tips) para obtener más detalles.
 
-Before making the plot, use the `fct_relevel()` function from **forcats** package to convert the grouping column to class factor and manually adjust the level order, as detailed in the page on [Factors].  
+Antes de realizar el gráfico, utiliza la función `fct_relevel()` del paquete **forcats** para convertir la columna de agrupación en de tipo factor y ajustar manualmente el orden de los niveles, como se detalla en la página sobre [Factores](#factors).
 
 ```{r}
 # load forcats package for working with factors
@@ -1106,7 +1106,7 @@ plot_data <- linelist %>%
 levels(plot_data$hospital) # print levels in order
 ```
 
-In the below plot, the only differences from previous is that column `hospital` has been consolidated as above, and we use `guides()` to reverse the legend order, so that "Missing" is on the bottom of the legend.  
+En el siguiente gráfico, las únicas diferencias con respecto al anterior es que la columna `hospital` se ha consolidado como en el caso anterior, y utilizamos `guides()` para invertir el orden de la leyenda, de modo que "Missing" se encuentra en la parte inferior de la leyenda. 
 
 ```{r, warning=F, message=F}
 ggplot(plot_data) +                     # Use NEW dataset with hospital as re-ordered factor
@@ -1154,33 +1154,33 @@ ggplot(plot_data) +                     # Use NEW dataset with hospital as re-or
     y        = "Weekly cases")
 ```
 
-<span style="color: darkgreen;">**_TIP:_** To reverse the order of the legend only, add this **ggplot2** command: `guides(fill = guide_legend(reverse = TRUE))`.</span>  
+<span style="color: darkgreen;">***CONSEJO:*** Para invertir solamente el orden de la leyenda, añade este comando **ggplot2**: `guides(fill = guide_legend(reverse = TRUE))`.</span>  
 
 
 
 
 
-### Adjust legend {.unnumbered}
+### Ajustar la leyenda {.unnumbered}
 
-Read more about legends and scales in the [ggplot tips] page. Here are a few highlights:  
+Lee más sobre las leyendas y las escalas en la página de [consejos de ggplot](#ggplot-tips). Aquí hay algunos puntos destacados:
 
-* Edit legend title either in the scale function or with `labs(fill = "Legend title")` (if your are using `color = ` aesthetic, then use `labs(color = "")`)  
-* `theme(legend.title = element_blank())` to have no legend title  
-* `theme(legend.position = "top")` ("bottom", "left", "right", or "none" to remove the legend)
-* `theme(legend.direction = "horizontal")` horizontal legend 
-* `guides(fill = guide_legend(reverse = TRUE))` to reverse order of the legend  
-
-
+* Edita el título de la leyenda, ya sea en la función de escala o con `labs(fill = "Título de la leyenda")` (si estás usando `color = ` estético, entonces usa `labs(color = "")`)
+* `theme(legend.title = element_blank())` para no tener título de leyenda
+* `theme(legend.position = "top")` ("bottom", "left", "right", o "none" para eliminar la leyenda)
+* `theme(legend.direction = "horizontal")` leyenda horizontal
+* `guides(fill = guide_legend(reverse = TRUE))` para invertir el orden de la leyenda  
 
 
 
 
 
-### Bars side-by-side {.unnumbered}  
 
-Side-by-side display of group bars (as opposed to stacked) is specified within `geom_histogram()` with `position = "dodge"` placed outside of `aes()`.  
 
-If there are more than two value groups, these can become difficult to read. Consider instead using a faceted plot (small multiples). To improve readability in this example, missing gender values are removed.  
+### Barras de lado a lado {.unnumbered}  
+
+La visualización lado a lado de las barras de grupo (en lugar de apiladas) se especifica dentro de `geom_histogram()` con `position = "dodge"` colocado fuera de `aes()`.
+
+Si hay más de dos grupos de valores, éstos pueden resultar difíciles de leer. Considera la posibilidad de utilizar un gráfico facetado (múltiplos pequeños). Para mejorar la legibilidad en este ejemplo, se han eliminado los valores de género que faltan.
 
 ```{r, warning=F, message=F}
 ggplot(central_data %>% drop_na(gender))+   # begin with Central Hospital cases dropping missing gender
@@ -1227,54 +1227,53 @@ ggplot(central_data %>% drop_na(gender))+   # begin with Central Hospital cases 
 
 
 
-### Axis limits {.unnumbered}  
+### Límites del eje {.unnumbered}  
 
-There are two ways to limit the extent of axis values.  
+Hay dos maneras de limitar la extensión de los valores del eje.
 
-Generally the preferred way is to use the command `coord_cartesian()`, which accepts `xlim = c(min, max)` and `ylim = c(min, max)` (where you provide the min and max values). This acts as a "zoom" without actually removing any data, which is important for statistics and summary measures.  
+Por lo general, la forma preferida es utilizar el comando `coord_cartesian()`, que acepta `xlim = c(min, max)` y `ylim = c(min, max)` (donde proporcionas los valores mínimos y máximos). Esto actúa como un "zoom" sin eliminar realmente ningún dato, lo que es importante para las estadísticas y las medidas de resumen.
 
-Alternatively, you can set maximum and minimum date values using `limits = c()` within `scale_x_date()`. For example:  
+Alternativamente, puedes establecer valores de fecha máximos y mínimos utilizando `limits = c()` dentro de `scale_x_date()`. Por ejemplo: 
 
 ```{r eval=F}
 scale_x_date(limits = c(as.Date("2014-04-01"), NA)) # sets a minimum date but leaves the maximum open.  
 ```
 
-Likewise, if you want to the x-axis to extend to a specific date (e.g. current date), even if no new cases have been reported, you can use:  
+Asimismo, si deseas que el eje-x se extienda hasta una fecha concreta (por ejemplo, la fecha actual), aunque no se hayan notificado nuevos casos, puedes utilizar 
 
 ```{r eval=F}
 scale_x_date(limits = c(NA, Sys.Date()) # ensures date axis will extend until current date  
 ```
 
-<span style="color: red;">**_DANGER:_** Be cautious setting the y-axis scale breaks or limits (e.g. 0 to 30 by 5: `seq(0, 30, 5)`). Such static numbers can cut-off your plot too short if the data changes to exceed the limit!.</span>
+<span style="color: red;">***PELIGRO:*** Ten cuidado al establecer los cortes o límites de la escala del eje-y (por ejemplo, de 0 a 30 por 5: `seq(0, 30, 5)`). Tales números estáticos pueden cortar tu gráfica demasiado si los datos cambian para superar el límite!</span>
 
 
 
 ### Date-axis labels/gridlines {.unnumbered} 
 
-<span style="color: darkgreen;">**_TIP:_** Remember that date-axis **labels** are independent from the aggregation of the data into bars, but visually it can be important to align bins, date labels, and vertical grid lines.</span>
+<span style="color: darkgreen;">***CONSEJO:*** Recuerda que las **etiquetas** de los ejes de fecha son independientes de la agregación de los datos en barras, pero visualmente puede ser importante alinear las franjas, las etiquetas de fecha y las líneas verticales de la cuadrícula.</span>
 
-To **modify the date labels and grid lines**, use `scale_x_date()` in one of these ways:  
+Para **modificar las etiquetas de fecha y las líneas de la cuadrícula**, utiliza `scale_x_date()` de una de estas maneras:
 
-* **If your histogram bins are days, Monday weeks, months, or years**:  
-  * Use `date_breaks = ` to specify the interval of labels and major gridlines (e.g. "day", "week", "3 weeks", "month", or "year")
-  * Use `date_minor_breaks = ` to specify interval of minor vertical gridlines (between date labels)  
-  * Add `expand = c(0,0)` to begin the labels at the first bar  
-  * Use `date_labels = ` to specify format of date labels - see the Dates page for tips (use `\n` for a new line)  
-* **If your histogram bins are Sunday weeks**:  
-  * Use `breaks = ` and `minor_breaks = ` by providing a sequence of date breaks for each
-  * You can still use `date_labels = ` and `expand = ` for formatting as described above  
+* **Si los intervalos de tu histograma son días, semanas de lunes, meses o años**:
+  * Utiliza `date_breaks = ` para especificar el intervalo de las etiquetas y las líneas principales de la cuadrícula (por ejemplo, "day", "week", "3 weeks", "month", o "year")
+  * Utiliza `date_minor_breaks = ` para especificar el intervalo de las líneas verticales menores (entre las etiquetas de fecha)
+  * Añade `expand = c(0,0)` para comenzar las etiquetas en la primera barra
+  * Usa `date_labels = ` para especificar el formato de las etiquetas de fecha - mira la página de [trabajar con fechas](working-with-dates) para consejos (usa `\n` para una nueva línea)
+* **Si las franjas de tu histograma son semanas de domingo**:
+  * Usa `breaks = ` y `minor_breaks = ` proporcionando una secuencia de saltos de fecha para cada
+  * Puedes seguir utilizando `date_labels = ` y `expand = ` para formatear como se ha descrito anteriormente
 
-Some notes:  
+Algunas notas:
 
-* See the opening ggplot section for instructions on how to create a sequence of dates using `seq.Date()`.  
-* See [this page](https://rdrr.io/r/base/strptime.html) or the [Working with dates] page for tips on creating date labels.  
-
-
+* Consulta la sección de apertura de ggplot para obtener instrucciones sobre cómo crear una secuencia de fechas utilizando `seq.Date()`.
+* Consulta [esta página](https://rdrr.io/r/base/strptime.html) o la página [Trabajar con fechas](#working-with-dates-1) para obtener consejos sobre la creación de etiquetas con fechas.
 
 
-#### Demonstrations {.unnumbered}
 
-Below is a demonstration of plots where the bins and the plot labels/grid lines are aligned and not aligned:  
+#### Demostraciones {.unnumbered}
+
+A continuación se hace una demostración de gráficos en los que los intervalos y las etiquetas de los gráficos/líneas de la cuadrícula están alineados y no alineados:
 
 ```{r fig.show='hold', class.source = 'fold-hide', warning=F, message=F}
 # 7-day bins + Monday labels
@@ -1421,9 +1420,9 @@ ggplot(central_data) +
 
 
 
-### Aggregated data {.unnumbered} 
+### Datos agregados {.unnumbered} 
 
-Often instead of a linelist, you begin with aggregated counts from facilities, districts, etc. You can make an epicurve with `ggplot()` but the code will be slightly different. This section will utilize the `count_data` dataset that was imported earlier, in the data preparation section. This dataset is the `linelist` aggregated to day-hospital counts. The first 50 rows are displayed below.  
+A menudo, en lugar de un listado, se comienza con recuentos agregados de instalaciones, distritos, etc. Se puede hacer una epicurva con `ggplot()` pero el código será ligeramente diferente. Esta sección utilizará los datos de `count_data` que fue importado anteriormente, en la sección de preparación de datos. Este conjunto de datos es `linelist` agregado a los recuentos de día-hospital. A continuación se muestran las primeras 50 filas.
 
 ```{r message=FALSE, warning=F, echo=F}
 # display the linelist data as a table
@@ -1431,14 +1430,13 @@ DT::datatable(head(count_data, 50), rownames = FALSE, filter="top", options = li
 ```
 
 
-#### Plotting daily counts {.unnumbered}  
+#### Trazado de recuentos diarios {.unnumbered}  
 
-We can plot a daily epicurve from these *daily counts*. Here are the differences to the code:  
+Podemos trazar una epicurva diaria a partir de estos *recuentos diarios*. Aquí están las diferencias con el código:
 
-* Within the aesthetic mapping `aes()`, specify `y = ` as the counts column (in this case, the column name is `n_cases`)
-* Add the argument `stat = "identity"` within `geom_histogram()`, which specifies that bar height should be the `y = ` value, not the number of rows as is the default  
-* Add the argument `width = ` to avoid vertical white lines between the bars. For daily data set to 1. For weekly count data set to 7. For monthly count data, white lines are an issue (each month has different number of days) - consider transforming your x-axis to a categorical ordered factor (months) and using `geom_col()`.
-
+* Dentro del mapeo estético `aes()`, especifique `y = ` como columna de recuento (en este caso, el nombre de la columna es `n_cases`)
+* Añadir el argumento `stat = "identity"` dentro de `geom_histogram()`, que especifica que la altura de la barra debe ser el valor `y =` , no el número de filas como es el valor por defecto
+* Añade el argumento `width = ` para evitar las líneas blancas verticales entre las barras. Para los datos diarios, establece el valor 1. Para los datos semanales, escribe 7. Para los datos de recuento mensual, las líneas blancas son un problema (cada mes tiene un número diferente de días) - considera la posibilidad de transformar el eje x en un factor categórico ordenado (meses) y utilizar `geom_col()`.
 
 ```{r, message=FALSE, warning=F}
 ggplot(data = count_data)+
@@ -1452,9 +1450,9 @@ ggplot(data = count_data)+
     title = "Daily case incidence, from daily count data")
 ```
 
-#### Plotting weekly counts {.unnumbered}
+#### Trazado de recuentos semanales {.unnumbered}
 
-If your data are already case counts by week, they might look like this dataset (called `count_data_weekly`):  
+Si tus datos ya son recuentos de casos por semana, podrían parecerse a este conjunto de datos (llamado `count_data_weekly`):
 
 ```{r, warning=F, message=F, echo=F}
 # Create weekly dataset with epiweek column
@@ -1464,14 +1462,14 @@ count_data_weekly <- count_data %>%
   summarize(n_cases_weekly = sum(n_cases, na.rm=T))   
 ```
 
-The first 50 rows of `count_data_weekly` are displayed below. You can see that the counts have been aggregated into weeks. Each week is displayed by the first day of the week (Monday by default).  
+A continuación se muestran las primeras 50 filas de `count_data_weekly`. Puedes ver que los recuentos se han agregado en semanas. Cada semana se muestra por el primer día de la semana (lunes por defecto).
 
 ```{r message=FALSE, echo=F}
 # display the linelist data as a table
 DT::datatable(count_data_weekly, rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Now plot so that `x = ` the epiweek column. Remember to add `y = ` the counts column to the aesthetic mapping, and add `stat = "identity"` as explained above.  
+Ahora trace de manera que `x = `la columna `epiweek`. Recuerda añadir `y = ` la columna de recuentos al mapeo estético, y añadir `stat = "identity"` como se ha explicado anteriormente.
 
 ```{r, warning=F, message=F}
 ggplot(data = count_data_weekly)+
@@ -1505,15 +1503,15 @@ ggplot(data = count_data_weekly)+
 
 
 
-### Moving averages {.unnumbered}
+### Medias móviles {.unnumbered}
 
-See the page on [Moving averages] for a detailed description and several options. Below is one option for calculating moving averages with the package **slider**. In this approach, *the moving average is calculated in the dataset prior to plotting*:  
+Consulta la página sobre [medias móviles](#moving-averages-1) para obtener una descripción detallada y varias opciones. A continuación se muestra una opción para calcular medias móviles con el paquete **slider**. En este enfoque, *la media móvil se calcula antes de su trazado*:
 
-1) Aggregate the data into counts as necessary (daily, weekly, etc.) (see [Grouping data] page)  
-2) Create a new column to hold the moving average, created with `slide_index()` from **slider** package  
-3) Plot the moving average as a `geom_line()` on top of (after) the epicurve histogram  
+1.  Agrega los datos en recuentos según sea necesario (diario, semanal, etc.) (véase la página de [Agrupar datos](#grouping-data))
+2.  Crea una nueva columna para contener la media móvil, creada con `slide_index()` del paquete **slider**
+3.  Traza la media móvil como una `geom_line()` encima (después) del histograma de la epicurva
 
-See the helpful online [vignette for the **slider** package](https://cran.r-project.org/web/packages/slider/vignettes/slider.html)  
+Mira la útil [viñeta en línea del paquete **slider**](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) 
 
 
 ```{r, warning=F, message=F}
@@ -1575,37 +1573,34 @@ ggplot(data = ll_counts_7day) +  # begin with new dataset defined above
 
 
 
-### Faceting/small-multiples {.unnumbered}
+### Facetas/pequeños múltiples {.unnumbered}
 
-As with other ggplots, you can create facetted plots ("small multiples"). As explained in the [ggplot tips] page of this handbook, you can use either `facet_wrap()` or `facet_grid()`. Here we demonstrate with `facet_wrap()`. For epicurves, `facet_wrap()` is typically easier as it is likely that you only need to facet on one column.  
+Al igual que con otros ggplots, puedes crear gráficos facetados ("pequeños múltiples"). Como se explica en la página de [consejos de ggplot](#ggplot-tips) de este manual, puedes utilizar `facet_wrap()` o `facet_grid()`. Aquí lo mostramos con `facet_wrap()`. Para las epicurvas, `facet_wrap()` es típicamente más fácil, ya que es probable que sólo necesites facetar una columna.
 
-The general syntax is `facet_wrap(rows ~ cols)`, where to the left of the tilde (~) is the name of a column to be spread across the "rows" of the facetted plot, and to the right of the tilde is the name of a column to be spread across the "columns" of the facetted plot. Most simply, just use one column name, to the right of the tilde: `facet_wrap(~age_cat)`.  
-
-
-**Free axes**  
-You will need to decide whether the scales of the axes for each facet are "fixed" to the same dimensions (default), or "free" (meaning they will change based on the data within the facet). Do this with the `scales = ` argument within `facet_wrap()` by specifying "free_x" or "free_y", or "free".  
+La sintaxis general es `facet_wrap(rows ~ cols)`, donde a la izquierda de la tilde (`~`) está el nombre de una columna que se extiende a través de las "filas" del gráfico facetado, y a la derecha de la tilde está el nombre de una columna que se extiende a través de las "columnas" del gráfico facetado. Lo más sencillo es utilizar un nombre de columna, a la derecha de la tilde: `facet_wrap(~age_cat)`.  
 
 
-**Number of cols and rows of facets**  
-This can be specified with `ncol = ` and `nrow = ` within `facet_wrap()`. 
+**Ejes libres**
+Tendrás que decidir si las escalas de los ejes para cada faceta son "fijas" (por defecto), o "libres" (lo que significa que cambiarán en función de los datos dentro de la faceta). Haz esto con el argumento `scales = ` dentro de `facet_wrap()` especificando "free_x" o "free_y", o "free".
 
+**Número de columnass y filas de las facetas**
+Se puede especificar con `ncol = ` y `nrow = ` dentro de `facet_wrap()`.
 
-**Order of panels**  
-To change the order of appearance, change the underlying order of the levels of the factor column used to create the facets.  
+**Orden de los paneles**
+Para cambiar el orden de aparición, cambia el orden de los niveles de la columna de factores utilizada para crear las facetas.
 
-
-**Aesthetics**  
-Font size and face, strip color, etc. can be modified through `theme()` with arguments like:  
+**Estética**
+El tamaño y tipo de la fuente, el color de la franja, etc. se pueden modificar a través de `theme()` con argumentos como:  
 
 * `strip.text = element_text()` (size, colour, face, angle...)
 * `strip.background = element_rect()` (e.g. element_rect(fill="grey"))  
-* `strip.position = ` (position of the strip "bottom", "top", "left", or "right")  
+* `strip.position = ` (posición "bottom", "top", "left", o "right")  
 
 
-**Strip labels**  
-Labels of the facet plots can be modified through the "labels" of the column as a factor, or by the use of a "labeller".  
+**Etiquetas de banda**
+Las etiquetas de los gráficos de facetas pueden modificarse a través de las "etiquetas" de la columna como factor, o mediante el uso de un "etiquetador".  
 
-Make a labeller like this, using the function `as_labeller()` from **ggplot2**. Then provide the labeller to the `labeller = ` argument of `facet_wrap()` as shown below.  
+Haz un etiquetador como este, usando la función `as_labeller()` de **ggplot2**. A continuación, proporciona el argumento `labeller = ` en `facet_wrap()` como se muestra a continuación.
 
 ```{r, class.source = 'fold-show'}
 my_labels <- as_labeller(c(
@@ -1619,7 +1614,7 @@ my_labels <- as_labeller(c(
      "70+"   = "Over age 70"))
 ```
 
-**An example facetted plot** - facetted by column `age_cat`.
+**Un ejemplo de gráfico facetado** - facetado por la columna `age_cat`.
 
 
 ```{r, warning=F, message=F}
@@ -1674,14 +1669,15 @@ ggplot(central_data) +
     caption  = stringr::str_glue("n = {nrow(central_data)} from Central Hospital; Case onsets range from {format(min(central_data$date_onset, na.rm=T), format = '%a %d %b %Y')} to {format(max(central_data$date_onset, na.rm=T), format = '%a %d %b %Y')}\n{nrow(central_data %>% filter(is.na(date_onset)))} cases missing date of onset and not shown"))
 ```
 
-See this [link](https://ggplot2.tidyverse.org/reference/labellers.html) for more information on labellers.  
+Consulta este [enlace](https://ggplot2.tidyverse.org/reference/labellers.html) para obtener más información sobre las etiquetadoras.
 
 
 
 
-#### Total epidemic in facet background {.unnumbered}
+#### Conjunto de la Epidemia como fondo de la faceta {.unnumbered}
 
-To show the total epidemic in the background of each facet, add the function `gghighlight()` with empty parentheses to the ggplot. This is from the package **gghighlight**. Note that the y-axis maximum in all facets is now based on the peak of the entire epidemic. There are more examples of this package in the [ggplot tips] page.  
+
+Para mostrar el conjunto de la epidemia como fondo de cada faceta, añade la función `gghighlight()` con paréntesis vacíos al ggplot. Esto es del paquete **gghighlight**. Observa que el máximo del eje Y en todas las facetas se basa ahora en el pico de toda la epidemia. Hay más ejemplos de este paquete en la página [de consejos de ggplot](#ggplot-tips). 
 
 ```{r, warning=F, message=F}
 ggplot(central_data) + 
@@ -1739,10 +1735,11 @@ ggplot(central_data) +
 
 
 #### One facet with data {.unnumbered}  
+Una faceta con datos
 
-If you want to have one facet box that contains all the data, duplicate the entire dataset and treat the duplicates as one faceting value. A "helper" function `CreateAllFacet()` below can assist with this (thanks to this [blog post](https://stackoverflow.com/questions/18933575/easily-add-an-all-facet-to-facet-wrap-in-ggplot2)). When it is run, the number of rows doubles and there will be a new column called `facet` in which the duplicated rows will have the value "all", and the original rows have the their original value of the faceting colum. Now you just have to facet on the `facet` column.   
+Si quieres tener una caja de facetas que contenga todos los datos, duplique todo el conjunto de datos y trate los duplicados como un solo valor de facetas. Una función de "ayuda" `CreateAllFacet()` a continuación puede ayudar con esto (gracias a esta [entrada del blog](https://stackoverflow.com/questions/18933575/easily-add-an-all-facet-to-facet-wrap-in-ggplot2)). Cuando se ejecuta, el número de filas se duplica y habrá una nueva columna llamada `facet` en la que las filas duplicadas tendrán el valor "all", y las filas originales tienen el valor original de la columna `facet`. Ahora sólo tienes que hacer la faceta con la columna `facet`.
 
-Here is the helper function. Run it so that it is available to you.  
+Aquí está la función de ayuda. Ejecútala para que esté disponible para ti. 
 
 ```{r}
 # Define helper function
@@ -1759,7 +1756,7 @@ CreateAllFacet <- function(df, col){
 }
 ```
 
-Now apply the helper function to the dataset, on column `age_cat`:  
+Ahora aplica la función de ayuda a los datos, en la columna `age_cat`:
 
 ```{r}
 # Create dataset that is duplicated and with new column "facet" to show "all" age categories as another facet level
@@ -1774,11 +1771,11 @@ central_data2 <- CreateAllFacet(central_data, col = "age_cat") %>%
 table(central_data2$facet, useNA = "always")
 ```
 
-Notable changes to the `ggplot()` command are:  
+Los cambios más importantes en el comando `ggplot()` son:
 
-* The data used is now central_data2 (double the rows, with new column "facet")
-* Labeller will need to be updated, if used  
-* Optional: to achieve vertically stacked facets: the facet column is moved to rows side of equation and on right is replaced by "." (`facet_wrap(facet~.)`), and `ncol = 1`. You may also need to adjust the width and height of the saved png plot image (see `ggsave()` in [ggplot tips]).  
+* Los datos utilizados son ahora `central_data2` (el doble de filas, con la nueva columna "facet")
+* La etiquetadora tendrá que ser actualizada, si se utiliza
+* Opcional: para conseguir facetas apiladas verticalmente: la columna de la faceta se mueve al lado de las filas de la ecuación y a la derecha se sustituye por "." (`facet_wrap(facet\~.)`), y `ncol = 1 `. También puede ser necesario ajustar la anchura y la altura de la imagen png guardada (ver `ggsave()` en [consejos de ggplot](#ggplot-tips)).
 
 ```{r, fig.height=12, fig.width=5, warning=F, message=F}
 ggplot(central_data2) + 
@@ -1831,23 +1828,23 @@ ggplot(central_data2) +
 
 
 
-## Tentative data  {#tentative-data}
+## Datos provisionales  {#tentative-data}
+
+Los datos más recientes que se muestran en las epicurvas deben marcarse a menudo como provisionales, o sujetos a retrasos en los informes. Esto puede hacerse añadiendo una línea vertical y/o un rectángulo sobre un número determinado de días. Aquí hay dos opciones:
 
 
-The most recent data shown in epicurves should often be marked as tentative, or subject to reporting delays. This can be done in by adding a vertical line and/or rectangle over a specified number of days. Here are two options:  
+1.  Utiliza `annotate()`:
+     + Para una línea utiliza `annotate(geom = "segment")`. Proporcione `x`, `xend`, `y`, e `yend`. Ajusta el tamaño, el tipo de línea (`lty)` y el color.
+     + Para un rectángulo utiliza `annotate(geom = "rect")`. Proporcionar `xmin/xmax/ymin/ymax`. Ajusta el color y el alpha.
+2.  Agrupar los datos por estado tentativo y colorear esas barras de forma diferente
 
-1) Use `annotate()`:  
-    + For a line use `annotate(geom = "segment")`. Provide `x`, `xend`, `y`, and `yend`. Adjust size, linetype (`lty`), and color.  
-    + For a rectangle use `annotate(geom = "rect")`. Provide xmin/xmax/ymin/ymax. Adjust color and alpha.  
-2) Group the data by tentative status and color those bars differently  
+<span style="color: orange;">***ATENCIÓN:*** Puedes intentar `geom_rect()` para dibujar un rectángulo, pero el ajuste de la transparencia no funciona en un contexto de listado. Esta función superpone un rectángulo para cada observación/fila!. Utiliza un alfa muy bajo (por ejemplo, 0,01), u otro enfoque. </span>
 
-<span style="color: orange;">**_CAUTION:_** You might try `geom_rect()` to draw a rectangle, but adjusting the transparency does not work in a linelist context. This function overlays one rectangle for each observation/row!. Use either a very low alpha (e.g. 0.01), or another approach. </span>
+### Uso de `annotate()` {.unnumbered}
 
-### Using `annotate()` {.unnumbered}
-
-* Within `annotate(geom = "rect")`, the `xmin` and `xmax` arguments must be given inputs of class Date.  
-* Note that because these data are aggregated into weekly bars, and the last bar extends to the Monday after the last data point, the shaded region may appear to cover 4 weeks  
-* Here is an `annotate()` [online example](https://ggplot2.tidyverse.org/reference/annotate.html)
+* Dentro de `annotate(geom = "rect")`, los argumentos `xmin` y `xmax` deben tener entradas del tipo Date.
+* Ten en cuenta que, como estos datos se agregan en barras semanales, y la última barra se extiende hasta el lunes siguiente al último punto de datos, la región sombreada puede parecer que abarca 4 semanas
+* Este es un [ejemplo de `annotate()` en línea](https://ggplot2.tidyverse.org/reference/annotate.html)
 
 
 ```{r, warning=F, message=F}
@@ -1909,7 +1906,7 @@ ggplot(central_data) +
 ```
 
 
-The same black vertical line can be achieved with the code below, but using `geom_vline()` you lose the ability to control the height:  
+La misma línea vertical negra se puede conseguir con el código de abajo, pero usando `geom_vline()` se pierde la capacidad de controlar la altura:
 
 ```{r, eval=F}
 geom_vline(xintercept = max(central_data$date_onset, na.rm = T) - 21,
@@ -1919,9 +1916,9 @@ geom_vline(xintercept = max(central_data$date_onset, na.rm = T) - 21,
 
 
 
-### Bars color {.unnumbered}  
+### Color de las barras {.unnumbered}  
 
-An alternative approach could be to adjust the color or display of the tentative bars of data themselves. You could create a new column in the data preparation stage and use it to group the data, such that the `aes(fill = )` of tentative data can be a different color or alpha than the other bars. 
+Un enfoque alternativo podría ser ajustar el color o la visualización de las propias barras de datos tentativos. Podrías crear una nueva columna en la etapa de preparación de los datos y utilizarla para agrupar los datos, de manera que el `aes(fill = )` de los datos tentativos pueda tener un color o un alfa diferente al de las otras barras.
 
 ```{r, message=F, warning=F}
 # add column
@@ -1958,17 +1955,17 @@ ggplot(plot_data, aes(x = date_onset, fill = tentative)) +
 ```
 
 
-## Multi-level date labels  {#multi-level-date-labels}
+## Etiquetas de fecha de varios niveles  {#multi-level-date-labels}
 
-If you want multi-level date labels (e.g. month and year) *without duplicating the lower label levels*, consider one of the approaches below:  
+Si deseas etiquetas de fecha de varios niveles (por ejemplo, mes y año) *sin duplicar los niveles de etiquetas inferiores*, considera uno de los enfoques siguientes:
 
-Remember - you can can use tools like `\n` *within* the `date_labels` or `labels` arguments to put parts of each label on a new line below. However, the code below helps you take years or months (for example) on a lower line *and only once*. A few notes on the code below:  
+Recuerda - puedes utilizar herramientas como `\n` *dentro de* los argumentos `date_labels` o `labels` para poner partes de cada etiqueta en una nueva línea inferior. Sin embargo, el código de abajo le ayuda a tomar años o meses (por ejemplo) en una línea inferior *y sólo una vez*. Algunas notas sobre el código de abajo:
 
-* Case counts are aggregated into weeks for aesthetic reasons. See Epicurves page (aggregated data tab) for details.  
-* A `geom_area()` line is used instead of a histogram, as the faceting approach below does not work well with histograms.  
+* Los recuentos de casos se agregan en semanas por motivos estéticos. Véase la página de Epicurves (sección de datos agregados) para más detalles.
+* Se utiliza una línea `geom_area()` en lugar de un histograma, ya que el enfoque de facetas que se presenta a continuación no funciona bien con los histogramas.
 
 
-**Aggregate to weekly counts**
+**Agregue a los recuentos semanales**
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning=F, message=F}
 
@@ -1987,7 +1984,7 @@ central_weekly <- linelist %>%
     fill = list(n = 0))                        # convert new NA values to 0 counts
 ```
 
-**Make plots**  
+**Hacer gráficos**
 
 ```{r, warning=F, message=F}
 # plot with box border on year
@@ -2039,7 +2036,7 @@ ggplot(central_weekly,
   labs(title = "Nested year labels - points, shaded, no label border")
 ```
 
-The above techniques were adapted from [this](https://stackoverflow.com/questions/44616530/axis-labels-on-two-lines-with-nested-x-variables-year-below-months) and [this](https://stackoverflow.com/questions/20571306/multi-row-x-axis-labels-in-ggplot-line-chart) post on stackoverflow.com.  
+Las técnicas anteriores fueron adaptadas de [este](https://stackoverflow.com/questions/44616530/axis-labels-on-two-lines-with-nested-x-variables-year-below-months) y [este](https://stackoverflow.com/questions/20571306/multi-row-x-axis-labels-in-ggplot-line-chart) post en stackoverflow.com.
 
 
 
@@ -2047,13 +2044,13 @@ The above techniques were adapted from [this](https://stackoverflow.com/question
 
 
 <!-- ======================================================= -->
-## Dual-axis {#dual-axis}  
+## Doble eje {#dual-axis}  
 
-Although there are fierce discussions about the validity of dual axes within the data visualization community, many epi supervisors still want to see an epicurve or similar chart with a percent overlaid with a second axis. This is discussed more extensively in the [ggplot tips] page, but one example using the **cowplot** method is shown below:  
+Aunque hay fuertes discusiones sobre la validez de los ejes duales dentro de la comunidad de visualización de datos, muchos supervisores de epi todavía quieren ver una epicurva o un gráfico similar con un porcentaje superpuesto con un segundo eje. Esto se discute más ampliamente en la página de [consejos de ggplot](#ggplot-tips), pero a continuación se muestra un ejemplo utilizando el método **cowplot**:
 
-* Two distinct plots are made, and then combined with **cowplot** package.  
-* The plots must have the exact same x-axis (set limits) or else the data and labels will not align  
-* Each uses `theme_cowplot()` and one has the y-axis moved to the right side of the plot  
+* Se hacen dos gráficos distintos y luego se combinan con el paquete **cowplot**.
+* Los gráficos deben tener exactamente el mismo eje x (límites establecidos) o de lo contrario los datos y las etiquetas no se alinearán
+* Cada uno de ellos utiliza `theme_cowplot()` y uno de ellos tiene el eje-y desplazado a la derecha del gráfico
 
 ```{r, warning=F, message=F}
 #load package
@@ -2124,7 +2121,7 @@ plot_deaths <- linelist %>%                        # begin with linelist
   theme_cowplot()                   # add this to make the two plots merge together nicely
 ```
 
-Now use **cowplot** to overlay the two plots. Attention has been paid to the x-axis alignment, side of the y-axis, and use of `theme_cowplot()`.  
+Ahora utiliza **cowplot** para superponer los dos gráficos. Se ha prestado atención a la alineación del eje-x, al lado del eje-y y al uso de `theme_cowplot()`.
 
 ```{r, warning=F, message=F}
 aligned_plots <- cowplot::align_plots(plot_cases, plot_deaths, align="hv", axis="tblr")
@@ -2134,11 +2131,11 @@ ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 
 
 
-## Cumulative Incidence {#cumulative-incidence-1}
+## Incidencia acumulada {#cumulative-incidence-1}
 
-Note: If using **incidence2**, see the section on how you can produce cumulative incidence with a simple function. This page will address how to calculate cumulative incidence and plot it with `ggplot()`.  
+Nota: Si utiliza **incidence2**, consulta la sección sobre cómo puede producir la incidencia acumulada con una función simple. Esta página abordará cómo calcular la incidencia acumulada y trazarla con `ggplot()`.
 
-If beginning with a case linelist, create a new column containing the cumulative number of cases per day in an outbreak using `cumsum()` from **base** R:    
+Si se empieza con una lista de casos, cree una nueva columna que contenga el número acumulado de casos por día en un brote utilizando `cumsum()` de R **base**:   
 
 ```{r}
 cumulative_case_counts <- linelist %>% 
@@ -2148,7 +2145,7 @@ cumulative_case_counts <- linelist %>%
     )
 ```
 
-The first 10 rows are shown below:  
+A continuación se muestran las 10 primeras filas:
 
 ```{r message=FALSE, echo=F}
 # display the linelist data as a table
@@ -2157,7 +2154,7 @@ DT::datatable(head(cumulative_case_counts, 10), rownames = FALSE, options = list
 
 
 
-This cumulative column can then be plotted against `date_onset`, using `geom_line()`:
+Esta columna acumulativa puede entonces ser trazada contra `date_onset`, usando `geom_line()`:
 
 ```{r, warning=F, message=F}
 plot_cumulative <- ggplot()+
@@ -2171,7 +2168,7 @@ plot_cumulative
 ```
 
 
-It can also be overlaid onto the epicurve, with dual-axis using the **cowplot** method described above and in the [ggplot tips] page:
+También se puede superponer a la epicurva, con doble eje utilizando el método **cowplot** descrito anteriormente y en la página de [consejos de ggplot](#ggplot-tips):
 
 ```{r, warning=F, message=F}
 #load package
@@ -2208,7 +2205,7 @@ plot_cumulative <- ggplot()+
     axis.ticks = element_blank())
 ```
 
-Now use **cowplot** to overlay the two plots. Attention has been paid to the x-axis alignment, side of the y-axis, and use of `theme_cowplot()`.  
+Ahora utiliza **cowplot** para superponer los dos gráficos. Se ha prestado atención a la alineación del eje-x, al lado del eje-y y al uso de `theme_cowplot()`.
 
 ```{r, warning=F, message=F}
 aligned_plots <- cowplot::align_plots(plot_cases, plot_cumulative, align="hv", axis="tblr")
@@ -2217,7 +2214,7 @@ ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 
 
 <!-- ======================================================= -->
-## Resources {#resources-25}
+## Recursos {#resources-25}
 
 
 
