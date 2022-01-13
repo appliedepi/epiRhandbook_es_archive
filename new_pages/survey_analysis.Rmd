@@ -47,12 +47,19 @@ pacman::p_load(rio,          # File import
                apyramid,     # a package dedicated to creating age pyramids
                patchwork,    # for combining ggplots
                ggforce       # for alluvial/sankey plots
+              
                ) 
 
 ## load packages from github
 pacman::p_load_gh(
-     "R4EPI/sitrep"          # for observation time / weighting functions
-)
+  
+  "r4epi/epikit") # jfmont
+
+pacman::p_load_gh(
+  
+  "r4epi/sitrep") # jfmont
+
+library("sitrep") # jfmont (Normally p_load_gh approach fails with sitrep, therefore I switch to an old-school way)
 
 ``` 
 
