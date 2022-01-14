@@ -644,7 +644,7 @@ counts %>%
 
 Vemos que un desfase de 4 semanas es el más correlacionado, por lo que creamos una variable de temperatura retardada para incluirla en nuestra regresión.
 
-<span style="color: red;">***PELIGRO:*** Ten en cuenta que las primeras cuatro semanas de nuestros datos en la variable de temperatura rezagada faltan (`NA`) - ya que no hay cuatro semanas anteriores para obtener datos. Para utilizar este conjunto de datos con la función de **tendencia** `predict()`, necesitamos utilizar el argumento `simulate_pi = FALSE` dentro de `predict()` más abajo. Si quisiéramos utilizar la opción de simulación, entonces tenemos que eliminar estas pérdidas y almacenarlas como un nuevo conjunto de datos añadiendo `drop_na(t2m_lag4)` al fragmento de código que aparece a continuación.</span>  
+<span style="color: red;">***PELIGRO:*** Ten en cuenta que las primeras cuatro semanas de nuestros datos en la variable de temperatura rezagada faltan (`NA`) - ya que no hay cuatro semanas anteriores para obtener datos. Para utilizar este conjunto de datos con la función  `predict()` de **trending**, necesitamos utilizar el argumento `simulate_pi = FALSE` dentro de `predict()` más abajo. Si quisiéramos utilizar la opción de simulación, entonces tenemos que eliminar estas pérdidas y almacenarlas como un nuevo conjunto de datos añadiendo `drop_na(t2m_lag4)` al fragmento de código que aparece a continuación.</span>  
  
 
 ```{r lag_tempvar}
