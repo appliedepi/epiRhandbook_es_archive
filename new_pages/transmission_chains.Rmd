@@ -14,7 +14,7 @@ La principal herramienta para manejar, analizar y visualizar las cadenas de tran
 if(
   !"epicontacts" %in% rownames(installed.packages()) |
   packageVersion("epicontacts") != "1.2.0"
-) remotes::install_github("reconhub/epicontacts@timeline")
+) remotes::install_github("reconhub/epicontacts@facf491") #jfmont
 
 ## install and load packages
 pacman::p_load(tidyverse, epicontacts, magrittr, here, webshot, visNetwork)
@@ -22,6 +22,7 @@ pacman::p_load(tidyverse, epicontacts, magrittr, here, webshot, visNetwork)
 ## load linelist
 linelist <- rio::import(here::here("data", "case_linelists", "linelist_cleaned.rds")) %>%
   filter(!duplicated(case_id))
+
 
 ## generate contacts
 contacts <- linelist %>%
