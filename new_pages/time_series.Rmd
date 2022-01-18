@@ -29,22 +29,25 @@ Los temas que se tratan son:
 Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para tu uso. También se pueden cargar paquetes con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R. 
 
 ```{r load_packages}
-pacman::p_load(rio,          # Importación de archivos
-               here,         # Localizador de archivos
-               tidyverse,    # gestión de datos + gráficos ggplot2
-               tsibble,      # manejar conjuntos de datos de series temporales
-               slider,       # para calcular medias móviles
-               imputeTS,     # para rellenar los valores perdidos
-               feasts,       # para la descomposición de las series temporales y la autocorrelación
-               forecast,     # para ajustar los términos sin y cosin a los datos (nota: debe cargarse después de feasts)
-               trending,     # para ajustar y evaluar modelos 
-               tmaptools,    # para obtener geocoordenadas (lon/lat) basadas en nombres de lugares
-               ecmwfr,       # para interactuar con la API CDS de satélites copernicus 
-               stars,        # para leer archivos .nc (datos climáticos)
-               units,        # para definir las unidades de medida (datos climáticos)
-               yardstick,    # para ver la precisión del modelo
-               surveillance  # para la detección de aberraciones
+
+pacman::p_load(rio,          # File import
+               here,         # File locator
+               tidyverse,    # data management + ggplot2 graphics
+               #tsibble,      # handle time series datasets #jfmont
+               slider,       # for calculating moving averages
+               imputeTS,     # for filling in missing values
+               feasts,       # for time series decomposition and autocorrelation
+               forecast,     # fit sin and cosin terms to data (note: must load after feasts)
+               trending,     # fit and assess models 
+               tmaptools,    # for getting geocoordinates (lon/lat) based on place names
+               ecmwfr,       # for interacting with copernicus sateliate CDS API
+               stars,        # for reading in .nc (climate data) files
+               units,        # for defining units of measurement (climate data)
+               yardstick,    # for looking at model accuracy
+               surveillance  # for aberration detection
                )
+
+library("tsibble") #cargo tsibble versión 1.0.0 #jfmont
 ``` 
 
 ### Cargar datos {.unnumbered}
