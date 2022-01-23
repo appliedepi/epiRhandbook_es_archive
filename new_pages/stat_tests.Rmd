@@ -77,7 +77,7 @@ Puedes utilizar las funciones de R **base** para realizar pruebas estadísticas.
 
 ### Tests-T {.unnumbered} 
 
-Un [test-t](https://en.wikipedia.org/wiki/Student's_t-test), también llamado "Test t de Student", se utiliza normalmente para determinar si existe una diferencia significativa entre las medias de alguna variable numérica entre dos grupos. Aquí mostraremos la sintaxis para hacer esta prueba dependiendo de si las columnas están en el mismo dataframe.
+Un [test-t](https://es.wikipedia.org/wiki/Prueba_t_de_Student), también llamado "Test t de Student" o "Prueba t de Student", se utiliza normalmente para determinar si existe una diferencia significativa entre las medias de alguna variable numérica entre dos grupos. Aquí mostraremos la sintaxis para hacer esta prueba dependiendo de si las columnas están en el mismo dataframe.
 
 **Sintaxis 1:** Esta es la sintaxis cuando tus columnas numéricas y categóricas están en el mismo dataframe. Proporcione la columna numérica en el lado izquierdo de la ecuación y la columna categórica en el lado derecho. Especifique los datos a `data =`. Opcionalmente, establece `paired = TRUE`, y `conf.level = ` (0.95 por defecto), y `alternative = ` (ya sea "two.sided", "less", o "greater"). Escribe `?t.test` para obtener más detalles.
 
@@ -101,7 +101,7 @@ t.test(linelist$age_years, mu = 45)
 
 ### Test de Shapiro-Wilk {.unnumbered}  
 
-El [test de Shapiro-Wilk](https://en.wikipedia.org/wiki/Shapiro–Wilk_test) puede utilizarse para determinar si una muestra procede de una población distribuida normalmente (un supuesto de muchas otras pruebas y análisis, como la prueba t). Sin embargo, sólo puede utilizarse en una muestra de entre 3 y 5000 observaciones. Para muestras más grandes puede ser útil un [gráfico de cuantiles](https://ggplot2.tidyverse.org/reference/geom_qq.html).
+El [test de Shapiro-Wilk](https://es.wikipedia.org/wiki/Test_de_Shapiro–Wilk) puede utilizarse para determinar si una muestra procede de una población distribuida normalmente (un supuesto de muchas otras pruebas y análisis, como la prueba t). Sin embargo, sólo puede utilizarse en una muestra de entre 3 y 5000 observaciones. Para muestras más grandes puede ser útil un [gráfico de cuantiles](https://ggplot2.tidyverse.org/reference/geom_qq.html).
 
 
 ```{r, eval=F}
@@ -237,14 +237,14 @@ linelist %>%
 
 ```
 
-Se pueden ejecutar muchas más funciones y pruebas estadísticas con las funciones de rstatix. Consulta la documentación de **rstatix** [en línea aquí](https://github.com/kassambara/rstatix) o escribiendo `?rstatix`.
+Se pueden ejecutar muchas más funciones y pruebas estadísticas con las funciones de rstatix. Consulta [la documentación](https://github.com/kassambara/rstatix) de **rstatix** o escribiendo `?rstatix`.
 
 
 
 
-## `gtsummary` package {#stats_gt}
+## Paquete `gtsummary` {#stats_gt}
 
-Use **gtsummary** if you are looking to add the results of a statistical test to a pretty table that was created with this package (as described in the **gtsummary** section of the [Descriptive tables](#tbl_gt) page).  
+Usa **gtsummary** si quieres añadir los resultados de una prueba estadística a una tabla bonita creada con este paquete (como se describe en la sección **gtsummary** de la página [Tablas descriptivas](#tbl_gt)).
 
 La realización de pruebas estadísticas de comparación con `tbl_summary` se lleva a cabo añadiendo la función `add_p` a una tabla y especificando qué prueba utilizar. Es posible obtener valores p corregidos para pruebas múltiples utilizando la función `add_q`. Ejecuta `?tbl_summary` para obtener más detalles.
 
@@ -487,6 +487,10 @@ rplot(correlation_tab)
 
 Gran parte de la información de esta página está adaptada de estos recursos y viñetas en línea:
 
-[gtsummary](http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) [dplyr](https://dplyr.tidyverse.org/articles/grouping.html) 
+[gtsummary](http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html)
+
+[dplyr](https://dplyr.tidyverse.org/articles/grouping.html) 
+
 [corrr](https://corrr.tidymodels.org/articles/using-corrr.html) 
+
 [correlaciones en sthda ](http://www.sthda.com/english/wiki/correlation-test-between-two-variables-in-r)

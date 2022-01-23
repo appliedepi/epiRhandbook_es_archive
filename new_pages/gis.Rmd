@@ -22,7 +22,7 @@ A continuación presentamos algunos términos clave. Para una introducción comp
 
 **Sistemas de Información Geográfica (SIG)** - Un SIG es un marco o entorno de trabajo para recopilar, gestionar, analizar y visualizar datos espaciales.
 
-### Software SIG {#gis-software}
+### Software SIG {.unnumbered}
 
 Algunos de los programas de SIG más conocidos permiten la interacción "señalar y clicar" para el desarrollo de mapas y el análisis espacial. Estas herramientas tienen ventajas como no tener que aprender código y la facilidad de seleccionar y colocar manualmente los iconos y características en un mapa. He aquí dos de los más populares:
 
@@ -32,7 +32,7 @@ Algunos de los programas de SIG más conocidos permiten la interacción "señala
 
 El uso de R como SIG puede parecer más intimidante al principio porque, en lugar de "señalar y clicar", tiene una "interfaz de línea de comandos" (hay que codificar para adquirir el resultado deseado). Sin embargo, esto es una gran ventaja si se necesita producir mapas repetidamente o crear un análisis que sea reproducible.
 
-### Datos espaciales {#spatial-data}
+### Datos espaciales {.unnumbered}
 
 Las dos formas principales de datos espaciales utilizadas en los SIG son los datos vectoriales y los ráster:
 
@@ -46,7 +46,7 @@ Las dos formas principales de datos espaciales utilizadas en los SIG son los dat
 
 **Datos ráster** - Es un formato alternativo para los datos espaciales. Los datos ráster son una matriz de celdas (por ejemplo, píxeles) en la que cada celda contiene información como la altura, la temperatura, la pendiente, la cubierta forestal, etc. Suelen ser fotografías aéreas, imágenes de satélite, etc. Las imágenes ráster también pueden utilizarse como "mapas base" debajo de los datos vectoriales.
 
-### Visualización de datos espaciales {#visualizing-spatial-data}
+### Visualización de datos espaciales {.unnumbered}
 
 Para representar visualmente los datos espaciales en un mapa, el software SIG requiere que se proporcione suficiente información sobre dónde deben estar las diferentes características y la relación de unas con otras. Si se utilizan datos vectoriales, como ocurre en la mayoría de los casos, esta información suele almacenarse en un archivo *shapefile*:
 
@@ -80,7 +80,7 @@ Hay un par de elementos clave que deberás tener y en los que deberás pensar pa
 
 -   Piensa **cómo quieres presentar** la información de los datos a tu audiencia. Hay muchos tipos diferentes de mapas, y es importante pensar qué tipo de mapa se ajusta mejor a tus necesidades.
 
-### Tipos de mapas para visualizar tus datos {#types-of-maps-for-visualizing-your-data}
+### Tipos de mapas para visualizar tus datos {.unnumbered}
 
 **Mapa de coropletas**: Es un tipo de mapa temático en el que se utiliza colores, sombreados o patrones para representar regiones geográficas en relación con el valor de un atributo. Por ejemplo, un valor mayor podría indicarse con un color más oscuro que un valor menor. Este tipo de mapa es particularmente útil cuando se visualiza una variable y cómo cambia a través de regiones o áreas geopolíticas definidas.
 
@@ -118,9 +118,9 @@ Nota: El enfoque principal de esta página del SIG se centra en el contexto de r
 
 ## Preparación {#preparation-19}
 
-### Cargar paquetes {#load-packages-18}
+### Cargar paquetes {.unnumbered}
 
-Este trozo de código muestra cómo puedes cargar de los paquetes necesarios para el análisis espacial que vamos a realizar. En este manual destacamos la función `p_load()` del paquete **pacman**: esta instala el paquete (si aún no está instalado) *y* lo carga para su uso. También puedes cargar los paquetes uno por uno  con la funcion `library()` de R **base.**, si ya los tienes instalados. Consulta la página sobre [los Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra cómo puedes cargar de los paquetes necesarios para el análisis espacial que vamos a realizar. En este manual destacamos la función `p_load()` del paquete **pacman**: esta instala el paquete (si aún no está instalado) *y* lo carga para su uso. También puedes cargar los paquetes uno por uno  con la funcion `library()` de R **base.**, si ya los tienes instalados. Consulta la página sobre los [Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r}
 pacman::p_load(
@@ -138,9 +138,9 @@ pacman::p_load(
 
 En este enlace de CRAN ["Spatial Task View"](https://cran.r-project.org/web/views/Spatial.html) puedes ver un resumen de todos los paquetes de R que pueden trabajar con datos espaciales. 
 
-### Ejemplos con una base de datos {#sample-case-data}
+### Ejemplos con una base de datos {.unnumbered}
 
-A muestra de ejemplo, trabajaremos con una muestra aleatoria de 1000 casos del brote de ébola simulado en el dataframe `linelist` (computacionalmente, una base de datos pequeña hace que sea más fácil trabajar con este ejemplo). Si quieres seguir el proceso, [clica para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds).
+A muestra de ejemplo, trabajaremos con una muestra aleatoria de 1000 casos del brote de ébola simulado en el dataframe `linelist` (computacionalmente, una base de datos pequeña hace que sea más fácil trabajar con este ejemplo). Si quieres seguir el proceso, [clica para descargar linelist "limpio"](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds).
 
 Los resultados que tengas al correr el código de este ejercicio puede que sean un poco diferentes de los que se aquí mostramos. Esto es porque vamos a estar trabajando con una muestra aleatoria de los casos.
 
@@ -182,7 +182,7 @@ Este es el aspecto del dataframe original `linelist`. En esta demostración, só
 DT::datatable(head(linelist_sf, 10), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-### Archivos shapefiles de límites administrativos {#admin-boundary-shapefiles}
+### Archivos shapefiles de límites administrativos {.unnumbered}
 
 **Sierra Leona: Archivos shapefiles de los límites administrativos**
 
@@ -194,7 +194,7 @@ Ahora vamos a hacer lo siguiente para guardar el shapefile del nivel administrat
 2.  Limpiar los nombres de las columnas
 3.  Filtrar las filas para mantener sólo las áreas de interés
 
-Para importar un shapefile utilizamos la función `read_sf()` del paquete **sf**, y usamos la función `here()` para que R encuentre el archivo. En nuestro caso, el archivo se encuentra dentro de nuestro proyecto R en las subcarpetas "data", "gis" y "shp", con nombre de archivo "sle_adm3.shp" (para más información ver las páginas sobre [Importación y exportación](#import-and-export) y [proyectos R](#r-projects)). En tu caso, tendrás que indicar la localización específica donde tienes tus archivos en tu ordenador.
+Para importar un shapefile utilizamos la función `read_sf()` del paquete **sf**, y usamos la función `here()` para que R encuentre el archivo. En nuestro caso, el archivo se encuentra dentro de nuestro proyecto R en las subcarpetas "data", "gis" y "shp", con nombre de archivo "sle_adm3.shp" (para más información ver las páginas sobre [Importación y exportación](#import-and-export) y [Proyectos en R](#r-projects)). En tu caso, tendrás que indicar la localización específica donde tienes tus archivos en tu ordenador.
 
 ```{r, echo=F}
 sle_adm3_raw <- sf::read_sf(here("data", "gis", "shp", "sle_adm3.shp"))
@@ -216,7 +216,7 @@ A continuación puedes ver el aspecto del shapefile después de la importación 
 DT::datatable(head(sle_adm3, 50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-### Datos de población {#population-data}
+### Datos de población {.unnumbered}
 
 **Sierra Leona: Población por ADM3**
 
@@ -236,7 +236,7 @@ Este es el aspecto del archivo de población. *Desplázate a la derecha* para ve
 DT::datatable(head(sle_adm3_pop, 50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-### Instalaciones sanitarias {#health-facilities}
+### Instalaciones sanitarias {.unnumbered}
 
 **Sierra Leone: Health facility data from OpenStreetMap**
 
@@ -281,7 +281,7 @@ tm_shape(linelist_sf) + tm_dots(size=0.08, col='blue')
 
 Por sí solos, los puntos no nos dicen mucho. Así que también tenemos que dibujar los límites administrativos:
 
-Para esto, vamos a usar `tm_shape()` (ver [documentación](https://www.rdocumentation.org/packages/tmap/versions/3.3/topics/tm_shape)), pero en vez de proporcionar el shapefile de los puntos de los casos, proporcionamos el shapefile de los límites administrativos (polígonos).
+Para esto, vamos a usar `tm_shape()` ([documentación](https://www.rdocumentation.org/packages/tmap/versions/3.3/topics/tm_shape)), pero en vez de proporcionar el shapefile de los puntos de los casos, proporcionamos el shapefile de los límites administrativos (polígonos).
 
 Con el argumento `bbox =`(bbox significa "bounding box") podemos especificar los límites de las coordenadas, lo cual nos ayuda a hacer zoom a una zona específica de interés. Primero mostramos la visualización del mapa sin `bbox`, y luego con él.
 
@@ -328,7 +328,7 @@ Es posible que estés familiarizado/a con la *unión* de datos entre bases de da
 
 El paquete **sf** ofrece varios métodos para las uniones espaciales. Puedes explorar la documentación del método `st_join()` y otros tipos de uniones espaciales en esta [referencia](https://r-spatial.github.io/sf/reference/geos_binary_pred.html).
 
-### Puntos en el polígono {#points-in-polygon}
+### Puntos en el polígono {.unnumbered}
 
 **Asignación espacial de unidades administrativas a los casos**
 
@@ -401,7 +401,7 @@ ggplot(
 
 <!-- ======================================================= -->
 
-### Vecino más cercano {#nearest-neighbor}
+### Vecino más cercano {.unnumbered}
 
 **Encontrar el centro sanitario más cercano**
 
@@ -456,7 +456,7 @@ tm_view(set.view = c(-13.2284, 8.4699, 13), # adjust zoom (center coords, zoom)
 tm_layout(title = "Cases, colored by nearest clinic")
 ```
 
-### Buffers {#buffers}
+### Buffers {.unnumbered}
 
 También podemos explorar cuántos casos se encuentran a menos de 2,5 km (\~30 minutos) de distancia a pie del centro sanitario más cercano. Esto se conoce como buffer o zona o ámbito de influencia.
 
@@ -529,7 +529,7 @@ tm_layout(title = "Cases by clinic catchment area")
 
 ```
 
-### Otras uniones espaciales {#other-spatial-joins}
+### Otras uniones espaciales {.unnumbered}
 
 Los siguientes son valores alternativos para el argunmento `join` (puedes encontrar más información en [documentation](https://r-spatial.github.io/sf/reference/st_join.html))
 
@@ -676,9 +676,9 @@ Para las personas que se sientan cómodas trabajando con **ggplot2**, `geom_sf()
 
 <!-- ======================================================= -->
 
-## Mapas bases {#basemaps}
+## Mapas base {#basemaps}
 
-### OpenStreetMap {#openstreetmap}
+### OpenStreetMap {.unnumbered}
 
 A continuación describimos cómo conseguir un mapa base para realizar un mapa con **ggplot2** utilizando las características de OpenStreetMap. Existen métodos alternativos que incluyen el uso de **ggmap** que requiere el registro gratuito con Google ([detalles](https://www.earthdatascience.org/courses/earth-analytics/lidar-raster-data-r/ggmap-basemap/)).
 
@@ -790,7 +790,7 @@ autoplot.OpenStreetMap(map_latlon)+
 
 <!-- ======================================================= -->
 
-### Mapa de calor de series temporales {#time-series-heatmap}
+### Mapa de calor de series temporales {.unnumbered}
 
 El mapa de calor de densidad anterior muestra los *casos acumulados*. Podemos examinar el brote a lo largo del tiempo y del espacio haciendo un facetado del mapa de calor basado en el *mes de inicio de los síntomas*, si tenemos esta información en el linelist.
 
@@ -846,7 +846,7 @@ autoplot.OpenStreetMap(map_latlon)+
 
 La mayor parte de nuestra discusión hasta ahora se ha centrado en la visualización de datos espaciales. En algunos casos, también puede interesarte utilizar *estadísticas espaciales* para cuantificar las relaciones espaciales de los atributos de tus datos. En esta sección se ofrece una breve visión general de algunos conceptos claves de la estadística espacial y se sugiere algunos recursos que te resultarán útiles si deseas realizar análisis espaciales más exhaustivos.
 
-### Relaciones espaciales {#spatial-relationships}
+### Relaciones espaciales {.unnumbered}
 
 Antes de poder calcular cualquier estadística espacial, tenemos que especificar las relaciones entre las características de nuestros datos. Hay muchas formas de conceptualizar las relaciones espaciales, pero un modelo sencillo y comúnmente aplicable es el de la *adyacencia*, es decir, que esperamos una relación geográfica entre las zonas que comparten una frontera o son "vecinas" unas de otras.
 
@@ -872,11 +872,11 @@ plot(sle_adm3_dat$geometry) +                                           # plot r
 
 Hemos utilizado un enfoque de adyacencia para identificar los polígonos vecinos; los vecinos que identificamos también se denominan a veces **vecinos por contigüidad**. Pero ésta es sólo una forma de elegir qué regiones se espera que tengan una relación geográfica. Los enfoques alternativos más comunes para identificar las relaciones geográficas generan vecinos basados en la **distancia**; brevemente, estos son:
 
--   **K-vecinos más cercanos** - Basándose en la distancia entre los centroides (el centro ponderado geográficamente de cada región poligonal), selecciona las *n* regiones más cercanas como vecinas. También se puede especificar un umbral de proximidad de distancia máxima. En **spdep,** puedes utilizar `knearneigh()` (ver [documentación](https://r-spatial.github.io/spdep/reference/knearneigh.html)).
+-   **K-vecinos más cercanos** - Basándose en la distancia entre los centroides (el centro ponderado geográficamente de cada región poligonal), selecciona las *n* regiones más cercanas como vecinas. También se puede especificar un umbral de proximidad de distancia máxima. En **spdep,** puedes utilizar `knearneigh()` ([documentación](https://r-spatial.github.io/spdep/reference/knearneigh.html)).
 
--   **Vecinos de umbral de distancia** - Selecciona todos los vecinos dentro de un umbral de distancia. En **spdep**, estas relaciones de vecindad pueden ser identificadas usando `dnearneigh()` (ver [documentación](https://www.rdocumentation.org/packages/spdep/versions/1.1-7/topics/dnearneigh)).
+-   **Vecinos de umbral de distancia** - Selecciona todos los vecinos dentro de un umbral de distancia. En **spdep**, estas relaciones de vecindad pueden ser identificadas usando `dnearneigh()` ([documentación](https://www.rdocumentation.org/packages/spdep/versions/1.1-7/topics/dnearneigh)).
 
-### Autocorrelación espacial {#spatial-autocorrelation}
+### Autocorrelación espacial {.unnumbered}
 
 La tan citada primera ley de la geografía de Tobler afirma que "todo está relacionado con todo lo demás, pero las cosas cercanas están más relacionadas que las lejanas". En epidemiología, esto suele significar que el riesgo de un determinado resultado sanitario en una región determinada es más similar al de sus regiones vecinas que al de las lejanas. Este concepto se ha formalizado como **autocorrelación espacial**: la propiedad estadística de que las características geográficas con valores similares se agrupan en el espacio. Las medidas estadísticas de autocorrelación espacial pueden utilizarse para *cuantificar el alcance de la agrupación espacial* de tus datos, *localizar dónde se produce la agrupación* e *identificar patrones compartidos de autocorrelación espacial* entre distintas variables de los datos. Esta sección ofrece una visión general de algunas medidas comunes de autocorrelación espacial y cómo calcularlas en R.
 
@@ -981,7 +981,7 @@ El resultado anterior muestra que la estadística L de Lee para nuestras dos var
 
 La estadística L de Lee puede ser útil para hacer este tipo de inferencias sobre la relación entre variables distribuidas espacialmente; sin embargo, para describir la naturaleza de la relación entre dos variables con más detalle, o ajustar por confusión, tenemos que aplicar técnicas de *regresión espacial*. Describeremos brevemente algunas de estas en la siguiente sección.
 
-### Regresión espacial {#spatial-regression}
+### Regresión espacial {.unnumbered}
 
 Es posible que quieras hacer inferencias estadísticas sobre las relaciones entre las variables de tus datos espaciales. En estos casos, es útil considerar las técnicas de *regresión espacial*, es decir, los enfoques de regresión que consideran explícitamente la organización espacial de las unidades en los datos. Algunas de las razones por las que puedes necesitar considerar modelos de regresión espacial, en lugar de modelos de regresión estándar como los GLM, incluyen:
 
