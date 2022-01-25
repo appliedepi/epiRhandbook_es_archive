@@ -18,7 +18,7 @@ El enfoque actual de esta página de los SIG (Sistemas de información geográfi
 
 ## Términos clave {#key-terms-1}
 
-A continuación presentamos algunos términos clave. Para una introducción completa a los SIG y al análisis espacial, te sugerimos que revises uno de los tutoriales o cursos más largos que aparecen en la sección de [Recursos](https://epirhandbook-es.netlify.app/gis-basics.html#resources-21).
+A continuación presentamos algunos términos clave. Para una introducción completa a los SIG y al análisis espacial, te sugerimos que revises uno de los tutoriales o cursos más largos que aparecen en la sección de [Recursos](#resources-21).
 
 **Sistemas de Información Geográfica (SIG)** - Un SIG es un marco o entorno de trabajo para recopilar, gestionar, analizar y visualizar datos espaciales.
 
@@ -74,7 +74,7 @@ Hay un par de elementos clave que deberás tener y en los que deberás pensar pa
 
 -   Si tus datos no están en formato espacial, también necesitarás unos datos **de referencia**. Los datos de referencia consisten en la representación espacial de los datos y sus **atributos** relacionados, que incluirían el material que contiene la información de ubicación y dirección de características específicas.
 
--   Si estás trabajando con límites geográficos predefinidos (por ejemplo, regiones administrativas), probablemente puedas encontrar shapefiles de referencia que te puedes descargar de forma gratuita desde una agencia gubernamental u organización de intercambio de datos. En caso de duda, un buen punto de partida es buscar en Google "\[regions\] shapefile"
+-   Si estás trabajando con límites geográficos predefinidos (por ejemplo, regiones administrativas), probablemente puedas encontrar shapefiles de referencia que te puedes descargar de forma gratuita desde una agencia gubernamental u organización de intercambio de datos. En caso de duda, un buen punto de partida es buscar en Google "[regions] shapefile"
 
 -   Si tus datos están guardados como direcciones, en vez de como latitud/longitud, puede que tengas que utilizar un **motor de geocodificación** que te permita hacer la "traducción" de una dirección específica a a datos en formato espacial.
 
@@ -458,13 +458,13 @@ tm_layout(title = "Cases, colored by nearest clinic")
 
 ### Buffers {.unnumbered}
 
-También podemos explorar cuántos casos se encuentran a menos de 2,5 km (\~30 minutos) de distancia a pie del centro sanitario más cercano. Esto se conoce como buffer o zona o ámbito de influencia.
+También podemos explorar cuántos casos se encuentran a menos de 2,5 km (~30 minutos) de distancia a pie del centro sanitario más cercano. Esto se conoce como buffer o zona o ámbito de influencia.
 
-*Nota: Para un cálculo más preciso de la distancia, es mejor reproyectar el objeto sf al respectivo sistema de proyección cartográfica local, como UTM (Tierra proyectada sobre una superficie plana). En este ejemplo, para simplificar, nos ceñiremos al sistema de coordenadas geográficas del Sistema Geodésico Mundial (WGS84) (la Tierra representada en una superficie esférica/redonda, por lo que las unidades están en grados decimales). Utilizaremos una conversión general de: 1 grado decimal = \~111km.*
+*Nota: Para un cálculo más preciso de la distancia, es mejor reproyectar el objeto sf al respectivo sistema de proyección cartográfica local, como UTM (Tierra proyectada sobre una superficie plana). En este ejemplo, para simplificar, nos ceñiremos al sistema de coordenadas geográficas del Sistema Geodésico Mundial (WGS84) (la Tierra representada en una superficie esférica/redonda, por lo que las unidades están en grados decimales). Utilizaremos una conversión general de: 1 grado decimal = ~111km.*
 
 Puedes ver más información sobre proyecciones cartográficas y sistemas de coordenadas en este [artículo de esri](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/gcs_vs_pcs/). Este [blog](http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/map%20coordinate%20systems/how%20to%20choose%20a%20projection.htm) habla de los diferentes tipos de proyecciones cartográficas y de cómo se puede elegir una proyección adecuada en función del área de interés y del contexto de su mapa/análisis.
 
-**En primer lugar**, se crea un buffer circular con un radio de \~2,5km alrededor de cada centro sanitario. Esto se hace con la función `st_buffer()` de **tmap**. Como la unidad del mapa está en grados decimales lat/long, tenemos que proporcionar el valor de `dist` en grados decimales, es decir, tenemos que proporcionar un valor de "0,02" (2,5/111 = 0.02 grados decimales, correspondiente a \~2,5km). Si el sistema de coordenadas del mapa está en metros, el número debe proporcionarse en metros.
+**En primer lugar**, se crea un buffer circular con un radio de ~2,5km alrededor de cada centro sanitario. Esto se hace con la función `st_buffer()` de **tmap**. Como la unidad del mapa está en grados decimales lat/long, tenemos que proporcionar el valor de `dist` en grados decimales, es decir, tenemos que proporcionar un valor de "0,02" (2,5/111 = 0.02 grados decimales, correspondiente a ~2,5km). Si el sistema de coordenadas del mapa está en metros, el número debe proporcionarse en metros.
 
 ```{r, warning=F, message=F}
 sle_hf_2k <- sle_hf %>%
@@ -694,7 +694,7 @@ A continuación, creamos el objeto `map`, que definimos mediante la función `op
 
 -   `zoom =` (si es nulo se determina automáticamente)
 
--   `type =` qué tipo de mapa base - aquí hemos enumerado varias posibilidades y el código utiliza actualmente la primera (\[1\]) "osm"
+-   `type =` qué tipo de mapa base - aquí hemos enumerado varias posibilidades y el código utiliza actualmente la primera ([1]) "osm"
 
 -   `mergeTiles` = elegimos TRUE para que las capas se fusionen en uno solo
 
@@ -891,7 +891,7 @@ moran_i <-spdep::moran.test(sle_adm3_dat$cases,    # numeric vector with variabl
 moran_i                                            # print results of Moran's I test
 ```
 
-El resultado de la función `moran.test()` nos muestra una estadística I de Moran de `round(moran_i\$estimate\[1\],2)`. Esto indica la presencia de autocorrelación espacial en nuestros datos; en concreto, sugiere que es probable que las regiones con un número similar de casos de Ébola estén próximas entre sí. El valor p proporcionado por `moran.test()` se genera mediante la comparación con la expectativa bajo la hipótesis nula de ausencia de autocorrelación espacial, y puede utilizarse si se necesita informar de los resultados de una prueba de hipótesis formal.
+El resultado de la función `moran.test()` nos muestra una estadística I de Moran de `round(moran_i$estimate[1],2)`. Esto indica la presencia de autocorrelación espacial en nuestros datos; en concreto, sugiere que es probable que las regiones con un número similar de casos de Ébola estén próximas entre sí. El valor p proporcionado por `moran.test()` se genera mediante la comparación con la expectativa bajo la hipótesis nula de ausencia de autocorrelación espacial, y puede utilizarse si se necesita informar de los resultados de una prueba de hipótesis formal.
 
 I de **Moran local** - Podemos descomponer la estadística I de Moran (global) calculada anteriormente para identificar la autocorrelación espacial *localizada*; es decir, para identificar grupos específicos en nuestros datos. Esta estadística, que a veces se denomina **indicador local de asociación espacial (LISA)**, resume el grado de autocorrelación espacial alrededor de cada región individual. Puede ser útil para encontrar puntos "calientes" y "fríos" en el mapa.
 
@@ -918,9 +918,10 @@ ggplot(data=sle_adm3_dat) +
 
 ```
 
-**Getis-Ord Gi**\* - Esta es otra estadística que se utiliza comúnmente para el análisis de puntos calientes; en gran parte, la popularidad de esta estadística se relaciona con su uso en la herramienta de análisis de puntos calientes en ArcGIS. Se basa en la suposición de que, normalmente, la diferencia del valor de una variable entre regiones vecinas debería seguir una distribución normal. Utiliza un enfoque de puntuación z para identificar las regiones que tienen valores significativamente más altos (punto caliente) o significativamente más bajos (punto frío) de una variable específica, en comparación con sus vecinos.
+**Getis-Ord Gi**
+* - Esta es otra estadística que se utiliza comúnmente para el análisis de puntos calientes; en gran parte, la popularidad de esta estadística se relaciona con su uso en la herramienta de análisis de puntos calientes en ArcGIS. Se basa en la suposición de que, normalmente, la diferencia del valor de una variable entre regiones vecinas debería seguir una distribución normal. Utiliza un enfoque de puntuación z para identificar las regiones que tienen valores significativamente más altos (punto caliente) o significativamente más bajos (punto frío) de una variable específica, en comparación con sus vecinos.
 
-Podemos calcular y asignar la estadística Gi\* utilizando la función `localG()` de **spdep**:
+Podemos calcular y asignar la estadística Gi* utilizando la función `localG()` de **spdep**:
 
 ```{r}
 # Perform local G analysis
@@ -943,7 +944,7 @@ ggplot(data=sle_adm3_dat) +
 
 ```
 
-Como puedes ver, el mapa de Getis-Ord Gi\* tiene un aspecto ligeramente diferente del mapa de Moran local elaborado anteriormente. Esto refleja que el método utilizado para calcular estas dos estadísticas es ligeramente diferente. Cuál de ellas debes utilizar depende de tu caso de uso específico y de la pregunta de investigación de interés.
+Como puedes ver, el mapa de Getis-Ord Gi* tiene un aspecto ligeramente diferente del mapa de Moran local elaborado anteriormente. Esto refleja que el método utilizado para calcular estas dos estadísticas es ligeramente diferente. Cuál de ellas debes utilizar depende de tu caso de uso específico y de la pregunta de investigación de interés.
 
 **Prueba L de Lee** - Es una prueba estadística de correlación espacial bivariada. Permite comprobar si el patrón espacial de una determinada variable *x* es similar al patrón espacial de otra variable, *y*, que se supone que está relacionada espacialmente con *x*.
 

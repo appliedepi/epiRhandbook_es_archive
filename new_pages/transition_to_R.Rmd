@@ -6,7 +6,7 @@
 
 A continuación, te ofrecemos algunos consejos y recursos que resultan útiles si te estás pasando a R.
 
-R se introdujo a finales de la década de 1990 y desde entonces su alcance ha crecido de forma espectacular. Sus capacidades son tan amplias que las alternativas comerciales han reaccionado a los desarrollos de R para seguir siendo competitivas. ([lea este artículo que compara R, SPSS, SAS, STATA y Python](https://www.inwt-statistics.com/read-blog/comparison-of-r-python-sas-spss-and-stata.html)).
+R se introdujo a finales de la década de 1990 y desde entonces su alcance ha crecido de forma espectacular. Sus capacidades son tan amplias que las alternativas comerciales han reaccionado a los desarrollos de R para seguir siendo competitivas. ([lee este artículo que compara R, SPSS, SAS, STATA y Python](https://www.inwt-statistics.com/read-blog/comparison-of-r-python-sas-spss-and-stata.html)).
 
 Además, R es mucho más fácil de aprender que hace 10 años. Antes, R tenía fama de ser difícil para los principiantes. Ahora es mucho más fácil, con interfaces de usuario amigables como RStudio, código intuitivo como **tidyverse**, y muchos recursos tutoriales.
 
@@ -21,7 +21,7 @@ knitr::include_graphics(here::here("images", "transition_door.png"))
 
 
 
-## Desde Excel  
+## Desde Excel  {#from-excel}
 
 La transición de Excel directamente a R es un objetivo muy alcanzable. Puede parecer desalentador, ¡pero puedes hacerlo!
 
@@ -39,11 +39,9 @@ Muchos flujos de trabajo de Excel se basan en la memoria y en la repetición, po
 **Para comenzar tu transición de Excel a R debes ajustar tu mentalidad en algunos aspectos importantes:**
 
 
-### Tidy data {.unnumbered}  
+### Datos ordenados (tidy data) {.unnumbered}  
 
-Datos ordenados (tidy data)
-
-Debes utilizar datos "ordenados" (tidy), legibles por la máquina en lugar de datos desordenados "legibles por el ser humano". Estos son los tres requisitos principales que los datos "ordenados" deben cumplir, como se explica en este tutorial sobre [datos "ordenados" en R](https://r4ds.had.co.nz/tidy-data.html):
+Debes utilizar datos "ordenados" (tidy), legibles por la máquina en lugar de datos desordenados "legibles por el ser humano". Estos son los tres requisitos principales que los datos "ordenados" deben cumplir, como se explica en este tutorial sobre [datos "ordenados" en R](https://es.r4ds.hadley.nz/datos-ordenados.html):
 
 * Cada variable debe tener su propia columna
 * Cada observación debe tener su propia fila
@@ -92,7 +90,7 @@ Puede que la palabra "función" en R sea nueva, pero el concepto existe también
 
 En lugar de clicar en los botones y arrastrar las celdas, escribirás *cada* paso y procedimiento en un "script" (secuencia de órdenes). Los usuarios de Excel pueden estar familiarizados con las "macros VBA", que también emplean un enfoque de scripting (secuencia de comandos VBA).
 
-*El script de R consiste en instrucciones paso a paso.* Esto permite que cualquier colega pueda leer el script y ver fácilmente los pasos que has dado. Esto también ayuda a depurar errores o cálculos inexactos. Consulta la sección de [Aspectos básicos de R](#r-basics) sobre scripts para ver algunos ejemplos.
+*El script de R consiste en instrucciones paso a paso.* Esto permite que cualquier colega pueda leer el script y ver fácilmente los pasos que has dado. Esto también ayuda a depurar errores o cálculos inexactos. Consulta la sección sobre scripts del capítulo [Fundamentos de R](#r-basics)  para ver algunos ejemplos.
 
 Este es un ejemplo de un script en R:
 
@@ -120,7 +118,7 @@ Es cierto que algunos de los formatos más estéticos de Excel pueden perderse e
 
 
 
-## Desde Stata  
+## Desde Stata  {#from-stata}
 <!-- ======================================================= -->
 
 **Llegando a R desde Stata**
@@ -138,7 +136,7 @@ Comunidad en línea disponible a través de [https://www.statalist.org/](https:/
 Funcionalidad de apuntar y clicar como una opción | Funcionalidad mínima de apuntar y clicar
 Ayuda para los comandos disponibles mediante el `[comando] help` | Ayuda disponible con la `[función]?` o mediante búsqueda en el panel de ayuda
 Comentar el código usando *  o /// o /*  TEXTO * /| Comment code using #
-Casi todos los comandos son propios de Stata. Las funciones nuevas/escritas por el usuario pueden instalarse como archivos **ado** utilizando el [paquete] **ssc install ** | R se instala con las funciones **base**, pero el uso típico implica la instalación de otros paquetes desde CRAN (véase la página sobre [Aspectos básicos de R](#r-basics))
+Casi todos los comandos son propios de Stata. Las funciones nuevas/escritas por el usuario pueden instalarse como archivos **ado** utilizando el [paquete] **ssc install ** | R se instala con las funciones **base**, pero el uso típico implica la instalación de otros paquetes desde CRAN (véase el capítulo sobre [Fundamentos de R](#r-basics))
 El análisis se suele escribir en un archivo **do** | El análisis se escribe en un script de R en el panel de fuentes de RStudio. Los scripts de R markdown son una alternativa.
 
 
@@ -188,7 +186,7 @@ Aunque esta lista ofrece una visión general de los fundamentos de la traducció
 
 
 
-## Desde SAS  
+## Desde SAS  {#from-stata}
 <!-- ======================================================= -->
 
 **Pasar de SAS a R**
@@ -202,7 +200,7 @@ SAS se utiliza habitualmente en las agencias de salud pública y en los campos d
 Comunidad en línea disponible a través del [Servicio de Atención al Cliente de SAS](https://support.sas.com/en/support-home.html)|Comunidad online disponible a través de RStudio, StackOverFlow y R-bloggers
 Ayuda para los comandos disponibles mediante `help [comando]`|Ayuda disponible usando mediante `[función]?` o buscando en el panel de ayuda
 Comentar el código usando `* TEXTO` ; o `/* TEXTO */`|Comentar el código usando #
-Casi todos los comandos están incorporados. Los usuarios pueden escribir nuevas funciones utilizando macros SAS, SAS/IML, SAS Component Language (SCL) y, más recientemente, los procedimientos `Proc Fcmp` y `Proc Proto`|R se instala con las funciones **base**, pero el uso típico implica la instalación de otros paquetes desde CRAN (véase la página sobre [Aspectos básicos de R](#r-basics))
+Casi todos los comandos están incorporados. Los usuarios pueden escribir nuevas funciones utilizando macros SAS, SAS/IML, SAS Component Language (SCL) y, más recientemente, los procedimientos `Proc Fcmp` y `Proc Proto`|R se instala con las funciones **base**, pero el uso típico implica la instalación de otros paquetes desde CRAN (véase la página sobre [Fundamentos de R](#r-basics))
 El análisis suele realizarse escribiendo un programa SAS en la ventana del Editor. |Análisis escrito en un script de R en el panel de fuentes de RStudio. Los scripts de R markdown son una alternativa.
 
 **Directorio de trabajo**  
@@ -234,7 +232,7 @@ Las variables se guardan con `**keep**=nombre de la variable`|Las columnas puede
 Las variables se eliminan con `**drop**=nombre de la variable`|Las columnas pueden eliminarse mediante la función `select()` con el nombre de la columna detrás de un signo menos, entre paréntesis
 Las variables factoriales pueden etiquetarse en el mediante la sentencia `Label`|El etiquetado de los valores puede hacerse convirtiendo la columna en una de tipo Factor y especificando los niveles. Véase la página sobre [Factores](#factors). Los nombres de las columnas no se suelen etiquetar.
 Los registros se seleccionan utilizando la sentencia `Where o If`. Las condiciones de selección múltiple se separan con el comando "and".|Los registros se seleccionan mediante la función `filter()` con múltiples condiciones de selección separadas por un operador AND (&) o una coma
-Los datos se combinan utilizando la sentencia `Merge`. Los datos que se van a combinar deben ordenarse primero mediante el procedimiento `Proc Sort`.|El paquete **dplyr** ofrece algunas funciones para fusionar conjuntos de datos. Para más detalles, consulta la página de [Unión de datos](#joining-data).
+Los datos se combinan utilizando la sentencia `Merge`. Los datos que se van a combinar deben ordenarse primero mediante el procedimiento `Proc Sort`.|El paquete **dplyr** ofrece algunas funciones para fusionar conjuntos de datos. Para más detalles, consulta la página de [Unir datos](#joining-data).
 
 **Análisis descriptivo**  
 
@@ -252,7 +250,7 @@ La tabulación cruzada de dos variables en una tabla 2x2 se realiza con `proc fr
 
 
 
-## Interoperabilidad de los datos 
+## Interoperabilidad de los datos {#from-stata}
 <!-- ======================================================= -->
 
 Consulta la página de [importación y exportación](#import-and-export) para obtener detalles sobre cómo el paquete **rio** puede importar y exportar los archivos .dta de STATA, los archivos .xpt y .sas7bdat de SAS, los archivos .por y .sav de SPSS, y muchos otros.
