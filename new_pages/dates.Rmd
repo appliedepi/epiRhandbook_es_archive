@@ -342,7 +342,7 @@ linelist <- linelist %>%
 
 ```
 
-### Convertir sólo horas
+### Convertir sólo horas {.unnumbered}
 
 Si tus datos contienen sólo un carácter de tiempo (horas y minutos), puedes convertirlos y manipularlos como tiempos utilizando `strptime()` desde R **base**. Por ejemplo, para obtener la diferencia entre dos de estos horas:
 
@@ -362,7 +362,7 @@ as.numeric(time2_clean - time1_clean)   # difference in hours
 
 Sin embargo, ten en cuenta que si no se proporciona un valor de fecha, se asume que la fecha es hoy. Para combinar una cadena de fecha y una cadena de hora, vea cómo usar **stringr** en la sección anterior. Lea más sobre `strptime()` [aquí](https://rdrr.io/r/base/strptime.html).
 
-Para convertir números de un solo dígito a dos dígitos (por ejemplo, para "rellenar" las horas o los minutos con ceros a la izquierda para conseguir 2 dígitos), consulta la sección "Longitud de relleno" de la página [Caracteres y cadenas](characters-and-strings.html#str_pad#str_pad).
+Para convertir números de un solo dígito a dos dígitos (por ejemplo, para "rellenar" las horas o los minutos con ceros a la izquierda para conseguir 2 dígitos), consulta la [sección "Longitud de relleno" de la página Caracteres y cadenas](#str_pad).
 
 
 ### Extraer fracciones de hora {.unnumbered}  
@@ -606,7 +606,7 @@ DT::datatable(head(weekly_counts, 20), rownames = FALSE, options = list(pageLeng
 ```
 
 
-### Alternativas a la Epiweek{.unnumbered}  
+### Alternativas a Epiweek {.unnumbered}  
 
 Ten en cuenta que **lubridate** también tiene las funciones  `week()`, `epiweek()`, e `isoweek()`, cada una de las cuales tiene fechas de inicio ligeramente diferentes y otros matices. Sin embargo, en términos generales, `floor_date()` debería ser todo lo que necesita. Lea los detalles de estas funciones introduciendo ?week en la consola o leyendo la documentación [aquí](https://www.rdocumentation.org/packages/lubridate/versions/1.7.4/topics/week).
 
@@ -653,7 +653,7 @@ Esto puede parecer muy abstracto, y a menudo no es necesario si el usuario no es
 
 
 <!-- ======================================================= -->
-## Cálculos de retardo y de avance
+## Cálculos de retardo y de avance {#lagging-and-leading-calculations}
 
 `lead()` y `lag()` son funciones del paquete **dplyr** que ayudan a encontrar los valores anteriores (retardados) o posteriores (principales) en un vector, normalmente un vector numérico o de fechas. Esto es útil cuando se hacen cálculos de cambio/diferencia entre unidades de tiempo.`
 
@@ -713,10 +713,14 @@ Puedes leer más sobre `lead()` y `lag()` en la documentación [aquí](https://d
 <!-- ======================================================= -->
 ## Recursos  {#resources-2}
 
-Página de lubridate** [tidyverse](https://lubridate.tidyverse.org/)\ 
+Página de lubridate** [tidyverse](https://lubridate.tidyverse.org/)
+
 Página de **lubridate** RStudio [cheatsheet](https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf)
+
 R for Data Science en español sobre [fechas y horas]https://es.r4ds.hadley.nz/fechas-y-horas.html
+
 [Tutorial en línea](https://www.statmethods.net/input/dates.html) 
+
 [Formatos de fecha](https://www.r-bloggers.com/2013/08/date-formats-in-r/)]
 
 

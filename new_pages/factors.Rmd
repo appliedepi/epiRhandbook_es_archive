@@ -17,7 +17,7 @@ Puedes encontrar una lista completa de las funciones de **forcats** en línea [a
 
 
 <!-- ======================================================= -->
-## Preparation  {#preparation-2}
+## Preparación  {#preparation-2}
 
 ### Cargar paquetes {.unnumbered}  
 
@@ -53,7 +53,7 @@ linelist <- import("linelist_cleaned.rds")
 ```
 
 
-### Nueva variable categórica  {#fct_newcat}  
+### Nueva variable categórica  {#fct_newcat .unnumbered}  
 
 Para la demostración en esta página utilizaremos un escenario común - la creación de una nueva variable categórica. 
 
@@ -84,7 +84,7 @@ Tal y como se creó con `case_when()`, la nueva columna `delay_cat` es una colum
 table(linelist$delay_cat, useNA = "always")
 ```
 
-Del mismo modo, si hacemos un gráfico de barras, los valores también aparecen en este orden en el eje x (ver la página de [fundamentos de ggplot](#ggplot-basics) para más información sobre **ggplot2** - el paquete de visualización más común en R). 
+Del mismo modo, si hacemos un gráfico de barras, los valores también aparecen en este orden en el eje x (ver la página de [conceptos básicos de ggplot](#ggplot-basics) para más información sobre **ggplot2** - el paquete de visualización más común en R). 
 
 ```{r, warning=F, message=F}
 ggplot(data = linelist)+
@@ -133,7 +133,7 @@ ggplot(data = linelist)+
 ```
 
 
-## Añadir o quitar niveles 
+## Añadir o quitar niveles {#add-or-drop-levels}
 
 ### Añadir  {#fct_add .unnumbered}
 
@@ -205,7 +205,7 @@ linelist %>%
 
 Los comandos **forcats** pueden utilizarse para establecer el orden de los niveles en el dataframe, o sólo dentro de un gráfico. Al utilizar el comando para "envolver" el nombre de la columna *dentro* del comando de trazado `ggplot()`, puede invertir/nivelar/etc. la transformación sólo se aplicará dentro de ese trazado. 
 
-A continuación, se crean dos gráficos con `ggplot()` (véase la página de [fundamentos de ggplot](#ggplot-basics)). En el primero, la columna delay_cat se asigna al eje x del gráfico, con su orden de nivel por defecto como en linelist de datos. En el segundo ejemplo se envuelve dentro de `fct_relevel()` y se cambia el orden en el gráfico. 
+A continuación, se crean dos gráficos con `ggplot()` (véase la página de [conceptos básicos de ggplot](#ggplot-basics)). En el primero, la columna delay_cat se asigna al eje x del gráfico, con su orden de nivel por defecto como en linelist de datos. En el segundo ejemplo se envuelve dentro de `fct_relevel()` y se cambia el orden en el gráfico. 
 
 ```{r, echo =F}
 linelist <- linelist %>% 
@@ -304,7 +304,7 @@ Observa que en este ejemplo no se requieren pasos previos a la llamada a `ggplot
 
 Utiliza `fct_reorder2()` para los gráficos de líneas agrupadas. Ordena los niveles (y, por tanto, la *leyenda*) para que se alineen con la ordenación vertical de las líneas en el "final" del gráfico. Técnicamente hablando, "ordena por los valores y asociados a los valores x más grandes". 
 
-Por ejemplo, si tiene líneas que muestran los recuentos de casos por hospital a lo largo del tiempo, puede aplicar `fct_reorder2()` al argumento `color = `dentro de `aes()`, de forma que el orden vertical de los hospitales que aparecen en la leyenda se alinee con el orden de las líneas en el extremo terminal del gráfico. Lea más en la [documentación en línea](https://forcats.tidyverse.org/reference/fct_reorder.html). 
+Por ejemplo, si tiene líneas que muestran los recuentos de casos por hospital a lo largo del tiempo, puede aplicar `fct_reorder2()` al argumento `color = `dentro de `aes()`, de forma que el orden vertical de los hospitales que aparecen en la leyenda se alinee con el orden de las líneas en el extremo terminal del gráfico. Lee más en la [documentación en línea](https://forcats.tidyverse.org/reference/fct_reorder.html). 
 
 ```{r, warning=F, message=F}
 epidemic_data <- linelist %>%         # begin with the linelist   
@@ -343,7 +343,7 @@ linelist %>%
 
 
 
-## Combinar niveles   
+## Combinar niveles {#combine-levels}
 
 
 ### Manualmente  {.unnumbered}  
@@ -436,7 +436,7 @@ linelist %>%
 
 
 
-## Mostrar todos los niveles 
+## Mostrar todos los niveles {#show-all-levels}
 
 Una de las ventajas del uso de factores es la estandarización del aspecto de las leyendas de los gráficos y de las tablas, independientemente de los valores que estén realmente presentes en unos datos. 
 
@@ -520,7 +520,7 @@ Consulta la página [Trabajar con fechas](#working-with-dates-1) para obtener m�
 
 
 <!-- ======================================================= -->
-## Recursos {} 
+## Recursos {#resources-4} 
 
 Página de R for Data Science en español sobre [factores](https://es.r4ds.hadley.nz/factores.html)
 [viñeta del paquete aweek](https://cran.r-project.org/web/packages/aweek/vignettes/introduction.html) 

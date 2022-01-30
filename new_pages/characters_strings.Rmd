@@ -152,9 +152,9 @@ str_glue("Linelist as of {current_date}.\nLast case hospitalized on {last_hospit
 
 ```
 
-**Sacar de un dataframe** 
+**Extraer de un dataframe** 
 
-A veces, es útil extraer datos de un dataframe y pegarlos en secuencia. A continuación se muestra un ejemplo de dataframe. Lo utilizaremos para hacer una declaración resumida sobre las jurisdicciones y los recuentos de casos nuevos y totales. 
+A veces, es útil extraer datos de un dataframe y pegarlos secuencialmente. A continuación se muestra un ejemplo de dataframe. Lo utilizaremos para hacer una declaración resumida sobre las jurisdicciones y los recuentos de casos nuevos y totales. 
 
 ```{r}
 # make case data frame
@@ -178,7 +178,7 @@ case_table %>%
 
 **Combinar cadenas a través de las filas** 
 
-Si estás intentando "enrollar" valores en una columna del dataframe, por ejemplo, combinar valores de varias filas en una sola fila pegándolos con un separador, consulta la sección de la página de [De-duplicación](#de-duplication) sobre ["combinar" valores](#str_rollup). 
+Si estás intentando "enrollar" valores en una columna del dataframe, por ejemplo, combinar valores de varias filas en una sola fila pegándolos con un separador, consulta la sección ["combinación de valores"](#str_rollup) de la página de **De-duplicación**. 
 
 **dataframe a una línea** 
 
@@ -194,7 +194,7 @@ Podría añadir el texto pre-fijo "Nuevos casos:" al principio de la sentencia e
 str_c("New Cases: ", str_c(case_table$zone, case_table$new_cases, sep = " = ", collapse = ";  "))
 ```
 
-### Unir columnas  {#str_unite}
+### Unir columnas  {#str_unite .unnumbered}
 
 Dentro de un dataframe, la unión de valores de caracteres de varias columnas puede lograrse con `unite()` de **tidyr**. Esto es lo contrario de `separate()`. 
 
@@ -301,7 +301,7 @@ str_split_fixed(symptoms, ",", n = 2)
 
 Si está intentando dividir una columna de un dataframe, es mejor utilizar la función `separate()` de **dplyr**. Se utiliza para dividir una columna de caracteres en otras columnas. 
 
-Digamos que tenemos un dataframe simple `df` (definido y unido en la [sección de unión](#str_unite)) que contiene una columna `case_ID`, una columna de caracteres con muchos síntomas y una columna de resultados. Nuestro objetivo es separar la columna de `symptoms` en varias columnas, cada una de las cuales contiene un síntoma.
+Digamos que tenemos un dataframe simple `df` (definido y unido en la [sección de unir columnas](#str_unite)) que contiene una columna `case_ID`, una columna de caracteres con muchos síntomas y una columna de resultados. Nuestro objetivo es separar la columna de `symptoms` en varias columnas, cada una de las cuales contiene un síntoma.
 
 ```{r, echo=F}
 DT::datatable(df, rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
@@ -339,7 +339,7 @@ df %>%
   separate(symptoms, into = c("sym_1", "sym_2"), sep=",")
 ```
 
-***ATENCIÓN:*** Si no proporcionas suficientes valores `into` en las nuevas columnas, tus datos pueden quedar truncados. {style="color: orange;"}
+<span style="color: orange;">***PRECAUCIÓN:*** Si no proporcionas suficientes valores `into` en las nuevas columnas, tus datos pueden quedar truncados. </span>
 
 <!-- ======================================================= -->
 
@@ -412,7 +412,6 @@ str_to_sentence("the patient must be transported")
 ```
 
 ### Longitud de la cadena {#str_pad .unnumbered}
- de la almohadilla 
 
 Utiliza `str_pad()` para añadir caracteres a una cadena, con una longitud mínima. Por defecto se añaden espacios, pero también puedes rellenar con otros caracteres utilizando el argumento `pad =`. 
 
@@ -491,12 +490,12 @@ str_squish("  Pt requires   IV saline\n")
 
 Escribe `?str_trim`, `?str_pad` en tu consola de R para ver más detalles. 
 
-### Envolver en párrafos {.unnumbered}
+### convertir en párrafos {.unnumbered}
 
-Utiliza `str_wrap()` para envolver un texto largo no estructurado en un párrafo estructurado con una longitud de línea fija. Proporciona la longitud de caracteres ideal para cada línea, y aplica un algoritmo para insertar nuevas líneas (\n) dentro del párrafo, como se ve en el ejemplo siguiente. 
+Utiliza `str_wrap()` para convertir un texto largo no estructurado en un párrafo estructurado con una longitud de línea fija. Proporciona la longitud de caracteres ideal para cada línea, y aplica un algoritmo para insertar nuevas líneas (\n) dentro del párrafo, como se ve en el ejemplo siguiente. 
 
 ```{r}
-pt_course <- "Symptom onset 1/4/2020 vomiting chills fever. Pt saw traditional healer in home village on 2/4/2020. On 5/4/2020 pt symptoms worsened and was admitted to Lumta clinic. Sample was taken and pt was transported to regional hospital on 6/4/2020. Pt died at regional hospital on 7/4/2020."
+pt_course <- "Inicio de los síntomas 1/4/2020 vómitos escalofríos fiebre. La paciente consultó a un curandero tradicional en su pueblo natal el 2/4/2020. El 5/4/2020 los síntomas empeoraron y fue ingresada en la clínica Lumta. Se tomó una muestra y fue trasladada al hospital regional el 6/4/2020. La paciente murió en el hospital regional el 7/4/2020".
 
 str_wrap(pt_course, 40)
 ```
@@ -652,7 +651,7 @@ Si necesitas contar los `TRUE`, simplemente `sum()` la salida. Esto cuenta el n�
 sum(str_detect(occupations, "teach"))
 ```
 
-Para buscar con varios términos, inclúyalos separados por barras OR (`|`) dentro del argumento `pattern =`, como se muestra a continuación: 
+Para buscar con varios términos, inclúyelos separados por barras O (`|`) dentro del argumento `pattern =`, como se muestra a continuación: 
 
 ```{r}
 sum(str_detect(string = occupations, pattern = "teach|professor|tutor"))
@@ -723,7 +722,7 @@ Notas:
 
 <!-- ======================================================= -->
 
-### Detect within logic {.unnumbered}
+### Detectar con lógica {.unnumbered}
 
 **Dentro de case_when()** 
 
@@ -826,13 +825,13 @@ EN CONSTRUCCIÓN
 
 <!-- ======================================================= -->
 
-## Special characters {#special-characters}
+## Caracteres especiales {#special-characters}
 
-**Barra invertida `\` como escape** 
+**Barra invertida `\` como código de escape** 
 
 La barra invertida `\` se utiliza para "escapar" del significado del siguiente carácter. De este modo, se puede utilizar una barra invertida para que una comilla aparezca *dentro* de otras comillas (`\"`) - la comilla del medio no "romperá" las comillas circundantes. 
 
-Nota - por lo tanto, si quiere *mostrar una barra* invertida, debe escapar su significado con *otra* barra invertida. Así que debe escribir dos barras invertidas `\\` para mostrar uno. 
+Nota - por lo tanto, si quieres *mostrar una barra* invertida, debes escapar su significado con *otra* barra invertida. Así que debes escribir dos barras invertidas `\\` para mostrar una. 
 
 **Caracteres especiales** 
 
@@ -887,9 +886,9 @@ Los conjuntos de caracteres, son una forma de expresar las opciones de la lista 
 
 Los conjuntos de caracteres pueden combinarse dentro de un paréntesis (¡sin espacios!), como `"[A-Za-z]"` (cualquier letra mayúscula o minúscula), u otro ejemplo `"[t-z0-5]"` (de la t a la z en minúscula o del número 0 al 5).
 
-**Meta characters**
+**Meta caracteres**
 
-Meta characters are shorthand for character sets. Some of the important ones are listed below:
+Los metacaracteres son la abreviatura de los juegos de caracteres. A continuación se enumeran algunos de los más importantes:
 
 | Meta carácter  | Coincide con                                         |
 |----------------|------------------------------------------------------|
@@ -946,12 +945,12 @@ Expresan los requisitos de lo que precede o sigue a un patrón. Por ejemplo, par
 str_extract_all(test, "")
 ```
 
-| Position statement | Matches to                               |
-|--------------------|------------------------------------------|
-| `"(?<=b)a"`        | "a" que **está precedida** con una "b"   |
-| `"(?<!b)a"`        | "a" que **NO está precedida** con una "b"|
-| `"a(?=b)"`         | "a" que **se sigue** de una "b"          |
-| `"a(?!b)"`         | "a" que **NO se sigue** de una "b"       |
+| Definición posición | Coincide con                             |
+|---------------------|------------------------------------------|
+| `"(?<=b)a"`         | "a" que **está precedida** con una "b"   |
+| `"(?<!b)a"`         | "a" que **NO está precedida** con una "b"|
+| `"a(?=b)"`          | "a" que **se sigue** de una "b"          |
+| `"a(?!b)"`          | "a" que **NO se sigue** de una "b"       |
 
 **Grupos** 
 
@@ -962,7 +961,7 @@ La captura de grupos en su expresión regular es una forma de tener una salida m
 A continuación se presenta un texto libre para los ejemplos. Intentaremos extraer información útil del mismo utilizando un término de búsqueda de expresión regular. 
 
 ```{r}
-pt_note <- "Patient arrived at Broward Hospital emergency ward at 18:00 on 6/12/2005. Patient presented with radiating abdominal pain from LR quadrant. Patient skin was pale, cool, and clammy. Patient temperature was 99.8 degrees farinheit. Patient pulse rate was 100 bpm and thready. Respiratory rate was 29 per minute."
+pt_note <- "El paciente llegó a la sala de urgencias del Broward Hospital a las 18:00 horas del 6/12/2005. Se presentó con dolor abdominal irradiado desde el cuadrante LR. La piel estaba pálida, fría y húmeda. Su temperatura era de 99,8 grados Farinheit. El pulso era de 100 lpm y filiforme. La frecuencia respiratoria era de 29 por minuto".
 ```
 
 Esta expresión coincide con todas las palabras (cualquier carácter hasta llegar a un no carácter como un espacio): 
@@ -971,7 +970,7 @@ Esta expresión coincide con todas las palabras (cualquier carácter hasta llega
 str_extract_all(pt_note, "[A-Za-z]+")
 ```
 
-The expression `"[0-9]{1,2}"` matches to consecutive numbers that are 1 or 2 digits in length. It could also be written `"\\d{1,2}"`, or `"[:digit:]{1,2}"`.
+La expresión `"[0-9]{1,2}"` coincide con números consecutivos de 1 o 2 dígitos. También podría escribirse `"\\d{1,2}"`, o `"[:digit:]{1,2}"`.
 
 ```{r}
 str_extract_all(pt_note, "[0-9]{1,2}")
@@ -985,9 +984,9 @@ str_extract_all(pt_note, "[0-9]{1,2}")
 
 <!-- ``` -->
 
-You can view a useful list of regex expressions and tips on page 2 of [this cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)
+Puedes ver una lista útil de expresiones regex y consejos en la página 2 de [esta hoja de trucos](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)
 
-Also see this [tutorial](https://towardsdatascience.com/a-gentle-introduction-to-regular-expressions-with-r-df5e897ca432).
+Mira también este [tutorial](https://towardsdatascience.com/a-gentle-introduction-to-regular-expressions-with-r-df5e897ca432).
 
 <!-- ======================================================= -->
 

@@ -1,5 +1,5 @@
 
-# Borrador. Agrupar datos {grouping-data}  
+# Borrador. Agrupar datos {#grouping-data}  
 
 
 ```{r, out.width=c('100%'), echo=F, message=F}
@@ -27,7 +27,7 @@ En esta página se tratarán los siguientes temas:
 
 
 <!-- ======================================================= -->
-## Preparación {#preparation-3}
+## Preparación {#preparation-4}
      
 ### Cargar paquetes {.unnumbered}  
 
@@ -208,7 +208,7 @@ linelist %>%
 
 
 
-## Counts y tallies  {#counts-and-tallies]}
+## Counts y tallies  {#counts-and-tallies}
 
 `count()` y `tally()` proporcionan una funcionalidad similar pero son diferentes. Lee más sobre la distinción entre `tally()` y `count()` [aquí](https://dplyr.tidyverse.org/reference/tally.html) 
 
@@ -265,7 +265,7 @@ linelist %>%
 
 A diferencia de `count()` y `summarise()`, puedes utilizar `add_count()` para *añadir* una nueva columna `n` con los recuentos de filas por grupo *conservando todas las demás columnas del dataframe*. 
 
-Esto significa que el número de recuento de un grupo, en la nueva columna n, se imprimirá en cada fila del grupo. Para fines de demostración, añadimos esta columna y luego reordenamos las columnas para facilitar la visualización. Consulta la sección siguiente sobre el [filtro del tamaño del grupo](#group_filter_grp_size) para ver otro ejemplo. 
+Esto significa que el número de recuento de un grupo, en la nueva columna n, se imprimirá en cada fila del grupo. Para fines de demostración, añadimos esta columna y luego reordenamos las columnas para facilitar la visualización. Consulta la sección siguiente sobre [filtrar por tamaño del grupo](#group_filter_grp_size) para ver otro ejemplo. 
 
 
 ```{r}
@@ -300,7 +300,7 @@ Para añadir filas de totales más complejas que incluyan estadísticas de resum
 
 ## Agrupar por fechas  {#grouping-by-date}
 
-Al agrupar datos por fecha, debe tener (o crear) una columna para la unidad de fecha de interés - por ejemplo "día", "epiweek", "mes", etc. Puedes crear esta columna utilizando `floor_date()` de **lubridate**, como se explica en la [sección Semanas epidémicas de](#dates_epi_wks) o en la página [Trabajar con fechas](#working-with-dates-1). Una vez que tengas esta columna, puedes utilizar `count()` de **dplyr** para agrupar las filas por esos valores de fecha únicos y lograr recuentos agregados. 
+Al agrupar datos por fecha, debe tener (o crear) una columna para la unidad de fecha de interés - por ejemplo "día", "epiweek", "mes", etc. Puedes crear esta columna utilizando `floor_date()` de **lubridate**, como se explica en la [sección Semanas epidemiológicas](#dates_epi_wks) de la página **Trabajar con fechas**. Una vez que tengas esta columna, puedes utilizar `count()` de **dplyr** para agrupar las filas por esos valores de fecha únicos y lograr recuentos agregados. 
 
 Un paso adicional común para las situaciones de fechas, es "rellenar" cualquier fecha en la que no haya  datos. Utiliza `complete()` de **tidyr** para que la serie de fechas agregadas esté *completa*, incluyendo *todas las unidades de fecha posibles* dentro del rango. Sin este paso, una semana sin casos reportados podría no aparecer en tus datos. 
 
@@ -524,6 +524,7 @@ A continuación, algunos recursos útiles para obtener más información:
 Puedes realizar cualquier función de resumen sobre datos agrupados; consulta la [hoja de trucos de transformación de datos de RStudio](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) 
 
 La página de Data Carpentry sobre [**dplyr**](https://datacarpentry.org/R-genomics/04-dplyr.html) 
+
 Las páginas de referencia de **tidyverse** sobre [group_by()](https://dplyr.tidyverse.org/reference/group_by.html) y [agrupación](https://dplyr.tidyverse.org/articles/grouping.html) 
 
 Esta página sobre [Manipulación de datos](https://itsalocke.com/files/DataManipulationinR.pdf) 
