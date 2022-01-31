@@ -68,7 +68,7 @@ En la sección sobre el emparejamiento probabilístico, utilizaremos dos pequeñ
 
 
 
-#### "Miniature" de casos de linelist {#joins_llmini .unnumbered}  
+#### "Miniatura" de casos de linelist {#joins_llmini .unnumbered}  
 
 A continuación se muestra la lista de casos en miniatura, que contiene sólo 10 filas y sólo las columnas `case_id`, `date_onset`, y `hospital`.
 
@@ -138,7 +138,7 @@ Puedes ver que, aunque algunos de los hospitales existen en ambos dataframes, ha
 
 Comenzamos limpiando los valores del dataframe `hosp_info`. Como se explica en la página [Limpieza de datos y funciones básicas](#cleaning-data-and-core-functions), podemos recodificar los valores con criterios lógicos utilizando la función `case_when()` de **dplyr**. Para los cuatro hospitales que existen en ambos dataframes, cambiamos los valores para alinearlos con los valores de `linelist_mini`. Para los demás hospitales dejamos los valores como están (`TRUE ~ hosp_name`).  
 
-<span style="color: orange;">***ATENCIÓN:*** Normalmente, al limpiar se debe crear una nueva columna (por ejemplo, `hosp_name_clean`), pero para facilitar la demostración mostramos la modificación de la antigua columna </span>
+<span style="color: orange;">***PRECAUCIÓN:*** Normalmente, al limpiar se debe crear una nueva columna (por ejemplo, `hosp_name_clean`), pero para facilitar la demostración mostramos la modificación de la antigua columna </span>
 
 ```{r}
 hosp_info <- hosp_info %>% 
@@ -305,10 +305,10 @@ Considera también si tu caso de uso está dentro de una cadena de pipes (`%>%`)
 
 
 <!-- ======================================================= -->
-### Full join {.unnumbered} 
-Unión completa 
+### Unión completa {.unnumbered} 
 
-**Una unión completa es la más *inclusiva* de las uniones**: devuelve todas las filas de ambos dataframes. 
+
+**Una unión completa (Full join) es la más *inclusiva* de las uniones**: devuelve todas las filas de ambos dataframes. 
 
 Si hay filas presentes en una y no en la otra (donde no se encontró ninguna coincidencia), el dataframe las incluirá y se hará más largo. Los valores faltantes `NA` se utilizan para rellenar los huecos creados. A medida que se une, observe el número de columnas y filas con cuidado para solucionar el problema de las coincidencias de mayúsculas y minúsculas y de los caracteres exactos. 
 
@@ -776,7 +776,7 @@ Un ejemplo común de vinculación de filas es vincular una fila "total" a una ta
 
 La función `summarise()` se utiliza en los datos agrupados por hospital para devolver un dataframe resumido por hospital. Pero la función `summarise()` no produce automáticamente una fila de "totales", así que la creamos resumiendo los datos *de nuevo*, pero con los datos no agrupados por hospital. Esto produce un segundo dataframe de una sola fila. A continuación, podemos unir estos dataframes para obtener la tabla final. 
 
-Mira otros ejemplos trabajados como éste en las páginas de [Tablas descriptivas](#descriptive-tables) y [Tablas de presentación](#tables-for-presentation). 
+Mira otros ejemplos trabajados como éste en las páginas de [Tablas descriptivas](#descriptive-tables) y [Tablas para presentaciones](#tables-for-presentation). 
 
 
 ```{r}
@@ -819,7 +819,7 @@ Ahora podemos unir las filas con `bind_rows()`.
 combined <- bind_rows(hosp_summary, totals)
 ```
 
-Ahora podemos ver el resultado. Observe cómo en la última fila se rellena un valor `NA` vacío para la columna hospital que no estaba en hosp_summary. Como se explica en la página de [Tablas para la presentación](#tables-for-presentation), podría "rellenar" esta celda con "Total" utilizando replace_na().   
+Ahora podemos ver el resultado. Observe cómo en la última fila se rellena un valor `NA` vacío para la columna hospital que no estaba en hosp_summary. Como se explica en la página de [Tablas para presentaciones](#tables-for-presentation), podría "rellenar" esta celda con "Total" utilizando replace_na().   
 
 ```{r message=FALSE, echo=F}
 DT::datatable(combined, rownames = FALSE, options = list(pageLength = nrow(10)))
@@ -875,7 +875,7 @@ Cuando utilizamos `match()`, la sintaxis es `match(TARGET ORDER VECTOR, DATA FRA
 match(case_info$hospital, contact_fu$hospital)
 ```
 
-Puedes utilizar este vector numérico para reordenar el dataframe - colóquelo dentro de los subcorchetes `[ ]` *antes de la coma*. Lea más sobre **la** sintaxis del subconjunto de corchetes en la página de [fundamentos de R](#r-basics). El comando de abajo crea un nuevo dataframe, definido como el anterior en el que las filas están ordenadas en el vector numérico de arriba.
+Puedes utilizar este vector numérico para reordenar el dataframe - colóquelo dentro de los subcorchetes `[ ]` *antes de la coma*. Lee más sobre la **sintaxis** del subconjunto de corchetes en la página de [fundamentos de R](#r-basics). El comando de abajo crea un nuevo dataframe, definido como el anterior en el que las filas están ordenadas en el vector numérico de arriba.
 
 ```{r}
 contact_fu_aligned <- contact_fu[match(case_info$hospital, contact_fu$hospital),]
@@ -886,7 +886,7 @@ contact_fu_aligned <- contact_fu[match(case_info$hospital, contact_fu$hospital),
 DT::datatable(contact_fu_aligned, rownames = FALSE, options = list(pageLength = nrow(10)))
 ```
 
-Ahora podemos unir las columnas del dataframe, con el orden correcto de las filas. Ten en cuenta que algunas columnas están duplicadas y será necesario limpiarlas con `rename()`. Lea más sobre `bind_rows()` [aquí](https://dplyr.tidyverse.org/reference/bind.html). 
+Ahora podemos unir las columnas del dataframe, con el orden correcto de las filas. Ten en cuenta que algunas columnas están duplicadas y será necesario limpiarlas con `rename()`. Lee más sobre `bind_rows()` [aquí](https://dplyr.tidyverse.org/reference/bind.html). 
 
 ```{r}
 bind_cols(case_info, contact_fu)
@@ -898,10 +898,10 @@ Una alternativa en R **base** a `bind_cols` es `cbind()`, que realiza la misma o
 
 
 <!-- ======================================================= -->
-## Resources {#resources-7}
-Recursos 
+## Recursos {#resources-7}
+ 
 
-La [página de tidyverse sobre las uniones](https://dplyr.tidyverse.org/reference/join.html) 
+Las [páginas de tidyverse sobre join](https://dplyr.tidyverse.org/reference/index.html) 
 
 La [página de R for Data Science sobre datos relacionales](https://r4ds.had.co.nz/relational-data.html) 
 

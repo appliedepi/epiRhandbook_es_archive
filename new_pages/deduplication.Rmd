@@ -135,7 +135,7 @@ obs %>%
   DT::datatable(rownames = FALSE, options = list(pageLength = 7, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Mira los [datos originales](#dedup_data). 
+Ver los [datos originales](#dedup_data). 
 
 Para más detalles, consulta `?get_dupes` o esta [referencia en línea](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html#explore-records-with-duplicated-values-for-specific-combinations-of-variables-with-get_dupes)  
 
@@ -171,7 +171,7 @@ obs %>%
   DT::datatable(rownames = FALSE, options = list(pageLength = 6, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-<span style="color: orange;">***ATENCIÓN:*** Si se utiliza `distinct()` en datos agrupados, la función se aplicará a cada grupo.</span>
+<span style="color: orange;">***PRECAUCIÓN:*** Si se utiliza `distinct()` en datos agrupados, la función se aplicará a cada grupo.</span>
 
 
 **De-duplicar en base a columnas específicas** 
@@ -196,7 +196,7 @@ obs %>%
   DT::datatable(rownames = FALSE, options = list(pageLength = 6, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Mira los [datos originales](#dedup_data). 
+Ver los [datos originales](#dedup_data). 
 
 <!-- ======================================================= -->
 ### De-duplicar elementos en un vector  {.unnumbered}  
@@ -307,7 +307,8 @@ Esto es útil para la De-duplicación si tiene varias filas por persona pero só
 En el ejemplo siguiente, para mantener sólo el *último* encuentro *por persona*, agrupamos las filas por nombre y luego utilizamos `slice_max()` con `n = 1` en la columna de `date`. Ten en cuenta que Para aplicar una función como `slice_max() en las fechas, la columna de fecha debe ser de tipo Date. 
 
 Por defecto, los "empates" (por ejemplo, la misma fecha en este escenario) se mantienen, y todavía obtendríamos múltiples filas para algunas personas (por ejemplo, adam). Para evitar esto, establecemos `with_ties = FALSE`. Sólo obtendremos una fila por persona. 
-<span style="color: orange;">***ATENCIÓN:*** Si utilizas `arrange()`, especifica .`by_group = TRUE` para que los datos se ordenen dentro de cada grupo.</span>
+
+<span style="color: orange;">***PRECACUCIÓN:*** Si utilizas `arrange()`, especifica .`by_group = TRUE` para que los datos se ordenen dentro de cada grupo.</span>
 
 <span style="color: red;">***PELIGRO:*** Si `with_ties = FALSE`, se mantiene la primera fila de un empate. Esto puede ser engañoso. Mira cómo para Mariah, ella tiene dos encuentros en tu última fecha (6 de enero) y el primero (el más temprano) se mantuvo. Es probable que queramos mantener tu último encuentro en ese día. Mira cómo "romper" estos vínculos en el siguiente ejemplo.  </span>  
 
@@ -331,7 +332,7 @@ obs %>%
   DT::datatable(rownames = FALSE, options = list(pageLength = 8, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Arriba, por ejemplo, podemos ver que sólo se conservó la fila de Amrish del 5 de enero, y sólo se conservó la fila de Brian del 7 de enero. Mira los [datos originales](#dedup_data).   
+Arriba, por ejemplo, podemos ver que sólo se conservó la fila de Amrish del 5 de enero, y sólo se conservó la fila de Brian del 7 de enero. Ver los [datos originales](#dedup_data).   
 
 
 **Romper los "empates"** 
