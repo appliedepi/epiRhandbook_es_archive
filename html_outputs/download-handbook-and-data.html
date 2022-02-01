@@ -71,7 +71,7 @@
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
 <li><a class="" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="borrador.-agrupar-datos-grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos {grouping-data}</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
 <li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
 <li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></li>
 <li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
@@ -125,9 +125,9 @@
 <span class="header-section-number">2</span> Descargando el manual y los datos<a class="anchor" aria-label="anchor" href="#download-handbook-and-data"><i class="fas fa-link"></i></a>
 </h1>
 <!-- Note to self: If you want to create a download link to Github, right-click the "View Raw" button on Github, copy the address, and use that in the HTML below. -->
-<div id="descargar-el-manual-sin-conexión" class="section level2" number="2.1">
+<div id="download-offline-handbook" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">2.1</span> Descargar el manual sin conexión<a class="anchor" aria-label="anchor" href="#descargar-el-manual-sin-conexi%C3%B3n"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Descargar el manual sin conexión<a class="anchor" aria-label="anchor" href="#download-offline-handbook"><i class="fas fa-link"></i></a>
 </h2>
 <p>Puedes descargar la versión sin conexión de este manual. Éste es un archivo HTML que puedes ver en tu navegador web sin acceder a Internet. Si estás pensando en utilizar este manual sin conexión, debes tener en cuenta algunas cosas:</p>
 <ul>
@@ -136,10 +136,13 @@
 <li>Consulta la página de <a href="suggested-packages-1.html#suggested-packages-1">Paquetes recomendados</a> para ayudarte a instalar los paquetes de R adecuados antes de que pierdas la conectividad a Internet</li>
 <li>Instala nuestro paquete R <strong>epirhandbook</strong> que contiene todos los datos del ejemplo (el proceso de instalación se describe a continuación)</li>
 </ul>
-<p><strong>Hay dos maneras de descargar el manual:</strong>
-### Utilizando el enlace de descarga {.unnumbered}</p>
-<p>Para acceder rápidamente, <strong>clica con el botón derecho</strong> <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/offline_long/Epi_R_Handbook_offline.html">en este enlace</a> <strong>y selecciona “Guardar enlace como”</strong>.</p>
+<p><strong>Hay dos maneras de descargar el manual:</strong></p>
+<div id="utilizando-el-enlace-de-descarga" class="section level3 unnumbered">
+<h3>Utilizando el enlace de descarga<a class="anchor" aria-label="anchor" href="#utilizando-el-enlace-de-descarga"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para acceder rápidamente, <strong>clica con el botón derecho</strong> <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/offline_long/Epi_R_Handbook_offline.html">en este enlace</a> <strong>y selecciona “Guardar enlace como”</strong>.</p>
 <p>Si es un Mac, utiliza Cmd+clic. Si es un móvil, mantén clicado el enlace y selecciona “Guardar enlace”. El manual se descargará en el dispositivo. Si aparece una pantalla con código HTML sin procesar, asegúrate de haber seguido las instrucciones anteriores o prueba la opción 2.</p>
+</div>
 <div id="utilizando-nuestro-paquete-r" class="section level3 unnumbered">
 <h3>Utilizando nuestro paquete R<a class="anchor" aria-label="anchor" href="#utilizando-nuestro-paquete-r"><i class="fas fa-link"></i></a>
 </h3>
@@ -159,9 +162,9 @@
 <span class="fu">download_book</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="descarga-los-datos-para-seguir-el-manual" class="section level2" number="2.2">
+<div id="download-data-to-follow-along" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">2.2</span> Descarga los datos para seguir el manual<a class="anchor" aria-label="anchor" href="#descarga-los-datos-para-seguir-el-manual"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Descarga los datos para seguir el manual<a class="anchor" aria-label="anchor" href="#download-data-to-follow-along"><i class="fas fa-link"></i></a>
 </h2>
 <p>Para “seguir” las páginas del manual, puedes descargar los datos y los resultados de los ejemplos.</p>
 <div id="utiliza-nuestro-paquete-para-r" class="section level3 unnumbered">
@@ -189,54 +192,54 @@
 <code class="sourceCode R"><span class="co"># descarga solo un archivo específoco en tu computadora</span>
 <span class="fu">get_data</span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
 <p>Una vez que hayas utilizado <code>get_data()</code> para guardar un archivo en tu ordenador, tendrás que importarlo a R. Consulta la página de <a href="import-and-export.html#import-and-export">importación y exportación</a> para más detalles.</p>
-<p>Si lo deseas, puedes revisar todos los datos utilizados en este manual en la <strong><a href="https://github.com/epirhandbook/Epi_R_handbook/tree/master/data">carpeta “data”</a></strong> de nuestro repositorio de Github.</p>
+<p>Si lo deseas, puedes revisar todos los datos utilizados en este manual en la <strong><a href="https://github.com/appliedepi/epirhandbook_eng/tree/master/data">carpeta “data”</a></strong> de nuestro repositorio de Github.</p>
 </div>
 <div id="descargar-uno-por-uno" class="section level3 unnumbered">
 <h3>Descargar uno por uno<a class="anchor" aria-label="anchor" href="#descargar-uno-por-uno"><i class="fas fa-link"></i></a>
 </h3>
 <p>Esta opción implica la descarga de los datos archivo por archivo desde nuestro repositorio de Github a través de un enlace o un comando de R específico para el archivo. Algunos tipos de archivos permiten un botón de descarga, mientras que otros pueden descargarse mediante un comando de R.</p>
-<div id="listado-de-casos" class="section level4 unnumbered">
-<h4>Listado de casos<a class="anchor" aria-label="anchor" href="#listado-de-casos"><i class="fas fa-link"></i></a>
+<div id="linelist" class="section level4 unnumbered">
+<h4>Linelist<a class="anchor" aria-label="anchor" href="#linelist"><i class="fas fa-link"></i></a>
 </h4>
 <p>Se trata de un brote de ébola ficticio, ampliado por el equipo del manual a partir de los datos <code>ebola_sim</code> de las prácticas del paquete <strong>Outbreaks</strong>.</p>
 <ul>
-<li><p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_raw.xlsx">Clica para descargar el listado de casos “en bruto” -raw- (.xlsx)</a>. Este listado de casos “en bruto” es una hoja de cálculo de Excel con datos desordenados. Utilízala para seguir la página de <a href="cleaning-data-and-core-functions.html#cleaning-data-and-core-functions">limpieza de datos y funciones básicas</a>.</p></li>
-<li><p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds">Clica para descargar</a> el listado de casos “en limpio”. Utiliza este archivo para todas las demás páginas de este manual que utilizan el listado de casos. Un archivo .rds es un tipo de archivo específico de R que conserva los tipos de columnas. Esto asegura que sólo tendrás que hacer una limpieza mínima después de importar los datos a R.</p></li>
+<li><p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx">Clica para descargar Linelist (con los casos) “en bruto” -raw- (.xlsx)</a>. Este listado de casos “en bruto” es una hoja de cálculo de Excel con datos desordenados. Utilízala para seguir la página de <a href="cleaning-data-and-core-functions.html#cleaning-data-and-core-functions">limpieza de datos y funciones básicas</a>.</p></li>
+<li><p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds">Clica para descargar</a> Linelist “en limpio”. Utiliza este archivo para todas las demás páginas de este manual que utilizan el listado de casos. Un archivo .rds es un tipo de archivo específico de R que conserva los tipos de columnas. Esto asegura que sólo tendrás que hacer una limpieza mínima después de importar los datos a R.</p></li>
 </ul>
 <p><em>Otros archivos relacionados:</em></p>
 <ul>
-<li><p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.xlsx">Clica para descargar</a> el listado de casos “en limpio” como archivo Excel.</p></li>
+<li><p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.xlsx">Clica para descargar</a> el listado de casos “en limpio” como archivo Excel.</p></li>
 <li><p>Parte de la página de limpieza utiliza un “diccionario de limpieza” (archivo .csv). Puedes cargarlo directamente en R ejecutando los siguientes comandos:</p></li>
 </ul>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">rio</span><span class="op">)</span> <span class="co"># install/load the rio package</span>
 
 <span class="co"># importa el archivo directamente desde Github</span>
-<span class="va">cleaning_dict</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/cleaning_dict.csv"</span><span class="op">)</span></code></pre></div>
+<span class="va">cleaning_dict</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/cleaning_dict.csv"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="data_malaria" class="section level4 unnumbered">
 <h4>Recuento de datos de malaria<a class="anchor" aria-label="anchor" href="#data_malaria"><i class="fas fa-link"></i></a>
 </h4>
 <p>Estos datos son recuentos ficticios de casos de malaria por grupos de edad, centro y día. Un archivo .rds es un tipo de archivo específico de R que conserva los tipos de columnas. Esto asegura que sólo tendrás que hacer una limpieza mínima después de importar los datos a R.</p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/malaria_facility_count_data.rds">Clica para descargar los datos del recuento de casos de malaria (archivo .rds)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/malaria_facility_count_data.rds">Clica para descargar los datos del recuento de casos de malaria (archivo .rds)</a></p>
 </div>
 <div id="datos-en-escala-likert" class="section level4 unnumbered">
 <h4>Datos en escala Likert<a class="anchor" aria-label="anchor" href="#datos-en-escala-likert"><i class="fas fa-link"></i></a>
 </h4>
-<p>Se trata de datos ficticios de una encuesta tipo Likert, utilizados en la página sobre <a href="demographic-pyramids-and-likert-scales.html#demographic-pyramids-and-likert-scales">Pirámides demográficas y escalas de Likert</a>. Puedes cargar estos datos directamente en R ejecutando los siguientes comandos:</p>
+<p>Se trata de datos ficticios de una encuesta tipo Likert, utilizados en la página sobre <a href="demographic-pyramids-and-likert-scales.html#demographic-pyramids-and-likert-scales">Pirámides de población y escalas de Likert</a>. Puedes cargar estos datos directamente en R ejecutando los siguientes comandos:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">rio</span><span class="op">)</span> <span class="co"># instala/carga el paquete rio</span>
 
 <span class="co"># importa el fichero directamente de Github</span>
-<span class="va">likert_data</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/nsbatra/Epi_R_handbook/master/data/likert_data.csv"</span><span class="op">)</span></code></pre></div>
+<span class="va">likert_data</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/appliedepi/epirhandbook_eng/master/data/likert_data.csv"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="flexdashboard" class="section level4 unnumbered">
 <h4>Flexdashboard<a class="anchor" aria-label="anchor" href="#flexdashboard"><i class="fas fa-link"></i></a>
 </h4>
 <p>A continuación se encuentran los enlaces al archivo asociado a la página sobre <a href="dashboards-with-r-markdown.html#dashboards-with-r-markdown">Dashboards con R Markdown</a>:</p>
 <ul>
-<li><p>Para descargar el código de R Markdown para el dashboard (panel de control) del brote, clica con el botón derecho en este <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/flexdashboard/outbreak_dashboard.Rmd">enlace</a> (Cmd+clic para Mac) y luego “Guardar enlace como”.</p></li>
-<li><p>Para descargar el código HTML del dashboard, clica con el botón derecho en este <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/flexdashboard/outbreak_dashboard_test.html">enlace</a> (Cmd+clic para Mac) y luego “Guardar enlace como”.</p></li>
+<li><p>Para descargar el código de R Markdown para el dashboard (panel de control) del brote, clica con el botón derecho en este <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/flexdashboard/outbreak_dashboard.Rmd">enlace</a> (Cmd+clic para Mac) y luego “Guardar enlace como”.</p></li>
+<li><p>Para descargar el código HTML del dashboard, clica con el botón derecho en este <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/flexdashboard/outbreak_dashboard_test.html">enlace</a> (Cmd+clic para Mac) y luego “Guardar enlace como”.</p></li>
 </ul>
 </div>
 <div id="rastreo-de-contactos" class="section level4 unnumbered">
@@ -253,8 +256,8 @@
 <h4>SIG (GIS)<a class="anchor" aria-label="anchor" href="#sig-gis"><i class="fas fa-link"></i></a>
 </h4>
 <p>Los archivos geográficos tipo shapefile tienen varios archivos subcomponentes, cada uno con una extensión de archivo diferente. Un archivo tendrá la extensión “.shp”, pero otros tienen la extensión “.dbf”, “.prj”, etc.</p>
-<p>La página de <a href="gis-basics.html#gis-basics">fundamentos del SIG</a> contiene enlaces al sitio web de <em>Humanitarian Data Exchange</em>, donde se pueden descargar los shapefiles directamente como archivos comprimidos.</p>
-<p>Por ejemplo, los datos de los puntos de las instalaciones sanitarias se pueden descargar de <a href="https://data.humdata.org/dataset/hotosm_sierra_leone_health_facilities">aquí</a>. Descarga “hotosm_sierra_leone_health_facilities_points_shp.zip”. Una vez guardado en tu ordenador, “descomprime” la carpeta. Ahí vas a encontrar varios archivos con diferentes extensiones (por ejemplo, “.shp”, “.prj”, “.shx”) todos ellos deben guardarse en la misma carpeta. A continuación, para importar en R, proporciona la ruta completa y el nombre del archivo “.shp” a <code>st_read()</code> del paquete <strong>sf</strong> (como se describe en la página de <a href="gis-basics.html#gis-basics">fundamentos del SIG</a>).</p>
+<p>La página de <a href="gis-basics.html#gis-basics">Conceptos básicos de los SIG</a> contiene enlaces al sitio web de <em>Humanitarian Data Exchange</em>, donde se pueden descargar los shapefiles directamente como archivos comprimidos.</p>
+<p>Por ejemplo, los datos de los puntos de las instalaciones sanitarias se pueden descargar de <a href="https://data.humdata.org/dataset/hotosm_sierra_leone_health_facilities">aquí</a>. Descarga “hotosm_sierra_leone_health_facilities_points_shp.zip”. Una vez guardado en tu ordenador, “descomprime” la carpeta. Ahí vas a encontrar varios archivos con diferentes extensiones (por ejemplo, “.shp”, “.prj”, “.shx”) todos ellos deben guardarse en la misma carpeta. A continuación, para importar en R, proporciona la ruta completa y el nombre del archivo “.shp” a <code>st_read()</code> del paquete <strong>sf</strong> (como se describe en la página de <a href="gis-basics.html#gis-basics">Conceptos básicos de los SIG</a>).</p>
 <p>Si sigues la opción 1 para descargar todos los datos de ejemplo (a través de nuestro paquete <strong>epirhandbook</strong>), todos los shapefiles están incluidos en el paquete.</p>
 <p>También puedes descargar los shapefiles de la carpeta “data” de R Handbook Github (véase la subcarpeta “gis”). Sin embargo, ten en cuenta que tendrás que descargar <em>cada</em> subfichero individualmente en tu ordenador. En Github, clica en cada archivo individualmente y descárgalo clicando en el botón “Download”. A continuación, puedes ver cómo el shapefile “sle_adm3” consta de muchos archivos, cada uno de los cuales tendría que ser descargado de Github.</p>
 <div class="inline-figure"><img src="images/download_shp.png" width="918" height="50%" style="display: block; margin: auto;"></div>
@@ -264,9 +267,9 @@
 </h4>
 <p>Mira la página sobre <a href="phylogenetic-trees-1.html#phylogenetic-trees-1">árboles filogenéticos</a>. El archivo Newick con el árbol filogenético construido a partir de la secuenciación del genoma completo de 299 muestras de Shigella sonnei y los datos de las muestras correspondientes (convertidos en un archivo de texto). Las muestras belgas y los datos resultantes han sido proporcionados amablemente por el NRC belga para Salmonella y Shigella en el marco de un proyecto dirigido por un fellow del programa ECDC EUPHEM, y también se publicarán en un manuscrito. Los datos internacionales están disponibles en bases de datos públicas (ncbi) y han sido publicados previamente.</p>
 <ul>
-<li><p>Para descargar el archivo del árbol filogenético “Shigella_tree.txt”, clica con el botón derecho en este <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/phylo/Shigella_tree.txt">enlace</a> (Cmd+clic para Mac) y selecciona “Guardar enlace como”.</p></li>
-<li><p>Para descargar el archivo “sample_data_Shigella_tree.csv” con información adicional sobre cada muestra, clica con el botón derecho en este <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/phylo/sample_data_Shigella_tree.csv">enlace</a> (Cmd+clic para Mac) y selecciona “Guardar enlace como”.</p></li>
-<li><p>Para ver el nuevo árbol de subconjuntos creado, clica con el botón derecho en este <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/phylo/Shigella_subtree_2.txt">enlace</a> (Cmd+clic para Mac) y selecciona “Guardar enlace como”. El archivo .txt se descargará en tu ordenador.</p></li>
+<li><p>Para descargar el archivo del árbol filogenético “Shigella_tree.txt”, clica con el botón derecho en este <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/phylo/Shigella_tree.txt">enlace</a> (Cmd+clic para Mac) y selecciona “Guardar enlace como”.</p></li>
+<li><p>Para descargar el archivo “sample_data_Shigella_tree.csv” con información adicional sobre cada muestra, clica con el botón derecho en este <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/phylo/sample_data_Shigella_tree.csv">enlace</a> (Cmd+clic para Mac) y selecciona “Guardar enlace como”.</p></li>
+<li><p>Para ver el nuevo árbol de subconjuntos creado, clica con el botón derecho en este <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/phylo/Shigella_subtree_2.txt">enlace</a> (Cmd+clic para Mac) y selecciona “Guardar enlace como”. El archivo .txt se descargará en tu ordenador.</p></li>
 </ul>
 <p>Tras la descarga, se pueden importar los archivos .txt con la función <code>read.tree()</code> del paquete <strong>ape</strong>, como se explica en la página.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -284,61 +287,61 @@
 <span class="co"># Country A</span>
 <span class="co">##############</span>
 <span class="co"># importa demographics del país A directamente desde Github</span>
-<span class="va">A_demo</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/standardization/country_demographics.csv"</span><span class="op">)</span>
+<span class="va">A_demo</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/appliedepi/epirhandbook_eng/raw/master/data/standardization/country_demographics.csv"</span><span class="op">)</span>
 
 <span class="co"># importa defunciones del país A directamente desde Github</span>
-<span class="va">A_deaths</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/standardization/deaths_countryA.csv"</span><span class="op">)</span>
+<span class="va">A_deaths</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/appliedepi/epirhandbook_eng/raw/master/data/standardization/deaths_countryA.csv"</span><span class="op">)</span>
 
 <span class="co">##############</span>
 <span class="co"># Country B</span>
 <span class="co">##############</span>
 <span class="co"># importa demographics del país B directamente desde Github</span>
-<span class="va">B_demo</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/standardization/country_demographics_2.csv"</span><span class="op">)</span>
+<span class="va">B_demo</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/appliedepi/epirhandbook_eng/raw/master/data/standardization/country_demographics_2.csv"</span><span class="op">)</span>
 
 <span class="co"># importa defunciones del país B directamente desde Github</span>
-<span class="va">B_deaths</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/standardization/deaths_countryB.csv"</span><span class="op">)</span>
+<span class="va">B_deaths</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/appliedepi/epirhandbook_eng/raw/master/data/standardization/deaths_countryB.csv"</span><span class="op">)</span>
 
 
 <span class="co">##########################</span>
 <span class="co"># Población de referencia#</span>
 <span class="co">##########################</span>
 <span class="co"># importa demographics del país B directamente desde Github</span>
-<span class="va">standard_pop_data</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/standardization/world_standard_population_by_sex.csv"</span><span class="op">)</span></code></pre></div>
+<span class="va">standard_pop_data</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"https://github.com/appliedepi/epirhandbook_eng/raw/master/data/standardization/world_standard_population_by_sex.csv"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="data_outbreak" class="section level4 unnumbered">
 <h4>Series temporales y detección de brotes<a class="anchor" aria-label="anchor" href="#data_outbreak"><i class="fas fa-link"></i></a>
 </h4>
 <p>Véase la página sobre <a href="time-series-and-outbreak-detection.html#time-series-and-outbreak-detection">series temporales y detección de brotes</a>. Utilizamos los casos de campylobacter notificados en Alemania entre 2002 y 2011, disponibles en el paquete R <strong>surveillance</strong>. (<em>nb.</em> este conjunto de datos ha sido adaptado del original, en el sentido de que se han eliminado 3 meses de datos de finales de 2011 para fines de demostración).</p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/campylobacter_germany.xlsx">Clica para descargar Campylobacter en Alemania (.xlsx)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/campylobacter_germany.xlsx">Clica para descargar Campylobacter en Alemania (.xlsx)</a></p>
 <p>También utilizamos datos climáticos de Alemania de 2002 a 2011 (temperatura en grados centígrados y lluvia caída en milímetros). Estos datos se descargaron de los datos del reanálisis por satélite Copernicus de la UE utilizando el paquete <strong>ecmwfr</strong>. Tendrás que descargarlos todos e importarlos con <code><a href="https://r-spatial.github.io/stars/reference/read_stars.html">stars::read_stars()</a></code> como se explica en la página de series temporales.</p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2002.nc">Clica para descargar el tiempo de Alemania 2002 (archivo .nc)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2003.nc">Clica para descargar el tiempo de Alemania 2003 (archivo .nc)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2004.nc">Clica para descargar el tiempo en Alemania 2004 (archivo .nc)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2005.nc">Clica para descargar el tiempo en Alemania 2005 (archivo .nc)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2006.nc">Clica para descargar el tiempo en Alemania 2006 (archivo .nc)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2007.nc">Clica para descargar el tiempo de Alemania 2007 (archivo .nc)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2008.nc">Clica para descargar el tiempo de Alemania 2008 (archivo .nc)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2009.nc">Clica para descargar el tiempo en Alemania 2009 (archivo .nc)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2010.nc">Clica para descargar el tiempo en Alemania 2010 (archivo .nc)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/time_series/weather/germany_weather2011.nc">Clica para descargar el tiempo en Alemania 2011 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2002.nc">Clica para descargar el tiempo de Alemania 2002 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2003.nc">Clica para descargar el tiempo de Alemania 2003 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2004.nc">Clica para descargar el tiempo en Alemania 2004 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2005.nc">Clica para descargar el tiempo en Alemania 2005 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2006.nc">Clica para descargar el tiempo en Alemania 2006 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2007.nc">Clica para descargar el tiempo de Alemania 2007 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2008.nc">Clica para descargar el tiempo de Alemania 2008 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2009.nc">Clica para descargar el tiempo en Alemania 2009 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2010.nc">Clica para descargar el tiempo en Alemania 2010 (archivo .nc)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/time_series/weather/germany_weather2011.nc">Clica para descargar el tiempo en Alemania 2011 (archivo .nc)</a></p>
 </div>
 <div id="data_survey" class="section level4 unnumbered">
 <h4>Análisis de encuestas<a class="anchor" aria-label="anchor" href="#data_survey"><i class="fas fa-link"></i></a>
 </h4>
-<p>Para el capítulo sobre <a href="https://epirhandbook.com/survey-analysis.html">análisis de encuestas</a> utilizamos datos ficticios de encuestas de mortalidad basados en las plantillas de encuestas de MSF OCA. Estos datos ficticios se generaron como parte del <a href="https://r4epis.netlify.app/">proyecto “R4Epis”</a>.</p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/surveys/survey_data.xlsx">Clica para descargar los datos de la encuesta ficticia (.xlsx)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/surveys/survey_dict.xlsx">Clica para descargar el diccionario de datos de la encuesta ficticia (.xlsx)</a></p>
-<p><a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/surveys/population.xlsx">Clica para descargar los datos de la población de la encuesta ficticia (.xlsx)</a></p>
+<p>Para el capítulo sobre <a href="survey-analysis.html#survey-analysis">análisis de encuestas</a> utilizamos datos ficticios de encuestas de mortalidad basados en las plantillas de encuestas de MSF OCA. Estos datos ficticios se generaron como parte del <a href="https://r4epis.netlify.app/">proyecto “R4Epis”</a>.</p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/surveys/survey_data.xlsx">Clica para descargar los datos de la encuesta ficticia (.xlsx)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/surveys/survey_dict.xlsx">Clica para descargar el diccionario de datos de la encuesta ficticia (.xlsx)</a></p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/surveys/population.xlsx">Clica para descargar los datos de la población de la encuesta ficticia (.xlsx)</a></p>
 </div>
 <div id="data_shiny" class="section level4 unnumbered">
 <h4>Shiny<a class="anchor" aria-label="anchor" href="#data_shiny"><i class="fas fa-link"></i></a>
 </h4>
 <p>El capítulo sobre <a href="dashboards-with-shiny.html#dashboards-with-shiny">Dashboards con Shiny</a> demuestra la construcción de una sencilla aplicación para mostrar datos sobre la malaria.</p>
 <p>Para descargar los archivos R que producen la aplicación Shiny:</p>
-<p>Puedes <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/malaria_app/app.R">clicar aquí para descargar el archivo app.R que contiene tanto la interfaz de usuario como el código del servidor para la aplicación Shiny.</a></p>
-<p>Puedes <a href="https://github.com/epirhandbook/Epi_R_handbook/blob/master/data/malaria_app/data/facility_count_data.rds">clicar aquí para descargar el archivo facility_count_data.rds</a> que contiene datos sobre la malaria para la aplicación Shiny. Ten en cuenta que puede ser necesario almacenarlo dentro de una carpeta “data” para que las rutas de los archivos here() funcionen correctamente.</p>
-<p>Puedes <a href="https://github.com/epirhandbook/Epi_R_handbook/blob/master/data/malaria_app/global.R">clicar aquí para descargar el archivo global.R</a> que debe ejecutarse antes de que se abra la aplicación, como se explica en dicho capítulo.</p>
-<p>Puedes <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/malaria_app/funcs/plot_epicurve.R">clicar aquí para descargar el archivo plot_epicurve.R</a> que es originado por global.R. Ten en cuenta que puede necesitar almacenarlo dentro de una carpeta “funcs” para que las rutas de los archivos here() funcionen correctamente.</p>
+<p>Puedes <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/malaria_app/app.R">clicar aquí para descargar el archivo app.R que contiene tanto la interfaz de usuario como el código del servidor para la aplicación Shiny.</a></p>
+<p>Puedes <a href="https://github.com/appliedepi/epirhandbook_eng/blob/master/data/malaria_app/data/facility_count_data.rds">clicar aquí para descargar el archivo facility_count_data.rds</a> que contiene datos sobre la malaria para la aplicación Shiny. Ten en cuenta que puede ser necesario almacenarlo dentro de una carpeta “data” para que las rutas de los archivos here() funcionen correctamente.</p>
+<p>Puedes <a href="https://github.com/appliedepi/epirhandbook_eng/blob/master/data/malaria_app/global.R">clicar aquí para descargar el archivo global.R</a> que debe ejecutarse antes de que se abra la aplicación, como se explica en dicho capítulo.</p>
+<p>Puedes <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/malaria_app/funcs/plot_epicurve.R">clicar aquí para descargar el archivo plot_epicurve.R</a> que es originado por global.R. Ten en cuenta que puede necesitar almacenarlo dentro de una carpeta “funcs” para que las rutas de los archivos here() funcionen correctamente.</p>
 
 </div>
 </div>
@@ -355,10 +358,13 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#download-handbook-and-data"><span class="header-section-number">2</span> Descargando el manual y los datos</a></li>
 <li>
-<a class="nav-link" href="#descargar-el-manual-sin-conexi%C3%B3n"><span class="header-section-number">2.1</span> Descargar el manual sin conexión</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#utilizando-nuestro-paquete-r">Utilizando nuestro paquete R</a></li></ul>
+<a class="nav-link" href="#download-offline-handbook"><span class="header-section-number">2.1</span> Descargar el manual sin conexión</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#utilizando-el-enlace-de-descarga">Utilizando el enlace de descarga</a></li>
+<li><a class="nav-link" href="#utilizando-nuestro-paquete-r">Utilizando nuestro paquete R</a></li>
+</ul>
 </li>
 <li>
-<a class="nav-link" href="#descarga-los-datos-para-seguir-el-manual"><span class="header-section-number">2.2</span> Descarga los datos para seguir el manual</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#download-data-to-follow-along"><span class="header-section-number">2.2</span> Descarga los datos para seguir el manual</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#utiliza-nuestro-paquete-para-r">Utiliza nuestro paquete para R</a></li>
 <li><a class="nav-link" href="#descargar-uno-por-uno">Descargar uno por uno</a></li>
 </ul>
@@ -383,7 +389,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-01-18.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

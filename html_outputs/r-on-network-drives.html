@@ -71,7 +71,7 @@
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
 <li><a class="" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="borrador.-agrupar-datos-grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos {grouping-data}</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
 <li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
 <li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></li>
 <li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
@@ -152,25 +152,25 @@
 </h2>
 <p>A continuación se presentan algunos comandos útiles cuando se trata de solucionar problemas utilizando R en unidades de red.</p>
 <p>Puedes devolver la(s) ruta(s) a las bibliotecas de paquetes que R está utilizando. Serán listadas en el orden que R está usando para instalar/cargar/buscar paquetes. Por lo tanto, si quiere que R utiliza una biblioteca diferente por defecto, puede cambiar el orden de estas rutas (ver más abajo).</p>
-<div class="sourceCode" id="cb1806"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1886"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Find libraries</span>
 <span class="fu"><a href="https://rdrr.io/r/base/libPaths.html">.libPaths</a></span><span class="op">(</span><span class="op">)</span>                   <span class="co"># Your library paths, listed in order that R installs/searches. </span>
                               <span class="co"># Note: all libraries will be listed, but to install to some (e.g. C:) you </span>
                               <span class="co"># may need to be running RStudio as an administrator (it won't appear in the </span>
                               <span class="co"># install packages library drop-down menu) </span></code></pre></div>
 <p>Es posible que desee cambiar el orden de las bibliotecas de paquetes utilizados por R. Por ejemplo, si R está recogiendo una ubicación de la biblioteca que comienza con “\" y uno que comienza con una letra, por ejemplo,”D:“. Puedes ajustar el orden de <code><a href="https://rdrr.io/r/base/libPaths.html">.libPaths()</a></code> con el siguiente código.</p>
-<div class="sourceCode" id="cb1807"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1887"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Switch order of libraries</span>
 <span class="co"># this can effect the priority of R finding a package. E.g. you may want your C: library to be listed first</span>
 <span class="va">myPaths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/libPaths.html">.libPaths</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># get the paths</span>
 <span class="va">myPaths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">myPaths</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">myPaths</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="co"># switch them</span>
 <span class="fu"><a href="https://rdrr.io/r/base/libPaths.html">.libPaths</a></span><span class="op">(</span><span class="va">myPaths</span><span class="op">)</span> <span class="co"># reassign them</span></code></pre></div>
 <p>Si tiene dificultades para que R Markdown se conecte a Pandoc, comience con este código para averiguar dónde cree RStudio que está tu instalación de Pandoc.</p>
-<div class="sourceCode" id="cb1808"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1888"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Find Pandoc</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"RSTUDIO_PANDOC"</span><span class="op">)</span>  <span class="co"># Find where RStudio thinks your Pandoc installation is</span></code></pre></div>
 <p>Si quieres ver de qué biblioteca se está cargando un paquete, prueba con el siguiente código:</p>
-<div class="sourceCode" id="cb1809"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1889"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Find a package</span>
 <span class="co"># gives first location of package (note order of your libraries)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/find.package.html">find.package</a></span><span class="op">(</span><span class="st">"rmarkdown"</span>, lib.loc <span class="op">=</span> <span class="cn">NULL</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"verbose"</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
@@ -184,7 +184,7 @@
 <ul>
 <li>Compruebe la instalación de TinyTex, o instale TinyTex en la ubicación C:. Consulta la página de <a href="r-basics.html#r-basics">fundamentos de R</a> sobre cómo instalar TinyTex.</li>
 </ul>
-<div class="sourceCode" id="cb1810"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1890"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check/install tinytex, to C: location</span>
 <span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">tinytex</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/is_tinytex.html">is_tinytex</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># should return TRUE (note three colons)</span></code></pre></div>
@@ -285,7 +285,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-01-18.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -71,7 +71,7 @@
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
 <li><a class="" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="borrador.-agrupar-datos-grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos {grouping-data}</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
 <li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
 <li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></li>
 <li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
@@ -415,9 +415,9 @@ They would typically live in the “root” folder of the repository.</p>
 <span class="header-section-number">46.7.3</span> En la consola<a class="anchor" aria-label="anchor" href="#in-console"><i class="fas fa-link"></i></a>
 </h3>
 <p>Lo que realmente ocurre entre bastidores es que creas una nueva rama con <code>git branch</code>, y luego vas a la rama con <code>git checkout</code> (<em>es decir</em>, le dices a Git que tus próximos commits se producirán allí). Desde tu repositorio git:</p>
-<div class="sourceCode" id="cb1784"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1784-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1784-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch my-new-branch  <span class="co"># Crea la nueva rama my-new-branch</span></span>
-<span id="cb1784-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1784-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout my-new-branch <span class="co"># Va a la rama</span></span>
-<span id="cb1784-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1784-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> my-new-branch <span class="co"># Ambos a la vez (satajo)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1864"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1864-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1864-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch my-new-branch  <span class="co"># Crea la nueva rama my-new-branch</span></span>
+<span id="cb1864-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1864-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout my-new-branch <span class="co"># Va a la rama</span></span>
+<span id="cb1864-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1864-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> my-new-branch <span class="co"># Ambos a la vez (satajo)</span></span></code></pre></div>
 <p>Para más información sobre el uso de la consola, consulta la sección sobre comandos Git al final.</p>
 </div>
 </div>
@@ -462,13 +462,13 @@ button.</p>
 <span class="header-section-number">46.8.3</span> En la consola<a class="anchor" aria-label="anchor" href="#in-console-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Las dos funciones que se utilizan entre bastidores son <code>git add</code> para seleccionar/poner en escena los archivos y <code>git commit</code> para hacer realmente el commit.</p>
-<div class="sourceCode" id="cb1785"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1785-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1785-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status <span class="co"># see the changes </span></span>
-<span id="cb1785-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1785-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1785-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1785-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add new_pages/collaboration.Rmd  <span class="co"># selecciona los ficheros a (= stage los cambioss)</span></span>
-<span id="cb1785-4"><a href="version-control-and-collaboration-with-git-and-github.html#cb1785-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1785-5"><a href="version-control-and-collaboration-with-git-and-github.html#cb1785-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Describe commit from Github Desktop"</span> <span class="co"># commit los cambios con un mensaje</span></span>
-<span id="cb1785-6"><a href="version-control-and-collaboration-with-git-and-github.html#cb1785-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1785-7"><a href="version-control-and-collaboration-with-git-and-github.html#cb1785-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log  <span class="co"># ver información sobre los commits anteriores</span></span></code></pre></div>
+<div class="sourceCode" id="cb1865"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1865-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1865-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status <span class="co"># see the changes </span></span>
+<span id="cb1865-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1865-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1865-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1865-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add new_pages/collaboration.Rmd  <span class="co"># selecciona los ficheros a (= stage los cambioss)</span></span>
+<span id="cb1865-4"><a href="version-control-and-collaboration-with-git-and-github.html#cb1865-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1865-5"><a href="version-control-and-collaboration-with-git-and-github.html#cb1865-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Describe commit from Github Desktop"</span> <span class="co"># commit los cambios con un mensaje</span></span>
+<span id="cb1865-6"><a href="version-control-and-collaboration-with-git-and-github.html#cb1865-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1865-7"><a href="version-control-and-collaboration-with-git-and-github.html#cb1865-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log  <span class="co"># ver información sobre los commits anteriores</span></span></code></pre></div>
 </div>
 <div id="amend-a-previous-commit" class="section level3" number="46.8.4">
 <h3>
@@ -478,11 +478,11 @@ button.</p>
 <p>En Rstudio, debería ser bastante obvio, ya que hay una casilla “Amend previous commit” (modificar una consolidación anterior) en la misma línea que el botón COMMIT.</p>
 <p>Por alguna razón poco clara, la funcionalidad no se ha implementado como tal en Github Desktop, pero hay una forma (conceptualmente incómoda pero fácil) de hacerlo. Si has confirmado <strong>pero</strong> aún <strong>no has enviado</strong> tus cambios, aparece un botón “UNDO” justo debajo del botón COMMIT. Clica en él y revertirá tu consolidación (pero mantendrá sus archivos en etapa y tu mensaje de consolidación). Guarda los cambios, añade nuevos archivos a la consolidación si es necesario y vuelva a confirmar.</p>
 <p>En la consola:</p>
-<div class="sourceCode" id="cb1786"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1786-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1786-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add [YOUR FILES] <span class="co"># Stage your new changes</span></span>
-<span id="cb1786-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1786-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1786-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1786-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">--amend</span>  <span class="co"># Amend the previous commit</span></span>
-<span id="cb1786-4"><a href="version-control-and-collaboration-with-git-and-github.html#cb1786-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1786-5"><a href="version-control-and-collaboration-with-git-and-github.html#cb1786-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">--amend</span> <span class="at">-m</span> <span class="st">"An updated commit message"</span>  <span class="co"># Amend the previous commit AND update the commit message</span></span></code></pre></div>
+<div class="sourceCode" id="cb1866"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1866-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1866-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add [YOUR FILES] <span class="co"># Stage your new changes</span></span>
+<span id="cb1866-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1866-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1866-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1866-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">--amend</span>  <span class="co"># Amend the previous commit</span></span>
+<span id="cb1866-4"><a href="version-control-and-collaboration-with-git-and-github.html#cb1866-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1866-5"><a href="version-control-and-collaboration-with-git-and-github.html#cb1866-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">--amend</span> <span class="at">-m</span> <span class="st">"An updated commit message"</span>  <span class="co"># Amend the previous commit AND update the commit message</span></span></code></pre></div>
 <p><em>Note: think before modifying commits that are already public and shared with your collaborators</em>.</p>
 </div>
 </div>
@@ -531,9 +531,9 @@ email address), and<br>
 <span class="header-section-number">46.9.0.3</span> Consola<a class="anchor" aria-label="anchor" href="#console"><i class="fas fa-link"></i></a>
 </h4>
 <p>Sin sorpresas, las órdenes son <em>fetch</em>, <em>pull</em> y <em>push</em>.</p>
-<div class="sourceCode" id="cb1787"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1787-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1787-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch  <span class="co"># ¿hay nuevos commits en el directorio remoto?</span></span>
-<span id="cb1787-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1787-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull   <span class="co"># Trae los commits remotos a tu rama local y la actualiza</span></span>
-<span id="cb1787-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1787-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push   <span class="co"># Envía los commits locales de esta rama a la rama remota</span></span></code></pre></div>
+<div class="sourceCode" id="cb1867"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1867-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1867-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch  <span class="co"># ¿hay nuevos commits en el directorio remoto?</span></span>
+<span id="cb1867-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1867-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull   <span class="co"># Trae los commits remotos a tu rama local y la actualiza</span></span>
+<span id="cb1867-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1867-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push   <span class="co"># Envía los commits locales de esta rama a la rama remota</span></span></code></pre></div>
 </div>
 <div id="i-want-to-pull-but-i-have-local-work" class="section level3" number="46.9.1">
 <h3>
@@ -565,8 +565,8 @@ email address), and<br>
 <span class="header-section-number">46.10.2</span> En la consola<a class="anchor" aria-label="anchor" href="#in-console-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Primero, vuelve a la rama que será la destinataria de los cambios. Normalmente es <em>la rama maestra</em> (main), pero puede ser otra rama. Luego fusiona tu rama de trabajo con la maestra.</p>
-<div class="sourceCode" id="cb1788"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1788-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1788-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout master  <span class="co"># Go back to master (or to the branch you want to move your )</span></span>
-<span id="cb1788-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1788-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge this_fancy_new_branch</span></code></pre></div>
+<div class="sourceCode" id="cb1868"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1868-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1868-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout master  <span class="co"># Go back to master (or to the branch you want to move your )</span></span>
+<span id="cb1868-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1868-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge this_fancy_new_branch</span></code></pre></div>
 <p><a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">Esta página</a> muestra un ejemplo más avanzado de bifurcación y explica un poco lo que ocurre entre bastidores.</p>
 </div>
 <div id="in-github-submitting-pull-requests" class="section level3" number="46.10.3">
@@ -650,18 +650,18 @@ email address), and<br>
 <p>Imagina que alguien hace una modificación crítica en el repositorio oficial, que quieres incluir en tu versión clonada. Es posible sincronizar tu fork con el repositorio oficial. Implica usar el terminal, pero no es demasiado complicado. Principalmente necesitas recordar que - <em>upstream</em> = el repositorio oficial, el que no has podido modificar - <em>origin</em> = tu versión del repositorio en tu perfil de Github</p>
 <p>Puedes leer <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork">este tutorial</a> o seguirlo a continuación:</p>
 <p>Primero, escribe en tu terminal Git (dentro de tu repo):</p>
-<div class="sourceCode" id="cb1789"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1789-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1789-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span></code></pre></div>
+<div class="sourceCode" id="cb1869"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1869-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1869-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span></code></pre></div>
 <p>Si aún no has configurado el repositorio upstream deberías ver dos líneas, que comienzan por <em>origin</em>. Muestran el repositorio remoto al que apuntan fetch y push. Recuerda que <em>origin</em> es el apodo convencional para tu propia versión del repositorio en Github. Por ejemplo:</p>
 <div class="inline-figure"><img src="images/github_fork_2.png" width="100%" height="200%" style="display: block; margin: auto;"></div>
 <p>Ahora, añade un nuevo repositorio remoto:</p>
-<div class="sourceCode" id="cb1790"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1790-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1790-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream https://github.com/epirhandbook/Epi_R_handbook.git</span></code></pre></div>
+<div class="sourceCode" id="cb1870"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1870-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1870-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream https://github.com/epirhandbook/Epi_R_handbook.git</span></code></pre></div>
 <p>Aquí la dirección es la que genera Github cuando clonas un repositorio (ver sección de clonación). Ahora tendrás cuatro punteros remotos:</p>
 <div class="inline-figure"><img src="images/github_fork_3.png" width="100%" height="200%" style="display: block; margin: auto;"></div>
 <p>Ahora que la configuración está hecha, siempre que quieras obtener los cambios del repositorio original (<em>upstream)</em>, sólo tienes que ir (<em>checkout</em>) a la rama que quieres actualizar y teclear:</p>
-<div class="sourceCode" id="cb1791"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1791-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1791-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch upstream <span class="co"># Obtener los nuevos commits del repositorio remoto</span></span>
-<span id="cb1791-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1791-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout the_branch_you_want_to_update</span>
-<span id="cb1791-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1791-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge upstream/the_branch_you_want_to_update  <span class="co"># Fusiona la rama de upstream en tu rama..</span></span>
-<span id="cb1791-4"><a href="version-control-and-collaboration-with-git-and-github.html#cb1791-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="co"># Actualiza tu propia versión del repositorio remoto</span></span></code></pre></div>
+<div class="sourceCode" id="cb1871"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1871-1"><a href="version-control-and-collaboration-with-git-and-github.html#cb1871-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch upstream <span class="co"># Obtener los nuevos commits del repositorio remoto</span></span>
+<span id="cb1871-2"><a href="version-control-and-collaboration-with-git-and-github.html#cb1871-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout the_branch_you_want_to_update</span>
+<span id="cb1871-3"><a href="version-control-and-collaboration-with-git-and-github.html#cb1871-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge upstream/the_branch_you_want_to_update  <span class="co"># Fusiona la rama de upstream en tu rama..</span></span>
+<span id="cb1871-4"><a href="version-control-and-collaboration-with-git-and-github.html#cb1871-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="co"># Actualiza tu propia versión del repositorio remoto</span></span></code></pre></div>
 <p>Si hay conflictos, tendrá que resolverlos, tal y como se explica en la sección Resolución de conflictos.</p>
 <p><strong>Resumen</strong>: forking es clonación, pero en el lado del servidor de Github. El resto de las acciones son las típicas del flujo de trabajo de colaboración (clonar, empujar, tirar, confirmar, fusionar, enviar solicitudes de extracción…).</p>
 <p><em>Nota: aunque la bifurcación es un concepto, no un comando de Git, también existe en otros hosts web, como <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow">Bitbucket</a>.</em></p>
@@ -904,7 +904,7 @@ what happens and how to go further.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-01-18.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

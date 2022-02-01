@@ -71,7 +71,7 @@
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
 <li><a class="" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="borrador.-agrupar-datos-grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos {grouping-data}</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
 <li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
 <li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></li>
 <li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
@@ -149,12 +149,12 @@
 <h2>
 <span class="header-section-number">26.2</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-16"><i class="fas fa-link"></i></a>
 </h2>
-<div id="paquetes-1" class="section level3 unnumbered">
-<h3>Paquetes<a class="anchor" aria-label="anchor" href="#paquetes-1"><i class="fas fa-link"></i></a>
+<div id="paquetes-2" class="section level3 unnumbered">
+<h3>Paquetes<a class="anchor" aria-label="anchor" href="#paquetes-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para tu uso. También se pueden cargar paquetes con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> desde <strong>el .</strong> Consulta la página sobre <a href="r-basics.html#r-basics">fundamentos de R</a> para obtener más información sobre los paquetes de R.
 quí también demostramos el uso de la función <code><a href="https://rdrr.io/pkg/pacman/man/p_load_gh.html">p_load_gh()</a></code> de <strong>pacman</strong> para instalar y cargar un paquete de github que aún no ha sido publicado en CRAN.</p>
-<div class="sourceCode" id="cb1075"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## load packages from CRAN</span>
 <span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">rio</span>,          <span class="co"># File import</span>
                <span class="va">here</span>,         <span class="co"># File locator</span>
@@ -194,22 +194,22 @@ quí también demostramos el uso de la función <code><a href="https://rdrr.io/p
 <p><span style="color: darkgreen;"><strong><em>CONSEJO:</em></strong> El diccionario de datos de Kobo tiene nombres de variables en la columna “name” de la hoja de la encuesta. Los valores posibles para cada variable se especifican en la hoja de opciones. En la hoja de opciones, “name” tiene el valor acortado y las columnas “label::english” y “label::french” tienen las versiones largas correspondientes. Si utilizas la función <code><a href="https://rdrr.io/pkg/sitrep/man/msf_dict.html">msf_dict_survey()</a></code> del paquete <strong>epidict</strong> para importar un archivo excel del diccionario Kobo, éste se reformulará para que pueda utilizarse fácilmente para recodificar. </span></p>
 <p><span style="color: orange;"><strong><em>ATENCIÓN:</em></strong> El conjunto de datos de ejemplo no es lo mismo que una exportación (ya que en Kobo se exportan los diferentes niveles del cuestionario de forma individual) - Mira la sección de datos de la encuesta más abajo para fusionar los diferentes niveles.</span></p>
 <p>El set de datos se importa mediante la función <code>import()</code> del paquete <strong>rio</strong>. Consulta la página sobre <a href="import-and-export.html#import-and-export">importación y exportación</a> para conocer las distintas formas de importar datos.</p>
-<div class="sourceCode" id="cb1076"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import the survey data</span>
 <span class="va">survey_data</span> <span class="op">&lt;-</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"survey_data.xlsx"</span><span class="op">)</span>
 
 <span class="co"># import the dictionary into R</span>
 <span class="va">survey_dict</span> <span class="op">&lt;-</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"survey_dict.xlsx"</span><span class="op">)</span> </code></pre></div>
 <p>The first 10 rows of the survey are displayed below.</p>
-<div id="htmlwidget-eebae5c165f7ed413180" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-eebae5c165f7ed413180">{"x":{"filter":"none","vertical":false,"data":[[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["2018-04-15T00:00:00Z","2018-03-04T00:00:00Z","2018-04-16T00:00:00Z","2018-01-23T00:00:00Z","2018-01-09T00:00:00Z","2018-03-07T00:00:00Z","2018-02-18T00:00:00Z","2018-04-12T00:00:00Z","2018-04-17T00:00:00Z","2018-01-05T00:00:00Z"],[null,null,null,null,null,null,null,null,null,null],["village_1","village_1","village_10","village_5","village_3","village_8","other","village_7","village_4","village_2"],[null,null,null,null,null,null,null,null,null,null],[1,1,10,5,3,8,11,7,4,2],[9,1,15,6,18,14,17,16,13,14],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["yes","no","no","yes","no","yes","no","yes","yes","yes"],[null,"no_benefit","neg_experience",null,"other",null,"no_benefit",null,null,null],[null,null,null,null,null,null,null,null,null,null],[6,null,null,8,null,5,null,6,5,5],["female",null,null,"female",null,"male",null,"male","male","female"],[26,null,null,3,null,22,null,33,96,18],[null,null,null,36,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["no",null,null,"no",null,"yes",null,"yes","yes","yes"],["yes",null,null,null,null,"yes",null,"no","no","no"],["secondary",null,null,null,null,"secondary",null,null,null,null],["no",null,null,"no",null,"yes",null,"no","yes","yes"],[null,null,null,null,null,"yes",null,null,"no","no"],["yes",null,null,null,null,null,null,null,null,"yes"],["no",null,null,"no",null,"yes",null,"yes","no","yes"],["yes",null,null,"no",null,"no",null,"no","yes","yes"],["no",null,null,null,null,null,null,null,"no","no"],[null,null,null,null,null,null,null,null,null,null],["yes",null,null,"no",null,"no",null,"yes","no","no"],["no",null,null,null,null,null,null,"no",null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["no","no","no","no","no","no","no","no","yes","no"],[null,null,null,null,null,null,null,null,"no",null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,"dont_know",null],[null,null,null,null,null,null,null,null,null,null],["yes",null,null,"yes",null,"no",null,"yes","no","no"],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["sexual",null,null,"sexual",null,null,null,"shot",null,null],["0",null,null,"0",null,null,null,"0",null,null],["1",null,null,"1",null,null,null,"0",null,null],["0",null,null,"0",null,null,null,"1",null,null],["0",null,null,"0",null,null,null,"0",null,null],["0",null,null,"0",null,null,null,"0",null,null],["0",null,null,"0",null,null,null,"0",null,null],[9,1,183,83,58,146,205,130,72,33],[1,1,1,1,1,1,1,1,1,1],["9_1","1_1","183_1","83_1","58_1","146_1","205_1","130_1","72_1","33_1"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>start<\/th>\n      <th>end<\/th>\n      <th>today<\/th>\n      <th>deviceid<\/th>\n      <th>date<\/th>\n      <th>team_number<\/th>\n      <th>village_name<\/th>\n      <th>village_other<\/th>\n      <th>cluster_number<\/th>\n      <th>household_number<\/th>\n      <th>households_building<\/th>\n      <th>random_hh<\/th>\n      <th>random_hh_note<\/th>\n      <th>consent<\/th>\n      <th>no_consent_reason<\/th>\n      <th>no_consent_other<\/th>\n      <th>member_number<\/th>\n      <th>sex<\/th>\n      <th>age_years<\/th>\n      <th>age_months_calc<\/th>\n      <th>age_months<\/th>\n      <th>bednet<\/th>\n      <th>read_write<\/th>\n      <th>education_level<\/th>\n      <th>measles_vaccination<\/th>\n      <th>vaccination_card<\/th>\n      <th>pregnant<\/th>\n      <th>malaria_treatment<\/th>\n      <th>arrived<\/th>\n      <th>remember_arrival<\/th>\n      <th>arrived_date<\/th>\n      <th>left<\/th>\n      <th>remember_departure<\/th>\n      <th>left_date<\/th>\n      <th>born<\/th>\n      <th>remember_dob<\/th>\n      <th>birthday_date<\/th>\n      <th>died<\/th>\n      <th>remember_death<\/th>\n      <th>death_date<\/th>\n      <th>cause<\/th>\n      <th>cause_other<\/th>\n      <th>violent_episode<\/th>\n      <th>violent_episodes_number<\/th>\n      <th>violence_nature_other<\/th>\n      <th>violence_nature<\/th>\n      <th>violence_nature/beaten<\/th>\n      <th>violence_nature/sexual<\/th>\n      <th>violence_nature/shot<\/th>\n      <th>violence_nature/detained_kidnapped<\/th>\n      <th>violence_nature/other<\/th>\n      <th>violence_nature/no_response<\/th>\n      <th>index<\/th>\n      <th>index_y<\/th>\n      <th>uid<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[8,9,16,18,19,20,52,53]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>También queremos importar los datos de la población de muestreo para poder elaborar las ponderaciones adecuadas. Estos datos pueden estar en diferentes formatos, sin embargo sugerimos tenerlos como se ve a continuación (esto puede ser simplemente escrito en un Excel).</p>
-<div class="sourceCode" id="cb1077"><pre class="downlit sourceCode r">
+<div id="htmlwidget-c3fb7a72f3aecd3ddaed" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c3fb7a72f3aecd3ddaed">{"x":{"filter":"none","vertical":false,"data":[[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["2018-04-15T00:00:00Z","2018-03-04T00:00:00Z","2018-04-16T00:00:00Z","2018-01-23T00:00:00Z","2018-01-09T00:00:00Z","2018-03-07T00:00:00Z","2018-02-18T00:00:00Z","2018-04-12T00:00:00Z","2018-04-17T00:00:00Z","2018-01-05T00:00:00Z"],[null,null,null,null,null,null,null,null,null,null],["village_1","village_1","village_10","village_5","village_3","village_8","other","village_7","village_4","village_2"],[null,null,null,null,null,null,null,null,null,null],[1,1,10,5,3,8,11,7,4,2],[9,1,15,6,18,14,17,16,13,14],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["yes","no","no","yes","no","yes","no","yes","yes","yes"],[null,"no_benefit","neg_experience",null,"other",null,"no_benefit",null,null,null],[null,null,null,null,null,null,null,null,null,null],[6,null,null,8,null,5,null,6,5,5],["female",null,null,"female",null,"male",null,"male","male","female"],[26,null,null,3,null,22,null,33,96,18],[null,null,null,36,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["no",null,null,"no",null,"yes",null,"yes","yes","yes"],["yes",null,null,null,null,"yes",null,"no","no","no"],["secondary",null,null,null,null,"secondary",null,null,null,null],["no",null,null,"no",null,"yes",null,"no","yes","yes"],[null,null,null,null,null,"yes",null,null,"no","no"],["yes",null,null,null,null,null,null,null,null,"yes"],["no",null,null,"no",null,"yes",null,"yes","no","yes"],["yes",null,null,"no",null,"no",null,"no","yes","yes"],["no",null,null,null,null,null,null,null,"no","no"],[null,null,null,null,null,null,null,null,null,null],["yes",null,null,"no",null,"no",null,"yes","no","no"],["no",null,null,null,null,null,null,"no",null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["no","no","no","no","no","no","no","no","yes","no"],[null,null,null,null,null,null,null,null,"no",null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,"dont_know",null],[null,null,null,null,null,null,null,null,null,null],["yes",null,null,"yes",null,"no",null,"yes","no","no"],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],["sexual",null,null,"sexual",null,null,null,"shot",null,null],["0",null,null,"0",null,null,null,"0",null,null],["1",null,null,"1",null,null,null,"0",null,null],["0",null,null,"0",null,null,null,"1",null,null],["0",null,null,"0",null,null,null,"0",null,null],["0",null,null,"0",null,null,null,"0",null,null],["0",null,null,"0",null,null,null,"0",null,null],[9,1,183,83,58,146,205,130,72,33],[1,1,1,1,1,1,1,1,1,1],["9_1","1_1","183_1","83_1","58_1","146_1","205_1","130_1","72_1","33_1"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>start<\/th>\n      <th>end<\/th>\n      <th>today<\/th>\n      <th>deviceid<\/th>\n      <th>date<\/th>\n      <th>team_number<\/th>\n      <th>village_name<\/th>\n      <th>village_other<\/th>\n      <th>cluster_number<\/th>\n      <th>household_number<\/th>\n      <th>households_building<\/th>\n      <th>random_hh<\/th>\n      <th>random_hh_note<\/th>\n      <th>consent<\/th>\n      <th>no_consent_reason<\/th>\n      <th>no_consent_other<\/th>\n      <th>member_number<\/th>\n      <th>sex<\/th>\n      <th>age_years<\/th>\n      <th>age_months_calc<\/th>\n      <th>age_months<\/th>\n      <th>bednet<\/th>\n      <th>read_write<\/th>\n      <th>education_level<\/th>\n      <th>measles_vaccination<\/th>\n      <th>vaccination_card<\/th>\n      <th>pregnant<\/th>\n      <th>malaria_treatment<\/th>\n      <th>arrived<\/th>\n      <th>remember_arrival<\/th>\n      <th>arrived_date<\/th>\n      <th>left<\/th>\n      <th>remember_departure<\/th>\n      <th>left_date<\/th>\n      <th>born<\/th>\n      <th>remember_dob<\/th>\n      <th>birthday_date<\/th>\n      <th>died<\/th>\n      <th>remember_death<\/th>\n      <th>death_date<\/th>\n      <th>cause<\/th>\n      <th>cause_other<\/th>\n      <th>violent_episode<\/th>\n      <th>violent_episodes_number<\/th>\n      <th>violence_nature_other<\/th>\n      <th>violence_nature<\/th>\n      <th>violence_nature/beaten<\/th>\n      <th>violence_nature/sexual<\/th>\n      <th>violence_nature/shot<\/th>\n      <th>violence_nature/detained_kidnapped<\/th>\n      <th>violence_nature/other<\/th>\n      <th>violence_nature/no_response<\/th>\n      <th>index<\/th>\n      <th>index_y<\/th>\n      <th>uid<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[8,9,16,18,19,20,52,53]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>También queremos importar los datos de la población de muestreo para poder elaborar las ponderaciones adecuadas. Estos datos pueden estar en diferentes formatos, sin embargo sugerimos tenerlos como se ve a continuación (esto puede ser simplemente escrito en un Excel).</p>
+<div class="sourceCode" id="cb1157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import the population data</span>
 <span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"population.xlsx"</span><span class="op">)</span></code></pre></div>
 <p>A continuación se muestran las 10 primeras filas de la encuesta.</p>
-<div id="htmlwidget-b5d6c24c5418a1d7bd8d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b5d6c24c5418a1d7bd8d">{"x":{"filter":"none","vertical":false,"data":[["0-2","3-14","15-29","30-44","45+","0-2","3-14","15-29","30-44","45+"],["male","male","male","male","male","female","female","female","female","female"],[0.034,0.1811,0.138,0.0808,0.0661,0.034,0.1811,0.138,0.0808,0.0661],[340,1811,1380,808,661,340,1811,1380,808,661],["district_a","district_a","district_a","district_a","district_a","district_a","district_a","district_a","district_a","district_a"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>age_group<\/th>\n      <th>sex<\/th>\n      <th>proportions<\/th>\n      <th>population<\/th>\n      <th>health_district<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>En el caso de las encuestas por conglomerados, es posible que desees añadir ponderaciones de la encuesta a nivel de conglomerado. Puedes introducir estos datos como se indica más arriba. Alternativamente, si sólo hay unos pocos recuentos, éstos podrían introducirse como se indica a continuación en un tibble. En cualquier caso, tendrá que tener una columna con un identificador de conglomerado que coincida con los datos de tu encuesta, y otra columna con el número de hogares en cada conglomerado.</p>
-<div class="sourceCode" id="cb1078"><pre class="downlit sourceCode r">
+<div id="htmlwidget-6bf90fc49eafc3febafb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6bf90fc49eafc3febafb">{"x":{"filter":"none","vertical":false,"data":[["0-2","3-14","15-29","30-44","45+","0-2","3-14","15-29","30-44","45+"],["male","male","male","male","male","female","female","female","female","female"],[0.034,0.1811,0.138,0.0808,0.0661,0.034,0.1811,0.138,0.0808,0.0661],[340,1811,1380,808,661,340,1811,1380,808,661],["district_a","district_a","district_a","district_a","district_a","district_a","district_a","district_a","district_a","district_a"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>age_group<\/th>\n      <th>sex<\/th>\n      <th>proportions<\/th>\n      <th>population<\/th>\n      <th>health_district<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>En el caso de las encuestas por conglomerados, es posible que desees añadir ponderaciones de la encuesta a nivel de conglomerado. Puedes introducir estos datos como se indica más arriba. Alternativamente, si sólo hay unos pocos recuentos, éstos podrían introducirse como se indica a continuación en un tibble. En cualquier caso, tendrá que tener una columna con un identificador de conglomerado que coincida con los datos de tu encuesta, y otra columna con el número de hogares en cada conglomerado.</p>
+<div class="sourceCode" id="cb1158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## define the number of households in each cluster</span>
 <span class="va">cluster_counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>cluster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"village_1"</span>, <span class="st">"village_2"</span>, <span class="st">"village_3"</span>, <span class="st">"village_4"</span>, 
                                      <span class="st">"village_5"</span>, <span class="st">"village_6"</span>, <span class="st">"village_7"</span>, <span class="st">"village_8"</span>,
@@ -223,7 +223,7 @@ quí también demostramos el uso de la función <code><a href="https://rdrr.io/p
 <p>A continuación se asegura que la columna de fechas tenga el formato adecuado. Hay varias otras maneras de hacer esto (ver la página <a href="working-with-dates.html#working-with-dates">Trabajar con fechas</a> para más detalles), sin embargo, usar el diccionario para definir las fechas es rápido y fácil.</p>
 <p>También creamos una variable de grupo de edad utilizando la función <code><a href="https://rdrr.io/pkg/sitrep/man/epikit-exports.html">age_categories()</a></code> de <strong>epikit</strong> - véase la sección del manual de <a href="#cleaning-data-and-core-functions.html#num_cats">limpieza de datos</a> para más detalles. Además, creamos una variable de carácter que define en qué distrito se encuentran las distintas agrupaciones.</p>
 <p>Por último, recodificamos todas las variables sí/no en variables VERDADERO/FALSO, ya que de lo contrario no pueden ser utilizadas por las funciones de proporción de <strong>survey</strong>.</p>
-<div class="sourceCode" id="cb1079"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## select the date variable names from the dictionary </span>
 <span class="va">DATEVARS</span> <span class="op">&lt;-</span> <span class="va">survey_dict</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"date"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -282,7 +282,7 @@ quí también demostramos el uso de la función <code><a href="https://rdrr.io/p
 - Estratificado y conglomerado</p>
 <p>Como se ha descrito anteriormente (dependiendo de cómo diseñe tu cuestionario) los datos de cada nivel se exportarían como unos datos separado de Kobo. En nuestro ejemplo hay un nivel para los hogares y un nivel para los individuos dentro de esos hogares.</p>
 <p>Estos dos niveles están vinculados por un identificador único. Para unos datos de Kobo, esta variable es “_index” en el nivel del hogar, que coincide con “_parent_index” en el nivel individual. Esto creará nuevas filas para el hogar con cada individuo que coincida, véase la sección del manual sobre <a href="joining-data.html#joining-data">unir datos</a> para más detalles.</p>
-<div class="sourceCode" id="cb1080"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## join the individual and household data to form a complete data set</span>
 <span class="va">survey_data</span> <span class="op">&lt;-</span> <span class="fu">left_join</span><span class="op">(</span><span class="va">survey_data_hh</span>, 
                          <span class="va">survey_data_indiv</span>,
@@ -300,7 +300,7 @@ quí también demostramos el uso de la función <code><a href="https://rdrr.io/p
 </h2>
 <p>En el caso de las encuestas de mortalidad, queremos saber cuánto tiempo ha estado presente cada individuo en el lugar para poder calcular una tasa de mortalidad adecuada para nuestro periodo de interés. Esto no es relevante para todas las encuestas, pero en particular para las encuestas de mortalidad es importante, ya que se realizan con frecuencia entre poblaciones móviles o desplazadas.</p>
 <p>Para ello, primero definimos nuestro periodo de interés, también conocido como periodo de recuerdo (es decir, el tiempo sobre el que se pide a los participantes que informen al responder a las preguntas). A continuación, podemos utilizar este periodo para establecer las fechas inadecuadas como ausentes, es decir, si las muertes se notifican fuera del periodo de interés.</p>
-<div class="sourceCode" id="cb1081"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## set the start/end of recall period</span>
 <span class="co">## can be changed to date variables from dataset </span>
 <span class="co">## (e.g. arrival date &amp; date questionnaire)</span>
@@ -332,7 +332,7 @@ quí también demostramos el uso de la función <code><a href="https://rdrr.io/p
 Evento de llegada más temprano dentro de tu período de recogida O bien el inicio de tu período de recogida (definidas de antemano), o una fecha posterior al inicio de la recogida, si procede (por ejemplo, llegadas o nacimientos)</p>
 <p>Fecha de finalización:
 Evento de salida más temprano dentro del periodo de recogida O bien el final de tu periodo de recogida, o una fecha anterior al final de la recogida si procede (por ejemplo, salidas, fallecimientos)</p>
-<div class="sourceCode" id="cb1082"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## create new variables for start and end dates/causes</span>
 <span class="va">survey_data</span> <span class="op">&lt;-</span> <span class="va">survey_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
      <span class="co">## choose earliest date entered in survey</span>
@@ -384,7 +384,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <p>Es importante que elimines las observaciones erróneas antes de añadir los pesos de la encuesta. Por ejemplo, si tiene observaciones con tiempo de observación negativo, tendrá que comprobarlas (puede hacerlo con la función <code><a href="https://rdrr.io/pkg/sitrep/man/find_date_cause.html">assert_positive_timespan()</a></code> de <strong>sitrep</strong>. Otra cosa es si quiere eliminar las filas vacías (por ejemplo, con <code>drop_na(uid)</code>) o eliminar los duplicados (véase la sección del manual sobre <a href="de-duplication.html#de-duplication">De-duplicación</a> para más detalles). También hay que eliminar las que no tienen consentimiento.</p>
 <p>En este ejemplo, filtramos los casos que queremos eliminar y los almacenamos en un dataframe separado, de forma que podamos describir los que fueron excluidos de la encuesta. A continuación, utilizamos la función <code>anti_join()</code> de <strong>dplyr</strong> para eliminar estos casos descartados de los datos de nuestra encuesta.</p>
 <p><span style="color: red;"><strong><em>PELIGRO:</em></strong> No puede tener valores faltantes en tu variable de peso, ni en ninguna de las variables relevantes para el diseño de tu encuesta (por ejemplo, edad, sexo, estratos o variables de agrupación).</span></p>
-<div class="sourceCode" id="cb1083"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## store the cases that you drop so you can describe them (e.g. non-consenting </span>
 <span class="co">## or wrong village/cluster)</span>
 <span class="va">dropped</span> <span class="op">&lt;-</span> <span class="va">survey_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -393,7 +393,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <span class="co">## use the dropped cases to remove the unused rows from the survey data set  </span>
 <span class="va">survey_data</span> <span class="op">&lt;-</span> <span class="fu">anti_join</span><span class="op">(</span><span class="va">survey_data</span>, <span class="va">dropped</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dropped</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Como se ha mencionado anteriormente, demostramos cómo añadir ponderaciones para tres diseños de estudio diferentes (estratificado, conglomerado y conglomerado estratificado). Estos requieren información sobre la población de origen y/o los conglomerados encuestados. Utilizaremos el código de conglomerado estratificado para este ejemplo, pero utiliza el que sea más apropiado para tu diseño de estudio.</p>
-<div class="sourceCode" id="cb1084"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># stratified ------------------------------------------------------------------</span>
 <span class="co"># create a variable called "surv_weight_strata"</span>
 <span class="co"># contains weights for each individual - by age group, sex and health district</span>
@@ -450,7 +450,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 </h3>
 <p>El paquete <strong>survey</strong> utiliza efectivamente la codificación d R <strong>base</strong>, por lo que no es posible utilizar pipes (<code>%&gt;%</code>) u otra sintaxis de <strong>dplyr</strong>. Con el paquete de <strong>survey</strong> utilizamos la función <code>svydesign()</code> para definir un objeto de encuesta con clusters, pesos y estratos adecuados.</p>
 <p><span style="color: black;"><strong><em>NOTA:</em></strong> necesitamos utilizar la tilde (<code>~</code>) delante de las variables, esto es porque el paquete utiliza la sintaxis de R <strong>base</strong> de asignación de variables basadas en fórmulas.</span></p>
-<div class="sourceCode" id="cb1085"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># simple random ---------------------------------------------------------------</span>
 <span class="va">base_survey_design_simple</span> <span class="op">&lt;-</span> <span class="fu">svydesign</span><span class="op">(</span>ids <span class="op">=</span> <span class="op">~</span><span class="fl">1</span>, <span class="co"># 1 for no cluster ids</span>
                    weights <span class="op">=</span> <span class="cn">NULL</span>,               <span class="co"># No weight added</span>
@@ -484,7 +484,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <span class="header-section-number">26.6.2</span> Paquete <strong>Srvyr</strong><a class="anchor" aria-label="anchor" href="#paquete-srvyr"><i class="fas fa-link"></i></a>
 </h3>
 <p>Con el paquete <strong>srvyr</strong> podemos utilizar la función <code>as_survey_design()</code>, que tiene los mismos argumentos que la anterior pero permite los tuberías (<code>%&gt;%</code>), por lo que no es necesario utilizar la tilde (<code>~</code>).</p>
-<div class="sourceCode" id="cb1086"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## simple random ---------------------------------------------------------------</span>
 <span class="va">survey_design_simple</span> <span class="op">&lt;-</span> <span class="va">survey_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">as_survey_design</span><span class="op">(</span>ids <span class="op">=</span> <span class="fl">1</span>, <span class="co"># 1 for no cluster ids </span>
@@ -531,7 +531,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 </h3>
 <p>Compara las proporciones de cada grupo de edad entre tu muestra y la población de origen. Esto es importante para poder resaltar el posible sesgo del muestreo. También puedes repetir esta operación para ver las distribuciones por sexo.</p>
 <p>Ten en cuenta que estos valores-p son sólo indicativos, y que una discusión descriptiva (o la visualización con las pirámides de edad que aparecen a continuación) de las distribuciones en tu muestra de estudio en comparación con la población de origen es más importante que la prueba binomial en sí. Esto se debe a que el aumento del tamaño de la muestra suele dar lugar a diferencias que pueden ser irrelevantes después de ponderar los datos.</p>
-<div class="sourceCode" id="cb1087"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## counts and props of the study population</span>
 <span class="va">ag</span> <span class="op">&lt;-</span> <span class="va">survey_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">age_group</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -580,13 +580,14 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   <span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 6
 ## # Groups:   Age group [5]
-##   `Age group` `Study population (n)` `Study population (%)` `Source population (n)` `Source population (%)` `P-value`
-##   &lt;chr&gt;                        &lt;int&gt;                  &lt;dbl&gt;                   &lt;dbl&gt;                   &lt;dbl&gt; &lt;chr&gt;    
-## 1 0-2                             12                 0.0256                    1360                     6.8 &lt;0.001   
-## 2 3-14                            42                 0.0896                    7244                    36.2 &lt;0.001   
-## 3 15-29                           64                 0.136                     5520                    27.6 &lt;0.001   
-## 4 30-44                           52                 0.111                     3232                    16.2 0.002    
-## 5 45+                            299                 0.638                     2644                    13.2 &lt;0.001</code></pre>
+##   `Age group` `Study population (n)` `Study populatio~ `Source populati~ `Source populati~
+##   &lt;chr&gt;                        &lt;int&gt;             &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;
+## 1 0-2                             12            0.0256              1360               6.8
+## 2 3-14                            42            0.0896              7244              36.2
+## 3 15-29                           64            0.136               5520              27.6
+## 4 30-44                           52            0.111               3232              16.2
+## 5 45+                            299            0.638               2644              13.2
+## # ... with 1 more variable: P-value &lt;chr&gt;</code></pre>
 </div>
 <div id="pirámides-demográficas" class="section level3" number="26.7.2">
 <h3>
@@ -595,7 +596,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <p>Las pirámides demográficas (o de edad y sexo) son una forma sencilla de visualizar la distribución de la población de la encuesta. También vale la pena considerar la creación de <a href="descriptive-tables.html#descriptive-tables">tablas descriptivas</a> de edad y sexo por estratos de la encuesta. Demostraremos el uso del paquete <strong>apyramid</strong>, ya que permite las proporciones ponderadas utilizando nuestro objeto de diseño de la encuesta creado anteriormente. Otras opciones para crear <a href="demographic-pyramids-and-likert-scales.html#demographic-pyramids-and-likert-scales">pirámides demográficas</a> se tratan ampliamente en ese capítulo del manual. También utilizaremos una función envolvente de <strong>sitrep</strong> llamada <code><a href="https://rdrr.io/pkg/sitrep/man/plot_age_pyramid.html">plot_age_pyramid()</a></code> que ahorra algunas líneas de codificación para producir un gráfico con proporciones.</p>
 <p>Al igual que con el test binomial formal de la diferencia, vista anteriormente en la sección de sesgo de muestreo, aquí estamos interesados en visualizar si nuestra población muestreada es sustancialmente diferente de la población de origen y si la ponderación corrige esta diferencia. Para ello, utilizaremos el paquete <strong>patchwork</strong> para mostrar nuestras visualizaciones <strong>ggplot</strong> una al lado de la otra; para más detalles, consulta la sección sobre la combinación de gráficos en el capítulo de <a href="#ggplot-tips.html?q=patch#combine-plots">consejos de ggplot</a> del manual. Visualizaremos nuestra población de origen, nuestra población de encuesta no ponderada y nuestra población de encuesta ponderada. También puede considerar la posibilidad de visualizar por cada estrato de tu encuesta - en nuestro ejemplo aquí sería utilizando el argumento <code>stack_by = "health_district"</code> (ver <code><a href="https://rdrr.io/pkg/sitrep/man/plot_age_pyramid.html">?plot_age_pyramid</a></code> para más detalles).</p>
 <p><span style="color: black;"><strong><em>NOTA:</em></strong> Los ejes-x e y están invertidos en las pirámides</span></p>
-<div class="sourceCode" id="cb1089"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## define x-axis limits and labels ---------------------------------------------</span>
 <span class="co">## (update these numbers to be the values for your graph)</span>
 <span class="va">max_prop</span> <span class="op">&lt;-</span> <span class="fl">35</span>      <span class="co"># choose the highest proportion you want to show </span>
@@ -705,7 +706,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <span class="header-section-number">26.7.3</span> Diagrama alluvial/sankey<a class="anchor" aria-label="anchor" href="#diagrama-alluvialsankey"><i class="fas fa-link"></i></a>
 </h3>
 <p>Visualizar los puntos de partida y los resultados de los individuos puede ser muy útil para obtener una visión general. Su aplicación es bastante obvia en el caso de las poblaciones móviles, pero hay muchas otras aplicaciones, como las cohortes o cualquier otra situación en la que haya transiciones de estados para los individuos. Estos diagramas tienen varios nombres diferentes, como diagramas aluviales, de sankey y paralelos; los detalles se encuentran en el capítulo del manual sobre <a href="#diagrams-and-charts.html#alluvialsankey-diagrams">diagramas y gráficos</a>.</p>
-<div class="sourceCode" id="cb1090"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## summarize data</span>
 <span class="va">flow_table</span> <span class="op">&lt;-</span> <span class="va">survey_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">count</span><span class="op">(</span><span class="va">startcause</span>, <span class="va">endcause</span>, <span class="va">sex</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="co"># get counts </span>
@@ -757,25 +758,25 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 </h3>
 <p>Podemos utilizar la función <code>svyciprop()</code> de <strong>survey</strong> para obtener las proporciones ponderadas y los correspondientes intervalos de confianza del 95%. Se puede extraer un efecto de diseño apropiado utilizando la función <code>svymean()</code> en lugar de <code>svyprop()</code>. Cabe señalar que <code>svyprop()</code> sólo parece aceptar variables entre 0 y 1 (o TRUE/FALSE), por lo que las variables categóricas no funcionarán.</p>
 <p><span style="color: black;"><strong><em>NOTA:</em></strong> Las funciones de <strong>survey</strong> también aceptan objetos de diseño <strong>srvyr</strong>, pero aquí hemos utilizado el objeto de diseño de <strong>survey</strong> sólo por coherencia</span></p>
-<div class="sourceCode" id="cb1091"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## produce weighted counts </span>
 <span class="fu">svytable</span><span class="op">(</span><span class="op">~</span><span class="va">died</span>, <span class="va">base_survey_design</span><span class="op">)</span></code></pre></div>
 <pre><code>## died
 ##      FALSE       TRUE 
 ## 1406244.43   76213.01</code></pre>
-<div class="sourceCode" id="cb1093"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## produce weighted proportions</span>
 <span class="fu">svyciprop</span><span class="op">(</span><span class="op">~</span><span class="va">died</span>, <span class="va">base_survey_design</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <pre><code>##               2.5% 97.5%
 ## died 0.0514 0.0208  0.12</code></pre>
-<div class="sourceCode" id="cb1095"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## get the design effect </span>
 <span class="fu">svymean</span><span class="op">(</span><span class="op">~</span><span class="va">died</span>, <span class="va">base_survey_design</span>, na.rm <span class="op">=</span> <span class="cn">T</span>, deff <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">deff</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## diedFALSE  diedTRUE 
 ##  3.755508  3.755508</code></pre>
 <p>Podemos combinar las funciones de <strong>survey</strong> mostradas arriba en una función que definimos nosotros mismos a continuación, llamada <code>svy_prop</code>; y podemos entonces usar esa función junto con <code>map()</code> del paquete purrr para iterar sobre varias variables y crear una tabla. Consulta el capítulo de <a href="iteration-loops-and-lists.html#iteration-loops-and-lists">iteración</a> del manual para obtener más detalles sobre <strong>purrr</strong>.</p>
-<div class="sourceCode" id="cb1097"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Define function to calculate weighted counts, proportions, CI and design effect</span>
 <span class="co"># x is the variable in quotation marks </span>
 <span class="co"># design is your survey design object</span>
@@ -835,7 +836,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 </h3>
 <p>Con <strong>srvyr</strong> podemos utilizar la sintaxis <strong>de dplyr</strong> para crear una tabla. Observe que se utiliza la función <code>survey_mean()</code> y se especifica el argumento de la proporción, y también que se utiliza la misma función para calcular el efecto del diseño. Esto se debe a que <strong>srvyr</strong> envuelve las dos funciones del paquete <strong>survey</strong>, <code>svyciprop()</code> y <code>svymean()</code>, que se utilizan en la sección anterior.</p>
 <p><span style="color: black;"><strong><em>NOTA:</em></strong> Tampoco parece posible obtener proporciones a partir de variables categóricas utilizando <strong>srvyr</strong>, si lo necesita, consulta la sección siguiente utilizando <strong>sitrep </strong></span></p>
-<div class="sourceCode" id="cb1099"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## use the srvyr design object</span>
 <span class="va">survey_design</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">summarise</span><span class="op">(</span>
@@ -856,7 +857,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 ##    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 76213.  5.14      2.08      12.1      3.76</code></pre>
 <p>Aquí también podríamos escribir una función para iterar sobre múltiples variables utilizando el paquete purrr. Consulta el capítulo de <a href="iteration-loops-and-lists.html#iteration-loops-and-lists">iteración</a> del manual para obtener más detalles sobre <strong>purrr</strong>.</p>
-<div class="sourceCode" id="cb1101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Define function to calculate weighted counts, proportions, CI and design effect</span>
 <span class="co"># design is your survey design object</span>
 <span class="co"># x is the variable in quotation marks </span>
@@ -905,7 +906,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <span class="header-section-number">26.8.3</span> Paquete <strong>Sitrep</strong><a class="anchor" aria-label="anchor" href="#paquete-sitrep"><i class="fas fa-link"></i></a>
 </h3>
 <p>La función <code><a href="https://rdrr.io/pkg/sitrep/man/tab_linelist.html">tab_survey()</a></code> de <strong>sitrep</strong> es una envoltura para <strong>srvyr</strong>, que permite crear tablas ponderadas con una codificación mínima. También permite calcular proporciones ponderadas para variables categóricas.</p>
-<div class="sourceCode" id="cb1103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## using the survey design object</span>
 <span class="va">survey_design</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="co">## pass the names of variables of interest unquoted</span>
@@ -932,7 +933,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <span class="header-section-number">26.8.4</span> Paquete <strong>Gtsummary</strong><a class="anchor" aria-label="anchor" href="#paquete-gtsummary"><i class="fas fa-link"></i></a>
 </h3>
 <p>Con <strong>gtsummary</strong> no parece haber todavía funciones incorporadas para añadir intervalos de confianza o efecto de diseño. Aquí mostramos cómo definir una función para añadir intervalos de confianza y luego añadir intervalos de confianza a una tabla gtsummary creada con la función <code>tbl_svysummary()</code>.</p>
-<div class="sourceCode" id="cb1106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">confidence_intervals</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">variable</span>, <span class="va">by</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="co">## extract the confidence intervals and multiply to get percentages</span>
@@ -960,12 +961,12 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
       <span class="va">add_stat_1</span> <span class="op">~</span> <span class="st">"**95%CI**"</span>
     <span class="op">)</span>
     <span class="op">)</span></code></pre></div>
-<div id="flufdohyyx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="dtjbixjgmb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#flufdohyyx .gt_table {
+#dtjbixjgmb .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -990,7 +991,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-left-color: #D3D3D3;
 }
 
-#flufdohyyx .gt_heading {
+#dtjbixjgmb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1002,7 +1003,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-right-color: #D3D3D3;
 }
 
-#flufdohyyx .gt_title {
+#dtjbixjgmb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1012,7 +1013,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-bottom-width: 0;
 }
 
-#flufdohyyx .gt_subtitle {
+#dtjbixjgmb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1022,13 +1023,13 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-top-width: 0;
 }
 
-#flufdohyyx .gt_bottom_border {
+#dtjbixjgmb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#flufdohyyx .gt_col_headings {
+#dtjbixjgmb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1043,7 +1044,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-right-color: #D3D3D3;
 }
 
-#flufdohyyx .gt_col_heading {
+#dtjbixjgmb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1063,7 +1064,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   overflow-x: hidden;
 }
 
-#flufdohyyx .gt_column_spanner_outer {
+#dtjbixjgmb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1075,15 +1076,15 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   padding-right: 4px;
 }
 
-#flufdohyyx .gt_column_spanner_outer:first-child {
+#dtjbixjgmb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#flufdohyyx .gt_column_spanner_outer:last-child {
+#dtjbixjgmb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#flufdohyyx .gt_column_spanner {
+#dtjbixjgmb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1095,7 +1096,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   width: 100%;
 }
 
-#flufdohyyx .gt_group_heading {
+#dtjbixjgmb .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1117,7 +1118,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   vertical-align: middle;
 }
 
-#flufdohyyx .gt_empty_group_heading {
+#dtjbixjgmb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1132,15 +1133,15 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   vertical-align: middle;
 }
 
-#flufdohyyx .gt_from_md > :first-child {
+#dtjbixjgmb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#flufdohyyx .gt_from_md > :last-child {
+#dtjbixjgmb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#flufdohyyx .gt_row {
+#dtjbixjgmb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1159,7 +1160,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   overflow-x: hidden;
 }
 
-#flufdohyyx .gt_stub {
+#dtjbixjgmb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1171,7 +1172,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   padding-left: 12px;
 }
 
-#flufdohyyx .gt_summary_row {
+#dtjbixjgmb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1181,7 +1182,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   padding-right: 5px;
 }
 
-#flufdohyyx .gt_first_summary_row {
+#dtjbixjgmb .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1191,7 +1192,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-top-color: #D3D3D3;
 }
 
-#flufdohyyx .gt_grand_summary_row {
+#dtjbixjgmb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1201,7 +1202,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   padding-right: 5px;
 }
 
-#flufdohyyx .gt_first_grand_summary_row {
+#dtjbixjgmb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1211,11 +1212,11 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-top-color: #D3D3D3;
 }
 
-#flufdohyyx .gt_striped {
+#dtjbixjgmb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#flufdohyyx .gt_table_body {
+#dtjbixjgmb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1224,7 +1225,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-bottom-color: #D3D3D3;
 }
 
-#flufdohyyx .gt_footnotes {
+#dtjbixjgmb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1238,13 +1239,13 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-right-color: #D3D3D3;
 }
 
-#flufdohyyx .gt_footnote {
+#dtjbixjgmb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#flufdohyyx .gt_sourcenotes {
+#dtjbixjgmb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1258,41 +1259,41 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
   border-right-color: #D3D3D3;
 }
 
-#flufdohyyx .gt_sourcenote {
+#dtjbixjgmb .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#flufdohyyx .gt_left {
+#dtjbixjgmb .gt_left {
   text-align: left;
 }
 
-#flufdohyyx .gt_center {
+#dtjbixjgmb .gt_center {
   text-align: center;
 }
 
-#flufdohyyx .gt_right {
+#dtjbixjgmb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#flufdohyyx .gt_font_normal {
+#dtjbixjgmb .gt_font_normal {
   font-weight: normal;
 }
 
-#flufdohyyx .gt_font_bold {
+#dtjbixjgmb .gt_font_bold {
   font-weight: bold;
 }
 
-#flufdohyyx .gt_font_italic {
+#dtjbixjgmb .gt_font_italic {
   font-style: italic;
 }
 
-#flufdohyyx .gt_super {
+#dtjbixjgmb .gt_super {
   font-size: 65%;
 }
 
-#flufdohyyx .gt_footnote_marks {
+#dtjbixjgmb .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1351,7 +1352,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <h3>
 <span class="header-section-number">26.9.1</span> Paquete <strong>survey</strong><a class="anchor" aria-label="anchor" href="#paquete-survey-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb1107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ratio</span> <span class="op">&lt;-</span> <span class="fu">svyratio</span><span class="op">(</span><span class="op">~</span><span class="va">died</span>, 
          denominator <span class="op">=</span> <span class="op">~</span><span class="va">obstime</span>, 
          design <span class="op">=</span> <span class="va">base_survey_design</span><span class="op">)</span>
@@ -1369,7 +1370,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <h3>
 <span class="header-section-number">26.9.2</span> Paquete <strong>Srvyr</strong><a class="anchor" aria-label="anchor" href="#paquete-srvyr-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb1109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">survey_design</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="co">## survey ratio used to account for observation time </span>
   <span class="fu">summarise</span><span class="op">(</span>
@@ -1410,7 +1411,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <li><a class="nav-link" href="#overview-4"><span class="header-section-number">26.1</span> Resumen</a></li>
 <li>
 <a class="nav-link" href="#preparation-16"><span class="header-section-number">26.2</span> Preparación</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#paquetes-1">Paquetes</a></li>
+<li><a class="nav-link" href="#paquetes-2">Paquetes</a></li>
 <li><a class="nav-link" href="#carga-de-datos">Carga de datos</a></li>
 <li><a class="nav-link" href="#limpieza-de-datos-1">Limpieza de datos</a></li>
 </ul>
@@ -1462,7 +1463,7 @@ Evento de salida más temprano dentro del periodo de recogida O bien el final de
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-01-18.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

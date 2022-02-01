@@ -71,7 +71,7 @@
 <li><a class="active" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
 <li><a class="" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="borrador.-agrupar-datos-grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos {grouping-data}</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
 <li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
 <li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></li>
 <li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
@@ -161,24 +161,24 @@
 <h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Instala o carga el paquete <strong>stringr</strong> y otros paquetes <strong>tidyverse</strong>.</p>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install/load packages</span>
 <span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span>
   <span class="va">stringr</span>,    <span class="co"># many functions for handling strings</span>
   <span class="va">tidyverse</span>,  <span class="co"># for optional data manipulation</span>
   <span class="va">tools</span><span class="op">)</span>      <span class="co"># alternative for converting to title case</span></code></pre></div>
 </div>
-<div id="importar-datos-2" class="section level3 unnumbered">
-<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-2"><i class="fas fa-link"></i></a>
+<div id="importar-datos-1" class="section level3 unnumbered">
+<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Importar datos</p>
 <p>En esta página haremos referencia de vez en cuando a la lista limpia de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds">clica para descargar linelist “limpio”</a> (como archivo .rds). Importa los datos con la función <code>import()</code> del paquete <strong>rio</strong> (maneja muchos tipos de archivos como .xlsx, .csv, .rds - vea la página de <a href="import-and-export.html#import-and-export">importación y exportación</a> para más detalles).</p>
-<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import case linelist </span>
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
 <p>A continuación se muestran las primeras 50 filas del listado.</p>
-<div id="htmlwidget-0e4a41941dac3a26a4ad" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0e4a41941dac3a26a4ad">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1399075200000\" data-max=\"1406419200000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1399939200000\" data-max=\"1407024000000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1400025600000\" data-max=\"1407110400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1400371200000\" data-max=\"1410566400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-29&quot;,&quot;30-49&quot;,&quot;50-69&quot;,&quot;70+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-24&quot;,&quot;25-29&quot;,&quot;30-34&quot;,&quot;35-39&quot;,&quot;40-44&quot;,&quot;45-49&quot;,&quot;50-54&quot;,&quot;55-59&quot;,&quot;60-64&quot;,&quot;65-69&quot;,&quot;70-74&quot;,&quot;75-79&quot;,&quot;80-84&quot;,&quot;85+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-13.2697246824573\" data-max=\"-13.209391925612\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"8.45171855856465\" data-max=\"8.48802917129884\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"100\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"11\" data-max=\"241\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"20\" data-max=\"24\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"35.9\" data-max=\"38\" data-scale=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"428.994082840237\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"2\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
+<div id="htmlwidget-0c373d452d9e9ccde306" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0c373d452d9e9ccde306">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1399075200000\" data-max=\"1406419200000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1399939200000\" data-max=\"1407024000000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1400025600000\" data-max=\"1407110400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1400371200000\" data-max=\"1410566400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-29&quot;,&quot;30-49&quot;,&quot;50-69&quot;,&quot;70+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-24&quot;,&quot;25-29&quot;,&quot;30-34&quot;,&quot;35-39&quot;,&quot;40-44&quot;,&quot;45-49&quot;,&quot;50-54&quot;,&quot;55-59&quot;,&quot;60-64&quot;,&quot;65-69&quot;,&quot;70-74&quot;,&quot;75-79&quot;,&quot;80-84&quot;,&quot;85+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-13.2697246824573\" data-max=\"-13.209391925612\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"8.45171855856465\" data-max=\"8.48802917129884\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"100\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"11\" data-max=\"241\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"20\" data-max=\"24\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"35.9\" data-max=\"38\" data-scale=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"428.994082840237\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"2\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
 </div>
 </div>
 <div id="unite-split-and-arrange" class="section level2" number="10.2">
@@ -195,11 +195,11 @@
 <h3>Combinar cadenas<a class="anchor" aria-label="anchor" href="#combinar-cadenas"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para combinar o concatenar varias cadenas en una sola, sugerimos utilizar <code>str_c</code> de <strong>stringr</strong>. Si tiene valores de caracteres distintos para combinar, simplemente proporciónelos como argumentos únicos, separados por comas.</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_c</span><span class="op">(</span><span class="st">"String1"</span>, <span class="st">"String2"</span>, <span class="st">"String3"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "String1String2String3"</code></pre>
 <p>El argumento <code>sep =</code> inserta un valor de carácter entre cada uno de los argumentos proporcionados (por ejemplo, insertando una coma, un espacio o una nueva línea <code>"\n"</code>)</p>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_c</span><span class="op">(</span><span class="st">"String1"</span>, <span class="st">"String2"</span>, <span class="st">"String3"</span>, sep <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "String1, String2, String3"</code></pre>
 <p>El argumento <code>collapse =</code> es relevante si está introduciendo múltiples <em>vectores</em> como argumentos a <code>str_c()</code>. Se utiliza para separar los elementos de lo que sería un vector de salida, de forma que el vector de salida sólo tenga un elemento de carácter largo.</p>
@@ -208,7 +208,7 @@
 <li><p>El valor <code>sep =</code> aparece entre cada nombre y apellido</p></li>
 <li><p>El valor de <code>collapse =</code> aparece entre cada persona</p></li>
 </ul>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">first_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"abdul"</span>, <span class="st">"fahruk"</span>, <span class="st">"janice"</span><span class="op">)</span> 
 <span class="va">last_names</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hussein"</span>, <span class="st">"akinleye"</span>, <span class="st">"okeke"</span><span class="op">)</span>
 
@@ -216,7 +216,7 @@
 <span class="fu">str_c</span><span class="op">(</span><span class="va">first_names</span>, <span class="va">last_names</span>, sep <span class="op">=</span> <span class="st">" "</span>, collapse <span class="op">=</span> <span class="st">";  "</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "abdul hussein;  fahruk akinleye;  janice okeke"</code></pre>
 <p>Nota: Dependiendo del contexto de visualización deseado, al imprimir una cadena combinada de este tipo con nuevas líneas, puede ser necesario envolver toda la frase en <code><a href="https://rdrr.io/r/base/cat.html">cat()</a></code> para que las nuevas líneas se impriman correctamente:</p>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># For newlines to print correctly, the phrase may need to be wrapped in cat()</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu">str_c</span><span class="op">(</span><span class="va">first_names</span>, <span class="va">last_names</span>, sep <span class="op">=</span> <span class="st">" "</span>, collapse <span class="op">=</span> <span class="st">";\n"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## abdul hussein;
@@ -236,31 +236,31 @@
 <li><p>Consejo: Utiliza <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> para ajustar la visualización de la fecha, y utiliza Sys.Date() para mostrar la fecha actual</p></li>
 </ul>
 <p>Un ejemplo sencillo, de un título de gráfico dinámico:</p>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_glue</span><span class="op">(</span><span class="st">"Data include {nrow(linelist)} cases and are current to {format(Sys.Date(), '%d %b %Y')}."</span><span class="op">)</span></code></pre></div>
-<pre><code>## Data include 5888 cases and are current to 18 ene. 2022.</code></pre>
+<pre><code>## Data include 5888 cases and are current to 01 feb. 2022.</code></pre>
 <p>Un formato alternativo es utilizar marcadores de posición dentro de los paréntesis y definir el código en argumentos separados al final de la función <code>str_glue()</code>, como se indica a continuación. Esto puede mejorar la legibilidad del código si el texto es largo.</p>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_glue</span><span class="op">(</span><span class="st">"Linelist as of {current_date}.\nLast case hospitalized on {last_hospital}.\n{n_missing_onset} cases are missing date of onset and not shown"</span>,
          current_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'%d %b %Y'</span><span class="op">)</span>,
          last_hospital <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">date_hospitalisation</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>, <span class="st">'%d %b %Y'</span><span class="op">)</span>,
          n_missing_onset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">linelist</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">date_onset</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
          <span class="op">)</span></code></pre></div>
-<pre><code>## Linelist as of 18 ene. 2022.
+<pre><code>## Linelist as of 01 feb. 2022.
 ## Last case hospitalized on 30 abr. 2015.
 ## 256 cases are missing date of onset and not shown</code></pre>
-<p><strong>Sacar de un dataframe</strong></p>
-<p>A veces, es útil extraer datos de un dataframe y pegarlos en secuencia. A continuación se muestra un ejemplo de dataframe. Lo utilizaremos para hacer una declaración resumida sobre las jurisdicciones y los recuentos de casos nuevos y totales.</p>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<p><strong>Extraer de un dataframe</strong></p>
+<p>A veces, es útil extraer datos de un dataframe y pegarlos secuencialmente. A continuación se muestra un ejemplo de dataframe. Lo utilizaremos para hacer una declaración resumida sobre las jurisdicciones y los recuentos de casos nuevos y totales.</p>
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make case data frame</span>
 <span class="va">case_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
   zone        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Zone 1"</span>, <span class="st">"Zone 2"</span>, <span class="st">"Zone 3"</span>, <span class="st">"Zone 4"</span>, <span class="st">"Zone 5"</span><span class="op">)</span>,
   new_cases   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span>,
   total_cases <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">4</span>, <span class="fl">25</span>, <span class="fl">10</span>, <span class="fl">103</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-91db3c1d8c9012fd77de" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-91db3c1d8c9012fd77de">{"x":{"filter":"none","vertical":false,"data":[["Zone 1","Zone 2","Zone 3","Zone 4","Zone 5"],[3,0,7,0,15],[40,4,25,10,103]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>zone<\/th>\n      <th>new_cases<\/th>\n      <th>total_cases<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Utiliza <code>str_glue_data()</code>, que está hecho especialmente para obtener datos de las filas del dataframe:</p>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div id="htmlwidget-1201da357c7cee17afff" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1201da357c7cee17afff">{"x":{"filter":"none","vertical":false,"data":[["Zone 1","Zone 2","Zone 3","Zone 4","Zone 5"],[3,0,7,0,15],[40,4,25,10,103]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>zone<\/th>\n      <th>new_cases<\/th>\n      <th>total_cases<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Utiliza <code>str_glue_data()</code>, que está hecho especialmente para obtener datos de las filas del dataframe:</p>
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">case_table</span> <span class="op">%&gt;%</span> 
   <span class="fu">str_glue_data</span><span class="op">(</span><span class="st">"{zone}: {new_cases} ({total_cases} total cases)"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Zone 1: 3 (40 total cases)
@@ -269,20 +269,19 @@
 ## Zone 4: 0 (10 total cases)
 ## Zone 5: 15 (103 total cases)</code></pre>
 <p><strong>Combinar cadenas a través de las filas</strong></p>
-<p>Si estás intentando “enrollar” valores en una columna del dataframe, por ejemplo, combinar valores de varias filas en una sola fila pegándolos con un separador, consulta la sección de la página de <a href="de-duplication.html#de-duplication">De-duplicación</a> sobre <a href="de-duplication.html#str_rollup">“combinar” valores</a>.</p>
+<p>Si estás intentando “enrollar” valores en una columna del dataframe, por ejemplo, combinar valores de varias filas en una sola fila pegándolos con un separador, consulta la sección <a href="de-duplication.html#str_rollup">“combinación de valores”</a> de la página de <strong>De-duplicación</strong>.</p>
 <p><strong>dataframe a una línea</strong></p>
 <p>Puedes hacer que la declaración aparezca en una línea utilizando <code>str_c()</code> (especificando el dataframe y los nombres de las columnas), y proporcionando los argumentos <code>sep =</code> y <code>collapse =</code>.</p>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_c</span><span class="op">(</span><span class="va">case_table</span><span class="op">$</span><span class="va">zone</span>, <span class="va">case_table</span><span class="op">$</span><span class="va">new_cases</span>, sep <span class="op">=</span> <span class="st">" = "</span>, collapse <span class="op">=</span> <span class="st">";  "</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Zone 1 = 3;  Zone 2 = 0;  Zone 3 = 7;  Zone 4 = 0;  Zone 5 = 15"</code></pre>
 <p>Podría añadir el texto pre-fijo “Nuevos casos:” al principio de la sentencia envolviendo con un <code>str_c()</code> separado (si “Nuevos casos:” estuviera dentro del <code>str_c()</code> original aparecería varias veces).</p>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_c</span><span class="op">(</span><span class="st">"New Cases: "</span>, <span class="fu">str_c</span><span class="op">(</span><span class="va">case_table</span><span class="op">$</span><span class="va">zone</span>, <span class="va">case_table</span><span class="op">$</span><span class="va">new_cases</span>, sep <span class="op">=</span> <span class="st">" = "</span>, collapse <span class="op">=</span> <span class="st">";  "</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "New Cases: Zone 1 = 3;  Zone 2 = 0;  Zone 3 = 7;  Zone 4 = 0;  Zone 5 = 15"</code></pre>
 </div>
-<div id="str_unite" class="section level3" number="10.2.1">
-<h3>
-<span class="header-section-number">10.2.1</span> Unir columnas<a class="anchor" aria-label="anchor" href="#str_unite"><i class="fas fa-link"></i></a>
+<div id="str_unite" class="section level3 unnumbered">
+<h3>Unir columnas<a class="anchor" aria-label="anchor" href="#str_unite"><i class="fas fa-link"></i></a>
 </h3>
 <p>Dentro de un dataframe, la unión de valores de caracteres de varias columnas puede lograrse con <code>unite()</code> de <strong>tidyr</strong>. Esto es lo contrario de <code>separate()</code>.</p>
 <p>Indique el nombre de la nueva columna unida. A continuación, indique los nombres de las columnas que desea unir.</p>
@@ -292,7 +291,7 @@
 <li><p><code>na.rm =</code> elimina los valores faltantes al unir (FALSE por defecto)</p></li>
 </ul>
 <p>A continuación, definimos un mini-dataframe con el que hacer una demostración:</p>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
   case_ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,
   symptoms  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"jaundice, fever, chills"</span>,     <span class="co"># patient 1</span>
@@ -302,13 +301,13 @@
                 <span class="st">"bleeding from gums, fever"</span>,   <span class="co"># patient 5</span>
                 <span class="st">"rapid pulse, headache"</span><span class="op">)</span>,      <span class="co"># patient 6</span>
   outcome <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Recover"</span>, <span class="st">"Death"</span>, <span class="st">"Death"</span>, <span class="st">"Recover"</span>, <span class="st">"Recover"</span>, <span class="st">"Recover"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_split</span> <span class="op">&lt;-</span> <span class="fu">separate</span><span class="op">(</span><span class="va">df</span>, <span class="va">symptoms</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sym_1"</span>, <span class="st">"sym_2"</span>, <span class="st">"sym_3"</span><span class="op">)</span>, extra <span class="op">=</span> <span class="st">"merge"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning: Expected 3 pieces. Missing pieces filled with `NA` in 2 rows [3, 4].</code></pre>
 <p>Este es el dataframe de ejemplo:</p>
-<div id="htmlwidget-81ef5959b6d759979eb2" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-81ef5959b6d759979eb2">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6],["jaundice","chills","fever","vomiting","bleeding","rapid"],["fever","aches",null,"diarrhoea","from","pulse"],["chills","pains",null,null,"gums, fever","headache"],["Recover","Death","Death","Recover","Recover","Recover"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_ID<\/th>\n      <th>sym_1<\/th>\n      <th>sym_2<\/th>\n      <th>sym_3<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>A continuación, unimos las tres columnas de síntomas:</p>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div id="htmlwidget-2b15928bf87116b42a3f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2b15928bf87116b42a3f">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6],["jaundice","chills","fever","vomiting","bleeding","rapid"],["fever","aches",null,"diarrhoea","from","pulse"],["chills","pains",null,null,"gums, fever","headache"],["Recover","Death","Death","Recover","Recover","Recover"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_ID<\/th>\n      <th>sym_1<\/th>\n      <th>sym_2<\/th>\n      <th>sym_3<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>A continuación, unimos las tres columnas de síntomas:</p>
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_split</span> <span class="op">%&gt;%</span> 
   <span class="fu">unite</span><span class="op">(</span>
     col <span class="op">=</span> <span class="st">"all_symptoms"</span>,         <span class="co"># name of the new united column</span>
@@ -332,19 +331,19 @@
 <p>Para dividir una cadena basada en un patrón, utiliza <code>str_split()</code>. Evalúa la(s) cadena(s) y devuelve una <code>lista</code> de vectores de caracteres formada por los valores recién divididos.</p>
 <p>El sencillo ejemplo que sigue evalúa una cadena y la divide en tres. Por defecto, devuelve un objeto de tipo <code>list</code> con un elemento (un vector de caracteres) por cada cadena proporcionada inicialmente. Si <code>simplify = TRUE</code> devuelve una matriz de caracteres.</p>
 <p>En este ejemplo, se proporciona una cadena y la función devuelve una lista con un elemento: un vector de caracteres con tres valores.</p>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_split</span><span class="op">(</span>string <span class="op">=</span> <span class="st">"jaundice, fever, chills"</span>,
           pattern <span class="op">=</span> <span class="st">","</span><span class="op">)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] "jaundice" " fever"   " chills"</code></pre>
 <p>Si la salida se guarda, puede acceder al enésimo valor dividido con la sintaxis de corchetes. Para acceder a un valor específico puede utilizar una sintaxis como esta: <code>the_returned_object[[1]][2]</code>, que accedería al segundo valor de la primera cadena evaluada (“fever”). Consulta la página de <a href="r-basics.html#r-basics">fundamentos de R</a> para obtener más detalles sobre el acceso a los elementos.</p>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pt1_symptoms</span> <span class="op">&lt;-</span> <span class="fu">str_split</span><span class="op">(</span><span class="st">"jaundice, fever, chills"</span>, <span class="st">","</span><span class="op">)</span>
 
 <span class="va">pt1_symptoms</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>  <span class="co"># extracts 2nd value from 1st (and only) element of the list</span></code></pre></div>
 <pre><code>## [1] " fever"</code></pre>
 <p>Si se proporcionan varias cadenas mediante <code>str_split()</code>, habrá más de un elemento en la lista devuelta.</p>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">symptoms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"jaundice, fever, chills"</span>,     <span class="co"># patient 1</span>
               <span class="st">"chills, aches, pains"</span>,        <span class="co"># patient 2 </span>
               <span class="st">"fever"</span>,                       <span class="co"># patient 3</span>
@@ -371,7 +370,7 @@
 ## [[6]]
 ## [1] "rapid pulse" " headache"</code></pre>
 <p>Para devolver una “matriz de caracteres” en su lugar, que puede ser útil si se crean columnas de dataframes, establezca el argumento <code>simplify = TRUE</code> como se muestra a continuación:</p>
-<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_split</span><span class="op">(</span><span class="va">symptoms</span>, <span class="st">","</span>, simplify <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>##      [,1]                 [,2]         [,3]     
 ## [1,] "jaundice"           " fever"     " chills"
@@ -381,7 +380,7 @@
 ## [5,] "bleeding from gums" " fever"     ""       
 ## [6,] "rapid pulse"        " headache"  ""</code></pre>
 <p>También puede ajustar el número de divisiones a crear con el argumento <code>n =</code>. Por ejemplo, esto restringe el número de divisiones a 2. Cualquier otra coma permanece dentro de los segundos valores.</p>
-<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_split</span><span class="op">(</span><span class="va">symptoms</span>, <span class="st">","</span>, simplify <span class="op">=</span> <span class="cn">TRUE</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>##      [,1]                 [,2]            
 ## [1,] "jaundice"           " fever, chills"
@@ -391,16 +390,16 @@
 ## [5,] "bleeding from gums" " fever"        
 ## [6,] "rapid pulse"        " headache"</code></pre>
 <p><em>Nota - los mismos resultados se pueden conseguir con <code>str_split_fixed()</code>, en la que no se da el argumento <code>simplify</code>, sino que se debe designar el número de columnas (<code>n</code>).</em></p>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_split_fixed</span><span class="op">(</span><span class="va">symptoms</span>, <span class="st">","</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="dividir-columnas" class="section level3 unnumbered">
 <h3>Dividir columnas<a class="anchor" aria-label="anchor" href="#dividir-columnas"><i class="fas fa-link"></i></a>
 </h3>
 <p>Si está intentando dividir una columna de un dataframe, es mejor utilizar la función <code>separate()</code> de <strong>dplyr</strong>. Se utiliza para dividir una columna de caracteres en otras columnas.</p>
-<p>Digamos que tenemos un dataframe simple <code>df</code> (definido y unido en la <a href="characters-and-strings.html#str_unite">sección de unión</a>) que contiene una columna <code>case_ID</code>, una columna de caracteres con muchos síntomas y una columna de resultados. Nuestro objetivo es separar la columna de <code>symptoms</code> en varias columnas, cada una de las cuales contiene un síntoma.</p>
-<div id="htmlwidget-9b32e2ac394171cb0b7c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9b32e2ac394171cb0b7c">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6],["jaundice, fever, chills","chills, aches, pains","fever","vomiting, diarrhoea","bleeding from gums, fever","rapid pulse, headache"],["Recover","Death","Death","Recover","Recover","Recover"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_ID<\/th>\n      <th>symptoms<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Asumiendo que los datos son canalizados en <code>separate()</code>, primero proporcione la columna a separar. A continuación, proporcione en = como un vector <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> que contiene los nombres de las <em>nuevas</em> columnas, como se muestra a continuación.</p>
+<p>Digamos que tenemos un dataframe simple <code>df</code> (definido y unido en la <a href="characters-and-strings.html#str_unite">sección de unir columnas</a>) que contiene una columna <code>case_ID</code>, una columna de caracteres con muchos síntomas y una columna de resultados. Nuestro objetivo es separar la columna de <code>symptoms</code> en varias columnas, cada una de las cuales contiene un síntoma.</p>
+<div id="htmlwidget-a04d1cd41d358316adc8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a04d1cd41d358316adc8">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6],["jaundice, fever, chills","chills, aches, pains","fever","vomiting, diarrhoea","bleeding from gums, fever","rapid pulse, headache"],["Recover","Death","Death","Recover","Recover","Recover"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_ID<\/th>\n      <th>symptoms<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Asumiendo que los datos son canalizados en <code>separate()</code>, primero proporcione la columna a separar. A continuación, proporcione en = como un vector <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> que contiene los nombres de las <em>nuevas</em> columnas, como se muestra a continuación.</p>
 <ul>
 <li><p><code>sep =</code> el separador, puede ser un carácter, o un número (interpretado como la posición del carácter a dividir)</p></li>
 <li><p><code>remove =</code> FALSE por defecto, elimina la columna de entrada</p></li>
@@ -411,7 +410,7 @@
 <li><p><strong><code>extra = "merge"</code> sólo dividirá hasta el número de nuevas columnas listadas en <code>into</code> - <em>esta configuración preservará todos tus datos</em></strong></p></li>
 </ul>
 <p>A continuación se muestra un ejemplo con <code>extra = "merge"</code> - no se pierde ningún dato. Se definen dos nuevas columnas pero cualquier tercer síntoma se deja en la segunda columna nueva:</p>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># third symptoms combined into second new column</span>
 <span class="va">df</span> <span class="op">%&gt;%</span> 
   <span class="fu">separate</span><span class="op">(</span><span class="va">symptoms</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sym_1"</span>, <span class="st">"sym_2"</span><span class="op">)</span>, sep<span class="op">=</span><span class="st">","</span>, extra <span class="op">=</span> <span class="st">"merge"</span><span class="op">)</span></code></pre></div>
@@ -424,7 +423,7 @@
 ## 5       5 bleeding from gums          fever Recover
 ## 6       6        rapid pulse       headache Recover</code></pre>
 <p>Cuando se utiliza el <code>extra = "drop"</code> por defecto a continuación, se da una advertencia pero se pierden los terceros síntomas:</p>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># third symptoms are lost</span>
 <span class="va">df</span> <span class="op">%&gt;%</span> 
   <span class="fu">separate</span><span class="op">(</span><span class="va">symptoms</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sym_1"</span>, <span class="st">"sym_2"</span><span class="op">)</span>, sep<span class="op">=</span><span class="st">","</span><span class="op">)</span></code></pre></div>
@@ -437,21 +436,21 @@
 ## 4       4           vomiting  diarrhoea Recover
 ## 5       5 bleeding from gums      fever Recover
 ## 6       6        rapid pulse   headache Recover</code></pre>
-<p><strong><em>ATENCIÓN:</em></strong> Si no proporcionas suficientes valores <code>into</code> en las nuevas columnas, tus datos pueden quedar truncados. {style=“color: orange;”}</p>
+<p><span style="color: orange;"><strong><em>PRECAUCIÓN:</em></strong> Si no proporcionas suficientes valores <code>into</code> en las nuevas columnas, tus datos pueden quedar truncados. </span></p>
 <!-- ======================================================= -->
 </div>
 <div id="ordenar-alfabéticamente" class="section level3 unnumbered">
 <h3>Ordenar alfabéticamente<a class="anchor" aria-label="anchor" href="#ordenar-alfab%C3%A9ticamente"><i class="fas fa-link"></i></a>
 </h3>
 <p>Se pueden ordenar varias cadenas por orden alfabético. <code>str_order()</code> devuelve el orden, mientras que <code>str_sort()</code> devuelve las cadenas en ese orden.</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># strings</span>
 <span class="va">health_zones</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alba"</span>, <span class="st">"Takota"</span>, <span class="st">"Delta"</span><span class="op">)</span>
 
 <span class="co"># return the alphabetical order</span>
 <span class="fu">str_order</span><span class="op">(</span><span class="va">health_zones</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 1 3 2</code></pre>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># return the strings in alphabetical order</span>
 <span class="fu">str_sort</span><span class="op">(</span><span class="va">health_zones</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Alba"   "Delta"  "Takota"</code></pre>
@@ -462,7 +461,7 @@
 <h3>funciones R base<a class="anchor" aria-label="anchor" href="#funciones-r-base"><i class="fas fa-link"></i></a>
 </h3>
 <p>Es común ver las funciones de R <strong>base</strong> <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> y <code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code>, que concatenan vectores después de convertir todas las partes en caracteres. Actúan de forma similar a <code>str_c()</code> pero la sintaxis es posiblemente más complicada - en los paréntesis cada parte está separada por una coma. Las partes son o bien texto de carácter (entre comillas) o bien objetos de código predefinidos (sin comillas). Por ejemplo:</p>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_beds</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 <span class="va">n_masks</span> <span class="op">&lt;-</span> <span class="fl">20</span>
 
@@ -480,33 +479,32 @@
 <h3>Cambiar mayúsculas<a class="anchor" aria-label="anchor" href="#cambiar-may%C3%BAsculas"><i class="fas fa-link"></i></a>
 </h3>
 <p>A menudo hay que alterar las mayúsculas y minúsculas de un valor de cadena, por ejemplo los nombres de las jurisdicciones. Utiliza <code>str_to_upper()</code>, <code>str_to_lower()</code>, y <code>str_to_title()</code>, de <strong>stringr</strong>, como se muestra a continuación:</p>
-<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_to_upper</span><span class="op">(</span><span class="st">"California"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "CALIFORNIA"</code></pre>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_to_lower</span><span class="op">(</span><span class="st">"California"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "california"</code></pre>
 <p>Usando R <strong>base</strong>, lo anterior también se puede lograr con <code><a href="https://rdrr.io/r/base/chartr.html">toupper()</a></code>, <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code>.</p>
 <p><strong>Capitalización del título</strong></p>
 <p>Se puede transformar la cadena para que cada palabra esté en mayúsculas con <code>str_to_title()</code>:</p>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_to_title</span><span class="op">(</span><span class="st">"go to the US state of california "</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Go To The Us State Of California "</code></pre>
 <p>Utiliza <code>toTitleCase()</code> del paquete de <strong>tools</strong> para lograr una capitalización más matizada (palabras como “a”, “el” y “de” no se escriben en mayúsculas).</p>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/toTitleCase.html">toTitleCase</a></span><span class="op">(</span><span class="st">"This is the US state of california"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "This is the US State of California"</code></pre>
 <p>También puedes utilizar <code>str_to_sentence()</code>, que sólo pone en mayúsculas la primera letra de la cadena.</p>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_to_sentence</span><span class="op">(</span><span class="st">"the patient must be transported"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "The patient must be transported"</code></pre>
 </div>
 <div id="str_pad" class="section level3 unnumbered">
 <h3>Longitud de la cadena<a class="anchor" aria-label="anchor" href="#str_pad"><i class="fas fa-link"></i></a>
 </h3>
-<p>de la almohadilla</p>
 <p>Utiliza <code>str_pad()</code> para añadir caracteres a una cadena, con una longitud mínima. Por defecto se añaden espacios, pero también puedes rellenar con otros caracteres utilizando el argumento <code>pad =</code>.</p>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ICD codes of differing length</span>
 <span class="va">ICD_codes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"R10.13"</span>,
                <span class="st">"R10.819"</span>,
@@ -515,16 +513,16 @@
 <span class="co"># ICD codes padded to 7 characters on the right side</span>
 <span class="fu">str_pad</span><span class="op">(</span><span class="va">ICD_codes</span>, <span class="fl">7</span>, <span class="st">"right"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "R10.13 " "R10.819" "R17    "</code></pre>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Pad with periods instead of spaces</span>
 <span class="fu">str_pad</span><span class="op">(</span><span class="va">ICD_codes</span>, <span class="fl">7</span>, <span class="st">"right"</span>, pad <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "R10.13." "R10.819" "R17...."</code></pre>
 <p>Por ejemplo, para rellenar números con ceros a la izquierda (como en el caso de las horas o los minutos), puedes rellenar el número hasta una longitud mínima de 2 con pad = “0”.</p>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Add leading zeros to two digits (e.g. for times minutes/hours)</span>
 <span class="fu">str_pad</span><span class="op">(</span><span class="st">"4"</span>, <span class="fl">2</span>, pad <span class="op">=</span> <span class="st">"0"</span><span class="op">)</span> </code></pre></div>
 <pre><code>## [1] "04"</code></pre>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># example using a numeric column named "hours"</span>
 <span class="co"># hours &lt;- str_pad(hours, 2, pad = "0")</span></code></pre></div>
 </div>
@@ -532,7 +530,7 @@
 <h3>Truncar<a class="anchor" aria-label="anchor" href="#truncar"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>str_trunc()</code> establece una longitud máxima para cada cadena. Si una cadena supera esta longitud, se trunca (acorta) y se incluye una elipsis (…) para indicar que la cadena era antes más larga. Ten en cuenta que la elipsis <em>se</em> cuenta en la longitud. Los caracteres de la elipsis pueden cambiarse con el argumento <code>ellipsis =</code>. El argumento opcional side = especifica dónde aparecerá la elipsis dentro de la cadena truncada (“izquierda”, “derecha” o “centro”).</p>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">original</span> <span class="op">&lt;-</span> <span class="st">"Symptom onset on 4/3/2020 with vomiting"</span>
 <span class="fu">str_trunc</span><span class="op">(</span><span class="va">original</span>, <span class="fl">10</span>, <span class="st">"center"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Symp...ing"</code></pre>
@@ -541,7 +539,7 @@
 <h3>Normalizar la longitud<a class="anchor" aria-label="anchor" href="#normalizar-la-longitud"><i class="fas fa-link"></i></a>
 </h3>
 <p>Utiliza <code>str_trunc()</code> para establecer una longitud máxima y, a continuación, utiliza <code>str_pad()</code> para ampliar las cadenas muy cortas hasta esa longitud truncada. En el ejemplo siguiente, se establece 6 como longitud máxima (se trunca un valor), y luego se rellena un valor muy corto para alcanzar la longitud de 6.</p>
-<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ICD codes of differing length</span>
 <span class="va">ICD_codes</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"R10.13"</span>,
                  <span class="st">"R10.819"</span>,
@@ -551,7 +549,7 @@
 <span class="va">ICD_codes_2</span> <span class="op">&lt;-</span> <span class="fu">str_trunc</span><span class="op">(</span><span class="va">ICD_codes</span>, <span class="fl">6</span><span class="op">)</span>
 <span class="va">ICD_codes_2</span></code></pre></div>
 <pre><code>## [1] "R10.13" "R10..." "R17"</code></pre>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># expand to minimum length of 6</span>
 <span class="va">ICD_codes_3</span> <span class="op">&lt;-</span> <span class="fu">str_pad</span><span class="op">(</span><span class="va">ICD_codes_2</span>, <span class="fl">6</span>, <span class="st">"right"</span><span class="op">)</span>
 <span class="va">ICD_codes_3</span></code></pre></div>
@@ -561,7 +559,7 @@
 <h3>Eliminar los espacios en blanco iniciales y finales<a class="anchor" aria-label="anchor" href="#eliminar-los-espacios-en-blanco-iniciales-y-finales"><i class="fas fa-link"></i></a>
 </h3>
 <p>Utiliza <code>str_trim()</code> para eliminar los espacios, las nuevas líneas (<code>\n</code>) o los tabuladores (<code>\t</code>) de los lados de una cadena de entrada. Añade <code>"right"</code> <code>"left"</code>, o <code>"both"</code> al comando para especificar qué lado recortar (por ejemplo, <code>str_trim(x, "right")</code>.</p>
-<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ID numbers with excess spaces on right</span>
 <span class="va">IDs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"provA_1852  "</span>, <span class="co"># two excess spaces</span>
          <span class="st">"provA_2345"</span>,   <span class="co"># zero excess spaces</span>
@@ -575,32 +573,33 @@
 <h3>Eliminar los espacios en blanco repetidos en una cadena<a class="anchor" aria-label="anchor" href="#eliminar-los-espacios-en-blanco-repetidos-en-una-cadena"><i class="fas fa-link"></i></a>
 </h3>
 <p>Utiliza <code>str_squish()</code> para eliminar los espacios repetidos que aparecen <em>dentro</em> de una cadena. Por ejemplo, para convertir espacios dobles en espacios simples. También elimina espacios, nuevas líneas o tabulaciones en el exterior de la cadena como <code>str_trim()</code>.</p>
-<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># original contains excess spaces within string</span>
 <span class="fu">str_squish</span><span class="op">(</span><span class="st">"  Pt requires   IV saline\n"</span><span class="op">)</span> </code></pre></div>
 <pre><code>## [1] "Pt requires IV saline"</code></pre>
 <p>Escribe <code>?str_trim</code>, <code>?str_pad</code> en tu consola de R para ver más detalles.</p>
 </div>
-<div id="envolver-en-párrafos" class="section level3 unnumbered">
-<h3>Envolver en párrafos<a class="anchor" aria-label="anchor" href="#envolver-en-p%C3%A1rrafos"><i class="fas fa-link"></i></a>
+<div id="convertir-en-párrafos" class="section level3 unnumbered">
+<h3>convertir en párrafos<a class="anchor" aria-label="anchor" href="#convertir-en-p%C3%A1rrafos"><i class="fas fa-link"></i></a>
 </h3>
-<p>Utiliza <code>str_wrap()</code> para envolver un texto largo no estructurado en un párrafo estructurado con una longitud de línea fija. Proporciona la longitud de caracteres ideal para cada línea, y aplica un algoritmo para insertar nuevas líneas () dentro del párrafo, como se ve en el ejemplo siguiente.</p>
-<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pt_course</span> <span class="op">&lt;-</span> <span class="st">"Symptom onset 1/4/2020 vomiting chills fever. Pt saw traditional healer in home village on 2/4/2020. On 5/4/2020 pt symptoms worsened and was admitted to Lumta clinic. Sample was taken and pt was transported to regional hospital on 6/4/2020. Pt died at regional hospital on 7/4/2020."</span>
+<p>Utiliza <code>str_wrap()</code> para convertir un texto largo no estructurado en un párrafo estructurado con una longitud de línea fija. Proporciona la longitud de caracteres ideal para cada línea, y aplica un algoritmo para insertar nuevas líneas () dentro del párrafo, como se ve en el ejemplo siguiente.</p>
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pt_course</span> <span class="op">&lt;-</span> <span class="st">"Inicio de los síntomas 1/4/2020 vómitos escalofríos fiebre. La paciente consultó a un curandero tradicional en su pueblo natal el 2/4/2020. El 5/4/2020 los síntomas empeoraron y fue ingresada en la clínica Lumta. Se tomó una muestra y fue trasladada al hospital regional el 6/4/2020. La paciente murió en el hospital regional el 7/4/2020"</span>
 
 <span class="fu">str_wrap</span><span class="op">(</span><span class="va">pt_course</span>, <span class="fl">40</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "Symptom onset 1/4/2020 vomiting chills\nfever. Pt saw traditional healer in\nhome village on 2/4/2020. On 5/4/2020\npt symptoms worsened and was admitted\nto Lumta clinic. Sample was taken and pt\nwas transported to regional hospital on\n6/4/2020. Pt died at regional hospital\non 7/4/2020."</code></pre>
+<pre><code>## [1] "Inicio de los síntomas 1/4/2020 vómitos\nescalofríos fiebre. La paciente consultó\na un curandero tradicional en su pueblo\nnatal el 2/4/2020. El 5/4/2020 los\nsíntomas empeoraron y fue ingresada en\nla clínica Lumta. Se tomó una muestra\ny fue trasladada al hospital regional\nel 6/4/2020. La paciente murió en el\nhospital regional el 7/4/2020"</code></pre>
 <p>La función <strong>base</strong> <code><a href="https://rdrr.io/r/base/cat.html">cat()</a></code> puede envolver el comando anterior para imprimir la salida, mostrando las nuevas líneas añadidas.</p>
-<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu">str_wrap</span><span class="op">(</span><span class="va">pt_course</span>, <span class="fl">40</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## Symptom onset 1/4/2020 vomiting chills
-## fever. Pt saw traditional healer in
-## home village on 2/4/2020. On 5/4/2020
-## pt symptoms worsened and was admitted
-## to Lumta clinic. Sample was taken and pt
-## was transported to regional hospital on
-## 6/4/2020. Pt died at regional hospital
-## on 7/4/2020.</code></pre>
+<pre><code>## Inicio de los síntomas 1/4/2020 vómitos
+## escalofríos fiebre. La paciente consultó
+## a un curandero tradicional en su pueblo
+## natal el 2/4/2020. El 5/4/2020 los
+## síntomas empeoraron y fue ingresada en
+## la clínica Lumta. Se tomó una muestra
+## y fue trasladada al hospital regional
+## el 6/4/2020. La paciente murió en el
+## hospital regional el 7/4/2020</code></pre>
 <!-- ======================================================= -->
 </div>
 </div>
@@ -625,23 +624,23 @@
 <li><p>Las posiciones que se extienden más allá de la cadena serán truncadas (eliminadas).</p></li>
 </ul>
 <p>A continuación se muestran algunos ejemplos aplicados a la cadena “pneumonia”:</p>
-<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># start and end third from left (3rd letter from left)</span>
 <span class="fu">str_sub</span><span class="op">(</span><span class="st">"pneumonia"</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "e"</code></pre>
-<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 0 is not present</span>
 <span class="fu">str_sub</span><span class="op">(</span><span class="st">"pneumonia"</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] ""</code></pre>
-<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 6th from left, to the 1st from right</span>
 <span class="fu">str_sub</span><span class="op">(</span><span class="st">"pneumonia"</span>, <span class="fl">6</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "onia"</code></pre>
-<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 5th from right, to the 2nd from right</span>
 <span class="fu">str_sub</span><span class="op">(</span><span class="st">"pneumonia"</span>, <span class="op">-</span><span class="fl">5</span>, <span class="op">-</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "moni"</code></pre>
-<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 4th from left to a position outside the string</span>
 <span class="fu">str_sub</span><span class="op">(</span><span class="st">"pneumonia"</span>, <span class="fl">4</span>, <span class="fl">15</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "umonia"</code></pre>
@@ -651,7 +650,7 @@
 </h3>
 <p>Para extraer la enésima ‘palabra’, utiliza <code>word()</code>, también de <strong>stringr</strong>. Proporciona la(s) cadena(s), luego la primera y la última posición de la palabra a extraer.</p>
 <p>Por defecto, se asume que el separador entre ‘palabras’ es un espacio, a menos que se indique lo contrario con <code>sep =</code> (por ejemplo, <code>sep = "_"</code> cuando las palabras están separadas por barra baja.</p>
-<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># strings to evaluate</span>
 <span class="va">chief_complaints</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"I just got out of the hospital 2 days ago, but still can barely breathe."</span>,
                       <span class="st">"My stomach hurts"</span>,
@@ -665,7 +664,7 @@
 <h3>Sustituir por posición de carácter<a class="anchor" aria-label="anchor" href="#sustituir-por-posici%C3%B3n-de-car%C3%A1cter"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>str_sub()</code> emparejado con el operador de asignación (<code>&lt;-</code>) puede utilizarse para modificar una parte de una cadena:</p>
-<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">word</span> <span class="op">&lt;-</span> <span class="st">"pneumonia"</span>
 
 <span class="co"># convert the third and fourth characters to X </span>
@@ -675,7 +674,7 @@
 <span class="va">word</span></code></pre></div>
 <pre><code>## [1] "pnXXmonia"</code></pre>
 <p>Un ejemplo aplicado a varias cadenas (por ejemplo, una columna). Obsérvese la ampliación de la longitud de “HIV”.</p>
-<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">words</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pneumonia"</span>, <span class="st">"tubercolosis"</span>, <span class="st">"HIV"</span><span class="op">)</span>
 
 <span class="co"># convert the third and fourth characters to X </span>
@@ -687,7 +686,7 @@
 <div id="evaluar-la-longitud" class="section level3 unnumbered">
 <h3>Evaluar la longitud<a class="anchor" aria-label="anchor" href="#evaluar-la-longitud"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_length</span><span class="op">(</span><span class="st">"abc"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>Como alternativa, utiliza <code><a href="https://rdrr.io/r/base/nchar.html">nchar()</a></code> de R <strong>base</strong></p>
@@ -704,19 +703,19 @@
 <h3>Detectar un patrón<a class="anchor" aria-label="anchor" href="#detectar-un-patr%C3%B3n"><i class="fas fa-link"></i></a>
 </h3>
 <p>Utiliza <code>str_detect()</code> como se indica a continuación para detectar la presencia/ausencia de un patrón dentro de una cadena. Primero proporcione la cadena o vector a buscar (<code>string =</code>), y luego el patrón a buscar (<code>pattern =</code>). Ten en cuenta que, por defecto, la búsqueda <em>distingue entre mayúsculas y minúsculas</em>.</p>
-<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_detect</span><span class="op">(</span>string <span class="op">=</span> <span class="st">"primary school teacher"</span>, pattern <span class="op">=</span> <span class="st">"teach"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Se puede incluir el argumento <code>negate =</code> y ponerlo a <code>TRUE</code> si se quiere saber si el patrón NO está presente.</p>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_detect</span><span class="op">(</span>string <span class="op">=</span> <span class="st">"primary school teacher"</span>, pattern <span class="op">=</span> <span class="st">"teach"</span>, negate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>Para ignorar las mayúsculas y minúsculas, envuelva el patrón dentro de <code><a href="https://rdrr.io/r/base/regex.html">regex()</a></code>, y <em>dentro</em> de <code><a href="https://rdrr.io/r/base/regex.html">regex()</a></code> añade el argumento <code>ignore_case = TRUE</code> (o <code>T</code> como abreviatura).</p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_detect</span><span class="op">(</span>string <span class="op">=</span> <span class="st">"Teacher"</span>, pattern <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/regex.html">regex</a></span><span class="op">(</span><span class="st">"teach"</span>, ignore_case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Cuando <code>str_detect()</code> se aplica a un vector de caracteres o a una columna de un dataframe, devolverá TRUE o FALSE para cada uno de los valores.</p>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># a vector/column of occupations </span>
 <span class="va">occupations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"field laborer"</span>,
                  <span class="st">"university professor"</span>,
@@ -733,15 +732,15 @@
 <span class="fu">str_detect</span><span class="op">(</span><span class="va">occupations</span>, <span class="st">"teach"</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
 <p>Si necesitas contar los <code>TRUE</code>, simplemente <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> la salida. Esto cuenta el número de <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">occupations</span>, <span class="st">"teach"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<p>Para buscar con varios términos, inclúyalos separados por barras OR (<code>|</code>) dentro del argumento <code>pattern =</code>, como se muestra a continuación:</p>
-<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<p>Para buscar con varios términos, inclúyelos separados por barras O (<code>|</code>) dentro del argumento <code>pattern =</code>, como se muestra a continuación:</p>
+<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span>string <span class="op">=</span> <span class="va">occupations</span>, pattern <span class="op">=</span> <span class="st">"teach|professor|tutor"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>Si necesitas construir una larga lista de términos de búsqueda, puede combinarlos usando <code>str_c()</code> y <code>sep = |</code>, luego definir esto es un objeto de caracteres, y luego referenciar el vector más adelante de manera más sucinta. El ejemplo siguiente incluye posibles términos de búsqueda de ocupación para proveedores médicos de primera línea.</p>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># search terms</span>
 <span class="va">occupation_med_frontline</span> <span class="op">&lt;-</span> <span class="fu">str_c</span><span class="op">(</span><span class="st">"medical"</span>, <span class="st">"medicine"</span>, <span class="st">"hcw"</span>, <span class="st">"healthcare"</span>, <span class="st">"home care"</span>, <span class="st">"home health"</span>,
                                 <span class="st">"surgeon"</span>, <span class="st">"doctor"</span>, <span class="st">"doc"</span>, <span class="st">"physician"</span>, <span class="st">"surgery"</span>, <span class="st">"peds"</span>, <span class="st">"pediatrician"</span>,
@@ -756,7 +755,7 @@
 <span class="va">occupation_med_frontline</span></code></pre></div>
 <pre><code>## [1] "medical|medicine|hcw|healthcare|home care|home health|surgeon|doctor|doc|physician|surgery|peds|pediatrician|intensivist|cardiologist|coroner|nurse|nursing|rn|lpn|cna|pa|physician assistant|mental health|emergency department technician|resp therapist|respiratory|phlebotomist|pharmacy|pharmacist|hospital|snf|rehabilitation|rehab|activity|elderly|subacute|sub acute|clinic|post acute|therapist|extended care|dental|dential|dentist"</code></pre>
 <p>Este comando devuelve el número de ocupaciones que contienen alguno de los términos de búsqueda para proveedores médicos de primera línea (<code>occupation_med_frontline</code>):</p>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span>string <span class="op">=</span> <span class="va">occupations</span>, pattern <span class="op">=</span> <span class="va">occupation_med_frontline</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p><strong>Funciones de búsqueda de cadenas en R base</strong></p>
@@ -767,7 +766,7 @@
 </h4>
 <p>He aquí un ejemplo de uso de <code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> para convertir comas en puntos en un vector de números. Esto podría ser útil si tus datos proceden de otras partes del mundo que no sean Estados Unidos o Gran Bretaña.</p>
 <p><code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> internamente actúa primero sobre <code>lengths</code> convirtiendo cualquier punto en sin espacio ““. El carácter de punto”.” tiene que ser “escapado” con dos barras inclinadas para significar realmente un punto, porque “.” en regex significa “cualquier carácter”. A continuación, el resultado (con sólo comas) se pasa a la función externa <code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> en la que las comas se sustituyen por puntos.</p>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2.454,56"</span>, <span class="st">"1,2"</span>, <span class="st">"6.096,5"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">","</span>,                <span class="co"># find commas     </span>
@@ -781,7 +780,7 @@
 <h3>Sustituir todo<a class="anchor" aria-label="anchor" href="#sustituir-todo"><i class="fas fa-link"></i></a>
 </h3>
 <p>Utiliza <code>str_replace_all()</code> como herramienta de “búsqueda y sustitución”. Primero, proporcione las cadenas a evaluar a <code>string =</code>, luego el patrón a reemplazar a <code>pattern =</code>, y luego el valor de reemplazo a <code>replacement =</code>. El ejemplo siguiente reemplaza todas las instancias de “dead” con “deceased”. Ten en cuenta que esto distingue entre mayúsculas y minúsculas.</p>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">outcome</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Karl: dead"</span>,
             <span class="st">"Samantha: dead"</span>,
             <span class="st">"Marco: not dead"</span><span class="op">)</span>
@@ -795,12 +794,12 @@
 </ul>
 <!-- ======================================================= -->
 </div>
-<div id="detect-within-logic" class="section level3 unnumbered">
-<h3>Detect within logic<a class="anchor" aria-label="anchor" href="#detect-within-logic"><i class="fas fa-link"></i></a>
+<div id="detectar-con-lógica" class="section level3 unnumbered">
+<h3>Detectar con lógica<a class="anchor" aria-label="anchor" href="#detectar-con-l%C3%B3gica"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Dentro de case_when()</strong></p>
 <p><code>str_detect()</code> se utiliza a menudo dentro de <code>case_when()</code> (de <strong>dplyr</strong>). Digamos que ocupaciones es una columna en linelist. La función <code>mutate()</code> de abajo crea una nueva columna llamada <code>is_educator</code> utilizando la lógica condicional a través de <code>case_when()</code>. Mirala página sobre limpieza de datos para aprender más sobre <code>case_when()</code>.</p>
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>is_educator <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
     <span class="co"># term search within occupation, not case sensitive</span>
@@ -810,36 +809,36 @@
     <span class="co"># all others</span>
     <span class="cn">TRUE</span>                                               <span class="op">~</span> <span class="st">"Not an educator"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Como recordatorio, puede ser importante añadir criterios de exclusión a la lógica condicional (<code>negate = F</code>):</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="characters-and-strings.html#cb345-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb345-2"><a href="characters-and-strings.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># value in new column is_educator is based on conditional logic</span></span>
-<span id="cb345-3"><a href="characters-and-strings.html#cb345-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_educator =</span> <span class="fu">case_when</span>(</span>
-<span id="cb345-4"><a href="characters-and-strings.html#cb345-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb345-5"><a href="characters-and-strings.html#cb345-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># occupation column must meet 2 criteria to be assigned "Educator":</span></span>
-<span id="cb345-6"><a href="characters-and-strings.html#cb345-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># it must have a search term AND NOT any exclusion term</span></span>
-<span id="cb345-7"><a href="characters-and-strings.html#cb345-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb345-8"><a href="characters-and-strings.html#cb345-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Must have a search term</span></span>
-<span id="cb345-9"><a href="characters-and-strings.html#cb345-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(occupations,</span>
-<span id="cb345-10"><a href="characters-and-strings.html#cb345-10" aria-hidden="true" tabindex="-1"></a>               <span class="fu">regex</span>(<span class="st">"teach|prof|tutor|university"</span>, <span class="at">ignore_case =</span> T)) <span class="sc">&amp;</span>              </span>
-<span id="cb345-11"><a href="characters-and-strings.html#cb345-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb345-12"><a href="characters-and-strings.html#cb345-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># AND must NOT have an exclusion term</span></span>
-<span id="cb345-13"><a href="characters-and-strings.html#cb345-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(occupations,</span>
-<span id="cb345-14"><a href="characters-and-strings.html#cb345-14" aria-hidden="true" tabindex="-1"></a>               <span class="fu">regex</span>(<span class="st">"admin"</span>, <span class="at">ignore_case =</span> T),</span>
-<span id="cb345-15"><a href="characters-and-strings.html#cb345-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">negate =</span> <span class="cn">TRUE</span>                        <span class="sc">~</span> <span class="st">"Educator"</span></span>
-<span id="cb345-16"><a href="characters-and-strings.html#cb345-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb345-17"><a href="characters-and-strings.html#cb345-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># All rows not meeting above criteria</span></span>
-<span id="cb345-18"><a href="characters-and-strings.html#cb345-18" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>                                            <span class="sc">~</span> <span class="st">"Not an educator"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="characters-and-strings.html#cb425-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb425-2"><a href="characters-and-strings.html#cb425-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># value in new column is_educator is based on conditional logic</span></span>
+<span id="cb425-3"><a href="characters-and-strings.html#cb425-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_educator =</span> <span class="fu">case_when</span>(</span>
+<span id="cb425-4"><a href="characters-and-strings.html#cb425-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb425-5"><a href="characters-and-strings.html#cb425-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># occupation column must meet 2 criteria to be assigned "Educator":</span></span>
+<span id="cb425-6"><a href="characters-and-strings.html#cb425-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># it must have a search term AND NOT any exclusion term</span></span>
+<span id="cb425-7"><a href="characters-and-strings.html#cb425-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb425-8"><a href="characters-and-strings.html#cb425-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Must have a search term</span></span>
+<span id="cb425-9"><a href="characters-and-strings.html#cb425-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(occupations,</span>
+<span id="cb425-10"><a href="characters-and-strings.html#cb425-10" aria-hidden="true" tabindex="-1"></a>               <span class="fu">regex</span>(<span class="st">"teach|prof|tutor|university"</span>, <span class="at">ignore_case =</span> T)) <span class="sc">&amp;</span>              </span>
+<span id="cb425-11"><a href="characters-and-strings.html#cb425-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb425-12"><a href="characters-and-strings.html#cb425-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># AND must NOT have an exclusion term</span></span>
+<span id="cb425-13"><a href="characters-and-strings.html#cb425-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(occupations,</span>
+<span id="cb425-14"><a href="characters-and-strings.html#cb425-14" aria-hidden="true" tabindex="-1"></a>               <span class="fu">regex</span>(<span class="st">"admin"</span>, <span class="at">ignore_case =</span> T),</span>
+<span id="cb425-15"><a href="characters-and-strings.html#cb425-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">negate =</span> <span class="cn">TRUE</span>                        <span class="sc">~</span> <span class="st">"Educator"</span></span>
+<span id="cb425-16"><a href="characters-and-strings.html#cb425-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb425-17"><a href="characters-and-strings.html#cb425-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># All rows not meeting above criteria</span></span>
+<span id="cb425-18"><a href="characters-and-strings.html#cb425-18" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>                                            <span class="sc">~</span> <span class="st">"Not an educator"</span>))</span></code></pre></div>
 <!-- ======================================================= -->
 </div>
 <div id="localizar-la-posición-de-un-patrón" class="section level3 unnumbered">
 <h3>Localizar la posición de un patrón<a class="anchor" aria-label="anchor" href="#localizar-la-posici%C3%B3n-de-un-patr%C3%B3n"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para localizar la <em>primera</em> posición de un patrón, utiliza <code>str_locate()</code>. Esta función da como resultado una posición inicial y una final.</p>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_locate</span><span class="op">(</span><span class="st">"I wish"</span>, <span class="st">"sh"</span><span class="op">)</span></code></pre></div>
 <pre><code>##      start end
 ## [1,]     5   6</code></pre>
 <p>Al igual que otras funciones <code>str</code>, existe una versión “_all” (<code>str_locate_all()</code>) que devolverá las posiciones de <em>todas</em> las instancias del patrón dentro de cada cadena. La salida es una <code>lista</code>.</p>
-<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">phrases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"I wish"</span>, <span class="st">"I hope"</span>, <span class="st">"he hopes"</span>, <span class="st">"He hopes"</span><span class="op">)</span>
 
 <span class="fu">str_locate</span><span class="op">(</span><span class="va">phrases</span>, <span class="st">"h"</span> <span class="op">)</span>     <span class="co"># position of *first* instance of the pattern</span></code></pre></div>
@@ -848,7 +847,7 @@
 ## [2,]     3   3
 ## [3,]     1   1
 ## [4,]     4   4</code></pre>
-<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_locate_all</span><span class="op">(</span><span class="va">phrases</span>, <span class="st">"h"</span> <span class="op">)</span> <span class="co"># position of *every* instance of the pattern</span></code></pre></div>
 <pre><code>## [[1]]
 ##      start end
@@ -873,7 +872,7 @@
 </h3>
 <p><code>str_extract_all()</code> devuelve los patrones coincidentes en sí mismos, lo que resulta muy útil cuando se han ofrecido varios patrones mediante condiciones “OR”. Por ejemplo, buscando en el vector de cadenas de ocupaciones (véase la pestaña anterior) <em>cualquiera</em> “enseñ”, “profesor” o “tutor”.</p>
 <p><code>str_extract_all()</code> devuelve una <code>lista</code> que contiene <em>todas las coincidencias</em> de cada cadena evaluada. Mira a continuación cómo la ocupación 3 tiene dos coincidencias de patrón dentro de ella.</p>
-<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_extract_all</span><span class="op">(</span><span class="va">occupations</span>, <span class="st">"teach|prof|tutor"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [[1]]
 ## character(0)
@@ -905,7 +904,7 @@
 ## [[10]]
 ## character(0)</code></pre>
 <p><code>str_extract()</code> extrae <em>sólo la primera coincidencia</em> en cada cadena evaluada, produciendo un vector de caracteres con un elemento por cada cadena evaluada. Devuelve NA cuando no hay coincidencias. Los <code>NA</code>s pueden ser eliminados envolviendo el vector devuelto con <code><a href="https://rdrr.io/r/stats/na.fail.html">na.exclude()</a></code>. Observe cómo la segunda de las coincidencias de la ocupación 3 no se muestra.</p>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_extract</span><span class="op">(</span><span class="va">occupations</span>, <span class="st">"teach|prof|tutor"</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] NA      "prof"  "teach" "tutor" NA      NA      NA      NA      NA      NA</code></pre>
 <!-- ======================================================= -->
@@ -915,11 +914,12 @@
 </h3>
 <p>Las funciones alineadas incluyen <code>str_subset()</code> y <code>str_count()</code>.</p>
 <p><code>str_subset()</code> devuelve los valores reales que contienen el patrón:</p>
-<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_subset</span><span class="op">(</span><span class="va">occupations</span>, <span class="st">"teach|prof|tutor"</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "university professor"           "primary school teacher &amp; tutor" "tutor"</code></pre>
+<pre><code>## [1] "university professor"           "primary school teacher &amp; tutor"
+## [3] "tutor"</code></pre>
 <p><code>str_count()</code> devuelve un vector de números: el <strong>número de veces</strong> que aparece un término de búsqueda en cada valor evaluado.</p>
-<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_count</span><span class="op">(</span><span class="va">occupations</span>, <span class="fu"><a href="https://rdrr.io/r/base/regex.html">regex</a></span><span class="op">(</span><span class="st">"teach|prof|tutor"</span>, ignore_case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] 0 1 2 1 0 0 0 0 0 0</code></pre>
 <!-- ======================================================= -->
@@ -933,11 +933,11 @@
 </div>
 <div id="special-characters" class="section level2" number="10.6">
 <h2>
-<span class="header-section-number">10.6</span> Special characters<a class="anchor" aria-label="anchor" href="#special-characters"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.6</span> Caracteres especiales<a class="anchor" aria-label="anchor" href="#special-characters"><i class="fas fa-link"></i></a>
 </h2>
-<p><strong>Barra invertida <code>\</code> como escape</strong></p>
+<p><strong>Barra invertida <code>\</code> como código de escape</strong></p>
 <p>La barra invertida <code>\</code> se utiliza para “escapar” del significado del siguiente carácter. De este modo, se puede utilizar una barra invertida para que una comilla aparezca <em>dentro</em> de otras comillas (<code>\"</code>) - la comilla del medio no “romperá” las comillas circundantes.</p>
-<p>Nota - por lo tanto, si quiere <em>mostrar una barra</em> invertida, debe escapar su significado con <em>otra</em> barra invertida. Así que debe escribir dos barras invertidas <code>\\</code> para mostrar uno.</p>
+<p>Nota - por lo tanto, si quieres <em>mostrar una barra</em> invertida, debes escapar su significado con <em>otra</em> barra invertida. Así que debes escribir dos barras invertidas <code>\\</code> para mostrar una.</p>
 <p><strong>Caracteres especiales</strong></p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
@@ -1034,8 +1034,8 @@
 </tbody>
 </table></div>
 <p>Los conjuntos de caracteres pueden combinarse dentro de un paréntesis (¡sin espacios!), como <code>"[A-Za-z]"</code> (cualquier letra mayúscula o minúscula), u otro ejemplo <code>"[t-z0-5]"</code> (de la t a la z en minúscula o del número 0 al 5).</p>
-<p><strong>Meta characters</strong></p>
-<p>Meta characters are shorthand for character sets. Some of the important ones are listed below:</p>
+<p><strong>Meta caracteres</strong></p>
+<p>Los metacaracteres son la abreviatura de los juegos de caracteres. A continuación se enumeran algunos de los más importantes:</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th>Meta carácter</th>
@@ -1067,34 +1067,34 @@
 <li><p>Preceder con un asterisco <code>*</code> para devolver <strong>cero o más</strong> coincidencias (útil si no está seguro de que el patrón está presente)</p></li>
 </ul>
 <p>Utilizando el símbolo <code>+</code> como cuantificador, la coincidencia se producirá hasta que se encuentre un carácter diferente. Por ejemplo, esta expresión devolverá todas las <em>palabras</em> (caracteres alfa: <code>"[A-Za-z]+"</code></p>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># test string for quantifiers</span>
 <span class="va">test</span> <span class="op">&lt;-</span> <span class="st">"A-AA-AAA-AAAA"</span></code></pre></div>
 <p>Cuando se utiliza un cuantificador de {2}, sólo se devuelven los pares de A consecutivos. Se identifican dos pares dentro de <code>AAAA</code>.</p>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_extract_all</span><span class="op">(</span><span class="va">test</span>, <span class="st">"A{2}"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] "AA" "AA" "AA" "AA"</code></pre>
 <p>Cuando se utiliza un cuantificador de {2,4}, se devuelven grupos de A consecutivos de dos a cuatro.</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_extract_all</span><span class="op">(</span><span class="va">test</span>, <span class="st">"A{2,4}"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] "AA"   "AAA"  "AAAA"</code></pre>
 <p>Con el cuantificador <code>+</code>, se devuelven grupos de <strong>uno o más</strong>:</p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_extract_all</span><span class="op">(</span><span class="va">test</span>, <span class="st">"A+"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] "A"    "AA"   "AAA"  "AAAA"</code></pre>
 <p><strong>Posición relativa</strong></p>
 <p>Expresan los requisitos de lo que precede o sigue a un patrón. Por ejemplo, para extraer frases, “dos números que van seguidos de un punto” (<code>""</code>). (?&lt;=\.)\s(?=[A-Z])</p>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_extract_all</span><span class="op">(</span><span class="va">test</span>, <span class="st">""</span><span class="op">)</span></code></pre></div>
 <pre><code>## [[1]]
 ##  [1] "A" "-" "A" "A" "-" "A" "A" "A" "-" "A" "A" "A" "A"</code></pre>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
-<th>Position statement</th>
-<th>Matches to</th>
+<th>Definición posición</th>
+<th>Coincide con</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1119,20 +1119,25 @@
 <p>La captura de grupos en su expresión regular es una forma de tener una salida más organizada al momento de la extracción.</p>
 <p><strong>Ejemplos de Regex</strong></p>
 <p>A continuación se presenta un texto libre para los ejemplos. Intentaremos extraer información útil del mismo utilizando un término de búsqueda de expresión regular.</p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pt_note</span> <span class="op">&lt;-</span> <span class="st">"Patient arrived at Broward Hospital emergency ward at 18:00 on 6/12/2005. Patient presented with radiating abdominal pain from LR quadrant. Patient skin was pale, cool, and clammy. Patient temperature was 99.8 degrees farinheit. Patient pulse rate was 100 bpm and thready. Respiratory rate was 29 per minute."</span></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pt_note</span> <span class="op">&lt;-</span> <span class="st">"El paciente llegó a la sala de urgencias del Broward Hospital a las 18:00 horas del 6/12/2005. Se presentó con dolor abdominal irradiado desde el cuadrante LR. La piel estaba pálida, fría y húmeda. Su temperatura era de 99,8 grados Farinheit. El pulso era de 100 lpm y filiforme. La frecuencia respiratoria era de 29 por minuto"</span></code></pre></div>
 <p>Esta expresión coincide con todas las palabras (cualquier carácter hasta llegar a un no carácter como un espacio):</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_extract_all</span><span class="op">(</span><span class="va">pt_note</span>, <span class="st">"[A-Za-z]+"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [[1]]
-##  [1] "Patient"     "arrived"     "at"          "Broward"     "Hospital"    "emergency"   "ward"        "at"         
-##  [9] "on"          "Patient"     "presented"   "with"        "radiating"   "abdominal"   "pain"        "from"       
-## [17] "LR"          "quadrant"    "Patient"     "skin"        "was"         "pale"        "cool"        "and"        
-## [25] "clammy"      "Patient"     "temperature" "was"         "degrees"     "farinheit"   "Patient"     "pulse"      
-## [33] "rate"        "was"         "bpm"         "and"         "thready"     "Respiratory" "rate"        "was"        
-## [41] "per"         "minute"</code></pre>
-<p>The expression <code>"[0-9]{1,2}"</code> matches to consecutive numbers that are 1 or 2 digits in length. It could also be written <code>"\\d{1,2}"</code>, or <code>"[:digit:]{1,2}"</code>.</p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+##  [1] "El"           "paciente"     "lleg"         "a"            "la"          
+##  [6] "sala"         "de"           "urgencias"    "del"          "Broward"     
+## [11] "Hospital"     "a"            "las"          "horas"        "del"         
+## [16] "Se"           "present"      "con"          "dolor"        "abdominal"   
+## [21] "irradiado"    "desde"        "el"           "cuadrante"    "LR"          
+## [26] "La"           "piel"         "estaba"       "p"            "lida"        
+## [31] "fr"           "a"            "y"            "h"            "meda"        
+## [36] "Su"           "temperatura"  "era"          "de"           "grados"      
+## [41] "Farinheit"    "El"           "pulso"        "era"          "de"          
+## [46] "lpm"          "y"            "filiforme"    "La"           "frecuencia"  
+## [51] "respiratoria" "era"          "de"           "por"          "minuto"</code></pre>
+<p>La expresión <code>"[0-9]{1,2}"</code> coincide con números consecutivos de 1 o 2 dígitos. También podría escribirse <code>"\\d{1,2}"</code>, o <code>"[:digit:]{1,2}"</code>.</p>
+<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">str_extract_all</span><span class="op">(</span><span class="va">pt_note</span>, <span class="st">"[0-9]{1,2}"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [[1]]
 ##  [1] "18" "00" "6"  "12" "20" "05" "99" "8"  "10" "0"  "29"</code></pre>
@@ -1140,8 +1145,8 @@
 <!-- ```{r} -->
 <!-- str_extract_all(pt_note, "[A-Z][a-z]+\\s\\w+\\s\\d{1,2}\\s\\w+\\s*\\w*") -->
 <!-- ``` -->
-<p>You can view a useful list of regex expressions and tips on page 2 of <a href="https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf">this cheatsheet</a></p>
-<p>Also see this <a href="https://towardsdatascience.com/a-gentle-introduction-to-regular-expressions-with-r-df5e897ca432">tutorial</a>.</p>
+<p>Puedes ver una lista útil de expresiones regex y consejos en la página 2 de <a href="https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf">esta hoja de trucos</a></p>
+<p>Mira también este <a href="https://towardsdatascience.com/a-gentle-introduction-to-regular-expressions-with-r-df5e897ca432">tutorial</a>.</p>
 <!-- ======================================================= -->
 </div>
 <div id="resources-3" class="section level2" number="10.9">
@@ -1163,14 +1168,14 @@
 <li>
 <a class="nav-link" href="#preparation-1"><span class="header-section-number">10.1</span> Preparación</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cargar-paquetes-1">Cargar paquetes</a></li>
-<li><a class="nav-link" href="#importar-datos-2">Importar datos</a></li>
+<li><a class="nav-link" href="#importar-datos-1">Importar datos</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#unite-split-and-arrange"><span class="header-section-number">10.2</span> Unir, dividir y ordenar</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#combinar-cadenas">Combinar cadenas</a></li>
 <li><a class="nav-link" href="#cadenas-din%C3%A1micas">Cadenas dinámicas</a></li>
-<li><a class="nav-link" href="#str_unite"><span class="header-section-number">10.2.1</span> Unir columnas</a></li>
+<li><a class="nav-link" href="#str_unite">Unir columnas</a></li>
 <li><a class="nav-link" href="#dividir">Dividir</a></li>
 <li><a class="nav-link" href="#dividir-columnas">Dividir columnas</a></li>
 <li><a class="nav-link" href="#ordenar-alfab%C3%A9ticamente">Ordenar alfabéticamente</a></li>
@@ -1185,7 +1190,7 @@
 <li><a class="nav-link" href="#normalizar-la-longitud">Normalizar la longitud</a></li>
 <li><a class="nav-link" href="#eliminar-los-espacios-en-blanco-iniciales-y-finales">Eliminar los espacios en blanco iniciales y finales</a></li>
 <li><a class="nav-link" href="#eliminar-los-espacios-en-blanco-repetidos-en-una-cadena">Eliminar los espacios en blanco repetidos en una cadena</a></li>
-<li><a class="nav-link" href="#envolver-en-p%C3%A1rrafos">Envolver en párrafos</a></li>
+<li><a class="nav-link" href="#convertir-en-p%C3%A1rrafos">convertir en párrafos</a></li>
 </ul>
 </li>
 <li>
@@ -1200,14 +1205,14 @@
 <a class="nav-link" href="#patterns"><span class="header-section-number">10.5</span> Patrones</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#detectar-un-patr%C3%B3n">Detectar un patrón</a></li>
 <li><a class="nav-link" href="#sustituir-todo">Sustituir todo</a></li>
-<li><a class="nav-link" href="#detect-within-logic">Detect within logic</a></li>
+<li><a class="nav-link" href="#detectar-con-l%C3%B3gica">Detectar con lógica</a></li>
 <li><a class="nav-link" href="#localizar-la-posici%C3%B3n-de-un-patr%C3%B3n">Localizar la posición de un patrón</a></li>
 <li><a class="nav-link" href="#extraer-una-coincidencia">Extraer una coincidencia</a></li>
 <li><a class="nav-link" href="#subconjunto-y-recuento">Subconjunto y recuento</a></li>
 <li><a class="nav-link" href="#grupos-regex">Grupos Regex</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#special-characters"><span class="header-section-number">10.6</span> Special characters</a></li>
+<li><a class="nav-link" href="#special-characters"><span class="header-section-number">10.6</span> Caracteres especiales</a></li>
 <li><a class="nav-link" href="#regular-expressions-regex"><span class="header-section-number">10.7</span> Expresiones regulares (regex)</a></li>
 <li><a class="nav-link" href="#regex-and-special-characters"><span class="header-section-number">10.8</span> Regex y caracteres especiales</a></li>
 <li><a class="nav-link" href="#resources-3"><span class="header-section-number">10.9</span> Recursos</a></li>
@@ -1227,7 +1232,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-01-18.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

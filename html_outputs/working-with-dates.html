@@ -71,7 +71,7 @@
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
 <li><a class="" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="borrador.-agrupar-datos-grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos {grouping-data}</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
 <li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
 <li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></li>
 <li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
@@ -142,7 +142,7 @@
 <h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes"><i class="fas fa-link"></i></a>
 </h3>
 <p>Este trozo de código muestra la carga de paquetes necesaria para esta página. En este manual destacamos <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para su uso. También puede cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de R <strong>base</strong>. Consulta la página sobre los <a href="r-basics.html#r-basics">fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Checks if package is installed, installs if necessary, and loads package for current session</span>
 
 <span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span>
@@ -153,11 +153,11 @@
   <span class="va">tidyverse</span>,  <span class="co"># data management and visualization  </span>
   <span class="va">rio</span><span class="op">)</span>        <span class="co"># data import/export</span></code></pre></div>
 </div>
-<div id="importar-datos-1" class="section level3 unnumbered">
-<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-1"><i class="fas fa-link"></i></a>
+<div id="importar-datos" class="section level3 unnumbered">
+<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Importamos los datos de casos de una epidemia de ébola simulada. Si desea descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página de <a href="download-handbook-and-data.html#download-handbook-and-data">descarga de manuales y datos</a>. Asumimos que el archivo está en el directorio de trabajo, por lo que no se especifican subcarpetas en esta ruta de archivo.</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"linelist_cleaned.xlsx"</span><span class="op">)</span></code></pre></div>
 <!-- ======================================================= -->
 </div>
@@ -167,14 +167,14 @@
 <span class="header-section-number">9.2</span> Fecha actual<a class="anchor" aria-label="anchor" href="#current-date"><i class="fas fa-link"></i></a>
 </h2>
 <p>Puedes obtener la fecha actual del “sistema” o la fecha-hora del sistema de tu ordenador haciendo lo siguiente con R <strong>base</strong>.</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get the system date - this is a DATE class</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "2022-01-18"</code></pre>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<pre><code>## [1] "2022-02-01"</code></pre>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get the system time - this is a DATETIME class</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "2022-01-18 22:18:05 CET"</code></pre>
+<pre><code>## [1] "2022-02-01 15:00:45 CST"</code></pre>
 <p>Con el paquete <strong>lubridate</strong> también se pueden devolver con <code>today()</code> y <code>now()</code>, respectivamente. <code><a href="https://rdrr.io/r/base/date.html">date()</a></code> devuelve la fecha y la hora actuales con los nombres del día de la semana y del mes.</p>
 <!-- ======================================================= -->
 </div>
@@ -199,7 +199,7 @@
 <p>En <strong>primer</strong> lugar, comprueba el tipo de su columna con <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> de R <strong>base</strong> . Si no estás seguro o estás confundido sobre el tipo de datos (por ejemplo, ve “POSIXct”, etc.) puede ser más fácil convertir primero la columna al tipo Character con <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code>, y luego convertirla al tipo Date.</p>
 <p>En <strong>segundo</strong> lugar, dentro de la función <code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code>, utiliza el argumento <code>format =</code> para indicar a R el formato <em>actual</em> de los componentes de la fecha con caracteres - qué caracteres se refieren al mes, al día y al año, y cómo están separados. Si sus valores ya están en uno de los formatos de fecha estándar de R (“AAAA-MM-DD” o “AAAA/MM/DD”) el argumento <code>format =</code> no es necesario.</p>
 <p>Para usar <code>format =</code>, proporcione una cadena de caracteres (entre comillas) que represente el formato <em>actual</em> de la fecha utilizando las abreviaturas especiales “strptime” que aparecen a continuación. Por ejemplo, si sus fechas de caracteres están actualmente en el formato “DD/MM/AAAA”, como “24/04/1968”, entonces usaría <code>format = "%d/%m/%Y"</code> para convertir los valores en fechas. <strong>Es necesario poner el formato entre comillas. ¡Y no olvides las barras o guiones!</strong>.</p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Convert to class date</span>
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>date_onset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">date_of_onset</span>, format <span class="op">=</span> <span class="st">"%d/%m/%Y"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -231,31 +231,31 @@
 </h3>
 <p>La conversión de objetos de carácter a fechas puede facilitarse utilizando el paquete <strong>lubridate</strong>. Se trata de un paquete <strong>tidyverse</strong> diseñado para hacer que el trabajo con fechas y horas sea más sencillo y consistente que en R <strong>base</strong>. Por estas razones, <strong>lubridate</strong> se considera a menudo el paquete estándar de oro para las fechas y la hora, y se recomienda siempre que se trabaje con ellas.</p>
 <p>El paquete <strong>lubridate</strong> proporciona varias funciones de ayuda diferentes diseñadas para convertir objetos de caracteres en fechas de una manera intuitiva y más indulgente que especificando el formato en <code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code>. Estas funciones son específicas para el formato de fecha aproximado, pero permiten una variedad de separadores, y sinónimos para las fechas (por ejemplo, 01 vs Jan vs Enero) - se denominan según las abreviaturas de los formatos de fecha.</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install/load lubridate </span>
 <span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">lubridate</span><span class="op">)</span></code></pre></div>
 <p>La flexibilidad de la función <code>ymd()</code> convierte de forma flexible los valores de fecha suministrados como <strong>año, luego mes y luego día</strong>.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read date in year-month-day format</span>
 <span class="fu">ymd</span><span class="op">(</span><span class="st">"2020-10-11"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-10-11"</code></pre>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ymd</span><span class="op">(</span><span class="st">"20201011"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-10-11"</code></pre>
 <p>La función <code>mdy()</code> convierte de forma flexible los valores de fecha suministrados como <strong>mes, luego día y luego año</strong>.</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read date in month-day-year format</span>
 <span class="fu">mdy</span><span class="op">(</span><span class="st">"10/11/2020"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-10-11"</code></pre>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">mdy</span><span class="op">(</span><span class="st">"Oct 11 20"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-10-11"</code></pre>
 <p>La función <code>dmy()</code> convierte de forma flexible los valores de fecha suministrados como <strong>día, luego mes y luego año.</strong></p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read date in day-month-year format</span>
 <span class="fu">dmy</span><span class="op">(</span><span class="st">"11 10 2020"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-10-11"</code></pre>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">dmy</span><span class="op">(</span><span class="st">"11 October 2020"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-10-11"</code></pre>
 <!-- The `as.character()` and `as.Date()` commands can optionally be combined as:   -->
@@ -263,17 +263,17 @@
 <!-- linelist_cleaned$date_of_onset <- as.Date(as.character(linelist_cleaned$date_of_onset), format = "%d/%m/%Y") -->
 <!-- ``` -->
 <p>Si se utiliza la canalización, la conversión de una columna de caracteres a fechas con <strong>lubridate</strong> podría tener este aspecto:</p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>date_onset <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy</a></span><span class="op">(</span><span class="va">date_onset</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Una vez completado, puedes ejecutar <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> para verificar el tipo de la columna</p>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Check the class of the column</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">date_onset</span><span class="op">)</span>  </code></pre></div>
 <p>Una vez que los valores están en el tipo Fecha, R los mostrará por defecto en el formato estándar, que es AAAA-MM-DD.</p>
 <p>Ten en cuenta que las funciones anteriores funcionan mejor con años de 4 dígitos. Los años de 2 dígitos pueden producir resultados inesperados, ya que <strong>lubridate</strong> intenta adivinar el siglo.</p>
 <p>Para convertir un año de 2 dígitos en un año de 4 dígitos (todos en el mismo siglo) puedes convertirlo a tipo carácter y luego combinar los dígitos existentes con un prefijo usando <code>str_glue()</code> del paquete <strong>stringr</strong>. Ver <a href="characters-and-strings.html#characters-and-strings">Caracteres y cadenas</a>. A continuación, convierte a fecha.</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">two_digit_years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"15"</span>, <span class="st">"15"</span>, <span class="st">"16"</span>, <span class="st">"17"</span><span class="op">)</span>
 <span class="fu">str_glue</span><span class="op">(</span><span class="st">"20{two_digit_years}"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 2015
@@ -285,7 +285,7 @@
 <h3>Combinar columnas<a class="anchor" aria-label="anchor" href="#combinar-columnas"><i class="fas fa-link"></i></a>
 </h3>
 <p>Puedes utilizar las funciones de <strong>lubridate</strong> <code>make_date()</code> y <code>make_datetime()</code> para combinar varias columnas numéricas en una columna de fecha. Por ejemplo, si tiene columnas numéricas <code>onset_day</code>, <code>onset_month</code> y <code>onset_year</code> en el dataframe <code>linelist</code>:</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>onset_date <span class="op">=</span> <span class="fu">make_date</span><span class="op">(</span>year <span class="op">=</span> <span class="va">onset_year</span>, month <span class="op">=</span> <span class="va">onset_month</span>, day <span class="op">=</span> <span class="va">onset_day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <!-- ======================================================= -->
@@ -300,7 +300,7 @@
 <p>Las fechas de Excel suelen importarse a R como estos valores numéricos en lugar de como caracteres. Si los datos que has importado de Excel muestran las fechas como números o caracteres como “41369”… utiliza <code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code> (o la función <code>as_date()</code> de <strong>lubridate</strong>) para convertirlas, pero <strong>en lugar de suministrar un “formato” como el anterior, suministre la fecha de origen de Excel</strong> al argumento <code>origin =</code> .</p>
 <p>Esto no funcionará si la fecha de Excel se almacena en R como de tipo carácter, ¡así que asegúrate de que el número es de tipo numérico!.</p>
 <p><span style="color: black;"><strong><em>NOTA:</em></strong> Debes proporcionar la fecha de origen en el formato de fecha por defecto de R (“AAAA-MM-DD”).</span></p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># An example of providing the Excel 'origin date' when converting Excel number dates</span>
 <span class="va">data_cleaned</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>date_onset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">date_onset</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>   <span class="co"># ensure class is numeric</span>
@@ -313,7 +313,7 @@
 </h2>
 <p>La función <code>guess_dates()</code> del paquete <strong>linelist</strong> intenta leer una columna de fecha “desordenada” que contiene fechas en muchos formatos diferentes y convertir las fechas a un formato estándar. <a href="https://www.repidemicsconsortium.org/linelist/reference/guess_dates.html">Puedes leer más en línea sobre <code>guess_dates()</code></a>. Si <code>guess_dates()</code> aún no está disponible en CRAN para R 4.0.2, intenta instalarlo mediante <code>pacman::p_load_gh("reconhub/linelist")</code>.</p>
 <p>Por ejemplo <code>guess_dates</code> vería un vector de las siguientes fechas de caracteres “03 Ene 2018”, “07/03/1982”, y “08/20/85” y las convertiría al tipo Date como <code>2018-01-03</code>, <code>1982-03-07</code>, y <code>1985-08-20</code>.</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">linelist</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/linelist/man/guess_dates.html">guess_dates</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"03 Jan 2018"</span>,
                         <span class="st">"07/03/1982"</span>,
                         <span class="st">"08/20/85"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -322,14 +322,14 @@
 * <code>error_tolerance</code> - Proporción de entradas que no pueden ser identificadas como fechas a tolerar (por defecto 0,1 o 10%)
 * <code>last_date</code> - la última fecha válida (por defecto, la fecha actual)
 * <code>first_date</code> - la primera fecha válida. Por defecto, cincuenta años antes de last_date.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="working-with-dates.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># An example using guess_dates on the column dater_onset</span></span>
-<span id="cb174-2"><a href="working-with-dates.html#cb174-2" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist <span class="sc">%&gt;%</span>                 <span class="co"># the dataset is called linelist</span></span>
-<span id="cb174-3"><a href="working-with-dates.html#cb174-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb174-4"><a href="working-with-dates.html#cb174-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_onset =</span> linelist<span class="sc">::</span><span class="fu">guess_dates</span>(  <span class="co"># the guess_dates() from package "linelist"</span></span>
-<span id="cb174-5"><a href="working-with-dates.html#cb174-5" aria-hidden="true" tabindex="-1"></a>      date_onset,</span>
-<span id="cb174-6"><a href="working-with-dates.html#cb174-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">error_tolerance =</span> <span class="fl">0.1</span>,</span>
-<span id="cb174-7"><a href="working-with-dates.html#cb174-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">first_date =</span> <span class="st">"2016-01-01"</span></span>
-<span id="cb174-8"><a href="working-with-dates.html#cb174-8" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="working-with-dates.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="co"># An example using guess_dates on the column dater_onset</span></span>
+<span id="cb254-2"><a href="working-with-dates.html#cb254-2" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist <span class="sc">%&gt;%</span>                 <span class="co"># the dataset is called linelist</span></span>
+<span id="cb254-3"><a href="working-with-dates.html#cb254-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb254-4"><a href="working-with-dates.html#cb254-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_onset =</span> linelist<span class="sc">::</span><span class="fu">guess_dates</span>(  <span class="co"># the guess_dates() from package "linelist"</span></span>
+<span id="cb254-5"><a href="working-with-dates.html#cb254-5" aria-hidden="true" tabindex="-1"></a>      date_onset,</span>
+<span id="cb254-6"><a href="working-with-dates.html#cb254-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">error_tolerance =</span> <span class="fl">0.1</span>,</span>
+<span id="cb254-7"><a href="working-with-dates.html#cb254-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">first_date =</span> <span class="st">"2016-01-01"</span></span>
+<span id="cb254-8"><a href="working-with-dates.html#cb254-8" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <!-- ======================================================= -->
 </div>
 <div id="working-with-date-time-class" class="section level2" number="9.6">
@@ -343,22 +343,22 @@
 <p>Un objeto <code>datetime</code> estándar se formatea con la fecha en primer lugar, seguida de un componente de tiempo - por ejemplo, <em>01 Ene 2020, 16:30</em>. Al igual que con las fechas, hay muchas maneras de formatearlas, y hay numerosos niveles de precisión (horas, minutos, segundos) que se pueden suministrar.</p>
 <p>Por suerte, también existen funciones de ayuda <strong>de lubridate</strong> para ayudar a convertir estas cadenas en objetos <code>datetime</code>. Estas funciones son extensiones de las funciones de ayuda a la fecha, con <code>_h</code> (sólo se suministran las horas), <code>_hm</code> (se suministran las horas y los minutos), o <code>_hms</code> (se suministran las horas, los minutos y los segundos) añadidas al final (por ejemplo, <code>dmy_hms()</code>). Se pueden utilizar como se indica:</p>
 <p>Convertir <code>datetime</code> con sólo horas a objeto <code>datetime</code></p>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ymd_h</span><span class="op">(</span><span class="st">"2020-01-01 16hrs"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-01-01 16:00:00 UTC"</code></pre>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ymd_h</span><span class="op">(</span><span class="st">"2020-01-01 4PM"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-01-01 04:00:00 UTC"</code></pre>
 <p>Convertir <code>datetime</code> con horas y minutos a objeto <code>datetime</code></p>
-<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">dmy_hm</span><span class="op">(</span><span class="st">"01 January 2020 16:20"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-01-01 16:20:00 UTC"</code></pre>
 <p>Convertir <code>datetime</code> con horas, minutos y segundos a objeto <code>datetime</code></p>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">mdy_hms</span><span class="op">(</span><span class="st">"01 January 2020, 16:20:40"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-01-20 16:20:40 UTC"</code></pre>
 <p>Puedes indicar la zona horaria, pero se ignora. Consulta la sección más adelante en esta página sobre las zonas horarias.</p>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">mdy_hms</span><span class="op">(</span><span class="st">"01 January 2020, 16:20:40 PST"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-01-20 16:20:40 UTC"</code></pre>
 <p>Cuando se trabaja con un dataframe, las columnas de fecha y hora pueden combinarse para crear una columna de fecha y hora utilizando <code>str_glue()</code>del paquete <strong>stringr</strong> y una función apropiada de <strong>lubridate</strong> . Consulta la página sobre <a href="characters-and-strings.html#characters-and-strings">Caracteres y cadenas</a> para obtener detalles sobre <strong>stringr</strong>.</p>
@@ -366,33 +366,32 @@
 <ol style="list-style-type: decimal">
 <li>Cree una columna de tiempo de admisión “limpia” con los valores faltantes rellenados con la mediana de la columna. Hacemos esto porque <strong>lubridate</strong> no opera con valores faltantes. Combínela con la columna <code>date_hospitalisation</code> y utiliza la función <code>ymd_hm()</code> para convertirla.</li>
 </ol>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="working-with-dates.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="co"># packages</span></span>
-<span id="cb185-2"><a href="working-with-dates.html#cb185-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, lubridate, stringr)</span>
-<span id="cb185-3"><a href="working-with-dates.html#cb185-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb185-4"><a href="working-with-dates.html#cb185-4" aria-hidden="true" tabindex="-1"></a><span class="co"># time_admission is a column in hours:minutes</span></span>
-<span id="cb185-5"><a href="working-with-dates.html#cb185-5" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist <span class="sc">%&gt;%</span></span>
-<span id="cb185-6"><a href="working-with-dates.html#cb185-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb185-7"><a href="working-with-dates.html#cb185-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># when time of admission is not given, assign the median admission time</span></span>
-<span id="cb185-8"><a href="working-with-dates.html#cb185-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb185-9"><a href="working-with-dates.html#cb185-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">time_admission_clean =</span> <span class="fu">ifelse</span>(</span>
-<span id="cb185-10"><a href="working-with-dates.html#cb185-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(time_admission),         <span class="co"># if time is missing</span></span>
-<span id="cb185-11"><a href="working-with-dates.html#cb185-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">median</span>(time_admission),        <span class="co"># assign the median</span></span>
-<span id="cb185-12"><a href="working-with-dates.html#cb185-12" aria-hidden="true" tabindex="-1"></a>      time_admission                 <span class="co"># if not missing keep as is</span></span>
-<span id="cb185-13"><a href="working-with-dates.html#cb185-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb185-14"><a href="working-with-dates.html#cb185-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb185-15"><a href="working-with-dates.html#cb185-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># use str_glue() to combine date and time columns to create one character column</span></span>
-<span id="cb185-16"><a href="working-with-dates.html#cb185-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and then use ymd_hm() to convert it to datetime</span></span>
-<span id="cb185-17"><a href="working-with-dates.html#cb185-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb185-18"><a href="working-with-dates.html#cb185-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_time_of_admission =</span> <span class="fu">str_glue</span>(<span class="st">"{date_hospitalisation} {time_admission_clean}"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb185-19"><a href="working-with-dates.html#cb185-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ymd_hm</span>()</span>
-<span id="cb185-20"><a href="working-with-dates.html#cb185-20" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="working-with-dates.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="co"># packages</span></span>
+<span id="cb265-2"><a href="working-with-dates.html#cb265-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, lubridate, stringr)</span>
+<span id="cb265-3"><a href="working-with-dates.html#cb265-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb265-4"><a href="working-with-dates.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="co"># time_admission is a column in hours:minutes</span></span>
+<span id="cb265-5"><a href="working-with-dates.html#cb265-5" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist <span class="sc">%&gt;%</span></span>
+<span id="cb265-6"><a href="working-with-dates.html#cb265-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb265-7"><a href="working-with-dates.html#cb265-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># when time of admission is not given, assign the median admission time</span></span>
+<span id="cb265-8"><a href="working-with-dates.html#cb265-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb265-9"><a href="working-with-dates.html#cb265-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">time_admission_clean =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb265-10"><a href="working-with-dates.html#cb265-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(time_admission),         <span class="co"># if time is missing</span></span>
+<span id="cb265-11"><a href="working-with-dates.html#cb265-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">median</span>(time_admission),        <span class="co"># assign the median</span></span>
+<span id="cb265-12"><a href="working-with-dates.html#cb265-12" aria-hidden="true" tabindex="-1"></a>      time_admission                 <span class="co"># if not missing keep as is</span></span>
+<span id="cb265-13"><a href="working-with-dates.html#cb265-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb265-14"><a href="working-with-dates.html#cb265-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb265-15"><a href="working-with-dates.html#cb265-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># use str_glue() to combine date and time columns to create one character column</span></span>
+<span id="cb265-16"><a href="working-with-dates.html#cb265-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and then use ymd_hm() to convert it to datetime</span></span>
+<span id="cb265-17"><a href="working-with-dates.html#cb265-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb265-18"><a href="working-with-dates.html#cb265-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_time_of_admission =</span> <span class="fu">str_glue</span>(<span class="st">"{date_hospitalisation} {time_admission_clean}"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb265-19"><a href="working-with-dates.html#cb265-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ymd_hm</span>()</span>
+<span id="cb265-20"><a href="working-with-dates.html#cb265-20" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
-<div id="convertir-sólo-horas" class="section level3" number="9.6.1">
-<h3>
-<span class="header-section-number">9.6.1</span> Convertir sólo horas<a class="anchor" aria-label="anchor" href="#convertir-s%C3%B3lo-horas"><i class="fas fa-link"></i></a>
+<div id="convertir-sólo-horas" class="section level3 unnumbered">
+<h3>Convertir sólo horas<a class="anchor" aria-label="anchor" href="#convertir-s%C3%B3lo-horas"><i class="fas fa-link"></i></a>
 </h3>
 <p>Si tus datos contienen sólo un carácter de tiempo (horas y minutos), puedes convertirlos y manipularlos como tiempos utilizando <code><a href="https://rdrr.io/r/base/strptime.html">strptime()</a></code> desde R <strong>base</strong>. Por ejemplo, para obtener la diferencia entre dos de estos horas:</p>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># raw character times</span>
 <span class="va">time1</span> <span class="op">&lt;-</span> <span class="st">"13:45"</span> 
 <span class="va">time2</span> <span class="op">&lt;-</span> <span class="st">"15:20"</span>
@@ -405,14 +404,14 @@
 <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">time2_clean</span> <span class="op">-</span> <span class="va">time1_clean</span><span class="op">)</span>   <span class="co"># difference in hours</span></code></pre></div>
 <pre><code>## [1] 1.583333</code></pre>
 <p>Sin embargo, ten en cuenta que si no se proporciona un valor de fecha, se asume que la fecha es hoy. Para combinar una cadena de fecha y una cadena de hora, vea cómo usar <strong>stringr</strong> en la sección anterior. Lea más sobre <code><a href="https://rdrr.io/r/base/strptime.html">strptime()</a></code> <a href="https://rdrr.io/r/base/strptime.html">aquí</a>.</p>
-<p>Para convertir números de un solo dígito a dos dígitos (por ejemplo, para “rellenar” las horas o los minutos con ceros a la izquierda para conseguir 2 dígitos), consulta la sección “Longitud de relleno” de la página <a href="characters-and-strings.html#str_pad#str_pad">Caracteres y cadenas</a>.</p>
+<p>Para convertir números de un solo dígito a dos dígitos (por ejemplo, para “rellenar” las horas o los minutos con ceros a la izquierda para conseguir 2 dígitos), consulta la <a href="characters-and-strings.html#str_pad">sección “Longitud de relleno” de la página Caracteres y cadenas</a>.</p>
 </div>
 <div id="extraer-fracciones-de-hora" class="section level3 unnumbered">
 <h3>Extraer fracciones de hora<a class="anchor" aria-label="anchor" href="#extraer-fracciones-de-hora"><i class="fas fa-link"></i></a>
 </h3>
 <p>Puedes extraer elementos de una hora con <code>hour()</code>, <code>minute()</code>, or <code>second()</code> de <strong>lubridate</strong>.</p>
 <p>He aquí un ejemplo de extracción de la hora y posterior clasificación por parte del día. Comenzamos con la columna <code>time_admission</code>, que es de tipo Carácter en formato “HH:MM”. En primer lugar, se utiliza <code><a href="https://rdrr.io/r/base/strptime.html">strptime()</a></code> como se ha descrito anteriormente para convertir los caracteres en <code>tipo datetime</code>. A continuación, se extrae la hora con <code>hour()</code>, devolviendo un número del 0 al 24. Por último, se crea una columna <code>time_period</code> utilizando la lógica con <code>case_when()</code> para clasificar las filas en Mañana/Tarde/Tarde/Noche en función de su hora de entrada.</p>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>hour_admit <span class="op">=</span> <span class="fu">hour</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strptime.html">strptime</a></span><span class="op">(</span><span class="va">time_admission</span>, format <span class="op">=</span> <span class="st">"%H:%M"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>time_period <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
@@ -430,24 +429,24 @@
 </h2>
 <p><code>lubridate</code> también puede utilizarse para otras funciones, como la <strong>extracción de aspectos de una fecha/hora</strong>, <strong>realización de cálculos aritméticos de fechas</strong> o <strong>cálculo de intervalos de fechas</strong></p>
 <p>Aquí definimos una fecha que se utilizará para los ejemplos:</p>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create object of class Date</span>
 <span class="va">example_date</span> <span class="op">&lt;-</span> <span class="fu">ymd</span><span class="op">(</span><span class="st">"2020-03-01"</span><span class="op">)</span></code></pre></div>
 <div id="extraer-los-componentes-de-la-fecha" class="section level3 unnumbered">
 <h3>Extraer los componentes de la fecha<a class="anchor" aria-label="anchor" href="#extraer-los-componentes-de-la-fecha"><i class="fas fa-link"></i></a>
 </h3>
 <p>Puedes extraer aspectos comunes como el mes, el día, el día de la semana:</p>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">month</span><span class="op">(</span><span class="va">example_date</span><span class="op">)</span>  <span class="co"># month number</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">day</span><span class="op">(</span><span class="va">example_date</span><span class="op">)</span>    <span class="co"># day (number) of the month</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">wday</span><span class="op">(</span><span class="va">example_date</span><span class="op">)</span>   <span class="co"># day number of the week (1-7)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>También puede extraer componentes de tiempo de un objeto o columna <code>datetime</code>. Esto puede ser útil si quiere ver la distribución de los tiempos de admisión.</p>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">example_datetime</span> <span class="op">&lt;-</span> <span class="fu">ymd_hm</span><span class="op">(</span><span class="st">"2020-03-01 14:45"</span><span class="op">)</span>
 
 <span class="fu">hour</span><span class="op">(</span><span class="va">example_datetime</span><span class="op">)</span>     <span class="co"># extract hour</span>
@@ -460,11 +459,11 @@
 <h3>Fecha matemática<a class="anchor" aria-label="anchor" href="#fecha-matem%C3%A1tica"><i class="fas fa-link"></i></a>
 </h3>
 <p>Puedes añadir ciertos números de días o semanas utilizando su respectiva función de <strong>lubridate</strong>.</p>
-<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># add 3 days to this date</span>
 <span class="va">example_date</span> <span class="op">+</span> <span class="fu">days</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-03-04"</code></pre>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># add 7 weeks and subtract two days from this date</span>
 <span class="va">example_date</span> <span class="op">+</span> <span class="fu">weeks</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span> <span class="op">-</span> <span class="fu">days</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "2020-04-17"</code></pre>
@@ -479,17 +478,17 @@
 <li>Si es necesario, convierta el resultado en tipo numéricoa para realizar los cálculos matemáticos posteriores</li>
 </ol>
 <p>A continuación se calcula y muestra el intervalo entre dos fechas. Se pueden encontrar intervalos utilizando el símbolo de resta “menos” en los valores que son de tipo Fecha. Ten en cuenta, sin embargo, que el tipo del valor devuelto es “difftime”, como se muestra a continuación, y debe ser convertido a numérico.</p>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># find the interval between this date and Feb 20 2020 </span>
 <span class="va">output</span> <span class="op">&lt;-</span> <span class="va">example_date</span> <span class="op">-</span> <span class="fu">ymd</span><span class="op">(</span><span class="st">"2020-02-20"</span><span class="op">)</span>
 <span class="va">output</span>    <span class="co"># print</span></code></pre></div>
 <pre><code>## Time difference of 10 days</code></pre>
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "difftime"</code></pre>
 <p>Para realizar operaciones posteriores sobre un “difftime”, conviértalo en numérico con <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>.</p>
 <p>Todo esto puede unirse para trabajar con datos, por ejemplo:</p>
-<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">lubridate</span>, <span class="va">tidyverse</span><span class="op">)</span>   <span class="co"># load packages</span>
 
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span>
@@ -504,7 +503,7 @@
   <span class="co"># find the difference in days between onset and hospitalisation</span>
   <span class="fu">mutate</span><span class="op">(</span>days_onset_to_hosp <span class="op">=</span> <span class="va">date_hospitalisation</span> <span class="op">-</span> <span class="va">date_of_onset</span><span class="op">)</span></code></pre></div>
 <p>En un contexto de dataframe, si falta alguna de las fechas anteriores, la operación fallará para esa fila. El resultado será un NA en lugar de un valor numérico. Cuando utilices esta columna para los cálculos, asegúrate de establecer el argumento <code>na.rm</code> = en TRUE. Por ejemplo:</p>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># calculate the median number of days to hospitalisation for all cases where data are available</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">linelist_delay</span><span class="op">$</span><span class="va">days_onset_to_hosp</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <!-- ======================================================= -->
@@ -540,22 +539,22 @@
 %z = Desplazamiento respecto a GMT
 %Z = Huso horario (carácter)</p>
 <p>Un ejemplo de formato de la fecha de hoy:</p>
-<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># today's date, with formatting</span>
 <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"%d %B %Y"</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "18 enero 2022"</code></pre>
-<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<pre><code>## [1] "01 febrero 2022"</code></pre>
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># easy way to get full date and time (default formatting)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/date.html">date</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "Tue Jan 18 22:18:07 2022"</code></pre>
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<pre><code>## [1] "Tue Feb 01 15:00:47 2022"</code></pre>
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># formatted combined date, time, and time zone using str_glue() function</span>
 <span class="fu">str_glue</span><span class="op">(</span><span class="st">"{format(Sys.Date(), format = '%A, %B %d %Y, %z  %Z, ')}{format(Sys.time(), format = '%H:%M:%S')}"</span><span class="op">)</span></code></pre></div>
-<pre><code>## martes, enero 18 2022, +0000  UTC, 22:18:07</code></pre>
-<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<pre><code>## martes, febrero 01 2022, +0000  UTC, 15:00:47</code></pre>
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Using format to display weeks</span>
 <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y Week %W"</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "2022 Week 03"</code></pre>
+<pre><code>## [1] "2022 Week 05"</code></pre>
 <p>Ten en cuenta que si utiliza <code>str_glue()</code>, Ten en cuenta que dentro de las esperadas comillas dobles ” sólo debe utilizar comillas simples (como arriba).</p>
 </div>
 <div id="mes-año" class="section level3 unnumbered">
@@ -563,7 +562,7 @@
 </h3>
 <p>Para convertir una columna de fecha al formato mes-año, le sugerimos que utilice la función <code>as.yearmon()</code> del paquete <strong>zoo</strong>. Esto convierte la fecha al tipo “yearmon” y mantiene el orden correcto. Por el contrario, usar <code>format(columna, "%Y %B")</code> convertirá al tipo Carácter y ordenará los valores alfabéticamente (incorrectamente).</p>
 <p>A continuación, se crea una nueva columna <code>yearmonth</code> a partir de la columna <code>date_onset</code>, utilizando la función as.yearmon()`. La ordenación por defecto (correcta) de los valores resultantes se muestra en la tabla.</p>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create new column </span>
 <span class="va">test_zoo</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
      <span class="fu">mutate</span><span class="op">(</span>yearmonth <span class="op">=</span> <span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/yearmon.html">as.yearmon</a></span><span class="op">(</span><span class="va">date_onset</span><span class="op">)</span><span class="op">)</span>
@@ -571,12 +570,12 @@
 <span class="co"># print table</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">test_zoo</span><span class="op">$</span><span class="va">yearmon</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
-## abr. 2014 may. 2014 jun. 2014 jul. 2014 ago. 2014 sep. 2014 oct. 2014 nov. 2014 dic. 2014 ene. 2015 feb. 2015 mar. 2015 
-##         7        64       100       226       528      1070      1112       763       562       431       306       277 
-## abr. 2015 
-##       186</code></pre>
+## abr. 2014 may. 2014 jun. 2014 jul. 2014 ago. 2014 sep. 2014 oct. 2014 nov. 2014 dic. 2014 
+##         7        64       100       226       528      1070      1112       763       562 
+## ene. 2015 feb. 2015 mar. 2015 abr. 2015 
+##       431       306       277       186</code></pre>
 <p>Por el contrario, se puede ver cómo sólo utilizando <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> se consigue el formato de visualización deseado, pero no el orden correcto.</p>
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create new column</span>
 <span class="va">test_format</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
      <span class="fu">mutate</span><span class="op">(</span>yearmonth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date_onset</span>, <span class="st">"%b %Y"</span><span class="op">)</span><span class="op">)</span>
@@ -584,10 +583,10 @@
 <span class="co"># print table</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">test_format</span><span class="op">$</span><span class="va">yearmon</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
-## abr. 2014 abr. 2015 ago. 2014 dic. 2014 ene. 2015 feb. 2015 jul. 2014 jun. 2014 mar. 2015 may. 2014 nov. 2014 oct. 2014 
-##         7       186       528       562       431       306       226       100       277        64       763      1112 
-## sep. 2014 
-##      1070</code></pre>
+## abr. 2014 abr. 2015 ago. 2014 dic. 2014 ene. 2015 feb. 2015 jul. 2014 jun. 2014 mar. 2015 
+##         7       186       528       562       431       306       226       100       277 
+## may. 2014 nov. 2014 oct. 2014 sep. 2014 
+##        64       763      1112      1070</code></pre>
 <p>Nota: si estás trabajando con <code>ggplot()</code> y quieres ajustar sólo cómo se <em>muestran</em> las fechas, puede ser suficiente proporcionar un formato strptime al argumento <code>date_labels =</code> en <code>scale_x_date()</code> - puedes utilizar <code>"%b %Y"</code> o <code>"%Y %b"</code>. Consulta la página de <a href="ggplot-tips.html#ggplot-tips">consejos de ggplot</a>.</p>
 <p><strong>zoo</strong> también ofrece la función <code>as.yearqtr()</code>, y puedes usar <code>scale_x_yearmon()</code> cuando uses <code>ggplot()</code>.</p>
 <!-- ======================================================= -->
@@ -601,7 +600,7 @@
 <h3>
 <strong>lubridate</strong><a class="anchor" aria-label="anchor" href="#lubridate-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Consulta la página sobre <a href="#grouping-data">Agrupar datos</a> para ver ejemplos más extensos de agrupación de datos por fecha. A continuación describimos brevemente la agrupación de datos por semanas.</p>
+<p>Consulta la página sobre <a href="grouping-data.html#grouping-data">Agrupar datos</a> para ver ejemplos más extensos de agrupación de datos por fecha. A continuación describimos brevemente la agrupación de datos por semanas.</p>
 <p>Generalmente recomendamos utilizar la función <code>floor_date()</code> de <strong>lubridate</strong>, con el argumento <code>unit = "week"</code>. Esto redondea la fecha hacia abajo al “inicio” de la semana, como se define por el argumento <code>week_start =</code>. El inicio de la semana por defecto es el 1 (para los lunes), pero se puede especificar cualquier día de la semana como inicio (por ejemplo, el 7 para los domingos). <code>floor_date()</code> es versátil y se puede utilizar para redondear hacia abajo a otras unidades de tiempo estableciendo <code>unit =</code> a “second”, “minute”, “hour”, “day”, “month”, o “year”.</p>
 <p>El valor devuelto es la fecha de inicio de la semana, en tipo Date. El tipo <code>Date</code> es útil a la hora de trazar los datos, ya que serán fácilmente reconocidos y ordenados correctamente por <code>ggplot()</code>.</p>
 <p>Si sólo está interesado en ajustar las fechas para que <em>se muestren</em> por semanas en un gráfico, consulta la sección de esta página sobre Visualización de fechas. Por ejemplo, al trazar una epicurva puede formatear la visualización de la fecha proporcionando la nomenclatura strptime “%” deseada. Por ejemplo, utiliza “%Y-%W” o “%Y-%U” para devolver el año y el número de semana (dado el comienzo de la semana del lunes o del domingo, respectivamente).</p>
@@ -609,13 +608,13 @@
 <div id="recuentos-semanales" class="section level3 unnumbered">
 <h3>Recuentos semanales<a class="anchor" aria-label="anchor" href="#recuentos-semanales"><i class="fas fa-link"></i></a>
 </h3>
-<p>Consulta la página sobre <a href="#grouping-data">Agrupar datos</a> para obtener una explicación detallada de la agrupación de datos con <code>count()</code>, <code>group_by()</code>, and <code>summarise()</code>. A continuación se muestra un breve ejemplo.</p>
+<p>Consulta la página sobre <a href="grouping-data.html#grouping-data">Agrupar datos</a> para obtener una explicación detallada de la agrupación de datos con <code>count()</code>, <code>group_by()</code>, and <code>summarise()</code>. A continuación se muestra un breve ejemplo.</p>
 <ol style="list-style-type: decimal">
 <li><p>Crear una nueva columna “semana” con <code>mutate()</code>, utilizando <code>floor_date()</code> con <code>unit = "week"</code></p></li>
 <li><p>Obtener el recuento de filas (casos) por semana con <code>count()</code>; filtra los casos a los que les falte la fecha</p></li>
 <li><p>Termin con <code>complete()</code> de <strong>tidyr</strong> para asegurarse de que <em>todas</em> las semanas aparecen en los datos - incluso las que no tienen filas/casos. Por defecto, los valores de recuento para cualquier fila “nueva” son NA, pero puede hacerlos 0 con el argumento <code>fill =</code>, que espera una lista con nombre (abajo, <code>n</code> es el nombre de la columna de recuentos).</p></li>
 </ol>
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Make aggregated dataset of weekly case counts</span>
 <span class="va">weekly_counts</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">drop_na</span><span class="op">(</span><span class="va">date_onset</span><span class="op">)</span> <span class="op">%&gt;%</span>             <span class="co"># remove cases missing onset date</span>
@@ -630,11 +629,11 @@
       by <span class="op">=</span> <span class="st">"week"</span><span class="op">)</span>,                   <span class="co"># by weeks</span>
     fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>             <span class="co"># fill-in NAs in the n counts column with 0</span></code></pre></div>
 <p>Aquí están las primeras filas del dataframe resultante:</p>
-<div id="htmlwidget-3421d373223b6138d0aa" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3421d373223b6138d0aa">{"x":{"filter":"none","vertical":false,"data":[["2014-04-06","2014-04-13","2014-04-20","2014-04-27","2014-05-04","2014-05-11","2014-05-18","2014-05-25","2014-06-01","2014-06-08","2014-06-15","2014-06-22","2014-06-29","2014-07-06","2014-07-13","2014-07-20","2014-07-27","2014-08-03","2014-08-10","2014-08-17"],[1,1,4,4,12,14,14,21,21,18,30,23,31,35,55,58,80,86,114,122]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>weekly_cases<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-bb067ccf04a8beece0f7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bb067ccf04a8beece0f7">{"x":{"filter":"none","vertical":false,"data":[["2014-04-06","2014-04-13","2014-04-20","2014-04-27","2014-05-04","2014-05-11","2014-05-18","2014-05-25","2014-06-01","2014-06-08","2014-06-15","2014-06-22","2014-06-29","2014-07-06","2014-07-13","2014-07-20","2014-07-27","2014-08-03","2014-08-10","2014-08-17"],[1,1,4,4,12,14,14,21,21,18,30,23,31,35,55,58,80,86,114,122]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>weekly_cases<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="alternativas-a-la-epiweek" class="section level3 unnumbered">
-<h3>Alternativas a la Epiweek<a class="anchor" aria-label="anchor" href="#alternativas-a-la-epiweek"><i class="fas fa-link"></i></a>
+<div id="alternativas-a-epiweek" class="section level3 unnumbered">
+<h3>Alternativas a Epiweek<a class="anchor" aria-label="anchor" href="#alternativas-a-epiweek"><i class="fas fa-link"></i></a>
 </h3>
 <p>Ten en cuenta que <strong>lubridate</strong> también tiene las funciones <code>week()</code>, <code>epiweek()</code>, e <code>isoweek()</code>, cada una de las cuales tiene fechas de inicio ligeramente diferentes y otros matices. Sin embargo, en términos generales, <code>floor_date()</code> debería ser todo lo que necesita. Lea los detalles de estas funciones introduciendo ?week en la consola o leyendo la documentación <a href="https://www.rdocumentation.org/packages/lubridate/versions/1.7.4/topics/week">aquí</a>.</p>
 <p>Puedes usar del paquete <strong>aweek</strong> para establecer semanas epidemiológicas. Puedes leer más sobre él <a href="https://www.repidemicsconsortium.org/aweek/">en el sitio web de RECON</a>. Tiene las funciones <code>date2week()</code> y <code>week2date()</code> en las que puede establecer el día de inicio de la semana con <code>week_start = "Monday"</code>. Este paquete es el más fácil si se desea obtener resultados del tipo “week” (por ejemplo, “2020-W12”). Otra ventaja de <strong>aweek</strong> es que cuando <code>date2week()</code> se aplica a una columna de fecha, la columna devuelta (formato de semana) es automáticamente del tipo Factor e incluye niveles para todas las semanas en el lapso de tiempo (esto evita el paso extra de <code>complete()</code> descrito anteriormente). Sin embargo, <strong>aweek</strong> no tiene la funcionalidad de redondear fechas a otras unidades de tiempo como meses, años, etc.</p>
@@ -650,12 +649,12 @@
 <p>En R, cada objeto <em>datetime</em> tiene un componente de zona horaria. Por defecto, todos los objetos <code>datetime</code> llevarán la zona horaria local para el ordenador que se está utilizando - esto es generalmente específico para una <em>ubicación</em> en lugar de una zona horaria, ya que las zonas horarias a menudo cambian en los lugares debido al horario de verano. No es posible compensar con precisión las zonas horarias sin un componente de tiempo de una fecha, ya que el evento que representa una columna de fecha no puede ser atribuido a un tiempo específico, y por lo tanto los cambios de tiempo medidos en horas no pueden ser razonablemente contabilizados.</p>
 <p>Para tratar las zonas horarias, hay una serie de funciones de ayuda en lubridate que pueden utilizarse para cambiar la zona horaria de un objeto <code>datetime</code> de la zona horaria local a una zona horaria diferente. Las zonas horarias se establecen atribuyendo una zona horaria válida de la base de datos tz al objeto <code>datetime</code>. Una lista de estos se puede encontrar aquí - si la ubicación que está utilizando los datos no está en esta lista, las grandes ciudades cercanas en la zona horaria están disponibles y sirven el mismo propósito.
 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" class="uri">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a></p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># assign the current time to a column</span>
 <span class="va">time_now</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">time_now</span></code></pre></div>
-<pre><code>## [1] "2022-01-18 22:18:07 CET"</code></pre>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<pre><code>## [1] "2022-02-01 15:00:47 CST"</code></pre>
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># use with_tz() to assign a new timezone to the column, while CHANGING the clock time</span>
 <span class="va">time_london_real</span> <span class="op">&lt;-</span> <span class="fu">with_tz</span><span class="op">(</span><span class="va">time_now</span>, <span class="st">"Europe/London"</span><span class="op">)</span>
 
@@ -667,46 +666,46 @@
 <span class="co"># there will be a difference in the times </span>
 <span class="co"># (the number of hours difference from the computers time zone to london)</span>
 <span class="va">time_london_real</span> <span class="op">-</span> <span class="va">time_london_local</span></code></pre></div>
-<pre><code>## Time difference of -1 hours</code></pre>
+<pre><code>## Time difference of 6 hours</code></pre>
 <p>Esto puede parecer muy abstracto, y a menudo no es necesario si el usuario no está trabajando a través de zonas horarias.</p>
 <!-- ======================================================= -->
 </div>
-<div id="cálculos-de-retardo-y-de-avance" class="section level2" number="9.11">
+<div id="lagging-and-leading-calculations" class="section level2" number="9.11">
 <h2>
-<span class="header-section-number">9.11</span> Cálculos de retardo y de avance<a class="anchor" aria-label="anchor" href="#c%C3%A1lculos-de-retardo-y-de-avance"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.11</span> Cálculos de retardo y de avance<a class="anchor" aria-label="anchor" href="#lagging-and-leading-calculations"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>lead()</code> y <code><a href="https://rdrr.io/r/stats/lag.html">lag()</a></code> son funciones del paquete <strong>dplyr</strong> que ayudan a encontrar los valores anteriores (retardados) o posteriores (principales) en un vector, normalmente un vector numérico o de fechas. Esto es útil cuando se hacen cálculos de cambio/diferencia entre unidades de tiempo.`</p>
 <p>Supongamos que se quiere calcular la diferencia de casos entre una semana actual y la anterior. Los datos se proporcionan inicialmente en recuentos semanales, como se muestra a continuación.</p>
-<div id="htmlwidget-f553e87712f05959799b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f553e87712f05959799b">{"x":{"filter":"none","vertical":false,"data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p><strong>Al utilizar lag() o lead(), el orden de las filas en el dataframe es muy importante. - presta atención a si tus fechas/números son ascendentes o descendentes</strong></p>
+<div id="htmlwidget-49ac405e24eb008db1ab" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-49ac405e24eb008db1ab">{"x":{"filter":"none","vertical":false,"data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p><strong>Al utilizar lag() o lead(), el orden de las filas en el dataframe es muy importante. - presta atención a si tus fechas/números son ascendentes o descendentes</strong></p>
 <p>En primer lugar, cree una nueva columna que contenga el valor de la semana anterior (retardada).</p>
 <ul>
 <li><p>Controla el número de unidades hacia atrás/adelante con n = (debe ser un entero no negativo)</p></li>
 <li><p>Utiliza <code>default =</code> para definir el valor colocado en las filas no existentes (por ejemplo, la primera fila para la que no hay un valor retardado). Por defecto es <code>NA</code>.</p></li>
 <li><p>Utiliza <code>order_by = TRUE</code> si tus filas no están ordenadas por su columna de referencia</p></li>
 </ul>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="va">counts</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>cases_prev_wk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">cases_wk</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-87dc810189fb05ae9050" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-87dc810189fb05ae9050">{"x":{"filter":"none","vertical":false,"data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0],[null,0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n      <th>cases_prev_wk<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>A continuación, cree una nueva columna que sea la diferencia entre las dos columnas de los casos:</p>
-<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<div id="htmlwidget-fb04d77c9569a6058898" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fb04d77c9569a6058898">{"x":{"filter":"none","vertical":false,"data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0],[null,0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n      <th>cases_prev_wk<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>A continuación, cree una nueva columna que sea la diferencia entre las dos columnas de los casos:</p>
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="va">counts</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>cases_prev_wk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">cases_wk</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
          case_diff <span class="op">=</span> <span class="va">cases_wk</span> <span class="op">-</span> <span class="va">cases_prev_wk</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-1367b4c92e9c644bdb47" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1367b4c92e9c644bdb47">{"x":{"filter":"none","vertical":false,"data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0],[null,0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19],[null,25,34,31,-25,14,-38,6,-16,1,-4,0,48,-35,29,20,34,154,93,-42,-152,-108,8,20,3,-61,-20,-19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n      <th>cases_prev_wk<\/th>\n      <th>case_diff<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Puedes leer más sobre <code>lead()</code> y <code><a href="https://rdrr.io/r/stats/lag.html">lag()</a></code> en la documentación <a href="https://dplyr.tidyverse.org/reference/lead-lag.html">aquí</a> o introduciendo <code><a href="https://rdrr.io/r/stats/lag.html">?lag</a></code> en tu consola.</p>
+<div id="htmlwidget-4039a4ddfe074477e998" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4039a4ddfe074477e998">{"x":{"filter":"none","vertical":false,"data":[["2019-06-23","2019-06-30","2019-07-07","2019-07-14","2019-07-21","2019-07-28","2019-08-04","2019-08-11","2019-08-18","2019-08-25","2019-09-01","2019-09-08","2019-09-15","2019-09-22","2019-09-29","2019-10-06","2019-10-13","2019-10-20","2019-10-27","2019-11-03","2019-11-10","2019-11-17","2019-11-24","2019-12-01","2019-12-08","2019-12-15","2019-12-22","2019-12-29"],[0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19,0],[null,0,25,59,90,65,79,41,47,31,32,28,28,76,41,70,90,124,278,371,329,177,69,77,97,100,39,19],[null,25,34,31,-25,14,-38,6,-16,1,-4,0,48,-35,29,20,34,154,93,-42,-152,-108,8,20,3,-61,-20,-19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>week_start<\/th>\n      <th>cases_wk<\/th>\n      <th>cases_prev_wk<\/th>\n      <th>case_diff<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Puedes leer más sobre <code>lead()</code> y <code><a href="https://rdrr.io/r/stats/lag.html">lag()</a></code> en la documentación <a href="https://dplyr.tidyverse.org/reference/lead-lag.html">aquí</a> o introduciendo <code><a href="https://rdrr.io/r/stats/lag.html">?lag</a></code> en tu consola.</p>
 <!-- ======================================================= -->
 </div>
 <div id="resources-2" class="section level2" number="9.12">
 <h2>
 <span class="header-section-number">9.12</span> Recursos<a class="anchor" aria-label="anchor" href="#resources-2"><i class="fas fa-link"></i></a>
 </h2>
-<p>Página de lubridate** <a href="https://lubridate.tidyverse.org/">tidyverse</a> 
-Página de <strong>lubridate</strong> RStudio <a href="https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf">cheatsheet</a>
-R for Data Science en español sobre [fechas y horas]<a href="https://es.r4ds.hadley.nz/fechas-y-horas.html" class="uri">https://es.r4ds.hadley.nz/fechas-y-horas.html</a>
-<a href="https://www.statmethods.net/input/dates.html">Tutorial en línea</a>
-<a href="https://www.r-bloggers.com/2013/08/date-formats-in-r/">Formatos de fecha</a>]</p>
+<p>Página de lubridate** <a href="https://lubridate.tidyverse.org/">tidyverse</a></p>
+<p>Página de <strong>lubridate</strong> RStudio <a href="https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf">cheatsheet</a></p>
+<p>R for Data Science en español sobre [fechas y horas]<a href="https://es.r4ds.hadley.nz/fechas-y-horas.html" class="uri">https://es.r4ds.hadley.nz/fechas-y-horas.html</a></p>
+<p><a href="https://www.statmethods.net/input/dates.html">Tutorial en línea</a></p>
+<p><a href="https://www.r-bloggers.com/2013/08/date-formats-in-r/">Formatos de fecha</a>]</p>
 
 </div>
 </div>
@@ -720,7 +719,7 @@ R for Data Science en español sobre [fechas y horas]<a href="https://es.r4ds.ha
 <li>
 <a class="nav-link" href="#preparation"><span class="header-section-number">9.1</span> Preparación</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cargar-paquetes">Cargar paquetes</a></li>
-<li><a class="nav-link" href="#importar-datos-1">Importar datos</a></li>
+<li><a class="nav-link" href="#importar-datos">Importar datos</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#current-date"><span class="header-section-number">9.2</span> Fecha actual</a></li>
@@ -736,7 +735,7 @@ R for Data Science en español sobre [fechas y horas]<a href="https://es.r4ds.ha
 <li>
 <a class="nav-link" href="#working-with-date-time-class"><span class="header-section-number">9.6</span> Trabajar con el tipo fecha-hora</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#convertir-fechas-con-horas">Convertir fechas con horas</a></li>
-<li><a class="nav-link" href="#convertir-s%C3%B3lo-horas"><span class="header-section-number">9.6.1</span> Convertir sólo horas</a></li>
+<li><a class="nav-link" href="#convertir-s%C3%B3lo-horas">Convertir sólo horas</a></li>
 <li><a class="nav-link" href="#extraer-fracciones-de-hora">Extraer fracciones de hora</a></li>
 </ul>
 </li>
@@ -757,11 +756,11 @@ R for Data Science en español sobre [fechas y horas]<a href="https://es.r4ds.ha
 <a class="nav-link" href="#dates_epi_wks"><span class="header-section-number">9.9</span> Semanas epidemiológicas</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#lubridate-1">lubridate</a></li>
 <li><a class="nav-link" href="#recuentos-semanales">Recuentos semanales</a></li>
-<li><a class="nav-link" href="#alternativas-a-la-epiweek">Alternativas a la Epiweek</a></li>
+<li><a class="nav-link" href="#alternativas-a-epiweek">Alternativas a Epiweek</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#converting-datestime-zones"><span class="header-section-number">9.10</span> Conversión de fechas/zonas horarias</a></li>
-<li><a class="nav-link" href="#c%C3%A1lculos-de-retardo-y-de-avance"><span class="header-section-number">9.11</span> Cálculos de retardo y de avance</a></li>
+<li><a class="nav-link" href="#lagging-and-leading-calculations"><span class="header-section-number">9.11</span> Cálculos de retardo y de avance</a></li>
 <li><a class="nav-link" href="#resources-2"><span class="header-section-number">9.12</span> Recursos</a></li>
 </ul>
 
@@ -779,7 +778,7 @@ R for Data Science en español sobre [fechas y horas]<a href="https://es.r4ds.ha
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-01-18.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

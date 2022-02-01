@@ -71,7 +71,7 @@
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
 <li><a class="active" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="borrador.-agrupar-datos-grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos {grouping-data}</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
 <li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
 <li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></li>
 <li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
@@ -133,13 +133,13 @@
 <!-- ======================================================= -->
 <div id="preparation-2" class="section level2" number="11.1">
 <h2>
-<span class="header-section-number">11.1</span> Preparation<a class="anchor" aria-label="anchor" href="#preparation-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-2"><i class="fas fa-link"></i></a>
 </h2>
 <div id="cargar-paquetes-2" class="section level3 unnumbered">
 <h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para su uso. También puede cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de de R <strong>base</strong> Consulta la página sobre los <a href="r-basics.html#r-basics">fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span>
   <span class="va">rio</span>,           <span class="co"># import/export</span>
   <span class="va">here</span>,          <span class="co"># filepaths</span>
@@ -150,17 +150,16 @@
   <span class="va">tidyverse</span>      <span class="co"># data mgmt and viz</span>
   <span class="op">)</span></code></pre></div>
 </div>
-<div id="importar-datos-3" class="section level3 unnumbered">
-<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-3"><i class="fas fa-link"></i></a>
+<div id="importar-datos-2" class="section level3 unnumbered">
+<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Importamos los datos de casos de una epidemia de ébola simulada. Si quieres seguir el proceso, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds">clica para descargar linelist “limpio”</a> (como archivo .rds). Importe sus datos con la función <code>import()</code> del paquete <strong>rio</strong> (acepta muchos tipos de archivos como .xlsx, .rds, .csv - Mira la página de <a href="import-and-export.html#import-and-export">importación y exportación</a> para más detalles).</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import your dataset</span>
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="fct_newcat" class="section level3" number="11.1.1">
-<h3>
-<span class="header-section-number">11.1.1</span> Nueva variable categórica<a class="anchor" aria-label="anchor" href="#fct_newcat"><i class="fas fa-link"></i></a>
+<div id="fct_newcat" class="section level3 unnumbered">
+<h3>Nueva variable categórica<a class="anchor" aria-label="anchor" href="#fct_newcat"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para la demostración en esta página utilizaremos un escenario común - la creación de una nueva variable categórica.</p>
 <p>Ten en cuenta que si convierte una columna numérica en una de tipo factor, no podrás calcular estadísticas numéricas sobre ella.</p>
@@ -168,7 +167,7 @@
 <h4>Crear columna<a class="anchor" aria-label="anchor" href="#crear-columna"><i class="fas fa-link"></i></a>
 </h4>
 <p>Utilizamos la columna existente <code>days_onset_hosp</code> (días desde el inicio de los síntomas hasta el ingreso en el hospital) y creamos una nueva columna <code>delay_cat</code> clasificando cada fila en una de varias categorías. Lo hacemos con la función <strong>dplyr</strong> <code>case_when()</code>, que aplica secuencialmente criterios lógicos (lado derecho) a cada fila y devuelve el valor correspondiente del lado izquierdo para la nueva columna <code>delay_cat</code>. Lea más sobre <code>case_when()</code> en <a href="cleaning-data-and-core-functions.html#cleaning-data-and-core-functions">Limpieza de datos y funciones básicas</a>.</p>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
     <span class="co"># criteria                                   # new value if TRUE</span>
@@ -183,16 +182,16 @@
 </h4>
 <p>Orden de valores por defecto</p>
 <p>Tal y como se creó con <code>case_when()</code>, la nueva columna <code>delay_cat</code> es una columna categórica del tipo Character - aún <em>no</em> es un factor. Así, en una tabla de frecuencia, vemos que los valores únicos aparecen en un orden alfanumérico por defecto - un orden que no tiene mucho sentido intuitivo:</p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">delay_cat</span>, useNA <span class="op">=</span> <span class="st">"always"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  &lt;2 days  &gt;5 days 2-5 days     &lt;NA&gt; 
 ##     2990      602     2040      256</code></pre>
-<p>Del mismo modo, si hacemos un gráfico de barras, los valores también aparecen en este orden en el eje x (ver la página de <a href="ggplot-basics.html#ggplot-basics">fundamentos de ggplot</a> para más información sobre <strong>ggplot2</strong> - el paquete de visualización más común en R).</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<p>Del mismo modo, si hacemos un gráfico de barras, los valores también aparecen en este orden en el eje x (ver la página de <a href="ggplot-basics.html#ggplot-basics">conceptos básicos de ggplot</a> para más información sobre <strong>ggplot2</strong> - el paquete de visualización más común en R).</p>
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">geom_bar</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">delay_cat</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-379-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-376-1.png" width="672"></div>
 </div>
 </div>
 </div>
@@ -203,36 +202,36 @@
 <p>Para convertir una columna numérica o de caracteres a de <em>tipo factor</em>, puedes utilizar cualquier función del paquete <strong>forcats</strong> (muchas se detallan <a href="factors.html#fct_adjust">a continuación</a>). Las convertirán a de tipo factor y luego también realizarán o permitirán cierto ordenamiento de los niveles - por ejemplo usando <code>fct_relevel()</code> le permite especificar manualmente el orden de los niveles. La función <code>as_factor()</code> simplemente convierte el tipo sin ninguna otra capacidad.</p>
 <p>La función <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> de R <strong>base</strong> convierte una columna en factor y permite especificar manualmente el orden de los niveles, como un vector de caracteres a su argumento <code>levels =</code>.</p>
 <p>A continuación utilizamos <code>mutate()</code> y <code>fct_relevel()</code> para convertir la columna delay_cat de tipo carácter a tipo factor. La columna <code>delay_cat</code> se crea en la sección de <a href="factors.html#fct_newcat">preparación</a> anterior.</p>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">fct_relevel</span><span class="op">(</span><span class="va">delay_cat</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><em>Los “valores” únicos de esta columna se consideran ahora “niveles” del factor.</em> Los niveles tienen un <em>orden</em>, que puede imprimirse con la función de <code><a href="https://rdrr.io/r/base/levels.html">levels()</a></code>, o alternativamente verse en una tabla de recuento mediante <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> de R <strong>base</strong> o <code>tabyl()</code> de <strong>janitor</strong>. Por defecto, el orden de los niveles será alfanumérico, como antes. Ten en cuenta que <code>NA</code> no es un nivel de factor.</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">delay_cat</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "&lt;2 days"  "&gt;5 days"  "2-5 days"</code></pre>
 <p>La función <code>fct_relevel()</code> tiene la utilidad adicional de permitirle especificar manualmente el orden de los niveles. Simplemente escriba los valores de nivel en orden, entre comillas, separados por comas, como se muestra a continuación. Ten en cuenta que la ortografía debe coincidir exactamente con los valores. Si desea crear niveles que no existen en los datos, utiliza <a href="factors.html#fct_add">fct_expand() en su lugar</a>).</p>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">fct_relevel</span><span class="op">(</span><span class="va">delay_cat</span>, <span class="st">"&lt;2 days"</span>, <span class="st">"2-5 days"</span>, <span class="st">"&gt;5 days"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Ahora podemos ver que los niveles están ordenados, como se especificó en el comando anterior, en un orden sensato.</p>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">delay_cat</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "&lt;2 days"  "2-5 days" "&gt;5 days"</code></pre>
 <p>Ahora el orden de la trama también tiene un sentido más intuitivo.</p>
-<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">geom_bar</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">delay_cat</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-384-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-381-1.png" width="672"></div>
 </div>
-<div id="añadir-o-quitar-niveles" class="section level2" number="11.3">
+<div id="add-or-drop-levels" class="section level2" number="11.3">
 <h2>
-<span class="header-section-number">11.3</span> Añadir o quitar niveles<a class="anchor" aria-label="anchor" href="#a%C3%B1adir-o-quitar-niveles"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3</span> Añadir o quitar niveles<a class="anchor" aria-label="anchor" href="#add-or-drop-levels"><i class="fas fa-link"></i></a>
 </h2>
 <div id="fct_add" class="section level3 unnumbered">
 <h3>Añadir<a class="anchor" aria-label="anchor" href="#fct_add"><i class="fas fa-link"></i></a>
 </h3>
 <p>Si necesitas añadir niveles a un factor, puede hacerlo con <code>fct_expand()</code>. Basta con escribir el nombre de la columna seguido de los nuevos niveles (separados por comas). Al tabular los valores, podemos ver los nuevos niveles y los recuentos de cero. Puedes utilizar <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> de R <strong>base</strong>, o <code>tabyl()</code> de <strong>janitor</strong>:</p>
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">fct_expand</span><span class="op">(</span><span class="va">delay_cat</span>, <span class="st">"Not admitted to hospital"</span>, <span class="st">"Transfer to other jurisdiction"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">tabyl</span><span class="op">(</span><span class="va">delay_cat</span><span class="op">)</span>   <span class="co"># print table</span></code></pre></div>
@@ -249,7 +248,7 @@
 <h3>Quitar<a class="anchor" aria-label="anchor" href="#quitar"><i class="fas fa-link"></i></a>
 </h3>
 <p>Si utiliza <code>fct_drop()</code>, los niveles “no utilizados” con recuento cero se eliminarán del conjunto de niveles. Los niveles que hemos añadido anteriormente (“No admitido en un hospital”) existen como nivel, pero ninguna fila tiene realmente esos valores. Por tanto, se eliminarán aplicando <code>fct_drop()</code> a nuestra columna de factores:</p>
-<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">fct_drop</span><span class="op">(</span><span class="va">delay_cat</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">tabyl</span><span class="op">(</span><span class="va">delay_cat</span><span class="op">)</span></code></pre></div>
@@ -282,12 +281,12 @@
 </li>
 </ul>
 <p>He aquí un ejemplo de redefinición de la columna <code>delay_cat</code> (que ya es el tipo Factor) y especificando todo el orden de niveles deseado.</p>
-<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># re-define level order</span>
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">fct_relevel</span><span class="op">(</span><span class="va">delay_cat</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"&lt;2 days"</span>, <span class="st">"2-5 days"</span>, <span class="st">"&gt;5 days"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Si sólo quiere mover un nivel, puede especificarlo a <code>fct_relevel()</code> solo y dar un número al argumento <code>after =</code>para indicar en qué lugar del orden debe estar. Por ejemplo, el comando siguiente desplaza “&lt;2 días” a la segunda posición:</p>
-<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># re-define level order</span>
 <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">fct_relevel</span><span class="op">(</span><span class="va">delay_cat</span>, <span class="st">"&lt;2 days"</span>, after <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -297,8 +296,8 @@
 <h3>Dentro de un gráfico<a class="anchor" aria-label="anchor" href="#dentro-de-un-gr%C3%A1fico"><i class="fas fa-link"></i></a>
 </h3>
 <p>Los comandos <strong>forcats</strong> pueden utilizarse para establecer el orden de los niveles en el dataframe, o sólo dentro de un gráfico. Al utilizar el comando para “envolver” el nombre de la columna <em>dentro</em> del comando de trazado <code>ggplot()</code>, puede invertir/nivelar/etc. la transformación sólo se aplicará dentro de ese trazado.</p>
-<p>A continuación, se crean dos gráficos con <code>ggplot()</code> (véase la página de <a href="ggplot-basics.html#ggplot-basics">fundamentos de ggplot</a>). En el primero, la columna delay_cat se asigna al eje x del gráfico, con su orden de nivel por defecto como en linelist de datos. En el segundo ejemplo se envuelve dentro de <code>fct_relevel()</code> y se cambia el orden en el gráfico.</p>
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<p>A continuación, se crean dos gráficos con <code>ggplot()</code> (véase la página de <a href="ggplot-basics.html#ggplot-basics">conceptos básicos de ggplot</a>). En el primero, la columna delay_cat se asigna al eje x del gráfico, con su orden de nivel por defecto como en linelist de datos. En el segundo ejemplo se envuelve dentro de <code>fct_relevel()</code> y se cambia el orden en el gráfico.</p>
+<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Alpha-numeric default order - no adjustment within ggplot</span>
 <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span><span class="op">+</span>
     <span class="fu">geom_bar</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">delay_cat</span><span class="op">)</span><span class="op">)</span>
@@ -306,7 +305,7 @@
 <span class="co"># Factor level order adjusted within ggplot</span>
 <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">geom_bar</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu">fct_relevel</span><span class="op">(</span><span class="va">delay_cat</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"&lt;2 days"</span>, <span class="st">"2-5 days"</span>, <span class="st">"&gt;5 days"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-390-1.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-390-2.png" width="50%"></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-387-1.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-387-2.png" width="50%"></p>
 <p>Ten en cuenta que el título del eje x por defecto es ahora bastante complicado - puede sobrescribir este título con el argumento de <strong>ggplot2</strong> <code>labs()</code>.</p>
 </div>
 <div id="invertir" class="section level3 unnumbered">
@@ -320,7 +319,7 @@
 </h3>
 <p>Para ordenar por la frecuencia con que el valor aparece en los datos, utiliza <code>fct_infreq()</code>. Cualquier valor que falte (<code>NA</code>) se incluirá automáticamente al final, a menos que se convierta en un nivel explícito (véase <a href="factors.html#fct_missing">esta sección</a>). Puedes invertir el orden envolviendo más con <code>fct_rev()</code>.</p>
 <p>Esta función puede utilizarse dentro de un <code>ggplot()</code>, como se muestra a continuación.</p>
-<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ordered by frequency</span>
 <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu">fct_infreq</span><span class="op">(</span><span class="va">delay_cat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">geom_bar</span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
@@ -332,7 +331,7 @@
   <span class="fu">geom_bar</span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Delay onset to admission (days)"</span>,
        title <span class="op">=</span> <span class="st">"Reverse of order by frequency"</span><span class="op">)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-391-1.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-391-2.png" width="50%"></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-388-1.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-388-2.png" width="50%"></p>
 </div>
 <div id="por-apariencia" class="section level3 unnumbered">
 <h3>Por apariencia<a class="anchor" aria-label="anchor" href="#por-apariencia"><i class="fas fa-link"></i></a>
@@ -345,7 +344,7 @@
 <p>Puedes utilizar <code>fct_reorder()</code> para ordenar los niveles de una columna <em>por una estadística de resumen de otra columna</em>. Visualmente, esto puede dar lugar a gráficos agradables en los que las barras/puntos ascienden o descienden de forma constante a través del gráfico.</p>
 <p>En los ejemplos siguientes, el eje x es <code>delay_cat</code>, y el eje y es la columna numérica <code>ct_blood</code> (valor de umbral de ciclo). Los gráficos de caja muestran la distribución del valor CT por grupo <code>delay_cat</code>. Queremos ordenar los gráficos de caja en orden ascendente por el valor de TC mediano del grupo.</p>
 <p>En el primer ejemplo de abajo, se utiliza el orden por defecto de los niveles alfa-numéricos. Se puede ver que las alturas de los gráficos de caja están mezcladas y no en ningún orden particular. En el segundo ejemplo, la columna <code>delay_cat</code> (asignada al eje x) se ha envuelto en <code>fct_reorder()</code>, la columna <code>ct_blood</code> se da como segundo argumento, y la “mediana” se da como tercer argumento (también podría usar “max”, “mean”, “min”, etc). Por lo tanto, el orden de los niveles de <code>delay_cat</code> reflejará ahora los valores ascendentes de la mediana del CT de cada grupo de <code>delay_cat</code>. Esto se refleja en el segundo gráfico: los gráficos de caja se han reordenado de forma ascendente. Observa cómo <code>NA</code> (missing) aparecerá al final, a menos que se convierta en un nivel explícito.</p>
-<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># boxplots ordered by original factor levels</span>
 <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">geom_boxplot</span><span class="op">(</span>
@@ -368,15 +367,15 @@
        title <span class="op">=</span> <span class="st">"Ordered by median CT value in group"</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-392-1.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-392-2.png" width="50%"></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-389-1.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-389-2.png" width="50%"></p>
 <p>Observa que en este ejemplo no se requieren pasos previos a la llamada a <code>ggplot()</code> - la agrupación y los cálculos se realizan internamente en el comando ggplot.</p>
 </div>
 <div id="por-valor-final" class="section level3 unnumbered">
 <h3>Por valor “final”<a class="anchor" aria-label="anchor" href="#por-valor-final"><i class="fas fa-link"></i></a>
 </h3>
 <p>Utiliza <code>fct_reorder2()</code> para los gráficos de líneas agrupadas. Ordena los niveles (y, por tanto, la <em>leyenda</em>) para que se alineen con la ordenación vertical de las líneas en el “final” del gráfico. Técnicamente hablando, “ordena por los valores y asociados a los valores x más grandes”.</p>
-<p>Por ejemplo, si tiene líneas que muestran los recuentos de casos por hospital a lo largo del tiempo, puede aplicar <code>fct_reorder2()</code> al argumento <code>color =</code>dentro de <code>aes()</code>, de forma que el orden vertical de los hospitales que aparecen en la leyenda se alinee con el orden de las líneas en el extremo terminal del gráfico. Lea más en la <a href="https://forcats.tidyverse.org/reference/fct_reorder.html">documentación en línea</a>.</p>
-<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<p>Por ejemplo, si tiene líneas que muestran los recuentos de casos por hospital a lo largo del tiempo, puede aplicar <code>fct_reorder2()</code> al argumento <code>color =</code>dentro de <code>aes()</code>, de forma que el orden vertical de los hospitales que aparecen en la leyenda se alinee con el orden de las líneas en el extremo terminal del gráfico. Lee más en la <a href="https://forcats.tidyverse.org/reference/fct_reorder.html">documentación en línea</a>.</p>
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epidemic_data</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span>         <span class="co"># begin with the linelist   </span>
     <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">date_onset</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2014-09-21"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>    <span class="co"># cut-off date, for visual clarity</span>
     <span class="fu">count</span><span class="op">(</span>                                            <span class="co"># get case counts per week and by hospital</span>
@@ -392,7 +391,7 @@
       color <span class="op">=</span> <span class="fu">fct_reorder2</span><span class="op">(</span><span class="va">hospital</span>, <span class="va">epiweek</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co"># data grouped and colored by hospital, with factor order by height at end of plot</span>
   <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Factor levels (and legend display) by line height at end of plot"</span>,
        color <span class="op">=</span> <span class="st">"Hospital"</span><span class="op">)</span>                          <span class="co"># change legend title</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-393-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-390-1.png" width="672"></div>
 </div>
 </div>
 <div id="fct_missing" class="section level2" number="11.5">
@@ -401,7 +400,7 @@
 </h2>
 <p>Si tiene valores <code>NA</code> en su columna de factores, puede convertirlos fácilmente a un nivel con nombre como “Missing” con <code>fct_explicit_na()</code>. Los valores <code>NA</code> se convierten por defecto en “(Missing)” al final del orden de los niveles. Puedes ajustar el nombre del nivel con el argumento <code>na_level =</code>.</p>
 <p>A continuación, esta operación se realiza en la columna <code>delay_cat</code> y se imprime una tabla con <code>tabyl()</code> con <code>NA</code> convertido en “Missing delay”.</p>
-<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">fct_explicit_na</span><span class="op">(</span><span class="va">delay_cat</span>, na_level <span class="op">=</span> <span class="st">"Missing delay"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">tabyl</span><span class="op">(</span><span class="va">delay_cat</span><span class="op">)</span></code></pre></div>
@@ -411,9 +410,9 @@
 ##        &gt;5 days  602 0.10224185
 ##  Missing delay  256 0.04347826</code></pre>
 </div>
-<div id="combinar-niveles" class="section level2" number="11.6">
+<div id="combine-levels" class="section level2" number="11.6">
 <h2>
-<span class="header-section-number">11.6</span> Combinar niveles<a class="anchor" aria-label="anchor" href="#combinar-niveles"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6</span> Combinar niveles<a class="anchor" aria-label="anchor" href="#combine-levels"><i class="fas fa-link"></i></a>
 </h2>
 <div id="manualmente-1" class="section level3 unnumbered">
 <h3>Manualmente<a class="anchor" aria-label="anchor" href="#manualmente-1"><i class="fas fa-link"></i></a>
@@ -422,11 +421,11 @@
 <p>Esta herramienta también puede utilizarse para “combinar” niveles, asignando a varios niveles el mismo valor recodificado. Sólo hay que tener cuidado de no perder información. Considere la posibilidad de realizar estos pasos de combinación en una nueva columna (sin sobreescribir la columna existente).</p>
 <p><code>fct_recode()</code> tiene una sintaxis diferente a la de <code>recode()</code>. <code>recode()</code> utiliza <code>OLD = NEW</code>, mientras que <code>fct_recode()</code> utiliza <code>NEW = OLD</code>.</p>
 <p>Los niveles actuales de <code>delay_cat</code> son:</p>
-<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">delay_cat</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "&lt;2 days"  "2-5 days" "&gt;5 days"</code></pre>
 <p>Los nuevos niveles se crean utilizando la sintaxis <code>fct_recode(column, "new" = "old", "new" = "old", "new" = "old")</code> y se imprimen:</p>
-<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">fct_recode</span><span class="op">(</span>
     <span class="va">delay_cat</span>,
@@ -440,7 +439,7 @@
 ##  More than 5 days  602 0.10224185     0.1068892
 ##              &lt;NA&gt;  256 0.04347826            NA</code></pre>
 <p>Aquí se combinan manualmente con <code>fct_recode()</code>. Obsérvese que no se produce ningún error en la creación de un nuevo nivel “Menos de 5 días”.</p>
-<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>delay_cat <span class="op">=</span> <span class="fu">fct_recode</span><span class="op">(</span>
     <span class="va">delay_cat</span>,
@@ -457,7 +456,7 @@
 <h3>Reducir a “Otros”<a class="anchor" aria-label="anchor" href="#reducir-a-otros"><i class="fas fa-link"></i></a>
 </h3>
 <p>Puedes utilizar <code>fct_other()</code> para asignar manualmente niveles de factor a un nivel “Otro”. A continuación, todos los niveles de la columna <code>hospital</code>, aparte de “Port Hospital” y “Central Hospital”, se combinan en “Otros”. Puedes proporcionar el vector <code>keep =</code>, o <code>drop =</code> para mantener o eliminar . Puedes cambiar la visualización del nivel “Otro” con <code>other_level =</code>.</p>
-<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span>    
   <span class="fu">mutate</span><span class="op">(</span>hospital <span class="op">=</span> <span class="fu">fct_other</span><span class="op">(</span>                      <span class="co"># adjust levels</span>
     <span class="va">hospital</span>,
@@ -479,7 +478,7 @@
 <li><p>Establezca <code>prop =</code> como la proporción de frecuencia del umbral para los niveles por encima de los cuales desea mantener. Todos los demás valores se combinarán en “Otros”.</p></li>
 </ul>
 <p>Puedes cambiar la visualización del nivel “Otros” con <code>other_level =</code>. A continuación, todos los hospitales excepto los dos más frecuentes se combinan en “Other hospitals”.</p>
-<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span>    
   <span class="fu">mutate</span><span class="op">(</span>hospital <span class="op">=</span> <span class="fu">fct_lump</span><span class="op">(</span>                      <span class="co"># adjust levels</span>
     <span class="va">hospital</span>,
@@ -492,9 +491,9 @@
 ##  Other Hospital 2657 0.4512568</code></pre>
 </div>
 </div>
-<div id="mostrar-todos-los-niveles" class="section level2" number="11.7">
+<div id="show-all-levels" class="section level2" number="11.7">
 <h2>
-<span class="header-section-number">11.7</span> Mostrar todos los niveles<a class="anchor" aria-label="anchor" href="#mostrar-todos-los-niveles"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.7</span> Mostrar todos los niveles<a class="anchor" aria-label="anchor" href="#show-all-levels"><i class="fas fa-link"></i></a>
 </h2>
 <p>Una de las ventajas del uso de factores es la estandarización del aspecto de las leyendas de los gráficos y de las tablas, independientemente de los valores que estén realmente presentes en unos datos.</p>
 <p>Si está preparando muchas figuras (por ejemplo, para varias jurisdicciones), querrá que las leyendas y las tablas aparezcan de forma idéntica incluso con distintos niveles de compleción o composición de los datos.</p>
@@ -503,13 +502,13 @@
 </h3>
 <p>En una figura <code>ggplot()</code>, basta con añadir el argumento <code>drop = FALSE</code> en la función <code>scale_xxxx()</code> correspondiente. Se mostrarán todos los niveles de los factores, independientemente de si están presentes en los datos. Si sus niveles de columna de factores se muestran con <code>fill =</code>, entonces en <code>scale_fill_discrete()</code> incluye <code>drop = FALSE,</code> como se muestra a continuación. Si sus niveles se muestran con <code>x =</code> (al eje-x) <code>color =</code> o <code>size =</code>, deberás establecer esto con <code>scale_color_discrete()</code> o <code>scale_size_discrete()</code> según corresponda.</p>
 <p>Este ejemplo es un gráfico de barras apiladas de la categoría de edad, por hospital. Añadiendo <code>scale_fill_discrete(drop = FALSE)</code> se garantiza que todos los grupos de edad aparezcan en la leyenda, aunque no estén presentes en los datos.</p>
-<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span><span class="op">+</span>
   <span class="fu">geom_bar</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">hospital</span>, fill <span class="op">=</span> <span class="va">age_cat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">scale_fill_discrete</span><span class="op">(</span>drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span>                        <span class="co"># show all age groups in the legend, even those not present</span>
   <span class="fu">labs</span><span class="op">(</span>
     title <span class="op">=</span> <span class="st">"All age groups will appear in legend, even if not present in data"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-401-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-398-1.png" width="672"></div>
 </div>
 <div id="en-tablas" class="section level3 unnumbered">
 <h3>En tablas<a class="anchor" aria-label="anchor" href="#en-tablas"><i class="fas fa-link"></i></a>
@@ -523,19 +522,19 @@
 <h2>
 <span class="header-section-number">11.8</span> Epiweeks<a class="anchor" aria-label="anchor" href="#epiweeks"><i class="fas fa-link"></i></a>
 </h2>
-<p>Por favor, consulta la extensa discusión sobre cómo crear semanas epidemiológicas en la página de <a href="#grouping-data">Agrupar datos</a>. Consulta también la página <a href="working-with-dates.html#working-with-dates-1">Trabajar con fechas</a> para obtener consejos sobre cómo crear y dar formato a las semanas epidemiológicas.</p>
+<p>Por favor, consulta la extensa discusión sobre cómo crear semanas epidemiológicas en la página de <a href="grouping-data.html#grouping-data">Agrupar datos</a>. Consulta también la página <a href="working-with-dates.html#working-with-dates-1">Trabajar con fechas</a> para obtener consejos sobre cómo crear y dar formato a las semanas epidemiológicas.</p>
 <div id="epiweeks-en-un-gráfico" class="section level3 unnumbered">
 <h3>Epiweeks en un gráfico<a class="anchor" aria-label="anchor" href="#epiweeks-en-un-gr%C3%A1fico"><i class="fas fa-link"></i></a>
 </h3>
-<p>Si tu objetivo es crear epiweeks para mostrarlos en un gráfico, puede hacerlo simplemente con <code>floor_date()</code> de <strong>lubridate</strong>, como se explica en la página de <a href="#grouping-data">Agrupar datos</a>. Los valores devueltos serán del tipo Date con el formato YYYY-MM-DD. Si utiliza esta columna en un gráfico, las fechas se ordenarán correctamente de forma natural, y no tendrá que preocuparse de los niveles o de la conversión al tipo Factor. Mira el histograma <code>ggplot()</code> de las fechas de inicio más abajo.</p>
+<p>Si tu objetivo es crear epiweeks para mostrarlos en un gráfico, puede hacerlo simplemente con <code>floor_date()</code> de <strong>lubridate</strong>, como se explica en la página de <a href="grouping-data.html#grouping-data">Agrupar datos</a>. Los valores devueltos serán del tipo Date con el formato YYYY-MM-DD. Si utiliza esta columna en un gráfico, las fechas se ordenarán correctamente de forma natural, y no tendrá que preocuparse de los niveles o de la conversión al tipo Factor. Mira el histograma <code>ggplot()</code> de las fechas de inicio más abajo.</p>
 <p>En este enfoque, puede ajustar la <em>visualización</em> de las fechas en un eje con <code>scale_x_date()</code>. Consulta la página sobre <a href="epidemic-curves.html#epidemic-curves">curvas epidémicas</a> para obtener más información. Puedes especificar un formato de visualización “strptime” al argumento <code>date_labels =</code> de <code>scale_x_date()</code>. Estos formatos utilizan marcadores de posición “%” y se tratan en la página <a href="working-with-dates.html#working-with-dates-1">Trabajar con fechas</a>. Utiliza “%Y” para representar un año de 4 dígitos, y “%W” o “%U” para representar el número de la semana (semana del lunes o del domingo respectivamente).</p>
-<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>epiweek_date <span class="op">=</span> <span class="fu">floor_date</span><span class="op">(</span><span class="va">date_onset</span>, <span class="st">"week"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># create week column</span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span><span class="op">+</span>                                                  <span class="co"># begin ggplot</span>
   <span class="fu">geom_histogram</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">epiweek_date</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>           <span class="co"># histogram of date of onset</span>
   <span class="fu">scale_x_date</span><span class="op">(</span>date_labels <span class="op">=</span> <span class="st">"%Y-W%W"</span><span class="op">)</span>                       <span class="co"># adjust disply of dates to be YYYY-WWw</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-402-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-399-1.png" width="672"></div>
 </div>
 <div id="epiweeks-en-los-datos" class="section level3 unnumbered">
 <h3>Epiweeks en los datos<a class="anchor" aria-label="anchor" href="#epiweeks-en-los-datos"><i class="fas fa-link"></i></a>
@@ -546,7 +545,7 @@
 <em>Para un control preciso de la visualización</em>, convierta la columna de la epi-semana <strong>lubrificada</strong> (AAAA-MM-DD) al formato de visualización deseado (AAAA-WWw) <em>dentro del propio dataframe,</em> y luego conviértala en el tipo Factor.</li>
 </ol>
 <p>En primer lugar, utiliza <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> de para convertir la visualización de la fecha de YYYY-MM-DD a YYYY-Www (consulta la página <a href="working-with-dates.html#working-with-dates-1">Trabajar con fechas</a>). En este proceso el tipo será convertida a carácter. A continuación, convierta de carácter a tipo Factor con <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>.</p>
-<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>epiweek_date <span class="op">=</span> <span class="fu">floor_date</span><span class="op">(</span><span class="va">date_onset</span>, <span class="st">"week"</span><span class="op">)</span>,       <span class="co"># create epiweeks (YYYY-MM-DD)</span>
          epiweek_formatted <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">epiweek_date</span>, <span class="st">"%Y-W%W"</span><span class="op">)</span>,  <span class="co"># Convert to display (YYYY-WWw)</span>
@@ -554,18 +553,20 @@
 
 <span class="co"># Display levels</span>
 <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">epiweek_formatted</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] "2014-W13" "2014-W14" "2014-W15" "2014-W16" "2014-W17" "2014-W18" "2014-W19" "2014-W20" "2014-W21" "2014-W22" "2014-W23"
-## [12] "2014-W24" "2014-W25" "2014-W26" "2014-W27" "2014-W28" "2014-W29" "2014-W30" "2014-W31" "2014-W32" "2014-W33" "2014-W34"
-## [23] "2014-W35" "2014-W36" "2014-W37" "2014-W38" "2014-W39" "2014-W40" "2014-W41" "2014-W42" "2014-W43" "2014-W44" "2014-W45"
-## [34] "2014-W46" "2014-W47" "2014-W48" "2014-W49" "2014-W50" "2014-W51" "2015-W00" "2015-W01" "2015-W02" "2015-W03" "2015-W04"
-## [45] "2015-W05" "2015-W06" "2015-W07" "2015-W08" "2015-W09" "2015-W10" "2015-W11" "2015-W12" "2015-W13" "2015-W14" "2015-W15"
-## [56] "2015-W16"</code></pre>
+<pre><code>##  [1] "2014-W13" "2014-W14" "2014-W15" "2014-W16" "2014-W17" "2014-W18" "2014-W19"
+##  [8] "2014-W20" "2014-W21" "2014-W22" "2014-W23" "2014-W24" "2014-W25" "2014-W26"
+## [15] "2014-W27" "2014-W28" "2014-W29" "2014-W30" "2014-W31" "2014-W32" "2014-W33"
+## [22] "2014-W34" "2014-W35" "2014-W36" "2014-W37" "2014-W38" "2014-W39" "2014-W40"
+## [29] "2014-W41" "2014-W42" "2014-W43" "2014-W44" "2014-W45" "2014-W46" "2014-W47"
+## [36] "2014-W48" "2014-W49" "2014-W50" "2014-W51" "2015-W00" "2015-W01" "2015-W02"
+## [43] "2015-W03" "2015-W04" "2015-W05" "2015-W06" "2015-W07" "2015-W08" "2015-W09"
+## [50] "2015-W10" "2015-W11" "2015-W12" "2015-W13" "2015-W14" "2015-W15" "2015-W16"</code></pre>
 <p><span style="color: red;"><strong><em>PELIGRO:</em></strong> Si colocas las semanas por delante de los años (“Www-YYY”) (“%W-%Y”), la ordenación por defecto del nivel alfanumérico será incorrecta (por ejemplo, 01-2015 estará antes que 35-2014). Podría ser necesario ajustar manualmente el orden, lo que sería un proceso largo y doloroso. </span></p>
 <ol start="2" style="list-style-type: decimal">
 <li>
 <em>Para una visualización rápida por defecto</em>, utiliza el paquete <strong>aweek</strong> y su función <code>date2week()</code>. Puedes establecer el día de comienzo con <code>week_start =</code>, y si estableces <code>factor = TRUE</code> entonces la columna de salida es un factor ordenado. Como ventaja, el factor incluye niveles para <em>todas las</em> semanas posibles en el lapso - incluso si no hay casos esa semana.</li>
 </ol>
-<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>epiweek <span class="op">=</span> <span class="fu">date2week</span><span class="op">(</span><span class="va">date_onset</span>, week_start <span class="op">=</span> <span class="st">"Monday"</span>, factor <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 
@@ -574,9 +575,9 @@
 <!-- ======================================================= -->
 </div>
 </div>
-<div id="recursos-1" class="section level2" number="11.9">
+<div id="resources-4" class="section level2" number="11.9">
 <h2>
-<span class="header-section-number">11.9</span> Recursos<a class="anchor" aria-label="anchor" href="#recursos-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.9</span> Recursos<a class="anchor" aria-label="anchor" href="#resources-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>Página de R for Data Science en español sobre <a href="https://es.r4ds.hadley.nz/factores.html">factores</a>
 <a href="https://cran.r-project.org/web/packages/aweek/vignettes/introduction.html">viñeta del paquete aweek</a></p>
@@ -594,15 +595,15 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#factors"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li>
-<a class="nav-link" href="#preparation-2"><span class="header-section-number">11.1</span> Preparation</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#preparation-2"><span class="header-section-number">11.1</span> Preparación</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cargar-paquetes-2">Cargar paquetes</a></li>
-<li><a class="nav-link" href="#importar-datos-3">Importar datos</a></li>
-<li><a class="nav-link" href="#fct_newcat"><span class="header-section-number">11.1.1</span> Nueva variable categórica</a></li>
+<li><a class="nav-link" href="#importar-datos-2">Importar datos</a></li>
+<li><a class="nav-link" href="#fct_newcat">Nueva variable categórica</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#convert-to-factor"><span class="header-section-number">11.2</span> Convertir en factor</a></li>
 <li>
-<a class="nav-link" href="#a%C3%B1adir-o-quitar-niveles"><span class="header-section-number">11.3</span> Añadir o quitar niveles</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#add-or-drop-levels"><span class="header-section-number">11.3</span> Añadir o quitar niveles</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#fct_add">Añadir</a></li>
 <li><a class="nav-link" href="#quitar">Quitar</a></li>
 </ul>
@@ -620,14 +621,14 @@
 </li>
 <li><a class="nav-link" href="#fct_missing"><span class="header-section-number">11.5</span> Valores faltantes</a></li>
 <li>
-<a class="nav-link" href="#combinar-niveles"><span class="header-section-number">11.6</span> Combinar niveles</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#combine-levels"><span class="header-section-number">11.6</span> Combinar niveles</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#manualmente-1">Manualmente</a></li>
 <li><a class="nav-link" href="#reducir-a-otros">Reducir a “Otros”</a></li>
 <li><a class="nav-link" href="#reducir-por-frecuencia">Reducir por frecuencia</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#mostrar-todos-los-niveles"><span class="header-section-number">11.7</span> Mostrar todos los niveles</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#show-all-levels"><span class="header-section-number">11.7</span> Mostrar todos los niveles</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#en-los-gr%C3%A1ficos">En los gráficos</a></li>
 <li><a class="nav-link" href="#en-tablas">En tablas</a></li>
 </ul>
@@ -638,7 +639,7 @@
 <li><a class="nav-link" href="#epiweeks-en-los-datos">Epiweeks en los datos</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#recursos-1"><span class="header-section-number">11.9</span> Recursos</a></li>
+<li><a class="nav-link" href="#resources-4"><span class="header-section-number">11.9</span> Recursos</a></li>
 </ul>
 
       <div class="book-extra">
@@ -655,7 +656,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-01-18.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

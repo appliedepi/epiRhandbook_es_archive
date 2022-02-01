@@ -71,7 +71,7 @@
 <li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
 <li><a class="" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
 <li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="borrador.-agrupar-datos-grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos {grouping-data}</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
 <li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
 <li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></li>
 <li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
@@ -144,7 +144,7 @@
 <h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes-11"><i class="fas fa-link"></i></a>
 </h3>
 <p>Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para tu uso. También puede cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de R <strong>base</strong>. Consulta la página sobre <a href="r-basics.html#r-basics">fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
-<div class="sourceCode" id="cb791"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb871"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span>
   <span class="va">rio</span>,          <span class="co"># File import</span>
   <span class="va">here</span>,         <span class="co"># File locator</span>
@@ -158,16 +158,16 @@
   <span class="va">see</span>          <span class="co"># alternative to visualise forest plots</span>
   <span class="op">)</span></code></pre></div>
 </div>
-<div id="importar-datos-11" class="section level3 unnumbered">
-<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-11"><i class="fas fa-link"></i></a>
+<div id="importar-datos-10" class="section level3 unnumbered">
+<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-10"><i class="fas fa-link"></i></a>
 </h3>
 <p>Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds">clica para descargar <code>linelist</code> “limpia”</a> (como archivo .rds). Importa tus datos con la función <code>import()</code> del paquete <strong>rio</strong> (acepta muchos tipos de archivos como .xlsx, .rds, .csv - Mira la página de <a href="import-and-export.html#import-and-export">importación y exportación</a> para más detalles).</p>
-<div class="sourceCode" id="cb792"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb872"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import the linelist</span>
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
 <p>A continuación se muestran las primeras 50 filas del listado.</p>
-<div id="htmlwidget-098672d6a32dd668c306" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-098672d6a32dd668c306">{"x":{"filter":"none","vertical":false,"data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-badaee469236d111a2fc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-badaee469236d111a2fc">{"x":{"filter":"none","vertical":false,"data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="datos-limpios" class="section level3 unnumbered">
 <h3>Datos limpios<a class="anchor" aria-label="anchor" href="#datos-limpios"><i class="fas fa-link"></i></a>
@@ -176,16 +176,16 @@
 <h4>Almacenar las variables explicativas<a class="anchor" aria-label="anchor" href="#almacenar-las-variables-explicativas"><i class="fas fa-link"></i></a>
 </h4>
 <p>Almacenamos los nombres de las columnas explicativas como un vector de caracteres. Esto se referenciará más adelante.</p>
-<div class="sourceCode" id="cb793"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb873"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## define variables of interest </span>
 <span class="va">explanatory_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gender"</span>, <span class="st">"fever"</span>, <span class="st">"chills"</span>, <span class="st">"cough"</span>, <span class="st">"aches"</span>, <span class="st">"vomit"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="convertir-a-1s-y-0s" class="section level4 unnumbered">
 <h4>Convertir a 1’s y 0’s<a class="anchor" aria-label="anchor" href="#convertir-a-1s-y-0s"><i class="fas fa-link"></i></a>
 </h4>
-<p>A continuación convertimos las columnas explicativas de “sí”/“no”, “m”/“f”, y “muerto”/“vivo” a <strong>1 / 0</strong>, para cooperar con las expectativas de los modelos de regresión logística. Para hacer esto de manera eficiente, utilizamos <code>across()</code> de <strong>dplyr</strong> para transformar varias columnas a la vez. La función que aplicamos a cada columna es <code>case_when()</code> (también de <strong>dplyr</strong>) que aplica la lógica para convertir los valores especificados en 1’s y 0’s. Mira las secciones sobre <code>across()</code> y <code>case_when()</code> en la página de <a href="#clean_across">Limpieza de datos y funciones básicas</a>).</p>
+<p>A continuación convertimos las columnas explicativas de “sí”/“no”, “m”/“f”, y “muerto”/“vivo” a <strong>1 / 0</strong>, para cooperar con las expectativas de los modelos de regresión logística. Para hacer esto de manera eficiente, utilizamos <code>across()</code> de <strong>dplyr</strong> para transformar varias columnas a la vez. La función que aplicamos a cada columna es <code>case_when()</code> (también de <strong>dplyr</strong>) que aplica la lógica para convertir los valores especificados en 1’s y 0’s. Mira las secciones sobre <code>across()</code> y <code>case_when()</code> en la página de <a href="cleaning-data-and-core-functions.html#clean_across">Limpieza de datos y funciones básicas</a>).</p>
 <p>Nota: el “.” que aparece a continuación representa la columna que está siendo procesada por <code>across()</code> en ese momento.</p>
-<div class="sourceCode" id="cb794"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb874"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## convert dichotomous variables to 0/1 </span>
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span>  
   <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span>                                      
@@ -203,7 +203,7 @@
 <p>Para eliminar las filas con valores faltantes, puede utilizar la función <code>drop_na()</code> de <strong>tidyr</strong>. Sin embargo, sólo queremos hacer esto para las filas a las que les faltan valores en las columnas de interés.</p>
 <p>Lo primero que debemos hacer es asegurarnos de que nuestro vector <code>explanatory_vars</code> incluye la columna <code>age</code> (<code>age</code> habría producido un error en la operación anterior <code>case_when()</code>, que sólo era para variables dicotómicas). A continuación, canalizamos <code>linelist</code> a <code>drop_na()</code> para eliminar cualquier fila con valores faltantes en la columna <code>outcome</code> o en cualquiera de las columnas <code>explanatory_vars</code>.</p>
 <p>Antes de ejecutar el código, el número de filas de <code>linelist</code> es <code>nrow(linelist)</code>.</p>
-<div class="sourceCode" id="cb795"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb875"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## add in age_category to the explanatory vars </span>
 <span class="va">explanatory_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">explanatory_vars</span>, <span class="st">"age_cat"</span><span class="op">)</span>
 
@@ -219,7 +219,7 @@
 <h2>
 <span class="header-section-number">19.2</span> Univariante<a class="anchor" aria-label="anchor" href="#univariate"><i class="fas fa-link"></i></a>
 </h2>
-<p>Al igual que en la página sobre <a href="https://epirhandbook.com/descriptive-tables.html">Tablas descriptivas</a>, tu caso de uso determinará el paquete de R que utilice. Presentamos dos opciones para realizar análisis univariantes:</p>
+<p>Al igual que en la página sobre <a href="descriptive-tables.html#descriptive-tables">Tablas descriptivas</a>, tu caso de uso determinará el paquete de R que utilice. Presentamos dos opciones para realizar análisis univariantes:</p>
 <ul>
 <li><p>Utiliza las funciones disponibles en R <strong>base</strong> para imprimir rápidamente los resultados en la consola. Utiliza el paquete <strong>broom</strong> para ordenar las salidas.</p></li>
 <li><p>Utiliza el paquete <strong>gtsummary</strong> para modelar y obtener resultados listos para tu publicación</p></li>
@@ -232,10 +232,10 @@
 </h4>
 <p>La función <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> de R <strong>base</strong>realiza una regresión lineal, evaluando la relación entre la respuesta numérica y las variables explicativas que se supone tienen una relación lineal.</p>
 <p>Proporciona la ecuación como una fórmula, con los nombres de las columnas de respuesta y explicativa separados por una tilde <code>~</code>. Además, especifique los datos a <code>data =</code>. Defina los resultados del modelo como un objeto R, para utilizarlo más tarde.</p>
-<div class="sourceCode" id="cb796"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb876"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">ht_cm</span> <span class="op">~</span> <span class="va">age</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span></code></pre></div>
 <p>A continuación, puedes ejecutar <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> en los resultados del modelo para ver los coeficientes (estimaciones), el valor P, los residuos y otras medidas.</p>
-<div class="sourceCode" id="cb797"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb877"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_results</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -256,7 +256,7 @@
 ## Multiple R-squared:  0.7675, Adjusted R-squared:  0.7674 
 ## F-statistic: 1.375e+04 on 1 and 4165 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>También se puede utilizar la función <code>tidy()</code> del paquete <strong>broom</strong> para obtener los resultados en una tabla. Lo que nos dicen los resultados es que por cada año de aumento de la edad la altura aumenta 3,5 cm y esto es estadísticamente significativo.</p>
-<div class="sourceCode" id="cb799"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb879"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tidy</span><span class="op">(</span><span class="va">lm_results</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 5
 ##   term        estimate std.error statistic p.value
@@ -264,7 +264,7 @@
 ## 1 (Intercept)    69.9     0.598       117.       0
 ## 2 age             3.44    0.0293      117.       0</code></pre>
 <p>También puedes utilizar esta regresión para añadirla a un <strong>ggplot</strong>, para hacer esto, primero juntamos los puntos de los datos observados y la línea ajustada en un dataframe utilizando la función <code>augment()</code> de <strong>broom</strong>.</p>
-<div class="sourceCode" id="cb801"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb881"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## pull the regression points and observed data in to one dataset</span>
 <span class="va">points</span> <span class="op">&lt;-</span> <span class="fu">augment</span><span class="op">(</span><span class="va">lm_results</span><span class="op">)</span>
 
@@ -276,7 +276,7 @@
   <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">.fitted</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/lin_reg_res_plot-1.png" width="672"></div>
 <p>También es posible añadir una simple recta de regresión lineal en <strong>ggplot</strong> utilizando la función <code>geom_smooth()</code>.</p>
-<div class="sourceCode" id="cb802"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb882"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## add your data to a plot </span>
  <span class="fu">ggplot</span><span class="op">(</span><span class="va">linelist</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">ht_cm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="co">## show points</span>
@@ -292,7 +292,7 @@
 </h4>
 <p>La función <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> del paquete <strong>stats</strong> (parte de R <strong>base</strong>) se utiliza para ajustar los modelos lineales generalizados (GLM).</p>
 <p><code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> puede utilizarse para la regresión logística univariante y multivariable (por ejemplo, para obtener Odds Ratios). Aquí están las partes principales:</p>
-<div class="sourceCode" id="cb804"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb884"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># arguments for glm()</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">family</span>, <span class="va">data</span>, <span class="va">weights</span>, <span class="va">subset</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
 <ul>
@@ -352,7 +352,7 @@
 <h4>Univariante <code>glm()</code><a class="anchor" aria-label="anchor" href="#univariante-glm"><i class="fas fa-link"></i></a>
 </h4>
 <p>En este ejemplo estamos evaluando la asociación entre diferentes categorías de edad y el resultado de muerte (codificado como 1 en la sección Preparación). A continuación se muestra un modelo univariante de <code>outcome</code> por age_cat. Guardamos la salida del modelo como <code>model</code> y luego la imprimimos con <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> en la consola. Observe que las estimaciones proporcionadas son las <em>probabilidades logarítmicas (log odds)</em> y que el nivel de referencia es el primer nivel del factor <code>age_cat</code> (“0-4”).</p>
-<div class="sourceCode" id="cb805"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb885"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age_cat</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -384,7 +384,7 @@
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>Para modificar el nivel de referencia de una variable determinada, asegúrese de que la columna es del tipo Factor y mueva el nivel deseado a la primera posición con <code>fct_relevel()</code> (véase la página sobre <a href="factors.html#factors">Factores</a>). Por ejemplo, a continuación tomamos la columna <code>age_cat</code> y establecemos “20-29” como línea de base antes de canalizar el dataframe modificado en <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>.</p>
-<div class="sourceCode" id="cb807"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb887"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>age_cat <span class="op">=</span> <span class="fu">fct_relevel</span><span class="op">(</span><span class="va">age_cat</span>, <span class="st">"20-29"</span>, after <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">outcome</span> <span class="op">~</span> <span class="va">age_cat</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -426,16 +426,16 @@
 <ol style="list-style-type: decimal">
 <li>Obtenga las estimaciones de log odds ratio <em>exponenciadas</em> y los intervalos de confianza pasando el modelo a <code>tidy()</code> y estableciendo <code>exponentiate = TRUE</code> y <code>conf.int = TRUE</code>.</li>
 </ol>
-<div class="sourceCode" id="cb809"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb889"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age_cat</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">tidy</span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>        <span class="co"># exponentiate and produce CIs</span>
   <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>  <span class="co"># round all numeric columns</span></code></pre></div>
 <p>A continuación, se muestra el <code>model</code> tibble resultante:</p>
-<div id="htmlwidget-e5861fdd515592c13bf7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e5861fdd515592c13bf7">{"x":{"filter":"none","vertical":false,"data":[["(Intercept)","age_cat5-9","age_cat10-14","age_cat15-19","age_cat20-29","age_cat30-49","age_cat50-69","age_cat70+"],[1.26,0.94,1.15,0.99,1.03,1.07,0.68,0.53],[0.07,0.1,0.11,0.11,0.1,0.11,0.26,0.92],[3.21,-0.62,1.29,-0.05,0.27,0.56,-1.5,-0.7],[0,0.54,0.2,0.96,0.79,0.58,0.13,0.49],[1.1,0.77,0.93,0.8,0.84,0.85,0.41,0.07],[1.46,1.15,1.42,1.24,1.26,1.33,1.13,3.2]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>term<\/th>\n      <th>estimate<\/th>\n      <th>std.error<\/th>\n      <th>statistic<\/th>\n      <th>p.value<\/th>\n      <th>conf.low<\/th>\n      <th>conf.high<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><ol start="2" style="list-style-type: decimal">
+<div id="htmlwidget-387ae32bbea7062f2ae0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-387ae32bbea7062f2ae0">{"x":{"filter":"none","vertical":false,"data":[["(Intercept)","age_cat5-9","age_cat10-14","age_cat15-19","age_cat20-29","age_cat30-49","age_cat50-69","age_cat70+"],[1.26,0.94,1.15,0.99,1.03,1.07,0.68,0.53],[0.07,0.1,0.11,0.11,0.1,0.11,0.26,0.92],[3.21,-0.62,1.29,-0.05,0.27,0.56,-1.5,-0.7],[0,0.54,0.2,0.96,0.79,0.58,0.13,0.49],[1.1,0.77,0.93,0.8,0.84,0.85,0.41,0.07],[1.46,1.15,1.42,1.24,1.26,1.33,1.13,3.2]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>term<\/th>\n      <th>estimate<\/th>\n      <th>std.error<\/th>\n      <th>statistic<\/th>\n      <th>p.value<\/th>\n      <th>conf.low<\/th>\n      <th>conf.high<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><ol start="2" style="list-style-type: decimal">
 <li>Combina estos resultados del modelo con una tabla de recuentos. A continuación, creamos la tabla cruzada de recuentos con la función <code>tabyl()</code> de <strong>janitor</strong>, como se explica en la página de <a href="descriptive-tables.html#descriptive-tables">tablas descriptivas</a>.</li>
 </ol>
-<div class="sourceCode" id="cb810"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb890"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts_table</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">age_cat</span>, <span class="va">outcome</span><span class="op">)</span></code></pre></div>
 <!-- * Group rows by outcome, and get counts by age category   -->
@@ -449,16 +449,16 @@
 <!--   pivot_wider(names_from = outcome, values_from = n)    ## spread data to wide format (as in cross-tabulation) -->
 <!-- ``` -->
 <p>Este es el aspecto de este dataframe <code>counts_table</code>:</p>
-<div id="htmlwidget-fdf2d23b3ff345802b76" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fdf2d23b3ff345802b76">{"x":{"filter":"none","vertical":false,"data":[["0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+"],[338,365,273,238,345,228,35,3],[427,433,396,299,448,307,30,2]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>age_cat<\/th>\n      <th>0<\/th>\n      <th>1<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Ahora podemos unir <code>counts_table</code> y los resultados del <code>model</code> horizontalmente con <code>bind_cols()</code> (<strong>dplyr</strong>). Recuerda que con <code>bind_cols()</code> las filas de los dos dataframes deben estar perfectamente alineadas. En este código, como estamos enlazando dentro de una cadena de tuberías, utilizamos <code>.</code> para representar el objeto de tuberías <code>counts_table</code> mientras lo enlazamos con el modelo. Para terminar el proceso, utilizamos <code>select()</code> para elegir las columnas deseadas y tu orden, y finalmente aplicamos la función <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> de R <strong>base</strong> en todas las columnas numéricas para especificar 2 decimales.</p>
-<div class="sourceCode" id="cb811"><pre class="downlit sourceCode r">
+<div id="htmlwidget-92f8a9ce12a6e1dcb724" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-92f8a9ce12a6e1dcb724">{"x":{"filter":"none","vertical":false,"data":[["0-4","5-9","10-14","15-19","20-29","30-49","50-69","70+"],[338,365,273,238,345,228,35,3],[427,433,396,299,448,307,30,2]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>age_cat<\/th>\n      <th>0<\/th>\n      <th>1<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Ahora podemos unir <code>counts_table</code> y los resultados del <code>model</code> horizontalmente con <code>bind_cols()</code> (<strong>dplyr</strong>). Recuerda que con <code>bind_cols()</code> las filas de los dos dataframes deben estar perfectamente alineadas. En este código, como estamos enlazando dentro de una cadena de tuberías, utilizamos <code>.</code> para representar el objeto de tuberías <code>counts_table</code> mientras lo enlazamos con el modelo. Para terminar el proceso, utilizamos <code>select()</code> para elegir las columnas deseadas y tu orden, y finalmente aplicamos la función <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> de R <strong>base</strong> en todas las columnas numéricas para especificar 2 decimales.</p>
+<div class="sourceCode" id="cb891"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">combined</span> <span class="op">&lt;-</span> <span class="va">counts_table</span> <span class="op">%&gt;%</span>           <span class="co"># begin with table of counts</span>
   <span class="fu">bind_cols</span><span class="op">(</span><span class="va">.</span>, <span class="va">model</span><span class="op">)</span> <span class="op">%&gt;%</span>              <span class="co"># combine with the outputs of the regression </span>
   <span class="fu">select</span><span class="op">(</span><span class="va">term</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="va">estimate</span>,          <span class="co"># select and re-order cols</span>
          <span class="va">conf.low</span>, <span class="va">conf.high</span>, <span class="va">p.value</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co">## round to 2 decimal places</span></code></pre></div>
 <p>Este es el aspecto del dataframe combinado, impreso de forma agradable como una imagen con una función de <strong>flextable</strong>. En <a href="tables-for-presentation.html#tables-for-presentation">Tablas para presentación</a> se explica cómo personalizar dichas tablas con <strong>flextable</strong>, o bien puede utilizar otros numerosos paquetes como <strong>knitr</strong> o <strong>GT</strong>.</p>
-<div class="sourceCode" id="cb812"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb892"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">combined</span> <span class="op">&lt;-</span> <span class="va">combined</span> <span class="op">%&gt;%</span> 
   <span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/flextable.html">qflextable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
@@ -471,16 +471,16 @@
 <li><p>crea un vector de nombres de columnas de las variables explicativas. Ya lo tenemos como <code>explanatory_vars</code> de la sección de preparación de esta página.</p></li>
 <li><p>Utiliza <code>str_c()</code> para crear múltiples fórmulas de cadena, con el resultado a la izquierda, y un nombre de columna de <code>explanatory_vars</code> a la derecha. El punto <code>.</code> sustituye al nombre de la columna en <code>explanatory_vars</code>.</p></li>
 </ol>
-<div class="sourceCode" id="cb813"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb893"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">explanatory_vars</span> <span class="op">%&gt;%</span> <span class="fu">str_c</span><span class="op">(</span><span class="st">"outcome ~ "</span>, <span class="va">.</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "outcome ~ gender"  "outcome ~ fever"   "outcome ~ chills"  "outcome ~ cough"   "outcome ~ aches"   "outcome ~ vomit"  
-## [7] "outcome ~ age_cat"</code></pre>
+<pre><code>## [1] "outcome ~ gender"  "outcome ~ fever"   "outcome ~ chills"  "outcome ~ cough"  
+## [5] "outcome ~ aches"   "outcome ~ vomit"   "outcome ~ age_cat"</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Pasa estas fórmulas de cadena a <code>map()</code> y establece <code>~glm()</code> como la función a aplicar a cada entrada. Dentro de <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, establece la fórmula de regresión como <code>as.formula(.x)</code>, donde <code>.x</code> se sustituirá por la fórmula de cadena definida en el paso anterior. <code>map()</code> realizará un bucle sobre cada una de las fórmulas de cadena, ejecutando regresiones para cada una.</p></li>
 <li><p>Los resultados de este primer <code>map()</code> se pasan a un segundo comando <code>map()</code>, que aplica <code>tidy()</code> a los resultados de la regresión.</p></li>
 <li><p>Por último, la salida de la segunda función <code>map()</code> (una lista de dataframes ordenados) se condensa con <code>bind_rows()</code>, dando lugar a un dataframe con todos los resultados univariantes.</p></li>
 </ol>
-<div class="sourceCode" id="cb815"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb895"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">models</span> <span class="op">&lt;-</span> <span class="va">explanatory_vars</span> <span class="op">%&gt;%</span>       <span class="co"># begin with variables of interest</span>
   <span class="fu">str_c</span><span class="op">(</span><span class="st">"outcome ~ "</span>, <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span>         <span class="co"># combine each variable into formula ("outcome ~ variable of interest")</span>
   
@@ -504,9 +504,9 @@
   <span class="co"># round all numeric columns</span>
   <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Esta vez, el objeto final <code>models</code> es más largo porque ahora representa los resultados combinados de varias regresiones univariantes. Clica para ver todas las filas de <code>model</code>.</p>
-<div id="htmlwidget-dc54e9f5548c7aa42f60" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dc54e9f5548c7aa42f60">{"x":{"filter":"none","vertical":false,"data":[["(Intercept)","gender","(Intercept)","fever","(Intercept)","chills","(Intercept)","cough","(Intercept)","aches","(Intercept)","vomit","(Intercept)","age_cat5-9","age_cat10-14","age_cat15-19","age_cat20-29","age_cat30-49","age_cat50-69","age_cat70+"],[1.28,1,1.28,1,1.28,1.03,1.14,1.15,1.29,0.93,1.23,1.09,1.26,0.94,1.15,0.99,1.03,1.07,0.68,0.53],[0.04,0.06,0.07,0.08,0.03,0.08,0.08,0.09,0.03,0.1,0.04,0.06,0.07,0.1,0.11,0.11,0.1,0.11,0.26,0.92],[5.67,-0.04,3.44,0.01,6.98,0.41,1.53,1.58,7.78,-0.66,4.67,1.39,3.21,-0.62,1.29,-0.05,0.27,0.56,-1.5,-0.7],[0,0.97,0,0.99,0,0.68,0.13,0.11,0,0.51,0,0.17,0,0.54,0.2,0.96,0.79,0.58,0.13,0.49],[1.18,0.88,1.11,0.85,1.19,0.89,0.97,0.97,1.21,0.76,1.13,0.96,1.1,0.77,0.93,0.8,0.84,0.85,0.41,0.07],[1.4,1.13,1.48,1.17,1.37,1.21,1.34,1.37,1.38,1.14,1.34,1.23,1.46,1.15,1.42,1.24,1.26,1.33,1.13,3.2]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>term<\/th>\n      <th>estimate<\/th>\n      <th>std.error<\/th>\n      <th>statistic<\/th>\n      <th>p.value<\/th>\n      <th>conf.low<\/th>\n      <th>conf.high<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Como antes, podemos crear una tabla de recuentos a partir de <code>linelist</code> para cada variable explicativa, vincularla a <code>models</code> y hacer una bonita tabla. Comenzamos con las variables, e iteramos a través de ellas con <code>map()</code>. Iteramos a través de una función definida por el usuario que implica la creación de una tabla de recuentos con funciones <strong>dplyr</strong>. Luego se combinan los resultados y se vinculan con los resultados del modelo <code>models</code>.</p>
-<div class="sourceCode" id="cb816"><pre class="downlit sourceCode r">
+<div id="htmlwidget-4bc5f5ff3bd3298d9b3e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4bc5f5ff3bd3298d9b3e">{"x":{"filter":"none","vertical":false,"data":[["(Intercept)","gender","(Intercept)","fever","(Intercept)","chills","(Intercept)","cough","(Intercept)","aches","(Intercept)","vomit","(Intercept)","age_cat5-9","age_cat10-14","age_cat15-19","age_cat20-29","age_cat30-49","age_cat50-69","age_cat70+"],[1.28,1,1.28,1,1.28,1.03,1.14,1.15,1.29,0.93,1.23,1.09,1.26,0.94,1.15,0.99,1.03,1.07,0.68,0.53],[0.04,0.06,0.07,0.08,0.03,0.08,0.08,0.09,0.03,0.1,0.04,0.06,0.07,0.1,0.11,0.11,0.1,0.11,0.26,0.92],[5.67,-0.04,3.44,0.01,6.98,0.41,1.53,1.58,7.78,-0.66,4.67,1.39,3.21,-0.62,1.29,-0.05,0.27,0.56,-1.5,-0.7],[0,0.97,0,0.99,0,0.68,0.13,0.11,0,0.51,0,0.17,0,0.54,0.2,0.96,0.79,0.58,0.13,0.49],[1.18,0.88,1.11,0.85,1.19,0.89,0.97,0.97,1.21,0.76,1.13,0.96,1.1,0.77,0.93,0.8,0.84,0.85,0.41,0.07],[1.4,1.13,1.48,1.17,1.37,1.21,1.34,1.37,1.38,1.14,1.34,1.23,1.46,1.15,1.42,1.24,1.26,1.33,1.13,3.2]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>term<\/th>\n      <th>estimate<\/th>\n      <th>std.error<\/th>\n      <th>statistic<\/th>\n      <th>p.value<\/th>\n      <th>conf.low<\/th>\n      <th>conf.high<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Como antes, podemos crear una tabla de recuentos a partir de <code>linelist</code> para cada variable explicativa, vincularla a <code>models</code> y hacer una bonita tabla. Comenzamos con las variables, e iteramos a través de ellas con <code>map()</code>. Iteramos a través de una función definida por el usuario que implica la creación de una tabla de recuentos con funciones <strong>dplyr</strong>. Luego se combinan los resultados y se vinculan con los resultados del modelo <code>models</code>.</p>
+<div class="sourceCode" id="cb896"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## for each explanatory variable</span>
 <span class="va">univ_tab_base</span> <span class="op">&lt;-</span> <span class="va">explanatory_vars</span> <span class="op">%&gt;%</span> 
   <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> 
@@ -533,18 +533,18 @@
   <span class="co">## round decimal places</span>
   <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>A continuación se muestra el aspecto del dataframe. Consulta la página sobre <a href="tables-for-presentation.html#tables-for-presentation">Tablas para presentación</a> para obtener ideas sobre cómo convertir esta tabla en una bonita salida HTML (por ejemplo, con <strong>flextable</strong>).</p>
-<div id="htmlwidget-42b4deac3689b5635023" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-42b4deac3689b5635023">{"x":{"filter":"none","vertical":false,"data":[["(Intercept)","gender","(Intercept)","fever","(Intercept)","chills","(Intercept)","cough","(Intercept)","aches","(Intercept)","vomit","(Intercept)","age_cat5-9","age_cat10-14","age_cat15-19","age_cat20-29","age_cat30-49","age_cat50-69","age_cat70+"],[909,916,340,1485,1472,353,272,1553,1636,189,931,894,338,365,273,238,345,228,35,3],[1168,1174,436,1906,1877,465,309,2033,2114,228,1144,1198,427,433,396,299,448,307,30,2],[1.28,1,1.28,1,1.28,1.03,1.14,1.15,1.29,0.93,1.23,1.09,1.26,0.94,1.15,0.99,1.03,1.07,0.68,0.53],[1.18,0.88,1.11,0.85,1.19,0.89,0.97,0.97,1.21,0.76,1.13,0.96,1.1,0.77,0.93,0.8,0.84,0.85,0.41,0.07],[1.4,1.13,1.48,1.17,1.37,1.21,1.34,1.37,1.38,1.14,1.34,1.23,1.46,1.15,1.42,1.24,1.26,1.33,1.13,3.2],[0,0.97,0,0.99,0,0.68,0.13,0.11,0,0.51,0,0.17,0,0.54,0.2,0.96,0.79,0.58,0.13,0.49]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>term<\/th>\n      <th>0<\/th>\n      <th>1<\/th>\n      <th>estimate<\/th>\n      <th>conf.low<\/th>\n      <th>conf.high<\/th>\n      <th>p.value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
+<div id="htmlwidget-58cd3ac2f9e2e4fd61ed" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-58cd3ac2f9e2e4fd61ed">{"x":{"filter":"none","vertical":false,"data":[["(Intercept)","gender","(Intercept)","fever","(Intercept)","chills","(Intercept)","cough","(Intercept)","aches","(Intercept)","vomit","(Intercept)","age_cat5-9","age_cat10-14","age_cat15-19","age_cat20-29","age_cat30-49","age_cat50-69","age_cat70+"],[909,916,340,1485,1472,353,272,1553,1636,189,931,894,338,365,273,238,345,228,35,3],[1168,1174,436,1906,1877,465,309,2033,2114,228,1144,1198,427,433,396,299,448,307,30,2],[1.28,1,1.28,1,1.28,1.03,1.14,1.15,1.29,0.93,1.23,1.09,1.26,0.94,1.15,0.99,1.03,1.07,0.68,0.53],[1.18,0.88,1.11,0.85,1.19,0.89,0.97,0.97,1.21,0.76,1.13,0.96,1.1,0.77,0.93,0.8,0.84,0.85,0.41,0.07],[1.4,1.13,1.48,1.17,1.37,1.21,1.34,1.37,1.38,1.14,1.34,1.23,1.46,1.15,1.42,1.24,1.26,1.33,1.13,3.2],[0,0.97,0,0.99,0,0.68,0.13,0.11,0,0.51,0,0.17,0,0.54,0.2,0.96,0.79,0.58,0.13,0.49]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>term<\/th>\n      <th>0<\/th>\n      <th>1<\/th>\n      <th>estimate<\/th>\n      <th>conf.low<\/th>\n      <th>conf.high<\/th>\n      <th>p.value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
 </div>
 </div>
 <div id="reg_gt_uni" class="section level3 unnumbered">
 <h3>paquete <strong>gtsummary</strong><a class="anchor" aria-label="anchor" href="#reg_gt_uni"><i class="fas fa-link"></i></a>
 </h3>
-<p>A continuación presentamos el uso de <code>tbl_uvregression()</code> del paquete <strong>gtsummary</strong>. Al igual que en la página sobre <a href="https://epirhandbook.com/descriptive-tables.html">Tablas descriptivas</a>, las funciones de gtsummary hacen un buen trabajo al ejecutar estadísticas <em>y</em> producir salidas de aspecto profesional. Esta función produce una tabla de resultados de regresión univariante.</p>
+<p>A continuación presentamos el uso de <code>tbl_uvregression()</code> del paquete <strong>gtsummary</strong>. Al igual que en la página sobre <a href="descriptive-tables.html#descriptive-tables">Tablas descriptivas</a>, las funciones de gtsummary hacen un buen trabajo al ejecutar estadísticas <em>y</em> producir salidas de aspecto profesional. Esta función produce una tabla de resultados de regresión univariante.</p>
 <p>Seleccionamos sólo las columnas necesarias de <code>linelist</code> (variables explicativas y la variable de resultado) y las introducimos en <code>tbl_uvregression()</code>. Vamos a ejecutar una regresión univariante en cada una de las columnas que definimos como <code>explanatory_vars</code> en la sección de preparación de datos (sexo, fiebre, escalofríos, tos, dolores, vómitos y age_cat).</p>
 <p>Dentro de la propia función, proporcionamos el <code>method =</code> como <code>glm</code> (sin comillas), la columna de resultado <code>y =</code> (<code>outcome</code>), especificamos a <code>method.args =</code> que queremos ejecutar la regresión logística a través de <code>family = binomial</code>, y le decimos que exponencie los resultados.</p>
 <p>La salida es HTML y contiene los recuentos</p>
-<div class="sourceCode" id="cb817"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb897"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">univ_tab</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">explanatory_vars</span>, <span class="va">outcome</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">## select variables of interest</span>
 
@@ -557,12 +557,12 @@
 
 <span class="co">## view univariate results table </span>
 <span class="va">univ_tab</span></code></pre></div>
-<div id="oruufljffh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="npefubjqjd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#oruufljffh .gt_table {
+#npefubjqjd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -587,7 +587,7 @@
   border-left-color: #D3D3D3;
 }
 
-#oruufljffh .gt_heading {
+#npefubjqjd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -599,7 +599,7 @@
   border-right-color: #D3D3D3;
 }
 
-#oruufljffh .gt_title {
+#npefubjqjd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -609,7 +609,7 @@
   border-bottom-width: 0;
 }
 
-#oruufljffh .gt_subtitle {
+#npefubjqjd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -619,13 +619,13 @@
   border-top-width: 0;
 }
 
-#oruufljffh .gt_bottom_border {
+#npefubjqjd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oruufljffh .gt_col_headings {
+#npefubjqjd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -640,7 +640,7 @@
   border-right-color: #D3D3D3;
 }
 
-#oruufljffh .gt_col_heading {
+#npefubjqjd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -660,7 +660,7 @@
   overflow-x: hidden;
 }
 
-#oruufljffh .gt_column_spanner_outer {
+#npefubjqjd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -672,15 +672,15 @@
   padding-right: 4px;
 }
 
-#oruufljffh .gt_column_spanner_outer:first-child {
+#npefubjqjd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oruufljffh .gt_column_spanner_outer:last-child {
+#npefubjqjd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oruufljffh .gt_column_spanner {
+#npefubjqjd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -692,7 +692,7 @@
   width: 100%;
 }
 
-#oruufljffh .gt_group_heading {
+#npefubjqjd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -714,7 +714,7 @@
   vertical-align: middle;
 }
 
-#oruufljffh .gt_empty_group_heading {
+#npefubjqjd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -729,15 +729,15 @@
   vertical-align: middle;
 }
 
-#oruufljffh .gt_from_md > :first-child {
+#npefubjqjd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oruufljffh .gt_from_md > :last-child {
+#npefubjqjd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oruufljffh .gt_row {
+#npefubjqjd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -756,7 +756,7 @@
   overflow-x: hidden;
 }
 
-#oruufljffh .gt_stub {
+#npefubjqjd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -768,7 +768,7 @@
   padding-left: 12px;
 }
 
-#oruufljffh .gt_summary_row {
+#npefubjqjd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -778,7 +778,7 @@
   padding-right: 5px;
 }
 
-#oruufljffh .gt_first_summary_row {
+#npefubjqjd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -788,7 +788,7 @@
   border-top-color: #D3D3D3;
 }
 
-#oruufljffh .gt_grand_summary_row {
+#npefubjqjd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -798,7 +798,7 @@
   padding-right: 5px;
 }
 
-#oruufljffh .gt_first_grand_summary_row {
+#npefubjqjd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -808,11 +808,11 @@
   border-top-color: #D3D3D3;
 }
 
-#oruufljffh .gt_striped {
+#npefubjqjd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oruufljffh .gt_table_body {
+#npefubjqjd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -821,7 +821,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#oruufljffh .gt_footnotes {
+#npefubjqjd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -835,13 +835,13 @@
   border-right-color: #D3D3D3;
 }
 
-#oruufljffh .gt_footnote {
+#npefubjqjd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#oruufljffh .gt_sourcenotes {
+#npefubjqjd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -855,41 +855,41 @@
   border-right-color: #D3D3D3;
 }
 
-#oruufljffh .gt_sourcenote {
+#npefubjqjd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#oruufljffh .gt_left {
+#npefubjqjd .gt_left {
   text-align: left;
 }
 
-#oruufljffh .gt_center {
+#npefubjqjd .gt_center {
   text-align: center;
 }
 
-#oruufljffh .gt_right {
+#npefubjqjd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oruufljffh .gt_font_normal {
+#npefubjqjd .gt_font_normal {
   font-weight: normal;
 }
 
-#oruufljffh .gt_font_bold {
+#npefubjqjd .gt_font_bold {
   font-weight: bold;
 }
 
-#oruufljffh .gt_font_italic {
+#npefubjqjd .gt_font_italic {
   font-style: italic;
 }
 
-#oruufljffh .gt_super {
+#npefubjqjd .gt_super {
   font-size: 65%;
 }
 
-#oruufljffh .gt_footnote_marks {
+#npefubjqjd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1054,7 +1054,7 @@
 </h3>
 <p>Aquí utilizamos <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> pero añadimos más variables al lado derecho de la ecuación, separadas por símbolos de suma (<code>+</code>).</p>
 <p>Para ejecutar el modelo con todas nuestras variables explicativas ejecutaríamos:</p>
-<div class="sourceCode" id="cb818"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb898"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mv_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">fever</span> <span class="op">+</span> <span class="va">chills</span> <span class="op">+</span> <span class="va">cough</span> <span class="op">+</span> <span class="va">aches</span> <span class="op">+</span> <span class="va">vomit</span> <span class="op">+</span> <span class="va">age_cat</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mv_reg</span><span class="op">)</span></code></pre></div>
@@ -1092,10 +1092,10 @@
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>Si quieres incluir dos variables y una interacción entre ellas puede separarlas con un asterisco <code>*</code> en lugar de un <code>+</code>. Si sólo especifica la interacción, sepárelas con dos puntos <code>:</code>. Por ejemplo:</p>
-<div class="sourceCode" id="cb820"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb900"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">age_cat</span> <span class="op">*</span> <span class="va">fever</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span></code></pre></div>
 <p><em>Opcionalmente</em>, puedes utilizar este código para aprovechar el vector predefinido de nombres de columnas y volver a crear el comando anterior utilizando <code>str_c()</code>. Esto puede ser útil si los nombres de sus variables explicativas cambian, o si no quiere escribirlos todos de nuevo.</p>
-<div class="sourceCode" id="cb821"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb901"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## run a regression with all variables of interest </span>
 <span class="va">mv_reg</span> <span class="op">&lt;-</span> <span class="va">explanatory_vars</span> <span class="op">%&gt;%</span>  <span class="co">## begin with vector of explanatory column names</span>
   <span class="fu">str_c</span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span> <span class="op">%&gt;%</span>     <span class="co">## combine all names of the variables of interest separated by a plus</span>
@@ -1107,7 +1107,7 @@
 </h4>
 <p>Puedes construir tu modelo paso a paso, guardando varios modelos que incluyan determinadas variables explicativas. Puedes comparar estos modelos con pruebas de razón de verosimilitud utilizando `lrtest() del paquete <strong>lmtest</strong>, como se indica a continuación:</p>
 <p><span style="color: black;"><strong><em>NOTA:</em></strong> El uso de anova(model1, model2, test = “Chisq) de R <strong>base</strong> produce los mismos resultados </span></p>
-<div class="sourceCode" id="cb822"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb902"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age_cat</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span>
 <span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">~</span> <span class="va">age_cat</span> <span class="op">+</span> <span class="va">gender</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span>
 
@@ -1120,22 +1120,22 @@
 ## 1   8 -2852.6                     
 ## 2   9 -2852.6  1 0.0002     0.9883</code></pre>
 <p>Otra opción es tomar el objeto modelo y aplicar la función <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> del paquete <strong>stats</strong>. Especifica qué dirección de selección de variables deseas utilizar al construir el modelo.</p>
-<div class="sourceCode" id="cb824"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb904"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## choose a model using forward selection based on AIC</span>
 <span class="co">## you can also do "backward" or "both" by adjusting the direction</span>
 <span class="va">final_mv_reg</span> <span class="op">&lt;-</span> <span class="va">mv_reg</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span>direction <span class="op">=</span> <span class="st">"forward"</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>También puedes desactivar la notación científica en tu sesión de R, para mayor claridad:</p>
-<div class="sourceCode" id="cb825"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb905"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen<span class="op">=</span><span class="fl">999</span><span class="op">)</span></code></pre></div>
 <p>Como se describe en la sección sobre el análisis univariante, pasamos la salida del modelo a <code>tidy()</code> para exponer las probabilidades logarítmicas y los IC. Finalmente, redondeamos todas las columnas numéricas a dos decimales. Desplázate para ver todas las filas.</p>
-<div class="sourceCode" id="cb826"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb906"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mv_tab_base</span> <span class="op">&lt;-</span> <span class="va">final_mv_reg</span> <span class="op">%&gt;%</span> 
   <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co">## get a tidy dataframe of estimates </span>
   <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>          <span class="co">## round </span></code></pre></div>
 <p>Este es el aspecto del dataframe resultante:</p>
-<div id="htmlwidget-d3baa9ba0e3757e25993" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d3baa9ba0e3757e25993">{"x":{"filter":"none","vertical":false,"data":[["(Intercept)","gender","fever","chills","cough","aches","vomit","age_cat5-9","age_cat10-14","age_cat15-19","age_cat20-29","age_cat30-49","age_cat50-69","age_cat70+"],[1.07,1,1,1.03,1.15,0.93,1.09,0.94,1.15,0.99,1.03,1.06,0.68,0.52],[0.13,0.07,0.08,0.08,0.09,0.1,0.06,0.1,0.11,0.11,0.1,0.12,0.26,0.92],[0.52,0.04,0.05,0.43,1.54,-0.68,1.37,-0.62,1.27,-0.1,0.26,0.51,-1.48,-0.71],[0.6,0.97,0.96,0.67,0.12,0.5,0.17,0.53,0.2,0.92,0.8,0.61,0.14,0.48],[0.83,0.88,0.86,0.89,0.96,0.76,0.96,0.77,0.93,0.79,0.84,0.85,0.4,0.07],[1.39,1.14,1.18,1.21,1.37,1.14,1.23,1.15,1.41,1.24,1.26,1.33,1.13,3.19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>term<\/th>\n      <th>estimate<\/th>\n      <th>std.error<\/th>\n      <th>statistic<\/th>\n      <th>p.value<\/th>\n      <th>conf.low<\/th>\n      <th>conf.high<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
+<div id="htmlwidget-84528ca43e9163d0d108" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-84528ca43e9163d0d108">{"x":{"filter":"none","vertical":false,"data":[["(Intercept)","gender","fever","chills","cough","aches","vomit","age_cat5-9","age_cat10-14","age_cat15-19","age_cat20-29","age_cat30-49","age_cat50-69","age_cat70+"],[1.07,1,1,1.03,1.15,0.93,1.09,0.94,1.15,0.99,1.03,1.06,0.68,0.52],[0.13,0.07,0.08,0.08,0.09,0.1,0.06,0.1,0.11,0.11,0.1,0.12,0.26,0.92],[0.52,0.04,0.05,0.43,1.54,-0.68,1.37,-0.62,1.27,-0.1,0.26,0.51,-1.48,-0.71],[0.6,0.97,0.96,0.67,0.12,0.5,0.17,0.53,0.2,0.92,0.8,0.61,0.14,0.48],[0.83,0.88,0.86,0.89,0.96,0.76,0.96,0.77,0.93,0.79,0.84,0.85,0.4,0.07],[1.39,1.14,1.18,1.21,1.37,1.14,1.23,1.15,1.41,1.24,1.26,1.33,1.13,3.19]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>term<\/th>\n      <th>estimate<\/th>\n      <th>std.error<\/th>\n      <th>statistic<\/th>\n      <th>p.value<\/th>\n      <th>conf.low<\/th>\n      <th>conf.high<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
 </div>
 </div>
 <div id="combine-univariate-and-multivariable" class="section level3 unnumbered">
@@ -1145,18 +1145,18 @@
 <h4>Combinar con <strong>gtsummary</strong><a class="anchor" aria-label="anchor" href="#combinar-con-gtsummary"><i class="fas fa-link"></i></a>
 </h4>
 <p>El paquete <strong>gtsummary</strong> proporciona la función <code>tbl_regression()</code>, que tomará los resultados de una regresión (<code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> en este caso) y producirá una bonita tabla resumen.</p>
-<div class="sourceCode" id="cb827"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb907"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## show results table of final regression </span>
 <span class="va">mv_tab</span> <span class="op">&lt;-</span> <span class="fu">tbl_regression</span><span class="op">(</span><span class="va">final_mv_reg</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>Veamos la tabla:</p>
-<div class="sourceCode" id="cb828"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb908"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mv_tab</span></code></pre></div>
-<div id="mkjsjexrve" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rpgqsipkvc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#mkjsjexrve .gt_table {
+#rpgqsipkvc .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1181,7 +1181,7 @@
   border-left-color: #D3D3D3;
 }
 
-#mkjsjexrve .gt_heading {
+#rpgqsipkvc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1193,7 +1193,7 @@
   border-right-color: #D3D3D3;
 }
 
-#mkjsjexrve .gt_title {
+#rpgqsipkvc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1203,7 +1203,7 @@
   border-bottom-width: 0;
 }
 
-#mkjsjexrve .gt_subtitle {
+#rpgqsipkvc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1213,13 +1213,13 @@
   border-top-width: 0;
 }
 
-#mkjsjexrve .gt_bottom_border {
+#rpgqsipkvc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mkjsjexrve .gt_col_headings {
+#rpgqsipkvc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1234,7 +1234,7 @@
   border-right-color: #D3D3D3;
 }
 
-#mkjsjexrve .gt_col_heading {
+#rpgqsipkvc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1254,7 +1254,7 @@
   overflow-x: hidden;
 }
 
-#mkjsjexrve .gt_column_spanner_outer {
+#rpgqsipkvc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1266,15 +1266,15 @@
   padding-right: 4px;
 }
 
-#mkjsjexrve .gt_column_spanner_outer:first-child {
+#rpgqsipkvc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mkjsjexrve .gt_column_spanner_outer:last-child {
+#rpgqsipkvc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mkjsjexrve .gt_column_spanner {
+#rpgqsipkvc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1286,7 +1286,7 @@
   width: 100%;
 }
 
-#mkjsjexrve .gt_group_heading {
+#rpgqsipkvc .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1308,7 +1308,7 @@
   vertical-align: middle;
 }
 
-#mkjsjexrve .gt_empty_group_heading {
+#rpgqsipkvc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1323,15 +1323,15 @@
   vertical-align: middle;
 }
 
-#mkjsjexrve .gt_from_md > :first-child {
+#rpgqsipkvc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mkjsjexrve .gt_from_md > :last-child {
+#rpgqsipkvc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mkjsjexrve .gt_row {
+#rpgqsipkvc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1350,7 +1350,7 @@
   overflow-x: hidden;
 }
 
-#mkjsjexrve .gt_stub {
+#rpgqsipkvc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1362,7 +1362,7 @@
   padding-left: 12px;
 }
 
-#mkjsjexrve .gt_summary_row {
+#rpgqsipkvc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1372,7 +1372,7 @@
   padding-right: 5px;
 }
 
-#mkjsjexrve .gt_first_summary_row {
+#rpgqsipkvc .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1382,7 +1382,7 @@
   border-top-color: #D3D3D3;
 }
 
-#mkjsjexrve .gt_grand_summary_row {
+#rpgqsipkvc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1392,7 +1392,7 @@
   padding-right: 5px;
 }
 
-#mkjsjexrve .gt_first_grand_summary_row {
+#rpgqsipkvc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1402,11 +1402,11 @@
   border-top-color: #D3D3D3;
 }
 
-#mkjsjexrve .gt_striped {
+#rpgqsipkvc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mkjsjexrve .gt_table_body {
+#rpgqsipkvc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1415,7 +1415,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#mkjsjexrve .gt_footnotes {
+#rpgqsipkvc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1429,13 +1429,13 @@
   border-right-color: #D3D3D3;
 }
 
-#mkjsjexrve .gt_footnote {
+#rpgqsipkvc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#mkjsjexrve .gt_sourcenotes {
+#rpgqsipkvc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1449,41 +1449,41 @@
   border-right-color: #D3D3D3;
 }
 
-#mkjsjexrve .gt_sourcenote {
+#rpgqsipkvc .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#mkjsjexrve .gt_left {
+#rpgqsipkvc .gt_left {
   text-align: left;
 }
 
-#mkjsjexrve .gt_center {
+#rpgqsipkvc .gt_center {
   text-align: center;
 }
 
-#mkjsjexrve .gt_right {
+#rpgqsipkvc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mkjsjexrve .gt_font_normal {
+#rpgqsipkvc .gt_font_normal {
   font-weight: normal;
 }
 
-#mkjsjexrve .gt_font_bold {
+#rpgqsipkvc .gt_font_bold {
   font-weight: bold;
 }
 
-#mkjsjexrve .gt_font_italic {
+#rpgqsipkvc .gt_font_italic {
   font-style: italic;
 }
 
-#mkjsjexrve .gt_super {
+#rpgqsipkvc .gt_super {
   font-size: 65%;
 }
 
-#mkjsjexrve .gt_footnote_marks {
+#rpgqsipkvc .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1605,17 +1605,17 @@
 </table></div>
 </div>
 <p>También puedes combinar varias tablas de salida diferentes producidas por <strong>gtsummary</strong> con la función <code>tbl_merge()</code>. Ahora combinamos los resultados multivariables con los resultados <em>univariantes</em> de <strong>gtsummary</strong> que creamos <a href="univariate-and-multivariable-regression.html#reg_gt_uni">anteriormente</a>:</p>
-<div class="sourceCode" id="cb829"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb909"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## combine with univariate results </span>
 <span class="fu">tbl_merge</span><span class="op">(</span>
   tbls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">univ_tab</span>, <span class="va">mv_tab</span><span class="op">)</span>,                          <span class="co"># combine</span>
   tab_spanner <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"**Univariate**"</span>, <span class="st">"**Multivariable**"</span><span class="op">)</span><span class="op">)</span> <span class="co"># set header names</span></code></pre></div>
-<div id="uuhbaxfhnl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xkobzaberh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#uuhbaxfhnl .gt_table {
+#xkobzaberh .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1640,7 +1640,7 @@
   border-left-color: #D3D3D3;
 }
 
-#uuhbaxfhnl .gt_heading {
+#xkobzaberh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1652,7 +1652,7 @@
   border-right-color: #D3D3D3;
 }
 
-#uuhbaxfhnl .gt_title {
+#xkobzaberh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1662,7 +1662,7 @@
   border-bottom-width: 0;
 }
 
-#uuhbaxfhnl .gt_subtitle {
+#xkobzaberh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1672,13 +1672,13 @@
   border-top-width: 0;
 }
 
-#uuhbaxfhnl .gt_bottom_border {
+#xkobzaberh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uuhbaxfhnl .gt_col_headings {
+#xkobzaberh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1693,7 +1693,7 @@
   border-right-color: #D3D3D3;
 }
 
-#uuhbaxfhnl .gt_col_heading {
+#xkobzaberh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1713,7 +1713,7 @@
   overflow-x: hidden;
 }
 
-#uuhbaxfhnl .gt_column_spanner_outer {
+#xkobzaberh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1725,15 +1725,15 @@
   padding-right: 4px;
 }
 
-#uuhbaxfhnl .gt_column_spanner_outer:first-child {
+#xkobzaberh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uuhbaxfhnl .gt_column_spanner_outer:last-child {
+#xkobzaberh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uuhbaxfhnl .gt_column_spanner {
+#xkobzaberh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1745,7 +1745,7 @@
   width: 100%;
 }
 
-#uuhbaxfhnl .gt_group_heading {
+#xkobzaberh .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1767,7 +1767,7 @@
   vertical-align: middle;
 }
 
-#uuhbaxfhnl .gt_empty_group_heading {
+#xkobzaberh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1782,15 +1782,15 @@
   vertical-align: middle;
 }
 
-#uuhbaxfhnl .gt_from_md > :first-child {
+#xkobzaberh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uuhbaxfhnl .gt_from_md > :last-child {
+#xkobzaberh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uuhbaxfhnl .gt_row {
+#xkobzaberh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1809,7 +1809,7 @@
   overflow-x: hidden;
 }
 
-#uuhbaxfhnl .gt_stub {
+#xkobzaberh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1821,7 +1821,7 @@
   padding-left: 12px;
 }
 
-#uuhbaxfhnl .gt_summary_row {
+#xkobzaberh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1831,7 +1831,7 @@
   padding-right: 5px;
 }
 
-#uuhbaxfhnl .gt_first_summary_row {
+#xkobzaberh .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1841,7 +1841,7 @@
   border-top-color: #D3D3D3;
 }
 
-#uuhbaxfhnl .gt_grand_summary_row {
+#xkobzaberh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1851,7 +1851,7 @@
   padding-right: 5px;
 }
 
-#uuhbaxfhnl .gt_first_grand_summary_row {
+#xkobzaberh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1861,11 +1861,11 @@
   border-top-color: #D3D3D3;
 }
 
-#uuhbaxfhnl .gt_striped {
+#xkobzaberh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uuhbaxfhnl .gt_table_body {
+#xkobzaberh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1874,7 +1874,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#uuhbaxfhnl .gt_footnotes {
+#xkobzaberh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1888,13 +1888,13 @@
   border-right-color: #D3D3D3;
 }
 
-#uuhbaxfhnl .gt_footnote {
+#xkobzaberh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#uuhbaxfhnl .gt_sourcenotes {
+#xkobzaberh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1908,41 +1908,41 @@
   border-right-color: #D3D3D3;
 }
 
-#uuhbaxfhnl .gt_sourcenote {
+#xkobzaberh .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#uuhbaxfhnl .gt_left {
+#xkobzaberh .gt_left {
   text-align: left;
 }
 
-#uuhbaxfhnl .gt_center {
+#xkobzaberh .gt_center {
   text-align: center;
 }
 
-#uuhbaxfhnl .gt_right {
+#xkobzaberh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uuhbaxfhnl .gt_font_normal {
+#xkobzaberh .gt_font_normal {
   font-weight: normal;
 }
 
-#uuhbaxfhnl .gt_font_bold {
+#xkobzaberh .gt_font_bold {
   font-weight: bold;
 }
 
-#uuhbaxfhnl .gt_font_italic {
+#xkobzaberh .gt_font_italic {
   font-style: italic;
 }
 
-#uuhbaxfhnl .gt_super {
+#xkobzaberh .gt_super {
   font-size: 65%;
 }
 
-#uuhbaxfhnl .gt_footnote_marks {
+#xkobzaberh .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2152,7 +2152,7 @@
 <li>Utiliza <code>select()</code> para mantener sólo las columnas que queremos, especificar tu orden y renombrarlas</li>
 <li>Utiliza <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> con dos decimales en toda la columna que sea de tipo Double</li>
 </ul>
-<div class="sourceCode" id="cb830"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb910"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## combine univariate and multivariable tables </span>
 <span class="fu">left_join</span><span class="op">(</span><span class="va">univ_tab_base</span>, <span class="va">mv_tab_base</span>, by <span class="op">=</span> <span class="st">"term"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="co">## choose columns and rename them</span>
@@ -2171,28 +2171,29 @@
   <span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.double</span><span class="op">)</span>, <span class="va">round</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>   </code></pre></div>
 <pre><code>## # A tibble: 20 x 11
-##    characteristic recovered  dead univ_or univ_ci_low univ_ci_high univ_pval mv_or mvv_ci_low mv_ci_high mv_pval
-##    &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 (Intercept)          909  1168    1.28        1.18         1.4       0     1.07       0.83       1.39    0.6 
-##  2 gender               916  1174    1           0.88         1.13      0.97  1          0.88       1.14    0.97
-##  3 (Intercept)          340   436    1.28        1.11         1.48      0     1.07       0.83       1.39    0.6 
-##  4 fever               1485  1906    1           0.85         1.17      0.99  1          0.86       1.18    0.96
-##  5 (Intercept)         1472  1877    1.28        1.19         1.37      0     1.07       0.83       1.39    0.6 
-##  6 chills               353   465    1.03        0.89         1.21      0.68  1.03       0.89       1.21    0.67
-##  7 (Intercept)          272   309    1.14        0.97         1.34      0.13  1.07       0.83       1.39    0.6 
-##  8 cough               1553  2033    1.15        0.97         1.37      0.11  1.15       0.96       1.37    0.12
-##  9 (Intercept)         1636  2114    1.29        1.21         1.38      0     1.07       0.83       1.39    0.6 
-## 10 aches                189   228    0.93        0.76         1.14      0.51  0.93       0.76       1.14    0.5 
-## 11 (Intercept)          931  1144    1.23        1.13         1.34      0     1.07       0.83       1.39    0.6 
-## 12 vomit                894  1198    1.09        0.96         1.23      0.17  1.09       0.96       1.23    0.17
-## 13 (Intercept)          338   427    1.26        1.1          1.46      0     1.07       0.83       1.39    0.6 
-## 14 age_cat5-9           365   433    0.94        0.77         1.15      0.54  0.94       0.77       1.15    0.53
-## 15 age_cat10-14         273   396    1.15        0.93         1.42      0.2   1.15       0.93       1.41    0.2 
-## 16 age_cat15-19         238   299    0.99        0.8          1.24      0.96  0.99       0.79       1.24    0.92
-## 17 age_cat20-29         345   448    1.03        0.84         1.26      0.79  1.03       0.84       1.26    0.8 
-## 18 age_cat30-49         228   307    1.07        0.85         1.33      0.58  1.06       0.85       1.33    0.61
-## 19 age_cat50-69          35    30    0.68        0.41         1.13      0.13  0.68       0.4        1.13    0.14
-## 20 age_cat70+             3     2    0.53        0.07         3.2       0.49  0.52       0.07       3.19    0.48</code></pre>
+##    characteristic recovered  dead univ_or univ_ci_low univ_ci_high univ_pval mv_or
+##    &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+##  1 (Intercept)          909  1168    1.28        1.18         1.4       0     1.07
+##  2 gender               916  1174    1           0.88         1.13      0.97  1   
+##  3 (Intercept)          340   436    1.28        1.11         1.48      0     1.07
+##  4 fever               1485  1906    1           0.85         1.17      0.99  1   
+##  5 (Intercept)         1472  1877    1.28        1.19         1.37      0     1.07
+##  6 chills               353   465    1.03        0.89         1.21      0.68  1.03
+##  7 (Intercept)          272   309    1.14        0.97         1.34      0.13  1.07
+##  8 cough               1553  2033    1.15        0.97         1.37      0.11  1.15
+##  9 (Intercept)         1636  2114    1.29        1.21         1.38      0     1.07
+## 10 aches                189   228    0.93        0.76         1.14      0.51  0.93
+## 11 (Intercept)          931  1144    1.23        1.13         1.34      0     1.07
+## 12 vomit                894  1198    1.09        0.96         1.23      0.17  1.09
+## 13 (Intercept)          338   427    1.26        1.1          1.46      0     1.07
+## 14 age_cat5-9           365   433    0.94        0.77         1.15      0.54  0.94
+## 15 age_cat10-14         273   396    1.15        0.93         1.42      0.2   1.15
+## 16 age_cat15-19         238   299    0.99        0.8          1.24      0.96  0.99
+## 17 age_cat20-29         345   448    1.03        0.84         1.26      0.79  1.03
+## 18 age_cat30-49         228   307    1.07        0.85         1.33      0.58  1.06
+## 19 age_cat50-69          35    30    0.68        0.41         1.13      0.13  0.68
+## 20 age_cat70+             3     2    0.53        0.07         3.2       0.49  0.52
+## # ... with 3 more variables: mvv_ci_low &lt;dbl&gt;, mv_ci_high &lt;dbl&gt;, mv_pval &lt;dbl&gt;</code></pre>
 <!-- ======================================================= -->
 </div>
 </div>
@@ -2203,7 +2204,7 @@
 </h2>
 <p>Esta sección muestra cómo producir un gráfico con los resultados de tu regresión.
 Hay dos opciones, puedes construir un gráfico tú mismo usando <strong>ggplot2</strong> o usar un metapaquete llamado <strong>easystats</strong> (un paquete que incluye muchos paquetes).</p>
-<p>Consulta la página sobre <a href="ggplot-basics.html#ggplot-basics">fundamentos de ggplot</a> si no estás familiarizado con el paquete de gráficos <strong>ggplot2</strong>.</p>
+<p>Consulta la página sobre <a href="ggplot-basics.html#ggplot-basics">Conceptos básicos de ggplot</a> si no estás familiarizado con el paquete de gráficos <strong>ggplot2</strong>.</p>
 <!-- ======================================================= -->
 <div id="paquete-ggplot2" class="section level3 unnumbered">
 <h3>Paquete <strong>ggplot2</strong><a class="anchor" aria-label="anchor" href="#paquete-ggplot2"><i class="fas fa-link"></i></a>
@@ -2218,7 +2219,7 @@ Hay dos opciones, puedes construir un gráfico tú mismo usando <strong>ggplot2<
 </li>
 </ul>
 <p>Antes de trazar, es posible que desee utilizar <code>fct_relevel()</code> del paquete <strong>forcats</strong> para establecer el orden de las variables/niveles en el eje y. <code>ggplot()</code> puede mostrarlos en orden alfanumérico, lo que no funcionaría bien para estos valores de categoría de edad (“30” aparecería antes de “5”). Mira la página sobre <a href="factors.html#factors">Factores</a> para más detalles.</p>
-<div class="sourceCode" id="cb832"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb912"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## remove the intercept term from your multivariable results</span>
 <span class="va">mv_tab_base</span> <span class="op">%&gt;%</span> 
   
@@ -2251,7 +2252,7 @@ Hay dos opciones, puedes construir un gráfico tú mismo usando <strong>ggplot2<
 </h3>
 <p>Una alternativa, si no deseas el nivel de control fino que proporciona <strong>ggplot2</strong>, es utilizar una combinación de paquetes <strong>easystats</strong>.</p>
 <p>La función <code>model_parameters()</code> del paquete <strong>parameters</strong> hace el equivalente de la función <code>tidy()</code> del paquete <strong>broom</strong>. El paquete <strong>see</strong> acepta esos resultados y crea por defecto un forest plot como un objeto <code>ggplot()</code>.</p>
-<div class="sourceCode" id="cb833"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb913"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">easystats</span><span class="op">)</span></code></pre></div>
 <pre><code>## Installing package into 'C:/Users/Juan Fco Monteagudo/Documents/R/win-library/4.1'
 ## (as 'lib' is unspecified)</code></pre>
@@ -2263,11 +2264,11 @@ Hay dos opciones, puedes construir un gráfico tú mismo usando <strong>ggplot2<
 <pre><code>## Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.1:
 ##   cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.1/PACKAGES'</code></pre>
 <pre><code>## Warning in p_install(package, character.only = TRUE, ...):</code></pre>
-<pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE, : there is no package called
-## 'easystats'</code></pre>
+<pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE, logical.return =
+## TRUE, : there is no package called 'easystats'</code></pre>
 <pre><code>## Warning in pacman::p_load(easystats): Failed to install/load:
 ## easystats</code></pre>
-<div class="sourceCode" id="cb840"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb920"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## remove the intercept term from your multivariable results</span>
 <span class="va">final_mv_reg</span> <span class="op">%&gt;%</span> 
   <span class="fu">model_parameters</span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -2298,7 +2299,7 @@ Hay dos opciones, puedes construir un gráfico tú mismo usando <strong>ggplot2<
 <li>
 <a class="nav-link" href="#preparation-9"><span class="header-section-number">19.1</span> Preparación</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cargar-paquetes-11">Cargar paquetes</a></li>
-<li><a class="nav-link" href="#importar-datos-11">Importar datos</a></li>
+<li><a class="nav-link" href="#importar-datos-10">Importar datos</a></li>
 <li><a class="nav-link" href="#datos-limpios">Datos limpios</a></li>
 </ul>
 </li>
@@ -2338,7 +2339,7 @@ Hay dos opciones, puedes construir un gráfico tú mismo usando <strong>ggplot2<
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-01-18.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
