@@ -7,7 +7,7 @@
 knitr::include_graphics(here::here("images", "Characters_Strings_1500x500.png"))
 ```
 
-Esta página demuestra el uso del paquete **stringr** para evaluar y manejar valores de caracteres.
+Esta página demuestra el uso del paquete **stringr** para evaluar y manejar valores de caracteres, también denominados "cadenas".
 
 1.  Combinar, ordenar, dividir, organizar - `str_c()`, `str_glue()`, `str_order()`, `str_split()`\
 
@@ -35,7 +35,7 @@ Esta [viñeta de stringr](https://cran.r-project.org/web/packages/stringr/vignet
 
 ### Cargar paquetes {.unnumbered}
 
-Instala o carga el paquete **stringr** y otros paquetes **tidyverse**.
+Instala o carga el paquete **stringr** y otros paquetes de **tidyverse**.
 
 ```{r}
 # install/load packages
@@ -49,7 +49,7 @@ pacman::p_load(
 ### Importar datos {.unnumbered}
 Importar datos 
 
-En esta página haremos referencia de vez en cuando a la lista limpia de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - vea la página de [importación y exportación](#import-and-export) para más detalles). 
+En esta página haremos referencia de vez en cuando a la lista limpia de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clique para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importe los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - vea la página de [importación y exportación](#import-and-export) para más detalles). 
 
 ```{r, echo=F}
 # import the linelist into R
@@ -123,17 +123,17 @@ cat(str_c(first_names, last_names, sep = " ", collapse = ";\n"))
 
 ### Cadenas dinámicas {.unnumbered}
 
-Utiliza `str_glue()` para insertar código R dinámico en una cadena. Se trata de una función muy útil para crear pies de foto dinámicos, como se demuestra a continuación. 
+Utiliza `str_glue()` para insertar código R dinámico en una cadena. Se trata de una función muy útil para crear títulos o pies de gráfico dinámicos, como se demuestra a continuación. 
 
 * Todo el contenido va entre comillas dobles `str_glue("")` 
 
-* Cualquier código dinámico o referencias a valores predefinidos se colocan entre llaves `{}` dentro de las comillas dobles. Puedes haber muchas llaves en el mismo comando `str_glue()`. 
+* Cualquier código dinámico o referencias a valores predefinidos se colocan entre llaves `{}` dentro de las comillas dobles. Puede haber muchas llaves en el mismo comando `str_glue()`. 
 
-* Para mostrar las comillas de caracteres '', utiliza comillas *simples* dentro de las comillas dobles que las rodean (por ejemplo, al proporcionar el formato de la fecha - véase el ejemplo siguiente) 
+* Para usar las comillas de caracteres '' dentro de la función, utiliza comillas *simples* dentro de las comillas dobles que las rodean (por ejemplo, al proporcionar el formato de la fecha - véase el ejemplo siguiente) 
 
 * Consejo: Puedes utilizar `\n` para forzar una nueva línea 
 
-* Consejo: Utiliza `format()` para ajustar la visualización de la fecha, y utiliza Sys.Date() para mostrar la fecha actual 
+* Consejo: Utiliza `format()` para ajustar la visualización de la fecha, y utiliza `Sys.Date()` para mostrar la fecha actual 
 
 Un ejemplo sencillo, de un título de gráfico dinámico: 
 
@@ -180,7 +180,7 @@ case_table %>%
 
 Si estás intentando "enrollar" valores en una columna del dataframe, por ejemplo, combinar valores de varias filas en una sola fila pegándolos con un separador, consulta la sección ["combinación de valores"](#str_rollup) de la página de **De-duplicación**. 
 
-**dataframe a una línea** 
+**Dataframe a una línea** 
 
 Puedes hacer que la declaración aparezca en una línea utilizando `str_c()` (especificando el dataframe y los nombres de las columnas), y proporcionando los argumentos `sep =` y `collapse =`. 
 
@@ -188,15 +188,16 @@ Puedes hacer que la declaración aparezca en una línea utilizando `str_c()` (es
 str_c(case_table$zone, case_table$new_cases, sep = " = ", collapse = ";  ")
 ```
 
-Podría añadir el texto pre-fijo "Nuevos casos:" al principio de la sentencia envolviendo con un `str_c()` separado (si "Nuevos casos:" estuviera dentro del `str_c()` original aparecería varias veces). 
+Podría añadir el texto "Nuevos casos:" fijado al principio de la frase envolviéndolo con un `str_c()` separado (si "Nuevos casos:" estuviera dentro del `str_c()` original aparecería varias veces). 
 
 ```{r}
 str_c("New Cases: ", str_c(case_table$zone, case_table$new_cases, sep = " = ", collapse = ";  "))
 ```
+#jfmont
 
 ### Unir columnas  {#str_unite .unnumbered}
 
-Dentro de un dataframe, la unión de valores de caracteres de varias columnas puede lograrse con `unite()` de **tidyr**. Esto es lo contrario de `separate()`. 
+Dentro de un dataframe, la unión de valores de caractéres de varias columnas puede lograrse con `unite()` de **tidyr**. Esto es lo contrario de `separate()`. 
 
 Indique el nombre de la nueva columna unida. A continuación, indique los nombres de las columnas que desea unir. 
 
