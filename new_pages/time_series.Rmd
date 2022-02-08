@@ -9,7 +9,7 @@
 
 Esta página demuestra el uso de varios paquetes para el análisis de series temporales. Principalmente se basa en paquetes de la familia [**tidyverts**](https://tidyverts.org/), pero también utilizará el paquete RECON [**trending**](https://github.com/reconhub/trending) para ajustar modelos más apropiados para la epidemiología de enfermedades infecciosas.
 
-Ten en cuenta que en el siguiente ejemplo utilizamos unos datos del paquete de **vigilancia** sobre Campylobacter en Alemania (véase el capítulo [Descargand el manual y los datoss](#download-handbook-and-data.html) del manual para más detalles). Sin embargo, si deseas ejecutar el mismo código en unos datos con múltiples países u otros estratos, hay una plantilla de código de ejemplo para esto en el [repo de github de r4epis](https://github.com/R4EPI/epitsa).
+Ten en cuenta que en el siguiente ejemplo utilizamos unos datos del paquete de **vigilancia** sobre Campylobacter en Alemania (véase el capítulo [Descargando el manual y los datoss](#download-handbook-and-data) del manual para más detalles). Sin embargo, si deseas ejecutar el mismo código en unos datos con múltiples países u otros estratos, hay una plantilla de código de ejemplo para esto en el [repo de github de r4epis](https://github.com/R4EPI/epitsa).
 
 Los temas que se tratan son:
 
@@ -22,7 +22,7 @@ Los temas que se tratan son:
 
 
 <!-- ======================================================= -->
-## Preparación {#preparation-13}
+## Preparación {#preparation-14}
 
 ### Paquetes {.unnumbered}
 
@@ -81,7 +81,7 @@ DT::datatable(head(counts, 10), rownames = FALSE, options = list(pageLength = 5,
 
 ### Limpiar datos {.unnumbered}
 
-El código siguiente se asegura de que la columna de la fecha tenga el formato adecuado. Para esta sección utilizaremos el paquete **tsibble** y la función `yearweek` se utilizará para crear una variable de semana de calendario. Hay otras maneras de hacer esto (ver la página de [Trabajar con fechas](https://epirhandbook.com/working-with-dates.html) para más detalles), sin embargo para las series temporales es mejor mantenerse dentro de un marco (**tsibble**).
+El código siguiente se asegura de que la columna de la fecha tenga el formato adecuado. Para esta sección utilizaremos el paquete **tsibble** y la función `yearweek` se utilizará para crear una variable de semana de calendario. Hay otras maneras de hacer esto (ver la página de [Trabajar con fechas](#working-with-dates) para más detalles), sin embargo para las series temporales es mejor mantenerse dentro de un marco (**tsibble**).
 
 ```{r clean_data}
 
@@ -259,7 +259,7 @@ duplicates(counts, index = epiweek)
 
 En nuestra breve inspección anterior hemos visto que no hay faltas, pero también hemos visto que parece haber un problema de retraso en la notificación en torno al año nuevo. Una forma de abordar este problema podría ser establecer estos valores como faltantes y luego imputar los valores. La forma más sencilla de imputación de series temporales consiste en trazar una línea recta entre el último valor no faltante y el siguiente valor no faltante. Para ello, utilizaremos la función `na_interpolation()` del paquete **imputeTS**.
 
-Consulta la página de [datos faltantes](https://epirhandbook.com/missing-data.html) para conocer otras opciones de imputación.
+Consulta la página de [datos faltantes](#missing-data) para conocer otras opciones de imputación.
 
 Otra alternativa sería calcular una media móvil para intentar suavizar estos aparentes problemas de información (véase la siguiente sección y la página sobre [medias móviles](#moving-averages).
 
@@ -401,7 +401,7 @@ peak_weeks <- periodogram(counts,
 <span style="color: black;">***NOTA: Es posible*** utilizar las semanas anteriores para añadirlas a los términos del seno y del coseno, sin embargo, utilizaremos una función para generar estos términos (véase la sección de regresión más adelante) </span>
 
 <!-- ======================================================= -->
-### Descomposición{.unnumbered}
+### Descomposición {.unnumbered}
 
 La descomposición clásica se utiliza para desglosar una serie temporal en varias partes, que en conjunto conforman el patrón que se observa. Estas diferentes partes son:
 
@@ -1423,8 +1423,11 @@ ggplot(observed, aes(x = epiweek)) +
 ## Recursos {#resources-16}
 
 [previsión: principios y práctica libro de texto](https://otexts.com/fpp3/)
+
 [Estudios de casos de análisis de series temporales de EPIET](https://github.com/EPIET/TimeSeriesAnalysis)
+
 [Curso de Penn State](https://online.stat.psu.edu/stat510/lesson/1) 
+
 [Manuscrito del paquete Surveillance](https://www.jstatsoft.org/article/view/v070i10)
 
 

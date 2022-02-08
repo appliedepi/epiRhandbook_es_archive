@@ -106,7 +106,7 @@ plot(epinow_res)
 ```
 
 <!-- ======================================================= -->
-## Preparación {#preparation-14}
+## Preparación {#preparation-15}
 
 Utilizaremos dos métodos y paquetes diferentes para la estimación de Rt, a saber, **EpiNow** y **EpiEstim**, así como el paquete de **projections** para la previsión de la incidencia de casos.
 
@@ -615,18 +615,11 @@ ggplot() +
 ```
 
 <!-- ======================================================= -->
-## Projecting incidence {#projecting-incidence}
+## Proyección de la incidencia {#projecting-incidence}
 
 ### EpiNow2 {.unnumbered}
 
-Besides estimating R<sub>t</sub>, **EpiNow2** also supports forecasting of
-R<sub>t</sub> and projections of case numbers by integration with the
-**EpiSoon** package under the hood. All you need to do is specify the `horizon`
-argument in your `epinow` function call, indicating how many days you want to
-project into the future; see the **EpiNow2** section under the "Estimating
-R<sub>t</sub>" for details on how to get **EpiNow2** up and running. In this
-section, we will just plot the outputs from that analysis, stored in the
-`epinow_res` object.
+Además de la estimación de R<sub>t</sub>, **EpiNow2** también admite la previsión de R<sub>t</sub> y las proyecciones del número de casos mediante la integración con el paquete **EpiSoon** por debajo. Todo lo que hay que hacer es especificar el argumento del `horizon` en la llamada a la función `epinow`, indicando cuántos días se quiere proyectar en el futuro; véase **EpiNow2** en la sección "Estimación de R<sub>t</sub>" para obtener detalles sobre cómo poner en marcha **EpiNow2**. En esta sección, sólo vamos a trazar los resultados de ese análisis, almacenados en el objeto `epinow_res`.
 
 ```{r epidemic_models_episoon, out.width=c('100%', '100%'), fig.show='hold', fig.width = 12, fig.height = 9, message=F, warning=F}
 
@@ -833,5 +826,7 @@ DT::datatable(
 ## Recursos {#resources-16}
 
 * [Aquí está el documento](https://www.sciencedirect.com/science/article/pii/S1755436519300350) que describe la metodología implementada en **EpiEstim**.
+
 * [Aquí está el documento](https://wellcomeopenresearch.org/articles/5-112/v1) que describe la metodología implementada en **EpiNow2**.
+
 * [Aquí hay un documento](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409) que describe varias consideraciones metodológicas y prácticas para estimar el R<sub>t</sub>.

@@ -19,7 +19,7 @@ En esta página se explica cómo:
 
 
 <!-- ======================================================= -->
-## Preparación {#preparation-10 }
+## Preparación {#preparation-11 }
 
 ### Cargar paquetes {.unnumbered}  
 
@@ -58,16 +58,15 @@ DT::datatable(head(linelist, 50), rownames = FALSE, filter="top", options = list
 
 
 ### Convertir valores faltantes en la importación {.unnumbered}  
-Convertir valores faltantes en la importación
 
-Al importar los datos, ten en cuenta los valores que deben clasificarse como ausentes. Por ejemplo, 99, 999, "Missing", celdas en blanco ("") o celdas con un espacio vacío (" "). Puedes convertirlos en `NA` (la versión de R de los valores faltantes) durante el comando de importación de datos.
-Consulta la página sobre la importación de la sección de [datos faltantes](#import_missing) para obtener más detalles, ya que la sintaxis exacta varía según el tipo de archivo. 
+Al importar los datos, ten en cuenta los valores que deben clasificarse como faltantes. Por ejemplo, 99, 999, "Missing", celdas en blanco ("") o celdas con un espacio vacío (" "). Puedes convertirlos en `NA` (la versión de R de los valores faltantes) durante el comando de importación de datos.
+Consulta la sección de [datos faltantes](#import_missing) de la página sobre la importación depara obtener más detalles, ya que la sintaxis exacta varía según el tipo de archivo. 
 
 
 <!-- ======================================================= -->
 ## Valores faltantes en R {#missing-values-in-r}
 
-Below we explore ways that missingness is presented and assessed in R, along with some adjacent values and functions.  
+A continuación, exploramos las formas en que se presenta y evalúa los datos faltantes R, junto con algunos valores y funciones adyacentes.  
 
 ### `NA` {.unnumbered}  
 
@@ -508,7 +507,7 @@ En general, la imputación de datos MCAR suele ser bastante sencilla, mientras q
 
 ### Paquetes útiles {.unnumbered}
 
-Algunos paquetes útiles para la imputación de valores faltantes son Mmisc, missForest (que utiliza bosques aleatorios para imputar los valores faltantes) y mice (Imputación multivariada por ecuaciones encadenadas). Para esta sección sólo utilizaremos el paquete mice, que implementa una variedad de técnicas. El mantenedor del paquete mice ha publicado un libro en línea sobre la imputación de valores faltantes que entra en [más detalle aquí](https://stefvanbuuren.name/fimd/)https://stefvanbuuren.name/fimd/).
+Algunos paquetes útiles para la imputación de valores faltantes son Mmisc, missForest (que utiliza bosques aleatorios para imputar los valores faltantes) y mice (Imputación multivariada por ecuaciones encadenadas). Para esta sección sólo utilizaremos el paquete mice, que implementa una variedad de técnicas. El mantenedor del paquete mice ha publicado un libro en línea sobre la imputación de valores faltantes que entra en [más detalle aquí](https://stefvanbuuren.name/fimd/).
 
 Este es el código para cargar el paquete **mice** :
 
@@ -567,7 +566,7 @@ Este es el mismo tipo de enfoque de algunos métodos más avanzados, como el uso
 
 La última observación trasladada (LOCF) y la observación de referencia trasladada (BOCF) son métodos de imputación para datos de series temporales/longitudinales. La idea es tomar el valor observado anterior como reemplazo de los datos que faltan. Cuando faltan varios valores sucesivamente, el método busca el último valor observado.
 
-La función `fill()` del paquete **tidyr** puede utilizarse para la imputación LOCF y BOCF (sin embargo, otros paquetes como **HMISC**, **zoo** y **data.table** también incluyen métodos para hacerlo). Para mostrar la sintaxis de `fill()`, crearemos un sencillo conjunto de datos de series temporales que contenga el número de casos de una enfermedad para cada trimestre de los años 2000 y 2001. Sin embargo, falta el valor del año para los trimestres posteriores al primero, por lo que tendremos que imputarlos. La unión `fill()` también se demuestra en la página [Pivoting data](#pivoting-data).
+La función `fill()` del paquete **tidyr** puede utilizarse para la imputación LOCF y BOCF (sin embargo, otros paquetes como **HMISC**, **zoo** y **data.table** también incluyen métodos para hacerlo). Para mostrar la sintaxis de `fill()`, crearemos un sencillo conjunto de datos de series temporales que contenga el número de casos de una enfermedad para cada trimestre de los años 2000 y 2001. Sin embargo, falta el valor del año para los trimestres posteriores al primero, por lo que tendremos que imputarlos. La unión `fill()` también se demuestra en la página [Pivotar datos](#pivoting-data).
 
 ```{r}
 #creating our simple dataset
@@ -639,7 +638,7 @@ En este caso, utilizamos el método de imputación por defecto del ratón, que e
 
 
 <!-- ======================================================= -->
-## Recursos {#resources-12}
+## Recursos {#resources-13}
 
 Viñeta sobre el [paquete naniar](https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html)
 

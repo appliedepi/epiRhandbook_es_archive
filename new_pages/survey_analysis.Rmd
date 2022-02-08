@@ -9,11 +9,11 @@
 
 Esta página muestra el uso de varios paquetes para el análisis de encuestas.
 
-La mayoría de los paquetes R de encuestas se basan en el [paquete **survey**](https://cran.r-project.org/web/packages/survey/index.html)para realizar análisis ponderados. Utilizaremos **survey**, así como [**srvyr**](https://cran.r-project.org/web/packages/srvyr/index.html) (una envoltura para **survey** que permite la codificación al estilo tidyverse) y [**gtsummary**](https://cran.r-project.org/web/packages/gtsummary/index.html) (una envoltura para **survey** que permite obtener tablas listas para tu publicación). Aunque el paquete original **survey** no permite la codificación al estilo tidyverse, tiene la ventaja añadida de permitir modelos lineales generalizados ponderados por la encuesta (que se añadirán a esta página más adelante). También demostraremos el uso de una función del paquete [**sitrep**](https://github.com/R4EPI/sitrep) para crear ponderaciones de muestreo (*n.b.* este paquete no está todavía en CRAN, pero se puede instalar desde github).
+La mayoría de los paquetes R de encuestas se basan en el [paquete **survey**](https://cran.r-project.org/web/packages/survey/index.html) para realizar análisis ponderados. Utilizaremos **survey**, así como [**srvyr**](https://cran.r-project.org/web/packages/srvyr/index.html) (una envoltura para **survey** que permite la codificación al estilo tidyverse) y [**gtsummary**](https://cran.r-project.org/web/packages/gtsummary/index.html) (una envoltura para **survey** que permite obtener tablas listas para tu publicación). Aunque el paquete original **survey** no permite la codificación al estilo tidyverse, tiene la ventaja añadida de permitir modelos lineales generalizados ponderados por la encuesta (que se añadirán a esta página más adelante). También demostraremos el uso de una función del paquete [**sitrep**](https://github.com/R4EPI/sitrep) para crear ponderaciones de muestreo (*n.b.* este paquete no está todavía en CRAN, pero se puede instalar desde github).
 
 La mayor parte de esta página se basa en el trabajo realizado para el [proyecto "R4Epis"](https://r4epis.netlify.app/); para ver el código detallado y las plantillas R-markdown del mismo, consulta la [página github de "R4Epis"](https://github.com/R4EPI/sitrep). Parte del código basado en el paquete de encuestas se basa en las primeras versiones de los [estudios de caso de EPIET](https://github.com/EPIET/RapidAssessmentSurveys).
 
-Actualmente, esta página no aborda el cálculo del tamaño de la muestra ni el muestreo. Para una calculadora del tamaño  muestral fácil de usar, consulta [OpenEpi](https://www.openepi.com/Menu/OE_Menu.htm). La página de [fundamentos del SIG](#gis-basics) del manual tendrá eventualmente una sección sobre muestreo aleatorio espacial, y esta página tendrá eventualmente una sección sobre marcos de muestreo así como cálculos del tamaño de la muestra.
+Actualmente, esta página no aborda el cálculo del tamaño de la muestra ni el muestreo. Para una calculadora del tamaño  muestral fácil de usar, consulta [OpenEpi](https://www.openepi.com/Menu/OE_Menu.htm). La página de [conceptos básicos de los SIG](#gis-basics) del manual tendrá eventualmente una sección sobre muestreo aleatorio espacial, y esta página tendrá eventualmente una sección sobre marcos de muestreo así como cálculos del tamaño de la muestra.
 
 
 
@@ -27,7 +27,7 @@ Actualmente, esta página no aborda el cálculo del tamaño de la muestra ni el 
 
 
 <!-- ======================================================= -->
-## Preparación {#preparation-16}
+## Preparación {#preparation-17}
 
 ### Paquetes {.unnumbered}
 
@@ -78,7 +78,7 @@ Kobo permite exportar tanto los datos recogidos como el diccionario de datos par
 
 <span style="color: darkgreen;">***CONSEJO:*** El diccionario de datos de Kobo tiene nombres de variables en la columna "name" de la hoja de la encuesta. Los valores posibles para cada variable se especifican en la hoja de opciones. En la hoja de opciones, "name" tiene el valor acortado y las columnas "label::english" y "label::french" tienen las versiones largas correspondientes. Si utilizas la función `msf_dict_survey()` del paquete **epidict** para importar un archivo excel del diccionario Kobo, éste se reformulará para que pueda utilizarse fácilmente para recodificar. </span>
 
-<span style="color: orange;">***ATENCIÓN:*** El conjunto de datos de ejemplo no es lo mismo que una exportación (ya que en Kobo se exportan los diferentes niveles del cuestionario de forma individual) - Mira la sección de datos de la encuesta más abajo para fusionar los diferentes niveles.</span>
+<span style="color: orange;">***PRECAUCIÓN:*** El conjunto de datos de ejemplo no es lo mismo que una exportación (ya que en Kobo se exportan los diferentes niveles del cuestionario de forma individual) - Mira la sección de datos de la encuesta más abajo para fusionar los diferentes niveles.</span>
 
 
 El set de datos se importa mediante la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos.
@@ -398,7 +398,7 @@ Para esta plantilla, supondremos que agrupamos las encuestas en dos estratos dis
 
 Como se ha mencionado anteriormente, hay dos paquetes disponibles para hacer esto. El clásico es **survey** y luego hay un paquete envolvente llamado **srvyr** que hace objetos y funciones amigables con tidyverse. Mostraremos ambos, pero ten en cuenta que la mayor parte del código de este capítulo utilizará objetos basados en **srvyr**. La única excepción es que el paquete **gtsummary** sólo acepta objetos de **survey**.
 
-### Paquete **survey** 
+### Paquete **survey** {.unnumbered}
 
 El paquete **survey** utiliza efectivamente la codificación d R **base**, por lo que no es posible utilizar pipes (`%>%`) u otra sintaxis de **dplyr**. Con el paquete de **survey** utilizamos la función `svydesign()` para definir un objeto de encuesta con clusters, pesos y estratos adecuados.
 
@@ -437,7 +437,7 @@ base_survey_design <- svydesign(ids = ~village_name,      # cluster ids
 
 
 
-### Paquete **Srvyr**
+### Paquete **Srvyr** {.unnumbered}
 
 Con el paquete **srvyr** podemos utilizar la función `as_survey_design()`, que tiene los mismos argumentos que la anterior pero permite los tuberías (`%>%`), por lo que no es necesario utilizar la tilde (`~`).
 
@@ -472,7 +472,7 @@ survey_design <- survey_data %>%
 <!-- ======================================================= -->
 ## Análisis descriptivo {#descriptive-analysis-2}
 
-El análisis descriptivo básico y la visualización se tratan extensamente en otros capítulos del manual, por lo que no nos detendremos en ellos aquí. Para más detalles, consulta los capítulos sobre [tablas descriptivas](#descriptive-tables), [pruebas estadísticas](#simple-statistical-tests), [tablas para  presentación](#tables-for-presentation), [fundamentos de ggplot](#ggplot-basics) e [informes R markdown](#r-markdown-reports).
+El análisis descriptivo básico y la visualización se tratan extensamente en otros capítulos del manual, por lo que no nos detendremos en ellos aquí. Para más detalles, consulta los capítulos sobre [tablas descriptivas](#descriptive-tables), [pruebas estadísticas](#simple-statistical-tests), [tablas para  presentaciones](#tables-for-presentation), [conceptos básicos de ggplot](#ggplot-basics) e [informes con R markdown](#reports-with-r-markdown).
 
 En este apartado nos centraremos en cómo investigar el sesgo de la muestra y visualizarlo. También veremos cómo visualizar el flujo de la población en un entorno de encuesta utilizando diagramas aluviales/sanitarios.
 
@@ -483,7 +483,7 @@ En general, debes considerar incluir los siguientes análisis descriptivos:
 - Mediana (rango) del número de hogares por grupo y de individuos por hogar
 
 
-### Sesgo de muestreo 
+### Sesgo de muestreo  {.unnumbered}
 
 Compara las proporciones de cada grupo de edad entre tu muestra y la población de origen. Esto es importante para poder resaltar el posible sesgo del muestreo. También puedes repetir esta operación para ver las distribuciones por sexo.
 
@@ -541,11 +541,11 @@ left_join(ag, propcount, by = "age_group", suffix = c("", "_pop")) %>%
 
 
 
-### Pirámides demográficas
+### Pirámides demográficas {.unnumbered}
 
 Las pirámides demográficas (o de edad y sexo) son una forma sencilla de visualizar la distribución de la población de la encuesta. También vale la pena considerar la creación de [tablas descriptivas](#descriptive-tables) de edad y sexo por estratos de la encuesta. Demostraremos el uso del paquete **apyramid**, ya que permite las proporciones ponderadas utilizando nuestro objeto de diseño de la encuesta creado anteriormente. Otras opciones para crear [pirámides demográficas](#demographic-pyramids-and-likert-scales) se tratan ampliamente en ese capítulo del manual. También utilizaremos una función envolvente de **sitrep** llamada `plot_age_pyramid()` que ahorra algunas líneas de codificación para producir un gráfico con proporciones.
 
-Al igual que con el test binomial formal de la diferencia, vista anteriormente en la sección de sesgo de muestreo, aquí estamos interesados en visualizar si nuestra población muestreada es sustancialmente diferente de la población de origen y si la ponderación corrige esta diferencia. Para ello, utilizaremos el paquete **patchwork** para mostrar nuestras visualizaciones **ggplot** una al lado de la otra; para más detalles, consulta la sección sobre la combinación de gráficos en el capítulo de [consejos de ggplot](#ggplot-tips.html?q=patch#combine-plots) del manual. Visualizaremos nuestra población de origen, nuestra población de encuesta no ponderada y nuestra población de encuesta ponderada. También puede considerar la posibilidad de visualizar por cada estrato de tu encuesta - en nuestro ejemplo aquí sería utilizando el argumento `stack_by = "health_district"` (ver `?plot_age_pyramid` para más detalles).
+Al igual que con el test binomial formal de la diferencia, vista anteriormente en la sección de sesgo de muestreo, aquí estamos interesados en visualizar si nuestra población muestreada es sustancialmente diferente de la población de origen y si la ponderación corrige esta diferencia. Para ello, utilizaremos el paquete **patchwork** para mostrar nuestras visualizaciones **ggplot** una al lado de la otra; para más detalles, consulta la sección sobre la combinación de gráficos en el capítulo de [consejos de ggplot](#combine-plots) del manual. Visualizaremos nuestra población de origen, nuestra población de encuesta no ponderada y nuestra población de encuesta ponderada. También puede considerar la posibilidad de visualizar por cada estrato de tu encuesta - en nuestro ejemplo aquí sería utilizando el argumento `stack_by = "health_district"` (ver `?plot_age_pyramid` para más detalles).
 
 <span style="color: black;">***NOTA:*** Los ejes-x e y están invertidos en las pirámides</span>
 
@@ -656,9 +656,9 @@ source_population + sample_population + weighted_population +
 ```
 
 
-### Diagrama alluvial/sankey
+### Diagrama alluvial/sankey {.unnumbered}
 
-Visualizar los puntos de partida y los resultados de los individuos puede ser muy útil para obtener una visión general. Su aplicación es bastante obvia en el caso de las poblaciones móviles, pero hay muchas otras aplicaciones, como las cohortes o cualquier otra situación en la que haya transiciones de estados para los individuos. Estos diagramas tienen varios nombres diferentes, como diagramas aluviales, de sankey y paralelos; los detalles se encuentran en el capítulo del manual sobre [diagramas y gráficos](#diagrams-and-charts.html#alluvialsankey-diagrams).
+Visualizar los puntos de partida y los resultados de los individuos puede ser muy útil para obtener una visión general. Su aplicación es bastante obvia en el caso de las poblaciones móviles, pero hay muchas otras aplicaciones, como las cohortes o cualquier otra situación en la que haya transiciones de estados para los individuos. Estos diagramas tienen varios nombres diferentes, como diagramas aluviales, de sankey y paralelos; los detalles se encuentran en el capítulo del manual sobre [diagramas y gráficos](#alluvialsankey-diagrams).
 
 
 ```{r visualise_population_flow}
@@ -709,7 +709,7 @@ ggplot(flow_table, aes(x, id = id, split = y, value = n)) +
 Esta sección detallará cómo producir tablas para recuentos y proporciones ponderadas, con los intervalos de confianza asociados y el efecto del diseño. Hay cuatro opciones diferentes que utilizan funciones de los siguientes paquetes: **survey**, **srvyr**, **sitrep** y **gtsummary**. Para una codificación mínima que produzca una tabla de estilo epidemiológico estándar, recomendaríamos la función sitrep - que es una envoltura para el código **srvyr**; Ten en cuenta, sin embargo, que esto no está todavía en CRAN y puede cambiar en el futuro. Por lo demás, es probable que el código de **survey** sea el más estable a largo plazo, mientras que **srvyr** se adaptará mejor a los flujos de trabajo de tidyverse. Aunque las funciones de **gtsummary** tienen mucho potencial, parecen ser experimentales e incompletas en el momento de escribir este artículo.
 
 
-### Paquete **survey**
+### Paquete **survey** {.unnumbered}
 
 
 Podemos utilizar la función `svyciprop()` de **survey** para obtener las proporciones ponderadas y los correspondientes intervalos de confianza del 95%. Se puede extraer un efecto de diseño apropiado utilizando la función `svymean()` en lugar de `svyprop()`. Cabe señalar que `svyprop()` sólo parece aceptar variables entre 0 y 1 (o TRUE/FALSE), por lo que las variables categóricas no funcionarán.
@@ -787,7 +787,7 @@ purrr::map(
 
 
 
-### Paquete **Srvyr**
+### Paquete **Srvyr** {.unnumbered}
 
 Con **srvyr** podemos utilizar la sintaxis **de dplyr** para crear una tabla. Observe que se utiliza la función `survey_mean()` y se especifica el argumento de la proporción, y también que se utiliza la misma función para calcular el efecto del diseño. Esto se debe a que **srvyr** envuelve las dos funciones del paquete **survey**, `svyciprop()` y `svymean()`, que se utilizan en la sección anterior.
 
@@ -859,7 +859,7 @@ purrr::map(
 
 
 
-### Paquete **Sitrep**
+### Paquete **Sitrep** {.unnumbered}
 
 La función `tab_survey()` de **sitrep** es una envoltura para **srvyr**, que permite crear tablas ponderadas con una codificación mínima. También permite calcular proporciones ponderadas para variables categóricas.
 
@@ -877,7 +877,7 @@ survey_design %>%
 
 
 
-### Paquete **Gtsummary**
+### Paquete **Gtsummary** {.unnumbered}
 
 Con **gtsummary** no parece haber todavía funciones incorporadas para añadir intervalos de confianza o efecto de diseño. Aquí mostramos cómo definir una función para añadir intervalos de confianza y luego añadir intervalos de confianza a una tabla gtsummary creada con la función `tbl_svysummary()`.
 
@@ -923,7 +923,7 @@ tbl_svysummary(base_survey_design,
 Del mismo modo, para los ratios ponderados (como los ratios de mortalidad) puede utilizar el paquete **survey** o **srvyr**. También se pueden escribir funciones (similares a las anteriores) para iterar sobre varias variables. También podría crear una función para **gtsummary** como la anterior, pero actualmente no tiene una funcionalidad incorporada.
 
 
-### Paquete **survey**
+### Paquete **survey** {.unnumbered}
 
 ```{r survey_ratio}
 
@@ -941,7 +941,7 @@ cbind(
 ```
 
 
-### Paquete **Srvyr**
+### Paquete **Srvyr** {.unnumbered}
 
 ```{r srvyr_ratio}
 
