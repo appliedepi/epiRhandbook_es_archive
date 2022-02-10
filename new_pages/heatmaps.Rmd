@@ -49,7 +49,7 @@ Esta página utiliza los casos de `linelist` un brote simulado para la sección 
 
 Los mapas de calor pueden ser útiles para visualizar matrices. Un ejemplo es la visualización de "quién-infectó-quién" en un brote. Esto supone que se tiene información sobre los eventos de transmisión.
 
-Ten en cuenta que la página de [Rastreo de contactos](#contact-tracing-1) contiene otro ejemplo de elaboración de una matriz de contactos del mapa de calor, utilizando unos datos diferentes (quizás más sencillo) en el que las edades de los casos y sus fuentes están perfectamente alineadas en la misma fila del dataframe. Estos mismos datos se utilizan para hacer un mapa de *densidad* en la página [consejos de ggplot](#ggplot-tips). Este ejemplo comienza a partir de `linelist`  y, por lo tanto, implica una considerable manipulación de los datos antes de lograr un dataframe ploteable. Así que hay muchos escenarios para elegir...
+Ten en cuenta que la página [Rastreo de contactos](#contact-tracing-1) contiene otro ejemplo de elaboración de una matriz de contactos del mapa de calor, utilizando unos datos diferentes (quizás más sencillo) en el que las edades de los casos y sus fuentes están perfectamente alineadas en la misma fila del dataframe. Estos mismos datos se utilizan para hacer un mapa de *densidad* en la página [Consejos de ggplot](#ggplot-tips). Este ejemplo comienza a partir de `linelist`  y, por lo tanto, implica una considerable manipulación de los datos antes de lograr un dataframe ploteable. Así que hay muchos escenarios para elegir...
 
 Partimos de la lista de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar `linelist` "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importe sus datos con la función `import()` del paquete **rio** (acepta muchos tipos de archivos como .xlsx, .rds, .csv - vea la página de [importación y exportación](#import-and-export) para más detalles).
 
@@ -192,7 +192,7 @@ DT::datatable(head(long_prop, 50), rownames = FALSE, options = list(pageLength =
 
 ### Crear un gráfico de calor {.unnumbered}  
 
-Ahora, finalmente, podemos crear el gráfico de calor con el paquete **ggplot2**, utilizando la función `geom_tile()`. Consulta la página de [consejos de ggplot](#ggplot-tips) para conocer más ampliamente las escalas de color/relleno, especialmente la función `scale_fill_gradient()`.
+Ahora, finalmente, podemos crear el gráfico de calor con el paquete **ggplot2**, utilizando la función `geom_tile()`. Consulta la página [Consejos de ggplot](#ggplot-tips) para conocer más ampliamente las escalas de color/relleno, especialmente la función `scale_fill_gradient()`.
 
 * En la estética `aes()` de `geom_tile()` establece la x y la y como la edad del caso y la edad del infector
 * También en `aes()` establezca el argumento `fill = ` en la columna `Freq` - este es el valor que se convertirá en un color de mosaico
@@ -231,7 +231,7 @@ A menudo, en el ámbito de la salud pública, uno de los objetivos es evaluar la
 
 ### Preparación de los datos {.unnumbered}
 
-Comenzamos importando unos datos de informes diarios sobre la malaria procedentes de muchos centros. Los informes contienen una fecha, una provincia, un distrito y el recuento de paludismo. Consulta la página de [descarga de manuales y datos](#download-handbook-and-data) para saber cómo descargar estos datos. A continuación se muestran las primeras 30 filas:
+Comenzamos importando unos datos de informes diarios sobre la malaria procedentes de muchos centros. Los informes contienen una fecha, una provincia, un distrito y el recuento de paludismo. Consulta la página [Descargando el manual y los datos](#download-handbook-and-data) para saber cómo descargar estos datos. A continuación se muestran las primeras 30 filas:
 
 ```{r, echo=F}
 facility_count_data <- rio::import(here::here("data", "malaria_facility_count_data.rds")) %>% 
@@ -384,7 +384,7 @@ ggplot(data = agg_weeks)+
 
 ### Gráfico limpio {.unnumbered}
 
-Podemos hacer que este gráfico se vea mejor añadiendo funciones adicionales **de ggplot2**, como se muestra a continuación. Consulta la página de [consejos de ggplot](#ggplot-tips) para más detalles.
+Podemos hacer que este gráfico se vea mejor añadiendo funciones adicionales **de ggplot2**, como se muestra a continuación. Consulta la página [Consejos de ggplot](#ggplot-tips) para más detalles.
 
 ```{r, message=FALSE, warning=FALSE}
 ggplot(data = agg_weeks)+ 
@@ -600,7 +600,7 @@ ggplot(data = agg_weeks)+
 
 
 <!-- ======================================================= -->
-## Resources {#resources-25}
+## Recursos {#resources-25}
 
 [scale_fill_gradient()](https://ggplot2.tidyverse.org/reference/scale_gradient.html)  
 

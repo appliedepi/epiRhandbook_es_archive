@@ -9,7 +9,7 @@ output:
 
 <!-- ======================================================= -->
 
-## Resumen {#overview-7}
+## Resumen {#overview-8}
 
 
 Los **árboles filogenéticos** se utilizan para visualizar y describir el parentesco y la evolución de los organismos a partir de la secuencia de su código genético.
@@ -45,11 +45,11 @@ scale_color_brewer(name = "Continent",  # nombre de tu esquema de color (se most
 
 <!-- ======================================================= -->
 
-## Preparación {#preparation-29}
+## Preparación {#preparation-31}
 
-### Cargar paquetes {#load-packages-25} {.unnumbered}  
+### Cargar paquetes {.unnumbered}  
 
-Este trozo de código muestra la carga de los paquetes necesarios. En este manual destacamos 'p_load()' de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con library() de R **base**. Consulta la página sobre [los fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R. 
+Este trozo de código muestra la carga de los paquetes necesarios. En este manual destacamos 'p_load()' de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con library() de R **base**. Consulta la página [Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R. 
 
 ```{r, phylogenetic_trees_loading_packages}
 pacman::p_load(
@@ -63,9 +63,9 @@ pacman::p_load(
 
 ```
 
-### Importar datos {#import-data-23} {.unnumbered}  
+### Importar datos {.unnumbered}  
 
-Los datos de esta página pueden descargarse con las instrucciones de la página de [descarga del manual y los datos](#download-handbook-and-data).
+Los datos de esta página pueden descargarse con las instrucciones de la página [Descargando el manual y los datos](#download-handbook-and-data).
 
 Hay varios formatos diferentes en los que se puede almacenar un árbol filogenético (por ejemplo, Newick, NEXUS, Phylip). Uno de los más comunes es el formato de archivo Newick (.nwk), que es el estándar para representar árboles en forma legible por el ordenador. Esto significa que un árbol completo puede expresarse en un formato de cadena como "((t2:0,04,t1:0,34):0,89,(t5:0,37,(t4:0,03,t3:0,67):0,9):0,59);", enumerando todos los nodos y puntas, y su relación (longitud de rama) entre sí.
 
@@ -106,7 +106,7 @@ A continuación se muestran las primeras 50 filas de los datos:
 DT::datatable(head(sample_data,50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-### Limpiar e inspeccionar {#clean-and-inspect} {.unnumbered} 
+### Limpiar e inspeccionar {.unnumbered} 
 
 Limpiamos e inspeccionamos nuestros datos: Para asignar los datos de muestra correctos al árbol filogenético, los valores de la columna `Sample_ID` en el dataframe `sample_data` deben coincidir con los valores de `tip.labels` en el archivo `tree`:
 
@@ -155,7 +155,7 @@ Estamos listos para empezar!
 ## Visualización simple de un árbol {#simple-tree-visualization}
 
 
-### Diferentes configuraciones de los árboles {#different-tree-layouts} {.unnumbered} 
+### Diferentes configuraciones de los árboles {.unnumbered} 
 
 **ggtree** ofrece varios formatos de presentación y algunos pueden ser más adecuados que otros dependiendo del propósito específico. A continuación se muestran algunos ejemplos. Para otras opciones, consulta este [libro en línea](http://yulab-smu.top/treedata-book/chapter4.html).
 
@@ -169,7 +169,7 @@ ggtree(tree, layout="circular", branch.length = "none") # árbol circular simple
 
 ```
 
-### Árbol simple con datos de muestra {#simple-tree-plus-sample-data} {.unnumbered}  
+### Árbol simple con datos de muestra {.unnumbered}  
 
 El operador **%<+%** se utiliza para conectar el dataframe `sample_data` con el archivo `tree`. La anotación más sencilla de un árbol es el agregado de los nombres de las muestras en las puntas, así como la coloración de las puntas y, si se desea, de las ramas:
 
@@ -232,7 +232,7 @@ A veces puede tener un árbol filogenético muy grande y sólo le interesa una p
 
 Dado que el archivo del árbol filogenético es el resultado del análisis de los datos de secuenciación, no podemos manipular el orden de los nodos y las ramas en el propio archivo. Estos ya han sido determinados en análisis anteriores a partir de los datos NGS en bruto. Sin embargo, podemos ampliar partes, ocultar partes e incluso subdividir partes del árbol. 
 
-### Ampliar el zoom {#zoom-in} {.unnumbered}  
+### Ampliar el zoom  {.unnumbered}  
 
 Si en vez de "cortar" tu árbol, prefieres inspeccionar sólo una parte más de cerca, puedes hacer zoom para ver una parte específica.
 
@@ -260,7 +260,7 @@ viewClade(p, node = 452)
 
 ```
 
-### Ramas colapsadas {#collapsing-branches} {.unnumbered}
+### Ramas colapsadas {.unnumbered}
 
 Sin embargo, tal vez queramos ignorar esta rama, entonces podemos colapsarla en ese mismo nodo (nodo 452) utilizando `collapse()`. Definimos este árbol como `p_collapsed`.
 
@@ -279,7 +279,7 @@ geom_point2(aes(subset = (node == 452)),  # asignamos un símbolo al nodo colaps
             fill = "steelblue")           # definimos el color del símbolo
 ```
 
-### Subconjunto de un árbol {#subsetting-a-tree} {.unnumbered}
+### Subconjunto de un árbol {.unnumbered}
 
 Si queremos hacer un cambio más permanente y crear un nuevo árbol reducido con el que trabajar, podemos subconjuntar parte de él con `tree_subset()`. Luego podemos guardarlo como un nuevo archivo de árbol newick o archivo .txt.
 
@@ -347,7 +347,7 @@ ape::write.tree(sub_tree2, file='data/phylo/Shigella_subtree_2.txt')
 
 ```
 
-### Rotación de nodos en un árbol {#rotating-nodes-in-a-tree} {.unnumbered} 
+### Rotación de nodos en un árbol  {.unnumbered} 
 
 
 Como ya hemos dicho, no podemos cambiar el orden de las puntas o de los nodos en el árbol, ya que éste se basa en su parentesco genético y no está sujeto a manipulación visual. Pero podemos rotar las ramas alrededor de los nodos si eso facilita la visualización.
@@ -403,7 +403,7 @@ p3 <-  flip(p1, 39, 37) +
 p3   # imprime en pantalla
 ```
 
-### Ejemplo de sub-árbol con anotación de datos {#example-subtree-with-sample-data-annotation} {.unnumbered}
+### Ejemplo de sub-árbol con anotación de datos {.unnumbered}
 
 Digamos que estamos investigando el grupo de casos con expansión clonal que se produjo en 2017 y 2018 representados en el nodo 39 de nuestro sub-árbol. Añadimos el año de aislamiento de la cepa, así como el historial de viajes y coloreamos por país para ver el origen de otras cepas estrechamente relacionadas genéticamente:
 
@@ -658,7 +658,7 @@ h5
 
 
 <!-- ======================================================= -->
-## Recursos {resources-29}
+## Recursos {#resources-29}
 
 http://hydrodictyon.eeb.uconn.edu/eebedia/index.php/Ggtree# Clade_Colors
 

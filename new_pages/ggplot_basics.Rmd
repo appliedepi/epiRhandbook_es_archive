@@ -10,16 +10,16 @@ knitr::include_graphics(here::here("images", "ggplot_basics_top.png"))
 
 La sintaxis es significativamente diferente de los dibujos de `R` **base**, y tiene una curva de aprendizaje asociada. El uso de **ggplot2** generalmente requiere que el usuario formatee sus datos de una manera que sea altamente compatible con **tidyverse**, lo que en última instancia hace que el uso conjunto de estos paquetes sea muy eficaz.
 
-En esta página cubriremos los fundamentos de la creación de gráficos con **ggplot2**. Consulta la página de [consejos de ggplot](#ggplot-tips) para sugerencias y técnicas avanzadas para lograr que sus gráficos se vean realmente bien.
+En esta página cubriremos los fundamentos de la creación de gráficos con **ggplot2**. Consulta la página [Consejos de ggplot](#ggplot-tips) para sugerencias y técnicas avanzadas para lograr que sus gráficos se vean realmente bien.
 
-Hay varios tutoriales extensos de **ggplot2** enlazados en la sección de recursos. También puede descargar esta [hoja de trucos de visualización de datos con ggplot](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) desde el sitio web de RStudio. Si quieres inspirarte en formas de visualizar tus datos de forma creativa, te sugerimos que revises sitios web como la [galería de gráficos de R](https://www.r-graph-gallery.com/) y [Data-to-viz](https://www.data-to-viz.com/caveats.html).
+Hay varios tutoriales extensos de **ggplot2** enlazados en la sección de recursos. También puede descargar esta [hoja de trucos de visualización de datos con ggplot](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf) desde el sitio web de RStudio. Si quieres inspirarte en formas de visualizar tus datos de forma creativa, te sugerimos que revises sitios web como la [galería de gráficos de R](https://www.r-graph-gallery.com/) y [Data-to-viz](https://www.data-to-viz.com/caveats.html).
 
 
 
 <!-- ======================================================= -->
-## Preparación {#preparation}
+## Preparación {#preparation-21}
 
-### Cargar paquetes {#load-packages-20}
+### Cargar paquetes {.unnumbered}
 
 Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También podes cargar los paquetes instalados con `library()` de R **base.** Consulta la página sobre los [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
@@ -32,7 +32,7 @@ pacman::p_load(
 )
 ```
 
-### Importar datos {#import-data-17}  
+### Importar datos {.unnumbered} 
 
 Importamos el conjunto de datos de casos de una epidemia de Ebola simulada. Si quieres seguir el proceso, [cliquea para descargar linelist "limpia"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Para importar sus datos utilizando la función `import()` del paquete **rio** (acepta muchos tipos de archivos como .xlsx, .rds, .csv - consulta la página de [importación y exportación](#import-and-export) para más detalles).
 
@@ -54,9 +54,9 @@ DT::datatable(head(linelist, 50), rownames = FALSE, filter="top", options = list
 
 
 
-### Limpieza general {#general-cleaning}
+### Limpieza general {.unnumbered}
 
-Cuando se preparan los datos para trazarlos (graficarlos), lo mejor es hacer que los datos se adhieran a [los estándares de datos "ordenados" tanto como](https://r4ds.had.co.nz/tidy-data.html) sea posible. En las páginas de gestión de datos de este manual, como [Limpieza de datos y funciones básicas, se explica](#cleaning-data-and-core-functions) cómo conseguirlo.
+Cuando se preparan los datos para trazarlos (graficarlos), lo mejor es hacer que los datos se adhieran a [los estándares de datos "ordenados" tanto como](https://es.r4ds.hadley.nz/datos-ordenados.html) sea posible. En las páginas de este manual, sobre [Limpieza de datos y funciones básicas](#cleaning-data-and-core-functions), se explica cómo conseguirlo.
 
 Algunas formas sencillas de preparar nuestros datos para que sea mas fáciles trazarlos pueden incluir la mejora del contenido de los datos para su visualización, lo que no equivale necesariamente a una manipulación de los datos mas sencilla. Por ejemplo:
 
@@ -78,7 +78,7 @@ linelist <- linelist %>%
   )
 ```
 
-### Pivotar a lo largo {#pivoting-longer}
+### Pivotar a lo largo {.unnumbered}
 
 Como una cuestión de estructura de datos, para **ggplot2** a menudo queremos pivotar nuestros datos en formatos *largos*. Lee más sobre esto en la página de [Pivoteo de datos](#pivoting-data).  
 
@@ -210,7 +210,7 @@ ggplot(data = linelist, mapping = aes(x = age))+
 ```
 
 
-### Estética del gráfico {#plot-aesthetics}  
+### Estética del gráfico {.unnumbered}  
 
 En la terminología de ggplot, la "estética" de un gráfico tiene un significado específico. Se refiere a una propiedad visual de *los datos trazados*. Ten en cuenta que "estética" aquí se refiere a los *datos que se trazan en geoms / formas* - no a lo que aparece en la periferia, tales como títulos, etiquetas de los ejes, el color de fondo, como podría comúnmente asociarse con la palabra "estética". En ggplot esos detalles se llaman "temas" y se ajustan dentro de un comando denominado `theme()` (ver [esta sección](#ggplot_basics_themes)).
 
@@ -233,7 +233,7 @@ A esta estética de los objetos del gráfico se le pueden asignar valores de dos
 
 <!-- *These non-axis aesthetics can be assigned static values (e.g. `size = 1`) or can be mapped to a column (e.g. `size = age`).* If you want the aesthetic to be assigned a static value, the assignment is placed *outside* the `mapping = aes()`. If you want the aesthetic to be scaled/depend on the value in each row of data, the assignment is made *inside* the `mapping = aes()`.   -->
 
-### Asignar un valor estático {#set-to-a-static-value}  
+### Asignar un valor estático {.unnumbered}  
 
 Si se desea que la estética del objeto de trazado sea estática, es decir, que sea la misma para cada observación de los datos, se escribe su asignación dentro del geom pero *fuera* del comando `mapping = aes()`. Estas asignaciones podrían escribirse como `size = 1` o `color = "blue"`. Aquí hay dos ejemplos:
 
@@ -256,7 +256,7 @@ ggplot(data = linelist, mapping = aes(x = age))+       # establecer datos y ejes
 ```
 
 
-### Escalado a los valores de la columna {#scaled-to-column-values}  
+### Escalado a los valores de la columna {.unnumbered} 
 
 Como alternativa al uso de estéticas de naturaleza estática, se pueden graficar objetos con tamaños proporcionales a sus valores como aparecen en su respectiva columna. Con este enfoque, la visualización de esta estética dependerá del valor de esa observación en la columna de datos correspondiente. Si los valores de la columna son continuos, la escala de visualización (en la leyenda) para esa estética será continua. Si los valores de la columna son discretos, la leyenda mostrará cada valor y los datos trazados aparecerán claramente "agrupados" (lea más en la sección de [agrupación](#ggplotgroups) de esta página).
 
@@ -318,7 +318,7 @@ ggplot(data = linelist,
 
 
 
-### Dónde hacer las asignaciones {#ggplot_basics_map_loc}
+### Dónde hacer las asignaciones {#ggplot_basics_map_loc .unnumbered}
 
 
 La asignación de estéticas dentro de `mapping = aes()` puede hacerse en varios lugares en sus comandos e incluso puede escribirse más de una vez. Esto puede ser escrito en el comando `ggplot()` inicial, y/o en cada geom individual debajo. Los matices incluyen:
@@ -347,7 +347,7 @@ ggplot()+
 
 
 
-### Grupos {#ggplotgroups}  
+### Grupos {#ggplotgroups .unnumbered}  
 
 Puedes agrupar fácilmente los datos y "graficar por grupo". De hecho, ¡ya lo has hecho!
 
@@ -379,7 +379,7 @@ Tené en cuenta que dependiendo del tipo de geom, tendrás que utilizar diferent
 
 Para tu información - la forma más básica de agrupar los datos es utilizando sólo el argumento `group =` dentro de `mapping = aes()`. Sin embargo, esto por sí mismo no cambiará los colores, el relleno o las formas. Tampoco creará una leyenda. Sin embargo, los datos están agrupados, por lo que las visualizaciones estadísticas pueden verse afectadas.
 
-Para ajustar el orden de los grupos en un gráfico, consulta la página de [consejos de ggplot](#ggplot-tips) o la página sobre [Factores](#factors). Hay muchos ejemplos de gráficos agrupados en las secciones siguientes sobre el trazado de datos continuos y categóricos. 
+Para ajustar el orden de los grupos en un gráfico, consulta la página de [Consejos de ggplot](#ggplot-tips) o la página sobre [Factores](#factors). Hay muchos ejemplos de gráficos agrupados en las secciones siguientes sobre el trazado de datos continuos y categóricos. 
 
 
 
@@ -387,7 +387,7 @@ Para ajustar el orden de los grupos en un gráfico, consulta la página de [cons
 
 Las facetas, o "pequeños gráficos múltiples", se utilizan para dividir un gráfico en una figura de varios paneles, con un panel ("faceta") representando un grupo de datos. El mismo tipo de gráfico se crea varias veces, cada vez utilizando un subgrupo del mismo conjunto de datos.
 
-El facetado es una funcionalidad que viene con **ggplot2**, por lo que las leyendas y los ejes de los `paneles` facetados se alinean automáticamente. Hay otros paquetes que abordamos en la página de [consejos de ggplot](#ggplot-tips) que se utilizan para combinar gráficos representando conjuntos de datos completamente diferentes (**cowplot** y **patchwork**) en una figura.
+El facetado es una funcionalidad que viene con **ggplot2**, por lo que las leyendas y los ejes de los `paneles` facetados se alinean automáticamente. Hay otros paquetes que abordamos en la página de [Consejos de ggplot](#ggplot-tips) que se utilizan para combinar gráficos representando conjuntos de datos completamente diferentes (**cowplot** y **patchwork**) en una figura.
 
 El facetado se realiza con una de las siguientes funciones de **ggplot2**:
 
@@ -422,7 +422,7 @@ DT::datatable(head(malaria_data, 50), rownames = FALSE, filter="top", options = 
 
 
 
-### `facet_wrap()` {#facet_wrap}
+### `facet_wrap()` {.unnumbered}
 
 Por el momento, vamos a centrarnos en las columnas `malaria_tot` y `District`. Ignoremos por ahora las columnas de recuento por edad. Trazaremos las curvas epidémicas con `geom_col()`, que produce una columna para cada día a la altura del eje-y especificada en la columna `malaria_tot` (los datos ya son recuentos diarios, por lo que utilizamos `geom_col()` - véase más adelante la sección ["Diagrama de barras"](#ggplot_basics_bars)).
 
@@ -440,7 +440,7 @@ ggplot(malaria_data, aes(x = data_date, y = malaria_tot)) +
   facet_wrap(~District)                       # se crean las facetas
 ```
 
-### `facet_grid()` {#facet_grid}  
+### `facet_grid()` {.unnumbered}  
 
 Podemos utilizar un enfoque de `facet_grid()` para cruzar dos variables. Digamos que queremos cruzar `District` y edad. Bien, necesitamos hacer algunas transformaciones de datos en las columnas de edad para poner estos datos en el formato "largo" preferido por ggplot. Los grupos de edad tienen sus propias columnas - los queremos en una sola columna llamada `age_group` y otra llamada `num_cases`. Consulta la página sobre [Pivoteo de datos](#pivoting-data) para obtener más información sobre este proceso.  
 
@@ -478,7 +478,7 @@ ggplot(malaria_age, aes(x = data_date, y = num_cases)) +
   facet_grid(District ~ age_group)
 ```
 
-### Ejes libres o fijos {#free-or-fixed-axes}  
+### Ejes libres o fijos {.unnumbered}  
 
 Las escalas de los ejes que se muestran en gráficos facetados son, por defecto, las mismas (fijas) en todas las facetas. Esto es útil para las comparaciones cruzadas, pero no siempre es apropiado.
 
@@ -520,7 +520,7 @@ ggplot(malaria_data, aes(x = data_date, y = malaria_tot)) +
 
 <!-- ``` -->
 
-### Orden del nivel de los factores en las facetas {#factor-level-order-in-facets}  
+### Orden del nivel de los factores en las facetas {.unnumbered}  
 
 
 Consulta esta [entrada](https://juliasilge.com/blog/reorder-within/) sobre cómo reordenar los niveles de los factores *dentro* de las facetas.
@@ -528,7 +528,7 @@ Consulta esta [entrada](https://juliasilge.com/blog/reorder-within/) sobre cómo
 
 ## Almacenamiento de gráficos {#storing-plots}
 
-### Guardar los gráficos {#saving-plots-1}
+### Guardar los gráficos {.unnumbered}
 
 Cuando se ejecuta un comando `ggplot()`, el gráfico se mostrará en el panel de Plots RStudio de manera predeterminada. Sin embargo, también podés guardar el gráfico como un objeto utilizando el operador de asignación `<-` y asignandole un nombre. Entonces el gráfico no se mostrará a menos que se ejecute el nombre del objeto mismo. También podés mostrarlo envolviendo el nombre del gráfico con `print()`, pero esto sólo es necesario en ciertas circunstancias, como cuando el gráfico se crea dentro de un *loop for* o bucle utilizado para imprimir múltiples gráficos a la vez (véase la página [Iteración, bucles y listas](#iteration-loops-and-lists) ).
 
@@ -542,7 +542,7 @@ age_by_wt
 ```
 
 
-### Modificación de gráficos guardados {#modifying-saved-plots}  
+### Modificación de gráficos guardados {.unnumbered} 
 
 Una gran ventaja de **ggplot2** es que podés definir un gráfico (como se ve arriba), y luego añadirle capas empezando por su nombre sin necesidad de repetir todos los comandos que crearon el gráfico original.
 
@@ -554,7 +554,7 @@ age_by_wt+
 ```
 
 
-### Exportación de gráficos {#exporting-plots}   
+### Exportación de gráficos {.unnumbered}   
 
 La exportación de ggplots es fácil con la función `ggsave()` de **ggplot2**. Puede funcionar de dos maneras, ya sea:
 
@@ -604,7 +604,7 @@ age_by_wt
 
 Observa cómo en la asignación del pie del gráfico hemos utilizado `str_glue()` del paquete **stringr** para integrar código R dinámico dentro del texto de la cadena. El pie del gráfico mostrará la fecha "Datos a partir de:" que refleja la fecha máxima de hospitalización en el listado de datos. Puedes leer más sobre esto en la página sobre [Caracteres y cadenas](#characters-and-strings).
 
-Una nota sobre la especificación del título de la *leyenda*: No hay un argumento "título de la leyenda", ya que podrías tener múltiples escalas en tu leyenda. Dentro de `labs()`, podes escribir el argumento de la estética del gráfico utilizado para crear la leyenda, y proporcionar el título de esta manera. Por ejemplo, arriba asignamos `color = age` para crear la leyenda. Por lo tanto, proporcionamos `color` `=` a `labs()` y asignamos el título de la leyenda deseado ("Age" con A mayúscula). Si se crea la leyenda con `aes(fill = COLUMN)`, entonces en `labs()` se escribiría `fill =` para ajustar el título de esa leyenda. La sección sobre escalas de color en la página [de consejos de ggplot](#ggplot-tips) proporciona más detalles sobre la edición de leyendas, y un enfoque alternativo utilizando las funciones `scales_()`.
+Una nota sobre la especificación del título de la *leyenda*: No hay un argumento "título de la leyenda", ya que podrías tener múltiples escalas en tu leyenda. Dentro de `labs()`, podes escribir el argumento de la estética del gráfico utilizado para crear la leyenda, y proporcionar el título de esta manera. Por ejemplo, arriba asignamos `color = age` para crear la leyenda. Por lo tanto, proporcionamos `color` `=` a `labs()` y asignamos el título de la leyenda deseado ("Age" con A mayúscula). Si se crea la leyenda con `aes(fill = COLUMN)`, entonces en `labs()` se escribiría `fill =` para ajustar el título de esa leyenda. La sección sobre escalas de color en la página [Consejos de ggplot](#ggplot-tips) proporciona más detalles sobre la edición de leyendas, y un enfoque alternativo utilizando las funciones `scales_()`.
 
 
 
@@ -616,7 +616,7 @@ Una de las mejores partes de **ggplot2** es el nivel de control que tienes sobre
 
 * Ajustando cada pequeño aspecto del gráfico individualmente dentro de `theme()`
 
-### Temas completos {#complete-themes}  
+### Temas completos {.unnumbered} 
 
 Como son bastante sencillas, demostraremos las funciones del tema completo a continuación y no las describiremos más aquí. Ten en cuenta que cualquier microajuste con `theme()` debe hacerse *después de* utilizar un tema completo.
 
@@ -648,7 +648,7 @@ ggplot(data = linelist, mapping = aes(x = age, y = wt_kg))+
 
 ```
 
-### Modificar el tema {#modify-theme}  
+### Modificar el tema {.unnumbered}
 
 La función `theme()` puede tomar un gran número de argumentos, cada uno de los cuales edita un aspecto específico del gráfico. No hay manera de que podamos cubrir todos los argumentos, pero describiremos el patrón general para ellos y te mostraremos cómo encontrar el nombre del argumento que necesitas. La sintaxis básica es esta:
 
@@ -723,7 +723,7 @@ Consulta esta [sección sobre las escalas de color de la página de consejos de 
 
 
 
-## Pipes en **ggplot2**   
+## Pipes en **ggplot2** {#piping-into-ggplot2}
 
 Cuando se utilizan pipes para limpiar y transformar los datos, es fácil pasar los datos transformados a `ggplot()`.
 
@@ -774,11 +774,11 @@ A lo largo de esta página, ya has visto muchos ejemplos de trazado de datos con
 
 
 
-### Histogramas {#histograms}
+### Histogramas {.unnumbered}
 
 Los histogramas pueden parecerse a los gráficos de barras, pero son distintos porque miden la distribución de una variable *continua*. No hay espacios entre las "barras", y sólo se proporciona una columna a `geom_histogram()`.
 
-A continuación se muestra el código para generar **histogramas**, que agrupan datos continuos en rangos y se muestran en barras adyacentes de altura variable. Esto se hace utilizando `geom_histogram()`. Consulte la [sección "Diagrama de barras"](#ggplot_basics_bars) de la página de fundamentos de ggplot para entender la diferencia entre `geom_histogram()`, `geom_bar()` y `geom_col()`.
+A continuación se muestra el código para generar **histogramas**, que agrupan datos continuos en rangos y se muestran en barras adyacentes de altura variable. Esto se hace utilizando `geom_histogram()`. Consulta la [sección "Gráfico de barras"](#ggplot_basics_bars) de la página de fundamentos de ggplot para entender la diferencia entre `geom_histogram()`, `geom_bar()` y `geom_col()`.
 
 Vamos a mostrar la distribución de las edades de los casos. Dentro de `mapping = aes()` especifique la columna de la que quiere ver la distribución. Puedes asignar esta columna al eje-x o al eje-y.
 
@@ -867,7 +867,7 @@ Lee más en detalle sobre los histogramas en la [página de **tidyverse** sobre 
 
 
 
-### Gráficos de caja {#box-plots}
+### Gráficos de caja {.unnumbered}
 
 Los gráficos de caja (Boxplot) son habituales, pero tienen limitaciones importantes. Pueden ocultar la distribución real - por ejemplo, una distribución bimodal. Consulta esta [galería de gráficos de R](https://www.r-graph-gallery.com/boxplot.html) y este [artículo sobre la visualización de datos](https://www.data-to-viz.com/caveat/boxplot.html) para obtener más detalles. Sin embargo, muestran muy bien el rango intercuartil y los valores atípicos, por lo que pueden superponerse a otros tipos de gráficos que muestran la distribución con más detalle.
 
@@ -894,13 +894,13 @@ ggplot(data = linelist, mapping = aes(y = age, x = gender, fill = gender)) +
   labs(title = "B) Boxplot by gender")      
 ```
 
-Para ver el código para añadir un gráfico de caja a los bordes de un gráfico de dispersión (gráficos "marginales"), consulta la página [ggplot tips](#ggplot-tips).
+Para ver el código para añadir un gráfico de caja a los bordes de un gráfico de dispersión (gráficos "marginales"), consulta la página [Consejos de ggplot](#ggplot-tips).
 
 
 
 
 
-### Gráficos de violín, fluctuación y sina {#violin-jitter-and-sina-plots}
+### Gráficos de violín, fluctuación y sina {.unnumbered}
 
 A continuación se muestra el código para crear gráficos de `violín` (`geom_violin`) y `gráficos de fluctuación` (`geom_jitter`) para mostrar distribuciones. Se puede especificar que el relleno o el color también estén determinados por los datos, insertando estas opciones dentro de `aes()`.
 
@@ -960,7 +960,7 @@ ggplot(
 
 
 
-### Dos variables continuas  {#two-continuous-variables}
+### Dos variables continuas  {.unnumbered}
 
 Siguiendo una sintaxis similar, `geom_point()` te permitirá trazar dos variables continuas en un **gráfico de dispersión**. Esto es útil para mostrar los valores reales en lugar de sus distribuciones. En (A) se muestra un gráfico de dispersión simple de la edad frente al peso. En (B) volvemos a utilizar `facet_grid()` para mostrar la relación entre dos variables continuas.
 
@@ -982,9 +982,9 @@ ggplot(data = linelist %>% drop_na(gender, outcome), # filter retains non-missin
 ```
 
 
-### Tres variables continuas {#three-continuous-variables}  
+### Tres variables continuas {.unnumbered}  
 
-Puedes mostrar tres variables continuas utilizando el argumento `fill =` para crear *un gráfico de calor*. El color de cada "celda" reflejará el valor de la tercera columna continua de datos. Consulte la página de [consejos de ggplot](#ggplot-tips) y la página de [gráficos de calor](#heat-plots) para obtener más detalles y varios ejemplos.
+Puedes mostrar tres variables continuas utilizando el argumento `fill =` para crear *un gráfico de calor*. El color de cada "celda" reflejará el valor de la tercera columna continua de datos. Consulta la página [Consejos de ggplot](#ggplot-tips) y la página de [gráficos de calor](#heat-plots) para obtener más detalles y varios ejemplos.
 
 Hay formas de hacer gráficos en 3D en R, pero para la epidemiología aplicada suelen ser difíciles de interpretar y, por tanto, menos útiles para la toma de decisiones.
 
@@ -996,11 +996,11 @@ Hay formas de hacer gráficos en 3D en R, pero para la epidemiología aplicada s
 
 
 
-## Trazar datos categóricos  {#plot-categorical-data}
+## Trazar datos categóricos  {.unnumbered}
 
 Los datos categóricos pueden ser valores de carácter, pueden ser lógicos (TRUE/FALSE), o factores (ver la página de [Factores](#factors)).
 
-### Preparación  {#preparation-22}
+### Preparación {.unnumbered}
 
 #### Estructura de datos {.unnumbered}  
 
@@ -1045,7 +1045,7 @@ linelist <- linelist %>%
 levels(linelist$hospital)
 ```
 
-### `geom_bar()` {#ggplot_basics_bars}  
+### Gráfico de barras {#ggplot_basics_bars .unnumbered}  
 
 Utiliza `geom_bar()` si deseas que la altura de las barras (o la altura de los componentes de las barras apiladas) refleje *el número de filas relevantes de los datos*. Estas barras tendrán huecos entre ellas, a menos que se ajuste la estética de `width =`.
 
@@ -1078,7 +1078,7 @@ ggplot(linelist %>% drop_na(outcome)) +
 
 
 
-### `geom_col()` {#geom_col}  
+### `geom_col()` {.unnumbered}  
 
 Utiliza `geom_col()` si deseas que la altura de las barras (o la altura de los componentes de las barras apiladas) refleje *valores* precalculados que existen en los datos. A menudo, se trata de recuentos sumarios o "agregados", o de proporciones.
 
@@ -1157,7 +1157,7 @@ Ten en cuenta que las proporciones son binarias, por lo que podemos preferir omi
 Si se utiliza `geom_col()` con datos de fechas (por ejemplo, una epicurva a partir de datos agregados) - querrá ajustar el argumento `width =` para eliminar los "huecos" entre las barras. Si se utilizan datos diarios (en días), ajuste `width= 1`. Si se trata de datos semanales, la anchura seria `width = 7`. Los meses no son posibles de representar porque cada mes tiene un número diferente de días.
 
 
-### `geom_histogram()` {#geom_histogram}  
+### geom_histogram() {.unnumbered}  
 
 Los histogramas pueden parecerse a los gráficos de barras, pero son distintos porque miden la distribución de una variable *continua*. No hay huecos o espacios entre las "barras" y sólo se asigna una columna a `geom_histogram()`. Hay argumentos específicos para los histogramas como `bin_width =` y `breaks =` para especificar cómo se deben dividir los datos. La sección anterior sobre datos continuos y la página sobre [curvas epidémicas](#epidemic-curves) proporcionan detalles adicionales. 
 
@@ -1171,6 +1171,6 @@ Hay una gran cantidad de ayuda en línea, especialmente sobre ggplot. Consulta l
 * [otra hoja de trucos](https://biostats.w.uib.no/the-ggplot2-cheat-sheet-by-rstudio/)
 * [página de fundamentos de tidyverse ggplot](https://ggplot2.tidyverse.org/reference/)
 * [trazado de variables continuas](http://www.sthda.com/english/articles/32-r-graphics-essentials/131-plot-two-continuous-variables-scatter-graph-and-alternatives/)
-* páginas de R for Data Science sobre [visualización de datos](https://es.r4ds.hadley.nz/visualización-de-datos.html)
+* páginas de R for Data Science en español sobre [visualización de datos](https://es.r4ds.hadley.nz/visualización-de-datos.html)
 * [gráficos para la comunicación](https://es.r4ds.hadley.nz/comunicar-con-gráficos.html) 
 

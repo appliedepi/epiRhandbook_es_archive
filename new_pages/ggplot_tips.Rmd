@@ -10,7 +10,7 @@ Hay varios [tutoriales extensos de **ggplot2**](https://ggplot2.tidyverse.org/) 
 
 
 <!-- ======================================================= -->
-## Preparación {#preparation-20}
+## Preparación {#preparation-23}
 
 ### Cargar paquetes {.unnumbered}
 
@@ -59,7 +59,7 @@ En **ggplot2**, cuando la estética de los datos trazados (por ejemplo, el tama�
 
 
 
-### Esquemas de color
+### Esquemas de color {.unnumbered}
 
 Una cosa que puede ser inicialmente difícil de entender con **ggplot2** es el control de los esquemas de color. Ten en cuenta que esta sección discute el color de los *objetos de trazado* (geoms/shapes) como puntos, barras, líneas, mosaicos, etc. Para ajustar el color del texto accesorio, los títulos o el color de fondo, consulta la sección [Temas de](#ggplot_basics_themes) la página [Conceptos básicos de ggplot](#ggplot-basics).
 
@@ -78,7 +78,7 @@ ggplot(data = linelist, mapping = aes(x = age))+       # set data and axes
 
 
 
-Como se explica en la sección de [Conceptos básicos de ggplot](#ggplot-basics) sobre la [asignación de datos al gráfico](#ggplot_basics_mapping), la estética como  `fill = ` y `color = `  puede definirse *fuera* de una sentencia `mapping = aes()` o *dentro* de ella. Si está *fuera* de `aes()`, el valor asignado debe ser estático (por ejemplo, `color = "blue"`) y se aplicará a *todos* los datos trazados por el geom. Si está *dentro*, la estética debe asignarse a una columna, como `color = hospital`, y la expresión variará según el valor de esa fila en los datos. Algunos ejemplos: 
+Como se explica en la sección [asignación de datos al gráfico](#ggplot_basics_mapping) de [Conceptos básicos de ggplot](#ggplot-basics) sobre la estética como  `fill = ` y `color = `  puede definirse *fuera* de una sentencia `mapping = aes()` o *dentro* de ella. Si está *fuera* de `aes()`, el valor asignado debe ser estático (por ejemplo, `color = "blue"`) y se aplicará a *todos* los datos trazados por el geom. Si está *dentro*, la estética debe asignarse a una columna, como `color = hospital`, y la expresión variará según el valor de esa fila en los datos. Algunos ejemplos: 
 
 ```{r, out.width=c('50%', '50%'), fig.show='hold', warning=F, message=F}
 # Static color for points and for line
@@ -294,7 +294,7 @@ preparedness_plot+                   # begin with plot saved above
 
 Las escalas de degradado de relleno pueden implicar matices adicionales. Los valores predeterminados suelen ser bastante agradables, pero es posible que desee ajustar los valores, los cortes, etc.
 
-Para demostrar cómo ajustar una escala de colores continua, utilizaremos unos datos de la página de [seguimiento de contactos](#contact-tracing-1) que contiene las edades de los casos y de sus casos de origen.
+Para demostrar cómo ajustar una escala de colores continua, utilizaremos unos datos de la página de [Rastreo de contactos](#contact-tracing-1) que contiene las edades de los casos y de sus casos de origen.
 
 
 ```{r, warning=F, message=F}
@@ -371,7 +371,7 @@ En general, si deseas paletas predefinidas, puedes utilizar las funciones `scale
 
 Las funciones 'brewer' pueden dibujar desde las paletas de [colorbrewer.org](http://www.colorbrewer.org).
 
-Las funciones "viridis" se basan en las paletas viridis (¡difíciles para los daltónicos!), que "proporcionan mapas de color que son perceptivamente uniformes tanto en color como en blanco y negro. También están diseñadas para ser percibidas por espectadores con formas comunes de daltonismo". (lea más [aquí](https://ggplot2.tidyverse.org/reference/scale_viridis.html) y [aquí](https://bids.github.io/colormap/)). Define si la paleta es discreta, continua o con intervalos especificando esto al final de la función (por ejemplo, discreta es `scale_xxx_viridis_d`).
+Las funciones 'viridis' se basan en las paletas viridis (¡difíciles para los daltónicos!), que "proporcionan mapas de color que son perceptivamente uniformes tanto en color como en blanco y negro. También están diseñadas para ser percibidas por espectadores con formas comunes de daltonismo". (lee más [aquí](https://ggplot2.tidyverse.org/reference/scale_viridis.html) y [aquí](https://bids.github.io/colormap/)). Define si la paleta es discreta, continua o con intervalos especificando esto al final de la función (por ejemplo, discreta es `scale_xxx_viridis_d`).
 
 Se aconseja que pruebes tu esquema en este [simulador de daltonismo](https://www.color-blindness.com/coblis-color-blindness-simulator/). Si tienes un esquema de color rojo/verde, prueba en su lugar un esquema "caliente-frío" (rojo-azul) como se describe [aquí](https://www.visualisingdata.com/2019/08/five-ways-to-design-for-red-green-colour-blindness/#:~:text=The pink-red through to,green hues used by default.)
 
@@ -697,10 +697,10 @@ linelist %>%
 
 ## Trazado de múltiples conjuntos de datos {#plotting-multiple-datasets}
 
-Ten en cuenta que alinear correctamente los ejes para trazar desde múltiples conjuntos de datos en el mismo gráfico puede ser difícil. Considere una de las siguientes estrategias:
+Ten en cuenta que alinear correctamente los ejes para trazar desde múltiples conjuntos de datos en el mismo gráfico puede ser difícil. Considera una de las siguientes estrategias:
 
 * Fusionar los datos antes de trazarlos y convertirlos al formato "long" con una columna que refleje el conjunto de datos
-* Utiliza **Cowplot** o un paquete similar para combinar dos gráficos (véase más abajo)
+* Utilizar **Cowplot** o un paquete similar para combinar dos gráficos (véase más abajo)
 
 
 
@@ -922,6 +922,7 @@ cowplot::ggdraw(main_plot)+
 Esta técnica se explica mejor en estas dos viñetas:
 
 [Laboratorio Wilke](https://wilkelab.org/cowplot/articles/drawing_with_on_plots.html)
+
 [documentación de draw_plot()](https://www.rdocumentation.org/packages/cowplot/versions/1.1.1/topics/draw_plot)
 
 
@@ -1066,15 +1067,15 @@ aligned_plotted                                                                #
 
 Hay algunos paquetes de R muy buenos diseñados específicamente para ayudarte a navegar por **ggplot2**:
 
-Apuntar y clicar en **ggplot2** con **equisse**
+### Apuntar y clicar en **ggplot2** con **equisse** {.unnumbered}
 
 "Este complemento te permite explorar interactivamente tus datos visualizándolos con el paquete ggplot2. Te permite dibujar gráficos de barras, curvas, gráficos de dispersión, histogramas, boxplot y objetos sf, y luego exportar el gráfico o recuperar el código para reproducir el gráfico."
 
 Instala y lance el complemento a través del menú de RStudio o con `esquisse::esquisser()`.
 
-Ver la [página de Github](https://github.com/dreamRs/esquisse)
+Ver la [página de Github](https://github.com/dreamRs/esquisse) de esquisse
 
-[Documentación](https://dreamrs.github.io/esquisse/index.html)
+[Documentación adicional](https://dreamrs.github.io/esquisse/index.html)
 
 
 
@@ -1109,13 +1110,13 @@ scales::dollar(56)
 scales::scientific(100000)
 ```
 
-## Recursos {#resources-22}
+## Recursos {#resources-24}
 
 Inspiración [galería de gráficos de ggplot](https://www.tidyverse.org/blog/2018/07/ggplot2-3-0-0/)
 
-Presentación de los datos del Centro Europeo para la Prevención y el Control de las Enfermedades [Directrices para la presentación de los datos de vigilancia](https://ecdc.europa.eu/sites/portal/files/documents/Guidelines for presentation of surveillance data-final-with-cover-for-we....pdf)
+[Directrices para la presentación de los datos de vigilancia](https://ecdc.europa.eu/sites/portal/files/documents/Guidelines for presentation of surveillance data-final-with-cover-for-we....pdf) del Centro Europeo para la Prevención y el Control de las Enfermedades (ecdc)
 
-Facetas y etiquetadoras [Utilización de etiquetadoras para tiras de facetas](http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/#modifying-facet-label-text) [Etiquetadoras](https://ggplot2.tidyverse.org/reference/labellers.html)]
+[Utilización de etiquetadoras para tiras de facetas](http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/#modifying-facet-label-text) y [Etiquetadoras](https://ggplot2.tidyverse.org/reference/labellers.html)]
 
 Ajuste del orden con factores
 [fct_reorder](https://forcats.tidyverse.org/reference/fct_reorder.html)

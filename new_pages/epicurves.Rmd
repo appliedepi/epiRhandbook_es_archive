@@ -72,7 +72,7 @@ count_data <- linelist %>%
 
 **`Linelist` con casos**
 
-Importamos los datos de casos de una epidemia de ébola simulada. Si deseas descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página de [descarga de manuales y datos](#download-handbook-and-data). Asumimos que el archivo está en el directorio de trabajo, por lo que no se especifican subcarpetas en esta ruta de archivo.  
+Importamos los datos de casos de una epidemia de ébola simulada. Si deseas descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página [Descargando el manual y los datos](#download-handbook-and-data). Asumimos que el archivo está en el directorio de trabajo, por lo que no se especifican subcarpetas en esta ruta de archivo.  
 
 ```{r, eval=F}
 linelist <- import("linelist_cleaned.rds")
@@ -135,7 +135,7 @@ ggplot(data = linelist)+
 
 
 <!-- ======================================================= -->
-## Epicurves con el paquete de **incidencia2** {#epicurves-with-incidence2-package}
+## Epicurves con el paquete **incidence2** {#epicurves-with-incidence2-package}
 
 A continuación mostramos cómo hacer epicurvas utilizando el paquete **incidence2**. Los autores de este paquete han intentado que el usuario pueda crear y modificar epicurvas sin necesidad de conocer la sintaxis de **ggplot2**. Gran parte de esta página está adaptada de las viñetas del paquete, que se pueden encontrar en la [página de github de **incidence2**](https://github.com/reconhub/incidence2).
 
@@ -629,7 +629,7 @@ plot(age_outbreak, fill = age_cat, title = "Manually-specified colors")+
     name = "Age Category")      # Name for legend
 ```
 
-Como se menciona en la página de [consejos de ggplot](#ggplot-tips), puede crear sus propias paletas utilizando `colorRampPalette()` sobre un vector de colores y especificando el número de colores que deseas. Esta es una buena manera de obtener muchos colores en una rampa especificando unos pocos.  
+Como se menciona en la página [Consejos de ggplot](#ggplot-tips), puede crear sus propias paletas utilizando `colorRampPalette()` sobre un vector de colores y especificando el número de colores que deseas. Esta es una buena manera de obtener muchos colores en una rampa especificando unos pocos.  
 
 ```{r}
 my_cols <- c("darkgreen", "darkblue", "purple", "grey", "yellow", "orange")
@@ -781,9 +781,6 @@ rolling_avg <- incidence(                    # make incidence object
   i2extras::add_rolling_average(before = 6)  # add rolling averages (in this case, by gender)
 
 # plot
-####
-#### jcfernandezm ### he quitado el argumento , n.breaks = 3 No está en la versión en inglés
-#### plot(rolling_avg, n.breaks = 3) # faceted automatically because rolling average on groups
 plot(rolling_avg) # faceted automatically because rolling average on groups
 ```
 
@@ -917,7 +914,7 @@ weekly_breaks_all <- seq.Date(
 
 Estas salidas de `seq.Date()` pueden utilizarse para crear los saltos de las casillas del histograma, pero también los saltos de las etiquetas de fecha, que pueden ser independientes de las casillas. Lea más sobre las etiquetas de fecha en secciones posteriores.
 
-<span style="color: darkgreen;">***SUGERENCIA:*** Para un comando `ggplot()` más sencillo, guarde los saltos de cubo y los saltos de etiqueta de fecha como vectores con nombre por adelantado, y simplemente proporcione sus nombres a `breaks = `..</span>  
+<span style="color: darkgreen;">***CONSEJO:*** Para un comando `ggplot()` más sencillo, guarde los saltos de cubo y los saltos de etiqueta de fecha como vectores con nombre por adelantado, y simplemente proporcione sus nombres a `breaks = `..</span>  
 
 
 
@@ -1162,7 +1159,7 @@ ggplot(plot_data) +                     # Use NEW dataset with hospital as re-or
 
 ### Ajustar la leyenda {.unnumbered}
 
-Lee más sobre las leyendas y las escalas en la página de [consejos de ggplot](#ggplot-tips). Aquí hay algunos puntos destacados:
+Lee más sobre las leyendas y las escalas en la página [Consejos de ggplot](#ggplot-tips). Aquí hay algunos puntos destacados:
 
 * Edita el título de la leyenda, ya sea en la función de escala o con `labs(fill = "Título de la leyenda")` (si estás usando `color = ` estético, entonces usa `labs(color = "")`)
 * `theme(legend.title = element_blank())` para no tener título de leyenda
@@ -1249,7 +1246,7 @@ scale_x_date(limits = c(NA, Sys.Date()) # ensures date axis will extend until cu
 
 
 
-### Date-axis labels/gridlines {.unnumbered} 
+### Ejes de fecha etiquetas/cuadrículas {.unnumbered} 
 
 <span style="color: darkgreen;">***CONSEJO:*** Recuerda que las **etiquetas** de los ejes de fecha son independientes de la agregación de los datos en barras, pero visualmente puede ser importante alinear las franjas, las etiquetas de fecha y las líneas verticales de la cuadrícula.</span>
 
@@ -1573,9 +1570,9 @@ ggplot(data = ll_counts_7day) +  # begin with new dataset defined above
 
 
 
-### Facetas/pequeños múltiples {.unnumbered}
+### Facetas/pequeñas múltiples {.unnumbered}
 
-Al igual que con otros ggplots, puedes crear gráficos facetados ("pequeños múltiples"). Como se explica en la página de [consejos de ggplot](#ggplot-tips) de este manual, puedes utilizar `facet_wrap()` o `facet_grid()`. Aquí lo mostramos con `facet_wrap()`. Para las epicurvas, `facet_wrap()` es típicamente más fácil, ya que es probable que sólo necesites facetar una columna.
+Al igual que con otros ggplots, puedes crear gráficos facetados ("pequeños múltiples"). Como se explica en la página [Consejos de ggplot](#ggplot-tips) de este manual, puedes utilizar `facet_wrap()` o `facet_grid()`. Aquí lo mostramos con `facet_wrap()`. Para las epicurvas, `facet_wrap()` es típicamente más fácil, ya que es probable que sólo necesites facetar una columna.
 
 La sintaxis general es `facet_wrap(rows ~ cols)`, donde a la izquierda de la tilde (`~`) está el nombre de una columna que se extiende a través de las "filas" del gráfico facetado, y a la derecha de la tilde está el nombre de una columna que se extiende a través de las "columnas" del gráfico facetado. Lo más sencillo es utilizar un nombre de columna, a la derecha de la tilde: `facet_wrap(~age_cat)`.  
 
@@ -1677,7 +1674,7 @@ Consulta este [enlace](https://ggplot2.tidyverse.org/reference/labellers.html) p
 #### Conjunto de la Epidemia como fondo de la faceta {.unnumbered}
 
 
-Para mostrar el conjunto de la epidemia como fondo de cada faceta, añade la función `gghighlight()` con paréntesis vacíos al ggplot. Esto es del paquete **gghighlight**. Observa que el máximo del eje Y en todas las facetas se basa ahora en el pico de toda la epidemia. Hay más ejemplos de este paquete en la página [de consejos de ggplot](#ggplot-tips). 
+Para mostrar el conjunto de la epidemia como fondo de cada faceta, añade la función `gghighlight()` con paréntesis vacíos al ggplot. Esto es del paquete **gghighlight**. Observa que el máximo del eje Y en todas las facetas se basa ahora en el pico de toda la epidemia. Hay más ejemplos de este paquete en la página [Consejos de ggplot](#highlighting). 
 
 ```{r, warning=F, message=F}
 ggplot(central_data) + 
@@ -1734,8 +1731,7 @@ ggplot(central_data) +
 ```
 
 
-#### One facet with data {.unnumbered}  
-Una faceta con datos
+#### Una faceta con datos {.unnumbered}  
 
 Si quieres tener una caja de facetas que contenga todos los datos, duplique todo el conjunto de datos y trate los duplicados como un solo valor de facetas. Una función de "ayuda" `CreateAllFacet()` a continuación puede ayudar con esto (gracias a esta [entrada del blog](https://stackoverflow.com/questions/18933575/easily-add-an-all-facet-to-facet-wrap-in-ggplot2)). Cuando se ejecuta, el número de filas se duplica y habrá una nueva columna llamada `facet` en la que las filas duplicadas tendrán el valor "all", y las filas originales tienen el valor original de la columna `facet`. Ahora sólo tienes que hacer la faceta con la columna `facet`.
 
@@ -1775,7 +1771,7 @@ Los cambios más importantes en el comando `ggplot()` son:
 
 * Los datos utilizados son ahora `central_data2` (el doble de filas, con la nueva columna "facet")
 * La etiquetadora tendrá que ser actualizada, si se utiliza
-* Opcional: para conseguir facetas apiladas verticalmente: la columna de la faceta se mueve al lado de las filas de la ecuación y a la derecha se sustituye por "." (`facet_wrap(facet\~.)`), y `ncol = 1 `. También puede ser necesario ajustar la anchura y la altura de la imagen png guardada (ver `ggsave()` en [consejos de ggplot](#ggplot-tips)).
+* Opcional: para conseguir facetas apiladas verticalmente: la columna de la faceta se mueve al lado de las filas de la ecuación y a la derecha se sustituye por "." (`facet_wrap(facet\~.)`), y `ncol = 1 `. También puede ser necesario ajustar la anchura y la altura de la imagen png guardada (ver `ggsave()` en [Conceptos básicos de ggplot](#ggplot-basics)).
 
 ```{r, fig.height=12, fig.width=5, warning=F, message=F}
 ggplot(central_data2) + 
@@ -1838,7 +1834,7 @@ Los datos más recientes que se muestran en las epicurvas deben marcarse a menud
      + Para un rectángulo utiliza `annotate(geom = "rect")`. Proporcionar `xmin/xmax/ymin/ymax`. Ajusta el color y el alpha.
 2.  Agrupar los datos por estado tentativo y colorear esas barras de forma diferente
 
-<span style="color: orange;">***ATENCIÓN:*** Puedes intentar `geom_rect()` para dibujar un rectángulo, pero el ajuste de la transparencia no funciona en un contexto de listado. Esta función superpone un rectángulo para cada observación/fila!. Utiliza un alfa muy bajo (por ejemplo, 0,01), u otro enfoque. </span>
+<span style="color: orange;">***PRECAUCIÓN:*** Puedes intentar `geom_rect()` para dibujar un rectángulo, pero el ajuste de la transparencia no funciona en un contexto de listado. Esta función superpone un rectángulo para cada observación/fila!. Utiliza un alfa muy bajo (por ejemplo, 0,01), u otro enfoque. </span>
 
 ### Uso de `annotate()` {.unnumbered}
 
@@ -2046,7 +2042,7 @@ Las técnicas anteriores fueron adaptadas de [este](https://stackoverflow.com/qu
 <!-- ======================================================= -->
 ## Doble eje {#dual-axis}  
 
-Aunque hay fuertes discusiones sobre la validez de los ejes duales dentro de la comunidad de visualización de datos, muchos supervisores de epi todavía quieren ver una epicurva o un gráfico similar con un porcentaje superpuesto con un segundo eje. Esto se discute más ampliamente en la página de [consejos de ggplot](#ggplot-tips), pero a continuación se muestra un ejemplo utilizando el método **cowplot**:
+Aunque hay fuertes discusiones sobre la validez de los ejes duales dentro de la comunidad de visualización de datos, muchos supervisores de epi todavía quieren ver una epicurva o un gráfico similar con un porcentaje superpuesto con un segundo eje. Esto se discute más ampliamente en la página [Consejos de ggplot](#plotting-multiple-datasets), pero a continuación se muestra un ejemplo utilizando el método **cowplot**:
 
 * Se hacen dos gráficos distintos y luego se combinan con el paquete **cowplot**.
 * Los gráficos deben tener exactamente el mismo eje x (límites establecidos) o de lo contrario los datos y las etiquetas no se alinearán
@@ -2168,7 +2164,7 @@ plot_cumulative
 ```
 
 
-También se puede superponer a la epicurva, con doble eje utilizando el método **cowplot** descrito anteriormente y en la página de [consejos de ggplot](#ggplot-tips):
+También se puede superponer a la epicurva, con doble eje utilizando el método **cowplot** descrito anteriormente y en la página [Consejos de ggplot](#ggplot-tips):
 
 ```{r, warning=F, message=F}
 #load package
