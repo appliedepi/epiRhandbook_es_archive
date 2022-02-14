@@ -5,16 +5,17 @@
 
 
 <!-- ======================================================= -->
-## Resumen {#overview-8}
+## Resumen {#overview-9}
 
 El uso de R en unidades compartidas de la red o de la "empresa" puede presentar desafíos adicionales. Esta página contiene enfoques, errores comunes y sugerencias sobre la solución de problemas obtenidas a partir de nuestra experiencia trabajando con estos problemas. Se incluyen consejos para las situaciones especialmente delicadas relacionadas con R Markdown.
 
 
 **Uso de R en unidades de red: Principios generales**
 
-1) You must get administrator access for your computer. Setup RStudio specifically to run as administrator.  
-2) Save packages to a library on a lettered drive (e.g. "C:") when possible. Use a package library whose path begins with "\\\" as little as possible.  
-3) the **rmarkdown** package must **not** be in a "\\\" package library, as then it can't connect to TinyTex or Pandoc.  
+1) Debes tener acceso de administrador a tu ordenador. Configura RStudio específicamente para que se ejecute como administrador.  
+2) Guarda los paquetes en una biblioteca en una unidad con letras (por ejemplo, "C:") cuando sea posible. Uiliza lo menos posible una biblioteca de paquetes cuya ruta comience por "\\\".  
+3) El paquete **rmarkdown** debe **no** estar en una librería de paquetes "\\\", ya que entonces no puede conectarse a TinyTex o Pandoc. 
+
 
 
 
@@ -26,7 +27,7 @@ Cuando clica en el icono de RStudio para abrirlo, hazlo clicando con el botón d
 
 
 
-## Useful commands {#useful-commands}
+## Comandos útiles {#useful-commands}
 
 A continuación se presentan algunos comandos útiles cuando se trata de solucionar problemas utilizando R en unidades de red.
 
@@ -71,9 +72,9 @@ find.package("rmarkdown", lib.loc = NULL, quiet = FALSE, verbose = getOption("ve
 ## Solución de errores comunes {#troubleshooting-common-errors}
 
 
-**"Failed to compile...tex in rmarkdown"**  
+**"Fallo al compilar...tex en rmarkdown "**  
 
-* Compruebe la instalación de TinyTex, o instale TinyTex en la ubicación C:. Consulta la página de [fundamentos de R](#r-basics) sobre cómo instalar TinyTex. 
+* Comprueba la instalación de TinyTex, o instale TinyTex en la ubicación C:. Consulta la página de [fundamentos de R](#r-basics) sobre cómo instalar TinyTex. 
 
 ```{r, eval=F}
 # check/install tinytex, to C: location
@@ -82,7 +83,7 @@ tinytex:::is_tinytex() # should return TRUE (note three colons)
 ```
 
 
-**Internet routines cannot be loaded**  
+**No se pueden cargar las rutinas de Internet.**  
 
 Por ejemplo, `Error in tools::startDynamicHelp() : internet routines cannot be loaded`  
 
@@ -91,7 +92,7 @@ Por ejemplo, `Error in tools::startDynamicHelp() : internet routines cannot be l
 * Alternativamente, intente desinstalar R y volver a instalarlo con una versión de bits diferente (32 en lugar de 64)
 
 
-**C: library does not appear as an option when I try to install packages manually**
+**C: la biblioteca no aparece como opción cuando intento instalar los paquetes manualmente**
 
 * Ejecuta RStudio como administrador, entonces aparecerá esta opción.
 * Para configurar RStudio para que se ejecute siempre como administrador (lo que resulta ventajoso cuando se utiliza un proyecto R en el que no se clica en el icono de RStudio para abrirlo)... clica con el botón derecho en el icono de Rstudio

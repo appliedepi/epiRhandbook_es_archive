@@ -8,9 +8,9 @@
 ## Preparación {#preparation-37}
 
 
-### Cargar paquetes {#load-packages-33}
+### Cargar paquetes {-}
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con `library()` de R **base.** Consulta la página sobre los [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con `library()` de R **base.** Consulta la página [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r, echo=F, warning=F, message=F}
 pacman::p_load(
@@ -29,7 +29,7 @@ pacman::p_load(
   )
 ```
 
-### Importar datos {#import-data-28}
+### Importar datos {-}
 
 Importamos los datos de casos de una epidemia de ébola simulada. Si deseas descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página [Descargar libro y datos]. Los datos se importan mediante la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos.
 
@@ -224,7 +224,7 @@ DT::datatable(rownames = FALSE, filter="top", options = list(pageLength = 10, sc
 
 ## Ejemplos  {#examples-2}
 
-### Devuelve tablas de proporciones para varias columnas {#return-proportion-tables-for-several-columns}  
+### Devuelve tablas de proporciones para varias columnas {.unnumbered}  
 
 Sí, ya disponemos de bonitas funciones en muchos paquetes que permiten resumir la información de una manera muy fácil y agradable. Pero aún así intentaremos hacer las nuestras, en nuestros primeros pasos para acostumbrarnos a escribir funciones.
 
@@ -286,12 +286,12 @@ base::lapply(linelist[,c("gender","age_cat", "outcome")], table)
 
 ## Uso de **purrr**: escribir funciones que se pueden aplicar de forma iterativa {#using-purrr-writing-functions-that-can-be-iteratively-applied}
 
-### Modificar el tipo de múltiples columnas en unos datos {#modify-class-of-multiple-columns-in-a-dataset}  
+### Modificar el tipo de múltiples columnas en unos datos {.unnumbered}   
 
 Digamos que muchas variables de carácter en los datos originales de `linelist` necesitan ser cambiadas a "factor" para propósitos de análisis y trazado. En lugar de repetir el paso varias veces, podemos utilizar simplemente `lapply()` para realizar la transformación de todas las variables afectadas en una sola línea de código.
 
 
-<span style="color: orange;">**_ATENCIÓN:_** `lapply()` devuelve una lista, por lo que su uso puede requerir una modificación adicional como último paso.</span>
+<span style="color: orange;">**_PRECAUCIÓN:_** `lapply()` devuelve una lista, por lo que su uso puede requerir una modificación adicional como último paso.</span>
 
 
 ```{r, include=FALSE}
@@ -319,7 +319,7 @@ linelist_factor2 %>%
 ```
 
 
-### Elaborar de forma iterativa gráficos para diferentes niveles de una variable {#iteratively-produce-graphs-for-different-levels-of-a-variable}
+### Elaborar de forma iterativa gráficos para diferentes niveles de una variable {.unnumbered} 
 
 Produciremos aquí un gráfico circular para ver la distribución del resultado de los pacientes en China durante el brote de H7N9 para cada provincia. En lugar de repetir el código para cada una de ellas, nos limitaremos a aplicar una función que crearemos.
 
@@ -362,7 +362,7 @@ chart_outcome_province(flu_china,"Jiangsu")
 
 
 
-### Producir iterativamente tablas para diferentes niveles de una variable {#iteratively-produce-graphs-for-different-levels-of-a-variable}
+### Producir iterativamente tablas para diferentes niveles de una variable {.unnumbered}  
 
 Aquí crearemos tres indicadores para resumirlos en una tabla y nos gustaría elaborar esta tabla para cada una de las provincias. Nuestros indicadores son el retraso entre el inicio y la hospitalización, el porcentaje de recuperación y la edad media de los casos.
 
@@ -462,7 +462,7 @@ print_indic_prov(table_indic_all, "Jiangsu")
 La programación funcional está pensada para aliviar el código y facilitar su lectura. Podría producir lo contrario. Los siguientes consejos le ayudarán a tener un código limpio y fácil de leer.
 
 
-### Nombres y sintaxis {#naming-and-syntax}
+### Nombres y sintaxis {.unnumbered} 
 
 * Evitar el uso de caracteres que podrían haber sido fácilmente tomados por otras funciones ya existentes en su entorno
 
@@ -471,7 +471,7 @@ La programación funcional está pensada para aliviar el código y facilitar su 
 * Es preferible utilizar verbos como nombre de la función y sustantivos para los nombres de los argumentos.
 
 
-### Nombres de columnas y evaluación ordenada {#column-names-and-tidy-evaluation}  
+### Nombres de columnas y evaluación ordenada {.unnumbered}   
 
 Si quiere saber cómo referenciar *nombres de columnas* que se proporcionan a su código como argumentos, lea esta [guía de programación de tidyverse](https://dplyr.tidyverse.org/articles/programming.html). Entre los temas tratados están la *evaluación ordenada* y el uso del *abrazo* con `{{ }}` "llaves dobles"
 
@@ -490,7 +490,7 @@ mtcars %>%
 ```
 
 
-### Pruebas y tratamiento de errores {#testing-and-error-handling}
+### Pruebas y tratamiento de errores {.unnumbered} 
 
 Cuanto más complicada sea la tarea de una función, mayor será la posibilidad de errores. Por lo tanto, a veces es necesario añadir alguna verificación dentro de la función para ayudar a entender rápidamente de dónde proviene el error y encontrar una manera de solucionarlo.
 
@@ -565,10 +565,10 @@ Como se ha dicho anteriormente, comentar bien nuestros códigos ya es una buena 
 <!-- ======================================================= -->
 ## Recursos {#resources-36}
 
-[Enlace a R for Data Science en español](https://es.r4ds.hadley.nz/funciones.html)
+[Funciones en R for Data Science en español](https://es.r4ds.hadley.nz/funciones.html)
 
-[Cheatsheet advance R programming](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf)
+[Cheatsheet advanzado de programación de R](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf)
 
-[Paquete Cheatsheet purr](https://purrr.tidyverse.org/)
+[Cheatsheet del paquete purr](https://purrr.tidyverse.org/)
 
 [Vídeo-ACM charla de Hadley Wickham: La alegría de la programación funcional (cómo funciona map_dbl)](https://youtube.videoken.com/embed/bzUmK0Y07ck)

@@ -10,25 +10,27 @@ El manual se centra en las funciones "verbales" de **dplyr** y en el operador pi
 <!-- ======================================================= -->
 ## Introducción a data.table {#intro-to-data-tables}
 
-A data table is a 2-dimensional data structure like a data frame that allows complex grouping operations to be performed. The data.table syntax is structured so that operations can be performed on rows, columns and groups. 
+Una tabla de datos es una estructura de datos bidimensional como un dataframe que permite realizar operaciones de agrupación complejas. La sintaxis de data.table está estructurada de forma que se puedan realizar operaciones sobre filas, columnas y grupos.
 
-The structure is **DT[i, j, by]**, separated by 3 parts; the **i, j** and **by** arguments. The **i** argument allows for subsetting of required rows, the **j** argument allows you to operate on columns and the **by** argument allows you operate on columns by groups.
-  
-This page will address the following topics:  
+La estructura es **DT[i, j, by]**, separada por 3 partes; los argumentos i**, j** y **by**. El argumento **i** permite subconjuntar las filas necesarias, el argumento **j permite** operar sobre las columnas y el argumento **by** permite operar sobre las columnas por grupos.
 
-* Importing data and use of `fread()` and `fwrite()`
-* Selecting and filtering rows using the **i** argument
-* Using helper functions `%like%`, `%chin%`, `%between%` 
-* Selecting and computing on columns using the **j** argument
-* Computing by groups using the **by** argument
-* Adding and updating data to data tables using `:=`
+En esta página se tratarán los siguientes temas:
+
+* Importación de datos y uso de `fread()` y `fwrite()`
+* Selección y filtrado de filas mediante el argumento **i**
+* Uso de las funciones de ayuda `%like%`, `%chin%`, `%between%`
+* Selección y cálculo de columnas con el argumento **j**
+* Cálculo por grupos utilizando el argumento **by**
+* Añadir y actualizar datos a las tablas de datos utilizando `:=`
+
+
 
 <!-- ======================================================= -->
-## Load packages and import data {#load-packages-and-import-data}
+## Cargar paquetes e importar datos {#load-packages-and-import-data}
 
-### Load packages {.unnumbered}  
+### Cargar paquetes {.unnumbered}  
 
-Using the `p_load()` function from **pacman**, we load (and install if necessary) packages required for this analysis.
+Utilizando la función `p_load()` de **pacman**, cargamos (e instalamos si es necesario) los paquetes necesarios para este análisis.
      
      
 ```{r}
@@ -41,26 +43,26 @@ pacman::p_load(
 ```
 
 
-### Import data {.unnumbered}
+### Importar datos {.unnumbered}
 
-This page will explore some of the core functions of **data.table** using the case linelist referenced throughout the handbook.
+Esta página explorará algunas de las funciones principales de **data.table** utilizando la lista de casos referenciados a lo largo del manual.
 
-We import the dataset of cases from a simulated Ebola epidemic. If you want to download the data to follow step-by-step, see instructions in the [Download book and data] page. The dataset is imported using the `import()` function from the **rio** package. See the page on [Import and export] for various ways to import data. From here we use `data.table()` to convert the data frame to a data table.
+Importamos los datos de casos de una epidemia de ébola simulada. Si desea descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página [Descargar libro y datos]. Los datos se importa mediante la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos. A partir de aquí utilizamos `data.table()` para convertir el dataframe en una tabla de datos.
 
 ```{r}
 linelist <- rio::import(here("data", "linelist_cleaned.xlsx")) %>% data.table()
 ```
 
-The `fread()` function is used to directly import regular delimited files, such as .csv files, directly to a data table format. This function, and its counterpart, `fwrite()`, used for writing data.tables as regular delimited files are very fast and computationally efficient options for large databases.
+La función `fread()` se utiliza para importar directamente archivos delimitados regulares, como los archivos .csv, directamente a un formato de tabla de datos. Esta función, y su homóloga, `fwrite()`, utilizada para escribir tablas de datos como archivos delimitados regulares, son opciones muy rápidas y eficientes desde el punto de vista computacional para bases de datos de gran tamaño.
 
 
-The first 20 rows of `linelist`:  
+Las primeras 20 filas de `linelist`:  
 
 ```{r message=FALSE, echo=F, eval=FALSE}
 DT::datatable(head(linelist,20), rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Base R commands such as `dim()` that are used for data frames can also be used for data tables
+Los comandos R base de R, como `dim()`, que se utilizan para los dataframes, también pueden utilizarse para las tablas de datos
 
 ```{r}
 dim(linelist) #gives the number of rows and columns in the data table
@@ -68,11 +70,11 @@ dim(linelist) #gives the number of rows and columns in the data table
 
 
 <!-- ======================================================= -->
-## The i argument: selecting and filtering rows {#the-i-argument-selecting-and-filtering-rows}
+## El argumento i: seleccionar y filtrar filas {#the-i-argument-selecting-and-filtering-rows}
      
-Recalling the **DT[i, j, by]** structure, we can filter rows using either row numbers or logical expressions. The i argument is first; therefore, the syntax **DT[i]** or **DT[i,]** can be used. 
+Recordando la estructura DT**[i, j, by]**, podemos filtrar filas utilizando números de fila o expresiones lógicas. El argumento i es el primero; por tanto, se puede utilizar la sintaxis **DT[i]** o **DT[i,]**.
 
-The first example retrieves the first 5 rows of the data table, the second example subsets cases are 18 years or over, and the third example subsets cases 18 years old or over but not diagnosed at the Central Hospital:
+El primer ejemplo recupera las 5 primeras filas de la tabla de datos, el segundo ejemplo subsume los casos de 18 años o más, y el tercer ejemplo subsume los casos de 18 años o más pero no diagnosticados en el Central Hospital:
 
 
 ```{r, eval=F}
@@ -82,7 +84,7 @@ linelist[age >= 18 & hospital != "Central Hospital"] #subsets cases equal to or 
 
 ```
 
-Using .N in the i argument represents the total number of rows in the data table. This can be used to subset on the row numbers: 
+El uso de .N en el argumento i representa el número total de filas en la tabla de datos. Esto se puede utilizar para subconjuntar los números de las filas:
 
 ```{r, eval=F}
 linelist[.N] #returns the last row
@@ -90,14 +92,14 @@ linelist[15:.N] #returns the 15th to the last row
 ```
 
 
-### Using helper functions for filtering {.unnumbered}  
+### Uso de funciones de ayuda para el filtrado {.unnumbered}  
 
-Data table uses helper functions that make subsetting rows easy. The `%like%` function is used to match a pattern in a column, `%chin%` is used to match a specific character, and the `%between%` helper function is used to match numeric columns within a prespecified range.
+Data table utiliza funciones de ayuda que facilitan el subconjunto de filas. La función %like% se utiliza para coincidir con un patrón en una columna, `%chin%` se utiliza para coincidir con un carácter específico, y la función de ayuda `%between%` se utiliza para coincidir con columnas numéricas dentro de un rango preestablecido.
 
-In the following examples we:
-*  filter rows where the hospital variable contains “Hospital”
-*  filter rows where the outcome is “Recover” or “Death”
-*  filter rows in the age range 40-60
+En los siguientes ejemplos: 
+* filtramos las filas en las que la variable hospital contiene "Hospital" 
+* filtramos las filas en las que el resultado es "Recuperación" o "Muerte" 
+* filtramos las filas en el rango de edad 40-60
 
 ```{r, eval=F}
 linelist[hospital %like% "Hospital"] #filter rows where the hospital variable contains “Hospital”
@@ -108,14 +110,14 @@ linelist[age %between% c(40, 60)] #filter rows in the age range 40-60
 
 ```
 
-## The j argument: selecting and computing on columns {#the-j-argument-selecting-and-computing-on-columns}
+## El argumento j: seleccionar y calcular en columnas {#the-j-argument-selecting-and-computing-on-columns}
 
-Using the **DT[i, j, by]** structure, we can select columns using numbers or names. The **j** argument is second; therefore, the syntax **DT[, j]** is used. To facilitate computations on the **j** argument, the column is wrapped using either `list()` or `.()`. 
+Utilizando la estructura DT**[i, j, by]**, podemos seleccionar columnas utilizando números o nombres. El argumento **j** es el segundo; por lo tanto, se utiliza la sintaxis **DT[, j]**. Para facilitar los cálculos sobre el argumento **j**, la columna se envuelve utilizando `list()` o `.()`.
 
 
-### Selecting columns {.unnumbered} 
+### Selección de columnas {.unnumbered} 
 
-The first example retrieves the first, third and fifth columns of the data table, the second example selects all columns except the height, weight and gender columns. The third example uses the `.()` wrap to select the **case_id** and **outcome** columns.
+El primer ejemplo recupera la primera, tercera y quinta columnas de la tabla de datos, el segundo ejemplo selecciona todas las columnas excepto las de altura, peso y sexo. El tercer ejemplo utiliza la envoltura `.()` para seleccionar las columnas **case_id** y **outcome**.
 
 
 ```{r, eval=F}
@@ -125,14 +127,15 @@ linelist[ , list(case_id, outcome)] #linelist[ , .(case_id, outcome)] works just
 
 ```
 
-### Computing on columns {.unnumbered} 
+### Cálculo en columnas {.unnumbered} 
 
-By combining the **i** and **j** arguments it is possible to filter rows and compute on the columns. Using **.N** in the **j** argument also represents the total number of rows in the data table and can be useful to return the number of rows after row filtering.
+Combinando los argumentos **i** y **j es posible filtrar filas** y calcular en las columnas. El uso de **.N** en el argumento **j** también representa el número total de filas en la tabla de datos y puede ser útil para devolver el número de filas después del filtrado de filas.
 
-In the following examples we:
-* Count the number of cases that stayed over 7 days in hospital
-* Calculate the mean age of the cases that died at the military hospital
-* Calculate the standard deviation, median, mean age of the cases that recovered at the central hospital
+En los siguientes ejemplos: 
+* Contar el número de casos que permanecieron más de 7 días en el hospital 
+* Calcular la edad media de los casos que murieron en el hospital militar 
+* Calcular la desviación estándar, la mediana, la edad media de los casos que se recuperaron en el central hospital
+
 
 ```{r}
 linelist[days_onset_hosp > 7 , .N]
@@ -144,16 +147,16 @@ linelist[hospital == "Central Hospital" & outcome == "Recover",
 
 ```
 
-Remember using the .() wrap in the j argument facilitates computation, returns a data table and allows for column naming.
+Recuerda que el uso de `.()` en el argumento j facilita el cálculo, devuelve una tabla de datos y permite nombrar las columnas.
 
-## The by argument: computing by groups {#the-by-argument-computing-by-groups}
+## El argumento by: cálculo por grupos {#the-by-argument-computing-by-groups}
 
-The **by** argument is the third argument in the **DT[i, j, by]** structure. The **by** argument accepts both a character vector and the `list()` or `.()` syntax. Using the `.()` syntax in the **by** argument allows column renaming on the fly.
+El argumento **by** es el tercer argumento de la estructura **DT[i, j, by]**. El argumento **by** acepta tanto un vector de caracteres como la sintaxis `list()` o `.()`. El uso de la sintaxis `.()` en el argumento **by** permite renombrar las columnas sobre la marcha.
 
-In the following examples we:	
-* group the number of cases by hospital
-* in cases 18 years old or over, calculate the mean height and weight of cases according to gender and whether they recovered or died
-* in admissions that lasted over 7 days, count the number of cases according to the month they were admitted and the hospital they were admitted to
+En los siguientes ejemplos:
+* agrupamos el número de casos por hospital 
+* en los casos de 18 años o más, calculamos la media de altura y peso de los casos según el sexo y si se recuperaron o murieron 
+* en los ingresos que duraron más de 7 días, contamos el número de casos según el mes en que ingresaron y el hospital en el que lo hicieron
 
 
 ````{r}
@@ -164,7 +167,7 @@ linelist[days_onset_hosp > 7, .N, .(month = month(date_hospitalisation), hospita
 
 ```
 
-Data.table also allows the chaining expressions as follows:
+Data.table también permite encadenar expresiones de la siguiente manera:
 
 ````{r}
 
@@ -173,7 +176,7 @@ linelist[, .N, .(hospital)][order(-N)][1:3] #1st selects all cases by hospital, 
 
 ```
 
-In these examples we are following the assumption that a row in the data table is equal to a new case, and so we can use the **.N** to represent the number of rows in the data table. Another useful function to represent the number of unique cases is `uniqueN()`, which returns the number of unique values in a given input. This is illustrated here:
+En estos ejemplos estamos siguiendo la suposición de que una fila en la tabla de datos es igual a un nuevo caso, y por lo tanto podemos utilizar el **.N** para representar el número de filas en la tabla de datos. Otra función útil para representar el número de casos únicos es `uniqueN()`, que devuelve el número de valores únicos en una entrada dada. Esto se ilustra aquí:
 
 ````{r}
 
@@ -181,14 +184,14 @@ linelist[, .(uniqueN(gender))] #remember .() in the j argument returns a data ta
 
 ```
 
-The answer is 3, as the unique values in the gender column are m, f and N/A. Compare with the base R function `unique()`, which returns all the unique values in a given input:
+La respuesta es 3, ya que los valores únicos de la columna de género son m, f y N/A. Compárelo con la función R base `unique()`, que devuelve todos los valores únicos en una entrada dada:
 
 ````{r}
 
 linelist[, .(unique(gender))]
 ```
 
-To find the number of unique cases in a given month we would write the following:
+Para hallar el número de casos únicos en un mes determinado escribiríamos lo siguiente:
 
 ````{r}
 
@@ -196,9 +199,9 @@ linelist[, .(uniqueN(case_id)), .(month = month(date_hospitalisation))]
 
 ```
 
-## Adding and updating to data tables {#adding-and-updating-to-data-tables}
+## Añadir y actualizar a las tablas de datos {#adding-and-updating-to-data-tables}
 
-The `:=` operator is used to add or update data in a data table. Adding columns to your data table can be done in the following ways:
+El operador `:=` se utiliza para añadir o actualizar datos en una tabla de datos. La adición de columnas a la tabla de datos puede hacerse de las siguientes maneras:
 
 ````{r}
 
@@ -211,12 +214,12 @@ linelist[, adult := NULL] #deletes the column
 ```
 
 
-Further complex aggregations are beyond the scope of this introductory chapter, but the idea is to provide a popular and viable alternative to **dplyr** for grouping and cleaning data. The **data.table** package is a great package that allows for neat and readable code.
+Las agregaciones más complejas están fuera del alcance de este capítulo introductorio, pero la idea es proporcionar una alternativa popular y viable a **dplyr** para agrupar y limpiar datos. El paquete **data.table** es un gran paquete que permite un código ordenado y legible.
 
 
 ## Recursos {#resources-36}
 
-A continuación, algunos recursos útiles para obtener más información: 
+A continuación, algunos recursos útiles para obtener más información:
 * https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html
 * https://github.com/Rdatatable/data.table
 * https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf

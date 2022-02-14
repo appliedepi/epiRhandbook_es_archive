@@ -8,7 +8,7 @@ En esta página cubrimos los escenarios comunes en los que se crea, se interact�
 
 ## Preparación  {#preparation-38}
 
-### Paquete **fs** {#fs-package}  
+### Paquete **fs** {.unnumbered}   
 
 El paquete fs es un paquete **tidyverse** que facilita las interacciones con los directorios, mejorando algunas de las funciones de R  **base**. En las secciones siguientes utilizaremos a menudo funciones de **fs**.
 
@@ -21,7 +21,7 @@ pacman::p_load(
 ```
 
 
-### Imprimir el directorio como un árbol de dendrogramas {#print-directory-as-a-dendrogram-tree}  
+### Imprimir el directorio como un árbol de dendrogramas {.unnumbered}   
 
 Utiliza la función `dir_tree()` de **fs**.
 
@@ -87,7 +87,7 @@ file_info(here("data", "case_linelists", "linelist_cleaned.rds"))$modification_t
 
 ## Comprobar si existe  {#check-if-exists}
 
-### Objetos R {#r-objects}  
+### Objetos R {.unnumbered}   
 
 Puedes utilizar `exists()` de para comprobar si un objeto R existe *dentro* de R (proporcione el nombre del objeto entre comillas).
 
@@ -106,7 +106,7 @@ Si está escribiendo una función, deberías utilizar `missing()` de R **base** 
 
 
 
-### Directorios {#directories}  
+### Directorios {.unnumbered}   
 
 Para comprobar si un directorio existe, proporcione la ruta del archivo (y el nombre del archivo) a `is_dir()` de **fs**. Desplázate a la derecha para ver que se imprime `TRUE`.
 
@@ -118,7 +118,7 @@ is_dir(here("data"))
 Una alternativa de R **base** es `file.exists()`.
 
 
-### Files {#files}  
+### Files {.unnumbered} 
 
 Para comprobar si un archivo específico existe, utiliza `is_file()` de **fs**. Desplázate a la derecha para ver que se imprime `TRUE`. 
 
@@ -131,7 +131,7 @@ Una alternativa de R **base** es `file.exists()`.
 
 ## Crear {#create}
 
-### Directorios {#directories-1}  
+### Directorios {.unnumbered}   
 
 Para crear un nuevo directorio (carpeta) puede utilizar `dir_create()` de **fs**. Si el directorio ya existe, no se sobrescribirá y no se devolverá ningún error.
 
@@ -141,7 +141,7 @@ dir_create(here("data", "test"))
 
 Una alternativa es `dir.create()` de R **base**, que mostrará un error si el directorio ya existe. En cambio, `dir_create()` en este escenario será silencioso.
 
-### Archivos {#files-1}  
+### Archivos {.unnumbered}   
 
 Puedes crear un archivo (vacío) con `file_create()` de **fs**. Si el archivo ya existe, no se sobreescribirá ni se modificará.
 
@@ -153,7 +153,7 @@ file_create(here("data", "test.rds"))
 Una alternativa de R **base** es `file.create()`. Pero si el archivo ya existe, esta opción lo truncará. Si se utiliza `file_create()` el archivo se dejará sin cambios  
 
 
-### Crear si no existe {#create-if-does-not-exists}  
+### Crear si no existe {.unnumbered}   
 
 
 EN CONSTRUCCIÓN
@@ -161,7 +161,7 @@ EN CONSTRUCCIÓN
 
 ## Borrar {#delete}
 
-### Objetos R {.unnumbered}  
+### Objetos R {.unnumbered}   
 
 Utiliza `rm()` de R **base** para eliminar un objeto R. 
 
@@ -200,7 +200,7 @@ Mira la página sobre [Informes con R Markdown](#reports-with-r-markdown) para m
 
 
 
-### Ejecutar archivos en un directorio{.unnumbered}
+### Ejecutar archivos en un directorio {.unnumbered}
 
 Puedes crear un *bucle for* y utilizarlo para `source()` cada archivo en un directorio, identificado con `dir()`. 
 
@@ -264,7 +264,7 @@ Si un archivo está actualmente "abierto", se mostrará en su carpeta con una ti
 
 
 <!-- ======================================================= -->
-## Resources {#resources-37}
+## Recursos {#resources-37}
 
 https://cran.r-project.org/web/packages/fs/vignettes/function-comparisons.html
 
