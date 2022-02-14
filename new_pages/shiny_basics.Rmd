@@ -18,9 +18,9 @@ Esta página dará una breve visión general de cómo hacer Dashboards con **shi
 ## Preparación {#preparation-36} 
 
 
-### Cargar paquetes {#load-packages-32}  
+### Cargar paquetes {.unnumbered}  
 
-En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de **.** Consulta la página sobre [los fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página [Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 Comenzamos instalando el paquete R **Shiny**:
 
@@ -29,7 +29,7 @@ pacman::p_load("shiny")
 ```
 
 
-### Importar datos {#import-data-27}  
+### Importar datos {.unnumbered}  
 
 Si quieres seguir esta página, consulta esta sección del [Manual de descarga y datos](#data_shiny). Hay enlaces para descargar los scripts de R y los archivos de datos que producen la aplicación final de Shiny.
 
@@ -40,7 +40,7 @@ Si intenta reconstruir la aplicación utilizando estos archivos, Ten en cuenta l
 <!-- ======================================================= -->
 ## Estructura de una app Shiny {#the-structure-of-a-shiny-app}
 
-### Estructuras básicas de archivos {#basic-file-structures}  
+### Estructuras básicas de archivos {.unnumbered}  
 
 Para entender `Shiny`, primero tenemos que entender cómo funciona la estructura de archivos de una aplicación. Deberíamos crear un nuevo directorio antes de empezar. Esto puede hacerse más fácil eligiendo *Nuevo proyecto* en *Rstudio*, y eligiendo *Aplicación Web Shiny*. Esto creará la estructura básica de una aplicación shiny para ti.
 
@@ -98,7 +98,7 @@ Si abres este archivo, te darás cuenta de que hay dos objetos definidos: uno ll
 
 
 
-### El servidor y la ui {#the-server-and-the-ui}
+### El servidor y la Interfaz de Usuario (ui) {.unnumbered} 
 
 A continuación, tenemos que entender lo que *hacen* realmente los objetos `server` y `ui`. *En pocas palabras, se trata de dos objetos que interactúan entre sí cada vez que el usuario interactúa con la app shiny.*
 
@@ -117,7 +117,7 @@ El servidor de la app shiny es donde se ejecuta todo el código una vez que la a
 Probablemente todo esto suene muy abstracto por ahora, así que tendremos que sumergirnos en algunos ejemplos para tener una idea clara de cómo funciona realmente.
 
 
-### Antes de empezar a crear una app {#before-you-start-to-build-an-app}
+### Antes de empezar a crear una app {.unnumbered}
 
 Antes de empezar a construir una aplicación, es muy útil saber *qué* quieres construir. Dado que tu interfaz de usuario estará escrita en código, no puedes visualizar realmente lo que estás construyendo a menos que tengas como objetivo algo específico. Por esta razón, es inmensamente útil mirar muchos ejemplos de aplicaciones Shinys para tener una idea de lo que puedes hacer - ¡incluso mejor si puedes mirar el código fuente detrás de estas aplicaciones! Algunos de los mejores recursos para ello son:
 
@@ -567,7 +567,7 @@ En este punto tenemos finalmente una aplicación en funcionamiento, pero tenemos
 
 Esto es mucho para agregar, pero podemos usarlo para aprender sobre un montón de diferentes características de Shiny en el camino. Hay mucho que aprender sobre Shiny (puede ser *muy* avanzado, pero es de esperar que una vez que los usuarios tienen una mejor idea de cómo usarlo pueden llegar a ser más cómodo usando fuentes de aprendizaje externas también).
 
-### Añadir texto estático {#adding-static-text}  
+### Añadir texto estático {.unnumbered} 
 
 Vamos a hablar primero de la adición de texto estático a nuestra aplicación Shiny. Añadir texto a nuestra aplicación es extremadamente fácil, una vez que se tiene un conocimiento básico de la misma. Dado que el texto estático no cambia en la aplicación shiny (si quieres que cambie, puedes utilizar las funciones de *procesado de texto* en el servidor), todo el texto estático de shiny se añade generalmente en la interfaz de usuario de la aplicación. No vamos a entrar en detalles, pero puedes añadir un número de elementos diferentes a su ui (e incluso personalizados) mediante la interfaz de R con *HTML* y *css*.
 
@@ -675,7 +675,7 @@ knitr::include_graphics(here::here("images", "shiny", "app_text_view.png"))
 ```
 
 
-### Añadir un enlace {#adding-a-link}
+### Añadir un enlace {.unnumbered}
 
 Para añadir un enlace a una página web, utiliza `tags$a()` con el enlace y el texto a mostrar como se muestra a continuación. Para tener como un párrafo independiente, póngalo dentro de `p()`. Para tener sólo algunas palabras de una frase enlazada, divida la frase en partes y utiliza `tags$a()` para la parte hipervinculada. Para que el enlace se abra en una *nueva* ventana del navegador, añada `target = "_blank"` como argumento.
 
@@ -685,7 +685,7 @@ tags$a(href = "www.epiRhandbook.com", "Visit our website!")
 
 
 
-### Añadir un botón de descarga {#adding-a-download-button}
+### Añadir un botón de descarga {.unnumbered}
 
 Pasemos a la segunda de las tres características. Un botón de descarga es una cosa bastante común para añadir a una aplicación y es bastante fácil de hacer. Tenemos que añadir otro Widget a nuestra ui, y tenemos que añadir otra salida a nuestro servidor para adjuntarlo. También podemos introducir *conductores reactivos* en este ejemplo!
 
@@ -866,7 +866,7 @@ knitr::include_graphics(here::here("images", "shiny", "download_button_view.png"
 ```
 
 
-### Añadir un selector de instalaciones {#adding-a-facility-selector}  
+### Añadir un selector de instalaciones {.unnumbered} 
 
 Pasemos a nuestra siguiente función: un selector para instalaciones específicas. Implementaremos otro parámetro en nuestra función para poder pasarlo como argumento desde nuestro código. Vamos a ver cómo hacer esto primero - sólo funciona con los mismos principios que los otros parámetros que hemos establecido. Actualicemos y probemos nuestra función.
 
@@ -1160,7 +1160,7 @@ knitr::include_graphics(here::here("images", "shiny", "app_menu_view.gif"))
 
 
 
-### Añadir otra pestaña con una tabla {#adding-another-tab-with-a-table}
+### Añadir otra pestaña con una tabla {.unnumbered}
 
 Ahora pasaremos al último componente que queremos añadir a nuestra aplicación. Querremos separar nuestra ui en dos pestañas, una de las cuales tendrá una tabla interactiva donde el usuario podrá ver los datos con los que está haciendo la curva epidémica. Para ello, podemos utilizar los elementos de ui empaquetados que vienen con shiny relevantes para las pestañas. En un nivel básico, podemos encerrar la mayor parte de nuestro panel principal en esta estructura general:
 
@@ -1373,7 +1373,7 @@ A continuación se presenta una selección de extensiones de shiny de alta calid
 
 * **shinyWidgets** - este paquete ofrece muchos más widgets que pueden ser utilizados en tu aplicación. Ejecuta  `shinyWidgets::shinyWidgetsGallery()` para ver una selección de los widgets disponibles con este paquete. Mira los ejemplos [aquí](https://github.com/dreamRs/shinyWidgets)
 
-* **shinyjs** - este es un excelente paquete que da al usuario la capacidad de ampliar en gran medida la utilidad de shiny a través de una serie de javascript. Las aplicaciones de este paquete van desde las más sencillas hasta las más avanzadas, pero es posible que quieras utilizarlo primero para manipular la interfaz de usuario de forma sencilla, como ocultar/mostrar elementos, o activar/desactivar botones. Para más información[, consulta](https://deanattali.com/shinyjs/basic)
+* **shinyjs** - este es un excelente paquete que da al usuario la capacidad de ampliar en gran medida la utilidad de shiny a través de una serie de javascript. Las aplicaciones de este paquete van desde las más sencillas hasta las más avanzadas, pero es posible que quieras utilizarlo primero para manipular la interfaz de usuario de forma sencilla, como ocultar/mostrar elementos, o activar/desactivar botones. Para más información, [consulta aqui](https://deanattali.com/shinyjs/basic)
 
 * **shinydashboard** - este paquete expande masivamente la ui disponible que puede ser usada en shiny, específicamente permitiendo al usuario crear un dashboard complejo con una variedad de diseños complejos. Consulta más [aquí](https://rstudio.github.io/shinydashboard/)
 

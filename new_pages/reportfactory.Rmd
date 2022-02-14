@@ -7,9 +7,9 @@ Este paquete facilita la ejecucion de reportes de rutina, especialmente la compi
 **reportfactory** es uno de los paquetes desarrollados por RECON (R Epidemics Consortium). Aquí está su [sitio web](https://www.repidemicsconsortium.org/) y su [Github](https://github.com/reconverse). 
 
 
-## Preparación {#preparation-39}
+## Preparación {#preparation-34}
 
-### Cargar paquetes {#load-packages-25} {.unnumbered}  
+### Cargar paquetes {.unnumbered}  
 
 En RStudio, instalá la última versión del paquete **reportfactory** desde Github.
 
@@ -46,12 +46,12 @@ knitr::include_graphics(here::here("images", "factory_new2.png"))
 * La carpeta de *outputs* contendrá el informe de salida (por ejemplo, HTML, Word, PDF, etc.)
 * La carpeta de *scripts* puede utilizarse para guardar otros scripts de R (por ejemplo, los que se convican en tus scripts de Rmd)
 * La carpeta de *data* puede utilizarse para guardar tus datos (se incluyen las subcarpetas "raw" (datos brutos) y "clean" (datos limpios))
-* Un archivo *.here*, para que puedas utilizar el paquete **here** para convocar a los archivos de las subcarpetas gracias a su relación con esta carpeta raíz (véase la página de [proyectos de R](#r-projects) para más detalles)
+* Un archivo *.here*, para que puedas utilizar el paquete **here** para convocar a los archivos de las subcarpetas gracias a su relación con esta carpeta raíz (véase la página de [proyectos en R](#r-projects) para más detalles)
 * Se ha creado un archivo *gitignore* en caso de que se vincule este proyecto R a un repositorio de Github (ver [Control de versiones y colaboración con Github])
 * Un archivo README vacío, en caso de que uses un repositorio de Github
 
 
-<span style="color: orange;">**_ATENCIÓN::_** dependiendo de la configuración de tu ordenador, los archivos como ".here" pueden existir pero estar ocultos.</span>  
+<span style="color: orange;">**_PRECAUCIÓN::_** dependiendo de la configuración de tu ordenador, los archivos como ".here" pueden existir pero estar ocultos.</span>  
 
 A continuación mencionamos configuraciones predeterminadas que tal vez quieras ajustar con el comando `new_factory()`: 
 
@@ -130,7 +130,7 @@ El informe de salida y los archivos generados por el script (por ejemplo, csv, p
 
 Esto contrasta con el comportamiento normal de un R Markdown "tejido", que guarda las salidas en la ubicación del script Rmd. Este comportamiento por defecto puede resultar en carpetas abarrotadas y desordenadas. El objetivo de la fábrica es mejorar la organización de archivos cuando uno necesita ejecutar informes con frecuencia.
 
-### Compilar por nombre {#compile-by-name} {.unnumbered}   
+### Compilar por nombre  {.unnumbered}   
 
 Podés compilar un informe específico ejecutando `compile_reports()` y proporcionando el nombre del script Rmd (sin la extensión .Rmd) a `reports = `. Para simplificar, podés omitir `reports = ` y simplemente escribir el nombre R Markdown entre comillas, como se indica a continuación.  
 
@@ -145,7 +145,7 @@ Tené en cuenta que si proporcionás la extensión .Rmd, debés escribir la exte
 
 También hay que tener en cuenta que, al compilar, es posible que aparezcan temporariamente varios archivos en la carpeta "report_sources", pero pronto desaparecerán al ser transferidos a la carpeta "outputs".
 
-### Compilación por número {#compile-by-number} {.unnumbered}
+### Compilación por número  {.unnumbered}
 
 También se puede especificar el script Rmd a compilar proporcionando un número o vector de números a `reports = `. Los números deben alinearse con el orden en que aparecen los informes cuando se ejecuta `list_reports()`.
 
@@ -157,7 +157,7 @@ compile_reports(reports = c(2, 4))
 
 
 
-### Compilar todos {#compile-all} {.unnumbered}
+### Compilar todos  {.unnumbered}
 
 Puedes compilar *todos* los informes R Markdown en la carpeta "report_sources" usando el argumento `reports = ` a TRUE.
 
@@ -166,7 +166,7 @@ knitr::include_graphics(here::here("images", "factory_compile_all.png"))
 ```
 
 
-### Compilar desde la subcarpeta {#compile-from-sub-folder} {.unnumbered} 
+### Compilar desde la subcarpeta {.unnumbered} 
 
 Podés añadir subcarpetas a la carpeta "report_sources". Para ejecutar un informe R Markdown desde una subcarpeta, simplemente proporcioná el nombre de la carpeta a `subfolder = `. A continuación se muestra un ejemplo de código para compilar un informe Rmd localizado en una subcarpeta de "report_sources".
 
@@ -183,7 +183,7 @@ compile_reports(reports = "for_partners/")
 ```
 
 
-### Parametrización {#parameterization} {.unnumbered}
+### Parametrización  {.unnumbered}
 
 Como indicamos en la página sobre [Informes con R Markdown](#reports-with-r-markdown), podés ejecutar informes con parámetros especificados. Podés pasar estos parámetros como una lista a `compile_reports()` a través del argumento `params = `. Por ejemplo, en este informe ficticio hay tres parámetros proporcionados a los informes de R Markdown.
 
@@ -198,7 +198,7 @@ compile_reports(
 ```
 
 
-### Utilizar un "run-file" {#using-a-run-file} {.unnumbered} 
+### Utilizar un "run-file"  {.unnumbered} 
 
 Si tenés que ejecutar varios informes, podés crear un script de R que contenga todos los comandos `compile_reports()`. Un usuario puede simplemente ejecutar todos los comandos en este script de R y todos los informes se compilarán. Puedes guardar este "archivo de ejecución" (run file) en la carpeta "scripts".
 
@@ -241,16 +241,16 @@ Podés utilizar `list_outputs()` para ver una lista de las salidas.
 
 ## Miscelánea  {#miscellaneous-1} 
 
-### Knit {#knit} {.unnumbered}
+### Knit  {.unnumbered}
 
 Si querés "procesar" uno de tus informes R Markdown cliqueando el botón "Knit" podés hacerlo. En este caso, por defecto, las salidas aparecerán en la carpeta donde se guarda el Rmd - la carpeta "report_sources". En versiones anteriores de **reportfactory**, la presencia de cualquier archivo que no sea Rmd en la carpeta "report_sources" impediría la compilación, pero esto ya no es así. Es posible ejecutar `compile_reports()` y no se producirá ningún error. 
 
-### Scripts {#scripts-2} {.unnumbered} 
+### Scripts  {.unnumbered} 
 
 Te recomendamos utilizar la carpeta "scripts" para almacenar "archivos de ejecución" o scripts .R que se originan en tus scripts .Rmd. Consultá la página sobre [R Markdown](#reports-with-r-markdown) para obtener consejos sobre cómo estructurar tu código en varios archivos. 
 
 
-### Extras {#extras} {.unnumbered}
+### Extras  {.unnumbered}
 
 * Con **reportfactory**, podés utilizar la función `list_deps()` para listar todos los paquetes requeridos en todos los informes de toda la fábrica.
 
@@ -262,7 +262,7 @@ Te recomendamos utilizar la carpeta "scripts" para almacenar "archivos de ejecuc
 
 
 <!-- ======================================================= -->
-## Recursos {#resources-30}
+## Recursos {#resources-34}
 
 Consultá la [página de Github del paquete **reportfactory**](https://github.com/reconverse/reportfactory)
 
