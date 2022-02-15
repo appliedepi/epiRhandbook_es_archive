@@ -50,10 +50,10 @@
 
     <div id="main-nav" class="collapse-lg">
       <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
 </form>
 
-      <nav aria-label="Table of contents"><h2>Tabla de contenidos</h2>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"></a></li>
 <li class="book-part">Acerca de este libro</li>
@@ -134,18 +134,16 @@
 <h2>
 <span class="header-section-number">43.1</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-36"><i class="fas fa-link"></i></a>
 </h2>
-<div id="load-packages-32" class="section level3" number="43.1.1">
-<h3>
-<span class="header-section-number">43.1.1</span> Cargar paquetes<a class="anchor" aria-label="anchor" href="#load-packages-32"><i class="fas fa-link"></i></a>
+<div id="cargar-paquetes-31" class="section level3 unnumbered">
+<h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes-31"><i class="fas fa-link"></i></a>
 </h3>
-<p>En este manual destacamos <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para su uso. También puede cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de <strong>.</strong> Consulta la página sobre <a href="r-basics.html#r-basics">los fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
+<p>En este manual destacamos <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para su uso. También puede cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de R <strong>base</strong>. Consulta la página <a href="r-basics.html#r-basics">Fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
 <p>Comenzamos instalando el paquete R <strong>Shiny</strong>:</p>
 <div class="sourceCode" id="cb1756"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="st">"shiny"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="import-data-27" class="section level3" number="43.1.2">
-<h3>
-<span class="header-section-number">43.1.2</span> Importar datos<a class="anchor" aria-label="anchor" href="#import-data-27"><i class="fas fa-link"></i></a>
+<div id="importar-datos-25" class="section level3 unnumbered">
+<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-25"><i class="fas fa-link"></i></a>
 </h3>
 <p>Si quieres seguir esta página, consulta esta sección del <a href="download-handbook-and-data.html#data_shiny">Manual de descarga y datos</a>. Hay enlaces para descargar los scripts de R y los archivos de datos que producen la aplicación final de Shiny.</p>
 <p>Si intenta reconstruir la aplicación utilizando estos archivos, Ten en cuenta la estructura de carpetas del proyecto R que se crea en el transcurso de la demostración (por ejemplo, carpetas para “data” y para “funcs”).</p>
@@ -156,9 +154,8 @@
 <h2>
 <span class="header-section-number">43.2</span> Estructura de una app Shiny<a class="anchor" aria-label="anchor" href="#the-structure-of-a-shiny-app"><i class="fas fa-link"></i></a>
 </h2>
-<div id="basic-file-structures" class="section level3" number="43.2.1">
-<h3>
-<span class="header-section-number">43.2.1</span> Estructuras básicas de archivos<a class="anchor" aria-label="anchor" href="#basic-file-structures"><i class="fas fa-link"></i></a>
+<div id="estructuras-básicas-de-archivos" class="section level3 unnumbered">
+<h3>Estructuras básicas de archivos<a class="anchor" aria-label="anchor" href="#estructuras-b%C3%A1sicas-de-archivos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para entender <code>Shiny</code>, primero tenemos que entender cómo funciona la estructura de archivos de una aplicación. Deberíamos crear un nuevo directorio antes de empezar. Esto puede hacerse más fácil eligiendo <em>Nuevo proyecto</em> en <em>Rstudio</em>, y eligiendo <em>Aplicación Web Shiny</em>. Esto creará la estructura básica de una aplicación shiny para ti.</p>
 <p>Al abrir este proyecto, notarás que ya hay un archivo <code>.R</code> llamado <em>app.R.</em> Es <em>esencial</em> que tengamos una de las dos estructuras básicas de archivos:</p>
@@ -209,9 +206,8 @@
 <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span>ui <span class="op">=</span> <span class="va">ui</span>, server <span class="op">=</span> <span class="va">server</span><span class="op">)</span></code></pre></div>
 <p>Si abres este archivo, te darás cuenta de que hay dos objetos definidos: uno llamado <code>ui</code> (interfaz de usuario) y otro llamado <code>server</code> (servidor). Estos objetos <em>deben</em> ser definidos en <em>todas</em> las aplicaciones shiny y son fundamentales para la estructura de la propia aplicación. De hecho, la única diferencia entre las dos estructuras de archivos descritas anteriormente es que en la estructura 1, tanto <code>ui</code> como <code>server</code> están definidos en un solo archivo, mientras que en la estructura 2 están definidos en archivos separados. Nota: también podemos (y deberíamos si tenemos una aplicación más grande) tener otros archivos .R en nuestra estructura que podemos <code><a href="https://rdrr.io/r/base/source.html">source()</a></code> en nuestra aplicación.</p>
 </div>
-<div id="the-server-and-the-ui" class="section level3" number="43.2.2">
-<h3>
-<span class="header-section-number">43.2.2</span> El servidor y la ui<a class="anchor" aria-label="anchor" href="#the-server-and-the-ui"><i class="fas fa-link"></i></a>
+<div id="el-servidor-y-la-interfaz-de-usuario-ui" class="section level3 unnumbered">
+<h3>El servidor y la Interfaz de Usuario (ui)<a class="anchor" aria-label="anchor" href="#el-servidor-y-la-interfaz-de-usuario-ui"><i class="fas fa-link"></i></a>
 </h3>
 <p>A continuación, tenemos que entender lo que <em>hacen</em> realmente los objetos <code>server</code> y <code>ui</code>. <em>En pocas palabras, se trata de dos objetos que interactúan entre sí cada vez que el usuario interactúa con la app shiny.</em></p>
 <p>El elemento de interfaz de usuario de una aplicación Shiny es, en un nivel básico, el código R que crea una interfaz HTML. Esto significa todo lo que se <em>muestra</em> en la UI de una app. Esto generalmente incluye:</p>
@@ -226,9 +222,8 @@
 <p>El servidor de la app shiny es donde se ejecuta todo el código una vez que la aplicación se inicia. La forma en que esto funciona es un poco confusa. La función del servidor <em>reaccionará</em> efectivamente a la interfaz del usuario con la UI, y ejecutará trozos de código en respuesta. Si las cosas cambian en el servidor, estas serán pasadas de vuelta a la UI, donde los cambios pueden ser vistos. Es importante destacar que el código en el servidor se ejecutará <em>de forma no consecutiva</em> (o es mejor pensarlo así). Básicamente, cada vez que una entrada de la ui afecte a un trozo de código en el servidor, éste se ejecutará automáticamente, y se producirá y mostrará esa salida.</p>
 <p>Probablemente todo esto suene muy abstracto por ahora, así que tendremos que sumergirnos en algunos ejemplos para tener una idea clara de cómo funciona realmente.</p>
 </div>
-<div id="before-you-start-to-build-an-app" class="section level3" number="43.2.3">
-<h3>
-<span class="header-section-number">43.2.3</span> Antes de empezar a crear una app<a class="anchor" aria-label="anchor" href="#before-you-start-to-build-an-app"><i class="fas fa-link"></i></a>
+<div id="antes-de-empezar-a-crear-una-app" class="section level3 unnumbered">
+<h3>Antes de empezar a crear una app<a class="anchor" aria-label="anchor" href="#antes-de-empezar-a-crear-una-app"><i class="fas fa-link"></i></a>
 </h3>
 <p>Antes de empezar a construir una aplicación, es muy útil saber <em>qué</em> quieres construir. Dado que tu interfaz de usuario estará escrita en código, no puedes visualizar realmente lo que estás construyendo a menos que tengas como objetivo algo específico. Por esta razón, es inmensamente útil mirar muchos ejemplos de aplicaciones Shinys para tener una idea de lo que puedes hacer - ¡incluso mejor si puedes mirar el código fuente detrás de estas aplicaciones! Algunos de los mejores recursos para ello son:</p>
 <ul>
@@ -384,19 +379,19 @@
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">malaria_data</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 12,152 x 7
-##    location_name data_date  submitted_date Province District age_group      cases_reported
-##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;int&gt;
-##  1 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_0~             11
-##  2 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_5~             12
-##  3 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_15             23
-##  4 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_tot                46
-##  5 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_0~             11
-##  6 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_5~             10
-##  7 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_15              5
-##  8 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_tot                26
-##  9 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_0~              8
-## 10 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_5~              5
-## # ... with 12,142 more rows</code></pre>
+##    location_name data_date  submitted_date Province District age_group       
+##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;           
+##  1 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_0-4 
+##  2 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_5-14
+##  3 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_rdt_15  
+##  4 Facility 1    2020-08-11 2020-08-12     North    Spring   malaria_tot     
+##  5 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_0-4 
+##  6 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_5-14
+##  7 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_rdt_15  
+##  8 Facility 2    2020-08-11 2020-08-12     North    Bolo     malaria_tot     
+##  9 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_0-4 
+## 10 Facility 3    2020-08-11 2020-08-12     North    Dingo    malaria_rdt_5-14
+## # ... with 12,142 more rows, and 1 more variable: cases_reported &lt;int&gt;</code></pre>
 <p>Y con esto hemos terminado de preparar nuestros datos! Esto tacha los puntos 1, 2 y 3 de nuestra lista de cosas a desarrollar para nuestro “script de prueba de R”. La última tarea, y la más difícil, será construir una función para producir una epicurva basada en parámetros definidos por el usuario. Como se mencionó anteriormente, se <em>recomienda encarecidamente</em> que cualquier persona que aprenda a brillar primero mire la sección sobre la programación funcional (<a href="writing-functions-1.html#writing-functions-1">Escribir funciones</a>) para entender cómo funciona esto!</p>
 <p>Al definir nuestra función, puede ser difícil pensar en los parámetros que queremos incluir. Para la programación funcional con shiny, cada parámetro relevante tendrá generalmente un widget asociado a él, así que pensar en esto suele ser bastante fácil. Por ejemplo, en nuestra aplicación actual, queremos ser capaces de filtrar por distrito, y tener un widget para ello, por lo que podemos añadir un parámetro de distrito para reflejar esto. <em>No</em> tenemos ninguna funcionalidad de la aplicación para filtrar por centro (por ahora), así que no necesitamos añadir esto como parámetro. Empecemos haciendo una función con tres parámetros:</p>
 <ol style="list-style-type: decimal">
@@ -647,9 +642,8 @@
 <li>Otra página del panel de control: podría mostrar una tabla con nuestros datos.</li>
 </ol>
 <p>Esto es mucho para agregar, pero podemos usarlo para aprender sobre un montón de diferentes características de Shiny en el camino. Hay mucho que aprender sobre Shiny (puede ser <em>muy</em> avanzado, pero es de esperar que una vez que los usuarios tienen una mejor idea de cómo usarlo pueden llegar a ser más cómodo usando fuentes de aprendizaje externas también).</p>
-<div id="adding-static-text" class="section level3" number="43.6.1">
-<h3>
-<span class="header-section-number">43.6.1</span> Añadir texto estático<a class="anchor" aria-label="anchor" href="#adding-static-text"><i class="fas fa-link"></i></a>
+<div id="añadir-texto-estático" class="section level3 unnumbered">
+<h3>Añadir texto estático<a class="anchor" aria-label="anchor" href="#a%C3%B1adir-texto-est%C3%A1tico"><i class="fas fa-link"></i></a>
 </h3>
 <p>Vamos a hablar primero de la adición de texto estático a nuestra aplicación Shiny. Añadir texto a nuestra aplicación es extremadamente fácil, una vez que se tiene un conocimiento básico de la misma. Dado que el texto estático no cambia en la aplicación shiny (si quieres que cambie, puedes utilizar las funciones de <em>procesado de texto</em> en el servidor), todo el texto estático de shiny se añade generalmente en la interfaz de usuario de la aplicación. No vamos a entrar en detalles, pero puedes añadir un número de elementos diferentes a su ui (e incluso personalizados) mediante la interfaz de R con <em>HTML</em> y <em>css</em>.</p>
 <p>HTML y css son lenguajes que intervienen explícitamente en el diseño de la interfaz de usuario. No es necesario entenderlos demasiado bien, pero <em>HTML</em> crea objetos en la interfaz de usuario (como un cuadro de texto, o una tabla), y <em>css</em> se utiliza generalmente para cambiar el estilo y la estética de esos objetos. Shiny tiene acceso a una gran variedad de <em>etiquetas HTML</em> - éstas están presentes para los objetos que se comportan de una manera específica, como los encabezados, los párrafos de texto, los saltos de línea, las tablas, etc. Podemos utilizar algunos de estos ejemplos así:</p>
@@ -745,17 +739,15 @@
 <span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="images/shiny/app_text_view.png" width="435"></div>
 </div>
-<div id="adding-a-link" class="section level3" number="43.6.2">
-<h3>
-<span class="header-section-number">43.6.2</span> Añadir un enlace<a class="anchor" aria-label="anchor" href="#adding-a-link"><i class="fas fa-link"></i></a>
+<div id="añadir-un-enlace" class="section level3 unnumbered">
+<h3>Añadir un enlace<a class="anchor" aria-label="anchor" href="#a%C3%B1adir-un-enlace"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para añadir un enlace a una página web, utiliza <code>tags$a()</code> con el enlace y el texto a mostrar como se muestra a continuación. Para tener como un párrafo independiente, póngalo dentro de <code><a href="https://rdrr.io/pkg/htmltools/man/builder.html">p()</a></code>. Para tener sólo algunas palabras de una frase enlazada, divida la frase en partes y utiliza <code>tags$a()</code> para la parte hipervinculada. Para que el enlace se abra en una <em>nueva</em> ventana del navegador, añada <code>target = "_blank"</code> como argumento.</p>
 <div class="sourceCode" id="cb1771"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tags</span><span class="op">$</span><span class="fu">a</span><span class="op">(</span>href <span class="op">=</span> <span class="st">"www.epiRhandbook.com"</span>, <span class="st">"Visit our website!"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="adding-a-download-button" class="section level3" number="43.6.3">
-<h3>
-<span class="header-section-number">43.6.3</span> Añadir un botón de descarga<a class="anchor" aria-label="anchor" href="#adding-a-download-button"><i class="fas fa-link"></i></a>
+<div id="añadir-un-botón-de-descarga" class="section level3 unnumbered">
+<h3>Añadir un botón de descarga<a class="anchor" aria-label="anchor" href="#a%C3%B1adir-un-bot%C3%B3n-de-descarga"><i class="fas fa-link"></i></a>
 </h3>
 <p>Pasemos a la segunda de las tres características. Un botón de descarga es una cosa bastante común para añadir a una aplicación y es bastante fácil de hacer. Tenemos que añadir otro Widget a nuestra ui, y tenemos que añadir otra salida a nuestro servidor para adjuntarlo. También podemos introducir <em>conductores reactivos</em> en este ejemplo!</p>
 <p>Vamos a actualizar nuestra interfaz de usuario primero - esto es fácil ya que Shiny viene con un widget llamado <code><a href="https://rdrr.io/pkg/shiny/man/downloadButton.html">downloadButton()</a></code> - vamos a darle un <code>inputId</code> y una <code>label</code> (etiqueta).</p>
@@ -902,9 +894,8 @@
 <p>Puedes ver que sólo estamos llamando a la salida de nuestro reactivo que hemos definido en nuestras funciones de descarga y representación gráfica. Una cosa que hay que tener en cuenta y que suele confundir a la gente es que hay que utilizar las salidas de los reactivos como si fueran funciones, por lo que <em>hay que añadir paréntesis vacíos al final de los mismos (es</em> decir, <code>malaria_plot()</code> es correcto, y <code>malaria_plot</code> no lo es). Ahora que hemos añadido esta solución nuestra aplicación es un poco más ordenada, más rápida y más fácil de cambiar ya que todo nuestro código que ejecuta la función epicurve está en un solo lugar.</p>
 <div class="inline-figure"><img src="images/shiny/download_button_view.png" width="457"></div>
 </div>
-<div id="adding-a-facility-selector" class="section level3" number="43.6.4">
-<h3>
-<span class="header-section-number">43.6.4</span> Añadir un selector de instalaciones<a class="anchor" aria-label="anchor" href="#adding-a-facility-selector"><i class="fas fa-link"></i></a>
+<div id="añadir-un-selector-de-instalaciones" class="section level3 unnumbered">
+<h3>Añadir un selector de instalaciones<a class="anchor" aria-label="anchor" href="#a%C3%B1adir-un-selector-de-instalaciones"><i class="fas fa-link"></i></a>
 </h3>
 <p>Pasemos a nuestra siguiente función: un selector para instalaciones específicas. Implementaremos otro parámetro en nuestra función para poder pasarlo como argumento desde nuestro código. Vamos a ver cómo hacer esto primero - sólo funciona con los mismos principios que los otros parámetros que hemos establecido. Actualicemos y probemos nuestra función.</p>
 <div class="sourceCode" id="cb1776"><pre class="downlit sourceCode r">
@@ -1161,9 +1152,8 @@
 <span class="op">}</span></code></pre></div>
 <div class="inline-figure"><img src="images/shiny/app_menu_view.gif" width="100%"></div>
 </div>
-<div id="adding-another-tab-with-a-table" class="section level3" number="43.6.5">
-<h3>
-<span class="header-section-number">43.6.5</span> Añadir otra pestaña con una tabla<a class="anchor" aria-label="anchor" href="#adding-another-tab-with-a-table"><i class="fas fa-link"></i></a>
+<div id="añadir-otra-pestaña-con-una-tabla" class="section level3 unnumbered">
+<h3>Añadir otra pestaña con una tabla<a class="anchor" aria-label="anchor" href="#a%C3%B1adir-otra-pesta%C3%B1a-con-una-tabla"><i class="fas fa-link"></i></a>
 </h3>
 <p>Ahora pasaremos al último componente que queremos añadir a nuestra aplicación. Querremos separar nuestra ui en dos pestañas, una de las cuales tendrá una tabla interactiva donde el usuario podrá ver los datos con los que está haciendo la curva epidémica. Para ello, podemos utilizar los elementos de ui empaquetados que vienen con shiny relevantes para las pestañas. En un nivel básico, podemos encerrar la mayor parte de nuestro panel principal en esta estructura general:</p>
 <div class="sourceCode" id="cb1786"><pre class="downlit sourceCode r">
@@ -1346,7 +1336,7 @@
 <p>A continuación se presenta una selección de extensiones de shiny de alta calidad que pueden ayudarle a sacar mucho más provecho del brillo. Sin ningún orden en particular:</p>
 <ul>
 <li><p><strong>shinyWidgets</strong> - este paquete ofrece muchos más widgets que pueden ser utilizados en tu aplicación. Ejecuta <code>shinyWidgets::shinyWidgetsGallery()</code> para ver una selección de los widgets disponibles con este paquete. Mira los ejemplos <a href="https://github.com/dreamRs/shinyWidgets">aquí</a></p></li>
-<li><p><strong>shinyjs</strong> - este es un excelente paquete que da al usuario la capacidad de ampliar en gran medida la utilidad de shiny a través de una serie de javascript. Las aplicaciones de este paquete van desde las más sencillas hasta las más avanzadas, pero es posible que quieras utilizarlo primero para manipular la interfaz de usuario de forma sencilla, como ocultar/mostrar elementos, o activar/desactivar botones. Para más información<a href="https://deanattali.com/shinyjs/basic">, consulta</a></p></li>
+<li><p><strong>shinyjs</strong> - este es un excelente paquete que da al usuario la capacidad de ampliar en gran medida la utilidad de shiny a través de una serie de javascript. Las aplicaciones de este paquete van desde las más sencillas hasta las más avanzadas, pero es posible que quieras utilizarlo primero para manipular la interfaz de usuario de forma sencilla, como ocultar/mostrar elementos, o activar/desactivar botones. Para más información, <a href="https://deanattali.com/shinyjs/basic">consulta aqui</a></p></li>
 <li><p><strong>shinydashboard</strong> - este paquete expande masivamente la ui disponible que puede ser usada en shiny, específicamente permitiendo al usuario crear un dashboard complejo con una variedad de diseños complejos. Consulta más <a href="https://rstudio.github.io/shinydashboard/">aquí</a></p></li>
 <li><p><strong>shinydashboardPlus</strong>: ¡obtenga aún más funciones del marco de trabajo <strong>de shinydashboard</strong>! Puedes ver más <a href="https://rinterface.github.io/shinydashboardPlus/articles/shinydashboardPlus.html">aquí</a></p></li>
 <li><p><strong>shinythemes</strong> - ¡cambia el tema css por defecto de tu app shiny con una amplia gama de plantillas preestablecidas! <a href="https://rstudio.github.io/shinythemes/">Más aquí</a></p></li>
@@ -1371,20 +1361,20 @@
 <div class="prev"><a href="dashboards-with-r-markdown.html"><span class="header-section-number">42</span> Borrador. Dashboards con R Markdown</a></div>
 <div class="next"><a href="writing-functions-1.html"><span class="header-section-number">44</span> Escribir funciones</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>En esta página</h2>
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#dashboards-with-shiny"><span class="header-section-number">43</span> Borrador. Dashboards con Shiny</a></li>
 <li>
 <a class="nav-link" href="#preparation-36"><span class="header-section-number">43.1</span> Preparación</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#load-packages-32"><span class="header-section-number">43.1.1</span> Cargar paquetes</a></li>
-<li><a class="nav-link" href="#import-data-27"><span class="header-section-number">43.1.2</span> Importar datos</a></li>
+<li><a class="nav-link" href="#cargar-paquetes-31">Cargar paquetes</a></li>
+<li><a class="nav-link" href="#importar-datos-25">Importar datos</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#the-structure-of-a-shiny-app"><span class="header-section-number">43.2</span> Estructura de una app Shiny</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#basic-file-structures"><span class="header-section-number">43.2.1</span> Estructuras básicas de archivos</a></li>
-<li><a class="nav-link" href="#the-server-and-the-ui"><span class="header-section-number">43.2.2</span> El servidor y la ui</a></li>
-<li><a class="nav-link" href="#before-you-start-to-build-an-app"><span class="header-section-number">43.2.3</span> Antes de empezar a crear una app</a></li>
+<li><a class="nav-link" href="#estructuras-b%C3%A1sicas-de-archivos">Estructuras básicas de archivos</a></li>
+<li><a class="nav-link" href="#el-servidor-y-la-interfaz-de-usuario-ui">El servidor y la Interfaz de Usuario (ui)</a></li>
+<li><a class="nav-link" href="#antes-de-empezar-a-crear-una-app">Antes de empezar a crear una app</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#building-a-ui"><span class="header-section-number">43.3</span> Construir una interfaz de usuario</a></li>
@@ -1392,11 +1382,11 @@
 <li><a class="nav-link" href="#developing-an-app-server"><span class="header-section-number">43.5</span> Desarrollar un servidor de app</a></li>
 <li>
 <a class="nav-link" href="#adding-more-functionality"><span class="header-section-number">43.6</span> Añadir más funcionalidad</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#adding-static-text"><span class="header-section-number">43.6.1</span> Añadir texto estático</a></li>
-<li><a class="nav-link" href="#adding-a-link"><span class="header-section-number">43.6.2</span> Añadir un enlace</a></li>
-<li><a class="nav-link" href="#adding-a-download-button"><span class="header-section-number">43.6.3</span> Añadir un botón de descarga</a></li>
-<li><a class="nav-link" href="#adding-a-facility-selector"><span class="header-section-number">43.6.4</span> Añadir un selector de instalaciones</a></li>
-<li><a class="nav-link" href="#adding-another-tab-with-a-table"><span class="header-section-number">43.6.5</span> Añadir otra pestaña con una tabla</a></li>
+<li><a class="nav-link" href="#a%C3%B1adir-texto-est%C3%A1tico">Añadir texto estático</a></li>
+<li><a class="nav-link" href="#a%C3%B1adir-un-enlace">Añadir un enlace</a></li>
+<li><a class="nav-link" href="#a%C3%B1adir-un-bot%C3%B3n-de-descarga">Añadir un botón de descarga</a></li>
+<li><a class="nav-link" href="#a%C3%B1adir-un-selector-de-instalaciones">Añadir un selector de instalaciones</a></li>
+<li><a class="nav-link" href="#a%C3%B1adir-otra-pesta%C3%B1a-con-una-tabla">Añadir otra pestaña con una tabla</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#sharing-shiny-apps"><span class="header-section-number">43.7</span> Compartir apps Shiny</a></li>
@@ -1423,11 +1413,11 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" fué escrito por el equipo del manual. Compilado el 2022-02-01.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
-    <p>Este libro fué construido con el paquete <a class="text-light" href="https://bookdown.org">bookdown</a> de R.</p>
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
   </div>
 
 </div></div>

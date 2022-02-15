@@ -50,10 +50,10 @@
 
     <div id="main-nav" class="collapse-lg">
       <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
 </form>
 
-      <nav aria-label="Table of contents"><h2>Tabla de contenidos</h2>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"></a></li>
 <li class="book-part">Acerca de este libro</li>
@@ -130,14 +130,14 @@
 <p>Estos documentos pueden producirse para ser actualizados de forma rutinaria (por ejemplo, informes de vigilancia diarios) y/o ejecutarse sobre subconjuntos de datos (por ejemplo, informes para cada jurisdicción).</p>
 <p>Otras páginas de este manual amplían este tema:</p>
 <ul>
-<li>La página <a href="organizing-routine-reports.html#organizing-routine-reports">Organización de informes de rutina</a> muestra cómo “rutinizar” la producción de informes con carpetas autogeneradas con marca de tiempo.</li>
+<li>La página <a href="organizing-routine-reports.html#organizing-routine-reports">Organización de informes rutinarios</a> muestra cómo “rutinizar” la producción de informes con carpetas autogeneradas con marca de tiempo.</li>
 <li>La página <a href="dashboards-with-r-markdown.html#dashboards-with-r-markdown">Dashboards con R Markdown</a> explica cómo formatear un informe de R Markdown como un cuadro de mando o tablero de control.</li>
 </ul>
 <p>Cabe destacar que el proyecto <a href="https://r4epis.netlify.app/">R4Epis</a> ha desarrollado plantillas de scripts R Markdown para los escenarios de brotes y encuestas de uso frcuente en lugares en donde MSF maneja proyectos.</p>
 <!-- ======================================================= -->
-<div id="preparation-31" class="section level2" number="40.1">
+<div id="preparation-33" class="section level2" number="40.1">
 <h2>
-<span class="header-section-number">40.1</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-31"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.1</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-33"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>Antecedentes de R Markdown</strong></p>
 <p>Explicamos algunos de los conceptos y paquetes involucrados:</p>
@@ -171,15 +171,15 @@
 <h2>
 <span class="header-section-number">40.2</span> Cómo empezar<a class="anchor" aria-label="anchor" href="#getting-started"><i class="fas fa-link"></i></a>
 </h2>
-<div id="instalar-el-paquete-r-rmarkdown-install-rmarkdown-r-package" class="section level3 unnumbered">
-<h3>Instalar el paquete R rmarkdown {#install-rmarkdown-r-package}<a class="anchor" aria-label="anchor" href="#instalar-el-paquete-r-rmarkdown-install-rmarkdown-r-package"><i class="fas fa-link"></i></a>
+<div id="instalar-el-paquete-r-rmarkdown" class="section level3 unnumbered">
+<h3>Instalar el paquete R rmarkdown<a class="anchor" aria-label="anchor" href="#instalar-el-paquete-r-rmarkdown"><i class="fas fa-link"></i></a>
 </h3>
 <p>Instalá el paquete R <strong>rmarkdown</strong>. En este manual destacamos p_load() de <strong>pacman</strong>, que instala el paquete si es necesario <em>y ademas</em> lo carga para su uso. También podés cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de R <strong>base</strong>. Consultá la página sobre <a href="r-basics.html#r-basics">fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
 <div class="sourceCode" id="cb1715"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">rmarkdown</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="iniciar-un-nuevo-archivo-rmd-starting-a-new-rmd-file" class="section level3 unnumbered">
-<h3>Iniciar un nuevo archivo Rmd {#starting-a-new-rmd-file}<a class="anchor" aria-label="anchor" href="#iniciar-un-nuevo-archivo-rmd-starting-a-new-rmd-file"><i class="fas fa-link"></i></a>
+<div id="iniciar-un-nuevo-archivo-rmd" class="section level3 unnumbered">
+<h3>Iniciar un nuevo archivo Rmd<a class="anchor" aria-label="anchor" href="#iniciar-un-nuevo-archivo-rmd"><i class="fas fa-link"></i></a>
 </h3>
 <p>En RStudio, abrí un nuevo archivo R markdown, comenzando con ‘File’, luego ‘New file’ luego ‘R markdown…’.</p>
 <div class="inline-figure"><img src="images/markdown/1_gettingstarted.png" width="50%" style="display: block; margin: auto;"></div>
@@ -187,8 +187,8 @@
 <div class="inline-figure"><img src="images/markdown/1_gettingstartedB.png" width="50%" style="display: block; margin: auto;"></div>
 <p>Esto abrirá un nuevo script .Rmd.</p>
 </div>
-<div id="es-importante-saber-important-to-know" class="section level3 unnumbered">
-<h3>Es importante saber {#important-to-know}<a class="anchor" aria-label="anchor" href="#es-importante-saber-important-to-know"><i class="fas fa-link"></i></a>
+<div id="es-importante-saber" class="section level3 unnumbered">
+<h3>Es importante saber<a class="anchor" aria-label="anchor" href="#es-importante-saber"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>El directorio de trabajo</strong></p>
 <p>El directorio de trabajo de un archivo markdown es el lugar donde se guarda el propio archivo Rmd. Por ejemplo, si el proyecto R está dentro de <code>~/Documents/projectX</code> y el archivo Rmd en sí está en una subcarpeta <code>~/Documents/projectX/markdownfiles/markdown.Rmd</code>, el código <code>read.csv("data.csv")</code> dentro del markdown buscará un archivo csv en la carpeta <code>markdownfiles</code>, y no en la carpeta raíz del proyecto donde los scripts dentro de los proyectos normalmente buscarían archivos de manera automática.</p>
@@ -209,20 +209,20 @@
 <p>Como puedes ver, hay tres componentes básicos en un archivo Rmd: YAML, texto Markdown y trozos de código R.</p>
 <p>Estos <em>crearán y se convertirán en la salida de su documento</em>. Consulta el siguiente diagrama:</p>
 <div class="inline-figure"><img src="images/markdown/rmarkdown_translation.png" width="100%" height="150%" style="display: block; margin: auto;"></div>
-<div id="metadatos-yaml-yaml-metadata" class="section level3 unnumbered">
-<h3>Metadatos YAML {#yaml-metadata}<a class="anchor" aria-label="anchor" href="#metadatos-yaml-yaml-metadata"><i class="fas fa-link"></i></a>
+<div id="metadatos-yaml" class="section level3 unnumbered">
+<h3>Metadatos YAML<a class="anchor" aria-label="anchor" href="#metadatos-yaml"><i class="fas fa-link"></i></a>
 </h3>
 <p>Denominado ‘metadatos YAML’ o simplemente ‘YAML’, se encuentra en la parte superior del documento R Markdown. Esta sección del script le dirá a su archivo Rmd qué tipo de salida producir, preferencias de formato y otros metadatos como el título del documento, el autor y la fecha. Hay otros usos que no se mencionan aquí (pero a los que se hace referencia en ‘Producción del documento de salida’). Ten en cuenta que la sangría es importante; los tabuladores no se aceptan, pero los espacios sí.</p>
 <p>Esta sección debe comenzar con una línea que contenga sólo tres guiones <code>---</code> y debe cerrar con una línea que contenga sólo tres guiones <code>---</code>. Los parámetros YAML vienen en pares <code>key:value</code>. La colocación de los dos puntos en YAML es importante - los pares <code>key:value</code> están separados por dos puntos (¡no por signos de igualdad!).</p>
 <p>El YAML debe comenzar con los metadatos del documento. El orden de estos parámetros YAML primarios (sin sangría) no importa. Por ejemplo:</p>
 <div class="sourceCode" id="cb1716"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1716-1"><a href="reports-with-r-markdown.html#cb1716-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My document"</span></span>
 <span id="cb1716-2"><a href="reports-with-r-markdown.html#cb1716-2" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Me"</span></span>
-<span id="cb1716-3"><a href="reports-with-r-markdown.html#cb1716-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">"2022-02-01"</span></span></code></pre></div>
+<span id="cb1716-3"><a href="reports-with-r-markdown.html#cb1716-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">"2022-02-14"</span></span></code></pre></div>
 <p>Puedes utilizar código R en valores YAML escribiéndolo como código en línea (precedido por <code>r</code> entre comillas) pero también entre comillas (véase el ejemplo anterior para <code>date:</code>).</p>
 <p>En la imagen de arriba, porque hemos seleccionado el tipo de documento de salida como html, podemos ver que el YAML dice <code>output: html_document</code>. Sin embargo, también podemos cambiar esto escribir <code>powerpoint_presentation</code> o <code>word_document</code> o incluso <code>pdf_document</code>.</p>
 </div>
-<div id="texto-text" class="section level3 unnumbered">
-<h3>Texto {#text}<a class="anchor" aria-label="anchor" href="#texto-text"><i class="fas fa-link"></i></a>
+<div id="texto" class="section level3 unnumbered">
+<h3>Texto<a class="anchor" aria-label="anchor" href="#texto"><i class="fas fa-link"></i></a>
 </h3>
 <p>Esta es la narrativa de t u documento, incluyendo los títulos y encabezados. Está escrito en el lenguaje “markdown”, que se utiliza en muchos otros programas.</p>
 <p>A continuación se presentan las formas principales de escribir este texto. Podés consultar material de referencia más detallado disponible en R Markdown “cheatsheet” en el <a href="https://rstudio.com/resources/cheatsheets/">sitio web de RStudio</a>.</p>
@@ -280,8 +280,8 @@
 <div class="inline-figure"><img src="images/markdown/rmarkdown_hide_text.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="trozos-de-código-chunks-code-chunks" class="section level3 unnumbered">
-<h3>Trozos de código (chunks) {#code-chunks}<a class="anchor" aria-label="anchor" href="#trozos-de-c%C3%B3digo-chunks-code-chunks"><i class="fas fa-link"></i></a>
+<div id="trozos-de-código-chunks" class="section level3 unnumbered">
+<h3>Trozos de código (chunks)<a class="anchor" aria-label="anchor" href="#trozos-de-c%C3%B3digo-chunks"><i class="fas fa-link"></i></a>
 </h3>
 <p>Las secciones del script que se dedican a ejecutar el código R se denominan “chunks” o trozos. Aquí es donde se pueden cargar paquetes, importar datos y realizar la gestión y visualización de datos propiamente dicha. Puede haber muchos trozos de código, por lo que puede ser de ayuda organizar tu código R en partes, quizás intercaladas con texto. Para tener en cuenta: estos trozos tendrán un color de fondo ligeramente diferente al de la parte narrativa del documento.</p>
 <p>Cada trozo se abre con una línea que comienza con tres comillas invertidas y corchetes que contienen parámetros para el trozo (<code><a href="https://rdrr.io/r/base/Paren.html">{ }</a></code>). El trozo termina con otras tres comillas invertidas.</p>
@@ -333,8 +333,8 @@
 <div class="inline-figure"><img src="images/markdown/3_chunktext.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="imágenes-images" class="section level3 unnumbered">
-<h3>Imágenes {images}<a class="anchor" aria-label="anchor" href="#im%C3%A1genes-images"><i class="fas fa-link"></i></a>
+<div id="imágenes" class="section level3 unnumbered">
+<h3>Imágenes<a class="anchor" aria-label="anchor" href="#im%C3%A1genes"><i class="fas fa-link"></i></a>
 </h3>
 <p>Hay dos maneras de incluir imágenes en R Markdown:</p>
 <div class="sourceCode" id="cb1721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1721-1"><a href="reports-with-r-markdown.html#cb1721-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>[](<span class="st">"path/to/image.png"</span>)  </span></code></pre></div>
@@ -345,8 +345,8 @@
 <div class="sourceCode" id="cb1723"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"path"</span>, <span class="st">"to"</span>, <span class="st">"image.png"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="tablas-tables" class="section level3 unnumbered">
-<h3>Tablas {#tables}<a class="anchor" aria-label="anchor" href="#tablas-tables"><i class="fas fa-link"></i></a>
+<div id="tablas" class="section level3 unnumbered">
+<h3>Tablas<a class="anchor" aria-label="anchor" href="#tablas"><i class="fas fa-link"></i></a>
 </h3>
 <p>Creá una tabla utilizando guiones ( - ) y barras ( | ). El número de guiones entre las barras determina el número de espacios en la celda a patrir del cual el texto comienza a envolverse.</p>
 <div class="sourceCode" id="cb1724"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb1724-1"><a href="reports-with-r-markdown.html#cb1724-1" aria-hidden="true" tabindex="-1"></a>Column  1 |Column   2 |Column 3</span>
@@ -374,8 +374,8 @@
 </tbody>
 </table></div>
 </div>
-<div id="secciones-con-pestañas-tabbed-sections" class="section level3 unnumbered">
-<h3>Secciones con pestañas {#tabbed-sections}<a class="anchor" aria-label="anchor" href="#secciones-con-pesta%C3%B1as-tabbed-sections"><i class="fas fa-link"></i></a>
+<div id="secciones-con-pestañas" class="section level3 unnumbered">
+<h3>Secciones con pestañas<a class="anchor" aria-label="anchor" href="#secciones-con-pesta%C3%B1as"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para las salidas HTML, podés organizar las secciones con “pestañas”. Basta con añadir <code>.tabset</code> entre las llaves <code><a href="https://rdrr.io/r/base/Paren.html">{ }</a></code> que se colocan <em>después de un encabezamiento</em>. Todos los subtítulos debajo de ese encabezado (hasta el próximo encabezado del mismo nivel) aparecerán como pestañas en las que el usuario puedes clicar. Lee más <a href="https://bookdown.org/yihui/rmarkdown-cookbook/html-tabs.html">aquí</a></p>
 <p><img src="images/markdown/tabbed_script.png" width="100%" style="display: block; margin: auto;"><img src="images/markdown/tabbed_view.gif" width="100%" style="display: block; margin: auto;"></p>
@@ -398,8 +398,8 @@
 </li>
 <li>Utilizar un “archivo de ejecución” - Ejecutar comandos en un script R <em>antes</em> de renderizar el R Markdown</li>
 </ul>
-<div id="rmd-autónomo-self-contained-rmd" class="section level3 unnumbered">
-<h3>Rmd autónomo {#self-contained-rmd}<a class="anchor" aria-label="anchor" href="#rmd-aut%C3%B3nomo-self-contained-rmd"><i class="fas fa-link"></i></a>
+<div id="rmd-autónomo" class="section level3 unnumbered">
+<h3>Rmd autónomo<a class="anchor" aria-label="anchor" href="#rmd-aut%C3%B3nomo"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para un informe relativamente sencillo, puedes optar por organizar tu script de R Markdown de manera que sea “autosuficiente” y no implique utilizar ningún script externo.</p>
 <p>Todo lo que se necesite para ejecutar el R Markdown se importa o se crea dentro del archivo Rmd, incluyendo todos los trozos de código y la carga de paquetes. Este enfoque “autosuficiente” es apropiado cuando no necesitás hacer mucho procesamiento de datos (por ejemplo, cuando se importa un archivo de datos limpio o semilimpio) y el procesamiento del R Markdown no tomará demasiado tiempo.</p>
@@ -426,8 +426,8 @@
 <p>Debes ser consciente de los distintos <em>entornos</em> de R. Los objetos creados dentro de un entorno no estarán necesariamente disponibles para el entorno utilizado por R Markdown.</p>
 </div>
 </div>
-<div id="ejecutar-archivo-runfile" class="section level3 unnumbered">
-<h3>Ejecutar archivo {#runfile}<a class="anchor" aria-label="anchor" href="#ejecutar-archivo-runfile"><i class="fas fa-link"></i></a>
+<div id="ejecutar-archivo" class="section level3 unnumbered">
+<h3>Ejecutar archivo<a class="anchor" aria-label="anchor" href="#ejecutar-archivo"><i class="fas fa-link"></i></a>
 </h3>
 <p>Este enfoque implica utilizar el script de R que contiene el comando(s) <code>render()</code> para preprocesar los objetos que se introducen en el R markdown.</p>
 <p>Por ejemplo, podés cargar los paquetes, cargar y limpiar los datos, e incluso crear los gráficos de interés antes de ejecutar<code>render()</code>. Estos pasos pueden ocurrir en el script de R, o en otros scripts que se convocan. Siempre y cuando estos comandos ocurran en la misma sesión de RStudio y los objetos se guarden en el entorno, los objetos pueden ser convocados dentro del contenido de Rmd. Entonces R markdown sólo se utilizará para el paso final, es decir, para producir la salida con todos los objetos pre-procesados. Esto es mucho más fácil de depurar si se genera algún error.</p>
@@ -443,8 +443,8 @@
 
 <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html">render</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"create_output.Rmd"</span><span class="op">)</span>   <span class="co"># Crear archivo Rmd </span></code></pre></div>
 </div>
-<div id="estructura-de-carpetas-folder-structure" class="section level3 unnumbered">
-<h3>Estructura de carpetas {#folder-structure}<a class="anchor" aria-label="anchor" href="#estructura-de-carpetas-folder-structure"><i class="fas fa-link"></i></a>
+<div id="estructura-de-carpetas" class="section level3 unnumbered">
+<h3>Estructura de carpetas<a class="anchor" aria-label="anchor" href="#estructura-de-carpetas"><i class="fas fa-link"></i></a>
 </h3>
 <p>El flujo de trabajo también se refiere a la estructura general de las carpetas, como tener una carpeta de ‘salida’ para los documentos y figuras creados, y carpetas de ‘datos’ o ‘entradas’ para los datos depurados. No entramos en más detalles aquí, pero echa un vistazo a la página de <a href="organizing-routine-reports.html#organizing-routine-reports">organización de informes rutinarios</a>.</p>
 </div>
@@ -458,8 +458,8 @@
 <li>Manualmente haciendo click sobre el botón “Knit” en la parte superior del editor de scripts de RStudio (rápido y fácil)</li>
 <li>Ejecutando el comando <code>render()</code> (ejecutado fuera del script de R Markdown)</li>
 </ul>
-<div id="opción-1-botón-knit-option-1-knit-button" class="section level3 unnumbered">
-<h3>Opción 1: botón “Knit” {#option-1-knit-button}<a class="anchor" aria-label="anchor" href="#opci%C3%B3n-1-bot%C3%B3n-knit-option-1-knit-button"><i class="fas fa-link"></i></a>
+<div id="opción-1-botón-knit" class="section level3 unnumbered">
+<h3>Opción 1: botón “Knit”<a class="anchor" aria-label="anchor" href="#opci%C3%B3n-1-bot%C3%B3n-knit"><i class="fas fa-link"></i></a>
 </h3>
 <p>Cuando tengas el archivo Rmd abierto, cliqueá el botón ‘Knit’ en la parte superior del archivo.</p>
 <p>R Studio te mostrará el progreso dentro de una pestaña ‘R Markdown’ cerca de la consola R. El documento se abrirá automáticamente cuando esté completo.</p>
@@ -467,8 +467,8 @@
 <p>Este es el botón de acceso directo de RStudio para la función <code>render()</code> de <strong>rmarkdown</strong>. Este enfoque sólo es compatible con un R markdown autocontenido, donde todos los componentes necesarios existen o se convocan dentro del archivo.</p>
 <div class="inline-figure"><img src="images/markdown/4_progress.png" width="90%" style="display: block; margin: auto;"></div>
 </div>
-<div id="opción-2-comando-render-option-2-render-command" class="section level3 unnumbered">
-<h3>Opción 2: comando <code>render()</code> {#option-2-render-command}<a class="anchor" aria-label="anchor" href="#opci%C3%B3n-2-comando-render-option-2-render-command"><i class="fas fa-link"></i></a>
+<div id="opción-2-comando-render" class="section level3 unnumbered">
+<h3>Opción 2: comando <code>render()</code><a class="anchor" aria-label="anchor" href="#opci%C3%B3n-2-comando-render"><i class="fas fa-link"></i></a>
 </h3>
 <p>Otra forma de producir el documento de salida de R Markdown es ejecutar la función <code>render()</code> (del paquete <strong>rmarkdown</strong>). Debés ejecutar este comando <em>fuera</em> del script de R Markdown, ya sea en un script de R separado (a menudo llamado “archivo de ejecución”), o como un comando independiente en la consola de R.</p>
 <div class="sourceCode" id="cb1727"><pre class="downlit sourceCode r">
@@ -497,11 +497,11 @@
   output_file <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"outputs/Report_{Sys.Date()}.docx"</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
 <p>A medida que el archivo se procesa, la consola de RStudio mostrará el progreso hasta el 100%, y un mensaje final para indicar que la renderización se ha completado.</p>
 </div>
-<div id="opción-3-paquete-reportfactory-options-3-reportfactory-package" class="section level3 unnumbered">
-<h3>Opción 3: paquete <strong>reportfactory</strong> {#options-3-reportfactory-package}<a class="anchor" aria-label="anchor" href="#opci%C3%B3n-3-paquete-reportfactory-options-3-reportfactory-package"><i class="fas fa-link"></i></a>
+<div id="opción-3-paquete-reportfactory" class="section level3 unnumbered">
+<h3>Opción 3: paquete <strong>reportfactory</strong><a class="anchor" aria-label="anchor" href="#opci%C3%B3n-3-paquete-reportfactory"><i class="fas fa-link"></i></a>
 </h3>
 <p>El paquete de R <strong>reportfactory</strong> ofrece un método alternativo de organización y compilación de informes R Markdown <em>para situaciones en las que se ejecutan informes de forma rutinaria (por ejemplo, diariamente, semanalmente…).</em> Facilita la compilación de múltiples archivos R Markdown y la organización de sus resultados. En esencia, proporciona una “fábrica” desde la que se pueden ejecutar los informes R Markdown, obtener automáticamente carpetas con fecha y hora para los resultados, y tener un control de versiones “ligero”.</p>
-<p>Leé más sobre este flujo de trabajo en la página sobre la <a href="organizing-routine-reports.html#organizing-routine-reports">organización de informes de rutina</a>.</p>
+<p>Leé más sobre este flujo de trabajo en la página sobre la <a href="organizing-routine-reports.html#organizing-routine-reports">organización de informes rutinarios</a>.</p>
 <!-- ======================================================= -->
 </div>
 </div>
@@ -512,8 +512,8 @@
 <p>Podés utilizar la parametrización para generar informes dinámicos, de forma que pueda ejecutarse con una configuración específica (por ejemplo, una fecha o lugar concretos o con determinadas opciones de procesamiento). A continuación, nos centramos en los aspectos básicos, pero hay más <a href="https://bookdown.org/yihui/rmarkdown/parameterized-reports.html">detalles en línea</a> sobre los informes parametrizados.</p>
 <p>Utilizando el listado de casos de Ébola como ejemplo, digamos que queremos ejecutar un informe de diario vigilancia estándar para cada hospital. Mostramos cómo se puede hacer esto usando parámetros.</p>
 <p><em>Importante: los informes dinámicos también son posibles sin la estructura formal de parámetros (sin params:), utilizando simples objetos R en un script adyacente. Esto se explica al final de esta sección.</em></p>
-<div id="establecer-parámetros-setting-parameters" class="section level3 unnumbered">
-<h3>Establecer parámetros {#setting-parameters}<a class="anchor" aria-label="anchor" href="#establecer-par%C3%A1metros-setting-parameters"><i class="fas fa-link"></i></a>
+<div id="establecer-parámetros-1" class="section level3 unnumbered">
+<h3>Establecer parámetros<a class="anchor" aria-label="anchor" href="#establecer-par%C3%A1metros-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Existen varias opciones para especificar los valores de los parámetros para tu documento de salida de R Markdown.</p>
 <div id="opción-1-establecer-parámetros-dentro-de-yaml" class="section level4 unnumbered">
@@ -582,8 +582,8 @@
 <div class="inline-figure"><img src="images/markdown/5_parametersGUIB.png" width="50%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="ejemplo-parametrizado-parameterized-example" class="section level3 unnumbered">
-<h3>Ejemplo parametrizado {#parameterized-example}<a class="anchor" aria-label="anchor" href="#ejemplo-parametrizado-parameterized-example"><i class="fas fa-link"></i></a>
+<div id="ejemplo-parametrizado" class="section level3 unnumbered">
+<h3>Ejemplo parametrizado<a class="anchor" aria-label="anchor" href="#ejemplo-parametrizado"><i class="fas fa-link"></i></a>
 </h3>
 <p>El siguiente código crea parámetros para <code>date</code> y <code>hospital</code>, que se utilizan en el R Markdown como <code>params$date</code> y <code>params$hospital</code>, respectivamente.</p>
 <p>En la salida del informe resultante, los datos se filtran al hospital específico, y el título del gráfico se refiere al hospital y a la fecha correctos. En este caso utilizamos el archivo “linelist_cleaned.rds”, pero sería especialmente adecuado que la propia lista de casos tuviera también un sello de fecha para alinearse con la fecha parametrizada.</p>
@@ -591,8 +591,8 @@
 <p>Si se procesa esto se obtiene la salida final con la fuente y el diseño predeterminados.</p>
 <div class="inline-figure"><img src="images/markdown/6_RmdexampleB.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="parametrización-sin-parámetros-parameterisation-without-params" class="section level3 unnumbered">
-<h3>Parametrización sin parámetros {#parameterisation-without-params}<a class="anchor" aria-label="anchor" href="#parametrizaci%C3%B3n-sin-par%C3%A1metros-parameterisation-without-params"><i class="fas fa-link"></i></a>
+<div id="parametrización-sin-parámetros" class="section level3 unnumbered">
+<h3>Parametrización sin parámetros<a class="anchor" aria-label="anchor" href="#parametrizaci%C3%B3n-sin-par%C3%A1metros"><i class="fas fa-link"></i></a>
 </h3>
 <p>Si estás procesando un archivo R Markdown con <code>render()</code> desde un script independiente, puede crear el mismo efecto de parametrización sin usar la funcionalidad <code>params:</code>.</p>
 <p>Por ejemplo, en el <em>script de R</em> que contiene el comando <code>render()</code>, podés simplemente definir <code>hospital</code> y <code>date</code> como dos objetos R (valores) antes del comando <code>render()</code>. En el R Markdown, no sería necesario tener una sección <code>params:</code> en el YAML, y nos referiríamos al objeto <code>date</code> en lugar de <code>params$date</code> y a <code>hospital</code> en lugar de <code>params$hospital</code>.</p>
@@ -648,15 +648,14 @@
 <span class="header-section-number">40.8</span> Plantillas<a class="anchor" aria-label="anchor" href="#templates"><i class="fas fa-link"></i></a>
 </h2>
 <p>Utilizando un documento de plantilla que contenga cualquier formato deseado, podés ajustar la estética del archivo de salida Rmd. Podés crear, por ejemplo, un archivo de MS Word o Powerpoint que contenga páginas/diapositivas con las dimensiones, marcas de agua, fondos y fuentes deseadas.</p>
-<div id="documentos-en-word-word-documents" class="section level3 unnumbered">
-<h3>Documentos en Word {#word-documents}<a class="anchor" aria-label="anchor" href="#documentos-en-word-word-documents"><i class="fas fa-link"></i></a>
+<div id="documentos-en-word" class="section level3 unnumbered">
+<h3>Documentos en Word<a class="anchor" aria-label="anchor" href="#documentos-en-word"><i class="fas fa-link"></i></a>
 </h3>
 <p>Para crear una plantilla, iniciá un nuevo documento de Word (o utiliza uno ya existente con el formato deseado), y editá las fuentes definiendo los Estilos. En el Estilo, los encabezados 1, 2 y 3 se refieren a los distintos niveles de encabezado de markdown (<code># Header 1</code>, <code>## Header 2</code> and <code>### Header 3</code>, respectivamente). Cliqueá con el botón derecho en el estilo y selectioná ‘modificar’ para cambiar el formato de la fuente, así como el párrafo (por ejemplo, podés introducir saltos de página antes de ciertos estilos que pueden ayudar con el espaciado). Otros aspectos del documento de Word, como los márgenes, el tamaño de la página, los encabezados, etc., pueden modificarse como un documento de Word normal en el que se trabaja directamente.</p>
 <div class="inline-figure"><img src="images/markdown/7_template.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="powerpoint-documents" class="section level3" number="40.8.1">
-<h3>
-<span class="header-section-number">40.8.1</span> Documentos en Powerpoint<a class="anchor" aria-label="anchor" href="#powerpoint-documents"><i class="fas fa-link"></i></a>
+<div id="documentos-en-powerpoint" class="section level3 unnumbered">
+<h3>Documentos en Powerpoint<a class="anchor" aria-label="anchor" href="#documentos-en-powerpoint"><i class="fas fa-link"></i></a>
 </h3>
 <p>Como en el caso anterior, creá un nuevo conjunto de diapositivas o utiliza un archivo PowerPoint existente con el formato deseado. Para seguir editando, cliqueá en “Ver” y “Patrón de diapositivas”. Desde aquí se puede cambiar la apariencia de la diapositiva “maestra” editando el formato del texto en los cuadros de texto, así como el fondo y las dimensiones del página.</p>
 <div class="inline-figure"><img src="images/markdown/8_ppttemplate.png" width="100%" style="display: block; margin: auto;"></div>
@@ -668,8 +667,8 @@
 </ul>
 <p>En el <a href="https://davidgohel.github.io/officer/">paquete <strong>oficcer </strong></a> encontrarás una herramienta para trabajar más a fondo con las presentaciones de PowerPoint.</p>
 </div>
-<div id="integración-de-plantillas-en-el-yaml-integrating-templates-into-the-yaml" class="section level3 unnumbered">
-<h3>Integración de plantillas en el YAML {#integrating-templates-into-the-yaml}<a class="anchor" aria-label="anchor" href="#integraci%C3%B3n-de-plantillas-en-el-yaml-integrating-templates-into-the-yaml"><i class="fas fa-link"></i></a>
+<div id="integración-de-plantillas-en-el-yaml" class="section level3 unnumbered">
+<h3>Integración de plantillas en el YAML<a class="anchor" aria-label="anchor" href="#integraci%C3%B3n-de-plantillas-en-el-yaml"><i class="fas fa-link"></i></a>
 </h3>
 <p>Una vez preparada la plantilla, el detalle de la misma puede añadirse en el YAML del Rmd debajo de la línea ‘output’ y debajo de donde se especifica el tipo de documento (que va a una línea aparte). Para las plantillas de diapositivas de PowerPoint se puede utilizar <code>reference_doc</code>.</p>
 <p>Lo más fácil es guardar la plantilla en la misma carpeta en la que está el archivo Rmd (como en el ejemplo siguiente), o en una subcarpeta dentro de ella.</p>
@@ -685,8 +684,8 @@
 <span id="cb1736-10"><a href="reports-with-r-markdown.html#cb1736-10" aria-hidden="true" tabindex="-1"></a><span class="at"> </span></span>
 <span id="cb1736-11"><a href="reports-with-r-markdown.html#cb1736-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
-<div id="formateo-de-archivos-html-formatting-html-files" class="section level3 unnumbered">
-<h3>Formateo de archivos HTML {#formatting-html-files}<a class="anchor" aria-label="anchor" href="#formateo-de-archivos-html-formatting-html-files"><i class="fas fa-link"></i></a>
+<div id="formateo-de-archivos-html" class="section level3 unnumbered">
+<h3>Formateo de archivos HTML<a class="anchor" aria-label="anchor" href="#formateo-de-archivos-html"><i class="fas fa-link"></i></a>
 </h3>
 <p>Los archivos HTML no utilizan plantillas, pero pueden tener los estilos configurados dentro del YAML. Los HTML son documentos interactivos y particularmente flexibles. Aquí cubrimos algunas opciones básicas.</p>
 <ul>
@@ -714,8 +713,8 @@
 <span class="header-section-number">40.9</span> Contenido dinámico<a class="anchor" aria-label="anchor" href="#dynamic-content"><i class="fas fa-link"></i></a>
 </h2>
 <p>En una salida HTML, el contenido de tu informe puede ser dinámico. A continuación, veremos algunos ejemplos:</p>
-<div id="tablas-tables-1" class="section level3 unnumbered">
-<h3>Tablas {#tables-1}<a class="anchor" aria-label="anchor" href="#tablas-tables-1"><i class="fas fa-link"></i></a>
+<div id="tablas-1" class="section level3 unnumbered">
+<h3>Tablas<a class="anchor" aria-label="anchor" href="#tablas-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>En un informe HTML, se puede imprimir un dataframe / tibble de manera que el contenido sea dinámico, con filtros y barras de desplazamiento. Hay varios paquetes que ofrecen esta capacidad.</p>
 <p>Para hacer esto con el paquete <strong>DT</strong>, como se utiliza en este manual, se puede insertar un trozo de código como este:</p>
@@ -723,24 +722,25 @@
 <p>La función <code>datatable()</code> imprimirá el dataframe proporcionado como una tabla dinámica para el lector. Puedes establecer <code>rownames = FALSE</code> para simplificar el extremo izquierdo de la tabla. <code>filter = "top"</code> proporciona un filtro sobre cada columna. En el argumento <code><a href="https://rdrr.io/r/base/options.html">options()</a></code> proporciona una lista de otras especificaciones. A continuación incluimos dos: <code>pageLength = 5</code> determina que el número de filas a mostrar sea 5 (las filas restantes se pueden ver paginando a través de flechas), y <code>scrollX=TRUE</code> habilita una barra de desplazamiento en la parte inferior de la tabla (para visualizar las columnas que se extienden a la extrema derecha).</p>
 <p>Si tu conjunto de datos es muy grande, considerá mostrar sólo las filas superiores envolviendo los datos en <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>.</p>
 </div>
-<div id="widgets-html-html-widgets" class="section level3 unnumbered">
-<h3>Widgets HTML {#html-widgets}<a class="anchor" aria-label="anchor" href="#widgets-html-html-widgets"><i class="fas fa-link"></i></a>
+<div id="widgets-html" class="section level3 unnumbered">
+<h3>Widgets HTML<a class="anchor" aria-label="anchor" href="#widgets-html"><i class="fas fa-link"></i></a>
 </h3>
 <p>Los <a href="http://www.htmlwidgets.org/">widgets HTML para R</a> son un tipo especial de paquetes de R que permiten una mayor interactividad utilizando bibliotecas de JavaScript. Puedes incorporarlos en salidas HTML R Markdown.</p>
 <p>Algunos ejemplos comunes de estos widgets son:</p>
 <ul>
-<li>Plotly (utilizado en la página de este manual y en la página de <a href="dashboards-with-r-markdown.html#interactive-plots-1">Gráficos interactivos</a> (#interactive-plots-1))</li>
-<li>visNetwork (utilizado en la página de <a href="transmission-chains.html#transmission-chains">Cadenas de transmisión de</a> este manual)</li>
-<li>Leaflet (Folleto) (utilizado en la página de <a href="gis-basics.html#gis-basics">Fundamentos del SIG</a> de este manual)</li>
+<li>Plotly (utilizado en la página de este manual y en la página de <a href="interactive-plots.html#interactive-plots">Gráficos interactivos</a>
+</li>
+<li>visNetwork (utilizado en la página de <a href="transmission-chains.html#transmission-chains">Cadenas de transmisión</a> de este manual)</li>
+<li>Leaflet (Folleto) (utilizado en la página <a href="gis-basics.html#gis-basics">Conceptos básicos de los SIG</a> de este manual)</li>
 <li>dygraphs (útil para mostrar interactivamente los datos de las series temporales)</li>
 <li>DT (<code>datatable()</code>) (se utiliza para mostrar tablas dinámicas con filtro, ordenación, etc.)</li>
 </ul>
-<p>La función <code><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html">ggplotly()</a></code> de <strong>plotly</strong> es particularmente fácil de usar. Consulta la página de <a href="dashboards-with-r-markdown.html#interactive-plots-1">Gráficos interactivos</a>.</p>
+<p>La función <code><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html">ggplotly()</a></code> de <strong>plotly</strong> es particularmente fácil de usar. Consúltalo en la sección en la página de <a href="interactive-plots.html#plot-with-ggplotly">Gráficos interactivos</a>.</p>
 </div>
 </div>
-<div id="resources" class="section level2" number="40.10">
+<div id="resources-33" class="section level2" number="40.10">
 <h2>
-<span class="header-section-number">40.10</span> Recursos<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.10</span> Recursos<a class="anchor" aria-label="anchor" href="#resources-33"><i class="fas fa-link"></i></a>
 </h2>
 <p>Podés encontrar más información en:</p>
 <ul>
@@ -755,64 +755,64 @@
 <div class="prev"><a href="interactive-plots.html"><span class="header-section-number">39</span> Gráficos interactivos</a></div>
 <div class="next"><a href="organizing-routine-reports.html"><span class="header-section-number">41</span> Organización de informes rutinarios</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>En esta página</h2>
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#reports-with-r-markdown"><span class="header-section-number">40</span> Informes con R Markdown</a></li>
-<li><a class="nav-link" href="#preparation-31"><span class="header-section-number">40.1</span> Preparación</a></li>
+<li><a class="nav-link" href="#preparation-33"><span class="header-section-number">40.1</span> Preparación</a></li>
 <li>
 <a class="nav-link" href="#getting-started"><span class="header-section-number">40.2</span> Cómo empezar</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#instalar-el-paquete-r-rmarkdown-install-rmarkdown-r-package">Instalar el paquete R rmarkdown {#install-rmarkdown-r-package}</a></li>
-<li><a class="nav-link" href="#iniciar-un-nuevo-archivo-rmd-starting-a-new-rmd-file">Iniciar un nuevo archivo Rmd {#starting-a-new-rmd-file}</a></li>
-<li><a class="nav-link" href="#es-importante-saber-important-to-know">Es importante saber {#important-to-know}</a></li>
+<li><a class="nav-link" href="#instalar-el-paquete-r-rmarkdown">Instalar el paquete R rmarkdown</a></li>
+<li><a class="nav-link" href="#iniciar-un-nuevo-archivo-rmd">Iniciar un nuevo archivo Rmd</a></li>
+<li><a class="nav-link" href="#es-importante-saber">Es importante saber</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#r-markdown-components"><span class="header-section-number">40.3</span> Componentes de R Markdown</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#metadatos-yaml-yaml-metadata">Metadatos YAML {#yaml-metadata}</a></li>
-<li><a class="nav-link" href="#texto-text">Texto {#text}</a></li>
-<li><a class="nav-link" href="#trozos-de-c%C3%B3digo-chunks-code-chunks">Trozos de código (chunks) {#code-chunks}</a></li>
-<li><a class="nav-link" href="#im%C3%A1genes-images">Imágenes {images}</a></li>
-<li><a class="nav-link" href="#tablas-tables">Tablas {#tables}</a></li>
-<li><a class="nav-link" href="#secciones-con-pesta%C3%B1as-tabbed-sections">Secciones con pestañas {#tabbed-sections}</a></li>
+<li><a class="nav-link" href="#metadatos-yaml">Metadatos YAML</a></li>
+<li><a class="nav-link" href="#texto">Texto</a></li>
+<li><a class="nav-link" href="#trozos-de-c%C3%B3digo-chunks">Trozos de código (chunks)</a></li>
+<li><a class="nav-link" href="#im%C3%A1genes">Imágenes</a></li>
+<li><a class="nav-link" href="#tablas">Tablas</a></li>
+<li><a class="nav-link" href="#secciones-con-pesta%C3%B1as">Secciones con pestañas</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#file-structure"><span class="header-section-number">40.4</span> Estructura de los archivos</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#rmd-aut%C3%B3nomo-self-contained-rmd">Rmd autónomo {#self-contained-rmd}</a></li>
-<li><a class="nav-link" href="#ejecutar-archivo-runfile">Ejecutar archivo {#runfile}</a></li>
-<li><a class="nav-link" href="#estructura-de-carpetas-folder-structure">Estructura de carpetas {#folder-structure}</a></li>
+<li><a class="nav-link" href="#rmd-aut%C3%B3nomo">Rmd autónomo</a></li>
+<li><a class="nav-link" href="#ejecutar-archivo">Ejecutar archivo</a></li>
+<li><a class="nav-link" href="#estructura-de-carpetas">Estructura de carpetas</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#producing-the-document"><span class="header-section-number">40.5</span> Producir el documento</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#opci%C3%B3n-1-bot%C3%B3n-knit-option-1-knit-button">Opción 1: botón “Knit” {#option-1-knit-button}</a></li>
-<li><a class="nav-link" href="#opci%C3%B3n-2-comando-render-option-2-render-command">Opción 2: comando render() {#option-2-render-command}</a></li>
-<li><a class="nav-link" href="#opci%C3%B3n-3-paquete-reportfactory-options-3-reportfactory-package">Opción 3: paquete reportfactory {#options-3-reportfactory-package}</a></li>
+<li><a class="nav-link" href="#opci%C3%B3n-1-bot%C3%B3n-knit">Opción 1: botón “Knit”</a></li>
+<li><a class="nav-link" href="#opci%C3%B3n-2-comando-render">Opción 2: comando render()</a></li>
+<li><a class="nav-link" href="#opci%C3%B3n-3-paquete-reportfactory">Opción 3: paquete reportfactory</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#parameterised-reports"><span class="header-section-number">40.6</span> Informes parametrizados</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#establecer-par%C3%A1metros-setting-parameters">Establecer parámetros {#setting-parameters}</a></li>
-<li><a class="nav-link" href="#ejemplo-parametrizado-parameterized-example">Ejemplo parametrizado {#parameterized-example}</a></li>
-<li><a class="nav-link" href="#parametrizaci%C3%B3n-sin-par%C3%A1metros-parameterisation-without-params">Parametrización sin parámetros {#parameterisation-without-params}</a></li>
+<li><a class="nav-link" href="#establecer-par%C3%A1metros-1">Establecer parámetros</a></li>
+<li><a class="nav-link" href="#ejemplo-parametrizado">Ejemplo parametrizado</a></li>
+<li><a class="nav-link" href="#parametrizaci%C3%B3n-sin-par%C3%A1metros">Parametrización sin parámetros</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#looping-reports"><span class="header-section-number">40.7</span> Informes en bucle</a></li>
 <li>
 <a class="nav-link" href="#templates"><span class="header-section-number">40.8</span> Plantillas</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#documentos-en-word-word-documents">Documentos en Word {#word-documents}</a></li>
-<li><a class="nav-link" href="#powerpoint-documents"><span class="header-section-number">40.8.1</span> Documentos en Powerpoint</a></li>
-<li><a class="nav-link" href="#integraci%C3%B3n-de-plantillas-en-el-yaml-integrating-templates-into-the-yaml">Integración de plantillas en el YAML {#integrating-templates-into-the-yaml}</a></li>
-<li><a class="nav-link" href="#formateo-de-archivos-html-formatting-html-files">Formateo de archivos HTML {#formatting-html-files}</a></li>
+<li><a class="nav-link" href="#documentos-en-word">Documentos en Word</a></li>
+<li><a class="nav-link" href="#documentos-en-powerpoint">Documentos en Powerpoint</a></li>
+<li><a class="nav-link" href="#integraci%C3%B3n-de-plantillas-en-el-yaml">Integración de plantillas en el YAML</a></li>
+<li><a class="nav-link" href="#formateo-de-archivos-html">Formateo de archivos HTML</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#dynamic-content"><span class="header-section-number">40.9</span> Contenido dinámico</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#tablas-tables-1">Tablas {#tables-1}</a></li>
-<li><a class="nav-link" href="#widgets-html-html-widgets">Widgets HTML {#html-widgets}</a></li>
+<li><a class="nav-link" href="#tablas-1">Tablas</a></li>
+<li><a class="nav-link" href="#widgets-html">Widgets HTML</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#resources"><span class="header-section-number">40.10</span> Recursos</a></li>
+<li><a class="nav-link" href="#resources-33"><span class="header-section-number">40.10</span> Recursos</a></li>
 </ul>
 
       <div class="book-extra">
@@ -829,11 +829,11 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" fué escrito por el equipo del manual. Compilado el 2022-02-01.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
-    <p>Este libro fué construido con el paquete <a class="text-light" href="https://bookdown.org">bookdown</a> de R.</p>
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
   </div>
 
 </div></div>

@@ -193,19 +193,18 @@ Podría añadir el texto "Nuevos casos:" fijado al principio de la frase envolvi
 ```{r}
 str_c("New Cases: ", str_c(case_table$zone, case_table$new_cases, sep = " = ", collapse = ";  "))
 ```
-#jfmont
 
 ### Unir columnas  {#str_unite .unnumbered}
 
 Dentro de un dataframe, la unión de valores de caractéres de varias columnas puede lograrse con `unite()` de **tidyr**. Esto es lo contrario de `separate()`. 
 
-Indique el nombre de la nueva columna unida. A continuación, indique los nombres de las columnas que desea unir. 
+Indique el nombre de la nueva columna (que contendrá los valores unidos) y, a continuación, indique los nombres de las columnas que desea unir. 
 
 * Por defecto, el separador utilizado en la columna unida es el guión bajo `_`, pero puede cambiarse con el argumento `sep =`. 
 
-* `remove =` elimina las columnas de entrada del dataframe (TRUE por defecto) 
+* `remove =` elimina las columnas del dataframe que queremos unir (TRUE por defecto) 
 
-* `na.rm =` elimina los valores faltantes al unir (FALSE por defecto) 
+* `na.rm =` elimina los valores perdidos (NA) al realizar la unión (FALSE por defecto) 
 
 A continuación, definimos un mini-dataframe con el que hacer una demostración:
 
@@ -248,9 +247,9 @@ df_split %>%
 
 ### Dividir  {.unnumbered}
 
-Para dividir una cadena basada en un patrón, utiliza `str_split()`. Evalúa la(s) cadena(s) y devuelve una `lista` de vectores de caracteres formada por los valores recién divididos. 
+Para dividir una cadena basada en un patrón, utiliza `str_split()`. Esta función evalúa las cadenas y devuelve una `lista` de vectores de caracteres formada por los valores recién divididos. 
 
-El sencillo ejemplo que sigue evalúa una cadena y la divide en tres. Por defecto, devuelve un objeto de tipo `list` con un elemento (un vector de caracteres) por cada cadena proporcionada inicialmente. Si `simplify = TRUE` devuelve una matriz de caracteres. 
+El ejemplo que sigue evalúa una cadena y la divide en tres. Por defecto, devuelve un objeto de tipo `list` con un elemento (un vector de caracteres) por cada cadena proporcionada inicialmente. Si `simplify = TRUE` devuelve una matriz de caracteres. 
 
 En este ejemplo, se proporciona una cadena y la función devuelve una lista con un elemento: un vector de caracteres con tres valores. 
 
@@ -286,7 +285,7 @@ Para devolver una "matriz de caracteres" en su lugar, que puede ser útil si se 
 str_split(symptoms, ",", simplify = TRUE)
 ```
 
-También puede ajustar el número de divisiones a crear con el argumento `n =`. Por ejemplo, esto restringe el número de divisiones a 2. Cualquier otra coma permanece dentro de los segundos valores. 
+También puede ajustar el número de divisiones a crear con el argumento `n =`. Por ejemplo, esto restringe el número de divisiones a 2. De este modo, cualquier otra coma permanece dentro del segundo valor. 
 
 ```{r}
 str_split(symptoms, ",", simplify = TRUE, n = 2)
@@ -299,6 +298,8 @@ str_split_fixed(symptoms, ",", n = 2)
 ```
 
 ### Dividir columnas   {.unnumbered}
+
+#jfmont
 
 Si está intentando dividir una columna de un dataframe, es mejor utilizar la función `separate()` de **dplyr**. Se utiliza para dividir una columna de caracteres en otras columnas. 
 

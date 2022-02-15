@@ -50,10 +50,10 @@
 
     <div id="main-nav" class="collapse-lg">
       <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
 </form>
 
-      <nav aria-label="Table of contents"><h2>Tabla de contenidos</h2>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"></a></li>
 <li class="book-part">Acerca de este libro</li>
@@ -131,7 +131,7 @@
 <span class="header-section-number">23.1</span> Resumen<a class="anchor" aria-label="anchor" href="#overview-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Esta página demuestra el uso de varios paquetes para el análisis de series temporales. Principalmente se basa en paquetes de la familia <a href="https://tidyverts.org/"><strong>tidyverts</strong></a>, pero también utilizará el paquete RECON <a href="https://github.com/reconhub/trending"><strong>trending</strong></a> para ajustar modelos más apropiados para la epidemiología de enfermedades infecciosas.</p>
-<p>Ten en cuenta que en el siguiente ejemplo utilizamos unos datos del paquete de <strong>vigilancia</strong> sobre Campylobacter en Alemania (véase el capítulo <a href="#download-handbook-and-data.html">Descargand el manual y los datoss</a> del manual para más detalles). Sin embargo, si deseas ejecutar el mismo código en unos datos con múltiples países u otros estratos, hay una plantilla de código de ejemplo para esto en el <a href="https://github.com/R4EPI/epitsa">repo de github de r4epis</a>.</p>
+<p>Ten en cuenta que en el siguiente ejemplo utilizamos unos datos del paquete de <strong>vigilancia</strong> sobre Campylobacter en Alemania (véase el capítulo <a href="download-handbook-and-data.html#download-handbook-and-data">Descargando el manual y los datoss</a> del manual para más detalles). Sin embargo, si deseas ejecutar el mismo código en unos datos con múltiples países u otros estratos, hay una plantilla de código de ejemplo para esto en el <a href="https://github.com/R4EPI/epitsa">repo de github de r4epis</a>.</p>
 <p>Los temas que se tratan son:</p>
 <ol style="list-style-type: decimal">
 <li>Datos de series temporales</li>
@@ -143,9 +143,9 @@
 </ol>
 <!-- ======================================================= -->
 </div>
-<div id="preparation-13" class="section level2" number="23.2">
+<div id="preparation-14" class="section level2" number="23.2">
 <h2>
-<span class="header-section-number">23.2</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-13"><i class="fas fa-link"></i></a>
+<span class="header-section-number">23.2</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-14"><i class="fas fa-link"></i></a>
 </h2>
 <div id="paquetes-1" class="section level3 unnumbered">
 <h3>Paquetes<a class="anchor" aria-label="anchor" href="#paquetes-1"><i class="fas fa-link"></i></a>
@@ -184,13 +184,13 @@
 <code class="sourceCode R"><span class="co"># import the counts into R</span>
 <span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"campylobacter_germany.xlsx"</span><span class="op">)</span></code></pre></div>
 <p>A continuación se muestran las 10 primeras filas de los recuentos.</p>
-<div id="htmlwidget-0f692b946277cda4e5fb" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0f692b946277cda4e5fb">{"x":{"filter":"none","vertical":false,"data":[["2001-12-31T00:00:00Z","2002-01-07T00:00:00Z","2002-01-14T00:00:00Z","2002-01-21T00:00:00Z","2002-01-28T00:00:00Z","2002-02-04T00:00:00Z","2002-02-11T00:00:00Z","2002-02-18T00:00:00Z","2002-02-25T00:00:00Z","2002-03-04T00:00:00Z"],[514,913,1023,887,815,792,803,807,692,705]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>case<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c974210dadb616aff457" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c974210dadb616aff457">{"x":{"filter":"none","vertical":false,"data":[["2001-12-31T00:00:00Z","2002-01-07T00:00:00Z","2002-01-14T00:00:00Z","2002-01-21T00:00:00Z","2002-01-28T00:00:00Z","2002-02-04T00:00:00Z","2002-02-11T00:00:00Z","2002-02-18T00:00:00Z","2002-02-25T00:00:00Z","2002-03-04T00:00:00Z"],[514,913,1023,887,815,792,803,807,692,705]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>case<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="limpiar-datos" class="section level3 unnumbered">
 <h3>Limpiar datos<a class="anchor" aria-label="anchor" href="#limpiar-datos"><i class="fas fa-link"></i></a>
 </h3>
-<p>El código siguiente se asegura de que la columna de la fecha tenga el formato adecuado. Para esta sección utilizaremos el paquete <strong>tsibble</strong> y la función <code>yearweek</code> se utilizará para crear una variable de semana de calendario. Hay otras maneras de hacer esto (ver la página de <a href="https://epirhandbook.com/working-with-dates.html">Trabajar con fechas</a> para más detalles), sin embargo para las series temporales es mejor mantenerse dentro de un marco (<strong>tsibble</strong>).</p>
+<p>El código siguiente se asegura de que la columna de la fecha tenga el formato adecuado. Para esta sección utilizaremos el paquete <strong>tsibble</strong> y la función <code>yearweek</code> se utilizará para crear una variable de semana de calendario. Hay otras maneras de hacer esto (ver la página de <a href="working-with-dates.html#working-with-dates">Trabajar con fechas</a> para más detalles), sin embargo para las series temporales es mejor mantenerse dentro de un marco (<strong>tsibble</strong>).</p>
 <div class="sourceCode" id="cb1021"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## ensure the date column is in the appropriate format</span>
 <span class="va">counts</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">counts</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>
@@ -342,7 +342,7 @@
 <h3>Valores faltantes<a class="anchor" aria-label="anchor" href="#valores-faltantes-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>En nuestra breve inspección anterior hemos visto que no hay faltas, pero también hemos visto que parece haber un problema de retraso en la notificación en torno al año nuevo. Una forma de abordar este problema podría ser establecer estos valores como faltantes y luego imputar los valores. La forma más sencilla de imputación de series temporales consiste en trazar una línea recta entre el último valor no faltante y el siguiente valor no faltante. Para ello, utilizaremos la función <code>na_interpolation()</code> del paquete <strong>imputeTS</strong>.</p>
-<p>Consulta la página de <a href="https://epirhandbook.com/missing-data.html">datos faltantes</a> para conocer otras opciones de imputación.</p>
+<p>Consulta la página de <a href="missing-data.html#missing-data">datos faltantes</a> para conocer otras opciones de imputación.</p>
 <p>Otra alternativa sería calcular una media móvil para intentar suavizar estos aparentes problemas de información (véase la siguiente sección y la página sobre <a href="moving-averages.html#moving-averages">medias móviles</a>.</p>
 <div class="sourceCode" id="cb1030"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## create a variable with missings instead of weeks with reporting issues</span>
@@ -1378,10 +1378,10 @@
          <span class="st">"95%CI high (perc)"</span> <span class="op">=</span> <span class="va">conf.high_perc</span>,
          <span class="st">"p-value"</span> <span class="op">=</span> <span class="va">p.value</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 7
-##     IRR `95%CI low` `95%CI high` `Percentage change` `95%CI low (perc)` `95%CI high (perc~
-##   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;              &lt;dbl&gt;              &lt;dbl&gt;
-## 1 0.936       0.874         1.00               -6.40              -12.6              0.306
-## # ... with 1 more variable: p-value &lt;dbl&gt;</code></pre>
+##     IRR `95%CI low` `95%CI high` `Percentage change` `95%CI low (perc)`
+##   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;              &lt;dbl&gt;
+## 1 0.936       0.874         1.00               -6.40              -12.6
+## # ... with 2 more variables: 95%CI high (perc) &lt;dbl&gt;, p-value &lt;dbl&gt;</code></pre>
 <p>Como en el caso anterior, podemos visualizar los resultados de la regresión.</p>
 <div class="sourceCode" id="cb1082"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">observed</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">epiweek</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -1417,10 +1417,10 @@
 <h2>
 <span class="header-section-number">23.9</span> Recursos<a class="anchor" aria-label="anchor" href="#resources-16"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://otexts.com/fpp3/">previsión: principios y práctica libro de texto</a>
-<a href="https://github.com/EPIET/TimeSeriesAnalysis">Estudios de casos de análisis de series temporales de EPIET</a>
-<a href="https://online.stat.psu.edu/stat510/lesson/1">Curso de Penn State</a>
-<a href="https://www.jstatsoft.org/article/view/v070i10">Manuscrito del paquete Surveillance</a></p>
+<p><a href="https://otexts.com/fpp3/">previsión: principios y práctica libro de texto</a></p>
+<p><a href="https://github.com/EPIET/TimeSeriesAnalysis">Estudios de casos de análisis de series temporales de EPIET</a></p>
+<p><a href="https://online.stat.psu.edu/stat510/lesson/1">Curso de Penn State</a></p>
+<p><a href="https://www.jstatsoft.org/article/view/v070i10">Manuscrito del paquete Surveillance</a></p>
 
 </div>
 </div>
@@ -1428,12 +1428,12 @@
 <div class="prev"><a href="moving-averages.html"><span class="header-section-number">22</span> Borrador. Medias Móviles</a></div>
 <div class="next"><a href="epidemic-modeling.html"><span class="header-section-number">24</span> Borrador. Modelización de epidemias</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>En esta página</h2>
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#time-series-and-outbreak-detection"><span class="header-section-number">23</span> Borrador. Series temporales y detección de brotes</a></li>
 <li><a class="nav-link" href="#overview-2"><span class="header-section-number">23.1</span> Resumen</a></li>
 <li>
-<a class="nav-link" href="#preparation-13"><span class="header-section-number">23.2</span> Preparación</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#preparation-14"><span class="header-section-number">23.2</span> Preparación</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#paquetes-1">Paquetes</a></li>
 <li><a class="nav-link" href="#cargar-datos">Cargar datos</a></li>
 <li><a class="nav-link" href="#limpiar-datos">Limpiar datos</a></li>
@@ -1494,11 +1494,11 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" fué escrito por el equipo del manual. Compilado el 2022-02-01.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
-    <p>Este libro fué construido con el paquete <a class="text-light" href="https://bookdown.org">bookdown</a> de R.</p>
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
   </div>
 
 </div></div>

@@ -50,10 +50,10 @@
 
     <div id="main-nav" class="collapse-lg">
       <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
 </form>
 
-      <nav aria-label="Table of contents"><h2>Tabla de contenidos</h2>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"></a></li>
 <li class="book-part">Acerca de este libro</li>
@@ -126,18 +126,18 @@
 </h1>
 <p><span style="color: red;"><strong><em>ADVERTENCIA:</em></strong> Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span></p>
 <!-- ======================================================= -->
-<div id="overview-8" class="section level2" number="49.1">
+<div id="overview-9" class="section level2" number="49.1">
 <h2>
-<span class="header-section-number">49.1</span> Resumen<a class="anchor" aria-label="anchor" href="#overview-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">49.1</span> Resumen<a class="anchor" aria-label="anchor" href="#overview-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>El uso de R en unidades compartidas de la red o de la “empresa” puede presentar desafíos adicionales. Esta página contiene enfoques, errores comunes y sugerencias sobre la solución de problemas obtenidas a partir de nuestra experiencia trabajando con estos problemas. Se incluyen consejos para las situaciones especialmente delicadas relacionadas con R Markdown.</p>
 <p><strong>Uso de R en unidades de red: Principios generales</strong></p>
 <ol style="list-style-type: decimal">
-<li>You must get administrator access for your computer. Setup RStudio specifically to run as administrator.<br>
+<li>Debes tener acceso de administrador a tu ordenador. Configura RStudio específicamente para que se ejecute como administrador.<br>
 </li>
-<li>Save packages to a library on a lettered drive (e.g. “C:”) when possible. Use a package library whose path begins with “\" as little as possible.<br>
+<li>Guarda los paquetes en una biblioteca en una unidad con letras (por ejemplo, “C:”) cuando sea posible. Uiliza lo menos posible una biblioteca de paquetes cuya ruta comience por “\".<br>
 </li>
-<li>the <strong>rmarkdown</strong> package must <strong>not</strong> be in a “\" package library, as then it can’t connect to TinyTex or Pandoc.</li>
+<li>El paquete <strong>rmarkdown</strong> debe <strong>no</strong> estar en una librería de paquetes “\", ya que entonces no puede conectarse a TinyTex o Pandoc.</li>
 </ol>
 </div>
 <div id="rstudio-as-administrator" class="section level2" number="49.2">
@@ -148,7 +148,7 @@
 </div>
 <div id="useful-commands" class="section level2" number="49.3">
 <h2>
-<span class="header-section-number">49.3</span> Useful commands<a class="anchor" aria-label="anchor" href="#useful-commands"><i class="fas fa-link"></i></a>
+<span class="header-section-number">49.3</span> Comandos útiles<a class="anchor" aria-label="anchor" href="#useful-commands"><i class="fas fa-link"></i></a>
 </h2>
 <p>A continuación se presentan algunos comandos útiles cuando se trata de solucionar problemas utilizando R en unidades de red.</p>
 <p>Puedes devolver la(s) ruta(s) a las bibliotecas de paquetes que R está utilizando. Serán listadas en el orden que R está usando para instalar/cargar/buscar paquetes. Por lo tanto, si quiere que R utiliza una biblioteca diferente por defecto, puede cambiar el orden de estas rutas (ver más abajo).</p>
@@ -180,15 +180,15 @@
 <h2>
 <span class="header-section-number">49.4</span> Solución de errores comunes<a class="anchor" aria-label="anchor" href="#troubleshooting-common-errors"><i class="fas fa-link"></i></a>
 </h2>
-<p><strong>“Failed to compile…tex in rmarkdown”</strong></p>
+<p><strong>“Fallo al compilar…tex en rmarkdown”</strong></p>
 <ul>
-<li>Compruebe la instalación de TinyTex, o instale TinyTex en la ubicación C:. Consulta la página de <a href="r-basics.html#r-basics">fundamentos de R</a> sobre cómo instalar TinyTex.</li>
+<li>Comprueba la instalación de TinyTex, o instale TinyTex en la ubicación C:. Consulta la página de <a href="r-basics.html#r-basics">fundamentos de R</a> sobre cómo instalar TinyTex.</li>
 </ul>
 <div class="sourceCode" id="cb1890"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check/install tinytex, to C: location</span>
 <span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">tinytex</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/is_tinytex.html">is_tinytex</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># should return TRUE (note three colons)</span></code></pre></div>
-<p><strong>Internet routines cannot be loaded</strong></p>
+<p><strong>No se pueden cargar las rutinas de Internet.</strong></p>
 <p>Por ejemplo, <code>Error in tools::startDynamicHelp() : internet routines cannot be loaded</code></p>
 <ul>
 <li>Intente seleccionar la versión de 32 bits de RStudio a través de Herramientas/Opciones Globales.
@@ -198,7 +198,7 @@
 </li>
 <li>Alternativamente, intente desinstalar R y volver a instalarlo con una versión de bits diferente (32 en lugar de 64)</li>
 </ul>
-<p><strong>C: library does not appear as an option when I try to install packages manually</strong></p>
+<p><strong>C: la biblioteca no aparece como opción cuando intento instalar los paquetes manualmente</strong></p>
 <ul>
 <li>Ejecuta RStudio como administrador, entonces aparecerá esta opción.</li>
 <li>Para configurar RStudio para que se ejecute siempre como administrador (lo que resulta ventajoso cuando se utiliza un proyecto R en el que no se clica en el icono de RStudio para abrirlo)… clica con el botón derecho en el icono de Rstudio</li>
@@ -262,12 +262,12 @@
 <div class="prev"><a href="getting-help.html"><span class="header-section-number">48</span> Cómo obtener ayuda</a></div>
 <div class="next"><a href="data-table.html"><span class="header-section-number">50</span> Borrador. data.table</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>En esta página</h2>
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#r-on-network-drives"><span class="header-section-number">49</span> Borrador. R en redes locales</a></li>
-<li><a class="nav-link" href="#overview-8"><span class="header-section-number">49.1</span> Resumen</a></li>
+<li><a class="nav-link" href="#overview-9"><span class="header-section-number">49.1</span> Resumen</a></li>
 <li><a class="nav-link" href="#rstudio-as-administrator"><span class="header-section-number">49.2</span> RStudio como administrador</a></li>
-<li><a class="nav-link" href="#useful-commands"><span class="header-section-number">49.3</span> Useful commands</a></li>
+<li><a class="nav-link" href="#useful-commands"><span class="header-section-number">49.3</span> Comandos útiles</a></li>
 <li><a class="nav-link" href="#troubleshooting-common-errors"><span class="header-section-number">49.4</span> Solución de errores comunes</a></li>
 </ul>
 
@@ -285,11 +285,11 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" fué escrito por el equipo del manual. Compilado el 2022-02-01.</p>
+    <p>"<strong>El manual de R para la Epidemiología</strong>" was written by El equipo del manual. It was last built on 2022-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
-    <p>Este libro fué construido con el paquete <a class="text-light" href="https://bookdown.org">bookdown</a> de R.</p>
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
   </div>
 
 </div></div>
