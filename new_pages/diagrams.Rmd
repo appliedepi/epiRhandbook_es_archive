@@ -7,13 +7,12 @@ knitr::include_graphics(here::here("images", "flow_chart.png"))
 knitr::include_graphics(here::here("images", "sankey_diagram.png"))
 ```
 
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
 Esta página cubre el código para producir:
 
 * Diagramas de flujo utilizando **DiagrammeR** y el lenguaje `DOT`
-* Diagramas aluviales/sanitarios
-* Calendario de eventos9
+* Diagramas aluviales/Diagramas de Sankey
+* Calendario de eventos
 
 <!-- * DAGs (Directed Acyclic Graphs)   -->
 <!-- * GANTT charts   -->
@@ -24,7 +23,7 @@ Esta página cubre el código para producir:
 
 ### Cargar paquetes {.unnumbered}  
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También es posible cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r}
 pacman::p_load(
@@ -35,7 +34,7 @@ pacman::p_load(
 
 ### Importar datos {.unnumbered}  
 
-La mayor parte del contenido de esta página no requiere unos datos. Sin embargo, en la sección del diagrama de Sankey, utilizaremos la lista de casos de una epidemia de ébola simulada. Si quiere seguir esta parte, [clica para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - vea la página [importación y exportación](#import-and-export) para más detalles).
+La mayor parte del contenido de esta página no requiere unos datos. Sin embargo, en la sección del diagrama de Sankey, utilizaremos la lista de casos de una epidemia de ébola simulada. Si quieres seguir esta parte, [clica para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - consulta la página [importación y exportación](#import-and-export) para más detalles).
 
 ```{r, echo=F}
 # import the linelist into R
@@ -69,9 +68,9 @@ La función `grViz()` se utiliza para crear un diagrama "Graphviz". Esta funció
 
 1)  Abre las instrucciones `grViz("`
 2)  Especifica la dirección y el nombre del gráfico, y abre los paréntesis, por ejemplo, `digraph my_flow_chart {`
-3)  Define  el gráfico (layout, rank direction)
-4)  Declara los nodos (create nodes)
-5)  Declara las aristas (da enlaces entre nodos)
+3)  Define los elementos del gráfico (layout, rank direction)
+4)  Establece los nodos (create nodes)
+5)  Establece las conexiones entre nodos
 6)  Cierra las instrucciones `}")`
 
 ### Ejemplos sencillos {.unnumbered} 
@@ -129,7 +128,7 @@ digraph surveillance_diagram {    # 'digraph' means 'directional graph', then th
 
 **Sintaxis básica**
 
-Los nombres de los nodos, o las declaraciones de las aristas (edges), pueden separarse con espacios, punto y coma o nuevas líneas.
+Los nombres de los nodos, o las etiquetas de las conexiones (edges), pueden separarse con espacios, punto y coma o nuevas líneas.
 
 **Dirección del rango**
 
@@ -137,11 +136,11 @@ Se puede reorientar un gráfico para que se mueva de izquierda a derecha ajustan
 
 **Nombres de los nodos**
 
-Los nombres de los nodos pueden ser palabras sueltas, como en el sencillo ejemplo anterior. Para utilizar nombres de varias palabras o caracteres especiales (por ejemplo, paréntesis, guiones), ponga el nombre del nodo entre comillas simples (' '). Puede ser más fácil tener un nombre de nodo corto, y asignar una *etiqueta* como se muestra a continuación entre corchetes `[ ]`. Si deseas tener una nueva línea dentro del nombre del nodo, debes hacerlo a través de una etiqueta - utiliza `\n` en la etiqueta del nodo entre comillas simples, como se muestra a continuación.
+Los nombres de los nodos pueden ser palabras sueltas, como en el sencillo ejemplo anterior. Para utilizar nombres con varias palabras o caracteres especiales (por ejemplo, paréntesis, guiones), pon el nombre del nodo entre comillas simples (' '). Puede ser más fácil tener un nombre de nodo corto, y asignar una *etiqueta* como se muestra a continuación entre corchetes `[ ]`. Si quieres tener una nueva línea dentro del nombre del nodo, debes hacerlo a través de una etiqueta - utiliza `\n` en la etiqueta del nodo entre comillas simples, como se muestra a continuación.
 
 **Subgrupos** 
 
-En las declaraciones de aristas, se pueden crear subgrupos a ambos lados de la arista con corchetes (`{ }`). La arista se aplica entonces a todos los nodos en el corchete - es una forma abreviada.
+Al definir las conexiones (aristas), se pueden crear subgrupos a ambos lados de la arista con corchetes (`{ }`). La arista se aplica entonces a todos los nodos en el corchete - es una forma abreviada.
 
 **Diseños** 
 
@@ -158,13 +157,13 @@ En las declaraciones de aristas, se pueden crear subgrupos a ambos lados de la a
 * `fontcolor`  (color de la fuente)
 * `alpha` (transparencia 0-1)  
 * `shape` (ellipse, oval, diamond, egg, plaintext, point, square, triangle)  
-* `style`  
+* `style` (estilo)
 * `sides`  (lados)
-* `peripheries`  
+* `peripheries`  (periferia)
 * `fixedsize` (h x w)  (tamaño fijo (alto x ancho))
-* `height`  
-* `width`  
-* `distortion`  
+* `height`  (alto)
+* `width`  (ancho)
+* `distortion`  (dstorsión)
 * `penwidth` (ancho del borde de la forma)  
 * `x` (left/right) (desplazamiento a la izquierda/derecha)
 * `y` (up/down)  (desplazamiento arriba/abajo)
@@ -173,7 +172,7 @@ En las declaraciones de aristas, se pueden crear subgrupos a ambos lados de la a
 * `icon`  
 
 
-**Bordes - atributos editables**
+**Conexioness - atributos editables**
 
 * `arrowsize`  (tamaño de la flecha)
 * `arrowhead` (normal, box, crow, curve, diamond, dot, inv, none, tee, vee)  
@@ -186,7 +185,7 @@ En las declaraciones de aristas, se pueden crear subgrupos a ambos lados de la a
 * `tailport` (texto detrás de la cola de flecha) 
 * `fontname`  (nombre de la fuente)
 * `fontsize`  (tamaño de letra)
-* `fontcolor`  
+* `fontcolor`  (color de la fuente)
 * `penwidth` (anchura de la flecha)  
 * `minlen` (longitud mínima)
 
@@ -196,7 +195,7 @@ En las declaraciones de aristas, se pueden crear subgrupos a ambos lados de la a
 ### Ejemplos complejos  {.unnumbered}
 
 
-El siguiente ejemplo amplía el surveillance_diagram, añadiendo nombres de nodos complejos, aristas agrupadas, colores y estilos
+El siguiente ejemplo amplía el surveillance_diagram, añadiendo nombres de nodos complejos, conexiones agrupadas, colores y estilos
 
 
 ```
@@ -463,7 +462,7 @@ Esta es una cita a este tutorial: https://mikeyharper.uk/flowcharts-in-r-using-d
 
 "Figuras parametrizadas": Una gran ventaja de diseñar figuras dentro de R es que podemos conectar las figuras directamente con nuestro análisis leyendo los valores de R directamente en nuestros diagramas de flujo. Por ejemplo, imagina que has creado un proceso de filtrado que elimina valores después de cada etapa de un proceso, puedes hacer que una figura muestre el número de valores que quedan en el conjunto de datos después de cada etapa de su proceso. Para hacer esto, puedes utilizar el símbolo `@@X` directamente dentro de la figura, y luego hacer referencia a esto en el pie de página del gráfico utilizando `[X]`:, donde X es el índice numérico único".
 
-Te animamos a revisar este tutorial si la parametrización es algo que le interesa.
+Te animamos a revisar este tutorial si te interesa la parametrización.
 
 
 <!-- And below is some example code from this tutorial. -->
@@ -511,11 +510,11 @@ Te animamos a revisar este tutorial si la parametrización es algo que le intere
 
 
 <!-- ======================================================= -->
-## Diagramas Alluvial/Sankey {#alluvialsankey-diagrams}
+## Diagramas Aluviales/Sankey {#alluvialsankey-diagrams}
 
 ### Cargar paquetes {.unnumbered}  
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 Cargamos el paquete **networkD3** para producir el diagrama, y también **tidyverse** para los pasos de preparación de datos.
 
@@ -548,7 +547,7 @@ DT::datatable(links, rownames = FALSE, options = list(pageLength = 5, scrollX=T)
 ```
 
 
-Ahora creamos un dataframe de todos los nodos del diagrama, bajo la columna. `name`. Esto consiste en todos los valores de `hospital` y `age_cat.` Observa que nos aseguramos de que todos son caracteres de tipo antes de combinarlos. y ajustamos las columnas ID para que sean números en lugar de etiquetas:
+Ahora creamos un dataframe de todos los nodos del diagrama, bajo la columna `name`. Esto consiste en todos los valores de `hospital` y `age_cat.` Observa que nos aseguramos de que todos son de tipo carácter antes de combinarlos. Ajustamos las columnas ID para que sean números en lugar de etiquetas:
 
 ```{r}
 # The unique node names
@@ -596,7 +595,7 @@ p
 
 
 
-Este es un ejemplo en el que también se incluye el resultado del paciente. Obsérvese que en el paso de preparación de los datos tenemos que calcular los recuentos de casos entre la edad y el hospital, y por separado entre el hospital y el resultado - y luego unir todos estos recuentos con `bind_rows()`.
+Este es un ejemplo en el que también se incluye el resultado del paciente. Obsérva que en el paso de preparación de los datos tenemos que calcular los recuentos de casos entre la edad y el hospital, y por separado entre el hospital y el resultado - y luego unir todos estos recuentos con `bind_rows()`.
 
 ```{r}
 # counts by hospital and age category
