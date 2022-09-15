@@ -27,7 +27,7 @@ Esta página demuestra el uso del paquete **stringr** para evaluar y manejar val
 
 Para facilitar la visualización, la mayoría de los ejemplos se muestran actuando sobre un vector de caracteres definido brevemente, aunque pueden adaptarse fácilmente a una columna dentro de un dataframe.
 
-Esta [viñeta de stringr](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html) proporcionó gran parte de la inspiración para esta página.
+Gran parte de la inspiración para esta página se obtuvo de esta [viñeta de stringr](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html).
 
 <!-- ======================================================= -->
 
@@ -38,18 +38,18 @@ Esta [viñeta de stringr](https://cran.r-project.org/web/packages/stringr/vignet
 Instala o carga el paquete **stringr** y otros paquetes de **tidyverse**.
 
 ```{r}
-# install/load packages
+# instalar / cargar paquetes
 pacman::p_load(
-  stringr,    # many functions for handling strings
-  tidyverse,  # for optional data manipulation
-  tools)      # alternative for converting to title case
+  stringr,    # funciones para trabajar con cadenas
+  tidyverse,  # manipulación de datos 
+  tools)      # alternativa para convertir cadenas a mayúsculas
 
 ```
 
 ### Importar datos {.unnumbered}
 Importar datos 
 
-En esta página haremos referencia de vez en cuando a la lista limpia de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clique para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importe los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - vea la página de [importación y exportación](#import-and-export) para más detalles). 
+En esta página haremos referencia de vez en cuando a una base de datos  de casos de una epidemia de ébola ficticia llamada "linelist". Para seguir el proceso, [cliquea aquí para descargar linelist "limpia"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - mira la página de [importación y exportación](#import-and-export) para más detalles). 
 
 ```{r, echo=F}
 # import the linelist into R
@@ -61,7 +61,7 @@ linelist <- rio::import(here::here("data", "case_linelists", "linelist_cleaned.r
 linelist <- import("linelist_cleaned.rds")
 ```
 
-A continuación se muestran las primeras 50 filas del listado. 
+A continuación se muestran las primeras 50 filas de linelist.  
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
