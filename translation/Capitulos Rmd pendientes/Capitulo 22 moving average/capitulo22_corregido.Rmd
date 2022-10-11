@@ -2,23 +2,23 @@
 
 En esta página se tratan dos métodos para calcular y visualizar las medias móviles:
 
-1.  Calcular con el paquete **deslizante**
+1.  Calcular con el paquete **slider**
 
-2.  Calcular *dentro de* un comando ggplot() con el paquete **tidyquant**
+2.  Calcular *dentro* de un comando `ggplot()` con el paquete **tidyquant**
 
 Preparación
 
 Cargar paquetes
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos p_load() de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con library() de **.** Consulta la página sobre [los fundamentos de R]](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con library() de R**base**. Consulta la página sobre [fundamentos de R]](#r-basics) para obtener más información sobre los paquetes de R.
 
 Importar datos
 
-Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar linelist "limpia"]](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importe los datos con la función import() del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - vea la página de [importación y exportación]](#import-and-export) para más detalles).
+Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar linelist "limpio"]](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - mira la página de [importación y exportación]](#import-and-export) para más detalles).
 
 A continuación se muestran las primeras 50 filas del listado.
 
-Calcular con el **deslizador**
+Calcular con el **slider**
 
 **Utiliza este enfoque para calcular una media móvil en un dataframe antes de trazarla.**
 
@@ -26,120 +26,107 @@ El paquete **slider** proporciona varias funciones de "ventana deslizante" para 
 
 Estas son algunas de las funciones más comunes:
 
-* slide_dbl() - itera a través de una columna *numérica* (de ahí "_dbl") realizando una operación mediante una ventana deslizante
+* `slide_dbl()` - itera a través de una columna *numérica* (de ahí "_dbl") realizando una operación mediante una ventana deslizante
+  * `slide_sum()` - función abreviada de suma rodante para `slide_dbl()`
+  * `slide_mean()` - función abreviada de media móvil para `slide_dbl()`
+* `slide_index_dbl()` - aplica la ventana rodante en una columna numérica utilizando una columna separada para *indexar* la progresión de la ventana (útil si se rueda por fecha con algunas fechas ausentes)
+  * `slide_index_sum()` - Función abreviada de suma rodante con indexación
+  * `slide_index_mean()` - Función de acceso directo a la media móvil con indexación
 
-* slide_sum() - función abreviada de suma rodante para slide_dbl()
-
-* slide_mean() - función abreviada de media móvil para slide_dbl()
-
-* slide_index_dbl() - aplica la ventana rodante en una columna numérica utilizando una columna separada para *indexar* la progresión de la ventana (útil si se rueda por fecha con algunas fechas ausentes)
-
-* slide_index_sum() - Función abreviada de suma rodante con indexación
-
-* slide_index_mean() - Función de acceso directo a la media móvil con indexación
-
-El paquete **deslizante** tiene muchas otras funciones que se tratan en la sección de Recursos de esta página. Tocamos brevemente las más comunes.
+El paquete **slider** tiene muchas otras funciones que se tratan en la sección de Recursos de esta página. Tocamos brevemente las más comunes.
 
 **Argumentos básicos**
 
-* .x, el primer argumento por defecto, es el vector sobre el que iterar y al que aplicar la función
-
-* .i = para las versiones de "índice" de las funciones de **deslizamiento** - proporciona una columna para "indexar" el rollo (véase la sección [siguiente]](#roll_index))
-
-* .f =, el segundo argumento por defecto, bien:
-
-* Una función, escrita sin paréntesis, como media, o
-
-* Una fórmula, que se convertirá en una función. Por ejemplo \~ .x - mean(.x) devolverá el resultado del valor actual menos la media del valor de la ventana
+* `.x`, el primer argumento por defecto, es el vector sobre el que iterar y al que aplicar la función
+* `.i = ` para las versiones de "índice" de las funciones de **deslizamiento** - proporciona una columna para "indexar" el rollo (véase la sección [siguiente]](#roll_index))
+* `.f =` , el segundo argumento por defecto, bien:
+  * Una función, escrita sin paréntesis, como `mean`, o
+  * Una fórmula, que se convertirá en una función. Por ejemplo `~ .x - mean(.x)` devolverá el resultado del valor actual menos la media del valor de la ventana
 
 * Para más detalles, consulta este [material de referencia]](https://davisvaughan.github.io/slider/reference/slide.html)
 
 **Tamaño de la ventana**
 
-Especifique el tamaño de la ventana utilizando los argumentos .before, .after o ambos:
+Especifica el tamaño de la ventana utilizando los argumentos `.before`, `.after`, o ambos:
 
-* .before = - Proporcionar un número entero
+* `.before = ` - Proporcionar un número entero
+* `.after = `- Proporcionar un número entero
+* `.complete = `- Pon este valor a `TRUE` si sólo quieres que se realicen cálculos en ventanas completas
 
-* .after = - Proporcionar un número entero
+Por ejemplo, para conseguir una ventana de 7 días que incluya el valor actual y los seis anteriores, utiliza `.before = 6`. Para conseguir una ventana "centrada" proporcione el mismo número tanto a `.before = ` como a `.after = `.
 
-* .complete = - Ponga este valor a TRUE si sólo quiere que se realicen cálculos en ventanas completas
-
-Por ejemplo, para conseguir una ventana de 7 días que incluya el valor actual y los seis anteriores, utiliza .before = 6. Para conseguir una ventana "centrada" proporcione el mismo número tanto a .before = como a .after =.
-
-Por defecto, .complete = será FALSE por lo que si la ventana completa de filas no existe, las funciones utilizarán las filas disponibles para realizar el cálculo. Si se ajusta a TRUE, los cálculos sólo se realizan en ventanas completas.
+Por defecto, `.complete = ` será FALSE por lo que si la ventana completa de filas no existe, las funciones utilizarán las filas disponibles para realizar el cálculo. Si se ajusta a `TRUE`, los cálculos sólo se realizan en ventanas completas.
 
 **Ventana expansiva**
 
-Para lograr operaciones *acumulativas*, establezca el argumento .before = en Inf. Esto realizará la operación sobre el valor actual y todos los que vengan antes.
+Para lograr operaciones *acumulativas*, establece el argumento `.before = ` en `Inf`. Esto realizará la operación sobre el valor actual y todos los que vengan antes.
 
-Enrollar por fecha
+Balancear por fecha
 
 El caso más probable de uso de un cálculo rotativo en epidemiología aplicada es examinar una medida a lo *largo del tiempo*. Por ejemplo, una medición continua de la incidencia de casos, basada en el recuento diario de casos.
 
-Si tiene datos de series temporales limpios con valores para cada fecha, puede estar bien utilizar slide_dbl(), como se demuestra aquí en la página de [series temporales y detección de brotes]](#timeseries_moving).
+Si tienes datos de series temporales limpios con valores para cada fecha, puede estar bien utilizar `slide_dbl()`, como se demuestra aquí en la página de [series temporales y detección de brotes]](#timeseries_moving).
 
-Sin embargo, en muchas circunstancias de epidemiología aplicada puede haber fechas ausentes en sus datos, donde no hay eventos registrados. En estos casos, es mejor utilizar las versiones "índice" de las funciones **deslizantes**.
+Sin embargo, en muchas circunstancias de epidemiología aplicada puede haber fechas ausentes en los datos, donde no hay eventos registrados. En estos casos, es mejor utilizar las versiones "index" de las funciones **slider**.
 
 Datos indexados
 
-A continuación, mostramos un ejemplo utilizando slide_index_dbl() en la lista de casos. Digamos que nuestro objetivo es calcular una incidencia rodante de 7 días - la suma de casos utilizando una ventana rodante de 7 días. Si está buscando un ejemplo de media rodante, vea la sección de abajo sobre [rodamiento agrupado]](#roll_slider_group).
+A continuación, mostramos un ejemplo utilizando `slide_index_dbl()` en la lista de casos. Digamos que nuestro objetivo es calcular una incidencia rodante de 7 días - la suma de casos utilizando una ventana rodante de 7 días. Si estás buscando un ejemplo de media rodante, mira la sección de abajo sobre [balanceo agrupado]](#roll_slider_group).
 
-Para empezar, se crean los datos daily_counts para reflejar los recuentos diarios de casos del listado, calculados con count() de **dplyr**.
+Para empezar, se crean los datos `daily_counts` para reflejar los recuentos diarios de casos de `linelist`, calculados con `count()` de **dplyr**.
 
-Aquí está el dataframe de daily_counts - hay nrow(daily_counts) filas, cada día está representado por una fila, pero especialmente al principio de la epidemia *algunos días no están presentes (no hubo casos admitidos en esos días)*.
+Aquí está el dataframe `daily_counts` - hay `nrow(daily_counts)` filas, cada día está representado por una fila, pero especialmente al principio de la epidemia *algunos días no están presentes (no hubo casos admitidos en esos días)*.
 
-Es crucial reconocer que una función estándar de balanceo (como slide_dbl() utilizaría una ventana de 7 *filas*, no de 7 *días*. Por lo tanto, si hay fechas ausentes, ¡algunas ventanas se extenderán realmente más de 7 días naturales!
+Es crucial reconocer que una función estándar de balanceo (como `slide_dbl()` utilizaría una ventana de 7 *filas*, no de 7 *días*. Por lo tanto, si hay fechas ausentes, ¡algunas ventanas se extenderán realmente más de 7 días naturales!
 
-Se puede conseguir una ventana móvil "inteligente" con slide_index_dbl(). El "índice" significa que la función utiliza una *columna independiente* como "índice" para la ventana móvil. La ventana no se basa simplemente en las filas del dataframe.
+Se puede conseguir una ventana móvil "inteligente" con `slide_index_dbl()`. El "índex" significa que la función utiliza una *columna independiente* como "index" para la ventana móvil. La ventana no se basa simplemente en las filas del dataframe.
 
-Si la columna índice es una fecha, tiene la posibilidad añadida de especificar la extensión de la ventana a .before = y/o .after = en unidades de **lubridate** days() o months(). Si hace estas cosas, la función incluirá los días ausentes en las ventanas como si estuvieran allí (como valores NA).
+Si la columna índex es una fecha, tiene la posibilidad añadida de especificar la extensión de la ventana a `.before = ` y/o `.after = ` en unidades de `days()` o `months()` de **lubridate**. Si hace sestas cosas, la función incluirá los días ausentes en las ventanas como si estuvieran allí (como valores `NA`).
 
 Mostremos una comparación. A continuación, calculamos la incidencia móvil de casos de 7 días con ventanas regulares e indexadas.
 
-Obsérvese cómo en la columna normal de las 7 primeras filas el recuento aumenta constantemente a *pesar de que las filas no tienen 7 días de diferencia*. La columna adyacente "indexada" tiene en cuenta estos días naturales ausentes, por lo que sus sumas de 7 días son mucho menores, al menos en este periodo de la epidemia en el que los casos están más alejados.
+Fíjate cómo en la columna normal de las 7 primeras filas el recuento aumenta constantemente a *pesar de que las filas no tienen 7 días de diferencia*. La columna adyacente "indexada" tiene en cuenta estos días naturales ausentes, por lo que sus sumas de 7 días son mucho menores, al menos en este periodo de la epidemia en el que los casos están más alejados.
 
-Ahora puede trazar estos datos utilizando ggplot():
+Ahora puede trazar estos datos utilizando `ggplot()`:
 
 Rodando por el grupo
 
-Si agrupa sus datos antes de utilizar una función **deslizante**, las ventanas deslizantes se aplicarán por grupo. Tenga cuidado de organizar sus filas en el orden deseado *por grupo*.
+Si agrupas los datos antes de utilizar una función **slider**, las ventanas deslizantes se aplicarán por grupo. Ten cuidado de organizar las filas en el orden deseado *por grupo*.
 
-Cada vez que se inicia un nuevo grupo, la ventana deslizante se reinicia. Por lo tanto, un matiz a tener en cuenta es que si sus datos están agrupados *y* ha establecido .complete = TRUE, tendrá valores vacíos en cada transición entre grupos. A medida que la función se desplaza hacia abajo a través de las filas, cada transición en la columna de agrupación reiniciará la acumulación del tamaño mínimo de la ventana para permitir un cálculo.
+Cada vez que se inicia un nuevo grupo, la ventana deslizante se reinicia. Por lo tanto, un matiz a tener en cuenta es que si tus datos están agrupados *y* has establecido `.complete = TRUE`, tendrás valores vacíos en cada transición entre grupos. A medida que la función se desplaza hacia abajo a través de las filas, cada transición en la columna de agrupación reiniciará la acumulación del tamaño mínimo de la ventana para permitir un cálculo.
 
 Consulta la página del manual sobre [Agrupar datos]](#grouping-data) para obtener detalles sobre la agrupación de datos.
 
-A continuación, contamos los casos del listado por fecha *y* por hospital. Luego ordenamos las filas en orden ascendente, primero ordenando por hospital y luego dentro de éste por fecha. A continuación establecemos group_by(). Entonces podemos crear nuestra nueva media móvil.
+A continuación, contamos los casos del listado por fecha *y* por hospital. Luego ordenamos las filas en orden ascendente, primero ordenando por hospital y luego dentro de éste por fecha. A continuación establecemos `group_by()`. Entonces podemos crear nuestra nueva media móvil.
 
 Aquí está el nuevo conjunto de datos:
 
-Ahora podemos trazar las medias móviles, mostrando los datos por grupo especificando \~ hospital a facet_wrap() en ggplot(). Para divertirnos, trazamos dos geometrías: una geom_col() que muestra los recuentos de casos diarios y una geom_line() que muestra la media móvil de 7 días.
+Ahora podemos trazar las medias móviles, mostrando los datos por grupo especificando `~ hospital` a `facet_wrap()` en `ggplot()`. Para divertirnos, trazamos dos geometrías: una `geom_col()` que muestra los recuentos de casos diarios y una `geom_line()` que muestra la media móvil de 7 días.
 
-***PELIGRO:*** Si obtiene un error que dice *"slide() fue obsoleta en tsibble 0.9.0 y ahora está desaparecida. Por favor, utiliza slider::slide() en su lugar"*, significa que la función slide() del paquete **tsibble** está enmascarando la función slide() del paquete **slider**. Solucione esto especificando el paquete en el comando, como slider::slide_dbl().
+***PELIGRO:*** Si obtienes un error que dice *"slide() was deprecated in tsibble 0.9.0 and is now defunct. Please use slider::slide() instead."*, significa que la función `slide()` del paquete **tsibble** está enmascarando la función `slide()` del paquete **slider**. Soluciona esto especificando el paquete en el comando, como `slider::slide_dbl()`.
 
-Calcular con **tidyquant** dentro de ggplot()
+Calcular con **tidyquant** dentro de `ggplot()`
 
-El paquete **tidyquant** ofrece otro enfoque para calcular las medias móviles, esta vez desde el propio comando ggplot().
+El paquete **tidyquant** ofrece otro enfoque para calcular las medias móviles, esta vez *dentro* del comando `ggplot()`.
 
-Debajo del listado, los datos se cuentan por fecha de inicio, y esto se traza como una línea descolorida (alfa \< 1). Encima hay una línea creada con geom_ma() del paquete **tidyquant**, con una ventana de 7 días (n = 7) con el color y el grosor especificados.
+Bajo `linelist`, los datos se cuentan por fecha de inicio, y esto se traza como una línea descolorida (`alpha` < 1). Encima hay una línea creada con `geom_ma()` del paquete **tidyquant**, con una ventana de 7 días (`n = 7`) con el color y el grosor especificados.
 
-Por defecto geom_ma() utiliza una media móvil simple (ma_fun = "SMA"), pero se pueden especificar otros tipos, como:
+Por defecto `geom_ma()` utiliza una media móvil simple (`ma_fun = "SMA"`), pero se pueden especificar otros tipos, como:
 
 * "EMA" - media móvil exponencial (más peso a las observaciones recientes)
-
-* "WMA" - media móvil ponderada (los wts se utilizan para ponderar las observaciones en la media móvil)
-
+* "WMA" - media móvil ponderada (los `wts` se utilizan para ponderar las observaciones en la media móvil)
 * Otros se pueden encontrar en la documentación de la función
 
 Consulta esta [viñeta]](https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ04-charting-with-tidyquant.html) para obtener más detalles sobre las opciones disponibles en **tidyquant**.
 
 Recursos
 
-Vea la útil [viñeta]](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) en línea [para elpaquete de**deslizadores**]](https://cran.r-project.org/web/packages/slider/vignettes/slider.html)
+Consulta la útil [viñeta en línea del paquete  **slider**](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) 
 
-La [página github del]](https://github.com/DavisVaughan/slider) **deslizador**
+La [página github del]](https://github.com/DavisVaughan/slider) **slider**
 
-Una [viñeta]](https://davisvaughan.github.io/slider/articles/slider.html) **deslizante**
+Una [viñeta]](https://davisvaughan.github.io/slider/articles/slider.html) **slider**
 
 [viñeta tidyquant]](https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ04-charting-with-tidyquant.html)
 
-Si tu caso de uso requiere que te "saltes" los fines de semana e incluso los días festivos, puede que te guste el paquete **almanaque**. 
+Si tu caso de uso requiere que te "saltes" los fines de semana e incluso los días festivos, puede que te guste el paquete **almanac**. 
