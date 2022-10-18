@@ -610,7 +610,7 @@ source_population <- population %>%
   
   
 ## plot the unweighted sample population 
-sample_population <- plot_age_pyramid(survey_data, 
+sample_population <- age_pyramid(survey_data, #plot_age_pyramid is #deprecated and no longer exists in sitrep #jfmont
                  age_group = "age_group", 
                  split_by = "sex",
                  proportion = TRUE) + 
@@ -629,7 +629,7 @@ weighted_population <- survey_design %>%
   ## make sure the variables are factors
   mutate(age_group = factor(age_group), 
          sex = factor(sex)) %>%
-  plot_age_pyramid(
+  age_pyramid( #plot_age_pyramid is deprecated and no longer exists #jfmont
     age_group = "age_group",
     split_by = "sex", 
     proportion = TRUE) +

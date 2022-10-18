@@ -4,36 +4,41 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>16 Borrador. Iteración, bucles y listas | El manual de R para la Epidemiología</title>
+<title>15 Borrador. Iteración, bucles y listas | El manual de R para Epi’s</title>
 <meta name="author" content="El equipo del manual">
 <meta name="description" content="ADVERTENCIA: Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="16 Borrador. Iteración, bucles y listas | El manual de R para la Epidemiología">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta property="og:title" content="15 Borrador. Iteración, bucles y listas | El manual de R para Epi’s">
 <meta property="og:type" content="book">
 <meta property="og:description" content="ADVERTENCIA: Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="16 Borrador. Iteración, bucles y listas | El manual de R para la Epidemiología">
+<meta name="twitter:title" content="15 Borrador. Iteración, bucles y listas | El manual de R para Epi’s">
 <meta name="twitter:description" content="ADVERTENCIA: Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.20/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.25/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
 <script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
 <script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<link href="libs/tabwid-1.0.0/tabwid.css" rel="stylesheet">
+<link href="libs/tabwid-1.1.0/tabwid.css" rel="stylesheet">
+<link href="libs/tabwid-1.1.0/scrool.css" rel="stylesheet">
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script><script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script><script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="libs/grViz-binding-1.0.7/grViz.js"></script><script src="libs/d3-4.5.0/d3.min.js"></script><script src="libs/sankey-1/sankey.js"></script><script src="libs/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script><script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="libs/grViz-binding-1.0.9/grViz.js"></script><script src="libs/d3-4.5.0/d3.min.js"></script><script src="libs/sankey-1/sankey.js"></script><script src="libs/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.0/visNetwork.js"></script><link href="libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.2/visNetwork.js"></script><link href="libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="libs/plotly-basic-2.5.1/plotly-basic-2.5.1.min.js"></script><script src="libs/plotly-cartesian-2.5.1/plotly-cartesian-2.5.1.min.js"></script><script src="libs/proj4js-2.3.15/proj4.js"></script><link href="libs/highcharts-9.3.1/css/motion.css" rel="stylesheet">
-<script src="libs/highcharts-9.3.1/highcharts.js"></script><script src="libs/highcharts-9.3.1/highcharts-3d.js"></script><script src="libs/highcharts-9.3.1/highcharts-more.js"></script><script src="libs/highcharts-9.3.1/modules/stock.js"></script><script src="libs/highcharts-9.3.1/modules/map.js"></script><script src="libs/highcharts-9.3.1/modules/data.js"></script><script src="libs/highcharts-9.3.1/modules/exporting.js"></script><script src="libs/highcharts-9.3.1/modules/offline-exporting.js"></script><script src="libs/highcharts-9.3.1/modules/drilldown.js"></script><script src="libs/highcharts-9.3.1/modules/item-series.js"></script><script src="libs/highcharts-9.3.1/modules/overlapping-datalabels.js"></script><script src="libs/highcharts-9.3.1/modules/annotations.js"></script><script src="libs/highcharts-9.3.1/modules/export-data.js"></script><script src="libs/highcharts-9.3.1/modules/funnel.js"></script><script src="libs/highcharts-9.3.1/modules/heatmap.js"></script><script src="libs/highcharts-9.3.1/modules/treemap.js"></script><script src="libs/highcharts-9.3.1/modules/sankey.js"></script><script src="libs/highcharts-9.3.1/modules/dependency-wheel.js"></script><script src="libs/highcharts-9.3.1/modules/organization.js"></script><script src="libs/highcharts-9.3.1/modules/solid-gauge.js"></script><script src="libs/highcharts-9.3.1/modules/streamgraph.js"></script><script src="libs/highcharts-9.3.1/modules/sunburst.js"></script><script src="libs/highcharts-9.3.1/modules/vector.js"></script><script src="libs/highcharts-9.3.1/modules/wordcloud.js"></script><script src="libs/highcharts-9.3.1/modules/xrange.js"></script><script src="libs/highcharts-9.3.1/modules/tilemap.js"></script><script src="libs/highcharts-9.3.1/modules/venn.js"></script><script src="libs/highcharts-9.3.1/modules/gantt.js"></script><script src="libs/highcharts-9.3.1/modules/timeline.js"></script><script src="libs/highcharts-9.3.1/modules/parallel-coordinates.js"></script><script src="libs/highcharts-9.3.1/modules/bullet.js"></script><script src="libs/highcharts-9.3.1/modules/coloraxis.js"></script><script src="libs/highcharts-9.3.1/modules/dumbbell.js"></script><script src="libs/highcharts-9.3.1/modules/lollipop.js"></script><script src="libs/highcharts-9.3.1/modules/series-label.js"></script><script src="libs/highcharts-9.3.1/plugins/motion.js"></script><script src="libs/highcharts-9.3.1/custom/reset.js"></script><script src="libs/highcharts-9.3.1/modules/boost.js"></script><script src="libs/highchart-binding-0.9.4/highchart.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style_bs4.css">
+<script src="libs/highcharts-9.3.1/highcharts.js"></script><script src="libs/highcharts-9.3.1/highcharts-3d.js"></script><script src="libs/highcharts-9.3.1/highcharts-more.js"></script><script src="libs/highcharts-9.3.1/modules/stock.js"></script><script src="libs/highcharts-9.3.1/modules/map.js"></script><script src="libs/highcharts-9.3.1/modules/data.js"></script><script src="libs/highcharts-9.3.1/modules/exporting.js"></script><script src="libs/highcharts-9.3.1/modules/offline-exporting.js"></script><script src="libs/highcharts-9.3.1/modules/drilldown.js"></script><script src="libs/highcharts-9.3.1/modules/item-series.js"></script><script src="libs/highcharts-9.3.1/modules/overlapping-datalabels.js"></script><script src="libs/highcharts-9.3.1/modules/annotations.js"></script><script src="libs/highcharts-9.3.1/modules/export-data.js"></script><script src="libs/highcharts-9.3.1/modules/funnel.js"></script><script src="libs/highcharts-9.3.1/modules/heatmap.js"></script><script src="libs/highcharts-9.3.1/modules/treemap.js"></script><script src="libs/highcharts-9.3.1/modules/sankey.js"></script><script src="libs/highcharts-9.3.1/modules/dependency-wheel.js"></script><script src="libs/highcharts-9.3.1/modules/organization.js"></script><script src="libs/highcharts-9.3.1/modules/solid-gauge.js"></script><script src="libs/highcharts-9.3.1/modules/streamgraph.js"></script><script src="libs/highcharts-9.3.1/modules/sunburst.js"></script><script src="libs/highcharts-9.3.1/modules/vector.js"></script><script src="libs/highcharts-9.3.1/modules/wordcloud.js"></script><script src="libs/highcharts-9.3.1/modules/xrange.js"></script><script src="libs/highcharts-9.3.1/modules/tilemap.js"></script><script src="libs/highcharts-9.3.1/modules/venn.js"></script><script src="libs/highcharts-9.3.1/modules/gantt.js"></script><script src="libs/highcharts-9.3.1/modules/timeline.js"></script><script src="libs/highcharts-9.3.1/modules/parallel-coordinates.js"></script><script src="libs/highcharts-9.3.1/modules/bullet.js"></script><script src="libs/highcharts-9.3.1/modules/coloraxis.js"></script><script src="libs/highcharts-9.3.1/modules/dumbbell.js"></script><script src="libs/highcharts-9.3.1/modules/lollipop.js"></script><script src="libs/highcharts-9.3.1/modules/series-label.js"></script><script src="libs/highcharts-9.3.1/plugins/motion.js"></script><script src="libs/highcharts-9.3.1/custom/reset.js"></script><script src="libs/highcharts-9.3.1/modules/boost.js"></script><script src="libs/highchart-binding-0.9.4/highchart.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style_bs4.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -43,17 +48,17 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">El manual de R para la Epidemiología</a>
+        <a href="index.html" title="">El manual de R para Epi’s</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
     <div id="main-nav" class="collapse-lg">
       <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
 </form>
 
-      <nav aria-label="Table of contents"><h2>Tabla de contenidos</h2>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"></a></li>
 <li class="book-part">Acerca de este libro</li>
@@ -68,51 +73,49 @@
 <li class="book-part">Gestión de datos</li>
 <li><a class="" href="cleaning-data-and-core-functions.html"><span class="header-section-number">8</span> Limpieza de datos y funciones básicas</a></li>
 <li><a class="" href="working-with-dates.html"><span class="header-section-number">9</span> Borrador. Trabajando con Fechas</a></li>
-<li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Borrador. Caracteres y cadenas</a></li>
-<li><a class="" href="factors.html"><span class="header-section-number">11</span> Borrador. Factores</a></li>
-<li><a class="" href="pivoting-data.html"><span class="header-section-number">12</span> Borrador. Pivotar datos</a></li>
-<li><a class="" href="grouping-data.html"><span class="header-section-number">13</span> Borrador. Agrupar datos</a></li>
-<li><a class="" href="joining-data.html"><span class="header-section-number">14</span> Borrador. Unir datos</a></li>
-<li><a class="" href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></li>
-<li><a class="active" href="iteration-loops-and-lists.html"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
+<li><a class="" href="characters-and-strings.html"><span class="header-section-number">10</span> Caracteres y cadenas</a></li>
+<li><a class="" href="pivoting-data.html"><span class="header-section-number">11</span> Pivotar datos</a></li>
+<li><a class="" href="grouping-data.html"><span class="header-section-number">12</span> Agrupar datos</a></li>
+<li><a class="" href="joining-data.html"><span class="header-section-number">13</span> Unir datos</a></li>
+<li><a class="" href="de-duplication.html"><span class="header-section-number">14</span> Borrador. De-duplicación</a></li>
+<li><a class="active" href="iteration-loops-and-lists.html"><span class="header-section-number">15</span> Borrador. Iteración, bucles y listas</a></li>
 <li class="book-part">Análisis</li>
-<li><a class="" href="descriptive-tables.html"><span class="header-section-number">17</span> Borrador. Tablas descriptivas</a></li>
-<li><a class="" href="simple-statistical-tests.html"><span class="header-section-number">18</span> Borrador. Tests estadísticos sencillos</a></li>
-<li><a class="" href="univariate-and-multivariable-regression.html"><span class="header-section-number">19</span> Borrador. Regresión univariante y multivariable</a></li>
-<li><a class="" href="missing-data.html"><span class="header-section-number">20</span> Borrador. Valores faltantes</a></li>
-<li><a class="" href="standardised-rates.html"><span class="header-section-number">21</span> Borrador. Tasas estandarizadas</a></li>
-<li><a class="" href="moving-averages.html"><span class="header-section-number">22</span> Borrador. Medias Móviles</a></li>
-<li><a class="" href="time-series-and-outbreak-detection.html"><span class="header-section-number">23</span> Borrador. Series temporales y detección de brotes</a></li>
-<li><a class="" href="epidemic-modeling.html"><span class="header-section-number">24</span> Borrador. Modelización de epidemias</a></li>
-<li><a class="" href="contact-tracing-1.html"><span class="header-section-number">25</span> Borrador. Rastreo de contactos</a></li>
-<li><a class="" href="survey-analysis.html"><span class="header-section-number">26</span> Borrador. Análisis de encuestas</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">27</span> Borrador. Análisis de supervivencia</a></li>
-<li><a class="" href="gis-basics.html"><span class="header-section-number">28</span> Conceptos básicos de los SIG</a></li>
+<li><a class="" href="descriptive-tables.html"><span class="header-section-number">16</span> Tablas descriptivas</a></li>
+<li><a class="" href="simple-statistical-tests.html"><span class="header-section-number">17</span> Tests estadísticos sencillos</a></li>
+<li><a class="" href="univariate-and-multivariable-regression.html"><span class="header-section-number">18</span> Borrador. Regresión univariante y multivariable</a></li>
+<li><a class="" href="missing-data.html"><span class="header-section-number">19</span> Borrador. Valores faltantes</a></li>
+<li><a class="" href="standardised-rates.html"><span class="header-section-number">20</span> Borrador. Tasas estandarizadas</a></li>
+<li><a class="" href="moving-averages.html"><span class="header-section-number">21</span> Borrador. Medias Móviles</a></li>
+<li><a class="" href="time-series-and-outbreak-detection.html"><span class="header-section-number">22</span> Borrador. Series temporales y detección de brotes</a></li>
+<li><a class="" href="epidemic-modeling.html"><span class="header-section-number">23</span> Borrador. Modelización de epidemias</a></li>
+<li><a class="" href="contact-tracing-1.html"><span class="header-section-number">24</span> Borrador. Rastreo de contactos</a></li>
+<li><a class="" href="survey-analysis.html"><span class="header-section-number">25</span> Borrador. Análisis de encuestas</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">26</span> Borrador. Análisis de supervivencia</a></li>
+<li><a class="" href="gis-basics.html"><span class="header-section-number">27</span> Conceptos básicos de los SIG</a></li>
 <li class="book-part">Visualización de datos</li>
-<li><a class="" href="tables-for-presentation.html"><span class="header-section-number">29</span> Borrador. Tablas para presentaciones</a></li>
-<li><a class="" href="ggplot-basics.html"><span class="header-section-number">30</span> Conceptos básicos de ggplot</a></li>
-<li><a class="" href="ggplot-tips.html"><span class="header-section-number">31</span> Consejos de ggplot</a></li>
-<li><a class="" href="epidemic-curves.html"><span class="header-section-number">32</span> Curvas epidémicas</a></li>
-<li><a class="" href="demographic-pyramids-and-likert-scales.html"><span class="header-section-number">33</span> Pirámides de población y escalas de Likert</a></li>
-<li><a class="" href="heat-plots.html"><span class="header-section-number">34</span> Gráficos de calor</a></li>
-<li><a class="" href="diagrams-and-charts.html"><span class="header-section-number">35</span> Diagramas y gráficos</a></li>
-<li><a class="" href="combinations-analysis.html"><span class="header-section-number">36</span> Borrador. Análisis de combinaciones</a></li>
-<li><a class="" href="transmission-chains.html"><span class="header-section-number">37</span> Borrador. Cadenas de transmisión</a></li>
-<li><a class="" href="phylogenetic-trees-1.html"><span class="header-section-number">38</span> Árboles filogenéticos</a></li>
-<li><a class="" href="interactive-plots.html"><span class="header-section-number">39</span> Gráficos interactivos</a></li>
+<li><a class="" href="ggplot-basics.html"><span class="header-section-number">28</span> Conceptos básicos de ggplot</a></li>
+<li><a class="" href="ggplot-tips.html"><span class="header-section-number">29</span> Consejos de ggplot</a></li>
+<li><a class="" href="epidemic-curves.html"><span class="header-section-number">30</span> Curvas epidémicas</a></li>
+<li><a class="" href="demographic-pyramids-and-likert-scales.html"><span class="header-section-number">31</span> Pirámides de población y escalas de Likert</a></li>
+<li><a class="" href="heat-plots.html"><span class="header-section-number">32</span> Gráficos de calor</a></li>
+<li><a class="" href="diagrams-and-charts.html"><span class="header-section-number">33</span> Diagramas y gráficos</a></li>
+<li><a class="" href="combinations-analysis.html"><span class="header-section-number">34</span> Borrador. Análisis de combinaciones</a></li>
+<li><a class="" href="transmission-chains.html"><span class="header-section-number">35</span> Borrador. Cadenas de transmisión</a></li>
+<li><a class="" href="phylogenetic-trees-1.html"><span class="header-section-number">36</span> Árboles filogenéticos</a></li>
+<li><a class="" href="interactive-plots.html"><span class="header-section-number">37</span> Gráficos interactivos</a></li>
 <li class="book-part">Informes y Dashboards</li>
-<li><a class="" href="reports-with-r-markdown.html"><span class="header-section-number">40</span> Informes con R Markdown</a></li>
-<li><a class="" href="organizing-routine-reports.html"><span class="header-section-number">41</span> Organización de informes rutinarios</a></li>
-<li><a class="" href="dashboards-with-r-markdown.html"><span class="header-section-number">42</span> Borrador. Dashboards con R Markdown</a></li>
-<li><a class="" href="dashboards-with-shiny.html"><span class="header-section-number">43</span> Borrador. Dashboards con Shiny</a></li>
+<li><a class="" href="reports-with-r-markdown.html"><span class="header-section-number">38</span> Informes con R Markdown</a></li>
+<li><a class="" href="organizing-routine-reports.html"><span class="header-section-number">39</span> Organización de informes rutinarios</a></li>
+<li><a class="" href="dashboards-with-r-markdown.html"><span class="header-section-number">40</span> Borrador. Dashboards con R Markdown</a></li>
+<li><a class="" href="dashboards-with-shiny.html"><span class="header-section-number">41</span> Borrador. Dashboards con Shiny</a></li>
 <li class="book-part">Miscelánea</li>
-<li><a class="" href="writing-functions-1.html"><span class="header-section-number">44</span> Escribir funciones</a></li>
-<li><a class="" href="directory-interactions.html"><span class="header-section-number">45</span> Borrador. Interacciones con directorios</a></li>
-<li><a class="" href="version-control-and-collaboration-with-git-and-github.html"><span class="header-section-number">46</span> Control de versiones y colaboración con Git y Github</a></li>
-<li><a class="" href="common-errors.html"><span class="header-section-number">47</span> Errores comunes</a></li>
-<li><a class="" href="getting-help.html"><span class="header-section-number">48</span> Cómo obtener ayuda</a></li>
-<li><a class="" href="r-on-network-drives.html"><span class="header-section-number">49</span> Borrador. R en redes locales</a></li>
-<li><a class="" href="data-table.html"><span class="header-section-number">50</span> Borrador. data.table</a></li>
+<li><a class="" href="writing-functions-1.html"><span class="header-section-number">42</span> Escribir funciones</a></li>
+<li><a class="" href="directory-interactions.html"><span class="header-section-number">43</span> Borrador. Interacciones con directorios</a></li>
+<li><a class="" href="version-control-and-collaboration-with-git-and-github.html"><span class="header-section-number">44</span> Control de versiones y colaboración con Git y Github</a></li>
+<li><a class="" href="common-errors.html"><span class="header-section-number">45</span> Errores comunes</a></li>
+<li><a class="" href="getting-help.html"><span class="header-section-number">46</span> Cómo obtener ayuda</a></li>
+<li><a class="" href="r-on-network-drives.html"><span class="header-section-number">47</span> Borrador. R en redes locales</a></li>
+<li><a class="" href="data-table.html"><span class="header-section-number">48</span> Borrador. data.table</a></li>
 </ul>
 
         <div class="book-extra">
@@ -120,9 +123,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="iteration-loops-and-lists" class="section level1" number="16">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="iteration-loops-and-lists" class="section level1" number="15">
 <h1>
-<span class="header-section-number">16</span> Borrador. Iteración, bucles y listas<a class="anchor" aria-label="anchor" href="#iteration-loops-and-lists"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15</span> Borrador. Iteración, bucles y listas<a class="anchor" aria-label="anchor" href="#iteration-loops-and-lists"><i class="fas fa-link"></i></a>
 </h1>
 <p><span style="color: red;"><strong><em>ADVERTENCIA:</em></strong> Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span></p>
 <p>Con frecuencia nos enfrentamos a la repetición de análisis por subgrupos, como países, distritos o grupos de edad. Estas son sólo algunas de las situaciones frecuentes que implican la <em>iteración</em>. La codificación de sus operaciones iterativas utilizando los enfoques que se indican a continuación te ayudarán a realizar estas tareas repetitivas más rápidamente, a reducir la posibilidad de error y a reducir la longitud del código.</p>
@@ -138,15 +141,15 @@
 <li>Ejecución de pruebas T para varias columnas en un dataframe</li>
 </ul>
 <p>En la <a href="iteration-loops-and-lists.html#iter_purrr">sección</a> de <strong>purrr</strong> también proporcionaremos varios ejemplos de creación y manejo de listas.</p>
-<div id="preparation-6" class="section level2" number="16.1">
+<div id="preparation-6" class="section level2" number="15.1">
 <h2>
-<span class="header-section-number">16.1</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-6"><i class="fas fa-link"></i></a>
 </h2>
 <div id="cargar-paquetes-7" class="section level3 unnumbered">
 <h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes-7"><i class="fas fa-link"></i></a>
 </h3>
 <p>Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load()</a></code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para su uso. También puedes cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de R <strong>base</strong>. Consulta la página sobre <a href="r-basics.html#r-basics">fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
-<div class="sourceCode" id="cb664"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb750"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span>
      <span class="va">rio</span>,         <span class="co"># import/export</span>
      <span class="va">here</span>,        <span class="co"># file locator</span>
@@ -157,18 +160,18 @@
 <div id="importar-datos-7" class="section level3 unnumbered">
 <h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-7"><i class="fas fa-link"></i></a>
 </h3>
-<p>Importamos los datos de casos de una epidemia de ébola simulada. Si quieres seguir el proceso, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds">clica para descargar linelist “limpia”</a> (como archivo .rds). Importa los datos con la función <code>import()</code> del paquete <strong>rio</strong> (maneja muchos tipos de archivos como .xlsx, .csv, .rds - Mira la página de <a href="import-and-export.html#import-and-export">importación y exportación</a> para más detalles).</p>
-<div class="sourceCode" id="cb665"><pre class="downlit sourceCode r">
+<p>Importamos los datos de casos de una epidemia de ébola simulada. Si quieres seguir el proceso, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds">clica para descargar linelist “limpia”</a> (como archivo .rds). Importa los datos con la función <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> del paquete <strong>rio</strong> (maneja muchos tipos de archivos como .xlsx, .csv, .rds - Mira la página de <a href="import-and-export.html#import-and-export">importación y exportación</a> para más detalles).</p>
+<div class="sourceCode" id="cb751"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import the linelist</span>
-<span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
+<span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></code></pre></div>
 <p>A continuación se muestran las primeras 50 filas del listado.</p>
-<div id="htmlwidget-9e46bc1c6e3a9688bd4d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9e46bc1c6e3a9688bd4d">{"x":{"filter":"none","vertical":false,"data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
+<div id="htmlwidget-3d290b838d0235114bc1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3d290b838d0235114bc1">{"x":{"filter":"none","vertical":false,"data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
 </div>
 </div>
-<div id="for-loops" class="section level2" number="16.2">
+<div id="for-loops" class="section level2" number="15.2">
 <h2>
-<span class="header-section-number">16.2</span> <em>bucles for</em><a class="anchor" aria-label="anchor" href="#for-loops"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2</span> <em>bucles for</em><a class="anchor" aria-label="anchor" href="#for-loops"><i class="fas fa-link"></i></a>
 </h2>
 <div id="iter_loops" class="section level3 unnumbered">
 <h3>
@@ -188,7 +191,7 @@
 </ol>
 <p>La sintaxis básica es: <code>for (elemento en la secuencia) {hacer operaciones con el elemento}</code>. Fíjate en los paréntesis y las llaves. Los resultados pueden ser impresos en la consola, o almacenados en un objeto R contenedor.</p>
 <p>A continuación se muestra un sencillo ejemplo de <em>bucle for</em>.</p>
-<div class="sourceCode" id="cb666"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb752"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">num</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>  <span class="co"># the SEQUENCE is defined (numbers 1 to 5) and loop is opened with "{"</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">num</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span>             <span class="co"># The OPERATIONS (add two to each sequence number and print)</span>
 <span class="op">}</span>                            <span class="co"># The loop is closed with "}"                            </span></code></pre></div>
@@ -197,7 +200,7 @@
 ## [1] 5
 ## [1] 6
 ## [1] 7</code></pre>
-<div class="sourceCode" id="cb668"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb754"><pre class="downlit sourceCode r">
 <code class="sourceCode R">                             <span class="co"># There is no "container" in this example</span></code></pre></div>
 </div>
 <div id="secuencia" class="section level3 unnumbered">
@@ -211,7 +214,7 @@
 </ul>
 <p><strong>Ejemplo: secuencia de valores de caracteres</strong></p>
 <p>En este ejemplo, se realiza un bucle para cada valor de un vector de caracteres predefinido de nombres de hospitales.</p>
-<div class="sourceCode" id="cb669"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb755"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make vector of the hospital names</span>
 <span class="va">hospital_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">hospital</span><span class="op">)</span>
 <span class="va">hospital_names</span> <span class="co"># print</span></code></pre></div>
@@ -222,7 +225,7 @@
 ## [5] "Military Hospital"                   
 ## [6] "Central Hospital"</code></pre>
 <p>Hemos elegido el término <code>hosp</code> para representar los valores del vector nombres_de_hospital. Para la primera iteración del bucle, el valor de <code>hosp</code> será <code>hospital_names[1]]</code>. Para la segunda iteración del bucle será <code>hospital_names[2]]</code>. Y así sucesivamente…</p>
-<div class="sourceCode" id="cb671"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb757"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># a 'for loop' with character sequence</span>
 
 <span class="kw">for</span> <span class="op">(</span><span class="va">hosp</span> <span class="kw">in</span> <span class="va">hospital_names</span><span class="op">)</span><span class="op">{</span>       <span class="co"># sequence</span>
@@ -234,7 +237,7 @@
 <p>A continuación, la secuencia son los <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> (nombres de columnas) del dataframe <code>linelist</code>. El nombre de nuestro “elemento” es <code>col</code>, que representará el nombre de cada columna a medida que avanzan los bucles.</p>
 <p>A modo de ejemplo, incluimos código de operaciones dentro del <em>bucle for</em>, que se ejecuta para cada valor de la secuencia. En este código, los valores de la secuencia (nombres de las columnas) se utilizan para <em>indexar</em> (subconjuntar) <code>linelist</code>, una por una. Como se enseñó en la página de <a href="r-basics.html#r-basics">fundamentos de R, se utilizan</a> dobles ramificaciones <code>[[ ]]</code> para el subconjunto. La columna resultante se pasa a <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code>, y luego a <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> para producir el número de valores de la columna que faltan. El resultado se imprime en la consola: un número por cada columna.</p>
 <p>Una nota sobre la indexación con los nombres de las columnas - ¡cuando se refiera a la propia columna <em>¡no escribas simplemente “col”!</em> ya que representa sólo el nombre de la columna de caracteres! Para referirse a la columna completa debe utilizar el nombre de la columna como un <em>índice</em> en <code>linelist</code> a través de <code>linelist[[col]]</code>.</p>
-<div class="sourceCode" id="cb672"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb758"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">col</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>        <span class="co"># loop runs for each column in linelist; column name represented by "col" </span>
   
   <span class="co"># Example operations code - print number of missing values in column</span>
@@ -276,13 +279,13 @@
 <p>Por ejemplo, digamos que quiere recorrer cada fila de tu dataframe y extraer cierta información. Sus “elementos” serían números de fila numéricos. A menudo, los “elementos” en este caso se escriben como <code>i</code>.</p>
 <p>El proceso del <em>bucle for</em> podría explicarse en palabras como “para cada elemento de una secuencia de números desde 1 hasta el número total de filas de mi dataframe, haz X”. Para la primera iteración del bucle, el valor del “elemento” <code>i</code> sería 1. Para la segunda iteración, <code>i</code> sería 2, etc.</p>
 <p>Aquí está el aspecto de la secuencia en código: <code>for (i in 1:nrow(linelist)) {CODIGO DE OPERACIONES}</code> donde <code>i</code> representa el “elemento” y <code>1:nrow(linelist)</code> produce una secuencia de números consecutivos desde 1 hasta el número de filas en <code>linelist</code>.</p>
-<div class="sourceCode" id="cb674"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb760"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>  <span class="co"># use on a data frame</span>
   <span class="co"># OPERATIONS HERE</span>
 <span class="op">}</span>  </code></pre></div>
 <p>Si quieres que la secuencia sea numérica, pero partes de un vector (no de un dataframe), utiliza el atajo <code><a href="https://rdrr.io/r/base/seq.html">seq_along()</a></code> para devolver una secuencia de números para cada elemento del vector. Por ejemplo, <code>for (i en seq_along(nombres_de_hospital) {Código_de_operaciones}</code>.</p>
 <p>El código siguiente devuelve en realidad números, que se convertirían en el valor de<code>i</code>en tu respectivo bucle.</p>
-<div class="sourceCode" id="cb675"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb761"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">hospital_names</span><span class="op">)</span>  <span class="co"># use on a named vector</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5 6</code></pre>
 <p>Una ventaja de usar números en la secuencia es que es fácil usar también el número<code>i</code>para indexar un <em>contenedor</em> que almacene las salidas del bucle. Hay un ejemplo de esto en la sección de Operaciones más abajo.</p>
@@ -290,9 +293,9 @@
 <div id="operaciones" class="section level3 unnumbered">
 <h3>Operaciones<a class="anchor" aria-label="anchor" href="#operaciones"><i class="fas fa-link"></i></a>
 </h3>
-<p>Este es el código dentro de las llaves <code><a href="https://rdrr.io/r/base/Paren.html">{ }</a></code> del <em>bucle for</em>. Quieres que este código se ejecute para cada “elemento” de la <em>secuencia</em>. Por lo tanto, ¡ten cuidado de que cada parte de tu código que cambia por el “ítem” esté correctamente codificado de manera que realmente cambie! Por ejemplo, recuerda usar <code>[[ ]]</code> para la indexación.</p>
+<p>Este es el código dentro de las llaves <code>{ }</code> del <em>bucle for</em>. Quieres que este código se ejecute para cada “elemento” de la <em>secuencia</em>. Por lo tanto, ¡ten cuidado de que cada parte de tu código que cambia por el “ítem” esté correctamente codificado de manera que realmente cambie! Por ejemplo, recuerda usar <code>[[ ]]</code> para la indexación.</p>
 <p>En el ejemplo siguiente, iteramos por cada fila de <code>linelist</code>. Los valores de género y edad de cada fila se pegan juntos y se almacenan en el vector de caracteres contenedor <code>cases_demographics</code>. Observe cómo también utilizamos la indexación <code>[[i]]</code> para guardar la salida del bucle en la posición correcta en el vector “contenedor”.</p>
-<div class="sourceCode" id="cb677"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb763"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create container to store results - a character vector</span>
 <span class="va">cases_demographics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"character"</span>, length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span><span class="op">)</span>
 
@@ -322,18 +325,18 @@
 <p><strong>Vector vacío</strong></p>
 <p>Utiliza <code><a href="https://rdrr.io/r/base/vector.html">vector()</a></code> y especifique el <code>mode =</code> en función del tipo esperada de los objetos que va a insertar - ya sea “double” (para contener números), “carácter” o “lógico”. También debe establecer la <code>length =</code> por adelantado. Esta debe ser la longitud de tu secuencia de <em>bucle for</em>.</p>
 <p>Digamos que quieres almacenar la mediana de la demora hasta el ingreso para cada hospital. Utilizaría “double” y establecería que la longitud fuera el número de salidas esperadas (el número de hospitales únicos en el set de datos).</p>
-<div class="sourceCode" id="cb679"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb765"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">delays</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>
   mode <span class="op">=</span> <span class="st">"double"</span>,                            <span class="co"># we expect to store numbers</span>
   length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">hospital</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># the number of unique hospitals in the dataset</span></code></pre></div>
 <p><strong>Dataframe vacío</strong></p>
 <p>Puedes hacer un dataframe vacío especificando el número de filas y columnas de esta manera:</p>
-<div class="sourceCode" id="cb680"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb766"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">delays</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><strong>Lista vacía</strong></p>
 <p>Es posible que desee almacenar algunos gráficos creados por un <em>bucle for</em> en una lista. Una lista es como un vector, pero contiene otros objetos R dentro de ella que pueden ser de diferentes tipos. Los elementos de una lista pueden ser un solo número, un dataframe, un vector e incluso otra lista.</p>
 <p>En realidad, se inicializa una lista vacía utilizando el mismo comando <code><a href="https://rdrr.io/r/base/vector.html">vector()</a></code> que el anterior, pero con <code>mode = "list"</code>. Especifica la longitud como quieras.</p>
-<div class="sourceCode" id="cb681"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb767"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"list"</span>, length <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="impresión" class="section level3 unnumbered">
@@ -341,7 +344,7 @@
 </h3>
 <p>Ten en cuenta que para imprimir desde dentro de un <em>bucle for</em> probablemente tendrás que envolver explícitamente con la función <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>.</p>
 <p>En este ejemplo, la secuencia es un vector de caracteres explícito, que se utiliza para subsumir <code>linelist</code> en un hospital. Los resultados no se almacenan en un contenedor, sino que se imprimen en la consola con la función <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>.</p>
-<div class="sourceCode" id="cb682"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb768"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">hosp</span> <span class="kw">in</span> <span class="va">hospital_names</span><span class="op">)</span><span class="op">{</span> 
      <span class="va">hospital_cases</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">hospital</span> <span class="op">==</span> <span class="va">hosp</span><span class="op">)</span>
      <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">hospital_cases</span><span class="op">)</span><span class="op">)</span>
@@ -360,7 +363,7 @@
 </h3>
 <p>Para reunir los tres componentes (contenedor, secuencia y operaciones) vamos a intentar trazar una epicurva para cada hospital (véase la página sobre <a href="epidemic-curves.html#epidemic-curves">curvas epidémicas</a>).</p>
 <p>Podemos hacer una bonita epicurva de <em>todos los</em> casos por género utilizando el paquete <strong>incidence2</strong> como se indica a continuación:</p>
-<div class="sourceCode" id="cb684"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb770"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create 'incidence' object</span>
 <span class="va">outbreak</span> <span class="op">&lt;-</span> <span class="fu">incidence2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/incidence.html">incidence</a></span><span class="op">(</span>   
      x <span class="op">=</span> <span class="va">linelist</span>,                   <span class="co"># dataframe - complete linelist</span>
@@ -375,7 +378,7 @@
      color <span class="op">=</span> <span class="st">"black"</span>,                <span class="co"># outline color of bars</span>
      title <span class="op">=</span> <span class="st">"Outbreak of ALL cases"</span> <span class="co"># title</span>
      <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-599-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-678-1.png" width="672"></div>
 <p>Para producir un gráfico separado para cada caso del hospital, podemos poner este código de epicurva dentro de un <em>bucle for</em>.</p>
 <p>En primer lugar, guardamos un vector con nombre de los nombres únicos de los hospitales, <code>hospital_names</code>. El <em>bucle for</em> se ejecutará una vez para cada uno de estos nombres: <code>for (hosp in hospital_names)</code>. En cada iteración del <em>bucle for</em>, el nombre actual del hospital del vector se representará como <code>hosp</code> para tu uso dentro del bucle.</p>
 <p>Dentro de las operaciones del bucle, puede escribir el código R de forma normal, pero utilizando el “elemento” (<code>hosp</code> en este caso) sabiendo que tu valor será cambiante. Dentro de este bucle:</p>
@@ -389,7 +392,7 @@
 <li>El bucle sigue adelante para repetirse con el siguiente hospital en <code>hospital_names</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb685"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb771"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make vector of the hospital names</span>
 <span class="va">hospital_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">hospital</span><span class="op">)</span>
 
@@ -417,26 +420,26 @@
      <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">plot_hosp</span><span class="op">)</span>
      
 <span class="op">}</span> <span class="co"># end the for loop when it has been run for every hospital in hospital_names </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-600-1.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-600-2.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-600-3.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-600-4.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-600-5.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-600-6.png" width="50%"></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-679-1.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-679-2.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-679-3.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-679-4.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-679-5.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-679-6.png" width="50%"></p>
 </div>
 <div id="seguimiento-del-progreso-de-un-bucle" class="section level3 unnumbered">
 <h3>Seguimiento del progreso de un bucle<a class="anchor" aria-label="anchor" href="#seguimiento-del-progreso-de-un-bucle"><i class="fas fa-link"></i></a>
 </h3>
 <p>Un bucle con muchas iteraciones puede funcionar durante muchos minutos o incluso horas. Por lo tanto, puede ser útil imprimir el progreso en la consola de R. La sentencia <code>if</code> de abajo puede colocarse <em>dentro</em> de las operaciones del bucle para imprimir cada 100 números. Sólo tiene que ajustarla para que <code>i</code> sea el “elemento” de tu bucle.</p>
-<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="iteration-loops-and-lists.html#cb686-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loop with code to print progress every 100 iterations</span></span>
-<span id="cb686-2"><a href="iteration-loops-and-lists.html#cb686-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(linelist))){</span>
-<span id="cb686-3"><a href="iteration-loops-and-lists.html#cb686-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb686-4"><a href="iteration-loops-and-lists.html#cb686-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print progress</span></span>
-<span id="cb686-5"><a href="iteration-loops-and-lists.html#cb686-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">%%</span> <span class="dv">100</span><span class="sc">==</span><span class="dv">0</span>){    <span class="co"># The %% operator is the remainder</span></span>
-<span id="cb686-6"><a href="iteration-loops-and-lists.html#cb686-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(i)</span>
-<span id="cb686-7"><a href="iteration-loops-and-lists.html#cb686-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb686-8"><a href="iteration-loops-and-lists.html#cb686-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="iteration-loops-and-lists.html#cb772-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loop with code to print progress every 100 iterations</span></span>
+<span id="cb772-2"><a href="iteration-loops-and-lists.html#cb772-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(linelist))){</span>
+<span id="cb772-3"><a href="iteration-loops-and-lists.html#cb772-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb772-4"><a href="iteration-loops-and-lists.html#cb772-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print progress</span></span>
+<span id="cb772-5"><a href="iteration-loops-and-lists.html#cb772-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">%%</span> <span class="dv">100</span><span class="sc">==</span><span class="dv">0</span>){    <span class="co"># The %% operator is the remainder</span></span>
+<span id="cb772-6"><a href="iteration-loops-and-lists.html#cb772-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(i)</span>
+<span id="cb772-7"><a href="iteration-loops-and-lists.html#cb772-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb772-8"><a href="iteration-loops-and-lists.html#cb772-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <!-- ======================================================= -->
 </div>
 </div>
-<div id="iter_purrr" class="section level2" number="16.3">
+<div id="iter_purrr" class="section level2" number="15.3">
 <h2>
-<span class="header-section-number">16.3</span> <strong>purrr</strong> y listas<a class="anchor" aria-label="anchor" href="#iter_purrr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3</span> <strong>purrr</strong> y listas<a class="anchor" aria-label="anchor" href="#iter_purrr"><i class="fas fa-link"></i></a>
 </h2>
 <p>Otro enfoque de las operaciones iterativas es el paquete <strong>purrr</strong> - es el enfoque <strong>tidyverse</strong> de la iteración.</p>
 <p>Si tienes que realizar la misma tarea varias veces, probablemente merezca la pena crear una solución generalizada que pueda utilizar en muchas entradas. Por ejemplo, producir gráficos para múltiples jurisdicciones, o importar y combinar muchos archivos.</p>
@@ -447,7 +450,7 @@
 <h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes-8"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>purrr</strong> forma parte de <strong>tidyverse</strong>, por lo que no es necesario instalar/cargar un paquete aparte.</p>
-<div class="sourceCode" id="cb687"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb773"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span>
      <span class="va">rio</span>,            <span class="co"># import/export</span>
      <span class="va">here</span>,           <span class="co"># relative filepaths</span>
@@ -466,13 +469,13 @@
 <li>
 <code>.x =</code> son las <em>entradas</em> sobre las que se aplicará iterativamente la función .f - por ejemplo, un vector de nombres de jurisdicciones, columnas de un dataframe o una lista de dataframes</li>
 <li>
-<code>.f =</code> es la <em>función</em> a aplicar a cada elemento de la entrada <code>.x</code> - puede ser una función como <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> que ya existe, o una función personalizada que tu definas. La función se suele escribir después de una tilde <code>~</code> (detalles más abajo).</li>
+<code>.f =</code> es la <em>función</em> a aplicar a cada elemento de la entrada <code>.x</code> - puede ser una función como <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> que ya existe, o una función personalizada que tu definas. La función se suele escribir después de una tilde <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> (detalles más abajo).</li>
 </ul>
 <p>Algunas notas más sobre la sintaxis:</p>
 <ul>
 <li>Si la función no necesita especificar más argumentos, puede escribirse sin paréntesis y sin tilde (por ejemplo, <code>.f = mean</code>). Para proporcionar argumentos que tendrán el mismo valor en cada iteración, proporciónelos dentro de <code>map()</code> pero fuera del argumento <code>.f =</code>, como el <code>na.rm = T</code> en <code>map(.x = mi_lista, .f = media, na.rm=T)</code>.</li>
 <li>Puedes utilizar <code>.x</code> (o simplemente <code>.</code> ) <em>dentro de</em> la función <code>.f =</code> como marcador de posición para el valor <code>.x</code> de esa iteración</li>
-<li>Utiliza la sintaxis con tilde (<code>~</code>) para tener un mayor control sobre la función - escriba la función de forma normal con paréntesis, como por ejemplo: <code>map(.x = mi_lista, .f = \~media(., na.rm = T))</code>. Utiliza esta sintaxis sobre todo si el valor de un argumento va a cambiar en cada iteración, o si es el propio valor <code>.x</code> (véanse los ejemplos siguientes)</li>
+<li>Utiliza la sintaxis con tilde (<code><a href="https://rdrr.io/r/base/tilde.html">~</a></code>) para tener un mayor control sobre la función - escriba la función de forma normal con paréntesis, como por ejemplo: <code>map(.x = mi_lista, .f = \~media(., na.rm = T))</code>. Utiliza esta sintaxis sobre todo si el valor de un argumento va a cambiar en cada iteración, o si es el propio valor <code>.x</code> (véanse los ejemplos siguientes)</li>
 </ul>
 <p>La <strong>salida de usar <code>map()</code> es una <em>lista </em></strong>- una lista es un tipo de objeto como un vector pero cuyos elementos pueden ser de diferentes tipos. Por lo tanto, una lista producida por <code>map()</code> podría contener muchos dataframes, o muchos vectores, muchos valores individuales, ¡o incluso muchas listas! Existen versiones alternativas de <code>map()</code> que se explican a continuación y que producen otros tipos de salidas (por ejemplo, <code>map_dfr()</code> para producir un dataframe, <code>map_chr()</code> para producir vectores de caracteres y <code>map_dbl()</code> para producir vectores numéricos).</p>
 <div id="iter_combined" class="section level4 unnumbered">
@@ -484,52 +487,52 @@
 <p>Este es un enfoque que utiliza <code>map()</code>:</p>
 <ol style="list-style-type: decimal">
 <li>
-<code>map()</code> la función <code>import()</code> para que se ejecute para cada hoja de Excel</li>
+<code>map()</code> la función <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> para que se ejecute para cada hoja de Excel</li>
 <li>Combinar los dataframes importados en uno solo utilizando <code>bind_rows()</code>
 </li>
 <li>A lo largo del proceso, conserva el nombre original de la hoja para cada fila, almacenando esta información en una nueva columna en el dataframe final</li>
 </ol>
 <p>En primer lugar, tenemos que extraer los nombres de las hojas y guardarlos. Proporcionamos la ruta del archivo de Excel a la función <code>excel_sheets()</code> del paquete <strong>readxl</strong>, que extrae los nombres de las hojas. Los almacenamos en un vector de caracteres llamado <code>sheet_names</code>.</p>
-<div class="sourceCode" id="cb688"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb774"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sheet_names</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="st">"hospital_linelists.xlsx"</span><span class="op">)</span></code></pre></div>
 <p>Aquí están los nombres:</p>
-<div class="sourceCode" id="cb689"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb775"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sheet_names</span></code></pre></div>
 <pre><code>## [1] "Central Hospital"              "Military Hospital"            
 ## [3] "Missing"                       "Other"                        
 ## [5] "Port Hospital"                 "St. Mark's Maternity Hospital"</code></pre>
-<p>Ahora que tenemos este vector de nombres, <code>map()</code> puede proporcionarlos uno a uno a la función <code>import()</code>. En este ejemplo, los <code>sheet_names</code> son <code>.x</code> e <code>import()</code> es la función <code>.f</code>.</p>
-<p>Recuerda de la página de <a href="import-and-export.html#import-and-export">importación y exportación</a> que cuando se utiliza en libros de Excel, <code>import()</code> puede aceptar el argumento <code>which =</code> especificando la hoja a importar. Dentro de la función <code>.f</code> en <code>import()</code>, proporcionamos <code>which = .x</code>, cuyo valor cambiará con cada iteración a través del vector `sheet_names - primero “Hospital Central”, luego “Military Hospital”, etc.</p>
+<p>Ahora que tenemos este vector de nombres, <code>map()</code> puede proporcionarlos uno a uno a la función <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code>. En este ejemplo, los <code>sheet_names</code> son <code>.x</code> e <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> es la función <code>.f</code>.</p>
+<p>Recuerda de la página de <a href="import-and-export.html#import-and-export">importación y exportación</a> que cuando se utiliza en libros de Excel, <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code> puede aceptar el argumento <code>which =</code> especificando la hoja a importar. Dentro de la función <code>.f</code> en <code><a href="https://rdrr.io/pkg/rio/man/import.html">import()</a></code>, proporcionamos <code>which = .x</code>, cuyo valor cambiará con cada iteración a través del vector `sheet_names - primero “Hospital Central”, luego “Military Hospital”, etc.</p>
 <p>Hay que tener en cuenta que, como hemos utilizado <code>map()</code>, los datos de cada hoja de Excel se guardarán como un dataframe separado dentro de una lista. Queremos que cada uno de estos elementos de la lista (dataframes) tenga un elemento <em>names</em>, así que antes de pasar <code>sheet_names</code> a <code>map()</code> lo pasamos a través de <code>set_names()</code> de <strong>purrr</strong>, lo que asegura que cada elemento de la lista obtenga el nombre apropiado.</p>
 <p>Guardamos la lista de salida como <code>combined</code>.</p>
-<div class="sourceCode" id="cb691"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb777"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">combined</span> <span class="op">&lt;-</span> <span class="va">sheet_names</span> <span class="op">%&gt;%</span> 
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu">import</span><span class="op">(</span><span class="st">"hospital_linelists.xlsx"</span>, which <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+  <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"hospital_linelists.xlsx"</span>, which <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Cuando inspeccionamos la salida, vemos que los datos de cada hoja de Excel se guardan en la lista con un nombre. Esto es bueno, pero no hemos terminado.</p>
 <div class="inline-figure"><img src="images/sheets_as_list.png" width="544" style="display: block; margin: auto;"></div>
 <p>Por último, utilizamos la función <code>bind_rows()</code> (de <strong>dplyr</strong>) que acepta la lista de dataframes de estructura similar y los combina en un dataframe. Para crear una nueva columna a partir de los <em>nombres</em> de los elementos de la lista, utilizamos el argumento <code>.id =</code>y le proporcionamos el nombre deseado para la nueva columna.</p>
 <p>A continuación se muestra toda la secuencia de comandos:</p>
-<div class="sourceCode" id="cb692"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb778"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sheet_names</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="st">"hospital_linelists.xlsx"</span><span class="op">)</span>  <span class="co"># extract sheet names</span>
  
 <span class="va">combined</span> <span class="op">&lt;-</span> <span class="va">sheet_names</span> <span class="op">%&gt;%</span>                                     <span class="co"># begin with sheet names</span>
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>                                        <span class="co"># set their names</span>
-  <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu">import</span><span class="op">(</span><span class="st">"hospital_linelists.xlsx"</span>, which <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># iterate, import, save in list</span>
+  <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span><span class="st">"hospital_linelists.xlsx"</span>, which <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># iterate, import, save in list</span>
   <span class="fu">bind_rows</span><span class="op">(</span>.id <span class="op">=</span> <span class="st">"origin_sheet"</span><span class="op">)</span> <span class="co"># combine list of data frames, preserving origin in new column  </span></code></pre></div>
 <p>¡Y ahora tenemos un dataframe con una columna que contiene la hoja de origen!</p>
 <div class="inline-figure"><img src="images/sheets_as_df.png" width="543" style="display: block; margin: auto;"></div>
 <p>Hay variaciones de <code>map()</code> que debe conocer. Por ejemplo, <code>map_dfr()</code> devuelve un dataframe, no una lista. Por lo tanto, podríamos haberla utilizado para la tarea anterior y no haber tenido que enlazar filas. Pero entonces no habríamos podido capturar de qué hoja (hospital) procedía cada caso.</p>
 <p>Otras variaciones son <code>map_chr()</code>, <code>map_dbl()</code>. Estas funciones son muy útiles por dos razones. En primer lugar, convierten automáticamente la salida de una función iterativa en un vector (no en una lista). En segundo lugar, pueden controlar explícitamente el tipo en la que vuelven los datos - te aseguras de que tus datos vuelven como un vector de caracteres con <code>map_chr()</code>, o vector numérico con <code>map_dbl()</code>. Volveremos a esto más adelante en la sección.</p>
 <p>Las funciones <code>map_at()</code> y <code>map_if()</code> también son muy útiles para la iteración - ¡permiten especificar en qué elementos de una lista se debe iterar! Funcionan simplemente aplicando un vector de índices/nombres (en el caso de <code>map_at()</code>) o una prueba lógica (en el caso de <code>map_if()</code>).</p>
-<p>Utilicemos un ejemplo en el que no queremos leer la primera hoja de datos del hospital. Usamos <code>map_at()</code> en lugar de <code>map()</code>, y especificamos el argumento <code>.at =</code> a <code>c(-1)</code> que significa <em>no</em> usar el primer elemento de .x. Alternativamente, puede proporcionar un vector de números positivos, o nombres, a <code>.at =</code> para especificar qué elementos usar.</p>
-<div class="sourceCode" id="cb693"><pre class="downlit sourceCode r">
+<p>Utilicemos un ejemplo en el que no queremos leer la primera hoja de datos del hospital. Usamos <code>map_at()</code> en lugar de <code>map()</code>, y especificamos el argumento <code>.at =</code> a <code><a href="https://rdrr.io/r/base/c.html">c(-1)</a></code> que significa <em>no</em> usar el primer elemento de .x. Alternativamente, puede proporcionar un vector de números positivos, o nombres, a <code>.at =</code> para especificar qué elementos usar.</p>
+<div class="sourceCode" id="cb779"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sheet_names</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="st">"hospital_linelists.xlsx"</span><span class="op">)</span>
 
 <span class="va">combined</span> <span class="op">&lt;-</span> <span class="va">sheet_names</span> <span class="op">%&gt;%</span> 
      <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
      <span class="co"># exclude the first sheet</span>
-     <span class="fu">map_at</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu">import</span><span class="op">(</span> <span class="st">"hospital_linelists.xlsx"</span>, which <span class="op">=</span> <span class="va">.x</span><span class="op">)</span>,
+     <span class="fu">map_at</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/import.html">import</a></span><span class="op">(</span> <span class="st">"hospital_linelists.xlsx"</span>, which <span class="op">=</span> <span class="va">.x</span><span class="op">)</span>,
             .at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Ten en cuenta que el nombre de la primera hoja seguirá apareciendo como un elemento de la lista de salida, pero es sólo un nombre de un solo carácter (no un dataframe). Tendrá que eliminar este elemento antes de vincular las filas. Veremos cómo eliminar y modificar los elementos de la lista en una sección posterior.</p>
 </div>
@@ -543,22 +546,22 @@
 </h4>
 <p>Digamos que tenemos <code>linelist</code> de casos completa como un dataframe, y ahora queremos crear un listado separado para cada hospital y exportar cada una como un archivo CSV separado. A continuación, hacemos los siguientes pasos:</p>
 <p>Utiliza <code>group_split()</code> (de <strong>dplyr</strong>) para dividir el dataframe del listado por valores únicos en la columna <code>hospital</code>. La salida es una lista que contiene un dataframe por subconjunto de hospitales.</p>
-<div class="sourceCode" id="cb694"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb780"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist_split</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
      <span class="fu">group_split</span><span class="op">(</span><span class="va">hospital</span><span class="op">)</span></code></pre></div>
-<p>Podemos ejecutar <code>View(linelist_split)</code> y ver que esta lista contiene 6 dataframes (“tibbles”), cada uno de los cuales representa los casos de un hospital.</p>
+<p>Podemos ejecutar <code><a href="https://rdrr.io/r/utils/View.html">View(linelist_split)</a></code> y ver que esta lista contiene 6 dataframes (“tibbles”), cada uno de los cuales representa los casos de un hospital.</p>
 <div class="inline-figure"><img src="images/purrr_linelist_split.png" width="574" style="display: block; margin: auto;"></div>
 <p>Sin embargo, ten en cuenta que los dataframes de la lista no tienen nombres por defecto. Queremos que cada uno de ellos tenga un nombre, y luego utilizar ese nombre al guardar el archivo CSV.</p>
 <p>Un enfoque para extraer los nombres es utilizar <code>pull()</code> (de <strong>dplyr</strong>) para extraer la columna <code>hospital</code> de cada dataframe de la lista. Luego, para estar seguros, convertimos los valores a caracteres y luego usamos <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> para obtener el nombre de ese dataframe en particular. Todos estos pasos se aplican a cada dataframe mediante <code>map()</code>.</p>
-<div class="sourceCode" id="cb695"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb781"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">linelist_split</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">linelist_split</span> <span class="op">%&gt;%</span>   <span class="co"># Assign to names of listed data frames </span>
      <span class="co"># Extract the names by doing the following to each data frame: </span>
      <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu">pull</span><span class="op">(</span><span class="va">.x</span>, <span class="va">hospital</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>        <span class="co"># Pull out hospital column</span>
      <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>          <span class="co"># Convert to character, just in case</span>
      <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span>                    <span class="co"># Take the unique hospital name</span></code></pre></div>
-<p>Ahora podemos ver que cada uno de los elementos de la lista tiene un nombre. Se puede acceder a estos nombres mediante <code>names(linelist_split)</code>.</p>
+<p>Ahora podemos ver que cada uno de los elementos de la lista tiene un nombre. Se puede acceder a estos nombres mediante <code><a href="https://rdrr.io/r/base/names.html">names(linelist_split)</a></code>.</p>
 <div class="inline-figure"><img src="images/purrr_linelist_split_named.png" width="575" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb696"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb782"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">linelist_split</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Central Hospital"                    
 ## [2] "Military Hospital"                   
@@ -570,7 +573,7 @@
 <h5>Más de una columna <code>group_split()</code><a class="anchor" aria-label="anchor" href="#m%C3%A1s-de-una-columna-group_split"><i class="fas fa-link"></i></a>
 </h5>
 <p>Si deseas dividir <code>linelist</code> por <em>más de una columna de agrupación</em>, por ejemplo, para producir un listado de subconjuntos por la intersección de hospital Y género, necesitará un enfoque diferente para nombrar los elementos de la lista. Esto implica recoger las “claves de grupo” únicas utilizando <code>group_keys()</code> de <strong>dplyr</strong> - se devuelven como un dataframe. Luego puede combinar las claves de grupo en valores con <code>unite()</code> como se muestra a continuación, y asignar estos nombres conglomerados a <code>linelist_split</code>.</p>
-<div class="sourceCode" id="cb698"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb784"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># split linelist by unique hospital-gender combinations</span>
 <span class="va">linelist_split</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
      <span class="fu">group_split</span><span class="op">(</span><span class="va">hospital</span>, <span class="va">gender</span><span class="op">)</span>
@@ -603,7 +606,7 @@
 ## 17 St. Mark's Maternity Hospital (SMMH) m     
 ## 18 St. Mark's Maternity Hospital (SMMH) &lt;NA&gt;</code></pre>
 <p>Ahora combinamos las agrupaciones juntas, separadas por guiones, y las asignamos como los nombres de los elementos de la lista en <code>linelist_split</code>. Esto requiere algunas líneas adicionales, ya que sustituimos <code>NA</code> por “Missing”, utilizamos <code>unite()</code> de <strong>dplyr</strong> para combinar los valores de las columnas juntos (separados por guiones), y luego los convertimos en un vector sin nombre para poder utilizarlos como nombres de <code>linelist_split</code>.</p>
-<div class="sourceCode" id="cb700"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb786"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Combine into one name value </span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">linelist_split</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">groupings</span> <span class="op">%&gt;%</span> 
      <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">replace_na</span>, <span class="st">"Missing"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># replace NA with "Missing" in all columns</span>
@@ -617,9 +620,9 @@
 <h4>Exportar como hojas de Excel<a class="anchor" aria-label="anchor" href="#exportar-como-hojas-de-excel"><i class="fas fa-link"></i></a>
 </h4>
 <p>Para exportar las listas de líneas del hospital como <em>un libro de Excel con un listado por hoja</em>, podemos simplemente proporcionar la lista con nombre <code>linelist_split</code> a la función <code>write_xlsx()</code> del paquete <strong>writexl</strong>. Esto tiene la capacidad de guardar un libro de Excel con múltiples hojas. Los nombres de los elementos de la lista se aplican automáticamente como los nombres de las hojas.</p>
-<div class="sourceCode" id="cb701"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb787"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">linelist_split</span> <span class="op">%&gt;%</span> 
-     <span class="fu">writexl</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu">here</span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"hospital_linelists.xlsx"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+     <span class="fu">writexl</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"hospital_linelists.xlsx"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Ahora puedes abrir el archivo de Excel y ver que cada hospital tiene tu propia hoja.</p>
 <div class="inline-figure"><img src="images/purrr_export_sheets.png" width="652" style="display: block; margin: auto;"></div>
 </div>
@@ -627,21 +630,21 @@
 <h4>Exportar como archivos CSV<a class="anchor" aria-label="anchor" href="#exportar-como-archivos-csv"><i class="fas fa-link"></i></a>
 </h4>
 <p>Es un comando un poco más complejo, pero también puedes exportar cada listado por hospital como un archivo CSV separado, con un nombre de archivo específico para el hospital.</p>
-<p>De nuevo utilizamos <code>map()</code>: tomamos el vector de nombres de elementos de la lista (mostrado arriba) y utilizamos <code>map()</code> para iterar a través de ellos, aplicando <code>export()</code> (del paquete <strong>rio</strong>, véase la página <a href="import-and-export.html#import-and-export">Importar y exportar</a>) en el dataframe de lista <code>linelist_split</code> que tiene ese nombre. También utilizamos el nombre para crear un nombre de archivo único. Así es como funciona:</p>
+<p>De nuevo utilizamos <code>map()</code>: tomamos el vector de nombres de elementos de la lista (mostrado arriba) y utilizamos <code>map()</code> para iterar a través de ellos, aplicando <code><a href="https://rdrr.io/pkg/rio/man/export.html">export()</a></code> (del paquete <strong>rio</strong>, véase la página <a href="import-and-export.html#import-and-export">Importar y exportar</a>) en el dataframe de lista <code>linelist_split</code> que tiene ese nombre. También utilizamos el nombre para crear un nombre de archivo único. Así es como funciona:</p>
 <ul>
 <li>Comenzamos con el vector de nombres de caracteres, pasado a <code>map()</code> como <code>.x</code>
 </li>
-<li>La función <code>.f</code> es <code>export()</code>, que requiere un dataframe y una ruta de archivo para escribirlo</li>
-<li>La entrada <code>.x</code> (el nombre del hospital) se utiliza <em>dentro</em> de <code>.f</code> para extraer/indexar ese elemento específico de la lista <code>linelist_split</code>. Esto hace que sólo se proporcione un dataframe a la vez a <code>export()</code>.</li>
+<li>La función <code>.f</code> es <code><a href="https://rdrr.io/pkg/rio/man/export.html">export()</a></code>, que requiere un dataframe y una ruta de archivo para escribirlo</li>
+<li>La entrada <code>.x</code> (el nombre del hospital) se utiliza <em>dentro</em> de <code>.f</code> para extraer/indexar ese elemento específico de la lista <code>linelist_split</code>. Esto hace que sólo se proporcione un dataframe a la vez a <code><a href="https://rdrr.io/pkg/rio/man/export.html">export()</a></code>.</li>
 <li>Por ejemplo, cuando <code>map()</code> itera por “Military Hospital”, entonces <code>linelist</code>_split[.x]] es en realidad <code>linelist_split[["Military Hospital"]]</code>, devolviendo así el segundo elemento de <code>linelist_split</code> - que son todos los casos del Military Hospital.</li>
-<li>La ruta del archivo proporcionada a <code>export()</code> es dinámica mediante el uso de <code>str_glue()</code> (ver página de <a href="characters-and-strings.html#characters-and-strings">caracteres y cadenas</a>):</li>
+<li>La ruta del archivo proporcionada a <code><a href="https://rdrr.io/pkg/rio/man/export.html">export()</a></code> es dinámica mediante el uso de <code>str_glue()</code> (ver página de <a href="characters-and-strings.html#characters-and-strings">caracteres y cadenas</a>):</li>
 <li>here() se utiliza para obtener la base de la ruta del archivo y especificar la carpeta “data” (nótese las comillas simples para no interrumpir las comillas dobles de <code>str_glue()</code>)</li>
-<li>A continuación, una barra <code>/</code>, y luego de nuevo el <code>.x</code> que imprime el nombre actual del hospital para que el archivo sea identificable</li>
-<li>Por último, la extensión “.csv” que <code>export()</code> utiliza para crear un archivo CSV</li>
+<li>A continuación, una barra <code><a href="https://rdrr.io/r/base/Arithmetic.html">/</a></code>, y luego de nuevo el <code>.x</code> que imprime el nombre actual del hospital para que el archivo sea identificable</li>
+<li>Por último, la extensión “.csv” que <code><a href="https://rdrr.io/pkg/rio/man/export.html">export()</a></code> utiliza para crear un archivo CSV</li>
 </ul>
-<div class="sourceCode" id="cb702"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb788"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">linelist_split</span><span class="op">)</span> <span class="op">%&gt;%</span>
-     <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu">export</span><span class="op">(</span><span class="va">linelist_split</span><span class="op">[[</span><span class="va">.x</span><span class="op">]</span><span class="op">]</span>, file <span class="op">=</span> <span class="fu">str_glue</span><span class="op">(</span><span class="st">"{here('data')}/{.x}.csv"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+     <span class="fu">map</span><span class="op">(</span>.f <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/rio/man/export.html">export</a></span><span class="op">(</span><span class="va">linelist_split</span><span class="op">[[</span><span class="va">.x</span><span class="op">]</span><span class="op">]</span>, file <span class="op">=</span> <span class="fu">str_glue</span><span class="op">(</span><span class="st">"{here('data')}/{.x}.csv"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>¡Ahora puedes ver que cada archivo se guarda en la carpeta “data” del proyecto R “Epi_R_handbook”.”!</p>
 <div class="inline-figure"><img src="images/purrr_export_csv.png" width="632" style="display: block; margin: auto;"></div>
 </div>
@@ -651,7 +654,7 @@
 </h3>
 <p>Puedes crear tu propia función para proporcionar a <code>map()</code>.</p>
 <p>Digamos que queremos crear curvas epidémicas para los casos de cada hospital. Para hacer esto usando <strong>purrr</strong>, nuestra función <code>.f</code> puede ser <code>ggplot()</code> y las extensiones con + como de costumbre. Como la salida de <code>map()</code> es siempre una lista, los gráficos se almacenan en una lista. Como son gráficos, pueden ser extraídas y trazadas con la función <code>ggarrange()</code> del paquete <strong>ggpubr</strong> (<a href="https://rpkgs.datanovia.com/ggpubr/reference/ggarrange.html">documentación</a>).</p>
-<div class="sourceCode" id="cb703"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb789"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load package for plotting elements from list</span>
 <span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">ggpubr</span><span class="op">)</span>
 
@@ -670,9 +673,9 @@
 
 <span class="co"># print the ggplots (they are stored in a list)</span>
 <span class="fu">ggarrange</span><span class="op">(</span>plotlist <span class="op">=</span> <span class="va">my_plots</span>, ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-626-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-705-1.png" width="672"></div>
 <p>Si este código de <code>map()</code> parece demasiado desordenado, se puede conseguir el mismo resultado guardando el comando específico de <code>ggplot()</code> como una función personalizada definida por el usuario, por ejemplo podemos llamarla <code>make_epicurve()</code>). Esta función se utiliza entonces dentro de la función <code>map()</code>. <code>.x</code> se sustituirá iterativamente por el nombre del hospital, y se utilizará como <code>hosp_name</code> en la función <code>make_epicurve()</code>. Véase la página sobre <a href="writing-functions-1.html#writing-functions-1">Escribir funciones</a>.</p>
-<div class="sourceCode" id="cb704"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb790"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create function</span>
 <span class="va">make_epicurve</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">hosp_name</span><span class="op">)</span><span class="op">{</span>
   
@@ -682,7 +685,7 @@
     <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="va">hosp_name</span><span class="op">)</span>
   
 <span class="op">}</span></code></pre></div>
-<div class="sourceCode" id="cb705"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb791"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># mapping</span>
 <span class="va">my_plots</span> <span class="op">&lt;-</span> <span class="fu">map</span><span class="op">(</span><span class="va">hospital_names</span>, <span class="op">~</span><span class="fu">make_epicurve</span><span class="op">(</span>hosp_name <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span>
 
@@ -700,17 +703,17 @@
 <li>La función <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> se suministra como la función <code>.f</code>, que se aplica a cada columna numérica</li>
 <li>Dentro del paréntesis de <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>:
 <ul>
-<li>el primer <code>~</code> precede al <code>.f</code> que <code>map()</code> iterará sobre el <code>.x</code>
+<li>el primer <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> precede al <code>.f</code> que <code>map()</code> iterará sobre el <code>.x</code>
 </li>
 <li>el <code>.x</code> representa la columna actual que se suministra a la función <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>
 </li>
-<li>el segundo <code>~</code> es parte de la ecuación del test-t descrita anteriormente</li>
+<li>el segundo <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> es parte de la ecuación del test-t descrita anteriormente</li>
 <li>la función <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> espera una columna binaria en el lado derecho de la ecuación. Suministramos el vector <code>linelist$gender</code> de forma independiente y estática (Ten en cuenta que no se incluye en <code>select()</code>).</li>
 </ul>
 </li>
 </ul>
 <p><code>map()</code> devuelve una lista, por lo que la salida es una lista de resultados del test-t, un elemento de la lista por cada columna numérica analizada.</p>
-<div class="sourceCode" id="cb706"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb792"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Results are saved as a list</span>
 <span class="va">t.test_results</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="va">age</span>, <span class="va">wt_kg</span>, <span class="va">ht_cm</span>, <span class="va">ct_blood</span>, <span class="va">temp</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># keep only some numeric columns to map across</span>
@@ -722,7 +725,7 @@
 </ul>
 <div class="inline-figure"><img src="images/purrr_ttest.png" width="286" height="150%"></div>
 <p>Nota: Recuerda que si deseas aplicar una función sólo a determinadas columnas de un dataframe, también puede utilizar simplemente <code>mutate()</code> y <code>across()</code>, como se explica en la página <a href="cleaning-data-and-core-functions.html#cleaning-data-and-core-functions">Limpieza de datos y funciones básicas</a>. A continuación se muestra un ejemplo de aplicación de <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code> sólo a las columnas “age”. Observa la colocación de los paréntesis y las comas.</p>
-<div class="sourceCode" id="cb707"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb793"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># convert columns with column name containing "age" to class Character</span>
 <span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span>.cols <span class="op">=</span> <span class="fu">contains</span><span class="op">(</span><span class="st">"age"</span><span class="op">)</span>, .fns <span class="op">=</span> <span class="va">as.character</span><span class="op">)</span><span class="op">)</span>  </code></pre></div>
@@ -735,7 +738,7 @@
 <h4>Nombres de elementos<a class="anchor" aria-label="anchor" href="#nombres-de-elementos"><i class="fas fa-link"></i></a>
 </h4>
 <p>Para extraer los nombres de los elementos en sí, basta con utilizar <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> de R <strong>base</strong>. En este caso, utilizamos <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> en <code>t.test_results</code> para devolver los nombres de cada sublista, que son los nombres de las 5 variables a las que se les realizaron test-t.</p>
-<div class="sourceCode" id="cb708"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb794"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">t.test_results</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "age"      "wt_kg"    "ht_cm"    "ct_blood" "temp"</code></pre>
 </div>
@@ -743,7 +746,7 @@
 <h4>Elementos por nombre o posición<a class="anchor" aria-label="anchor" href="#elementos-por-nombre-o-posici%C3%B3n"><i class="fas fa-link"></i></a>
 </h4>
 <p>Para extraer los elementos de la lista por tu nombre o por tu posición se pueden utilizar paréntesis <code>[[ ]]</code> como se describe en la página de <a href="r-basics.html#r-basics">fundamentos de R</a>. A continuación, utilizamos corchetes dobles para indexar la lista <code>t.test_results</code> y mostrar el primer elemento, que son los resultados del test-t sobre <code>age</code>.</p>
-<div class="sourceCode" id="cb710"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb796"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t.test_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="co"># first element by position</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
@@ -756,7 +759,7 @@
 ## sample estimates:
 ## mean in group f mean in group m 
 ##        12.66085        19.56939</code></pre>
-<div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb798"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t.test_results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="st">"p.value"</span><span class="op">]</span> <span class="co"># return element named "p.value" from first element  </span></code></pre></div>
 <pre><code>## $p.value
 ## [1] 2.350374e-96</code></pre>
@@ -767,7 +770,7 @@
 <code>pluck()</code><a class="anchor" aria-label="anchor" href="#pluck"><i class="fas fa-link"></i></a>
 </h4>
 <p><code>pluck()</code> extrae elementos por nombre o por posición. Por ejemplo, para extraer los resultados del test-t para la edad, puedes utilizar <code>pluck()</code> así:</p>
-<div class="sourceCode" id="cb714"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb800"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t.test_results</span> <span class="op">%&gt;%</span> 
   <span class="fu">pluck</span><span class="op">(</span><span class="st">"age"</span><span class="op">)</span>        <span class="co"># alternatively, use pluck(1)</span></code></pre></div>
 <pre><code>## 
@@ -782,12 +785,12 @@
 ## mean in group f mean in group m 
 ##        12.66085        19.56939</code></pre>
 <p>Indexa niveles más profundos especificando los niveles adicionales con comas. A continuación se extrae el elemento denominado “p.value” de la lista <code>age</code> dentro de la lista <code>t.test_results</code>. También puedes utilizar números en lugar de nombres de caracteres.</p>
-<div class="sourceCode" id="cb716"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb802"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t.test_results</span> <span class="op">%&gt;%</span> 
   <span class="fu">pluck</span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"p.value"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 2.350374e-96</code></pre>
 <p>Puedes extraer estos elementos internos de <em>todos</em> los elementos de primer nivel utilizando <code>map()</code> para ejecutar la función <code>pluck()</code> en cada elemento de primer nivel. Por ejemplo, el siguiente código extrae los elementos “p.value” de todas las listas dentro de <code>t.test_results</code>. La lista de resultados del test-t es el <code>.x</code> que se itera, <code>pluck()</code> es la función <code>.f</code> que se itera, y el valor “p-value” se proporciona a la función.</p>
-<div class="sourceCode" id="cb718"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb804"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t.test_results</span> <span class="op">%&gt;%</span>
   <span class="fu">map</span><span class="op">(</span><span class="va">pluck</span>, <span class="st">"p.value"</span><span class="op">)</span>   <span class="co"># return every p-value</span></code></pre></div>
 <pre><code>## $age
@@ -805,7 +808,7 @@
 ## $temp
 ## [1] 0.5735923</code></pre>
 <p>Como otra alternativa, <code>map()</code> ofrece una forma abreviada en la que puede escribir el nombre del elemento entre comillas, y lo extraerá. Si utiliza <code>map()</code> la salida será una lista, mientras que si utiliza <code>map_chr()</code> será un vector de caracteres con nombre y si utilizas <code>map_dbl()</code> será un vector numérico con nombre.</p>
-<div class="sourceCode" id="cb720"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb806"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t.test_results</span> <span class="op">%&gt;%</span> 
   <span class="fu">map_dbl</span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span>   <span class="co"># return p-values as a named numeric vector</span></code></pre></div>
 <pre><code>##           age         wt_kg         ht_cm      ct_blood          temp 
@@ -821,7 +824,7 @@
 <ul>
 <li>La función <code>tibble()</code> se utilizará para crear un tibble (como un dataframe)
 <ul>
-<li>Rodeamos la función <code>tibble()</code> con corchetes <code><a href="https://rdrr.io/r/base/Paren.html">{ }</a></code> para evitar que todo el <code>t.test_results</code> se almacene como la primera columna tibble</li>
+<li>Rodeamos la función <code>tibble()</code> con corchetes <code>{ }</code> para evitar que todo el <code>t.test_results</code> se almacene como la primera columna tibble</li>
 </ul>
 </li>
 <li>Dentro de <code>tibble()</code>, cada columna se crea explícitamente, de forma similar a la sintaxis de <code>mutate()</code>:
@@ -833,7 +836,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb722"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb808"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t.test_results</span> <span class="op">%&gt;%</span> <span class="op">{</span>
   <span class="fu">tibble</span><span class="op">(</span>
     variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,
@@ -849,7 +852,7 @@
 ## 5 temp      5.74e-  1</code></pre>
 <p>Pero ahora vamos a añadir columnas que contengan las medias de cada grupo (hombres y mujeres).</p>
 <p>Tendríamos que extraer el elemento <code>estimate</code>, pero éste contiene en realidad <em>dos</em> elementos en su interior (<code>media en el grupo f</code> y <code>media en el grupo m</code>). Por lo tanto, no se puede simplificar en un vector con <code>map_chr()</code> o <code>map_dbl()</code>. En su lugar, utilizamos <code>map()</code>, que usado dentro de <code>tibble()</code> creará <em>una columna de tipo lista dentro del tibble</em>! ¡Sí, esto es posible!</p>
-<div class="sourceCode" id="cb724"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb810"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t.test_results</span> <span class="op">%&gt;%</span> 
   <span class="op">{</span><span class="fu">tibble</span><span class="op">(</span>
     variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,
@@ -873,7 +876,7 @@
 <code>hoist()</code> - actúa como <code>unnest_wider()</code> pero se especifica qué elementos se van a anular</li>
 </ul>
 <p>A continuación, pasamos el tibble a <code>unnest_wider()</code> especificando la columna <code>means</code> del tibble (que es una lista anidada). El resultado es que <code>means</code> se sustituyen por dos nuevas columnas, cada una de las cuales refleja los dos elementos que había antes en cada celda <code>means</code>.</p>
-<div class="sourceCode" id="cb726"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb812"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t.test_results</span> <span class="op">%&gt;%</span> 
   <span class="op">{</span><span class="fu">tibble</span><span class="op">(</span>
     variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,
@@ -906,26 +909,26 @@
 </ul>
 <p>Aquí hay algunos ejemplos que utilizan la lista <code>combined</code> creada en la sección anterior sobre el <a href="iteration-loops-and-lists.html#iter_combined">uso de <code>map()</code> para importar y combinar múltiples archivos</a> (contiene 6 dataframes de listas de casos):</p>
 <p>Los elementos pueden ser eliminados por tu nombre con <code>list_modify()</code> y estableciendo el nombre igual a <code>NULL</code>.</p>
-<div class="sourceCode" id="cb728"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb814"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">combined</span> <span class="op">%&gt;%</span> 
   <span class="fu">list_modify</span><span class="op">(</span><span class="st">"Central Hospital"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>   <span class="co"># remove list element by name</span></code></pre></div>
-<p>También puedes eliminar elementos por criterio, proporcionando una ecuación “predicada” a <code>.p =</code> (una ecuación que evalúa a TRUE o FALSE). Coloque una tilde <code>~</code> antes de la función y utiliza <code>.x</code> para representar el elemento de la lista. Utilizando <code>keep()</code> se conservarán los elementos de la lista que se evalúen como TRUE. A la inversa, si se utiliza <code>discard()</code> se eliminarán los elementos de la lista que se evalúen como TRUE.</p>
-<div class="sourceCode" id="cb729"><pre class="downlit sourceCode r">
+<p>También puedes eliminar elementos por criterio, proporcionando una ecuación “predicada” a <code>.p =</code> (una ecuación que evalúa a TRUE o FALSE). Coloque una tilde <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> antes de la función y utiliza <code>.x</code> para representar el elemento de la lista. Utilizando <code>keep()</code> se conservarán los elementos de la lista que se evalúen como TRUE. A la inversa, si se utiliza <code>discard()</code> se eliminarán los elementos de la lista que se evalúen como TRUE.</p>
+<div class="sourceCode" id="cb815"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># keep only list elements with more than 500 rows</span>
 <span class="va">combined</span> <span class="op">%&gt;%</span> 
   <span class="fu">keep</span><span class="op">(</span>.p <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">500</span><span class="op">)</span>  </code></pre></div>
 <p>En el siguiente ejemplo, los elementos de la lista se descartan si tu tipo no son dataframes.</p>
-<div class="sourceCode" id="cb730"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb816"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Discard list elements that are not data frames</span>
 <span class="va">combined</span> <span class="op">%&gt;%</span> 
   <span class="fu">discard</span><span class="op">(</span>.p <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">!=</span> <span class="st">"data.frame"</span><span class="op">)</span></code></pre></div>
 <p>Su función de predicado también puede hacer referencia a elementos/columnas dentro de cada elemento de la lista. Por ejemplo, a continuación, se descartan los elementos de la lista cuya media de la columna <code>ct_blood</code> sea superior a 25.</p>
-<div class="sourceCode" id="cb731"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb817"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># keep only list elements where ct_blood column mean is over 25</span>
 <span class="va">combined</span> <span class="op">%&gt;%</span> 
   <span class="fu">discard</span><span class="op">(</span>.p <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">ct_blood</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">25</span><span class="op">)</span>  </code></pre></div>
 <p>Este comando eliminaría todos los elementos vacíos de la lista:</p>
-<div class="sourceCode" id="cb732"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb818"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Remove all empty list elements</span>
 <span class="va">combined</span> <span class="op">%&gt;%</span> 
   <span class="fu">compact</span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -937,16 +940,16 @@
 <p>ESTA SECCIÓN ESTÁ EN CONSTRUCCIÓN</p>
 </div>
 </div>
-<div id="apply-functions" class="section level2" number="16.4">
+<div id="apply-functions" class="section level2" number="15.4">
 <h2>
-<span class="header-section-number">16.4</span> Funciones Apply<a class="anchor" aria-label="anchor" href="#apply-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4</span> Funciones Apply<a class="anchor" aria-label="anchor" href="#apply-functions"><i class="fas fa-link"></i></a>
 </h2>
 <p>La familia de funciones “apply” es una alternativa de R <strong>base</strong> <strong>purrr</strong> para operaciones iterativas. Puedes leer más sobre ellas <a href="https://www.datacamp.com/community/tutorials/r-tutorial-apply-family">aquí</a>.</p>
 <!-- ======================================================= -->
 </div>
-<div id="resources-8" class="section level2" number="16.5">
+<div id="resources-8" class="section level2" number="15.5">
 <h2>
-<span class="header-section-number">16.5</span> Recursos<a class="anchor" aria-label="anchor" href="#resources-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.5</span> Recursos<a class="anchor" aria-label="anchor" href="#resources-8"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="https://datacarpentry.org/semester-biology/materials/for-loops-R/">Bucles for en Data Carpentry</a></p>
 <p>La <a href="https://es.r4ds.hadley.nz/iteraci%C3%B3n.html">página de R for Data Science en español sobre la iteración</a></p>
@@ -965,20 +968,20 @@
 
 
 <div class="chapter-nav">
-<div class="prev"><a href="de-duplication.html"><span class="header-section-number">15</span> Borrador. De-duplicación</a></div>
-<div class="next"><a href="descriptive-tables.html"><span class="header-section-number">17</span> Borrador. Tablas descriptivas</a></div>
+<div class="prev"><a href="de-duplication.html"><span class="header-section-number">14</span> Borrador. De-duplicación</a></div>
+<div class="next"><a href="descriptive-tables.html"><span class="header-section-number">16</span> Tablas descriptivas</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>En esta página</h2>
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#iteration-loops-and-lists"><span class="header-section-number">16</span> Borrador. Iteración, bucles y listas</a></li>
+<li><a class="nav-link" href="#iteration-loops-and-lists"><span class="header-section-number">15</span> Borrador. Iteración, bucles y listas</a></li>
 <li>
-<a class="nav-link" href="#preparation-6"><span class="header-section-number">16.1</span> Preparación</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#preparation-6"><span class="header-section-number">15.1</span> Preparación</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cargar-paquetes-7">Cargar paquetes</a></li>
 <li><a class="nav-link" href="#importar-datos-7">Importar datos</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#for-loops"><span class="header-section-number">16.2</span> bucles for</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#for-loops"><span class="header-section-number">15.2</span> bucles for</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#iter_loops">bucles for en R</a></li>
 <li><a class="nav-link" href="#componentes-b%C3%A1sicos">Componentes básicos</a></li>
 <li><a class="nav-link" href="#secuencia">Secuencia</a></li>
@@ -990,7 +993,7 @@
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#iter_purrr"><span class="header-section-number">16.3</span> purrr y listas</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#iter_purrr"><span class="header-section-number">15.3</span> purrr y listas</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cargar-paquetes-8">Cargar paquetes</a></li>
 <li><a class="nav-link" href="#map">map()</a></li>
 <li><a class="nav-link" href="#dividir-los-datos-y-exportar">Dividir los datos y exportar</a></li>
@@ -1002,8 +1005,8 @@
 <li><a class="nav-link" href="#pmap">pmap()</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#apply-functions"><span class="header-section-number">16.4</span> Funciones Apply</a></li>
-<li><a class="nav-link" href="#resources-8"><span class="header-section-number">16.5</span> Recursos</a></li>
+<li><a class="nav-link" href="#apply-functions"><span class="header-section-number">15.4</span> Funciones Apply</a></li>
+<li><a class="nav-link" href="#resources-8"><span class="header-section-number">15.5</span> Recursos</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1024,11 +1027,11 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>El manual de R para la Epidemiología</strong>" fué escrito por el equipo del manual. Compilado el 2022-02-14.</p>
+    <p>"<strong>El manual de R para Epi’s</strong>" was written by El equipo del manual. It was last built on 2022-10-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
-    <p>Este libro fué construido con el paquete <a class="text-light" href="https://bookdown.org">bookdown</a> de R.</p>
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
   </div>
 
 </div></div>
@@ -1037,7 +1040,7 @@
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

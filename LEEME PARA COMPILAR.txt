@@ -1,0 +1,30 @@
+#########################################################################
+##########       Arreglar paquetes para compilación ####################
+#########################################################################
+
+#1. Instalar R 4.1.0
+#2. Instalar Última versión de RStudio
+#3. Instalar RTools 40 y checar que está bien instalado
+
+     #3.1 Importante fijar como path al instalarlo c:\RTools40\usr\bin o el que corresponda a tu path.
+     #3.2 Importante leer https://github.com/r-windows/docs/blob/master/rtools40.md
+
+#4. Hacer fork en github y crear carpeta llamada "compilacion_nombreusuario" 
+#( Para así usar renv en nuestro pc al acabar y guardar la configuración de los paquetes para compilar después)
+#5. Descargar de github a R Studio el proyecto "compilacion_nombreusuario", haciendo pull.  
+#6. En R Studio seleccionar nuestra rama (panel de environment/git/ icono morado / seleccionar "compilacion_usuario"
+#7. Copiar y pegar las carpetas "scripts" y "data" a la carpeta raíz donde se encuentre compilacion_nombreusuario.Rproj, sobrescribiendo. 
+#8. Correr el código de "scripts/run.R" (Introducir tecla 3 y pulsar intro cuando solicite)
+#9. Realizar compilación
+#10. Escribir en la consola renv::init() renv::snapshot() tras compilación para guardar la configuración de los paquetes en el proyecto. 
+    Se creará un archivo llamado renv.lock. 
+#11. Hacer stagged 
+    1.	Cliqueo en la arandela azul del apartado git de R Studio
+    2.	Selecciono "Shell"
+    3.	Escribo el siguiente código en el terminal :
+
+git add -A && git commit -m 'staging all files'4
+
+#12. Hacer commit
+#13. Hacer push
+
