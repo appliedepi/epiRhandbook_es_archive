@@ -2,7 +2,7 @@
 <!-- ======================================================= -->
 <!-- ======================================================= -->
 <!-- ======================================================= -->
-# Borrador. Pivotar datos {#pivoting-data} 
+# Pivotar datos {#pivoting-data} 
 
 ```{r, warning=F, message=F, out.height = c('50%'), fig.align="center", fig.show='hold', echo=F}
 knitr::include_graphics(here::here("images", "pivoting", "Pivoting_500x500.png"))
@@ -12,8 +12,6 @@ knitr::include_graphics(here::here("images", "pivoting", "Pivoting_500x500.png")
 #knitr::include_graphics(here::here("images", "pivoting", "pivot_wider_new.png"))
 ```
 
-
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
 En la gestión de datos, se puede entender que el *pivoteo se refiere* a uno de los dos procesos: 
 
@@ -30,7 +28,7 @@ En esta página se tratan los formatos de los datos. Es útil conocer la idea de
 
 ### Cargar paquetes {.unnumbered}  
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base** Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R. 
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R. 
 
 ```{r}
 pacman::p_load(
@@ -46,7 +44,7 @@ pacman::p_load(
 
 ### Recuento de casos de malaria {-}  
 
-En esta página, utilizaremos unos datos ficticio de casos diarios de malaria, por centro y grupo de edad. Si quieres seguirlo, [clica aquí para descargarlo (como archivo .rds)](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/malaria_facility_count_data.rds). Importe los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - mira la página de [importación y exportación](#import-and-export) para más detalles). 
+En esta página, utilizaremos unos datos ficticios de casos diarios de malaria, por centro y grupo de edad. Si quieres seguirlo, [clica aquí para descargarlo (como archivo .rds)](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/malaria_facility_count_data.rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - mira la página de [importación y exportación](#import-and-export) para más detalles). 
   
 
 ```{r, echo=F}
@@ -101,17 +99,17 @@ knitr::include_graphics(here::here("images", "pivoting", "pivot_longer_new.png")
 
 Los datos suelen introducirse y almacenarse en un formato "amplio", en el que las características o respuestas de un sujeto se almacenan en una sola fila. Aunque esto puede ser útil para la presentación, no es ideal para algunos tipos de análisis. 
 
-Tomemos como ejemplo el set de datos `count_data` importado en la sección Preparación. Puedes ver que cada fila representa un "centro-día". Los recuentos de casos reales (las columnas más a la derecha) se almacenan en un formato "amplio", de modo que la información de cada grupo de edad en un día determinado del centro se almacena en una sola fila. 
+Tomemos como ejemplo el set de datos `count_data` importado en la sección "Preparación". Puedes ver que cada fila representa un "centro-día". Los recuentos de casos reales (las columnas más a la derecha) se almacenan en un formato "ancho", de modo que la información de cada grupo de edad en un día determinado del centro se almacena en una sola fila. 
 
 ```{r, echo=F}
 DT::datatable(count_data, rownames = FALSE, options = list(pageLength = 5, scrollX=T) )
 ```
 
-Cada observación de este conjunto de datos se refiere a los recuentos de paludismo en una de las 65 instalaciones en una fecha determinada, que va desde `count_data$data_date %\>% min()` hasta `count_data$data_date %\>% max()`. Estas instalaciones están situadas en una `Province` (Norte) y cuatro `District`os (Spring, Bolo, Dingo y Barnard). Los datos proporcionan los recuentos globales de malaria, así como los recuentos específicos por edad en cada uno de los tres grupos de edad: \<4 años, 5-14 años y 15 años o más. 
+Cada observación de este conjunto de datos se refiere a los recuentos de paludismo en una de las 65 instalaciones en una fecha determinada, que va desde `count_data$data_date %\>% min()` hasta `count_data$data_date %\>% max()`. Estas instalaciones están situadas en una `Province` (Norte) y cuatro `District` (Spring, Bolo, Dingo y Barnard). Los datos proporcionan los recuentos globales de malaria, así como los recuentos específicos por edad en cada uno de los tres grupos de edad: \<4 años, 5-14 años y 15 años o más. 
 
-Los datos "anchoos" como éste no se ajustan a las normas de "datos ordenados", porque los encabezados de las columnas no representan realmente "variables", sino que representan *valores* de una hipotética variable "grupo de edad". 
+Los datos "anchos" como éste no se ajustan a las normas de "datos ordenados", porque los encabezados de las columnas no representan realmente "variables", sino que representan *valores* de una hipotética variable "grupo de edad". 
 
-Este formato puede ser útil para presentar la información en una tabla, o para introducir datos (por ejemplo, en Excel) a partir de formularios de informes de casos. Sin embargo, en la etapa de análisis, estos datos normalmente deben ser transformados a un formato "más largo" más alineado con los estándares de "datos ordenados". El paquete **ggplot2**, en particular, funciona mejor cuando los datos están en un formato "largo". 
+Este formato puede ser útil para presentar la información en una tabla, o para introducir datos (por ejemplo, en Excel) a partir de formularios de informes de casos. Sin embargo, en la etapa de análisis, estos datos normalmente deben ser transformados a un formato "largo" más alineado con los estándares de "datos ordenados". El paquete **ggplot2**, en particular, funciona mejor cuando los datos están en un formato "largo". 
 
 La visualización de los recuentos *totales* de malaria a lo largo del tiempo no plantea ninguna dificultad con los datos en su formato actual: 
 
@@ -120,7 +118,7 @@ ggplot(count_data) +
   geom_col(aes(x = data_date, y = malaria_tot), width = 1)
 ```
 
-Sin embargo, ¿qué pasaría si quisiéramos mostrar las contribuciones relativas de cada grupo de edad a este recuento total? En este caso, necesitamos asegurarnos de que la variable de interés (grupo de edad), aparezca en set de datos en una sola columna que pueda pasarse a {ggplot2} el argumento `aes()` de  "mapping aesthetics". 
+Sin embargo, ¿qué pasaría si quisiéramos mostrar las contribuciones relativas de cada grupo de edad a este recuento total? En este caso, necesitamos asegurarnos de que la variable de interés (grupo de edad), aparezca en el conjunto de datos en una sola columna que pueda pasarse a {ggplot2} el argumento `aes()` de  "mapping aesthetics". 
 
 
 
@@ -128,11 +126,11 @@ Sin embargo, ¿qué pasaría si quisiéramos mostrar las contribuciones relativa
 <!-- ======================================================= -->
 ### `pivot_longer()` {.unnumbered}
 
-La función `pivot_longer()` de **tidyr**  hace que los datos sean "más largos". **tidyr** forma parte de los paquetes **tidyverse** . 
+La función `pivot_longer()` de **tidyr**  hace que los datos sean "largos". **tidyr** forma parte de los paquetes **tidyverse** . 
 
 Acepta un rango de columnas para transformar (especificado a `cols = `). Por lo tanto, puede operar sólo en una parte de unos datos. Esto es útil para los datos de la malaria, ya que sólo queremos pivotar las columnas de recuento de casos. 
 
-En este proceso, terminará con dos "nuevas" columnas - una con las categorías (los antiguos nombres de las columnas), y otra con los valores correspondientes (por ejemplo, recuento de casos). Puedes aceptar los nombres por defecto para estas nuevas columnas, o puede especificar los suyos propios a `names_to = ` y `values_to = ` respectivamente. 
+En este proceso, terminará con dos "nuevas" columnas - una con las categorías (los antiguos nombres de las columnas), y otra con los valores correspondientes (por ejemplo, recuento de casos). Puedes aceptar los nombres por defecto para estas nuevas columnas, o puede especificar otros con `names_to = ` y `values_to = ` respectivamente. 
 
 Veamos `pivot_longer()` en acción... 
 
@@ -187,7 +185,7 @@ count_data %>%
 ```
 
 
-Estas dos nuevas columnas reciben los nombres por defecto de `name` y `value`, pero podemos anular estos valores por defecto para proporcionar nombres más significativos, que pueden ayudar a recordar lo que se almacena dentro, utilizando los argumentos `names_to` y `values_to`. Utilicemos los nombres `age_group` y `counts`: 
+Estas dos nuevas columnas reciben los nombres por defecto de `name` y `value`, pero podemos cambiar estos valores por defecto para proporcionar nombres más significativos, que pueden ayudar a recordar lo que se almacena dentro, utilizando los argumentos `names_to` y `values_to`. Utilicemos los nombres `age_group` y `counts`: 
 
 ```{r}
 df_long <- 
@@ -215,7 +213,7 @@ Examina esta nueva gráfica y compárala con la que hemos creado antes: *¿qué 
 
 Nos hemos encontrado con un problema común al manejar los datos de vigilancia: hemos incluido también los recuentos totales de la columna `malaria_tot`, por lo que la magnitud de cada barra en el gráfico es el doble de lo que debería ser. 
 
-Podemos manejar esto de varias maneras. Podríamos simplemente filtrar estos totales dset de datos antes de pasarlo a `ggplot()`: 
+Podemos manejar esto de varias maneras. Podríamos simplemente filtrar estos totales en los datos antes de pasarlo a `ggplot()`: 
 
 ```{r, warning=F, message=F}
 df_long %>% 
@@ -248,7 +246,7 @@ El ejemplo anterior funciona bien en situaciones en las que todas las columnas q
 
 Sin embargo, habrá muchos casos en los que, en el trabajo de campo, se trabaje con datos preparados por personas no especializadas y que sigan su propia lógica no estándar - como señaló Hadley Wickham (haciendo referencia a Tolstoi) en su [artículo seminal](https://vita.had.co.nz/papers/tidy-data.pdf) sobre los principios de **Tidy Data**: "Como las familias, los conjuntos de datos ordenados son todos iguales, pero cada conjunto de datos desordenado es desordenado a su manera". 
 
-Un problema particularmente común que encontrará será la necesidad de pivotar columnas que contienen diferentes tipos de datos. Este pivote resultará en el almacenamiento de estos diferentes tipos de datos en una sola columna, lo cual no es una buena situación. Hay varios enfoques que uno puede tomar para separar el desorden que esto crea, pero hay un paso importante que puedes seguir usando `pivot_longer()` para evitar crear tal situación tu mismo. 
+Un problema particularmente común que encontrarás será la necesidad de pivotar columnas que contienen diferentes tipos de datos. Este pivote resultará en el almacenamiento de estos diferentes tipos de datos en una sola columna, lo cual no es una buena situación. Se pueden seguir varios enfoques para separar el desorden que esto crea, pero hay un paso importante que puedes seguir usando `pivot_longer()` para evitar crear tal situación tu mismo. 
 
 Tomemos una situación en la que ha habido una serie de observaciones en diferentes pasos de tiempo para cada uno de los tres elementos A, B y C. Ejemplos de estos elementos podrían ser individuos (por ejemplo, contactos de un caso de ébola que se rastrean cada día durante 21 días) o puestos de salud de aldeas remotas que se supervisan una vez al año para garantizar que siguen funcionando. Utilicemos el ejemplo del rastreo de contactos. Imaginemos que los datos se almacenan de la siguiente manera: 
 
@@ -289,7 +287,7 @@ Para evitar esta situación, podemos aprovechar la estructura sintáctica de los
 Para ello: 
 
 * Proporcionar un vector de caracteres al argumento names_to =, siendo el segundo elemento (`".value"`). Este término especial indica que las columnas pivotadas se dividirán basándose en un carácter de su nombre... 
-* También debe proporcionar el carácter de "división" al argumento `names_sep = `. En este caso, es el guión bajo "_". 
+* También se debe proporcionar el carácter de "división" al argumento `names_sep = `. En este caso, es el guión bajo "_". 
 
 Así, la denominación y división de las nuevas columnas se basa en el guión bajo de los nombres de las variables existentes. 
 
@@ -309,9 +307,9 @@ df_long
 
 **Toques finales**: 
 
-Ten en cuenta que la columna de fecha está actualmente en el tipo *carácter* - podemos convertirla fácilmente en tipo fecha utilizando las funciones `mutate()` y `as_date()` descritas en la página [Trabajar con fechas](#working-with-dates-1). 
+Ten en cuenta que la columna de fecha es actualmente de tipo *carácter* - podemos convertirla fácilmente en tipo fecha utilizando las funciones `mutate()` y `as_date()` descritas en la página [Trabajar con fechas](#working-with-dates-1). 
 
-También podemos querer convertir la columna de `observation` a un formato `numeric` eliminando el prefijo "obs" y convirtiendo a numérico. Podemos hacer esto con `str_remove_all()` del paquete **stringr** (véase la página [Caracteres y cadenas](#characters-and-strings)).   
+También podemos convertir la columna de `observation` a un formato `numeric` eliminando el prefijo "obs" y convirtiendo a numérico. Podemos hacer esto con `str_remove_all()` del paquete **stringr** (véase la página [Caracteres y cadenas](#characters-and-strings)).   
 
 ```{r}
 
@@ -354,7 +352,7 @@ ggplot(data = df_long, mapping = aes(x = date, y = id, fill = status)) +
 knitr::include_graphics(here::here("images", "pivoting", "pivot_wider_new.png"))
 ```
 
-En algunos casos, es posible que queramos convertir unos datos a un formato más amplio. Para ello, podemos utilizar la función `pivot_wider()`. 
+En algunos casos, es posible que queramos convertir unos datos a un formato ancho. Para ello, podemos utilizar la función `pivot_wider()`. 
 
 Un caso de uso típico es cuando queremos transformar los resultados de un análisis en un formato que sea más digerible para el lector (como una [tabla para su presentación](#tables-for-presentation)). Por lo general, se trata de transformar unos datos en el que la información de un sujeto está repartida en varias filas en un formato en el que esa información se almacena en una sola fila. 
 
@@ -387,11 +385,11 @@ ggplot(df_wide) +
   geom_col(aes(x = age_cat, y = n, fill = gender))
 ```
 
-### Pivote más amplio {.unnumbered}  
+### Pivote ancho {.unnumbered}  
  
 Por lo tanto, podemos utilizar `pivot_wider()` para transformar los datos en un formato mejor para incluirlos como tablas en nuestros informes. 
 
-El argumento `names_from` especifica la columna *from* que genera la columna nueva *names*, mientras que el argumento `values_from` especifica la columna *from* la que tomar los *values* para rellenar las celdas. El argumento `id_cols = ` es opcional, pero se puede proporcionar un vector de nombres de columnas que no deben ser pivotadas, y que por tanto identificarán cada fila. 
+El argumento `names_from` especifica la columna *from* que genera la columna nueva *names*, mientras que el argumento `values_from` especifica la columna *from* de la que tomar los *values* para rellenar las celdas. El argumento `id_cols = ` es opcional, pero se puede proporcionar un vector de nombres de columnas que no deben ser pivotadas, y que por tanto identificarán cada fila. 
 
 ```{r}
 table_wide <- 
@@ -421,12 +419,12 @@ table_wide %>%
 <!-- ======================================================= -->
 ## Rellenar {#fill}
 
-En algunas situaciones después de un `pivot`, y más comúnmente después de un `bind`, nos quedan huecos en algunas celdas que nos gustaría rellenar. 
+En algunas situaciones después de `pivotar`, y más comúnmente después de unir con `bind`, nos quedan huecos en algunas celdas que nos gustaría rellenar. 
 
 <!-- ======================================================= -->
 ### Datos {.unnumbered}
 
-Por ejemplo, tome dos conjuntos de datos, cada uno con observaciones para el número de medición, el nombre del centro y el recuento de casos en ese momento. Sin embargo, el segundo conjunto de datos también tiene la variable `Year`.
+Por ejemplo, toma dos conjuntos de datos, cada uno con observaciones para el número de medición, el nombre del centro y el recuento de casos en ese momento. Sin embargo, el segundo conjunto de datos también tiene la variable `Year`.
 
 ```{r}
 df1 <- 
@@ -495,7 +493,7 @@ df_combined <-
 df_combined
 ```
 
-Ahora tenemos unos datos útil para trazar: 
+Ahora tenemos unos datos útiles para representarlos gráficamente: 
 
 ```{r}
 ggplot(df_combined) +
@@ -503,7 +501,7 @@ ggplot(df_combined) +
   geom_col()
 ```
 
-Pero es menos útil para presentarlo en una tabla, así que practiquemos la conversión de este largo y desordenado dataframe en un dataframe más amplio y ordenado: 
+Pero es menos útil para presentarlo en una tabla, así que practiquemos la conversión de este largo y desordenado dataframe en un dataframe ancho y ordenado: 
 
 ```{r}
 df_combined %>% 
@@ -530,7 +528,7 @@ df_combined %>%
   knitr::kable()
 ```
 
-## Resources {#resources-5}
+## Recursos {#resources-5}
 
 Aquí hay un [tutorial](https://datacarpentry.org/r-socialsci/03-dplyr-tidyr/index.html) útil 
 

@@ -1,20 +1,17 @@
-# Borrador. Caracteres y cadenas  {#characters-and-strings} 
-
-
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
+# Caracteres y cadenas  {#characters-and-strings} 
 
 ```{r, out.width=c('100%'), echo=F, message=F}
 knitr::include_graphics(here::here("images", "Characters_Strings_1500x500.png"))
 ```
 
-Esta página demuestra el uso del paquete **stringr** para evaluar y manejar valores de caracteres, también denominados "cadenas".
+Esta página muestra el uso del paquete **stringr** para evaluar y manejar valores de caracteres, también denominados "cadenas" ("strings").
 
 1.  Combinar, ordenar, dividir, organizar - `str_c()`, `str_glue()`, `str_order()`, `str_split()`\
 
 2.  Limpiar y normalizar
 
     -   Ajustar la longitud - `str_pad()`, `str_trunc()`, `str_wrap()`\
-    -   Cambio de mayúsculas y minúsculas - `str_to_upper()`, `str_to_title()`, `str_to_lower()`, `str_to_sentence()`\
+    -   Cambiar mayúsculas y minúsculas - `str_to_upper()`, `str_to_title()`, `str_to_lower()`, `str_to_sentence()`\
 
 3.  Evaluar y extraer por posición - `str_length()`, `str_sub()`, `word()`\
 
@@ -49,7 +46,7 @@ pacman::p_load(
 ### Importar datos {.unnumbered}
 Importar datos 
 
-En esta página haremos referencia de vez en cuando a la lista limpia de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clique para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importe los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - vea la página de [importación y exportación](#import-and-export) para más detalles). 
+En esta página haremos referencia de vez en cuando a la lista limpia de casos de una epidemia de ébola simulada. Si quieres seguir el proceso, [clica para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - consulta la página de [importación y exportación](#import-and-export) para más detalles). 
 
 ```{r, echo=F}
 # import the linelist into R
@@ -84,7 +81,7 @@ Esta sección abarca:
 
 ### Combinar cadenas {.unnumbered}
 
-Para combinar o concatenar varias cadenas en una sola, sugerimos utilizar `str_c` de **stringr**. Si tiene valores de caracteres distintos para combinar, simplemente proporciónelos como argumentos únicos, separados por comas. 
+Para combinar o concatenar varias cadenas en una sola, sugerimos utilizar `str_c` de **stringr**. Si tienes valores de caracteres distintos para combinar, simplemente proporciónalos como argumentos únicos, separados por comas. 
 
 ```{r}
 str_c("String1", "String2", "String3")
@@ -96,7 +93,7 @@ El argumento `sep = ` inserta un valor de carácter entre cada uno de los argume
 str_c("String1", "String2", "String3", sep = ", ")
 ```
 
-El argumento `collapse = ` es relevante si está introduciendo múltiples *vectores* como argumentos a `str_c()`. Se utiliza para separar los elementos de lo que sería un vector de salida, de forma que el vector de salida sólo tenga un elemento de carácter largo. 
+El argumento `collapse = ` es relevante si estás introduciendo múltiples *vectores* como argumentos a `str_c()`. Se utiliza para separar los elementos de lo que sería un vector de salida, de forma que el vector de salida sólo tenga un elemento de carácter largo. 
 
 El ejemplo siguiente muestra la combinación de dos vectores en uno (nombres y apellidos). Otro ejemplo similar podría ser el de las jurisdicciones y su número de casos. En este ejemplo: 
 
@@ -123,7 +120,7 @@ cat(str_c(first_names, last_names, sep = " ", collapse = ";\n"))
 
 ### Cadenas dinámicas {.unnumbered}
 
-Utiliza `str_glue()` para insertar código R dinámico en una cadena. Se trata de una función muy útil para crear títulos o pies de gráfico dinámicos, como se demuestra a continuación. 
+Utiliza `str_glue()` para insertar código R dinámico en una cadena. Se trata de una función muy útil para crear títulos o pies de gráfico dinámicos, como se muestra a continuación. 
 
 * Todo el contenido va entre comillas dobles `str_glue("")` 
 
@@ -196,9 +193,9 @@ str_c("New Cases: ", str_c(case_table$zone, case_table$new_cases, sep = " = ", c
 
 ### Unir columnas  {#str_unite .unnumbered}
 
-Dentro de un dataframe, la unión de valores de caractéres de varias columnas puede lograrse con `unite()` de **tidyr**. Esto es lo contrario de `separate()`. 
+Dentro de un dataframe, la unión de valores de caracteres de varias columnas puede lograrse con `unite()` de **tidyr**. Esto es lo contrario de `separate()`. 
 
-Indique el nombre de la nueva columna (que contendrá los valores unidos) y, a continuación, indique los nombres de las columnas que desea unir. 
+Indica el nombre de la nueva columna (que contendrá los valores unidos) y, a continuación, indica los nombres de las columnas que deseas unir. 
 
 * Por defecto, el separador utilizado en la columna unida es el guión bajo `_`, pero puede cambiarse con el argumento `sep =`. 
 
@@ -258,7 +255,7 @@ str_split(string = "jaundice, fever, chills",
           pattern = ",")
 ```
 
-Si la salida se guarda, puede acceder al enésimo valor dividido con la sintaxis de corchetes. Para acceder a un valor específico puede utilizar una sintaxis como esta: `the_returned_object[[1]][2]`, que accedería al segundo valor de la primera cadena evaluada ("fever"). Consulta la página de [fundamentos de R](#r-basics) para obtener más detalles sobre el acceso a los elementos. 
+Si se guarda la salida, puedes acceder al enésimo valor dividido con la sintaxis de corchetes. Para acceder a un valor específico puedes utilizar una sintaxis como esta: `the_returned_object[[1]][2]`, que accedería al segundo valor de la primera cadena evaluada ("fever"). Consulta la página de [fundamentos de R](#r-basics) para obtener más detalles sobre el acceso a los elementos. 
 
 ```{r}
 pt1_symptoms <- str_split("jaundice, fever, chills", ",")
@@ -279,13 +276,13 @@ symptoms <- c("jaundice, fever, chills",     # patient 1
 str_split(symptoms, ",")                     # split each patient's symptoms
 ```
 
-Para devolver una "matriz de caracteres" en su lugar, que puede ser útil si se crean columnas de dataframes, establezca el argumento `simplify = TRUE` como se muestra a continuación: 
+Para devolver una "matriz de caracteres" en su lugar, que puede ser útil si se crean columnas de dataframes, establece el argumento `simplify = TRUE` como se muestra a continuación: 
 
 ```{r}
 str_split(symptoms, ",", simplify = TRUE)
 ```
 
-También puede ajustar el número de divisiones a crear con el argumento `n =`. Por ejemplo, esto restringe el número de divisiones a 2. De este modo, cualquier otra coma permanece dentro del segundo valor. 
+También puedes ajustar el número de divisiones a crear con el argumento `n =`. Por ejemplo, esto restringe el número de divisiones a 2. De este modo, cualquier otra coma permanece dentro del segundo valor. 
 
 ```{r}
 str_split(symptoms, ",", simplify = TRUE, n = 2)
@@ -299,9 +296,7 @@ str_split_fixed(symptoms, ",", n = 2)
 
 ### Dividir columnas   {.unnumbered}
 
-#jfmont
-
-Si está intentando dividir una columna de un dataframe, es mejor utilizar la función `separate()` de **dplyr**. Se utiliza para dividir una columna de caracteres en otras columnas. 
+Si estás intentando dividir una columna de un dataframe, es mejor utilizar la función `separate()` de **dplyr**. Se utiliza para dividir una columna de caracteres en otras columnas. 
 
 Digamos que tenemos un dataframe simple `df` (definido y unido en la [sección de unir columnas](#str_unite)) que contiene una columna `case_ID`, una columna de caracteres con muchos síntomas y una columna de resultados. Nuestro objetivo es separar la columna de `symptoms` en varias columnas, cada una de las cuales contiene un síntoma.
 
@@ -309,7 +304,7 @@ Digamos que tenemos un dataframe simple `df` (definido y unido en la [sección d
 DT::datatable(df, rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Asumiendo que los datos son canalizados en `separate()`, primero proporcione la columna a separar. A continuación, proporcione en = como un vector `c()` que contiene los nombres de las *nuevas* columnas, como se muestra a continuación. 
+Asumiendo que los datos son enlazados con pipe en `separate()`, primero proporciona la columna a separar. A continuación, proporcione en = como un vector `c()` que contiene los nombres de las *nuevas* columnas, como se muestra a continuación. 
 
 * `sep =` el separador, puede ser un carácter, o un número (interpretado como la posición del carácter a dividir) 
 
@@ -319,7 +314,7 @@ Asumiendo que los datos son canalizados en `separate()`, primero proporcione la 
 
 * `extra = ` controla lo que sucede si hay más valores creados por la separación que nuevas columnas nombradas. 
 
-* `extra = "warn"` significa que verá una advertencia, pero dejará caer los valores en exceso (**el valor por defecto**) 
+* `extra = "warn"` significa que verá una advertencia, pero quitará los valores en exceso (**el valor por defecto**) 
 
 * `extra = "drop"` significa que los valores sobrantes se eliminarán sin previo aviso 
 
@@ -360,7 +355,7 @@ str_order(health_zones)
 str_sort(health_zones)
 ```
 
-Para utilizar un alfabeto diferente, añada el argumento `locale =`. Mirala lista completa de locales introduciendo `stringi::stri_locale_list()` en la consola de R. 
+Para utilizar un alfabeto diferente, añade el argumento `locale =`. Mira lista completa de locales introduciendo `stringi::stri_locale_list()` en la consola de R. 
 
 <!-- ======================================================= -->
 
@@ -442,7 +437,7 @@ str_pad("4", 2, pad = "0")
 
 ### Truncar {.unnumbered}
 
-`str_trunc()` establece una longitud máxima para cada cadena. Si una cadena supera esta longitud, se trunca (acorta) y se incluye una elipsis (...) para indicar que la cadena era antes más larga. Ten en cuenta que la elipsis *se* cuenta en la longitud. Los caracteres de la elipsis pueden cambiarse con el argumento `ellipsis =`. El argumento opcional side = especifica dónde aparecerá la elipsis dentro de la cadena truncada ("izquierda", "derecha" o "centro"). 
+`str_trunc()` establece una longitud máxima para cada cadena. Si una cadena supera esta longitud, se trunca (acorta) y se incluye una elipsis (...) para indicar que la cadena era antes más larga. Ten en cuenta que la elipsis *se* cuenta en la longitud. Los caracteres de la elipsis pueden cambiarse con el argumento `ellipsis =`. El argumento opcional `side = `especifica dónde aparecerá la elipsis dentro de la cadena truncada ("left", "right", o "center"). 
 
 ```{r}
 original <- "Symptom onset on 4/3/2020 with vomiting"
@@ -555,7 +550,7 @@ str_sub("pneumonia", 4, 15)
 
 Para extraer la enésima 'palabra', utiliza `word()`, también de **stringr**. Proporciona la(s) cadena(s), luego la primera y la última posición de la palabra a extraer. 
 
-Por defecto, se asume que el separador entre 'palabras' es un espacio, a menos que se indique lo contrario con `sep =` (por ejemplo, `sep = "_"` cuando las palabras están separadas por barra baja. 
+Por defecto, se asume que el separador entre 'palabras' es un espacio, a menos que se indica lo contrario con `sep =` (por ejemplo, `sep = "_"` cuando las palabras están separadas por barra baja. 
 
 ```{r}
 # strings to evaluate
@@ -610,7 +605,7 @@ Muchas funciones de **stringr** trabajan para detectar, localizar, extraer, hace
 
 ### Detectar un patrón {.unnumbered}
 
-Utiliza `str_detect()` como se indica a continuación para detectar la presencia/ausencia de un patrón dentro de una cadena. Primero proporcione la cadena o vector a buscar (`string =`), y luego el patrón a buscar (`pattern =`). Ten en cuenta que, por defecto, la búsqueda *distingue entre mayúsculas y minúsculas*. 
+Utiliza `str_detect()` como se indica a continuación para detectar la presencia/ausencia de un patrón dentro de una cadena. Primero proporciona la cadena o vector en la que a buscar (`string =`), y luego el patrón a buscar (`pattern =`). Ten en cuenta que, por defecto, la búsqueda *distingue entre mayúsculas y minúsculas*. 
 
 ```{r}
 str_detect(string = "primary school teacher", pattern = "teach")
@@ -622,7 +617,7 @@ Se puede incluir el argumento `negate =` y ponerlo a `TRUE` si se quiere saber s
 str_detect(string = "primary school teacher", pattern = "teach", negate = TRUE)
 ```
 
-Para ignorar las mayúsculas y minúsculas, envuelva el patrón dentro de `regex()`, y *dentro* de `regex()` añade el argumento `ignore_case = TRUE` (o `T` como abreviatura). 
+Para ignorar las mayúsculas y minúsculas, envuelve el patrón dentro de `regex()`, y *dentro* de `regex()` añade el argumento `ignore_case = TRUE` (o `T` como abreviatura). 
 
 ```{r}
 str_detect(string = "Teacher", pattern = regex("teach", ignore_case = T))
@@ -653,13 +648,13 @@ Si necesitas contar los `TRUE`, simplemente `sum()` la salida. Esto cuenta el n�
 sum(str_detect(occupations, "teach"))
 ```
 
-Para buscar con varios términos, inclúyelos separados por barras O (`|`) dentro del argumento `pattern =`, como se muestra a continuación: 
+Para buscar con varios términos, inclúyelos separados por barras (`|`) dentro del argumento `pattern =`, como se muestra a continuación: 
 
 ```{r}
 sum(str_detect(string = occupations, pattern = "teach|professor|tutor"))
 ```
 
-Si necesitas construir una larga lista de términos de búsqueda, puede combinarlos usando `str_c()` y `sep = |`, luego definir esto es un objeto de caracteres, y luego referenciar el vector más adelante de manera más sucinta. El ejemplo siguiente incluye posibles términos de búsqueda de ocupación para proveedores médicos de primera línea. 
+Si necesitas construir una larga lista de términos de búsqueda, puedes combinarlos usando `str_c()` y `sep = |`, luego definir que esto es un objeto de caracteres, y luego referenciar el vector más adelante de manera más sucinta. El ejemplo siguiente incluye posibles términos de búsqueda de ocupación para proveedores médicos de primera línea. 
 
 ```{r}
 # search terms
@@ -728,7 +723,7 @@ Notas:
 
 **Dentro de case_when()** 
 
-`str_detect()` se utiliza a menudo dentro de `case_when()` (de **dplyr**). Digamos que ocupaciones es una columna en linelist. La función `mutate()` de abajo crea una nueva columna llamada `is_educator` utilizando la lógica condicional a través de `case_when()`. Mirala página sobre limpieza de datos para aprender más sobre `case_when()`. 
+`str_detect()` se utiliza a menudo dentro de `case_when()` (de **dplyr**). Digamos que ocupaciones es una columna en linelist. La función `mutate()` de abajo crea una nueva columna llamada `is_educator` utilizando la lógica condicional a través de `case_when()`. Mira la página sobre limpieza de datos para aprender más sobre `case_when()`. 
 
 ```{r, eval=F}
 df <- df %>% 
@@ -795,7 +790,7 @@ str_locate_all(phrases, "h" ) # position of *every* instance of the pattern
 str_extract_all(occupations, "teach|prof|tutor")
 ```
 
-`str_extract()` extrae *sólo la primera coincidencia* en cada cadena evaluada, produciendo un vector de caracteres con un elemento por cada cadena evaluada. Devuelve NA cuando no hay coincidencias. Los `NA`s pueden ser eliminados envolviendo el vector devuelto con `na.exclude()`. Observe cómo la segunda de las coincidencias de la ocupación 3 no se muestra.
+`str_extract()` extrae *sólo la primera coincidencia* en cada cadena evaluada, produciendo un vector de caracteres con un elemento por cada cadena evaluada. Devuelve NA cuando no hay coincidencias. Los `NA`s pueden ser eliminados envolviendo el vector devuelto con `na.exclude()`. Observa cómo la segunda de las coincidencias de la ocupación 3 no se muestra.
 
 ```{r}
 str_extract(occupations, "teach|prof|tutor")

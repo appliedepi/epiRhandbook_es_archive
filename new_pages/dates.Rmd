@@ -6,11 +6,9 @@
 knitr::include_graphics(here::here("images", "Dates_500x500.png"))
 ```
 
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
-
 Trabajar con fechas en R requiere más atención que trabajar con otros tipos de objetos. A continuación, ofrecemos algunas herramientas y ejemplos para hacer este proceso menos doloroso. Por suerte, las fechas pueden manejarse fácilmente con la práctica y con un conjunto de paquetes útiles como  **lubridate**.  
 
-Al importar los datos en bruto, R suele interpretar las fechas como objetos de carácter, lo que significa que no pueden utilizarse para operaciones generales con fechas, como la creación de series temporales y el cálculo de intervalos de tiempo. Para hacer las cosas más difíciles, hay muchas maneras de formatear una fecha y debe ayudar a R a saber qué parte de una fecha representa qué (mes, día, hora, etc.).
+Al importar los datos en bruto, R suele interpretar las fechas como objetos de carácter, lo que significa que no pueden utilizarse para operaciones generales con fechas, como la creación de series temporales y el cálculo de intervalos de tiempo. Para hacer las cosas más difíciles, hay muchas maneras de formatear una fecha y debes ayudar a R a saber qué parte de una fecha representa qué (mes, día, hora, etc.).
 
 Las fechas en R son su propio tipo de objeto - el tipo Date. Hay que tener en cuenta que también hay un tipo que almacena objetos con fecha y hora. Los objetos fecha-hora se denominan formalmente tipos `POSIXt`, `POSIXct`, o  `POSIXlt` (la diferencia no es importante). Estos objetos se denominan informalmente tipos *datetime*.
 
@@ -25,10 +23,11 @@ Las fechas en R son su propio tipo de objeto - el tipo Date. Hay que tener en cu
 ### Cargar paquetes {.unnumbered}  
 
 
-Este trozo de código muestra la carga de paquetes necesaria para esta página. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con   `library()` de R **base**. Consulta la página sobre los [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra la carga de paquetes necesaria para esta página. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con   `library()` de R **base**. Consulta la página sobre los [Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r dates_packages, warning=F, message=F}
-# Checks if package is installed, installs if necessary, and loads package for current session
+# Ccomprueba si el paquete está instalado, lo instala si es necesario y lo carga para la sesión actual.
+
 
 pacman::p_load(
   lubridate,  # general package for handling and converting dates  
@@ -41,7 +40,7 @@ pacman::p_load(
 
 ### Importar datos {.unnumbered}  
 
-Importamos los datos de casos de una epidemia de ébola simulada. Si desea descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página de [descarga de manuales y datos](#download-handbook-and-data). Asumimos que el archivo está en el directorio de trabajo, por lo que no se especifican subcarpetas en esta ruta de archivo.
+Importamos los datos de casos de una epidemia de ébola simulada. Si deseas descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página de [descarga de manuales y datos](#download-handbook-and-data). Asumimos que el archivo está en el directorio de trabajo, por lo que no se especifican subcarpetas en esta ruta de archivo.
 ```{r,  echo=F}
 linelist <- rio::import(here::here("data", "case_linelists", "linelist_cleaned.rds"))
 
@@ -92,14 +91,14 @@ A continuación presentamos dos enfoques para convertir una columna de valores d
 
 El uso de `as.Date()` requiere que:
 
-*	Se *especifica el formato **existente** de la fecha de carácter bruto o la fecha de origen si se suministran las fechas como números (véase la sección sobre las fechas de Excel)
+*	Se especifique el formato **existente** de la fecha de carácter en bruto o la fecha de origen si se suministran las fechas como números (véase la sección sobre las fechas de Excel)
 *	Si se utiliza en una columna de caracteres, todos los valores de fecha deben tener el mismo formato exacto (si no es el caso, pruebe con `guess_dates()` del paquete **linelist**)
 
-En **primer** lugar, comprueba el tipo de su columna con `class()` de R **base** . Si no estás seguro o estás confundido sobre el tipo de datos (por ejemplo, ve "POSIXct", etc.) puede ser más fácil convertir primero la columna al tipo Character con `as.character()`, y luego convertirla al tipo Date.
+En **primer** lugar, comprueba el tipo de la columna con `class()` de R **base** . Si no estás seguro o estás confundido sobre el tipo de datos (por ejemplo, ve "POSIXct", etc.) puede ser más fácil convertir primero la columna al tipo Character con `as.character()`, y luego convertirla al tipo Date.
 
 En **segundo** lugar, dentro de la función `as.Date()`, utiliza el argumento `format =` para indicar a R el formato *actual* de los componentes de la fecha con caracteres - qué caracteres se refieren al mes, al día y al año, y cómo están separados. Si sus valores ya están en uno de los formatos de fecha estándar de R ("AAAA-MM-DD" o "AAAA/MM/DD") el argumento `format =` no es necesario.
 
-Para usar `format =`, proporcione una cadena de caracteres (entre comillas) que represente el formato *actual* de la fecha utilizando las abreviaturas especiales "strptime" que aparecen a continuación. Por ejemplo, si sus fechas de caracteres están actualmente en el formato "DD/MM/AAAA", como "24/04/1968", entonces usaría `format = "%d/%m/%Y"` para convertir los valores en fechas. **Es necesario poner el formato entre comillas. ¡Y no olvides las barras o guiones!**.
+Para usar `format =`, escribe una cadena de caracteres (entre comillas) que represente el formato *actual* de la fecha utilizando las abreviaturas especiales "strptime" que aparecen a continuación. Por ejemplo, si las fechas de caracteres están actualmente en el formato "DD/MM/AAAA", como "24/04/1968", entonces usarías `format = "%d/%m/%Y"` para convertir los valores en fechas. **Es necesario poner el formato entre comillas. ¡Y no olvides las barras o guiones!**.
 
 ```{r eval=F}
 # Convert to class date
@@ -138,7 +137,7 @@ Una vez que los valores están en el tipo Fecha, R los mostrará por defecto en 
 
 ### **lubridate** {.unnumbered}  
 
-La conversión de objetos de carácter a fechas puede facilitarse utilizando el paquete **lubridate**. Se trata de un paquete **tidyverse** diseñado para hacer que el trabajo con fechas y horas sea más sencillo y consistente que en R **base**. Por estas razones, **lubridate** se considera a menudo el paquete estándar de oro para las fechas y la hora, y se recomienda siempre que se trabaje con ellas.
+La conversión de objetos de carácter a fechas puede facilitarse utilizando el paquete **lubridate**. Se trata de un paquete **tidyverse** diseñado para hacer que el trabajo con fechas y horas sea más sencillo y consistente que en R **base**. Por estas razones, el paquete **lubridate** se considera a menudo el estándar de oro para las fechas y la hora, y se recomienda siempre que se trabaje con ellas.
 
 El paquete **lubridate** proporciona varias funciones de ayuda diferentes diseñadas para convertir objetos de caracteres en fechas de una manera intuitiva y más indulgente que especificando el formato en `as.Date()`. Estas funciones son específicas para el formato de fecha aproximado, pero permiten una variedad de separadores, y sinónimos para las fechas (por ejemplo, 01 vs Jan vs Enero) - se denominan según las abreviaturas de los formatos de fecha.
 
@@ -178,7 +177,7 @@ dmy("11 October 2020")
 <!-- linelist_cleaned$date_of_onset <- as.Date(as.character(linelist_cleaned$date_of_onset), format = "%d/%m/%Y") -->
 <!-- ``` -->
 
-Si se utiliza la canalización, la conversión de una columna de caracteres a fechas con **lubridate** podría tener este aspecto:
+Si se utilizan pipes, la conversión de una columna de caracteres a fechas con **lubridate** podría tener este aspecto:
 
 ```{r, eval=F}
 linelist <- linelist %>%
@@ -222,11 +221,11 @@ linelist <- linelist %>%
 <!-- ======================================================= -->
 ## Fechas en Excel {#excel-dates}
 
-En el fondo, la mayoría de los programas informáticos almacenan las fechas como números. R almacena las fechas desde un origen del 1 de enero de 1970. Así, si ejecutas `as.numeric(as.Date("1970-01¬¬-01))` obtendrás `0`.
+En el fondo, la mayoría de los programas informáticos almacenan las fechas como números. R almacena las fechas desde un origen del 1 de enero de 1970. Así, si ejecutas `as.numeric(as.Date("1970-01-01"))` obtendrás `0`.
 
 Microsoft Excel almacena las fechas con un origen dependiendo del sistema operativo, del 30 de diciembre de 1899 (Windows) o del 1 de enero de 1904 (Mac). Consulta esta [guía de Microsoft](https://docs.microsoft.com/en-us/office/troubleshoot/excel/1900-and-1904-date-system) para obtener más información.
 
-Las fechas de Excel suelen importarse a R como estos valores numéricos en lugar de como caracteres. Si los datos que has importado de Excel muestran las fechas como números o caracteres como "41369"... utiliza `as.Date()` (o la función `as_date()` de **lubridate**) para convertirlas, pero **en lugar de suministrar un "formato" como el anterior, suministre la fecha de origen de Excel** al argumento `origin =` .
+Las fechas de Excel suelen importarse a R como estos valores numéricos en lugar de como caracteres. Si los datos que has importado de Excel muestran las fechas como números o caracteres como "41369"... utiliza `as.Date()` (o la función `as_date()` de **lubridate**) para convertirlas, pero **en lugar de suministrar un "formato" como el anterior, suministra la fecha de origen de Excel** al argumento `origin =` .
 
 Esto no funcionará si la fecha de Excel se almacena en R como de tipo carácter, ¡así que asegúrate de que el número es de tipo numérico!.
 
@@ -255,7 +254,8 @@ linelist::guess_dates(c("03 Jan 2018",
                         "08/20/85"))
 ```
 
-Algunos argumentos opcionales para `guess_dates()` que puede incluir son
+Algunos argumentos opcionales para `guess_dates()` que puede incluir son:
+
 *	`error_tolerance` - Proporción de entradas que no pueden ser identificadas como fechas a tolerar (por defecto 0,1 o 10%)
 *	`last_date` - la última fecha válida (por defecto, la fecha actual)
 *	`first_date` - la primera fecha válida. Por defecto, cincuenta años antes de last_date.
@@ -312,11 +312,11 @@ mdy_hms("01 January 2020, 16:20:40 PST")
 
 ```
 
-Cuando se trabaja con un dataframe, las columnas de fecha y hora pueden combinarse para crear una columna de fecha y hora utilizando `str_glue()`del paquete **stringr** y una función apropiada de **lubridate** . Consulta la página sobre [Caracteres y cadenas](#characters-and-strings) para obtener detalles sobre **stringr**.
+Cuando se trabaja con un dataframe, las columnas de fecha y hora pueden combinarse para crear una columna de fecha y hora utilizando `str_glue()`del paquete **stringr** y una función apropiada de **lubridate**. Consulta la página sobre [Caracteres y cadenas](#characters-and-strings) para obtener detalles sobre **stringr**.
 
 En este ejemplo, el dataframe `linelist` tiene una columna con formato "horas:minutos". Para convertirla en una fecha, hay que seguir algunos pasos:
 
-1.  Cree una columna de tiempo de admisión "limpia" con los valores faltantes rellenados con la mediana de la columna. Hacemos esto porque **lubridate** no opera con valores faltantes. Combínela con la columna `date_hospitalisation` y utiliza la función `ymd_hm()` para convertirla.
+1.  Crea una columna de tiempo de admisión "limpia" con los valores faltantes rellenados con la mediana de la columna. Hacemos esto porque **lubridate** no opera con valores faltantes. Combínala con la columna `date_hospitalisation` y utiliza la función `ymd_hm()` para convertirla.
 
 ```{r, eval = FALSE}
 # packages
@@ -360,16 +360,16 @@ as.numeric(time2_clean - time1_clean)   # difference in hours
 
 ```
 
-Sin embargo, ten en cuenta que si no se proporciona un valor de fecha, se asume que la fecha es hoy. Para combinar una cadena de fecha y una cadena de hora, vea cómo usar **stringr** en la sección anterior. Lea más sobre `strptime()` [aquí](https://rdrr.io/r/base/strptime.html).
+Sin embargo, ten en cuenta que si no se proporciona un valor de fecha, se asume que la fecha es hoy. Para combinar una cadena de fecha y una cadena de hora, observa cómo se usa **stringr** en la sección anterior. Puedes leer más sobre `strptime()` [aquí](https://rdrr.io/r/base/strptime.html).
 
 Para convertir números de un solo dígito a dos dígitos (por ejemplo, para "rellenar" las horas o los minutos con ceros a la izquierda para conseguir 2 dígitos), consulta la [sección "Longitud de relleno" de la página Caracteres y cadenas](#str_pad).
 
 
 ### Extraer fracciones de hora {.unnumbered}  
 
-Puedes extraer elementos de una hora con `hour()`, `minute()`, or `second()` de **lubridate**.
+Puedes extraer elementos de una hora con `hour()`, `minute()`, o `second()` de **lubridate**.
 
-He aquí un ejemplo de extracción de la hora y posterior clasificación por parte del día. Comenzamos con la columna `time_admission`, que es de tipo Carácter en formato "HH:MM". En primer lugar, se utiliza `strptime()` como se ha descrito anteriormente para convertir los caracteres en `tipo datetime`. A continuación, se extrae la hora con `hour()`, devolviendo un número del 0 al 24. Por último, se crea una columna `time_period` utilizando la lógica con `case_when()` para clasificar las filas en Mañana/Tarde/Tarde/Noche en función de su hora de entrada.
+He aquí un ejemplo de extracción de la hora y posterior clasificación como parte del día. Comenzamos con la columna `time_admission`, que es de tipo Carácter en formato "HH:MM". En primer lugar, se utiliza `strptime()` como se ha descrito anteriormente para convertir los caracteres en `tipo datetime`. A continuación, se extrae la hora con `hour()`, devolviendo un número del 0 al 24. Por último, se crea una columna `time_period` utilizando la lógica con `case_when()` para clasificar las filas en Mañana/Tarde/Anochecer/Noche en función de su hora de entrada.
 
 ```{r}
 linelist <- linelist %>%
@@ -405,7 +405,7 @@ day(example_date)    # day (number) of the month
 wday(example_date)   # day number of the week (1-7)
 ```
 
-También puede extraer componentes de tiempo de un objeto o columna  `datetime`. Esto puede ser útil si quiere ver la distribución de los tiempos de admisión.
+También puede extraer componentes de tiempo de un objeto o columna  `datetime`. Esto puede ser útil si quieres ver la distribución de los tiempos de admisión.
 
 ```{r, eval=F}
 example_datetime <- ymd_hm("2020-03-01 14:45")
@@ -417,7 +417,7 @@ second(example_datetime)   # extract second
 
 Hay varias opciones para recuperar las semanas. Consulta la sección sobre semanas epidemiológicas más abajo.
 
-Ten en cuenta que si desea *mostrar* una fecha de una forma determinada (por ejemplo, "enero de 2020" o "jueves 20 de marzo" o "semana 20 de 1977") puede hacerlo de forma más flexible, tal y como se describe en la sección sobre Visualización de fechas.
+Ten en cuenta que si deseas *mostrar* una fecha de una forma determinada (por ejemplo, "enero de 2020" o "jueves 20 de marzo" o "semana 20 de 1977") puedes hacerlo de forma más flexible, tal y como se describe en la sección sobre Visualización de fechas.
 
 
 ### Fecha matemática {.unnumbered}  
@@ -436,9 +436,9 @@ example_date + weeks(7) - days(2)
 
 La diferencia entre las fechas se puede calcular mediante:
 
-1.  Asegúrese de que ambas fechas son del mismo tipo
+1.  Asegúrate que ambas fechas son del mismo tipo
 2.  Utiliza la resta para devolver la diferencia "difftime" entre las dos fechas
-3.  Si es necesario, convierta el resultado en tipo numéricoa para realizar los cálculos matemáticos posteriores
+3.  Si es necesario, convierte el resultado en tipo numéricoa para realizar los cálculos matemáticos posteriores
 
 A continuación se calcula y muestra el intervalo entre dos fechas. Se pueden encontrar intervalos utilizando el símbolo de resta "menos" en los valores que son de tipo Fecha. Ten en cuenta, sin embargo, que el tipo del valor devuelto es "difftime", como se muestra a continuación, y debe ser convertido a numérico.
 
@@ -449,7 +449,7 @@ output    # print
 class(output)
 ```
 
-Para realizar operaciones posteriores sobre un "difftime", conviértalo en numérico con `as.numeric()`.
+Para realizar operaciones posteriores sobre un "difftime", conviértelo en numérico con `as.numeric()`.
 
 Todo esto puede unirse para trabajar con datos, por ejemplo:
 
@@ -480,7 +480,7 @@ median(linelist_delay$days_onset_to_hosp, na.rm = T)
 
 
 <!-- ======================================================= -->
-## Visualización de la fecha {#date-display}
+## Visualización de fechas {#date-display}
 
 Una vez que las fechas son del tipo correcto, a menudo se desea mostrarlas de forma diferente, por ejemplo para que se muestren como "lunes 05 de enero" en lugar de "2018-01-05". También puedes querer ajustar la visualización para agrupar las filas por los elementos de fecha mostrados, por ejemplo, para agrupar por mes-año.
 
@@ -525,12 +525,12 @@ str_glue("{format(Sys.Date(), format = '%A, %B %d %Y, %z  %Z, ')}{format(Sys.tim
 format(Sys.Date(), "%Y Week %W")
 ```
 
-Ten en cuenta que si utiliza `str_glue()`, Ten en cuenta que dentro de las esperadas comillas dobles " sólo debe utilizar comillas simples (como arriba).
+Ten en cuenta que si utilizas `str_glue()`, dentro de las comillas dobles " sólo debes utilizar comillas simples (como arriba).
 
 
 ### Mes-Año {.unnumbered}  
 
-Para convertir una columna de fecha al formato mes-año, le sugerimos que utilice la función `as.yearmon()` del paquete **zoo**. Esto convierte la fecha al tipo "yearmon" y mantiene el orden correcto. Por el contrario, usar `format(columna, "%Y %B")` convertirá al tipo Carácter y ordenará los valores alfabéticamente (incorrectamente).
+Para convertir una columna de fecha al formato mes-año, te sugerimos que utilice la función `as.yearmon()` del paquete **zoo**. Esto convierte la fecha al tipo "yearmon" y mantiene el orden correcto. Por el contrario, usar `format(columna, "%Y %B")` convertirá al tipo Carácter y ordenará los valores alfabéticamente (incorrectamente).
 
 A continuación, se crea una nueva columna `yearmonth` a partir de la columna `date_onset`, utilizando la función as.yearmon()`. La ordenación por defecto (correcta) de los valores resultantes se muestra en la tabla.
 
@@ -567,11 +567,11 @@ Nota: si estás trabajando con `ggplot()` y quieres ajustar sólo cómo se *mues
 
 Consulta la página sobre [Agrupar datos](#grouping-data) para ver ejemplos más extensos de agrupación de datos por fecha. A continuación describimos brevemente la agrupación de datos por semanas.
 
-Generalmente recomendamos utilizar la función `floor_date()` de **lubridate**, con el argumento `unit = "week"`. Esto redondea la fecha hacia abajo al "inicio" de la semana, como se define por el argumento `week_start =`. El inicio de la semana por defecto es el 1 (para los lunes), pero se puede especificar cualquier día de la semana como inicio (por ejemplo, el 7 para los domingos). `floor_date()` es versátil y se puede utilizar para redondear hacia abajo a otras unidades de tiempo estableciendo `unit = ` a "second", "minute", "hour", "day", "month", o "year".  
+Generalmente recomendamos utilizar la función `floor_date()` de **lubridate**, con el argumento `unit = "week"`. Esto redondea la fecha hacia abajo al "inicio" de la semana, como se define por el argumento `week_start =`. El inicio de la semana por defecto es el 1 (para los lunes), pero se puede especificar cualquier día de la semana como inicio (por ejemplo, el 7 para los domingos). `floor_date()` es versátil y se puede utilizar para redondear hacia abajo a otras unidades de tiempo estableciendo `unit = ` "second", "minute", "hour", "day", "month", o "year".  
 
-El valor devuelto es la fecha de inicio de la semana, en tipo Date. El tipo `Date` es útil a la hora de trazar los datos, ya que serán fácilmente reconocidos y ordenados correctamente por `ggplot()`.
+El valor devuelto es la fecha de inicio de la semana, en tipo Date. El tipo `Date` es útil a la hora de representar los datos, ya que serán fácilmente reconocidos y ordenados correctamente por `ggplot()`.
 
-Si sólo está interesado en ajustar las fechas para que *se muestren* por semanas en un gráfico, consulta la sección de esta página sobre Visualización de fechas. Por ejemplo, al trazar una epicurva puede formatear la visualización de la fecha proporcionando la nomenclatura strptime "%" deseada. Por ejemplo, utiliza "%Y-%W" o "%Y-%U" para devolver el año y el número de semana (dado el comienzo de la semana del lunes o del domingo, respectivamente).
+Si sólo tienes interés en ajustar las fechas para que *se muestren* por semanas en un gráfico, consulta la sección de esta página sobre Visualización de fechas. Por ejemplo, al representar una epicurva puedes formatear la visualización de la fecha proporcionando la nomenclatura strptime "%" deseada. Por ejemplo, utiliza "%Y-%W" o "%Y-%U" para devolver el año y el número de semana (dado el comienzo de la semana del lunes o del domingo, respectivamente).
 
 ### Recuentos semanales {.unnumbered}  
 
@@ -581,7 +581,7 @@ Consulta la página sobre [Agrupar datos](#grouping-data) para obtener una expli
 
 2.  Obtener el recuento de filas (casos) por semana con `count()`; filtra los casos a los que les falte la fecha
 
-3.  Termin con `complete()` de **tidyr** para asegurarse de que *todas* las semanas aparecen en los datos - incluso las que no tienen filas/casos. Por defecto, los valores de recuento para cualquier fila "nueva" son NA, pero puede hacerlos 0 con el argumento `fill =`, que espera una lista con nombre (abajo, `n` es el nombre de la columna de recuentos).
+3.  Termina con `complete()` de **tidyr** para asegurarte que *todas* las semanas aparecen en los datos - incluso las que no tienen filas/casos. Por defecto, los valores de recuento para cualquier fila "nueva" son NA, pero puedes hacerlos 0 con el argumento `fill =`, que espera una lista con nombre (abajo, `n` es el nombre de la columna de recuentos).
 
 ```{r}
 # Make aggregated dataset of weekly case counts
@@ -608,9 +608,9 @@ DT::datatable(head(weekly_counts, 20), rownames = FALSE, options = list(pageLeng
 
 ### Alternativas a Epiweek {.unnumbered}  
 
-Ten en cuenta que **lubridate** también tiene las funciones  `week()`, `epiweek()`, e `isoweek()`, cada una de las cuales tiene fechas de inicio ligeramente diferentes y otros matices. Sin embargo, en términos generales, `floor_date()` debería ser todo lo que necesita. Lea los detalles de estas funciones introduciendo ?week en la consola o leyendo la documentación [aquí](https://www.rdocumentation.org/packages/lubridate/versions/1.7.4/topics/week).
+Ten en cuenta que **lubridate** también tiene las funciones  `week()`, `epiweek()`, e `isoweek()`, cada una de las cuales tiene fechas de inicio ligeramente diferentes y otros matices. Sin embargo, en términos generales, `floor_date()` debería ser todo lo que necesitas. Puedes leer más detalles de estas funciones introduciendo ?week en la consola o leyendo la documentación [aquí](https://www.rdocumentation.org/packages/lubridate/versions/1.7.4/topics/week).
 
-Puedes usar del paquete **aweek** para establecer semanas epidemiológicas. Puedes leer más sobre él [en el sitio web de RECON](https://www.repidemicsconsortium.org/aweek/). Tiene las funciones `date2week()` y `week2date()` en las que puede establecer el día de inicio de la semana con `week_start = "Monday"`. Este paquete es el más fácil si se desea obtener resultados del tipo "week" (por ejemplo, "2020-W12"). Otra ventaja de **aweek** es que cuando `date2week()` se aplica a una columna de fecha, la columna devuelta (formato de semana) es automáticamente del tipo Factor e incluye niveles para todas las semanas en el lapso de tiempo (esto evita el paso extra de `complete()` descrito anteriormente). Sin embargo, **aweek** no tiene la funcionalidad de redondear fechas a otras unidades de tiempo como meses, años, etc.
+Puedes usar del paquete **aweek** para establecer semanas epidemiológicas. Puedes leer más sobre él [en el sitio web de RECON](https://www.repidemicsconsortium.org/aweek/). Tiene las funciones `date2week()` y `week2date()` en las que se puede establecer el día de inicio de la semana con `week_start = "Monday"`. Este paquete es el más fácil si se desea obtener resultados del tipo "week" (por ejemplo, "2020-W12"). Otra ventaja de **aweek** es que cuando `date2week()` se aplica a una columna de fecha, la columna devuelta (formato de semana) es automáticamente del tipo Factor e incluye niveles para todas las semanas en el lapso de tiempo (esto evita el paso extra de `complete()` descrito anteriormente). Sin embargo, **aweek** no tiene la funcionalidad de redondear fechas a otras unidades de tiempo como meses, años, etc.
 
 
 Otra alternativa para las series temporales que también funciona bien para mostrar un formato de "semana" ("2020 W12") es `yearweek()` del paquete **tsibble**, como se demuestra en la página sobre [series temporales y detección de brotes](#time-series-and-outbreak-detection). 
@@ -623,8 +623,8 @@ Cuando los datos están presentes en diferentes husos horarios, a menudo puede s
 
 En R, cada objeto *datetime* tiene un componente de zona horaria. Por defecto, todos los objetos `datetime` llevarán la zona horaria local para el ordenador que se está utilizando - esto es generalmente específico para una *ubicación* en lugar de una zona horaria, ya que las zonas horarias a menudo cambian en los lugares debido al horario de verano. No es posible compensar con precisión las zonas horarias sin un componente de tiempo de una fecha, ya que el evento que representa una columna de fecha no puede ser atribuido a un tiempo específico, y por lo tanto los cambios de tiempo medidos en horas no pueden ser razonablemente contabilizados.
 
-Para tratar las zonas horarias, hay una serie de funciones de ayuda en lubridate que pueden utilizarse para cambiar la zona horaria de un objeto `datetime` de la zona horaria local a una zona horaria diferente. Las zonas horarias se establecen atribuyendo una zona horaria válida de la base de datos tz al objeto `datetime`. Una lista de estos se puede encontrar aquí - si la ubicación que está utilizando los datos no está en esta lista, las grandes ciudades cercanas en la zona horaria están disponibles y sirven el mismo propósito.
-https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+Para tratar las zonas horarias, hay una serie de funciones de ayuda en lubridate que pueden utilizarse para cambiar la zona horaria de un objeto `datetime` de la zona horaria local a una zona horaria diferente. Las zonas horarias se establecen atribuyendo una zona horaria válida de la base de datos tz al objeto `datetime`. [Aquí](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) se puede encontrar una lista de éstas - si la ubicación que se está utilizando en los datos no está en esta lista, las grandes ciudades cercanas en la zona horaria están disponibles y sirven para el mismo propósito.
+
 
 
 ```{r}
@@ -676,7 +676,7 @@ DT::datatable(counts, rownames = FALSE,  options = list(pageLength = 5, scrollX=
 
 **Al utilizar lag() o lead(), el orden de las filas en el dataframe es muy importante. - presta atención a si tus fechas/números son ascendentes o descendentes**
 
-En primer lugar, cree una nueva columna que contenga el valor de la semana anterior (retardada).
+En primer lugar, crea una nueva columna que contenga el valor de la semana anterior (retardada).
 
 * Controla el número de unidades hacia atrás/adelante con n = (debe ser un entero no negativo)
 
@@ -694,7 +694,7 @@ counts <- counts %>%
 DT::datatable(counts, rownames = FALSE,  options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-A continuación, cree una nueva columna que sea la diferencia entre las dos columnas de los casos:
+A continuación, crea una nueva columna que sea la diferencia entre las dos columnas de los casos:
 
 ```{r}
 counts <- counts %>% 
@@ -707,7 +707,7 @@ DT::datatable(counts, rownames = FALSE,  options = list(pageLength = 5, scrollX=
 ```
 
 
-Puedes leer más sobre `lead()` y `lag()` en la documentación [aquí](https://dplyr.tidyverse.org/reference/lead-lag.html) o introduciendo `?lag` en tu consola. 
+Puedes leer más sobre `lead()` y `lag()` en [esta documentación aquí](https://dplyr.tidyverse.org/reference/lead-lag.html) o introduciendo `?lag` en tu consola. 
 
 
 <!-- ======================================================= -->

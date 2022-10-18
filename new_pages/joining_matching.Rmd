@@ -1,5 +1,5 @@
 
-# Borrador. Unir datos {#joining-data}  
+# Unir datos {#joining-data}  
 
 ```{r out.width = c('50%'), fig.show='hold', echo=F}
 knitr::include_graphics(here::here("images", "left-join.gif"))
@@ -7,9 +7,7 @@ knitr::include_graphics(here::here("images", "left-join.gif"))
 
 *Arriba: un ejemplo animado de una unión por la izquierda ([fuente de la imagen](https://github.com/gadenbuie/tidyexplain/tree/master/images))* 
 
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
-
-This page describes ways to "join", "match", "link" "bind"
+Esta página describe diferentes formas de unir datos ("join", "match", "link", "bind") y combinar dataframes.
 
 
 <!-- ======================================================= -->
@@ -17,7 +15,7 @@ This page describes ways to "join", "match", "link" "bind"
 
 ### Cargar paquetes  {.unnumbered}
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R. 
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R. 
 
 ```{r}
 pacman::p_load(
@@ -33,7 +31,7 @@ pacman::p_load(
 
 ### Importar datos  {.unnumbered}
 
-Para empezar, importamos la lista de casos limpia de una epidemia de ébola simulada. Si quieres seguir el proceso, [clica aquí para descargar el listado "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - mira la página de [importación y exportación](#import-and-export) para más detalles). 
+Para empezar, importamos la lista de casos limpiada de una epidemia de ébola simulada. Si quieres seguir el proceso, [clica aquí para descargar el listado "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - mira la página de [importación y exportación](#import-and-export) para más detalles). 
 
 ```{r, echo=F}
 # import the linelist into R
@@ -112,7 +110,7 @@ DT::datatable(hosp_info, rownames = FALSE, options = list(pageLength = nrow(hosp
 <!-- ======================================================= -->
 ### Pre-limpieza  {.unnumbered}
 
-Las uniones tradicionales (no probabilísticas) distinguen entre mayúsculas y minúsculas y requieren coincidencias de caracteres exactas entre los valores de los dos dataframes. Para demostrar algunos de los pasos de limpieza que puede necesitar antes de iniciar una unión, ahora limpiaremos y alinearemos los datos `linelist_mini` y `hosp_info`. 
+Las uniones tradicionales (no probabilísticas) distinguen entre mayúsculas y minúsculas y requieren coincidencias de caracteres exactas entre los valores de los dos dataframes. Para mostrar algunos de los pasos de limpieza que puedes necesitar antes de iniciar una unión, ahora limpiaremos y alinearemos los datos `linelist_mini` y `hosp_info`. 
 
 **Identificar las diferencias** 
 
@@ -160,7 +158,7 @@ Los nombres de los hospitales que aparecen en ambos dataframes están alineados.
 unique(hosp_info$hosp_name)
 ```
 
-Antes de una unión, a menudo es más fácil convertir una columna a todas las minúsculas o a todas las mayúsculas. Si necesita convertir todos los valores de una columna a MAYÚSCULAS o minúsculas, utiliza `mutate()` y envuelva la columna con una de estas funciones de **stringr**, como se muestra en la página sobre [Caracteres y cadenas](#characters-and-strings).  
+Antes de una unión, a menudo es más fácil convertir en una columna todas a minúsculas o todas a mayúsculas. Si necesitas convertir todos los valores de una columna a MAYÚSCULAS o minúsculas, utiliza `mutate()` y envuelva la columna con una de estas funciones de **stringr**, como se muestra en la página sobre [Caracteres y cadenas](#characters-and-strings).  
 
 `str_to_upper()`  
 `str_to_upper()`  
@@ -182,11 +180,11 @@ Muchas gracias a [https://github.com/gadenbuie](https://github.com/gadenbuie/tid
 <!-- ======================================================= -->
 ### Sintaxis general  {.unnumbered}
 
-Los comandos de unión pueden ejecutarse como comandos independientes para unir dos dataframes en un nuevo objeto, o pueden utilizarse dentro de una cadena de tuberías (`%>%`) para fusionar un dataframe en otro mientras se limpia o se modifica de alguna manera. 
+Los comandos de unión pueden ejecutarse como comandos independientes para unir dos dataframes en un nuevo objeto, o pueden utilizarse dentro de una cadena de pipes (`%>%`) para fusionar un dataframe en otro mientras se limpia o se modifica de alguna manera. 
 
-En el siguiente ejemplo, la función `left_join()` se utiliza como un comando independiente para crear un nuevo dataframe `joined_data`. Las entradas son los dataframes 1 y 2 (`df1` y `df2`). El primer dataframe listado es el dataframe de referencia, y el segundo listado se une *a* él. 
+En el siguiente ejemplo, la función `left_join()` se utiliza como un comando independiente para crear un nuevo dataframe `joined_data`. Las entradas son los dataframes 1 y 2 (`df1` y `df2`). El primer dataframe es el dataframe de referencia, y el segundo se une *a* él. 
 
-El tercer argumento por = es donde se especifican las columnas de cada dataframe que se utilizarán para alinear las filas de los dos dataframes. Si los nombres de estas columnas son diferentes, proporciónelos dentro de un vector `c()` como se muestra a continuación, donde las filas se emparejan sobre la base de valores comunes entre la columna `ID` en `df1` y la columna `identifier` en `df2`. 
+El tercer argumento `by = ` es donde se especifican las columnas de cada dataframe que se utilizarán para alinear las filas de los dos dataframes. Si los nombres de estas columnas son diferentes, proporciónelos dentro de un vector `c()` como se muestra a continuación, donde las filas se emparejan sobre la base de valores comunes entre la columna `ID` en `df1` y la columna `identifier` en `df2`. 
 
 ```{r, eval=F}
 # Join based on common values between column "ID" (first data frame) and column "identifier" (second data frame)
@@ -208,9 +206,9 @@ joined_data <- left_join(df1, df2, by = c("name" = "firstname", "surname" = "las
 ```
 
 
-Los comandos de unión también pueden ejecutarse dentro de una cadena de tuberías. Esto modificará el dataframe que se está canalizando. 
+Los comandos de unión también pueden ejecutarse dentro de una cadena de pipes. Esto modificará el dataframe que se está canalizando. 
 
-En el ejemplo siguiente, `df1` se pasa por las tuberías, `df2` se une a él y, por tanto, `df `se modifica y se redefine.   
+En el ejemplo siguiente, `df1` se pasa por los pipes, `df2` se une a él y, por tanto, `df `se modifica y se redefine.   
 
 ```{r eval=F}
 df1 <- df1 %>%
@@ -277,7 +275,7 @@ linelist_mini %>%
 
 #### "¿Debo usar una unión a la derecha o a la izquierda?"  {.unnumbered}  
 
-Para responder a la pregunta anterior, pregúntese "¿qué dataframe debe conservar todas sus filas?" - Utiliza éste como base. Una unión *a la izquierda* conserva todas las filas del primer dataframe escrito en el comando, mientras que una *unión a la derecha* conserva todas las filas del segundo dataframe. 
+Para responder a la pregunta anterior, hay que tener claro "¿qué dataframe debe conservar todas sus filas?" - Utiliza éste como base. Una unión *a la izquierda* conserva todas las filas del primer dataframe escrito en el comando, mientras que una *unión a la derecha* conserva todas las filas del segundo dataframe. 
 
 Los dos comandos de abajo consiguen el mismo resultado - 10 filas de `hosp_info` unidas *en* base a `linelist_mini`, pero utilizan diferentes uniones. El resultado es que el orden de las columnas variará en función de si `hosp_info` llega por la derecha (en la unión izquierda) o llega por la izquierda (en la unión derecha). El orden de las filas también puede cambiar en consecuencia. Pero ambas consecuencias pueden ser tratadas posteriormente, utilizando `select()` para reordenar las columnas o `arrange()` para ordenar las filas. 
 
@@ -310,7 +308,7 @@ Considera también si tu caso de uso está dentro de una cadena de pipes (`%>%`)
 
 **Una unión completa (Full join) es la más *inclusiva* de las uniones**: devuelve todas las filas de ambos dataframes. 
 
-Si hay filas presentes en una y no en la otra (donde no se encontró ninguna coincidencia), el dataframe las incluirá y se hará más largo. Los valores faltantes `NA` se utilizan para rellenar los huecos creados. A medida que se une, observe el número de columnas y filas con cuidado para solucionar el problema de las coincidencias de mayúsculas y minúsculas y de los caracteres exactos. 
+Si hay filas presentes en una y no en la otra (donde no se encontró ninguna coincidencia), el dataframe las incluirá y se hará más largo. Los valores faltantes `NA` se utilizan para rellenar los huecos creados. A medida que se une, observa el número de columnas y filas con cuidado para solucionar el problema de las coincidencias de mayúsculas y minúsculas y de los caracteres exactos. 
 
 El dataframe de "base" es el que se escribe primero en el comando. El ajuste de esto no afectará a los registros devueltos por la unión, pero puede afectar al orden de las columnas resultantes, al orden de las filas y a las columnas de los identificadores que se conservan. 
 
@@ -320,15 +318,15 @@ knitr::include_graphics(here::here("images", "full-join.gif"))
 
 Ejemplo animado de una unión completa ([fuente de la imagen](https://github.com/gadenbuie/tidyexplain/tree/master/images)) 
 
-**Example**  
+**Ejemplo**  
 
-Below is the output of a `full_join()` of `hosp_info` (originally ` nrow(hosp_info)`, [view here](#joins_hosp_info))  *into* `linelist_mini` (originally ` nrow(linelist_mini)`, [view here](#joins_llmini)). Note the following:  
+`A continuación se muestra la salida de` un `full_join()` de `hosp_info` (originalmente ` nrow(hosp_info)`, [view here](#joins_hosp_info))  *into* `linelist_mini` (originalmente ` nrow(linelist_mini)`, [view here](#joins_llmini)). Nota lo siguiente:  
 
-* All baseline rows are kept (`linelist_mini`)  
-* Rows in the secondary that do not match to the baseline are kept ("ignace" and "sisters"), with values in the corresponding baseline columns  `case_id` and `onset` filled in with missing values  
-* Likewise, rows in the baseline data frame that do not match to the secondary ("Other" and "Missing") are kept, with secondary columns ` catchment_pop` and `level` filled-in with missing values  
-* In the case of one-to-many or many-to-one matches (e.g. rows for "Military Hospital"), all possible combinations are returned (lengthening the final data frame)  
-* Only the identifier column from the baseline is kept (`hospital`)  
+* Se mantienen todas las filas de la base (`linelist_mini`)
+* Se conservan las filas de los datos secundarios que no coinciden con la de base ("ignace" y "sisters"), con los valores de las columnas correspondientes de la de base `case_id` y `onset` rellenados con los valores que faltan  
+* Del mismo modo, se conservan las filas de los datos de referencia que no coinciden con el secundario ("Otros" y "Falta"), y las columnas secundarias `catchment_pop` y `level` se rellenan con los valores que faltan 
+* En el caso de coincidencias de uno a muchos o de muchos a uno (por ejemplo, filas para "Hospital Militar"), se devuelven todas las combinaciones posibles (alargando el conjunto de datos final)  
+* Sólo se mantiene la columna del identificador de la línea de base (`hospital`)   
 
 
 ```{r, eval=F}
@@ -341,9 +339,6 @@ linelist_mini %>%
   full_join(hosp_info, by = c("hospital" = "hosp_name")) %>% 
   DT::datatable(rownames = FALSE, options = list(pageLength = 15))
 ```
-
-
-
 
 
 <!-- ======================================================= -->
@@ -364,7 +359,7 @@ Ejemplo animado de una unión interna ([fuente de la imagen](https://github.com/
 
 A continuación se muestra la salida de un `inner_join()` de `linelist_mini` (base) con `hosp_info` (secundario). Observa lo siguiente: 
 
-* Se eliminan las filas del de base que no coinciden con los datos secundarios (filas en las que el hospital es "Missing" u "Other") * Asimismo, se eliminan las filas del dataframe secundario que no tenían ninguna coincidencia en la línea de base (filas en las que `hosp_name` es "sisters" o "ignace") 
+* Se eliminan las filas del de base que no coinciden con los datos secundarios (filas en las que el hospital es "Missing" u "Other") * Asimismo, se eliminan las filas del dataframe secundario que no tenían ninguna coincidencia en la de base (filas en las que `hosp_name` es "sisters" o "ignace") 
 * Sólo se conserva la columna del identificador del de base (`hospital`)   
 
 
@@ -388,9 +383,9 @@ linelist_mini %>%
 <!-- ======================================================= -->
 ### Semi-unión  {.unnumbered} 
 
-Un semi join es un "filtering join" que utiliza otro conjunto de datos *no para añadir filas o columnas, sino para realizar un filtrado*. 
+Una semi-unión join es una "unión filtrada" que utiliza otro conjunto de datos *no para añadir filas o columnas, sino para realizar un filtrado*. 
 
-Un **semi-join mantiene todas las observaciones en el dataframe de referencia que tienen una coincidencia en el dataframe secundario** (pero no añade nuevas columnas ni duplica ninguna fila para las coincidencias múltiples). Lee más sobre estas uniones de "filtrado" [aquí](https://towardsdatascience.com/level-up-with-semi-joins-in-r-a068426096e0). 
+Un **semi-join mantiene todas las observaciones en el dataframe de referencia que tienen una coincidencia con el dataframe secundario** (pero no añade nuevas columnas ni duplica ninguna fila para las coincidencias múltiples). Lee más sobre estas uniones de "filtrado" [aquí](https://towardsdatascience.com/level-up-with-semi-joins-in-r-a068426096e0). 
 
 ```{r out.width = c('50%'), fig.show='hold', echo=F}
 knitr::include_graphics(here::here("images", "semi-join.gif"))
@@ -410,7 +405,7 @@ hosp_info %>%
 <!-- ======================================================= -->
 ### Anti unión {.unnumbered} 
 
-**El anti join es otro "filtering join" que devuelve las filas del dataframe de referencia que *no* tienen una coincidencia en el dataframe secundario.** 
+**La anti unión es otra "unión filtrada" que devuelve las filas del dataframe de referencia que *no* tienen una coincidencia en el dataframe secundario.** 
 
 Lee más sobre el filtrado de las uniones [aquí](https://towardsdatascience.com/level-up-with-semi-joins-in-r-a068426096e0). 
 
@@ -422,7 +417,7 @@ Los anti-join son útiles para la identificación de registros que no están pre
 knitr::include_graphics(here::here("images", "anti-join.gif"))
 ```
 
-Ejemplo animado de una antijunta ([fuente de la imagen](https://github.com/gadenbuie/tidyexplain/tree/master/images)) 
+Ejemplo animado de una anti-unión ([fuente de la imagen](https://github.com/gadenbuie/tidyexplain/tree/master/images)) 
 
 
 #### Ejemplo de `anti_join()` sencillo {.unnumbered}  
@@ -456,7 +451,7 @@ linelist_mini %>%
   DT::datatable(rownames = FALSE, options = list(pageLength = 8))
 ```
 
-Para revisar los registros de `linelist_mini` que fueron excluidos durante el inner join, podemos ejecutar un anti-join con la misma configuración (linelist_mini como línea de base).  
+Para revisar los registros de `linelist_mini` que fueron excluidos durante el inner join, podemos ejecutar un anti-join con la misma configuración (linelist_mini como base).  
 
 ```{r, eval = F}
 linelist_mini %>% 
@@ -477,7 +472,7 @@ Para ver los registros de `hosp_info` que se excluyeron en la unión interna, ta
 <!-- ======================================================= -->
 ## Emparejamiento probabilístico {#probabalistic-matching}
 
-Si no dispone de un identificador único común a todos los conjuntos de datos para unirlos, considere la posibilidad de utilizar un algoritmo de coincidencia probabilística. Este algoritmo buscaría coincidencias entre los registros basándose en la similitud (por ejemplo, la distancia de cadena de Jaro-Winkler o la distancia numérica). A continuación se muestra un ejemplo sencillo utilizando el paquete **fastLink** . 
+Si no dispones de un identificador único común a todos los conjuntos de datos para unirlos, considera  la posibilidad de utilizar un algoritmo de coincidencia probabilística. Este algoritmo buscaría coincidencias entre los registros basándose en la similitud (por ejemplo, la distancia de cadena de Jaro-Winkler o la distancia numérica). A continuación se muestra un ejemplo sencillo utilizando el paquete **fastLink** . 
 
 **Cargar paquetes** 
 
@@ -560,7 +555,7 @@ La función `fastLink()` del paquete **fastLink** puede utilizarse para aplicar 
 
 *Sugerencia: divide una columna de fecha en tres columnas numéricas separadas utilizando `day()`, `month()`, and `year()` del paquete **lubridate*** 
 
-El umbral por defecto para las coincidencias es de 0,94 (`threshold.match = `), pero puedes ajustarlo más alto o más bajo. Si defines el umbral, en en cuenta que los umbrales más altos podrían producir más falsos negativos (filas que no coinciden y que en realidad deberían coincidir) y, del mismo modo, un umbral más bajo podría producir más falsos positivos. 
+El umbral por defecto para las coincidencias es de 0,94 (`threshold.match = `), pero puedes ajustarlo más alto o más bajo. Si defines el umbral, ten en cuenta que los umbrales más altos podrían producir más falsos negativos (filas que no coinciden y que en realidad deberían coincidir) y, del mismo modo, un umbral más bajo podría producir más falsos positivos. 
 
 A continuación, los datos se emparejan según la distancia de las cadenas en las columnas de nombre y distrito, y según la distancia numérica para el año, el mes y el día de nacimiento. Se establece un umbral de coincidencia del 95% de probabilidad. 
 
@@ -683,7 +678,7 @@ results_not_matched <- results[!rownames(results) %in% my_matches$inds.b,]  # Ro
 
 La coincidencia probabilística también puede utilizarse para de-duplicar unos datos. Consulta la página sobre [de-duplicación](#de-duplication) para conocer otros métodos de de-duplicación. 
 
-Aquí comenzamos con el set de datos `cases`, pero ahora lo llamamos `cases_dup`, ya que tiene 2 filas adicionales que podrían ser duplicados de filas anteriores: Ver "Tony" con "Anthony", y "Marialisa Rodrigues" con "Maria Rodriguez". 
+Aquí comenzamos con el conjunto de datos `cases`, pero ahora lo llamamos `cases_dup`, ya que tiene 2 filas adicionales que podrían ser duplicados de filas anteriores: Ver "Tony" con "Anthony", y "Marialisa Rodrigues" con "Maria Rodriguez". 
 
 ```{r, echo=F}
 ## Add duplicates
@@ -711,7 +706,7 @@ DT::datatable(cases_dup, rownames = FALSE, options = list(pageLength = nrow(case
 ```
 
 
-Ejecuta `fastLink()` como antes, pero compare el dataframe `cases_dup` consigo mismo. Cuando los dos dataframes proporcionados son idénticos, la función asume que se quiere de-duplicar. Observa que no especificamos `stringdist.match =` o `numeric.match =` como hicimos anteriormente.   
+Ejecuta `fastLink()` como antes, pero compara el dataframe `cases_dup` consigo mismo. Cuando los dos dataframes proporcionados son idénticos, la función asume que se quiere de-duplicar. Observa que no especificamos `stringdist.match =` o `numeric.match =` como hicimos anteriormente.   
 
 ```{r, message = F, warning = F}
 ## Run fastLink on the same dataset
@@ -768,7 +763,7 @@ En esta sección también se discutirá cómo "alinear" el orden de las filas de
 
 Para unir las filas de un dataframe con el fondo de otro dataframe, utiliza `bind_rows()` de **dplyr**. Es muy inclusivo, por lo que cualquier columna presente en cualquiera de los dataframes se incluirá en la salida. Algunas notas: 
 
-* A diferencia de la versión **básica** de R `row.bind()`, `bind_rows()` de **dplyr** no requiere que el orden de las columnas sea el mismo en ambos dataframes. Siempre que los nombres de las columnas se escriban de forma idéntica, las alineará correctamente. 
+* A diferencia de la versión de R **base** de R `row.bind()`, `bind_rows()` de **dplyr** no requiere que el orden de las columnas sea el mismo en ambos dataframes. Siempre que los nombres de las columnas se escriban de forma idéntica, las alineará correctamente. 
 * Puedes especificar opcionalmente el argumento `.id =`. Proporcionar un nombre de columna de caracteres. Esto producirá una nueva columna que sirve para identificar de qué dataframe procede originalmente cada fila. 
 * Puedes utilizar `bind_rows()` en una lista de dataframes de estructura similar para combinarlos en un dataframe. Mira un ejemplo en la página [Iteración, bucles y listas](#iteration-loops-and-lists) que implica la importación de múltiples listas de líneas con **purrr**. 
 
@@ -819,7 +814,7 @@ Ahora podemos unir las filas con `bind_rows()`.
 combined <- bind_rows(hosp_summary, totals)
 ```
 
-Ahora podemos ver el resultado. Observe cómo en la última fila se rellena un valor `NA` vacío para la columna hospital que no estaba en hosp_summary. Como se explica en la página de [Tablas para presentaciones](#tables-for-presentation), podría "rellenar" esta celda con "Total" utilizando replace_na().   
+Ahora podemos ver el resultado. Observa cómo en la última fila se rellena un valor `NA` vacío para la columna hospital que no estaba en hosp_summary. Como se explica en la página de [Tablas para presentaciones](#tables-for-presentation), podrías "rellenar" esta celda con "Total" utilizando replace_na().   
 
 ```{r message=FALSE, echo=F}
 DT::datatable(combined, rownames = FALSE, options = list(pageLength = nrow(10)))
@@ -830,7 +825,7 @@ DT::datatable(combined, rownames = FALSE, options = list(pageLength = nrow(10)))
 
 Existe una función similar de **dplyr** `bind_cols()` que se puede utilizar para combinar dos dataframes de forma lateral. Ten en cuenta que las filas se emparejan entre sí *por posición* (no como una *unión* anterior) - por ejemplo, la fila 12 en cada dataframe se alineará. 
 
-Como ejemplo, unimos varias tablas de resumen. Para ello, también demostramos cómo reordenar el orden de las filas de un dataframe para que coincida con el orden de otro dataframe, con `match()`. 
+Como ejemplo, unimos varias tablas de resumen. Para ello, también mostramos cómo reordenar el orden de las filas de un dataframe para que coincida con el orden de otro dataframe, con `match()`. 
 
 Aquí definimos  `case_info` como un dataframe resumido de los casos del listado, por hospital, con el número de casos y el número de muertes.
 
@@ -867,7 +862,7 @@ Observa que los hospitales son los mismos, pero están en diferente orden en cad
 
 #### Utiliza `match()` para alinear la ordenación  {.unnumbered}  
 
-Debido a que los órdenes de las filas son diferentes, un simple comando `bind_cols()` daría lugar a un desajuste de los datos. Para solucionarlo podemos utilizar `match()` de para alinear las filas de un dataframe en el mismo orden que en otro. Asumimos para este enfoque que no hay valores duplicados en ninguno de los dos dataframes. 
+Debido a que los órdenes de las filas son diferentes, un simple comando `bind_cols()` daría lugar a un desajuste de los datos. Para solucionarlo podemos utilizar `match()` de R *base* para alinear las filas de un dataframe en el mismo orden que en otro. Asumimos para este enfoque que no hay valores duplicados en ninguno de los dos dataframes. 
 
 Cuando utilizamos `match()`, la sintaxis es `match(TARGET ORDER VECTOR, DATA FRAME COLUMN TO CHANGE)`, donde el primer argumento es el orden deseado (ya sea un vector independiente, o en este caso una columna en un dataframe), y el segundo argumento es la columna del dataframe que se reordenará. La salida de `match()` es un vector de números que representa el ordenamiento correcto de las posiciones. Puedes obtener más información con `?match`. 
 
@@ -875,7 +870,7 @@ Cuando utilizamos `match()`, la sintaxis es `match(TARGET ORDER VECTOR, DATA FRA
 match(case_info$hospital, contact_fu$hospital)
 ```
 
-Puedes utilizar este vector numérico para reordenar el dataframe - colóquelo dentro de los subcorchetes `[ ]` *antes de la coma*. Lee más sobre la **sintaxis** del subconjunto de corchetes en la página de [fundamentos de R](#r-basics). El comando de abajo crea un nuevo dataframe, definido como el anterior en el que las filas están ordenadas en el vector numérico de arriba.
+Puedes utilizar este vector numérico para reordenar el dataframe - colócalo dentro de los subcorchetes `[ ]` *antes de la coma*. Lee más sobre la **sintaxis** del subconjunto de corchetes en la página de [Fundamentos de R](#r-basics). El comando de abajo crea un nuevo dataframe, definido como el anterior en el que las filas están ordenadas en el vector numérico de arriba.
 
 ```{r}
 contact_fu_aligned <- contact_fu[match(case_info$hospital, contact_fu$hospital),]
