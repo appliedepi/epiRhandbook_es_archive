@@ -205,7 +205,7 @@ A continuación utilizamos `clean_names()` del paquete **janitor** para estandar
 ```{r}
 # ADM3 level clean
 sle_adm3 <- sle_adm3_raw %>%
-  clean_names() %>% # standardize column names
+  janitor::clean_names() %>% # standardize column names #jfmont
   filter(admin2name %in% c("Western Area Urban", "Western Area Rural")) # filter to keep certain areas
 ```
 
@@ -226,7 +226,7 @@ de [HDX](https://data.humdata.org/dataset/sierra-leone-population)) o a través 
 ```{r}
 # Population by ADM3
 sle_adm3_pop <- import(here("data", "gis", "population", "sle_admpop_adm3_2020.csv")) %>%
-  clean_names()
+  janitor::clean_names() #jfmont
 ```
 
 Este es el aspecto del archivo de población. *Desplázate a la derecha* para ver cómo cada jurisdicción tiene columnas con la población `male`, `female`, y la población `total` y el desglose de la población en columnas por grupos de edad.
@@ -247,7 +247,7 @@ Importamos el shapefile de puntos de las instalaciones con `read_sf()`, limpiamo
 ```{r}
 # OSM health facility shapefile
 sle_hf <- sf::read_sf(here("data", "gis", "shp", "sle_hf.shp")) %>% 
-  clean_names() %>%
+  janitor::clean_names() %>% #jfmont
   filter(amenity %in% c("hospital", "clinic", "doctors"))
 ```
 
