@@ -5,7 +5,6 @@
 knitr::include_graphics(here::here("images", "epicurve_top.png"))
 ```    
 
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
 Una curva epidémica (también conocida como "curva epi") es un gráfico epidemiológico básico que se suele utilizar para visualizar el patrón temporal de aparición de la enfermedad entre un grupo o epidemia de casos.
 
@@ -18,7 +17,7 @@ En esta página mostramos dos enfoques para producir epicurvas en R:
 
 También se abordan casos de uso específicos como:
 
-* Trazado de datos de recuento agregados
+* Grágicos de datos de recuento agregados
 * Facetado o producción de múltiplos gráficos pequeños
 * Aplicación de medias móviles
 * Mostrar qué datos son "provisionales" o están sujetos a retrasos en la presentación de informes
@@ -112,7 +111,7 @@ DT::datatable(head(count_data, 50), rownames = FALSE, options = list(pageLength 
 
 ### Establecer parámetros {.unnumbered}
 
-Para la producción de un informe, es posible que desees establecer parámetros editables como la fecha para la que los datos son actuales (la "data_date"). A continuación, puedes hacer referencia al objeto `data_date` en tu código cuando apliques filtros o en subtítulos dinámicos.
+Para la producción de un informe, es posible que desees establecer parámetros editables como la fecha para la que los datos sean actuales (la "data_date"). A continuación, puedes hacer referencia al objeto `data_date` en tu código cuando apliques filtros o en subtítulos dinámicos.
 
 ```{r set_parameters}
 ## set the report date for the report
@@ -150,7 +149,7 @@ A continuación mostramos cómo hacer epicurvas utilizando el paquete **incidenc
      + Especificar la columna de fecha a `date_index = `
      + Especificar el `interval = ` en el que deben agregarse los casos (diario, semanal, mensual..)
      + Especificar cualquier columna de agrupación (por ejemplo, sexo, hospital, resultado)
-2.  **Trazar** el objeto de incidencia
+2.  **Representarr** el objeto de incidencia
      + Especificar etiquetas, colores, títulos, etc.
 
 A continuación, cargamos el paquete **incidence2**, creamos el objeto de incidencia a partir de `linelist` en la columna `date_onset` y agregamos los casos por día. A continuación, imprimimos un resumen del objeto de incidencia.
@@ -167,7 +166,7 @@ epi_day <- incidence(       # create incidence object
   )
 ```
 
-El objeto **incidencia2** tiene el aspecto de un tibble (como una trama de datos) y puede imprimirse o manipularse como un dataframe. 
+El objeto **epi_day2** tiene el aspecto de un tibble (como una trama de datos) y puede imprimirse o manipularse como un dataframe. 
 
 ```{r}
 class(epi_day)
@@ -202,7 +201,7 @@ El argumento `interval = ` de `incidence()` define cómo se agrupan las observac
 
 **Especificar el intervalo**
 
-**incidence2** proporciona flexibilidad y una sintaxis comprensible para especificar cómo quieres agregar tus casos en barras epicúreas. Proporcione un valor como los siguientes al argumento `interval = `. Puedes escribir cualquiera de los siguientes en plural (por ejemplo, "week**s**"), y puedes añadir números antes (por ejemplo, "3 monts"). 
+**incidence2** proporciona flexibilidad y una sintaxis comprensible para especificar cómo quieres agregar tus casos en una epicurva de barras Proporcione un valor como los siguientes al argumento `interval = `. Puedes escribir cualquiera de los siguientes en plural (por ejemplo, "week**s**"), y puedes añadir números antes (por ejemplo, "3 months"). 
 
 Opción de argumento | Más explicaciones 
 ------------------- | ------------------------------------ |
@@ -218,7 +217,7 @@ Número (1, 7, 13, 14, etc.) | Número de días por intervalo
 "year" | Primer día del año natural 
 
 
-A continuación se muestran ejemplos de cómo se ven los diferentes intervalos cuando se aplican a linelist. Observe cómo el formato por defecto y la frecuencia de las *etiquetas de* fecha en el eje-x cambian a medida que cambia el intervalo de fecha.
+A continuación se muestran ejemplos de cómo se ven los diferentes intervalos cuando se aplican a linelist. Observa cómo el formato por defecto y la frecuencia de las *etiquetas de* fecha en el eje-x cambian a medida que cambia el intervalo de fecha.
 
 ```{r incidence, out.width=c('50%', '50%', '50%', '50%'), fig.show='hold', warning=F, message=F}
 # Create the incidence objects (with different intervals)
@@ -343,7 +342,7 @@ plot(central_outbreak, title = "Weekly case incidence at Central Hospital")
 
 ### Recuentos agregados {.unnumbered}
 
-Si los datos originales son agregados (recuentos), proporciona el nombre de la columna que contiene los recuentos de casos al argumento `count =` cuando crees el objeto de incidencia con `incidence()`.
+Si los datos originales son agregados (recuentos), cuando crees el objeto de incidencia con `incidence()` proporciona el nombre de la columna que contiene los recuentos de casos al argumento `count = `.
 
 Por ejemplo, este dataframe `count_data` son casos de `linelist` agregados en recuentos diarios por hospital. Las primeras 50 filas tienen este aspecto: 
 
@@ -351,7 +350,7 @@ Por ejemplo, este dataframe `count_data` son casos de `linelist` agregados en re
 DT::datatable(head(count_data,50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-If you are beginning your analysis with daily count data like the dataset above, your `incidence()` command to convert this to a weekly epicurve by hospital would look like this:  
+Si comienzas tu análisis con datos de recuento diario como el conjunto de datos anterior, tu comando `incidence()` para convertirlo en una epicurva semanal por hospital tendría el siguiente aspecto:
 
 ```{r}
 epi_counts <- incidence(              # create weekly incidence object
@@ -431,22 +430,39 @@ Argumento(s)|Descripción
 Ten en cuenta que el argumento `date_breaks = ` sólo funciona si `centre_dates = FALSE`. Proporciona un valor de carácter entre comillas utilizando la sintaxis strptime que se indica a continuación, como se detalla en la página [Trabajar con fechas](#working-with-dates-1). Puedes utilizar `\n` para una "nueva línea".
 
 %d = Número de día del mes (5, 17, 28, etc.)
+
 %j = Número de día del año (día juliano 001-366)
+
 %a = Día de la semana abreviado (Mon, Tue, Wed, etc.)
+
 %A = Día de la semana completo (Monday, Tuesday, etc.))
+
 %w = Número del día de la semana (0-6, el domingo es 0)
+
 %u = Número del día de la semana (1-7, el lunes es 1)
+
 %W = Número de la semana (00-53, el lunes es el comienzo de la semana)
+
 %U = Número de la semana (01-53, el domingo es el comienzo de la semana)
+
 %m = Número del mes (ej. 01, 02, 03, 04)
+
 %b = Mes abreviado (Jan, Feb, etc. )
+
 %B = Mes completo (January, February, etc.)
+
 %y = Año de 2 dígitos (por ejemplo, 89)
+
 %Y = Año de 4 dígitos (por ejemplo, 1989)
+
 %h = horas (reloj de 24 horas)
+
 %m = minutos
+
 %s = segundos
+
 %z = desviación de GMT
+
 %Z = Zona horaria (carácter)
 
 
@@ -569,7 +585,7 @@ plot(
 
 #### Especificar una paleta {.unnumbered}  
 
-Proporcione el nombre de una paleta predefinida al argumento `col_pal = ` en `plot()`. El paquete **incidence2** viene con 2 paletas predefinidas: "vibrant" y "muted". En "vibrant" los primeros 6 colores son distintos y en "muted" los primeros 9 colores son distintos. Después de estos números, los colores son interpolaciones/intermediarios de otros colores. Estas paletas predefinidas se pueden encontrar en [este sitio web](https://personal.sron.nl/~pault/#sec:qualitative). Las paletas excluyen el gris, que está reservado para los datos que faltan (utiliza `na_color = ` para cambiar este valor por defecto).
+Proporciona el nombre de una paleta predefinida al argumento `col_pal = ` en `plot()`. El paquete **incidence2** viene con 2 paletas predefinidas: "vibrant" y "muted". En "vibrant" los primeros 6 colores son distintos y en "muted" los primeros 9 colores son distintos. Después de estos números, los colores son interpolaciones/intermediarios de otros colores. Estas paletas predefinidas se pueden encontrar en [este sitio web](https://personal.sron.nl/~pault/#sec:qualitative). Las paletas excluyen el gris, que está reservado para los datos que faltan (utiliza `na_color = ` para cambiar este valor por defecto).
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning = F, message = F}
 # Create incidence object, with data grouped by age category  
@@ -619,7 +635,7 @@ plot(age_outbreak, fill = age_cat, title = "RColorBrewer palette")+
 
 #### Especificar manualmente {.unnumbered}  
 
-Para especificar los colores manualmente, añade la función `scale_fill_manual()` de **ggplot2** a la función `plot()` con un `+` y proporciona el vector de nombres de colores o códigos HEX al argumento `values = `. El número de colores listados debe ser igual al número de grupos. Ten en cuenta si los valores faltantes son un grupo - pueden ser convertidos a un valor de carácter como "Missing" durante la preparación de los datos con la función `fct_explicit_na()` como se explica en la página sobre [Factores](#factors).
+Para especificar los colores manualmente, añade la función `scale_fill_manual()` de **ggplot2** a la función `plot()` con un `+` y proporciona el vector de nombres de colores o códigos HEX al argumento `values = `. El número de colores listados debe ser igual al número de grupos. Ten en cuenta que si los valores faltantes son un grupo - pueden ser convertidos a un valor de carácter como "Missing" durante la preparación de los datos con la función `fct_explicit_na()` como se explica en la página sobre [Factores](#factors).
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning=F, message=F}
 # manual colors
@@ -629,7 +645,7 @@ plot(age_outbreak, fill = age_cat, title = "Manually-specified colors")+
     name = "Age Category")      # Name for legend
 ```
 
-Como se menciona en la página [Consejos de ggplot](#ggplot-tips), puede crear sus propias paletas utilizando `colorRampPalette()` sobre un vector de colores y especificando el número de colores que deseas. Esta es una buena manera de obtener muchos colores en una rampa especificando unos pocos.  
+Como se menciona en la página [Consejos de ggplot](#ggplot-tips), puedes crear tus propias paletas utilizando `colorRampPalette()` sobre un vector de colores y especificando el número de colores que deseas. Esta es una buena manera de obtener muchos colores en una rampa especificando unos pocos.  
 
 ```{r}
 my_cols <- c("darkgreen", "darkblue", "purple", "grey", "yellow", "orange")
@@ -659,7 +675,7 @@ hospital_outbreak <- incidence(
 plot(hospital_outbreak, fill = hospital, title = "ORIGINAL - hospital not a factor")
 ```
 
-Ahora, para ajustar el orden de manera que los "Faltantes" y "Otros" estén en la parte superior de la epicurva podemos hacer lo siguiente:
+Ahora, para ajustar el orden de manera que los "Missing" y "Otros" estén en la parte superior de la epicurva podemos hacer lo siguiente:
 
 * Cargar el paquete **forcats**, para trabajar con factores
 * Ajustar los datos - en este caso vamos a definir un nuevo dataset (`plot_data`) en el que:
@@ -711,7 +727,7 @@ plot(hospital_outbreak_mod, fill = hospital)+
 
 ### Líneas de cuadrícula verticales {.unnumbered}  
 
-Si utilizas la configuración predeterminada de la **incidence2**, puedes observar que las líneas de cuadrícula verticales aparecen en cada etiqueta de fecha y una vez entre cada etiqueta de fecha. Esto puede dar lugar a que las líneas de cuadrícula se crucen con la parte superior de algunas barras.
+Si utilizas la configuración predeterminada de **incidence2**, puedes observar que las líneas de cuadrícula verticales aparecen en cada etiqueta de fecha y una vez entre cada etiqueta de semana. Esto puede dar lugar a que las líneas de cuadrícula se crucen con la parte superior de algunas barras.
 
 <!-- [TO DO Note this paragraph is not applicable with version 1.0.0 of incidence2). You can specify the interval for the gridlines by adding **ggplot2**'s `scale_x_date()` command to your **incidence2** plot. Within it, specify the intervals for `date_breaks = ` and `date_minor_breaks = ` (e.g. "weeks" or "3 weeks" or "months"). Note that use of `scale_x_date()` will over-ride any formatting of the date labels in `plot()`, so you will need to specify any string format to `date_labels = ` as below.   -->
 
@@ -812,12 +828,11 @@ detach("package:tidyverse", unload=TRUE)
 library(tidyverse)
 ```
 
+Para producir una epicurva con `ggplot()` hay tres elementos principales:  
 
-To produce an epicurve with `ggplot()` there are three main elements:  
-
-* A histogram, with linelist cases aggregated into "bins" distinguished by specific "break" points  
-* Scales for the axes and their labels  
-* Themes for the plot appearance, including titles, labels, captions, etc.
+* Un histograma, con los casos de la lista de líneas agregados en "bins" distinguidos por puntos específicos de "ruptura".  
+* Escalas para los ejes y sus etiquetas  
+* Temas para la apariencia del gráfico, incluyendo títulos, etiquetas, subtítulos, etc.
 
 
 ### Especificaciones de las barras {.unnumbered}  
@@ -853,9 +868,9 @@ Observamos que el primer caso de este conjunto de datos del Hospital Central tuv
 format(min(central_data$date_onset, na.rm=T), "%A %d %b, %Y")
 ```
 
-**Para especificar manualmente las pausas del histograma, *no* utilices el argumento `binwidth = `, y en su lugar suministre un vector de fechas a `breaks = `.**
+**Para especificar manualmente las pausas del histograma, *no* utilices el argumento `binwidth = `, y en su lugar suministra un vector de fechas a `breaks = `.**
 
-Crea el vector de fechas con la función `seq.Date()` de R **base** . Esta función espera argumentos `to = `, `from = `, y `by = `. Por ejemplo, el comando siguiente devuelve fechas mensuales que comienzan en el 15 de enero y terminan en el 28 de junio.
+Crea el vector de fechas con la función `seq.Date()` de R **base**. Esta función espera argumentos `to = `, `from = `, y `by = `. Por ejemplo, el comando siguiente devuelve fechas mensuales que comienzan en el 15 de enero y terminan en el 28 de junio.
 
 ```{r}
 monthly_breaks <- seq.Date(from = as.Date("2014-02-01"),
@@ -876,7 +891,7 @@ ggplot(data = central_data) +
   labs(title = "Monthly case bins")   # title
 ```
 
-Una simple secuencia de fechas semanales puede ser devuelta estableciendo  `by = "week"`. Por ejemplo:
+Una secuencia simple de fechas semanales puede ser devuelta estableciendo  `by = "week"`. Por ejemplo:
 
 ```{r}
 weekly_breaks <- seq.Date(from = as.Date("2014-02-01"),
@@ -914,7 +929,7 @@ weekly_breaks_all <- seq.Date(
 
 Estas salidas de `seq.Date()` pueden utilizarse para crear los saltos de las casillas del histograma, pero también los saltos de las etiquetas de fecha, que pueden ser independientes de las casillas. Lea más sobre las etiquetas de fecha en secciones posteriores.
 
-<span style="color: darkgreen;">***CONSEJO:*** Para un comando `ggplot()` más sencillo, guarde los saltos de cubo y los saltos de etiqueta de fecha como vectores con nombre por adelantado, y simplemente proporcione sus nombres a `breaks = `..</span>  
+<span style="color: darkgreen;">***CONSEJO:*** Para un comando `ggplot()` más sencillo, guarda los saltos de cubo y los saltos de etiqueta de fecha como vectores con nombre por adelantado, y simplemente proporciona sus nombres a `breaks = `..</span>  
 
 
 
@@ -1022,7 +1037,7 @@ scale_x_date(
 
 Las barras del histograma pueden colorearse por grupos y "apilarse". Para designar la columna de agrupación, haz los siguientes cambios. Consulta la página de [Conceptos básicos de ggplot](#ggplot-basics) para más detalles.
 
-* Dentro del mapeo estético del histograma `aes()`, asigne el nombre de la columna a los argumentos `group =` y `fill = `
+* Dentro del mapeo estético del histograma `aes()`, asigna el nombre de la columna a los argumentos `group =` y `fill = `
 * Elimina cualquier argumento `fill = ` *fuera* de `aes()`, ya que anulará el de dentro
 * Los argumentos *dentro de* `aes()` se aplicarán *por grupo*, mientras que los de *fuera* se aplicarán a todas las barras (por ejemplo, es posible que quieras `color = ` fuera, para que cada barra tenga el mismo borde)
 
@@ -1057,9 +1072,9 @@ ggplot(data = linelist) +     # begin with linelist (many hospitals)
 * Para establecer *manualmente* el relleno de cada grupo, utiliza `scale_fill_manual()` (nota: `scale_color_manual()` es diferente).
   * Utiliza el argumento `values = ` para aplicar un vector de colores.
   * Utiliza `na.value = ` para especificar un color para los valores `NA`.
-  * Utiliza el argumento `labels = ` para cambiar el texto de los elementos de la leyenda. Para estar seguro, proporcione como un vector con nombre como `c("old" = "new", "old" = "new")` o ajusta los valores en los propios datos.
+  * Utiliza el argumento `labels = ` para cambiar el texto de los elementos de la leyenda. Para estar seguro, proporciónalo como un vector, como `c("old" = "new", "old" = "new")` o ajusta los valores en los propios datos.
   * Utiliza `name = ` para dar un título adecuado a la leyenda
-* Para obtener más consejos sobre las escalas y paletas de colores, consulta la página sobre [Conceptos básicos de ggplot](#ggplot-basics).  
+* Consulta la página sobre [Conceptos básicos de ggplot](#ggplot-basics) para obtener más información sobre escalas y paletas de colores.  
 
 ```{r, warning=F, message=F}
 ggplot(data = linelist)+           # begin with linelist (many hospitals)
@@ -1082,7 +1097,6 @@ ggplot(data = linelist)+           # begin with linelist (many hospitals)
     labels = c("St. Mark's Maternity Hospital (SMMH)" = "St. Mark's"),
     name = "Hospital") # specify fill colors ("values") - attention to order!
 ```
-
 
 
 
@@ -1177,7 +1191,7 @@ Lee más sobre las leyendas y las escalas en la página [Consejos de ggplot](#gg
 
 La visualización lado a lado de las barras de grupo (en lugar de apiladas) se especifica dentro de `geom_histogram()` con `position = "dodge"` colocado fuera de `aes()`.
 
-Si hay más de dos grupos de valores, éstos pueden resultar difíciles de leer. Considera la posibilidad de utilizar un gráfico facetado (múltiplos pequeños). Para mejorar la legibilidad en este ejemplo, se han eliminado los valores de género que faltan.
+Si hay más de dos grupos de valores, éstos pueden resultar difíciles de leer. Considera la posibilidad de utilizar un gráfico facetado (múltiples pequeños). Para mejorar la legibilidad en este ejemplo, se han eliminado los valores de género que faltan.
 
 ```{r, warning=F, message=F}
 ggplot(central_data %>% drop_na(gender))+   # begin with Central Hospital cases dropping missing gender
@@ -1245,7 +1259,7 @@ scale_x_date(limits = c(NA, Sys.Date()) # ensures date axis will extend until cu
 <span style="color: red;">***PELIGRO:*** Ten cuidado al establecer los cortes o límites de la escala del eje-y (por ejemplo, de 0 a 30 por 5: `seq(0, 30, 5)`). Tales números estáticos pueden cortar tu gráfica demasiado si los datos cambian para superar el límite!</span>
 
 
-
+<!-- # hasta aquí -->
 ### Ejes de fecha etiquetas/cuadrículas {.unnumbered} 
 
 <span style="color: darkgreen;">***CONSEJO:*** Recuerda que las **etiquetas** de los ejes de fecha son independientes de la agregación de los datos en barras, pero visualmente puede ser importante alinear las franjas, las etiquetas de fecha y las líneas verticales de la cuadrícula.</span>
