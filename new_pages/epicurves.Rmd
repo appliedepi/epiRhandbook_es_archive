@@ -1259,7 +1259,6 @@ scale_x_date(limits = c(NA, Sys.Date()) # ensures date axis will extend until cu
 <span style="color: red;">***PELIGRO:*** Ten cuidado al establecer los cortes o límites de la escala del eje-y (por ejemplo, de 0 a 30 por 5: `seq(0, 30, 5)`). Tales números estáticos pueden cortar tu gráfica demasiado si los datos cambian para superar el límite!</span>
 
 
-<!-- # hasta aquí -->
 ### Ejes de fecha etiquetas/cuadrículas {.unnumbered} 
 
 <span style="color: darkgreen;">***CONSEJO:*** Recuerda que las **etiquetas** de los ejes de fecha son independientes de la agregación de los datos en barras, pero visualmente puede ser importante alinear las franjas, las etiquetas de fecha y las líneas verticales de la cuadrícula.</span>
@@ -1272,8 +1271,8 @@ Para **modificar las etiquetas de fecha y las líneas de la cuadrícula**, utili
   * Añade `expand = c(0,0)` para comenzar las etiquetas en la primera barra
   * Usa `date_labels = ` para especificar el formato de las etiquetas de fecha - mira la página de [trabajar con fechas](working-with-dates) para consejos (usa `\n` para una nueva línea)
 * **Si las franjas de tu histograma son semanas de domingo**:
-  * Usa `breaks = ` y `minor_breaks = ` proporcionando una secuencia de saltos de fecha para cada
-  * Puedes seguir utilizando `date_labels = ` y `expand = ` para formatear como se ha descrito anteriormente
+  * Usa `breaks = ` y `minor_breaks = ` proporcionando una secuencia de saltos de fecha para cada una
+  * Puedes seguir utilizando `date_labels = ` y `expand = ` para formatear, como se ha descrito anteriormente
 
 Algunas notas:
 
@@ -1441,12 +1440,12 @@ DT::datatable(head(count_data, 50), rownames = FALSE, filter="top", options = li
 ```
 
 
-#### Trazado de recuentos diarios {.unnumbered}  
+#### Representar recuentos diarios {.unnumbered}  
 
 Podemos trazar una epicurva diaria a partir de estos *recuentos diarios*. Aquí están las diferencias con el código:
 
-* Dentro del mapeo estético `aes()`, especifique `y = ` como columna de recuento (en este caso, el nombre de la columna es `n_cases`)
-* Añadir el argumento `stat = "identity"` dentro de `geom_histogram()`, que especifica que la altura de la barra debe ser el valor `y =` , no el número de filas como es el valor por defecto
+* Dentro del mapeo estético `aes()`, especifica `y = ` como columna de recuento (en este caso, el nombre de la columna es `n_cases`)
+* Añadir el argumento `stat = "identity"` dentro de `geom_histogram()`, que especifica que la altura de la barra debe ser el valor `y =` y no el número de filas, como es el valor por defecto
 * Añade el argumento `width = ` para evitar las líneas blancas verticales entre las barras. Para los datos diarios, establece el valor 1. Para los datos semanales, escribe 7. Para los datos de recuento mensual, las líneas blancas son un problema (cada mes tiene un número diferente de días) - considera la posibilidad de transformar el eje x en un factor categórico ordenado (meses) y utilizar `geom_col()`.
 
 ```{r, message=FALSE, warning=F}
@@ -1461,7 +1460,7 @@ ggplot(data = count_data)+
     title = "Daily case incidence, from daily count data")
 ```
 
-#### Trazado de recuentos semanales {.unnumbered}
+#### representar recuentos semanales {.unnumbered}
 
 Si tus datos ya son recuentos de casos por semana, podrían parecerse a este conjunto de datos (llamado `count_data_weekly`):
 
@@ -1516,13 +1515,13 @@ ggplot(data = count_data_weekly)+
 
 ### Medias móviles {.unnumbered}
 
-Consulta la página sobre [medias móviles](#moving-averages-1) para obtener una descripción detallada y varias opciones. A continuación se muestra una opción para calcular medias móviles con el paquete **slider**. En este enfoque, *la media móvil se calcula antes de su trazado*:
+Consulta la página sobre [medias móviles](#moving-averages-1) para obtener una descripción detallada y varias opciones. A continuación se muestra una opción para calcular medias móviles con el paquete **slider**. En este enfoque, *la media móvil se calcula antes de representarla*:
 
 1.  Agrega los datos en recuentos según sea necesario (diario, semanal, etc.) (véase la página de [Agrupar datos](#grouping-data))
 2.  Crea una nueva columna para contener la media móvil, creada con `slide_index()` del paquete **slider**
-3.  Traza la media móvil como una `geom_line()` encima (después) del histograma de la epicurva
+3.  Dibuja la media móvil como una `geom_line()` encima (después) del histograma de la epicurva
 
-Mira la útil [viñeta en línea del paquete **slider**](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) 
+Es muy útil la [viñeta en línea del paquete **slider**](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) 
 
 
 ```{r, warning=F, message=F}
@@ -1594,18 +1593,18 @@ La sintaxis general es `facet_wrap(rows ~ cols)`, donde a la izquierda de la til
 **Ejes libres**
 Tendrás que decidir si las escalas de los ejes para cada faceta son "fijas" (por defecto), o "libres" (lo que significa que cambiarán en función de los datos dentro de la faceta). Haz esto con el argumento `scales = ` dentro de `facet_wrap()` especificando "free_x" o "free_y", o "free".
 
-**Número de columnass y filas de las facetas**
+**Número de columnas y filas de las facetas**
 Se puede especificar con `ncol = ` y `nrow = ` dentro de `facet_wrap()`.
 
 **Orden de los paneles**
 Para cambiar el orden de aparición, cambia el orden de los niveles de la columna de factores utilizada para crear las facetas.
 
 **Estética**
-El tamaño y tipo de la fuente, el color de la franja, etc. se pueden modificar a través de `theme()` con argumentos como:  
+El tamaño y tipo de la fuente, el color de la franja, etc, se pueden modificar mediante  `theme()` con argumentos como:  
 
-* `strip.text = element_text()` (size, colour, face, angle...)
+* `strip.text = element_text()` (size, colour, face, angle..(tamaño, color, cara, ángulo)
 * `strip.background = element_rect()` (e.g. element_rect(fill="grey"))  
-* `strip.position = ` (posición "bottom", "top", "left", o "right")  
+* `strip.position = ` (posición "bottom", "top", "left", o "right" (Abajo, arriba, izquierda o derecha))  
 
 
 **Etiquetas de banda**
@@ -1747,7 +1746,7 @@ ggplot(central_data) +
 
 #### Una faceta con datos {.unnumbered}  
 
-Si quieres tener una caja de facetas que contenga todos los datos, duplique todo el conjunto de datos y trate los duplicados como un solo valor de facetas. Una función de "ayuda" `CreateAllFacet()` a continuación puede ayudar con esto (gracias a esta [entrada del blog](https://stackoverflow.com/questions/18933575/easily-add-an-all-facet-to-facet-wrap-in-ggplot2)). Cuando se ejecuta, el número de filas se duplica y habrá una nueva columna llamada `facet` en la que las filas duplicadas tendrán el valor "all", y las filas originales tienen el valor original de la columna `facet`. Ahora sólo tienes que hacer la faceta con la columna `facet`.
+Si quieres tener una caja de facetas que contenga todos los datos, duplica todo el conjunto de datos y trata los duplicados como un solo valor de facetas. Una función de "ayuda" `CreateAllFacet()` a continuación puede ayudar con esto (gracias a esta [entrada del blog](https://stackoverflow.com/questions/18933575/easily-add-an-all-facet-to-facet-wrap-in-ggplot2)). Cuando se ejecuta, el número de filas se duplica y habrá una nueva columna llamada `facet` en la que las filas duplicadas tendrán el valor "all", y las filas originales tienen el valor original de la columna `facet`. Ahora sólo tienes que hacer la faceta con la columna `facet`.
 
 Aquí está la función de ayuda. Ejecútala para que esté disponible para ti. 
 
@@ -1844,8 +1843,8 @@ Los datos más recientes que se muestran en las epicurvas deben marcarse a menud
 
 
 1.  Utiliza `annotate()`:
-     + Para una línea utiliza `annotate(geom = "segment")`. Proporcione `x`, `xend`, `y`, e `yend`. Ajusta el tamaño, el tipo de línea (`lty)` y el color.
-     + Para un rectángulo utiliza `annotate(geom = "rect")`. Proporcionar `xmin/xmax/ymin/ymax`. Ajusta el color y el alpha.
+     + Para una línea utiliza `annotate(geom = "segment")`. Proporciona `x`, `xend`, `y`, e `yend`. Ajusta el tamaño, el tipo de línea (`lty)` y el color.
+     + Para un rectángulo utiliza `annotate(geom = "rect")`. Proporciona `xmin/xmax/ymin/ymax`. Ajusta el color y el alpha.
 2.  Agrupar los datos por estado tentativo y colorear esas barras de forma diferente
 
 <span style="color: orange;">***PRECAUCIÓN:*** Puedes intentar `geom_rect()` para dibujar un rectángulo, pero el ajuste de la transparencia no funciona en un contexto de listado. Esta función superpone un rectángulo para cada observación/fila!. Utiliza un alfa muy bajo (por ejemplo, 0,01), u otro enfoque. </span>
@@ -1969,13 +1968,13 @@ ggplot(plot_data, aes(x = date_onset, fill = tentative)) +
 
 Si deseas etiquetas de fecha de varios niveles (por ejemplo, mes y año) *sin duplicar los niveles de etiquetas inferiores*, considera uno de los enfoques siguientes:
 
-Recuerda - puedes utilizar herramientas como `\n` *dentro de* los argumentos `date_labels` o `labels` para poner partes de cada etiqueta en una nueva línea inferior. Sin embargo, el código de abajo le ayuda a tomar años o meses (por ejemplo) en una línea inferior *y sólo una vez*. Algunas notas sobre el código de abajo:
+Recuerda - puedes utilizar herramientas como `\n` *dentro de* los argumentos `date_labels` o `labels` para poner partes de cada etiqueta en una nueva línea inferior. Sin embargo, el código de abajo le ayuda a usar años o meses (por ejemplo) en una línea inferior *y sólo una vez*. Algunas notas sobre el código de abajo:
 
 * Los recuentos de casos se agregan en semanas por motivos estéticos. Véase la página de Epicurves (sección de datos agregados) para más detalles.
 * Se utiliza una línea `geom_area()` en lugar de un histograma, ya que el enfoque de facetas que se presenta a continuación no funciona bien con los histogramas.
 
 
-**Agregue a los recuentos semanales**
+**Agregar a los recuentos semanales**
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning=F, message=F}
 
@@ -2143,9 +2142,9 @@ ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 
 ## Incidencia acumulada {#cumulative-incidence-1}
 
-Nota: Si utiliza **incidence2**, consulta la sección sobre cómo puede producir la incidencia acumulada con una función simple. Esta página abordará cómo calcular la incidencia acumulada y trazarla con `ggplot()`.
+Nota: Si utilizas **incidence2**, consulta la sección sobre cómo puede producirse la incidencia acumulada con una función simple. Esta página abordará cómo calcular la incidencia acumulada y dibujarla con `ggplot()`.
 
-Si se empieza con una lista de casos, cree una nueva columna que contenga el número acumulado de casos por día en un brote utilizando `cumsum()` de R **base**:   
+Si se empieza con una lista de casos, crea una nueva columna que contenga el número acumulado de casos por día en un brote utilizando `cumsum()` de R **base**:   
 
 ```{r}
 cumulative_case_counts <- linelist %>% 
@@ -2164,7 +2163,7 @@ DT::datatable(head(cumulative_case_counts, 10), rownames = FALSE, options = list
 
 
 
-Esta columna acumulativa puede entonces ser trazada contra `date_onset`, usando `geom_line()`:
+Esta columna acumulativa puede entonces ser dibujada contra `date_onset`, usando `geom_line()`:
 
 ```{r, warning=F, message=F}
 plot_cumulative <- ggplot()+
