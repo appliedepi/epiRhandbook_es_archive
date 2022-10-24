@@ -1,7 +1,6 @@
 
-# Borrador. Interacciones con directorios {#directory-interactions}  
+# Interacciones con directorios {#directory-interactions}  
 
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
 En esta página cubrimos los escenarios comunes en los que se crea, se interactúa, se guarda y se importa con directorios (carpetas).
 
@@ -10,7 +9,7 @@ En esta página cubrimos los escenarios comunes en los que se crea, se interact�
 
 ### Paquete **fs** {.unnumbered}   
 
-El paquete fs es un paquete **tidyverse** que facilita las interacciones con los directorios, mejorando algunas de las funciones de R  **base**. En las secciones siguientes utilizaremos a menudo funciones de **fs**.
+El paquete **fs** es un paquete **tidyverse** que facilita las interacciones con los directorios, mejorando algunas de las funciones de R **base**. En las secciones siguientes utilizaremos a menudo funciones de **fs**.
 
 ```{r}
 pacman::p_load(
@@ -35,23 +34,23 @@ fs::dir_tree(path = here("data"), recurse = TRUE)
 
 ## Listar los archivos de un directorio {#list-files-in-a-directory}
 
-Para listar sólo los nombres de los archivos de un directorio puede utilizar `dir()` desde R **base.** Por ejemplo, este comando lista los nombres de los archivos de la subcarpeta "population" de la carpeta "data" en un proyecto R. La ruta relativa de los archivos se proporciona utilizando `here()` (sobre la que puede leer más en la página de [importación y exportación](#import-and-export)).  
+Para listar sólo los nombres de los archivos de un directorio puedes utilizar `dir()` de R **base**. Por ejemplo, este comando lista los nombres de los archivos de la subcarpeta "population" de la carpeta "data" en un proyecto R. La ruta relativa de los archivos se proporciona utilizando `here()` (sobre la que puede leer más en la página de [importación y exportación](#import-and-export)).  
 
 ```{r}
 # file names
 dir(here("data", "gis", "population"))
 ```
 
-Para listar las rutas completas de los archivos del directorio, puede utilizar `dir_ls()` de **fs**. Una alternativa de R **base** es `list.files()`.
+Para listar las rutas completas de los archivos del directorio, puedes utilizar `dir_ls()` de **fs**. Una alternativa de R **base** es `list.files()`.
 
 ```{r}
 # file paths
 dir_ls(here("data", "gis", "population"))
 ```
 
-Para obtener toda la información de los metadatos de cada archivo en un directorio, (por ejemplo, la ruta, la fecha de modificación, etc.) puede utilizar `dir_info()` de **fs**.
+Para obtener toda la información de los metadatos de cada archivo en un directorio, (por ejemplo, la ruta, la fecha de modificación, etc.) puedes utilizar `dir_info()` de **fs**.
 
-Esto puede ser especialmente útil si quiere extraer la última hora de modificación del archivo, por ejemplo si quiere importar la versión más reciente de un archivo. Para ver un ejemplo de esto, consulta la página de [importación y exportación](#import-and-export).
+Esto puede ser especialmente útil si quieres extraer la última hora de modificación del archivo, por ejemplo si quieres importar la versión más reciente de un archivo. Para ver un ejemplo de esto, consulta la página de [importación y exportación](#import-and-export).
 
 ```{r, eval=F}
 # file info
@@ -66,7 +65,7 @@ DT::datatable(dir_info(here("data", "gis", "population")), rownames = FALSE, opt
 
 ## Información sobre el archivo {#file-information}
 
-Para extraer información de metadatos sobre un archivo específico, puede utilizar `file_info()` de **fs** (o `file.info()` de R **base**).
+Para extraer información de metadatos sobre un archivo específico, puedes utilizar `file_info()` de **fs** (o `file.info()` de R **base**).
 
 ```{r, eval=F}
 file_info(here("data", "case_linelists", "linelist_cleaned.rds"))
@@ -89,7 +88,7 @@ file_info(here("data", "case_linelists", "linelist_cleaned.rds"))$modification_t
 
 ### Objetos R {.unnumbered}   
 
-Puedes utilizar `exists()` de para comprobar si un objeto R existe *dentro* de R (proporcione el nombre del objeto entre comillas).
+Puedes utilizar `exists()` de R **base** para comprobar si un objeto R existe *dentro* de R (escribe el nombre del objeto entre comillas).
 
 ```{r}
 exists("linelist")
@@ -102,13 +101,13 @@ exists("data")
 exists("data", inherit = FALSE)
 ```
 
-Si está escribiendo una función, deberías utilizar `missing()` de R **base** para comprobar si un argumento está presente o no, en lugar de `exists()`.
+Si estás escribiendo una función, deberías utilizar `missing()` de R **base** para comprobar si un argumento está presente o no, en lugar de `exists()`.
 
 
 
 ### Directorios {.unnumbered}   
 
-Para comprobar si un directorio existe, proporcione la ruta del archivo (y el nombre del archivo) a `is_dir()` de **fs**. Desplázate a la derecha para ver que se imprime `TRUE`.
+Para comprobar si un directorio existe, escribe la ruta del archivo (y el nombre del archivo) a `is_dir()` de **fs**. Desplázate a la derecha para ver que se imprime `TRUE`.
 
 
 ```{r}
@@ -194,7 +193,7 @@ knitr::include_graphics(here::here("images", "source_button.png"))
 
 ### `render()` {.unnumbered}  
 
-`render()` es una variación de `source()` que se utiliza más a menudo para los scripts de R markdown. Tu proporcionas la `input = ` que es el archivo R markdown, y también `output_format = ` ("html_document", "pdf_document", "word_document", "")
+`render()` es una variación de `source()` que se utiliza más a menudo para los scripts de R markdown. Tu pescribes `input = ` que es el archivo R markdown, y también `output_format = ` ("html_document", "pdf_document", "word_document", "")
 
 Mira la página sobre [Informes con R Markdown](#reports-with-r-markdown) para más detalles. También consulta la documentación de `render()` [aquí](https://rmarkdown.rstudio.com/docs/reference/render.html) o escribiendo `?render`.
 
@@ -202,7 +201,7 @@ Mira la página sobre [Informes con R Markdown](#reports-with-r-markdown) para m
 
 ### Ejecutar archivos en un directorio {.unnumbered}
 
-Puedes crear un *bucle for* y utilizarlo para `source()` cada archivo en un directorio, identificado con `dir()`. 
+Puedes crear un bucle *for* y utilizarlo para `source()` cada archivo en un directorio, identificado con `dir()`. 
 
 ```{r, eval=F}
 for(script in dir(here("scripts"), pattern = ".R$")) {   # for each script name in the R Project's "scripts" folder (with .R extension)
@@ -248,7 +247,7 @@ Consulta la página sobre [Iteración, bucles y listas](#iteration-loops-and-lis
 
 ## R **base**  {#base-r-4}
 
-Vea a continuación las funciones `list.files()` y `dir()`, que realizan la misma operación de listar archivos dentro de un directorio especificado. Puedes especificar `ignore.case = ` o un patrón específico para buscar.
+Mira a continuación las funciones `list.files()` y `dir()`, que realizan la misma operación de listar archivos dentro de un directorio especificado. Puedes especificar `ignore.case = ` o un patrón específico para buscar.
 
 ```{r, eval=F}
 list.files(path = here("data"))
