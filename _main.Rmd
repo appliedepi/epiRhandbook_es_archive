@@ -1,6 +1,6 @@
 ---
 knit: "bookdown::render_book"
-title: "El manual de R para Epi's"  
+title: "EpiRhandbook en español"  
 description: "EpiRhandbook es un manual de referencia de R aplicado a la epidemiología y la salud pública. "
 author: "El equipo del manual"
 date: "`r Sys.Date()`"
@@ -148,7 +148,7 @@ Este manual **no** es un producto aprobado por ninguna organización específica
 
 **Revisores**: Pat Keating, Annick Lenglet, Margot Charette, Danielly Xavier, Esther Kukielka, Michelle Sloan, Aybüke Koyuncu, Rachel Burke, Kate Kelsey, [Berhe Etsay](https://www.linkedin.com/in/berhe-etsay-5752b1154/), John Rossow, Mackenzie Zendt, James Wright, Laura Haskins, [Flavio Finger](ffinger.github.io), Tim Taylor, [Jae Hyoung Tim Lee](https://www.linkedin.com/in/jaehyoungtlee/), [Brianna Bradley](https://www.linkedin.com/in/brianna-bradley-bb8658155), [Wayne Enanoria](https://www.linkedin.com/in/wenanoria), Manual Albela Miranda, [Molly Mantus](https://www.linkedin.com/in/molly-mantus-174550150/), Pattama Ulrich, Joseph Timothy, Adam Vaughan, Olivia Varsaneux, Lionel Monteiro, Joao Muianga  
 
-**Equipo de traducción al español**: [Juan Carlos Fernández-Merino](https://www.linkedin.com/in/juan-carlos-fernandez-merino-2596b522/), [Juan Francisco Monteagudo](https://www.linkedin.com/in/juan-francisco-monteagudo-pérez-05889064/), [Ximena Tolosa](https://www.linkedin.com/in/ximena-tolosa-miph-mae-phd/), [Luis Hernando Aguilar Ramirez](https://www.linkedin.com/in/luishernando/), [Ignacio Castro Aguirre](https://www.linkedin.com/in/ignacio-castro-aguirre-1b14ab41/), Esther Kukielka, Cristina Torró.
+**Equipo de traducción al español**: [Juan Carlos Fernández-Merino](https://www.linkedin.com/in/juan-carlos-fernandez-merino-2596b522/), [Juan Francisco Monteagudo](https://www.linkedin.com/in/juan-francisco-monteagudo-pérez-05889064/), [Ximena Tolosa](https://www.linkedin.com/in/ximena-tolosa-miph-mae-phd/), [Luis Hernando Aguilar Ramirez](https://www.linkedin.com/in/luishernando/), [Ignacio Castro Aguirre](https://www.linkedin.com/in/ignacio-castro-aguirre-1b14ab41/), Esther Kukielka, [Cristina Torró](https://www.linkedin.com/in/cristina-torro-8aab0111b/), [Ana Fernández-Ayuso](https://www.linkedin.com/in/ana-fern%C3%A1ndez-ayuso-17b39b57/).
 
 
 **Illustraciones**: Calder Fong  
@@ -6145,7 +6145,7 @@ options(scipen=1, digits=7)
 <!--chapter:end:new_pages/cleaning.Rmd-->
 
 
-# Borrador. Trabajando con Fechas {#working-with-dates}
+# Trabajando con Fechas {#working-with-dates}
 
 
 ```{r, out.width=c('50%'), fig.align='center', echo=F, message=F}
@@ -13895,16 +13895,16 @@ options(scipen=1, digits=7)
 
 <!-- ======================================================= -->
 
-Esta página muestra el uso de las funciones de regresión **básicas** de R, como `glm()` y el paquete **gtsummary,** para observar las asociaciones entre variables (por ejemplo, odds ratios, risk ratios y hazard ratios). También utiliza funciones como `tidy()` del paquete **broom** para limpiar los resultados de la regresión.
+Esta página muestra como se pueden emplear las funciones de regresión de R **base** , como `glm()` y el paquete **gtsummary** para observar las asociaciones entre variables (por ejemplo, odds ratios, risk ratios y hazard ratios). También utiliza funciones como `tidy()` del paquete **broom** para limpiar los resultados de la regresión.
 
-1.  Univariante: tablas de dos en dos
+1.  Univariante: tablas de dos por dos
 2.  Estratificado: estimaciones mantel-haenszel
 3.  Multivariable: selección de variables, selección de modelos, tabla final
 4.  Forest plots
 
 Para la regresión de riesgos proporcionales de Cox, véase la página de [análisis de supervivencia](#survival-analysis).
 
-***NOTA:*** Utilizamos el término *multivariable* para referirnos a una regresión con múltiples variables explicativas. En este sentido, un modelo multivariante sería una regresión con varios resultados - véase esta [editorial](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3518362/) para más detalles
+***NOTA:*** Utilizamos el término *multivariable* para referirnos a una regresión con múltiples variables explicativas. En este sentido, un modelo multivariante sería una regresión con varios resultados - véase este [editorial](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3518362/) para más detalles.
 
 
 <!-- ======================================================= -->
@@ -13914,7 +13914,7 @@ Para la regresión de riesgos proporcionales de Cox, véase la página de [anál
 
 ### Cargar paquetes {.unnumbered}
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para tu uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra la carga de los paquetes necesarios para realizar los análisis. En este manual se hace énfasis en en el empleo de  `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para tu uso. Los paquetes ya instalados también pueden cargarse empleando  `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r}
 pacman::p_load(
@@ -13933,7 +13933,7 @@ pacman::p_load(
 
 ### Importar datos {.unnumbered}
 
-Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar `linelist` "limpia"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa tus datos con la función `import()` del paquete **rio** (acepta muchos tipos de archivos como .xlsx, .rds, .csv - Mira la página de [importación y exportación](#import-and-export) para más detalles). 
+Importaremos los datos de casos de una epidemia de ébola simulada. Para seguir el proceso, [clica aquí para descargar la base de datos `linelist` "limpia"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa tus datos con la función `import()` del paquete **rio** (la cual acepta múltiples tipos de archivos como .xlsx, .rds, .csv - Checa la página de [importación y exportación](#import-and-export) para más detalles). 
 
 
 ```{r, echo=F}
@@ -13946,7 +13946,7 @@ linelist <- rio::import(here::here("data", "case_linelists", "linelist_cleaned.r
 linelist <- import("linelist_cleaned.rds")
 ```
 
-A continuación se muestran las primeras 50 filas del listado.
+A continuación se muestran las primeras 50 filas de la base de datos linelist.
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
@@ -13957,7 +13957,7 @@ DT::datatable(head(linelist, 50), rownames = FALSE, options = list(pageLength = 
 
 #### Almacenar las variables explicativas {.unnumbered}  
 
-Almacenamos los nombres de las columnas explicativas como un vector de caracteres. Esto se referenciará más adelante.
+Almacenamos en un vector de caracteres los nombres de las columnas explicativas. Esto se explicará más adelante.
 
 ```{r}
 ## define variables of interest 
@@ -13967,7 +13967,7 @@ explanatory_vars <- c("gender", "fever", "chills", "cough", "aches", "vomit")
 
 #### Convertir a 1's y 0's  {.unnumbered}   
 
-A continuación convertimos las columnas explicativas de "sí"/"no", "m"/"f", y "muerto"/"vivo" a **1 / 0**, para cooperar con las expectativas de los modelos de regresión logística. Para hacer esto de manera eficiente, utilizamos `across()` de **dplyr** para transformar varias columnas a la vez. La función que aplicamos a cada columna es `case_when()` (también de **dplyr**) que aplica la lógica para convertir los valores especificados en 1's y 0's. Mira las secciones sobre `across()` y `case_when()` en la página de [Limpieza de datos y funciones básicas](#clean_across)).
+A continuación convertimos las columnas explicativas de "sí"/"no", "m"/"f", y "muerto"/"vivo" a **1 / 0**, para cumplir con las expectativas de los modelos de regresión logística. Para hacer esto de manera eficiente, utilizaremos `across()` de **dplyr** para transformar varias columnas a la vez. La función que aplicamos a cada columna es `case_when()` (también de **dplyr**) que aplica la lógica para convertir los valores especificados en 1's y 0's. Mira las secciones sobre `across()` y `case_when()` en la página de [Limpieza de datos y funciones básicas](#clean_across)).
 
 Nota: el "." que aparece a continuación representa la columna que está siendo procesada por `across()` en ese momento.
 
@@ -13987,13 +13987,13 @@ linelist <- linelist %>%
       
 ```
 
-#### Eliminar las filas con valores faltantes {.unnumbered}  
+#### Eliminar las filas con valores perdidos {.unnumbered}  
 
-Para eliminar las filas con valores faltantes, puede utilizar la función `drop_na()` de **tidyr**. Sin embargo, sólo queremos hacer esto para las filas a las que les faltan valores en las columnas de interés.
+Para eliminar las filas con valores perdidos, se puede utilizar la función `drop_na()` de **tidyr**. Sin embargo, sólo queremos hacer esto para las filas a las que les faltan valores en las columnas de interés.
 
-Lo primero que debemos hacer es asegurarnos de que nuestro vector `explanatory_vars` incluye la columna `age` (`age` habría producido un error en la operación anterior `case_when()`, que sólo era para variables dicotómicas). A continuación, canalizamos `linelist` a `drop_na()` para eliminar cualquier fila con valores faltantes en la columna `outcome` o en cualquiera de las columnas `explanatory_vars`.
+Lo primero que debemos hacer es asegurarnos de que nuestro vector `explanatory_vars` incluye la columna `age` (`age` habría producido un error en la operación anterior `case_when()`, que sólo era para variables dicotómicas). A continuación, escribimos un pipe uniendo `linelist` con `drop_na()` para eliminar cualquier fila con valores perdidos en la columna `outcome` o en cualquiera de las columnas `explanatory_vars`.
 
-Antes de ejecutar el código, el número de filas de `linelist` es ` nrow(linelist)`.
+Antes de ejecutar el código, podemos comprobar el número de filas inicial de `linelist` empleando ` nrow(linelist)`.
 
 ```{r}
 ## add in age_category to the explanatory vars 
@@ -14005,18 +14005,18 @@ linelist <- linelist %>%
 
 ```
 
-El número de filas que quedan en `linelist` es `nrow(linelist)`.
+Podremos checar el número de filas que quedan en `linelist` tras la operación empleando `nrow(linelist)`.
 
 
 <!-- ======================================================= -->
 
 ## Univariante {#univariate}
 
-Al igual que en la página sobre [Tablas descriptivas](#descriptive-tables), tu caso de uso determinará el paquete de R que utilice. Presentamos dos opciones para realizar análisis univariantes:
+Al igual que en la página sobre [Tablas descriptivas](#descriptive-tables), en función de la tarea que vayas a realizar, podremos elegir que función emplear. A continuación presentamos dos opciones para realizar análisis univariantes:
 
-* Utiliza las funciones disponibles en R **base** para imprimir rápidamente los resultados en la consola. Utiliza el paquete **broom** para ordenar las salidas.
+* Puedes utilizar las funciones disponibles en R **base** para imprimir rápidamente los resultados en la consola. Después, puedes utilizar el paquete **broom** para convertir esos outputs a formato *tidy*.
 
-* Utiliza el paquete **gtsummary** para modelar y obtener resultados listos para tu publicación
+* Puedes utilizar el paquete **gtsummary** para modelar y obtener resultados en tablas listas para su publicación. 
 
 
 
@@ -14026,9 +14026,9 @@ Al igual que en la página sobre [Tablas descriptivas](#descriptive-tables), tu 
 
 #### Regresión lineal {.unnumbered}  
 
-La función `lm()` de  R **base**realiza una regresión lineal, evaluando la relación entre la respuesta numérica y las variables explicativas que se supone tienen una relación lineal.
+La función `lm()` de  R **base** realiza una regresión lineal, evaluando la relación entre la respuesta numérica y las variables explicativas que se supone tienen una relación lineal.
 
-Proporciona la ecuación como una fórmula, con los nombres de las columnas de respuesta y explicativa separados por una tilde `~`. Además, especifique los datos a `data = `. Defina los resultados del modelo como un objeto R, para utilizarlo más tarde.  
+Para ello, proporciona la ecuación como una fórmula, con los nombres de las columnas de respuesta y explicativa separados por una tilde `~`. Además, especifica la base de datos a `data = `. Finalmente, define los resultados del modelo como un objeto R, para poder utilizarlos más tarde.  
 
 ```{r lin_reg}
 lm_results <- lm(ht_cm ~ age, data = linelist)
@@ -14046,7 +14046,7 @@ También se puede utilizar la función `tidy()` del paquete **broom** para obten
 tidy(lm_results)
 ```
 
-También puedes utilizar esta regresión para añadirla a un **ggplot**, para hacer esto, primero juntamos los puntos de los datos observados y la línea ajustada en un dataframe utilizando la función `augment()` de **broom**.
+También podemos utilizar esta regresión para añadirla a un **ggplot**, para hacer esto, primero juntamos los puntos de los datos observados y la línea ajustada en un dataframe utilizando la función `augment()` de **broom**.
 
 ```{r lin_reg_res_plot}
 
@@ -14062,7 +14062,7 @@ ggplot(points, aes(x = age)) +
 
 ```
 
-También es posible añadir una simple recta de regresión lineal en **ggplot** utilizando la función `geom_smooth()`. 
+También es posible añadir una recta de regresión lineal en **ggplot** utilizando la función `geom_smooth()`. 
 
 ```{r geom_smooth}
 
@@ -14074,7 +14074,7 @@ También es posible añadir una simple recta de regresión lineal en **ggplot** 
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-Consulta la sección de recursos al final de este capítulo para obtener tutoriales más detallados. 
+Consulta la sección de recursos al final de este capítulo para consultar tutoriales más detallados. 
 
 
 #### Regresión logística{.unnumbered}  
@@ -14090,7 +14090,7 @@ glm(formula, family, data, weights, subset, ...)
 
 * `formula = ` El modelo se proporciona a `glm()` como una ecuación, con el resultado a la izquierda y las variables explicativas a la derecha de una tilde \~.
 * `family = ` Determina el tipo de modelo a ejecutar. Para la regresión logística, utiliza `family = "binomial"`, para poisson utiliza `family = "poisson"`. Otros ejemplos se encuentran en la tabla siguiente.
-* `data = ` Especifica tu dataframe
+* `data = ` Especifica tu base de datos. 
 
 Si es necesario, también puede especificar la función de enlace mediante la sintaxis `family = familytype(link = "linkfunction"))`. Puedes leer más en la documentación sobre otras familias y argumentos opcionales como  `weights = ` y `subset = ` (`?glm`).
 
@@ -14107,22 +14107,22 @@ Familia                |Función de enlace por defecto
 `"quasipoisson"` | `(link = "log")`  
 
 
-Cuando se ejecuta `glm()` lo más habitual es guardar los resultados como un objeto R. A continuación, puede imprimir los resultados en tu consola utilizando `summary()` como se muestra a continuación, o realizar otras operaciones con los resultados (por ejemplo, exponer).
+Cuando se ejecuta `glm()` lo más habitual es guardar los resultados como un objeto R. A continuación, se pueden mostrar los resultados en la consola utilizando `summary()` como se muestra a continuación, o realizar otras operaciones con los resultados (por ejemplo, exponenciar).
 
-Si necesitas ejecutar una regresión binomial negativa, puede utilizar el paquete **MASS**; glm.nb() utiliza la misma sintaxis que `glm()`. 
+Si necesitas ejecutar una regresión binomial negativa, puede utilizar el paquete **MASS**;  el cual contiene la función `glm.nb()` que utiliza la misma sintaxis que `glm()`. 
 
 Para un recorrido por diferentes regresiones, consulta la [página de estadísticas de UCLA](https://stats.idre.ucla.edu/other/dae/).
 
 #### Univariante `glm()` {.unnumbered}
 
-En este ejemplo estamos evaluando la asociación entre diferentes categorías de edad y el resultado de muerte (codificado como 1 en la sección Preparación). A continuación se muestra un modelo univariante de `outcome` por age_cat. Guardamos la salida del modelo como `model` y luego la imprimimos con `summary()` en la consola. Observe que las estimaciones proporcionadas son las *probabilidades logarítmicas (log odds)* y que el nivel de referencia es el primer nivel del factor `age_cat` ("0-4").
+En este ejemplo estamos evaluando la asociación entre diferentes categorías de edad y el resultado de muerte (codificado como 1 en la sección anterior "Preparación"). A continuación se muestra un modelo univariante de `outcome` por age_cat. Guardamos la salida del modelo como `model` y luego la imprimimos con `summary()` en la consola. Observa que las estimaciones proporcionadas son las *probabilidades logarítmicas (log odds)* y que el nivel de referencia es el primer nivel del factor `age_cat` ("0-4").
 
 ```{r}
 model <- glm(outcome ~ age_cat, family = "binomial", data = linelist)
 summary(model)
 ```
 
-Para modificar el nivel de referencia de una variable determinada, asegúrese de que la columna es del tipo Factor y mueva el nivel deseado a la primera posición con `fct_relevel()` (véase la página sobre [Factores](#factors)). Por ejemplo, a continuación tomamos la columna `age_cat` y establecemos "20-29" como línea de base antes de canalizar el dataframe modificado en `glm()`.
+Para modificar el nivel de referencia de una variable determinada, asegúrate de que la columna es del tipo Factor y mueve el nivel deseado a la primera posición con `fct_relevel()` (véase la página sobre [Factores](#factors)). Por ejemplo, a continuación tomamos la columna `age_cat` y establecemos "20-29" como línea de base antes de conectar mediante pipes el dataframe modificado con `glm()`.
 
 ```{r}
 linelist %>% 
@@ -14131,13 +14131,13 @@ linelist %>%
   summary()
 ```
 
-#### Resultados de la impresión {.unnumbered}
+#### Imprimir resultados {.unnumbered}
 
-Para la mayoría de los usos, hay que hacer varias modificaciones a los resultados anteriores. La función `tidy()` del paquete **broom** es conveniente para hacer presentables los resultados del modelo.
+En la mayoría de los casos, para su empleo posterior, es necesario hacer modificaciones a los resultados obtenidos anteriormente. La función `tidy()` del paquete **broom** es  útil de cara a hacer más presentables los resultados de nuestros modelos.
 
-Aquí demostramos cómo combinar los resultados del modelo con una tabla de recuentos.
+Aquí demostramos cómo combinar los resultados del modelo con una tabla de recuento.
 
-1.  Obtenga las estimaciones de log odds ratio *exponenciadas* y los intervalos de confianza pasando el modelo a `tidy()` y estableciendo `exponentiate = TRUE` y `conf.int = TRUE`.
+1.  Obtén las estimaciones de log odds ratio *exponenciadas* y los intervalos de confianza pasando el modelo a `tidy()` y estableciendo `exponentiate = TRUE` y `conf.int = TRUE`.
 
 ```{r odds_base_single}
 
@@ -14146,7 +14146,7 @@ model <- glm(outcome ~ age_cat, family = "binomial", data = linelist) %>%
   mutate(across(where(is.numeric), round, digits = 2))  # round all numeric columns
 ```
 
-A continuación, se muestra el `model` tibble resultante:
+A continuación, se muestra el objeto tibble `model`  resultante:
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
@@ -14182,7 +14182,7 @@ Este es el aspecto de este dataframe `counts_table`:
 DT::datatable(counts_table, rownames = FALSE, options = list(pageLength = nrow(counts_table), scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Ahora podemos unir `counts_table` y los resultados del `model` horizontalmente con `bind_cols()` (**dplyr**). Recuerda que con `bind_cols()` las filas de los dos dataframes deben estar perfectamente alineadas. En este código, como estamos enlazando dentro de una cadena de tuberías, utilizamos `.` para representar el objeto de tuberías `counts_table` mientras lo enlazamos con el modelo. Para terminar el proceso, utilizamos `select()` para elegir las columnas deseadas y tu orden, y finalmente aplicamos la función `round()`  de R **base** en todas las columnas numéricas para especificar 2 decimales.
+Ahora podemos unir `counts_table` y los resultados del `model` horizontalmente con `bind_cols()` (**dplyr**). Recuerda que con `bind_cols()` las filas de los dos dataframes deben estar perfectamente alineadas. En este código, como estamos enlazando mediante pipes, utilizamos `.` para representar el objeto `counts_table` mientras lo enlazamos con el modelo. Para terminar el proceso, utilizamos `select()` para elegir las columnas deseadas y determinar su orden, y finalmente aplicamos la función `round()`  de R **base** en todas las columnas numéricas para especificar 2 decimales.
 
 ```{r, message=F, warning=F}
 combined <- counts_table %>%           # begin with table of counts
@@ -14192,7 +14192,7 @@ combined <- counts_table %>%           # begin with table of counts
   mutate(across(where(is.numeric), round, digits = 2)) ## round to 2 decimal places
 ```
 
-Este es el aspecto del dataframe combinado, impreso de forma agradable como una imagen con una función de **flextable**. En [Tablas para presentación](#tables-for-presentation) se explica cómo personalizar dichas tablas con **flextable**, o bien puede utilizar otros numerosos paquetes como **knitr** o **GT**. 
+Este es el aspecto del dataframe combinado, impreso de forma agradable como una imagen con una función de **flextable**. En [Tablas para presentación](#tables-for-presentation) se explica cómo personalizar dichas tablas con **flextable**, o bien puede utilizar otros paquetes como **knitr** o **GT**. 
 
 ```{r}
 combined <- combined %>% 
@@ -14200,13 +14200,13 @@ combined <- combined %>%
 ```
 
 
-#### Bucle de múltiples modelos univariantes {.unnumbered}  
+#### Loops con múltiples modelos univariantes {.unnumbered}  
 
-A continuación presentamos un método que utiliza `glm()` y `tidy()` para un enfoque más sencillo, véase la sección sobre **gtsummary**.
+A continuación presentamos un método que utiliza `glm()` y `tidy()`.  Para un enfoque más sencillo, véase la sección sobre **gtsummary**.
 
-Para ejecutar los modelos en varias variables de exposición para producir odds ratios univariantes (es decir, sin controlar entre sí), puede utilizar el enfoque siguiente. Utiliza `str_c()` de **stringr** para crear fórmulas univariantes (véase [Caracteres y cadenas](#characters-and-strings)), ejecuta la regresión `glm()` en cada fórmula, pasa cada resultado de `glm()` a `tidy()` y finalmente colapsa todos los resultados del modelo juntos con `bind_rows()` de **tidyr**. Este enfoque utiliza `map()` del paquete **purrr** para iterar - véase la página sobre [Iteración, bucles y listas](#iteration-loops-and-lists) para más información sobre esta herramienta.
+Para ejecutar los modelos en varias variables de exposición para producir odds ratios univariantes (es decir, sin controlar entre sí), se puede utilizar el enfoque siguiente. Utiliza `str_c()` de **stringr** para crear fórmulas univariantes (véase [Caracteres y cadenas](#characters-and-strings)), ejecuta la regresión `glm()` en cada fórmula, pasa cada resultado de `glm()` a `tidy()` y finalmente junta todos los resultados de los modelos resultantes con `bind_rows()` de **tidyr**. Este enfoque utiliza `map()` del paquete **purrr** para iterar - véase la página sobre [Iteración, bucles y listas](#iteration-loops-and-lists) para más información sobre esta herramienta.
 
-1.  crea un vector de nombres de columnas de las variables explicativas. Ya lo tenemos como `explanatory_vars` de la sección de preparación de esta página.
+1.  Crea un vector de nombres de columnas de las variables explicativas. Ya lo tenemos como `explanatory_vars` de la sección de preparación de esta página.
 
 2.  Utiliza `str_c()` para crear múltiples fórmulas de cadena, con el resultado a la izquierda, y un nombre de columna de `explanatory_vars` a la derecha. El punto `.` sustituye al nombre de la columna en `explanatory_vars`.
 
@@ -14287,7 +14287,7 @@ univ_tab_base <- explanatory_vars %>%
 
 ```
 
-A continuación se muestra el aspecto del dataframe. Consulta la página sobre [Tablas para presentación](#tables-for-presentation) para obtener ideas sobre cómo convertir esta tabla en una bonita salida HTML (por ejemplo, con **flextable**).
+A continuación se muestra el aspecto del dataframe. Consulta la página sobre [Tablas para presentación](#tables-for-presentation) para obtener ideas sobre cómo convertir esta tabla en una bonita tabla HTML (por ejemplo, con **flextable**).
 
 ```{r, message=FALSE, echo=F}
 # display the linelist data as a table
@@ -14300,15 +14300,15 @@ DT::datatable(univ_tab_base, rownames = FALSE, options = list(pageLength = 5, sc
 
 <!-- ======================================================= -->
 
-### paquete **gtsummary** {#reg_gt_uni .unnumbered}
+### Paquete **gtsummary** {#reg_gt_uni .unnumbered}
 
-A continuación presentamos el uso de `tbl_uvregression()` del paquete **gtsummary**. Al igual que en la página sobre [Tablas descriptivas](#descriptive-tables), las funciones de gtsummary hacen un buen trabajo al ejecutar estadísticas *y* producir salidas de aspecto profesional. Esta función produce una tabla de resultados de regresión univariante.
+A continuación presentamos el uso de `tbl_uvregression()` del paquete **gtsummary**. Al igual que en la página sobre [Tablas descriptivas](#descriptive-tables), las funciones de gtsummary hacen un buen trabajo a la hora de realizar estadísticas *y* producir outputs con aspecto profesional. Esta función produce una tabla de resultados de regresión univariante.
 
 Seleccionamos sólo las columnas necesarias de `linelist` (variables explicativas y la variable de resultado) y las introducimos en `tbl_uvregression()`. Vamos a ejecutar una regresión univariante en cada una de las columnas que definimos como `explanatory_vars` en la sección de preparación de datos (sexo, fiebre, escalofríos, tos, dolores, vómitos y age_cat).
 
 Dentro de la propia función, proporcionamos el `method = ` como `glm` (sin comillas), la columna de resultado `y = ` (`outcome`), especificamos a `method.args = ` que queremos ejecutar la regresión logística a través de  `family = binomial`, y le decimos que exponencie los resultados.
 
-La salida es HTML y contiene los recuentos
+La salida es HTML y contiene el recuento de cada variable. 
 
 ```{r odds_gt, message=F, warning=F}
 
@@ -14326,7 +14326,7 @@ univ_tab <- linelist %>%
 univ_tab
 ```
 
-Hay muchas modificaciones que se pueden hacer a la salida de esta tabla, como ajustar las etiquetas de texto, poner en negrita las filas por tu valor p, etc. Consulta [estos tutoriales](http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) y en otros lugares en línea.
+Hay muchas modificaciones que se pueden hacer al output de esta tabla, como ajustar las etiquetas de texto, poner en negrita las filas por tu valor p, etc. Puedes consultar tutoriales [aquí](http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) y en internet. 
 
 
 
@@ -14334,7 +14334,7 @@ Hay muchas modificaciones que se pueden hacer a la salida de esta tabla, como aj
 
 ## Estratificado {#stratified}
 
-El análisis estratificado se está trabajando actualmente para **gtsummary**, esta página se actualizará a su debido tiempo.
+Actualmente, el análisis estratificado para **gtsummary** se está desarrollando. Esta página se actualizará a su debido tiempo.
 
 
 
@@ -14343,14 +14343,14 @@ El análisis estratificado se está trabajando actualmente para **gtsummary**, e
 Para el análisis multivariable, volvemos a presentar dos enfoques:
 
 * `glm()` y `tidy()`  
-* paquete **gtsummary** 
+* Paquete **gtsummary** 
 
-El flujo de trabajo es similar para cada uno de ellos y sólo el último paso de elaborar una tabla final es diferente.
+El flujo de trabajo es similar para cada uno de ellos, siendo diferente el último paso al elaborar una tabla final.
 
 
-### Realizar el multivariable {.unnumbered}  
+### Realizar análisis multivariable {.unnumbered}  
 
-Aquí utilizamos `glm()` pero añadimos más variables al lado derecho de la ecuación, separadas por símbolos de suma (`+`).
+Aquí utilizamos `glm()` pero en este caso, añadiremos más variables al lado derecho de la ecuación, separadas por símbolos de suma (`+`).
 
 Para ejecutar el modelo con todas nuestras variables explicativas ejecutaríamos: 
 
@@ -14360,14 +14360,14 @@ mv_reg <- glm(outcome ~ gender + fever + chills + cough + aches + vomit + age_ca
 summary(mv_reg)
 ```
 
-Si quieres incluir dos variables y una interacción entre ellas puede separarlas con un asterisco `*` en lugar de un `+`. Si sólo especifica la interacción, sepárelas con dos puntos `:`. Por ejemplo: 
+Si quieres incluir dos variables y una interacción entre ellas puede separarlas con un asterisco `*` en lugar de un `+`. Si sólo especifica la interacción, sepáralas con dos puntos `:`. Por ejemplo: 
 
 ```{r, eval=F}
 glm(outcome ~ gender + age_cat * fever, family = "binomial", data = linelist)
 ```
 
 
-*Opcionalmente*, puedes utilizar este código para aprovechar el vector predefinido de nombres de columnas y volver a crear el comando anterior utilizando `str_c()`. Esto puede ser útil si los nombres de sus variables explicativas cambian, o si no quiere escribirlos todos de nuevo.
+*Opcionalmente*, puedes utilizar este código para aprovechar el vector predefinido de nombres de columnas y volver a crear el comando anterior utilizando `str_c()`. Esto puede ser útil si los nombres de sus variables explicativas cambian, o si no quieres escribirlas todos de nuevo.
 
 ```{r mv_regression}
 
@@ -14382,9 +14382,9 @@ mv_reg <- explanatory_vars %>%  ## begin with vector of explanatory column names
 
 #### Construir el modelo {.unnumbered}  
 
-Puedes construir tu modelo paso a paso, guardando varios modelos que incluyan determinadas variables explicativas. Puedes comparar estos modelos con pruebas de razón de verosimilitud utilizando `lrtest() del paquete **lmtest**, como se indica a continuación:
+Puedes construir tu modelo paso a paso, guardando varios modelos que incluyan determinadas variables explicativas. Puedes comparar estos modelos con pruebas de razón de verosimilitud utilizando `lrtest()` del paquete **lmtest**, como se indica a continuación:
 
-<span style="color: black;">***NOTA:*** El uso de anova(model1, model2, test = "Chisq) de R **base** produce los mismos resultados </span> 
+<span style="color: black;">***NOTA:*** El uso de `anova(model1, model2, test = "Chisq")` de R **base** produce los mismos resultados </span> 
 
 ```{r}
 model1 <- glm(outcome ~ age_cat, family = "binomial", data = linelist)
@@ -14393,7 +14393,7 @@ model2 <- glm(outcome ~ age_cat + gender, family = "binomial", data = linelist)
 lmtest::lrtest(model1, model2)
 ```
 
-Otra opción es tomar el objeto modelo y aplicar la función `step()` del paquete **stats**. Especifica qué dirección de selección de variables deseas utilizar al construir el modelo.  
+Otra opción es tomar el objeto que contiene el modelo y aplicar la función `step()` del paquete **stats**. Especifica qué dirección de selección de variables deseas utilizar al construir el modelo.  
 
 ```{r}
 ## choose a model using forward selection based on AIC
@@ -14403,13 +14403,13 @@ final_mv_reg <- mv_reg %>%
 ```
 
 
-También puedes desactivar la notación científica en tu sesión de R, para mayor claridad:
+Para mayor claridad, también puedes desactivar la notación científica en tu sesión de R. 
 
 ```{r}
 options(scipen=999)
 ```
 
-Como se describe en la sección sobre el análisis univariante, pasamos la salida del modelo a `tidy()` para exponer las probabilidades logarítmicas y los IC. Finalmente, redondeamos todas las columnas numéricas a dos decimales. Desplázate para ver todas las filas.
+Como se describe en la sección sobre el análisis univariante, pasamos la salida del modelo a `tidy()` para exponenciar las probabilidades logarítmicas y los IC. Finalmente, redondeamos todas las columnas numéricas a dos decimales. Haz scroll para ver el resultado. 
 
 ```{r mv_regression_base}
 
@@ -14430,11 +14430,11 @@ DT::datatable(mv_tab_base, rownames = FALSE, options = list(pageLength = 10, scr
 
 <!-- ======================================================= -->
 
-### Combine univariate and multivariable {.unnumbered}
+### Combinar regresiones univariantes y multivariables {.unnumbered}
 
 #### Combinar con **gtsummary**  {.unnumbered}  
 
-El paquete **gtsummary** proporciona la función `tbl_regression()`, que tomará los resultados de una regresión (`glm()` en este caso) y producirá una bonita tabla resumen.
+El paquete **gtsummary** proporciona la función `tbl_regression()`, que toma los resultados de una regresión (`glm()` en este caso) y produce una bonita tabla resumen.
 
 ```{r mv_regression_gt}
 ## show results table of final regression 
@@ -14447,7 +14447,7 @@ Veamos la tabla:
 mv_tab
 ```
 
-También puedes combinar varias tablas de salida diferentes producidas por **gtsummary** con la función `tbl_merge()`. Ahora combinamos los resultados multivariables con los resultados *univariantes* de **gtsummary** que creamos [anteriormente](#reg_gt_uni):
+También puedes combinar varias tablas producidas por **gtsummary** con la función `tbl_merge()`. En este ejemplo combinaremos los resultados multivariables con los resultados *univariantes* de **gtsummary** que creamos [anteriormente](#reg_gt_uni):
 
 ```{r}
 ## combine with univariate results 
@@ -14462,9 +14462,9 @@ tbl_merge(
 
 Una forma alternativa de combinar los resultados univariables y multivariables de `glm()`/`tidy()` es con las funciones join de **dplyr**.
 
-* Unir los resultados univariantes de antes (`univ_tab_base`, que contiene los recuentos) con los resultados multivariables ordenados `mv_tab_base`
-* Utiliza `select()` para mantener sólo las columnas que queremos, especificar tu orden y renombrarlas
-* Utiliza `round()` con dos decimales en toda la columna que sea de tipo Double  
+* Unimos los resultados univariantes obtenidos anteriormente (`univ_tab_base`, que contiene los recuentos) con los resultados multivariables en formato tidy de `mv_tab_base`.
+* Utilizamos `select()` para mantener sólo las columnas que queremos, especificar su orden y renombrarlas
+* Empleamos `round()` con dos decimales en todas las columnas que sean de tipo "Double".  
 
 ```{r, warning=F, message=F}
 ## combine univariate and multivariable tables 
@@ -14504,13 +14504,13 @@ Consulta la página sobre [Conceptos básicos de ggplot](#ggplot-basics) si no e
 
 ### Paquete **ggplot2** {.unnumbered}
 
-Puedes construir un gráfico de bosque con `ggplot()` trazando elementos de los resultados de la regresión multivariable. Añada las capas de los gráficos utilizando estos "geoms":
+Puedes construir un gráfico de bosque con `ggplot()` trazando elementos de los resultados de la regresión multivariable. Añade las capas de los gráficos utilizando estos "geoms":
 
-* estimaciones con `geom_point()`
-* intervalos de confianza con `geom_errorbar()`
-* una línea vertical en OR = 1 con `geom_vline()`
+* Añadimos estimaciones con `geom_point()`
+* Añadimos intervalos de confianza con `geom_errorbar()`
+* Ploteamos una línea vertical en OR = 1 con `geom_vline()`
 
-Antes de trazar, es posible que desee utilizar `fct_relevel()` del paquete **forcats** para establecer el orden de las variables/niveles en el eje y. `ggplot()` puede mostrarlos en orden alfanumérico, lo que no funcionaría bien para estos valores de categoría de edad ("30" aparecería antes de "5"). Mira la página sobre [Factores](#factors) para más detalles.
+Antes de empezar a plotear, es posible que sea necesario  utilizar `fct_relevel()` del paquete **forcats** para establecer el orden de las variables/niveles en el eje y. De no establecer un orden en las variables,  `ggplot()` podría mostrar las variables en orden alfanumérico, lo que no funcionaría bien para los valores de categoría de edad ("30" aparecería antes de "5"). Mira la página sobre [Factores](#factors) para más detalles.
 
 ```{r ggplot_forest}
 
@@ -14544,11 +14544,11 @@ mv_tab_base %>%
 
 <!-- ======================================================= -->
 
-### paquetes **easystats** {.unnumbered}
+### Paquetes **easystats** {.unnumbered}
 
-Una alternativa, si no deseas el nivel de control fino que proporciona **ggplot2**, es utilizar una combinación de paquetes **easystats**.
+Una alternativa, si no deseas el nivel de precisión y control que proporciona **ggplot2**, es utilizar la combinación de paquetes **easystats**.
 
-La función `model_parameters()` del paquete **parameters** hace el equivalente de la función `tidy()` del paquete **broom**. El paquete **see** acepta esos resultados y crea por defecto un forest plot como un objeto `ggplot()`.
+La función `model_parameters()` del paquete **parameters** hace el equivalente de la función `tidy()` del paquete **broom**. El paquete **see** acepta esos resultados y crea por defecto un forest plot, dándo como output un objeto `ggplot()`.
 
 ```{r easystats_forest}
 pacman::p_load(easystats)
@@ -14565,7 +14565,7 @@ final_mv_reg %>%
 
 ## Recursos {#resources-11}
 
-El contenido de esta página se ha basado en estos recursos y viñetas en línea:  
+El contenido de esta página se ha basado en estos recursos y viñetas:  
 
 [Regresión lineal en R](https://www.datacamp.com/community/tutorials/linear-regression-R)
 
@@ -25220,7 +25220,6 @@ options(scipen=1, digits=7)
 knitr::include_graphics(here::here("images", "epicurve_top.png"))
 ```    
 
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
 Una curva epidémica (también conocida como "curva epi") es un gráfico epidemiológico básico que se suele utilizar para visualizar el patrón temporal de aparición de la enfermedad entre un grupo o epidemia de casos.
 
@@ -25233,7 +25232,7 @@ En esta página mostramos dos enfoques para producir epicurvas en R:
 
 También se abordan casos de uso específicos como:
 
-* Trazado de datos de recuento agregados
+* Grágicos de datos de recuento agregados
 * Facetado o producción de múltiplos gráficos pequeños
 * Aplicación de medias móviles
 * Mostrar qué datos son "provisionales" o están sujetos a retrasos en la presentación de informes
@@ -25327,7 +25326,7 @@ DT::datatable(head(count_data, 50), rownames = FALSE, options = list(pageLength 
 
 ### Establecer parámetros {.unnumbered}
 
-Para la producción de un informe, es posible que desees establecer parámetros editables como la fecha para la que los datos son actuales (la "data_date"). A continuación, puedes hacer referencia al objeto `data_date` en tu código cuando apliques filtros o en subtítulos dinámicos.
+Para la producción de un informe, es posible que desees establecer parámetros editables como la fecha para la que los datos sean actuales (la "data_date"). A continuación, puedes hacer referencia al objeto `data_date` en tu código cuando apliques filtros o en subtítulos dinámicos.
 
 ```{r set_parameters}
 ## set the report date for the report
@@ -25365,7 +25364,7 @@ A continuación mostramos cómo hacer epicurvas utilizando el paquete **incidenc
      + Especificar la columna de fecha a `date_index = `
      + Especificar el `interval = ` en el que deben agregarse los casos (diario, semanal, mensual..)
      + Especificar cualquier columna de agrupación (por ejemplo, sexo, hospital, resultado)
-2.  **Trazar** el objeto de incidencia
+2.  **Representarr** el objeto de incidencia
      + Especificar etiquetas, colores, títulos, etc.
 
 A continuación, cargamos el paquete **incidence2**, creamos el objeto de incidencia a partir de `linelist` en la columna `date_onset` y agregamos los casos por día. A continuación, imprimimos un resumen del objeto de incidencia.
@@ -25382,7 +25381,7 @@ epi_day <- incidence(       # create incidence object
   )
 ```
 
-El objeto **incidencia2** tiene el aspecto de un tibble (como una trama de datos) y puede imprimirse o manipularse como un dataframe. 
+El objeto **epi_day2** tiene el aspecto de un tibble (como una trama de datos) y puede imprimirse o manipularse como un dataframe. 
 
 ```{r}
 class(epi_day)
@@ -25417,7 +25416,7 @@ El argumento `interval = ` de `incidence()` define cómo se agrupan las observac
 
 **Especificar el intervalo**
 
-**incidence2** proporciona flexibilidad y una sintaxis comprensible para especificar cómo quieres agregar tus casos en barras epicúreas. Proporcione un valor como los siguientes al argumento `interval = `. Puedes escribir cualquiera de los siguientes en plural (por ejemplo, "week**s**"), y puedes añadir números antes (por ejemplo, "3 monts"). 
+**incidence2** proporciona flexibilidad y una sintaxis comprensible para especificar cómo quieres agregar tus casos en una epicurva de barras Proporcione un valor como los siguientes al argumento `interval = `. Puedes escribir cualquiera de los siguientes en plural (por ejemplo, "week**s**"), y puedes añadir números antes (por ejemplo, "3 months"). 
 
 Opción de argumento | Más explicaciones 
 ------------------- | ------------------------------------ |
@@ -25433,7 +25432,7 @@ Número (1, 7, 13, 14, etc.) | Número de días por intervalo
 "year" | Primer día del año natural 
 
 
-A continuación se muestran ejemplos de cómo se ven los diferentes intervalos cuando se aplican a linelist. Observe cómo el formato por defecto y la frecuencia de las *etiquetas de* fecha en el eje-x cambian a medida que cambia el intervalo de fecha.
+A continuación se muestran ejemplos de cómo se ven los diferentes intervalos cuando se aplican a linelist. Observa cómo el formato por defecto y la frecuencia de las *etiquetas de* fecha en el eje-x cambian a medida que cambia el intervalo de fecha.
 
 ```{r incidence, out.width=c('50%', '50%', '50%', '50%'), fig.show='hold', warning=F, message=F}
 # Create the incidence objects (with different intervals)
@@ -25558,7 +25557,7 @@ plot(central_outbreak, title = "Weekly case incidence at Central Hospital")
 
 ### Recuentos agregados {.unnumbered}
 
-Si los datos originales son agregados (recuentos), proporciona el nombre de la columna que contiene los recuentos de casos al argumento `count =` cuando crees el objeto de incidencia con `incidence()`.
+Si los datos originales son agregados (recuentos), cuando crees el objeto de incidencia con `incidence()` proporciona el nombre de la columna que contiene los recuentos de casos al argumento `count = `.
 
 Por ejemplo, este dataframe `count_data` son casos de `linelist` agregados en recuentos diarios por hospital. Las primeras 50 filas tienen este aspecto: 
 
@@ -25566,7 +25565,7 @@ Por ejemplo, este dataframe `count_data` son casos de `linelist` agregados en re
 DT::datatable(head(count_data,50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-If you are beginning your analysis with daily count data like the dataset above, your `incidence()` command to convert this to a weekly epicurve by hospital would look like this:  
+Si comienzas tu análisis con datos de recuento diario como el conjunto de datos anterior, tu comando `incidence()` para convertirlo en una epicurva semanal por hospital tendría el siguiente aspecto:
 
 ```{r}
 epi_counts <- incidence(              # create weekly incidence object
@@ -25646,22 +25645,39 @@ Argumento(s)|Descripción
 Ten en cuenta que el argumento `date_breaks = ` sólo funciona si `centre_dates = FALSE`. Proporciona un valor de carácter entre comillas utilizando la sintaxis strptime que se indica a continuación, como se detalla en la página [Trabajar con fechas](#working-with-dates-1). Puedes utilizar `\n` para una "nueva línea".
 
 %d = Número de día del mes (5, 17, 28, etc.)
+
 %j = Número de día del año (día juliano 001-366)
+
 %a = Día de la semana abreviado (Mon, Tue, Wed, etc.)
+
 %A = Día de la semana completo (Monday, Tuesday, etc.))
+
 %w = Número del día de la semana (0-6, el domingo es 0)
+
 %u = Número del día de la semana (1-7, el lunes es 1)
+
 %W = Número de la semana (00-53, el lunes es el comienzo de la semana)
+
 %U = Número de la semana (01-53, el domingo es el comienzo de la semana)
+
 %m = Número del mes (ej. 01, 02, 03, 04)
+
 %b = Mes abreviado (Jan, Feb, etc. )
+
 %B = Mes completo (January, February, etc.)
+
 %y = Año de 2 dígitos (por ejemplo, 89)
+
 %Y = Año de 4 dígitos (por ejemplo, 1989)
+
 %h = horas (reloj de 24 horas)
+
 %m = minutos
+
 %s = segundos
+
 %z = desviación de GMT
+
 %Z = Zona horaria (carácter)
 
 
@@ -25784,7 +25800,7 @@ plot(
 
 #### Especificar una paleta {.unnumbered}  
 
-Proporcione el nombre de una paleta predefinida al argumento `col_pal = ` en `plot()`. El paquete **incidence2** viene con 2 paletas predefinidas: "vibrant" y "muted". En "vibrant" los primeros 6 colores son distintos y en "muted" los primeros 9 colores son distintos. Después de estos números, los colores son interpolaciones/intermediarios de otros colores. Estas paletas predefinidas se pueden encontrar en [este sitio web](https://personal.sron.nl/~pault/#sec:qualitative). Las paletas excluyen el gris, que está reservado para los datos que faltan (utiliza `na_color = ` para cambiar este valor por defecto).
+Proporciona el nombre de una paleta predefinida al argumento `col_pal = ` en `plot()`. El paquete **incidence2** viene con 2 paletas predefinidas: "vibrant" y "muted". En "vibrant" los primeros 6 colores son distintos y en "muted" los primeros 9 colores son distintos. Después de estos números, los colores son interpolaciones/intermediarios de otros colores. Estas paletas predefinidas se pueden encontrar en [este sitio web](https://personal.sron.nl/~pault/#sec:qualitative). Las paletas excluyen el gris, que está reservado para los datos que faltan (utiliza `na_color = ` para cambiar este valor por defecto).
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning = F, message = F}
 # Create incidence object, with data grouped by age category  
@@ -25834,7 +25850,7 @@ plot(age_outbreak, fill = age_cat, title = "RColorBrewer palette")+
 
 #### Especificar manualmente {.unnumbered}  
 
-Para especificar los colores manualmente, añade la función `scale_fill_manual()` de **ggplot2** a la función `plot()` con un `+` y proporciona el vector de nombres de colores o códigos HEX al argumento `values = `. El número de colores listados debe ser igual al número de grupos. Ten en cuenta si los valores faltantes son un grupo - pueden ser convertidos a un valor de carácter como "Missing" durante la preparación de los datos con la función `fct_explicit_na()` como se explica en la página sobre [Factores](#factors).
+Para especificar los colores manualmente, añade la función `scale_fill_manual()` de **ggplot2** a la función `plot()` con un `+` y proporciona el vector de nombres de colores o códigos HEX al argumento `values = `. El número de colores listados debe ser igual al número de grupos. Ten en cuenta que si los valores faltantes son un grupo - pueden ser convertidos a un valor de carácter como "Missing" durante la preparación de los datos con la función `fct_explicit_na()` como se explica en la página sobre [Factores](#factors).
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning=F, message=F}
 # manual colors
@@ -25844,7 +25860,7 @@ plot(age_outbreak, fill = age_cat, title = "Manually-specified colors")+
     name = "Age Category")      # Name for legend
 ```
 
-Como se menciona en la página [Consejos de ggplot](#ggplot-tips), puede crear sus propias paletas utilizando `colorRampPalette()` sobre un vector de colores y especificando el número de colores que deseas. Esta es una buena manera de obtener muchos colores en una rampa especificando unos pocos.  
+Como se menciona en la página [Consejos de ggplot](#ggplot-tips), puedes crear tus propias paletas utilizando `colorRampPalette()` sobre un vector de colores y especificando el número de colores que deseas. Esta es una buena manera de obtener muchos colores en una rampa especificando unos pocos.  
 
 ```{r}
 my_cols <- c("darkgreen", "darkblue", "purple", "grey", "yellow", "orange")
@@ -25874,7 +25890,7 @@ hospital_outbreak <- incidence(
 plot(hospital_outbreak, fill = hospital, title = "ORIGINAL - hospital not a factor")
 ```
 
-Ahora, para ajustar el orden de manera que los "Faltantes" y "Otros" estén en la parte superior de la epicurva podemos hacer lo siguiente:
+Ahora, para ajustar el orden de manera que los "Missing" y "Otros" estén en la parte superior de la epicurva podemos hacer lo siguiente:
 
 * Cargar el paquete **forcats**, para trabajar con factores
 * Ajustar los datos - en este caso vamos a definir un nuevo dataset (`plot_data`) en el que:
@@ -25926,7 +25942,7 @@ plot(hospital_outbreak_mod, fill = hospital)+
 
 ### Líneas de cuadrícula verticales {.unnumbered}  
 
-Si utilizas la configuración predeterminada de la **incidence2**, puedes observar que las líneas de cuadrícula verticales aparecen en cada etiqueta de fecha y una vez entre cada etiqueta de fecha. Esto puede dar lugar a que las líneas de cuadrícula se crucen con la parte superior de algunas barras.
+Si utilizas la configuración predeterminada de **incidence2**, puedes observar que las líneas de cuadrícula verticales aparecen en cada etiqueta de fecha y una vez entre cada etiqueta de semana. Esto puede dar lugar a que las líneas de cuadrícula se crucen con la parte superior de algunas barras.
 
 <!-- [TO DO Note this paragraph is not applicable with version 1.0.0 of incidence2). You can specify the interval for the gridlines by adding **ggplot2**'s `scale_x_date()` command to your **incidence2** plot. Within it, specify the intervals for `date_breaks = ` and `date_minor_breaks = ` (e.g. "weeks" or "3 weeks" or "months"). Note that use of `scale_x_date()` will over-ride any formatting of the date labels in `plot()`, so you will need to specify any string format to `date_labels = ` as below.   -->
 
@@ -26027,12 +26043,11 @@ detach("package:tidyverse", unload=TRUE)
 library(tidyverse)
 ```
 
+Para producir una epicurva con `ggplot()` hay tres elementos principales:  
 
-To produce an epicurve with `ggplot()` there are three main elements:  
-
-* A histogram, with linelist cases aggregated into "bins" distinguished by specific "break" points  
-* Scales for the axes and their labels  
-* Themes for the plot appearance, including titles, labels, captions, etc.
+* Un histograma, con los casos de la lista de líneas agregados en "bins" distinguidos por puntos específicos de "ruptura".  
+* Escalas para los ejes y sus etiquetas  
+* Temas para la apariencia del gráfico, incluyendo títulos, etiquetas, subtítulos, etc.
 
 
 ### Especificaciones de las barras {.unnumbered}  
@@ -26068,9 +26083,9 @@ Observamos que el primer caso de este conjunto de datos del Hospital Central tuv
 format(min(central_data$date_onset, na.rm=T), "%A %d %b, %Y")
 ```
 
-**Para especificar manualmente las pausas del histograma, *no* utilices el argumento `binwidth = `, y en su lugar suministre un vector de fechas a `breaks = `.**
+**Para especificar manualmente las pausas del histograma, *no* utilices el argumento `binwidth = `, y en su lugar suministra un vector de fechas a `breaks = `.**
 
-Crea el vector de fechas con la función `seq.Date()` de R **base** . Esta función espera argumentos `to = `, `from = `, y `by = `. Por ejemplo, el comando siguiente devuelve fechas mensuales que comienzan en el 15 de enero y terminan en el 28 de junio.
+Crea el vector de fechas con la función `seq.Date()` de R **base**. Esta función espera argumentos `to = `, `from = `, y `by = `. Por ejemplo, el comando siguiente devuelve fechas mensuales que comienzan en el 15 de enero y terminan en el 28 de junio.
 
 ```{r}
 monthly_breaks <- seq.Date(from = as.Date("2014-02-01"),
@@ -26091,7 +26106,7 @@ ggplot(data = central_data) +
   labs(title = "Monthly case bins")   # title
 ```
 
-Una simple secuencia de fechas semanales puede ser devuelta estableciendo  `by = "week"`. Por ejemplo:
+Una secuencia simple de fechas semanales puede ser devuelta estableciendo  `by = "week"`. Por ejemplo:
 
 ```{r}
 weekly_breaks <- seq.Date(from = as.Date("2014-02-01"),
@@ -26129,7 +26144,7 @@ weekly_breaks_all <- seq.Date(
 
 Estas salidas de `seq.Date()` pueden utilizarse para crear los saltos de las casillas del histograma, pero también los saltos de las etiquetas de fecha, que pueden ser independientes de las casillas. Lea más sobre las etiquetas de fecha en secciones posteriores.
 
-<span style="color: darkgreen;">***CONSEJO:*** Para un comando `ggplot()` más sencillo, guarde los saltos de cubo y los saltos de etiqueta de fecha como vectores con nombre por adelantado, y simplemente proporcione sus nombres a `breaks = `..</span>  
+<span style="color: darkgreen;">***CONSEJO:*** Para un comando `ggplot()` más sencillo, guarda los saltos de cubo y los saltos de etiqueta de fecha como vectores con nombre por adelantado, y simplemente proporciona sus nombres a `breaks = `..</span>  
 
 
 
@@ -26237,7 +26252,7 @@ scale_x_date(
 
 Las barras del histograma pueden colorearse por grupos y "apilarse". Para designar la columna de agrupación, haz los siguientes cambios. Consulta la página de [Conceptos básicos de ggplot](#ggplot-basics) para más detalles.
 
-* Dentro del mapeo estético del histograma `aes()`, asigne el nombre de la columna a los argumentos `group =` y `fill = `
+* Dentro del mapeo estético del histograma `aes()`, asigna el nombre de la columna a los argumentos `group =` y `fill = `
 * Elimina cualquier argumento `fill = ` *fuera* de `aes()`, ya que anulará el de dentro
 * Los argumentos *dentro de* `aes()` se aplicarán *por grupo*, mientras que los de *fuera* se aplicarán a todas las barras (por ejemplo, es posible que quieras `color = ` fuera, para que cada barra tenga el mismo borde)
 
@@ -26272,9 +26287,9 @@ ggplot(data = linelist) +     # begin with linelist (many hospitals)
 * Para establecer *manualmente* el relleno de cada grupo, utiliza `scale_fill_manual()` (nota: `scale_color_manual()` es diferente).
   * Utiliza el argumento `values = ` para aplicar un vector de colores.
   * Utiliza `na.value = ` para especificar un color para los valores `NA`.
-  * Utiliza el argumento `labels = ` para cambiar el texto de los elementos de la leyenda. Para estar seguro, proporcione como un vector con nombre como `c("old" = "new", "old" = "new")` o ajusta los valores en los propios datos.
+  * Utiliza el argumento `labels = ` para cambiar el texto de los elementos de la leyenda. Para estar seguro, proporciónalo como un vector, como `c("old" = "new", "old" = "new")` o ajusta los valores en los propios datos.
   * Utiliza `name = ` para dar un título adecuado a la leyenda
-* Para obtener más consejos sobre las escalas y paletas de colores, consulta la página sobre [Conceptos básicos de ggplot](#ggplot-basics).  
+* Consulta la página sobre [Conceptos básicos de ggplot](#ggplot-basics) para obtener más información sobre escalas y paletas de colores.  
 
 ```{r, warning=F, message=F}
 ggplot(data = linelist)+           # begin with linelist (many hospitals)
@@ -26297,7 +26312,6 @@ ggplot(data = linelist)+           # begin with linelist (many hospitals)
     labels = c("St. Mark's Maternity Hospital (SMMH)" = "St. Mark's"),
     name = "Hospital") # specify fill colors ("values") - attention to order!
 ```
-
 
 
 
@@ -26392,7 +26406,7 @@ Lee más sobre las leyendas y las escalas en la página [Consejos de ggplot](#gg
 
 La visualización lado a lado de las barras de grupo (en lugar de apiladas) se especifica dentro de `geom_histogram()` con `position = "dodge"` colocado fuera de `aes()`.
 
-Si hay más de dos grupos de valores, éstos pueden resultar difíciles de leer. Considera la posibilidad de utilizar un gráfico facetado (múltiplos pequeños). Para mejorar la legibilidad en este ejemplo, se han eliminado los valores de género que faltan.
+Si hay más de dos grupos de valores, éstos pueden resultar difíciles de leer. Considera la posibilidad de utilizar un gráfico facetado (múltiples pequeños). Para mejorar la legibilidad en este ejemplo, se han eliminado los valores de género que faltan.
 
 ```{r, warning=F, message=F}
 ggplot(central_data %>% drop_na(gender))+   # begin with Central Hospital cases dropping missing gender
@@ -26460,7 +26474,6 @@ scale_x_date(limits = c(NA, Sys.Date()) # ensures date axis will extend until cu
 <span style="color: red;">***PELIGRO:*** Ten cuidado al establecer los cortes o límites de la escala del eje-y (por ejemplo, de 0 a 30 por 5: `seq(0, 30, 5)`). Tales números estáticos pueden cortar tu gráfica demasiado si los datos cambian para superar el límite!</span>
 
 
-
 ### Ejes de fecha etiquetas/cuadrículas {.unnumbered} 
 
 <span style="color: darkgreen;">***CONSEJO:*** Recuerda que las **etiquetas** de los ejes de fecha son independientes de la agregación de los datos en barras, pero visualmente puede ser importante alinear las franjas, las etiquetas de fecha y las líneas verticales de la cuadrícula.</span>
@@ -26473,8 +26486,8 @@ Para **modificar las etiquetas de fecha y las líneas de la cuadrícula**, utili
   * Añade `expand = c(0,0)` para comenzar las etiquetas en la primera barra
   * Usa `date_labels = ` para especificar el formato de las etiquetas de fecha - mira la página de [trabajar con fechas](working-with-dates) para consejos (usa `\n` para una nueva línea)
 * **Si las franjas de tu histograma son semanas de domingo**:
-  * Usa `breaks = ` y `minor_breaks = ` proporcionando una secuencia de saltos de fecha para cada
-  * Puedes seguir utilizando `date_labels = ` y `expand = ` para formatear como se ha descrito anteriormente
+  * Usa `breaks = ` y `minor_breaks = ` proporcionando una secuencia de saltos de fecha para cada una
+  * Puedes seguir utilizando `date_labels = ` y `expand = ` para formatear, como se ha descrito anteriormente
 
 Algunas notas:
 
@@ -26642,12 +26655,12 @@ DT::datatable(head(count_data, 50), rownames = FALSE, filter="top", options = li
 ```
 
 
-#### Trazado de recuentos diarios {.unnumbered}  
+#### Representar recuentos diarios {.unnumbered}  
 
 Podemos trazar una epicurva diaria a partir de estos *recuentos diarios*. Aquí están las diferencias con el código:
 
-* Dentro del mapeo estético `aes()`, especifique `y = ` como columna de recuento (en este caso, el nombre de la columna es `n_cases`)
-* Añadir el argumento `stat = "identity"` dentro de `geom_histogram()`, que especifica que la altura de la barra debe ser el valor `y =` , no el número de filas como es el valor por defecto
+* Dentro del mapeo estético `aes()`, especifica `y = ` como columna de recuento (en este caso, el nombre de la columna es `n_cases`)
+* Añadir el argumento `stat = "identity"` dentro de `geom_histogram()`, que especifica que la altura de la barra debe ser el valor `y =` y no el número de filas, como es el valor por defecto
 * Añade el argumento `width = ` para evitar las líneas blancas verticales entre las barras. Para los datos diarios, establece el valor 1. Para los datos semanales, escribe 7. Para los datos de recuento mensual, las líneas blancas son un problema (cada mes tiene un número diferente de días) - considera la posibilidad de transformar el eje x en un factor categórico ordenado (meses) y utilizar `geom_col()`.
 
 ```{r, message=FALSE, warning=F}
@@ -26662,7 +26675,7 @@ ggplot(data = count_data)+
     title = "Daily case incidence, from daily count data")
 ```
 
-#### Trazado de recuentos semanales {.unnumbered}
+#### representar recuentos semanales {.unnumbered}
 
 Si tus datos ya son recuentos de casos por semana, podrían parecerse a este conjunto de datos (llamado `count_data_weekly`):
 
@@ -26717,13 +26730,13 @@ ggplot(data = count_data_weekly)+
 
 ### Medias móviles {.unnumbered}
 
-Consulta la página sobre [medias móviles](#moving-averages-1) para obtener una descripción detallada y varias opciones. A continuación se muestra una opción para calcular medias móviles con el paquete **slider**. En este enfoque, *la media móvil se calcula antes de su trazado*:
+Consulta la página sobre [medias móviles](#moving-averages-1) para obtener una descripción detallada y varias opciones. A continuación se muestra una opción para calcular medias móviles con el paquete **slider**. En este enfoque, *la media móvil se calcula antes de representarla*:
 
 1.  Agrega los datos en recuentos según sea necesario (diario, semanal, etc.) (véase la página de [Agrupar datos](#grouping-data))
 2.  Crea una nueva columna para contener la media móvil, creada con `slide_index()` del paquete **slider**
-3.  Traza la media móvil como una `geom_line()` encima (después) del histograma de la epicurva
+3.  Dibuja la media móvil como una `geom_line()` encima (después) del histograma de la epicurva
 
-Mira la útil [viñeta en línea del paquete **slider**](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) 
+Es muy útil la [viñeta en línea del paquete **slider**](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) 
 
 
 ```{r, warning=F, message=F}
@@ -26795,18 +26808,18 @@ La sintaxis general es `facet_wrap(rows ~ cols)`, donde a la izquierda de la til
 **Ejes libres**
 Tendrás que decidir si las escalas de los ejes para cada faceta son "fijas" (por defecto), o "libres" (lo que significa que cambiarán en función de los datos dentro de la faceta). Haz esto con el argumento `scales = ` dentro de `facet_wrap()` especificando "free_x" o "free_y", o "free".
 
-**Número de columnass y filas de las facetas**
+**Número de columnas y filas de las facetas**
 Se puede especificar con `ncol = ` y `nrow = ` dentro de `facet_wrap()`.
 
 **Orden de los paneles**
 Para cambiar el orden de aparición, cambia el orden de los niveles de la columna de factores utilizada para crear las facetas.
 
 **Estética**
-El tamaño y tipo de la fuente, el color de la franja, etc. se pueden modificar a través de `theme()` con argumentos como:  
+El tamaño y tipo de la fuente, el color de la franja, etc, se pueden modificar mediante  `theme()` con argumentos como:  
 
-* `strip.text = element_text()` (size, colour, face, angle...)
+* `strip.text = element_text()` (size, colour, face, angle..(tamaño, color, cara, ángulo)
 * `strip.background = element_rect()` (e.g. element_rect(fill="grey"))  
-* `strip.position = ` (posición "bottom", "top", "left", o "right")  
+* `strip.position = ` (posición "bottom", "top", "left", o "right" (Abajo, arriba, izquierda o derecha))  
 
 
 **Etiquetas de banda**
@@ -26948,7 +26961,7 @@ ggplot(central_data) +
 
 #### Una faceta con datos {.unnumbered}  
 
-Si quieres tener una caja de facetas que contenga todos los datos, duplique todo el conjunto de datos y trate los duplicados como un solo valor de facetas. Una función de "ayuda" `CreateAllFacet()` a continuación puede ayudar con esto (gracias a esta [entrada del blog](https://stackoverflow.com/questions/18933575/easily-add-an-all-facet-to-facet-wrap-in-ggplot2)). Cuando se ejecuta, el número de filas se duplica y habrá una nueva columna llamada `facet` en la que las filas duplicadas tendrán el valor "all", y las filas originales tienen el valor original de la columna `facet`. Ahora sólo tienes que hacer la faceta con la columna `facet`.
+Si quieres tener una caja de facetas que contenga todos los datos, duplica todo el conjunto de datos y trata los duplicados como un solo valor de facetas. Una función de "ayuda" `CreateAllFacet()` a continuación puede ayudar con esto (gracias a esta [entrada del blog](https://stackoverflow.com/questions/18933575/easily-add-an-all-facet-to-facet-wrap-in-ggplot2)). Cuando se ejecuta, el número de filas se duplica y habrá una nueva columna llamada `facet` en la que las filas duplicadas tendrán el valor "all", y las filas originales tienen el valor original de la columna `facet`. Ahora sólo tienes que hacer la faceta con la columna `facet`.
 
 Aquí está la función de ayuda. Ejecútala para que esté disponible para ti. 
 
@@ -27045,8 +27058,8 @@ Los datos más recientes que se muestran en las epicurvas deben marcarse a menud
 
 
 1.  Utiliza `annotate()`:
-     + Para una línea utiliza `annotate(geom = "segment")`. Proporcione `x`, `xend`, `y`, e `yend`. Ajusta el tamaño, el tipo de línea (`lty)` y el color.
-     + Para un rectángulo utiliza `annotate(geom = "rect")`. Proporcionar `xmin/xmax/ymin/ymax`. Ajusta el color y el alpha.
+     + Para una línea utiliza `annotate(geom = "segment")`. Proporciona `x`, `xend`, `y`, e `yend`. Ajusta el tamaño, el tipo de línea (`lty)` y el color.
+     + Para un rectángulo utiliza `annotate(geom = "rect")`. Proporciona `xmin/xmax/ymin/ymax`. Ajusta el color y el alpha.
 2.  Agrupar los datos por estado tentativo y colorear esas barras de forma diferente
 
 <span style="color: orange;">***PRECAUCIÓN:*** Puedes intentar `geom_rect()` para dibujar un rectángulo, pero el ajuste de la transparencia no funciona en un contexto de listado. Esta función superpone un rectángulo para cada observación/fila!. Utiliza un alfa muy bajo (por ejemplo, 0,01), u otro enfoque. </span>
@@ -27170,13 +27183,13 @@ ggplot(plot_data, aes(x = date_onset, fill = tentative)) +
 
 Si deseas etiquetas de fecha de varios niveles (por ejemplo, mes y año) *sin duplicar los niveles de etiquetas inferiores*, considera uno de los enfoques siguientes:
 
-Recuerda - puedes utilizar herramientas como `\n` *dentro de* los argumentos `date_labels` o `labels` para poner partes de cada etiqueta en una nueva línea inferior. Sin embargo, el código de abajo le ayuda a tomar años o meses (por ejemplo) en una línea inferior *y sólo una vez*. Algunas notas sobre el código de abajo:
+Recuerda - puedes utilizar herramientas como `\n` *dentro de* los argumentos `date_labels` o `labels` para poner partes de cada etiqueta en una nueva línea inferior. Sin embargo, el código de abajo le ayuda a usar años o meses (por ejemplo) en una línea inferior *y sólo una vez*. Algunas notas sobre el código de abajo:
 
 * Los recuentos de casos se agregan en semanas por motivos estéticos. Véase la página de Epicurves (sección de datos agregados) para más detalles.
 * Se utiliza una línea `geom_area()` en lugar de un histograma, ya que el enfoque de facetas que se presenta a continuación no funciona bien con los histogramas.
 
 
-**Agregue a los recuentos semanales**
+**Agregar a los recuentos semanales**
 
 ```{r out.width = c('50%', '50%'), fig.show='hold', warning=F, message=F}
 
@@ -27344,9 +27357,9 @@ ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 
 ## Incidencia acumulada {#cumulative-incidence-1}
 
-Nota: Si utiliza **incidence2**, consulta la sección sobre cómo puede producir la incidencia acumulada con una función simple. Esta página abordará cómo calcular la incidencia acumulada y trazarla con `ggplot()`.
+Nota: Si utilizas **incidence2**, consulta la sección sobre cómo puede producirse la incidencia acumulada con una función simple. Esta página abordará cómo calcular la incidencia acumulada y dibujarla con `ggplot()`.
 
-Si se empieza con una lista de casos, cree una nueva columna que contenga el número acumulado de casos por día en un brote utilizando `cumsum()` de R **base**:   
+Si se empieza con una lista de casos, crea una nueva columna que contenga el número acumulado de casos por día en un brote utilizando `cumsum()` de R **base**:   
 
 ```{r}
 cumulative_case_counts <- linelist %>% 
@@ -27365,7 +27378,7 @@ DT::datatable(head(cumulative_case_counts, 10), rownames = FALSE, options = list
 
 
 
-Esta columna acumulativa puede entonces ser trazada contra `date_onset`, usando `geom_line()`:
+Esta columna acumulativa puede entonces ser dibujada contra `date_onset`, usando `geom_line()`:
 
 ```{r, warning=F, message=F}
 plot_cumulative <- ggplot()+
@@ -35577,9 +35590,8 @@ options(scipen=1, digits=7)
 <!--chapter:end:new_pages/writing_functions.Rmd-->
 
 
-# Borrador. Interacciones con directorios {#directory-interactions}  
+# Interacciones con directorios {#directory-interactions}  
 
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
 En esta página cubrimos los escenarios comunes en los que se crea, se interactúa, se guarda y se importa con directorios (carpetas).
 
@@ -35588,7 +35600,7 @@ En esta página cubrimos los escenarios comunes en los que se crea, se interact�
 
 ### Paquete **fs** {.unnumbered}   
 
-El paquete fs es un paquete **tidyverse** que facilita las interacciones con los directorios, mejorando algunas de las funciones de R  **base**. En las secciones siguientes utilizaremos a menudo funciones de **fs**.
+El paquete **fs** es un paquete **tidyverse** que facilita las interacciones con los directorios, mejorando algunas de las funciones de R **base**. En las secciones siguientes utilizaremos a menudo funciones de **fs**.
 
 ```{r}
 pacman::p_load(
@@ -35613,23 +35625,23 @@ fs::dir_tree(path = here("data"), recurse = TRUE)
 
 ## Listar los archivos de un directorio {#list-files-in-a-directory}
 
-Para listar sólo los nombres de los archivos de un directorio puede utilizar `dir()` desde R **base.** Por ejemplo, este comando lista los nombres de los archivos de la subcarpeta "population" de la carpeta "data" en un proyecto R. La ruta relativa de los archivos se proporciona utilizando `here()` (sobre la que puede leer más en la página de [importación y exportación](#import-and-export)).  
+Para listar sólo los nombres de los archivos de un directorio puedes utilizar `dir()` de R **base**. Por ejemplo, este comando lista los nombres de los archivos de la subcarpeta "population" de la carpeta "data" en un proyecto R. La ruta relativa de los archivos se proporciona utilizando `here()` (sobre la que puede leer más en la página de [importación y exportación](#import-and-export)).  
 
 ```{r}
 # file names
 dir(here("data", "gis", "population"))
 ```
 
-Para listar las rutas completas de los archivos del directorio, puede utilizar `dir_ls()` de **fs**. Una alternativa de R **base** es `list.files()`.
+Para listar las rutas completas de los archivos del directorio, puedes utilizar `dir_ls()` de **fs**. Una alternativa de R **base** es `list.files()`.
 
 ```{r}
 # file paths
 dir_ls(here("data", "gis", "population"))
 ```
 
-Para obtener toda la información de los metadatos de cada archivo en un directorio, (por ejemplo, la ruta, la fecha de modificación, etc.) puede utilizar `dir_info()` de **fs**.
+Para obtener toda la información de los metadatos de cada archivo en un directorio, (por ejemplo, la ruta, la fecha de modificación, etc.) puedes utilizar `dir_info()` de **fs**.
 
-Esto puede ser especialmente útil si quiere extraer la última hora de modificación del archivo, por ejemplo si quiere importar la versión más reciente de un archivo. Para ver un ejemplo de esto, consulta la página de [importación y exportación](#import-and-export).
+Esto puede ser especialmente útil si quieres extraer la última hora de modificación del archivo, por ejemplo si quieres importar la versión más reciente de un archivo. Para ver un ejemplo de esto, consulta la página de [importación y exportación](#import-and-export).
 
 ```{r, eval=F}
 # file info
@@ -35644,7 +35656,7 @@ DT::datatable(dir_info(here("data", "gis", "population")), rownames = FALSE, opt
 
 ## Información sobre el archivo {#file-information}
 
-Para extraer información de metadatos sobre un archivo específico, puede utilizar `file_info()` de **fs** (o `file.info()` de R **base**).
+Para extraer información de metadatos sobre un archivo específico, puedes utilizar `file_info()` de **fs** (o `file.info()` de R **base**).
 
 ```{r, eval=F}
 file_info(here("data", "case_linelists", "linelist_cleaned.rds"))
@@ -35667,7 +35679,7 @@ file_info(here("data", "case_linelists", "linelist_cleaned.rds"))$modification_t
 
 ### Objetos R {.unnumbered}   
 
-Puedes utilizar `exists()` de para comprobar si un objeto R existe *dentro* de R (proporcione el nombre del objeto entre comillas).
+Puedes utilizar `exists()` de R **base** para comprobar si un objeto R existe *dentro* de R (escribe el nombre del objeto entre comillas).
 
 ```{r}
 exists("linelist")
@@ -35680,13 +35692,13 @@ exists("data")
 exists("data", inherit = FALSE)
 ```
 
-Si está escribiendo una función, deberías utilizar `missing()` de R **base** para comprobar si un argumento está presente o no, en lugar de `exists()`.
+Si estás escribiendo una función, deberías utilizar `missing()` de R **base** para comprobar si un argumento está presente o no, en lugar de `exists()`.
 
 
 
 ### Directorios {.unnumbered}   
 
-Para comprobar si un directorio existe, proporcione la ruta del archivo (y el nombre del archivo) a `is_dir()` de **fs**. Desplázate a la derecha para ver que se imprime `TRUE`.
+Para comprobar si un directorio existe, escribe la ruta del archivo (y el nombre del archivo) a `is_dir()` de **fs**. Desplázate a la derecha para ver que se imprime `TRUE`.
 
 
 ```{r}
@@ -35772,7 +35784,7 @@ knitr::include_graphics(here::here("images", "source_button.png"))
 
 ### `render()` {.unnumbered}  
 
-`render()` es una variación de `source()` que se utiliza más a menudo para los scripts de R markdown. Tu proporcionas la `input = ` que es el archivo R markdown, y también `output_format = ` ("html_document", "pdf_document", "word_document", "")
+`render()` es una variación de `source()` que se utiliza más a menudo para los scripts de R markdown. Tu pescribes `input = ` que es el archivo R markdown, y también `output_format = ` ("html_document", "pdf_document", "word_document", "")
 
 Mira la página sobre [Informes con R Markdown](#reports-with-r-markdown) para más detalles. También consulta la documentación de `render()` [aquí](https://rmarkdown.rstudio.com/docs/reference/render.html) o escribiendo `?render`.
 
@@ -35780,7 +35792,7 @@ Mira la página sobre [Informes con R Markdown](#reports-with-r-markdown) para m
 
 ### Ejecutar archivos en un directorio {.unnumbered}
 
-Puedes crear un *bucle for* y utilizarlo para `source()` cada archivo en un directorio, identificado con `dir()`. 
+Puedes crear un bucle *for* y utilizarlo para `source()` cada archivo en un directorio, identificado con `dir()`. 
 
 ```{r, eval=F}
 for(script in dir(here("scripts"), pattern = ".R$")) {   # for each script name in the R Project's "scripts" folder (with .R extension)
@@ -35826,7 +35838,7 @@ Consulta la página sobre [Iteración, bucles y listas](#iteration-loops-and-lis
 
 ## R **base**  {#base-r-4}
 
-Vea a continuación las funciones `list.files()` y `dir()`, que realizan la misma operación de listar archivos dentro de un directorio especificado. Puedes especificar `ignore.case = ` o un patrón específico para buscar.
+Mira a continuación las funciones `list.files()` y `dir()`, que realizan la misma operación de listar archivos dentro de un directorio especificado. Puedes especificar `ignore.case = ` o un patrón específico para buscar.
 
 ```{r, eval=F}
 list.files(path = here("data"))
@@ -37085,10 +37097,7 @@ options(scipen=1, digits=7)
 <!--chapter:end:new_pages/help.Rmd-->
 
 
-# Borrador. R en redes locales {#r-on-network-drives}
-
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
-
+# R en redes locales {#r-on-network-drives}
 
 <!-- ======================================================= -->
 ## Resumen {#overview-9}
@@ -37108,7 +37117,7 @@ El uso de R en unidades compartidas de la red o de la "empresa" puede presentar 
 
 ## RStudio como administrador  {#rstudio-as-administrator}
 
-Cuando clica en el icono de RStudio para abrirlo, hazlo clicando con el botón derecho. Dependiendo de tu máquina, puede ver una opción para "Ejecutar como administrador". De lo contrario, puede ver una opción para seleccionar Propiedades (entonces debería aparecer una ventana con la opción "Compatibilidad", y puede seleccionar una casilla de verificación "Ejecutar como administrador").
+Cuando clicas en el icono de RStudio para abrirlo, hazlo clicando con el botón derecho. Dependiendo de tu máquina, puedes ver una opción para "Ejecutar como administrador". O si no,  puedes ver una opción para seleccionar Propiedades (entonces debería aparecer una ventana con la opción "Compatibilidad", y selecciona una casilla de verificación "Ejecutar como administrador").
 
 
 
@@ -37117,7 +37126,7 @@ Cuando clica en el icono de RStudio para abrirlo, hazlo clicando con el botón d
 
 A continuación se presentan algunos comandos útiles cuando se trata de solucionar problemas utilizando R en unidades de red.
 
-Puedes devolver la(s) ruta(s) a las bibliotecas de paquetes que R está utilizando. Serán listadas en el orden que R está usando para instalar/cargar/buscar paquetes. Por lo tanto, si quiere que R utiliza una biblioteca diferente por defecto, puede cambiar el orden de estas rutas (ver más abajo). 
+Puedes devolver la(s) ruta(s) a las bibliotecas de paquetes que R está utilizando. Serán listadas en el orden que R está usando para instalar/cargar/buscar paquetes. Por lo tanto, si quieres que R utilice una biblioteca diferente por defecto, puedes cambiar el orden de estas rutas (ver más abajo). 
 
 ```{r, eval=F}
 # Find libraries
@@ -37127,7 +37136,7 @@ Puedes devolver la(s) ruta(s) a las bibliotecas de paquetes que R está utilizan
                               # install packages library drop-down menu) 
 ```
 
-Es posible que desee cambiar el orden de las bibliotecas de paquetes utilizados por R. Por ejemplo, si R está recogiendo una ubicación de la biblioteca que comienza con "\\\" y uno que comienza con una letra, por ejemplo, "D:". Puedes ajustar el orden de `.libPaths()` con el siguiente código. 
+Es posible que desees cambiar el orden de las bibliotecas de paquetes utilizados por R. Por ejemplo, si R está recogiendo una ubicación de la biblioteca que comienza con "\\\" y uno que comienza con una letra, por ejemplo, "D:". Puedes ajustar el orden de `.libPaths()` con el siguiente código. 
 
 ````{r, eval=F}
 # Switch order of libraries
@@ -37137,7 +37146,7 @@ myPaths <- c(myPaths[2], myPaths[1]) # switch them
 .libPaths(myPaths) # reassign them
 ```
 
-Si tiene dificultades para que R Markdown se conecte a Pandoc, comience con este código para averiguar dónde cree RStudio que está tu instalación de Pandoc. 
+Si tienes dificultades para que R Markdown se conecte a Pandoc, comienza con este código para averiguar dónde cree RStudio que está tu instalación de Pandoc. 
 
 ```{r, eval=F}
 # Find Pandoc
@@ -37160,7 +37169,7 @@ find.package("rmarkdown", lib.loc = NULL, quiet = FALSE, verbose = getOption("ve
 
 **"Fallo al compilar...tex en rmarkdown "**  
 
-* Comprueba la instalación de TinyTex, o instale TinyTex en la ubicación C:. Consulta la página de [fundamentos de R](#r-basics) sobre cómo instalar TinyTex. 
+* Comprueba la instalación de TinyTex, o instala TinyTex en la ubicación C:. Consulta la página de [fundamentos de R](#r-basics) sobre cómo instalar TinyTex. 
 
 ```{r, eval=F}
 # check/install tinytex, to C: location
@@ -37173,9 +37182,9 @@ tinytex:::is_tinytex() # should return TRUE (note three colons)
 
 Por ejemplo, `Error in tools::startDynamicHelp() : internet routines cannot be loaded`  
 
-* Intente seleccionar la versión de 32 bits de RStudio a través de Herramientas/Opciones Globales.
-  * nota: si la versión de 32 bits no aparece en el menú, asegúrese de que no está utilizando RStudio v1.2.
-* Alternativamente, intente desinstalar R y volver a instalarlo con una versión de bits diferente (32 en lugar de 64)
+* Intenta seleccionar la versión de 32 bits de RStudio a través de Herramientas/Opciones Globales.
+  * nota: si la versión de 32 bits no aparece en el menú, asegúrate que no está utilizando RStudio v1.2.
+* Alternativamente, intenta desinstalar R y volver a instalarlo con una versión de bits diferente (32 en lugar de 64)
 
 
 **C: la biblioteca no aparece como opción cuando intento instalar los paquetes manualmente**
@@ -37183,7 +37192,7 @@ Por ejemplo, `Error in tools::startDynamicHelp() : internet routines cannot be l
 * Ejecuta RStudio como administrador, entonces aparecerá esta opción.
 * Para configurar RStudio para que se ejecute siempre como administrador (lo que resulta ventajoso cuando se utiliza un proyecto R en el que no se clica en el icono de RStudio para abrirlo)... clica con el botón derecho en el icono de Rstudio
 
-La imagen siguiente muestra cómo puede seleccionar manualmente la biblioteca en la que instalar un paquete. Esta ventana aparece cuando se abre el panel de paquetes de RStudio y se clica en "Install".
+La imagen siguiente muestra cómo puedes seleccionar manualmente la biblioteca en la que instalar un paquete. Esta ventana aparece cuando se abre el panel de paquetes de RStudio y se clica en "Install".
 
 ```{r, warning=F, message=F, echo=F}
 knitr::include_graphics(here::here("images", "network_install.png"))
@@ -37191,11 +37200,11 @@ knitr::include_graphics(here::here("images", "network_install.png"))
 
 **Error Pandoc 1**  
 
-Si aparece el error "pandoc error 1" al ejcutar R Markdowns scripts en unidades de red:
+Si aparece el error "pandoc error 1" al ejecutar R Markdowns scripts en unidades de red:
 
 * De las múltiples ubicaciones de las bibliotecas, que aparezca en primer lugar la que tenga una unidad de disco con letras (véanse los códigos anteriores)
-* La solución anterior funcionó cuando se tejió en la unidad local, pero mientras que en una conexión a Internet en red
-* Vea más consejos aquí: [https://ciser.cornell.edu/rmarkdown-knit-to-html-word-pdf/](https://ciser.cornell.edu/rmarkdown-knit-to-html-word-pdf/)
+* La solución anterior funciona en una unidad de red local, si establece la conexión a Internet en la red
+* Mira más consejos aquí: [https://ciser.cornell.edu/rmarkdown-knit-to-html-word-pdf/](https://ciser.cornell.edu/rmarkdown-knit-to-html-word-pdf/)
 
 **Error Pandoc 83** 
 
@@ -37209,7 +37218,7 @@ Posibilidades:
 2.  El paquete Rmarkdown no se encuentra
 3.  Un problema de derechos de administración.
 
-Es posible que R no sea capaz de encontrar el archivo del paquete rmarkdown, así que compruebe en qué biblioteca vive el paquete **rmarkdown** (vea el código anterior). Si el paquete está instalado en una biblioteca inaccesible (por ejemplo, comienza con "\\\") considere moverlo manualmente a C: o a otra biblioteca con nombre. Ten en cuenta que el paquete **rmarkdown** tiene que ser capaz de conectarse a la instalación de TinyTex, por lo que no puede vivir en una biblioteca en una unidad de red.
+Es posible que R no sea capaz de encontrar el archivo del paquete rmarkdown, así que comprueba en qué biblioteca está el paquete **rmarkdown** (vearel código anterior). Si el paquete está instalado en una biblioteca inaccesible (por ejemplo, comienza con "\\\") considera moverlo manualmente a C: o a otra biblioteca con nombre. Ten en cuenta que el paquete **rmarkdown** tiene que ser capaz de conectarse a la instalación de TinyTex, por lo que no puede valojarse en una biblioteca en una unidad de red.
 
 
 **Error Pandoc 61**
@@ -37217,7 +37226,7 @@ Es posible que R no sea capaz de encontrar el archivo del paquete rmarkdown, as�
 Por ejemplo: `Error: pandoc document conversion failed with error 61`  o `Could not fetch...`  
 
 * Prueba a ejecutar RStudio como administrador (clica con el botón derecho en el icono, selecciona ejecutar como administrador, vea las instrucciones anteriores)
-* Vea también si el paquete específico que no pudo ser alcanzado puede ser movido a la biblioteca C:.
+* Ver también si el paquete específico que no pudo ser alcanzado puede ser movido a la biblioteca C:.
 
 
 **Error de LaTex (ver más abajo)**
@@ -37236,26 +37245,26 @@ Podría tratarse de un problema de RAM (espacio). Reinicia tu sesión de R e int
 
 Mapear una unidad de red puede ser arriesgado. Consulta con tu departamento de TI antes de intentarlo.
 
-Un consejo tomado de esta [discusión del foro](https://stackoverflow.com/questions/48161177/r-markdown-openbinaryfile-does-not-exist-no-such-file-or-directory/55616529?noredirect=1#comment97966859_55616529):
+Un consejo tomado de este [foro de discusión](https://stackoverflow.com/questions/48161177/r-markdown-openbinaryfile-does-not-exist-no-such-file-or-directory/55616529?noredirect=1#comment97966859_55616529):
 
 ¿Cómo se abre un archivo "a través de una unidad de red asignada"?
 
 * En primer lugar, tendrás que conocer la ubicación de la red a la que intentas acceder.
-* A continuación, en el administrador de archivos de Windows, deberá clicar con el botón derecho en "Este PC" en el panel de la derecha, y seleccionar "Asignar una unidad de red".
-* Vaya a través del diálogo para definir la ubicación de red de antes como una unidad de letra.
+* A continuación, en el administrador de archivos de Windows, deberás clicar con el botón derecho en "Este PC" en el panel de la derecha, y seleccionar "Asignar una unidad de red".
+* Asigna la ubicación de red como una letra de unidad.
 * Ahora tienes dos maneras de llegar al archivo que estás abriendo. Usar la ruta de la letra de la unidad debería funcionar.
 
 
 **Error in install.packages()**  
 
-Si obtiene un error que incluya la mención de un directorio de "bloqueo", por ejemplo `Error in install.packages : ERROR: failed to lock directory...`
+Si obtienes un error que incluya la mención de un directorio de "bloqueo", por ejemplo `Error in install.packages : ERROR: failed to lock directory...`
 
-Busca en tu biblioteca de paquetes y verá una carpeta cuyo nombre empieza por "00LOCK". Pruebe los siguientes consejos:
+Busca en tu biblioteca de paquetes y verás una carpeta cuyo nombre empieza por "00LOCK". Prueba los siguientes consejos:
 
-* Elimine manualmente el directorio de la carpeta "00LOCK" de tu biblioteca de paquetes. Intente instalar el paquete de nuevo.
-* También puede probar el comando `pacman::p_unlock()` (también puede poner este comando en el Rprofile para que se ejecute cada vez que se abra el proyecto). Luego intente instalar el paquete de nuevo. Puedes tomar varios intentos.
-* Pruebe a ejecutar RStudio en modo de administrador e intente instalar los paquetes uno por uno.
-* Si todo lo demás falla, instale el paquete en otra biblioteca o carpeta (por ejemplo, Temp) y luego copie manualmente la carpeta del paquete en la biblioteca deseada.  
+* Elimina manualmente el directorio de la carpeta "00LOCK" de tu biblioteca de paquetes. Intenta instalar el paquete de nuevo.
+* También puedes probar el comando `pacman::p_unlock()` (también puedes poner este comando en el Rprofile para que se ejecute cada vez que se abra el proyecto). Luego intenta instalar el paquete de nuevo. Puedes necesitar varios intentos.
+* Prueba a ejecutar RStudio en modo de administrador e intenta instalar los paquetes uno por uno.
+* Si todo lo demás falla, instala el paquete en otra biblioteca o carpeta (por ejemplo, Temp) y luego copia manualmente la carpeta del paquete en la biblioteca deseada.  
 
 
 
@@ -37306,9 +37315,7 @@ options(scipen=1, digits=7)
 <!--chapter:end:new_pages/network_drives.Rmd-->
 
 
-# Borrador. data.table {#data-table}
-
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
+# data.table {#data-table}
 
 El manual se centra en las funciones "verbales" de **dplyr** y en el operador pipe `%>%` de **magrittr** como método para limpiar y agrupar datos, pero el paquete **data.table** ofrece un método alternativo que puedes encontrar en tu recorrido con R.
 
@@ -37319,7 +37326,7 @@ El manual se centra en las funciones "verbales" de **dplyr** y en el operador pi
 
 Una tabla de datos es una estructura de datos bidimensional como un dataframe que permite realizar operaciones de agrupación complejas. La sintaxis de data.table está estructurada de forma que se puedan realizar operaciones sobre filas, columnas y grupos.
 
-La estructura es **DT[i, j, by]**, separada por 3 partes; los argumentos i**, j** y **by**. El argumento **i** permite subconjuntar las filas necesarias, el argumento **j permite** operar sobre las columnas y el argumento **by** permite operar sobre las columnas por grupos.
+La estructura es **DT[i, j, by]**, separada por 3 partes; los argumentos **i**, **j** y **by**. El argumento **i** permite subconjuntar las filas necesarias, el argumento **j** permite operar sobre las columnas y el argumento **by** permite operar sobre las columnas por grupos.
 
 En esta página se tratarán los siguientes temas:
 
@@ -37354,7 +37361,7 @@ pacman::p_load(
 
 Esta página explorará algunas de las funciones principales de **data.table** utilizando la lista de casos referenciados a lo largo del manual.
 
-Importamos los datos de casos de una epidemia de ébola simulada. Si desea descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página [Descargar libro y datos]. Los datos se importa mediante la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos. A partir de aquí utilizamos `data.table()` para convertir el dataframe en una tabla de datos.
+Importamos los datos de casos de una epidemia de ébola simulada. Si deseas descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página [Descargar libro y datos]. Los datos se importan mediante la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos. A partir de aquí utilizamos `data.table()` para convertir el dataframe en una data.table.
 
 ```{r}
 linelist <- rio::import(here("data", "linelist_cleaned.xlsx")) %>% data.table()
@@ -37369,7 +37376,7 @@ Las primeras 20 filas de `linelist`:
 DT::datatable(head(linelist,20), rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Los comandos R base de R, como `dim()`, que se utilizan para los dataframes, también pueden utilizarse para las tablas de datos
+Los comandos de R **base**, como `dim()`, que se utilizan para los dataframes, también pueden utilizarse para las tablas de datos
 
 ```{r}
 dim(linelist) #gives the number of rows and columns in the data table
@@ -37379,9 +37386,9 @@ dim(linelist) #gives the number of rows and columns in the data table
 <!-- ======================================================= -->
 ## El argumento i: seleccionar y filtrar filas {#the-i-argument-selecting-and-filtering-rows}
      
-Recordando la estructura DT**[i, j, by]**, podemos filtrar filas utilizando números de fila o expresiones lógicas. El argumento i es el primero; por tanto, se puede utilizar la sintaxis **DT[i]** o **DT[i,]**.
+Recordando la estructura **DT*[i, j, by]**, podemos filtrar filas utilizando números de fila o expresiones lógicas. El argumento i es el primero; por tanto, se puede utilizar la sintaxis **DT[i]** o **DT[i,]**.
 
-El primer ejemplo recupera las 5 primeras filas de la tabla de datos, el segundo ejemplo subsume los casos de 18 años o más, y el tercer ejemplo subsume los casos de 18 años o más pero no diagnosticados en el Central Hospital:
+El primer ejemplo muestra las 5 primeras filas de la tabla de datos, el segundo ejemplo los casos de 18 años o más, y el tercer ejemplo los casos de 18 años o más pero no diagnosticados en el Central Hospital:
 
 
 ```{r, eval=F}
@@ -37405,7 +37412,7 @@ Data table utiliza funciones de ayuda que facilitan el subconjunto de filas. La 
 
 En los siguientes ejemplos: 
 * filtramos las filas en las que la variable hospital contiene "Hospital" 
-* filtramos las filas en las que el resultado es "Recuperación" o "Muerte" 
+* filtramos las filas en las que el resultado es "Recover" o "Death" 
 * filtramos las filas en el rango de edad 40-60
 
 ```{r, eval=F}
@@ -37436,7 +37443,7 @@ linelist[ , list(case_id, outcome)] #linelist[ , .(case_id, outcome)] works just
 
 ### Cálculo en columnas {.unnumbered} 
 
-Combinando los argumentos **i** y **j es posible filtrar filas** y calcular en las columnas. El uso de **.N** en el argumento **j** también representa el número total de filas en la tabla de datos y puede ser útil para devolver el número de filas después del filtrado de filas.
+Combinando los argumentos **i** y **j** es posible filtrar filas y calcular en sus columnas. El uso de **.N** en el argumento **j** también representa el número total de filas en la tabla de datos y puede ser útil para devolver el número de filas después del filtrado de filas.
 
 En los siguientes ejemplos: 
 * Contar el número de casos que permanecieron más de 7 días en el hospital 
