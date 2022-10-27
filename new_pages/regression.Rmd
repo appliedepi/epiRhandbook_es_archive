@@ -114,14 +114,14 @@ linelist <- linelist %>%
 
 ```
 
-El número de filas que quedan en `linelist` tras la operación es `nrow(linelist)`.
+Podremos checar el número de filas que quedan en `linelist` tras la operación empleando `nrow(linelist)`.
 
 
 <!-- ======================================================= -->
 
 ## Univariante {#univariate}
 
-Al igual que en la página sobre [Tablas descriptivas](#descriptive-tables), en función de la tarea que vayas a realizar, podrás elegir que función emplear. A continuación presentamos dos opciones para realizar análisis univariantes:
+Al igual que en la página sobre [Tablas descriptivas](#descriptive-tables), en función de la tarea que vayas a realizar, podremos elegir que función emplear. A continuación presentamos dos opciones para realizar análisis univariantes:
 
 * Puedes utilizar las funciones disponibles en R **base** para imprimir rápidamente los resultados en la consola. Después, puedes utilizar el paquete **broom** para convertir esos outputs a formato *tidy*.
 
@@ -137,7 +137,7 @@ Al igual que en la página sobre [Tablas descriptivas](#descriptive-tables), en 
 
 La función `lm()` de  R **base** realiza una regresión lineal, evaluando la relación entre la respuesta numérica y las variables explicativas que se supone tienen una relación lineal.
 
-Para ello, proporciona la ecuación como una fórmula, con los nombres de las columnas de respuesta y explicativa separados por una tilde `~`. Además, especifica la base de datos a `data = `. Finalmente, defina los resultados del modelo como un objeto R, para poder utilizarlos más tarde.  
+Para ello, proporciona la ecuación como una fórmula, con los nombres de las columnas de respuesta y explicativa separados por una tilde `~`. Además, especifica la base de datos a `data = `. Finalmente, define los resultados del modelo como un objeto R, para poder utilizarlos más tarde.  
 
 ```{r lin_reg}
 lm_results <- lm(ht_cm ~ age, data = linelist)
@@ -155,7 +155,7 @@ También se puede utilizar la función `tidy()` del paquete **broom** para obten
 tidy(lm_results)
 ```
 
-También puedes utilizar esta regresión para añadirla a un **ggplot**, para hacer esto, primero juntamos los puntos de los datos observados y la línea ajustada en un dataframe utilizando la función `augment()` de **broom**.
+También podemos utilizar esta regresión para añadirla a un **ggplot**, para hacer esto, primero juntamos los puntos de los datos observados y la línea ajustada en un dataframe utilizando la función `augment()` de **broom**.
 
 ```{r lin_reg_res_plot}
 
@@ -171,7 +171,7 @@ ggplot(points, aes(x = age)) +
 
 ```
 
-También es posible añadir una simple recta de regresión lineal en **ggplot** utilizando la función `geom_smooth()`. 
+También es posible añadir una recta de regresión lineal en **ggplot** utilizando la función `geom_smooth()`. 
 
 ```{r geom_smooth}
 
@@ -183,7 +183,7 @@ También es posible añadir una simple recta de regresión lineal en **ggplot** 
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-Consulta la sección de recursos al final de este capítulo para obtener tutoriales más detallados. 
+Consulta la sección de recursos al final de este capítulo para consultar tutoriales más detallados. 
 
 
 #### Regresión logística{.unnumbered}  
@@ -216,7 +216,7 @@ Familia                |Función de enlace por defecto
 `"quasipoisson"` | `(link = "log")`  
 
 
-Cuando se ejecuta `glm()` lo más habitual es guardar los resultados como un objeto R. A continuación, se pueden imprimir los resultados en la consola utilizando `summary()` como se muestra a continuación, o realizar otras operaciones con los resultados (por ejemplo, exponenciar).
+Cuando se ejecuta `glm()` lo más habitual es guardar los resultados como un objeto R. A continuación, se pueden mostrar los resultados en la consola utilizando `summary()` como se muestra a continuación, o realizar otras operaciones con los resultados (por ejemplo, exponenciar).
 
 Si necesitas ejecutar una regresión binomial negativa, puede utilizar el paquete **MASS**;  el cual contiene la función `glm.nb()` que utiliza la misma sintaxis que `glm()`. 
 
@@ -224,7 +224,7 @@ Para un recorrido por diferentes regresiones, consulta la [página de estadísti
 
 #### Univariante `glm()` {.unnumbered}
 
-En este ejemplo estamos evaluando la asociación entre diferentes categorías de edad y el resultado de muerte (codificado como 1 en la sección anterior "Preparación"). A continuación se muestra un modelo univariante de `outcome` por age_cat. Guardamos la salida del modelo como `model` y luego la imprimimos con `summary()` en la consola. Observe que las estimaciones proporcionadas son las *probabilidades logarítmicas (log odds)* y que el nivel de referencia es el primer nivel del factor `age_cat` ("0-4").
+En este ejemplo estamos evaluando la asociación entre diferentes categorías de edad y el resultado de muerte (codificado como 1 en la sección anterior "Preparación"). A continuación se muestra un modelo univariante de `outcome` por age_cat. Guardamos la salida del modelo como `model` y luego la imprimimos con `summary()` en la consola. Observa que las estimaciones proporcionadas son las *probabilidades logarítmicas (log odds)* y que el nivel de referencia es el primer nivel del factor `age_cat` ("0-4").
 
 ```{r}
 model <- glm(outcome ~ age_cat, family = "binomial", data = linelist)
@@ -246,7 +246,7 @@ En la mayoría de los casos, para su empleo posterior, es necesario hacer modifi
 
 Aquí demostramos cómo combinar los resultados del modelo con una tabla de recuento.
 
-1.  Obtenga las estimaciones de log odds ratio *exponenciadas* y los intervalos de confianza pasando el modelo a `tidy()` y estableciendo `exponentiate = TRUE` y `conf.int = TRUE`.
+1.  Obtén las estimaciones de log odds ratio *exponenciadas* y los intervalos de confianza pasando el modelo a `tidy()` y estableciendo `exponentiate = TRUE` y `conf.int = TRUE`.
 
 ```{r odds_base_single}
 
@@ -301,7 +301,7 @@ combined <- counts_table %>%           # begin with table of counts
   mutate(across(where(is.numeric), round, digits = 2)) ## round to 2 decimal places
 ```
 
-Este es el aspecto del dataframe combinado, impreso de forma agradable como una imagen con una función de **flextable**. En [Tablas para presentación](#tables-for-presentation) se explica cómo personalizar dichas tablas con **flextable**, o bien puede utilizar otros numerosos paquetes como **knitr** o **GT**. 
+Este es el aspecto del dataframe combinado, impreso de forma agradable como una imagen con una función de **flextable**. En [Tablas para presentación](#tables-for-presentation) se explica cómo personalizar dichas tablas con **flextable**, o bien puede utilizar otros paquetes como **knitr** o **GT**. 
 
 ```{r}
 combined <- combined %>% 
@@ -313,7 +313,7 @@ combined <- combined %>%
 
 A continuación presentamos un método que utiliza `glm()` y `tidy()`.  Para un enfoque más sencillo, véase la sección sobre **gtsummary**.
 
-Para ejecutar los modelos en varias variables de exposición para producir odds ratios univariantes (es decir, sin controlar entre sí), puede utilizar el enfoque siguiente. Utiliza `str_c()` de **stringr** para crear fórmulas univariantes (véase [Caracteres y cadenas](#characters-and-strings)), ejecuta la regresión `glm()` en cada fórmula, pasa cada resultado de `glm()` a `tidy()` y finalmente junta todos los resultados de los modelos resultantes con `bind_rows()` de **tidyr**. Este enfoque utiliza `map()` del paquete **purrr** para iterar - véase la página sobre [Iteración, bucles y listas](#iteration-loops-and-lists) para más información sobre esta herramienta.
+Para ejecutar los modelos en varias variables de exposición para producir odds ratios univariantes (es decir, sin controlar entre sí), se puede utilizar el enfoque siguiente. Utiliza `str_c()` de **stringr** para crear fórmulas univariantes (véase [Caracteres y cadenas](#characters-and-strings)), ejecuta la regresión `glm()` en cada fórmula, pasa cada resultado de `glm()` a `tidy()` y finalmente junta todos los resultados de los modelos resultantes con `bind_rows()` de **tidyr**. Este enfoque utiliza `map()` del paquete **purrr** para iterar - véase la página sobre [Iteración, bucles y listas](#iteration-loops-and-lists) para más información sobre esta herramienta.
 
 1.  Crea un vector de nombres de columnas de las variables explicativas. Ya lo tenemos como `explanatory_vars` de la sección de preparación de esta página.
 
@@ -409,7 +409,7 @@ DT::datatable(univ_tab_base, rownames = FALSE, options = list(pageLength = 5, sc
 
 <!-- ======================================================= -->
 
-### paquete **gtsummary** {#reg_gt_uni .unnumbered}
+### Paquete **gtsummary** {#reg_gt_uni .unnumbered}
 
 A continuación presentamos el uso de `tbl_uvregression()` del paquete **gtsummary**. Al igual que en la página sobre [Tablas descriptivas](#descriptive-tables), las funciones de gtsummary hacen un buen trabajo a la hora de realizar estadísticas *y* producir outputs con aspecto profesional. Esta función produce una tabla de resultados de regresión univariante.
 
@@ -443,7 +443,7 @@ Hay muchas modificaciones que se pueden hacer al output de esta tabla, como ajus
 
 ## Estratificado {#stratified}
 
-El análisis estratificado se está trabajando actualmente para **gtsummary**, esta página se actualizará a su debido tiempo.
+Actualmente, el análisis estratificado para **gtsummary** se está desarrollando. Esta página se actualizará a su debido tiempo.
 
 
 
@@ -452,9 +452,9 @@ El análisis estratificado se está trabajando actualmente para **gtsummary**, e
 Para el análisis multivariable, volvemos a presentar dos enfoques:
 
 * `glm()` y `tidy()`  
-* paquete **gtsummary** 
+* Paquete **gtsummary** 
 
-El flujo de trabajo es similar para cada uno de ellos y sólo el último paso de elaborar una tabla final es diferente.
+El flujo de trabajo es similar para cada uno de ellos, siendo diferente el último paso al elaborar una tabla final.
 
 
 ### Realizar análisis multivariable {.unnumbered}  
@@ -469,14 +469,14 @@ mv_reg <- glm(outcome ~ gender + fever + chills + cough + aches + vomit + age_ca
 summary(mv_reg)
 ```
 
-Si quieres incluir dos variables y una interacción entre ellas puede separarlas con un asterisco `*` en lugar de un `+`. Si sólo especifica la interacción, sepárelas con dos puntos `:`. Por ejemplo: 
+Si quieres incluir dos variables y una interacción entre ellas puede separarlas con un asterisco `*` en lugar de un `+`. Si sólo especifica la interacción, sepáralas con dos puntos `:`. Por ejemplo: 
 
 ```{r, eval=F}
 glm(outcome ~ gender + age_cat * fever, family = "binomial", data = linelist)
 ```
 
 
-*Opcionalmente*, puedes utilizar este código para aprovechar el vector predefinido de nombres de columnas y volver a crear el comando anterior utilizando `str_c()`. Esto puede ser útil si los nombres de sus variables explicativas cambian, o si no quiere escribirlos todos de nuevo.
+*Opcionalmente*, puedes utilizar este código para aprovechar el vector predefinido de nombres de columnas y volver a crear el comando anterior utilizando `str_c()`. Esto puede ser útil si los nombres de sus variables explicativas cambian, o si no quieres escribirlas todos de nuevo.
 
 ```{r mv_regression}
 
@@ -512,7 +512,7 @@ final_mv_reg <- mv_reg %>%
 ```
 
 
-También puedes desactivar la notación científica en tu sesión de R, para mayor claridad:
+Para mayor claridad, también puedes desactivar la notación científica en tu sesión de R. 
 
 ```{r}
 options(scipen=999)
@@ -571,9 +571,9 @@ tbl_merge(
 
 Una forma alternativa de combinar los resultados univariables y multivariables de `glm()`/`tidy()` es con las funciones join de **dplyr**.
 
-* Unir los resultados univariantes obtenidos anteriormente (`univ_tab_base`, que contiene los recuentos) con los resultados multivariables en formato tidy `mv_tab_base`
-* Utiliza `select()` para mantener sólo las columnas que queremos, especificar su orden y renombrarlas
-* Empleamos `round()` con dos decimales en todas las columnas que sean de tipo Double  
+* Unimos los resultados univariantes obtenidos anteriormente (`univ_tab_base`, que contiene los recuentos) con los resultados multivariables en formato tidy de `mv_tab_base`.
+* Utilizamos `select()` para mantener sólo las columnas que queremos, especificar su orden y renombrarlas
+* Empleamos `round()` con dos decimales en todas las columnas que sean de tipo "Double".  
 
 ```{r, warning=F, message=F}
 ## combine univariate and multivariable tables 
@@ -613,13 +613,13 @@ Consulta la página sobre [Conceptos básicos de ggplot](#ggplot-basics) si no e
 
 ### Paquete **ggplot2** {.unnumbered}
 
-Puedes construir un gráfico de bosque con `ggplot()` trazando elementos de los resultados de la regresión multivariable. Añada las capas de los gráficos utilizando estos "geoms":
+Puedes construir un gráfico de bosque con `ggplot()` trazando elementos de los resultados de la regresión multivariable. Añade las capas de los gráficos utilizando estos "geoms":
 
-* estimaciones con `geom_point()`
-* intervalos de confianza con `geom_errorbar()`
-* una línea vertical en OR = 1 con `geom_vline()`
+* Añadimos estimaciones con `geom_point()`
+* Añadimos intervalos de confianza con `geom_errorbar()`
+* Ploteamos una línea vertical en OR = 1 con `geom_vline()`
 
-Antes de empezar a plottear, es posible que sea necesario  utilizar `fct_relevel()` del paquete **forcats** para establecer el orden de las variables/niveles en el eje y. De no establecer un orden en las variables,  `ggplot()` podría mostrar las variables en orden alfanumérico, lo que no funcionaría bien para los valores de categoría de edad ("30" aparecería antes de "5"). Mira la página sobre [Factores](#factors) para más detalles.
+Antes de empezar a plotear, es posible que sea necesario  utilizar `fct_relevel()` del paquete **forcats** para establecer el orden de las variables/niveles en el eje y. De no establecer un orden en las variables,  `ggplot()` podría mostrar las variables en orden alfanumérico, lo que no funcionaría bien para los valores de categoría de edad ("30" aparecería antes de "5"). Mira la página sobre [Factores](#factors) para más detalles.
 
 ```{r ggplot_forest}
 
@@ -655,7 +655,7 @@ mv_tab_base %>%
 
 ### Paquetes **easystats** {.unnumbered}
 
-Una alternativa, si no deseas el nivel de precisión y control que proporciona **ggplot2**, es utilizar una combinación de paquetes **easystats**.
+Una alternativa, si no deseas el nivel de precisión y control que proporciona **ggplot2**, es utilizar la combinación de paquetes **easystats**.
 
 La función `model_parameters()` del paquete **parameters** hace el equivalente de la función `tidy()` del paquete **broom**. El paquete **see** acepta esos resultados y crea por defecto un forest plot, dándo como output un objeto `ggplot()`.
 
