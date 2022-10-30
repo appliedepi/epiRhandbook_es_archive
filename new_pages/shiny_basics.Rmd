@@ -1,7 +1,5 @@
 
-# Borrador. Dashboards con Shiny {#dashboards-with-shiny}
-
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
+# Dashboards con Shiny {#dashboards-with-shiny}
 
 Los Dashboards (cuadros de mando o tableros de control) suelen ser una buena forma de compartir los resultados de los análisis con otras personas. Elaborar un cuadro de mando con **shiny** requiere un conocimiento relativamente avanzado del lenguaje R, pero ofrece una personalización y unas posibilidades increíbles.
 
@@ -11,7 +9,7 @@ Los Dashboards (cuadros de mando o tableros de control) suelen ser una buena for
 
 Se recomienda que alguien que esté aprendiendo a usar Dashboards con **shiny** tenga buenos conocimientos de transformación y visualización de datos, y se sienta cómodo depurando código y escribiendo funciones. Trabajar con dashboards no es intuitivo cuando se empieza, y es difícil de entender a veces, pero es una gran habilidad para aprender y se hace mucho más fácil con la práctica.
 
-Esta página dará una breve visión general de cómo hacer Dashboards con **shiny** y sus extensiones. Para un método alternativo de hacer dashboards que es más rápido, más fácil, pero quizás menos personalizable, vea la página sobre **flextable** ([Dashboards with R Markdown](#dashboards-with-r-markdown)). 
+Esta página dará una breve visión general de cómo hacer Dashboards con **shiny** y sus extensiones. Para un método alternativo de hacer dashboards que es más rápido, más fácil, pero quizás menos personalizable, ver la página sobre **flextable** ([Dashboards with R Markdown](#dashboards-with-r-markdown)). 
 
 
 
@@ -20,7 +18,7 @@ Esta página dará una breve visión general de cómo hacer Dashboards con **shi
 
 ### Cargar paquetes {.unnumbered}  
 
-En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página [Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con `library()` de R **base**. Consulta la página [Fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 Comenzamos instalando el paquete R **Shiny**:
 
@@ -33,7 +31,7 @@ pacman::p_load("shiny")
 
 Si quieres seguir esta página, consulta esta sección del [Manual de descarga y datos](#data_shiny). Hay enlaces para descargar los scripts de R y los archivos de datos que producen la aplicación final de Shiny.
 
-Si intenta reconstruir la aplicación utilizando estos archivos, Ten en cuenta la estructura de carpetas del proyecto R que se crea en el transcurso de la demostración (por ejemplo, carpetas para "data" y para "funcs").  
+Si intentas reconstruir la aplicación utilizando estos archivos, ten en cuenta la estructura de carpetas del proyecto R que se crea en el transcurso de la demostración (por ejemplo, carpetas para "data" y para "funcs").  
 
 
 
@@ -94,7 +92,7 @@ shinyApp(ui = ui, server = server)
 ```
 
 
-Si abres este archivo, te darás cuenta de que hay dos objetos definidos: uno llamado `ui` (interfaz de usuario) y otro llamado `server` (servidor). Estos objetos *deben* ser definidos en *todas* las aplicaciones shiny y son fundamentales para la estructura de la propia aplicación. De hecho, la única diferencia entre las dos estructuras de archivos descritas anteriormente es que en la estructura 1, tanto `ui` como `server` están definidos en un solo archivo, mientras que en la estructura 2 están definidos en archivos separados. Nota: también podemos (y deberíamos si tenemos una aplicación más grande) tener otros archivos .R en nuestra estructura que podemos `source()` en nuestra aplicación.
+Si abres este archivo, te darás cuenta de que hay dos objetos definidos: uno llamado `ui` (interfaz de usuario) y otro llamado `server` (servidor). Estos objetos *deben* ser definidos en *todas* las aplicaciones shiny y son fundamentales para la estructura de la propia aplicación. De hecho, la única diferencia entre las dos estructuras de archivos descritas anteriormente es que en la estructura 1, tanto `ui` como `server` están definidos en un solo archivo, mientras que en la estructura 2 están definidos en archivos separados. Nota: también podemos (y deberíamos si tenemos una aplicación más grande) tener otros archivos .R en nuestra estructura que podemos llamar con `source()` desde nuestra aplicación.
 
 
 
@@ -112,14 +110,14 @@ El elemento de interfaz de usuario de una aplicación Shiny es, en un nivel bás
 
 Lo más importante que hay que entender sobre la UI es que *recibe entradas* del usuario y *muestra salidas* del servidor. No hay código *activo* que se ejecute en la UI *en ningún momento* - todos los cambios que se ven en la UI pasan por el servidor (más o menos). Así que tenemos que hacer nuestros gráficos, descargas, etc en el servidor
 
-El servidor de la app shiny es donde se ejecuta todo el código una vez que la aplicación se inicia. La forma en que esto funciona es un poco confusa. La función del servidor *reaccionará* efectivamente a la interfaz del usuario con la UI, y ejecutará trozos de código en respuesta. Si las cosas cambian en el servidor, estas serán pasadas de vuelta a la UI, donde los cambios pueden ser vistos. Es importante destacar que el código en el servidor se ejecutará *de forma no consecutiva* (o es mejor pensarlo así). Básicamente, cada vez que una entrada de la ui afecte a un trozo de código en el servidor, éste se ejecutará automáticamente, y se producirá y mostrará esa salida.
+El servidor de la app shiny es donde se ejecuta todo el código una vez que la aplicación se inicia. La forma en que esto funciona es un poco confusa. La función del servidor *reaccionará* efectivamente a la interfaz del usuario con la UI, y ejecutará trozos de código en respuesta. Si las cosas cambian en el servidor, estas serán pasadas de vuelta a la UI, donde pueden verse los cambios. Es importante destacar que el código en el servidor se ejecutará *de forma no consecutiva* (o es mejor pensarlo así). Básicamente, cada vez que una entrada de la ui afecte a un trozo de código en el servidor, éste se ejecutará automáticamente, y se producirá y mostrará esa salida.
 
 Probablemente todo esto suene muy abstracto por ahora, así que tendremos que sumergirnos en algunos ejemplos para tener una idea clara de cómo funciona realmente.
 
 
 ### Antes de empezar a crear una app {.unnumbered}
 
-Antes de empezar a construir una aplicación, es muy útil saber *qué* quieres construir. Dado que tu interfaz de usuario estará escrita en código, no puedes visualizar realmente lo que estás construyendo a menos que tengas como objetivo algo específico. Por esta razón, es inmensamente útil mirar muchos ejemplos de aplicaciones Shinys para tener una idea de lo que puedes hacer - ¡incluso mejor si puedes mirar el código fuente detrás de estas aplicaciones! Algunos de los mejores recursos para ello son:
+Antes de empezar a construir una aplicación, es muy útil saber *qué* quieres construir. Dado que tu interfaz de usuario estará escrita en código, no puedes visualizar realmente lo que estás construyendo a menos que tengas como objetivo algo específico. Por esta razón, es inmensamente útil mirar muchos ejemplos de aplicaciones Shiny para tener una idea de lo que puedes hacer - ¡incluso mejor si puedes mirar el código fuente detrás de estas aplicaciones! Algunos de los mejores recursos para ello son:
 
 * La [galería de aplicaciones de Rstudio](https://shiny.rstudio.com/gallery/)
 
@@ -128,7 +126,7 @@ Una vez que tengas una idea de lo que es posible, también es útil hacer un map
 
 ## Construir una interfaz de usuario {#building-a-ui}
 
-Cuando construimos nuestra aplicación, es más fácil trabajar en la interfaz de usuario (UI) primero para que podamos ver lo que estamos haciendo, y no arriesgarnos a que la aplicación falle debido a cualquier error del servidor. Como se mencionó anteriormente, a menudo es bueno utilizar una plantilla cuando se trabaja en la interfaz de usuario. Hay una serie de diseños estándar que se pueden utilizar con shiny que están disponibles en el paquete base de shiny, pero vale la pena señalar que también hay una serie de extensiones del paquete como `shinydashboard`. Utilizaremos un ejemplo del paquete base de shiny para empezar.
+Cuando construimos nuestra aplicación, es más fácil trabajar en la interfaz de usuario (UI) primero para que podamos ver lo que estamos haciendo, y no arriesgarnos a que la aplicación falle debido a cualquier error del servidor. Como se mencionó anteriormente, a menudo es bueno utilizar una plantilla cuando se trabaja en la interfaz de usuario. Hay una serie de diseños estándar que se pueden utilizar con shiny que están disponibles en el paquete base de shiny, pero vale la pena señalar que también hay una serie de extensiones del paquete como `shinydashboard`. Utilizaremos un ejemplo del paquete shiny básico para empezar.
 
 Una interfaz de usuario Shiny se define generalmente como una serie de funciones anidadas, en el siguiente orden
 
@@ -142,7 +140,7 @@ Una interfaz de usuario Shiny se define generalmente como una serie de funciones
      -  Los widgets suelen tener el estilo de `xxxInput()`, por ejemplo, `selectInput()`
      -  Las salidas suelen tener el estilo de `xxxOutput()`, por ejemplo, `plotOutput()`
      
-Vale la pena repetir que estos datos no se pueden visualizar fácilmente de forma abstracta, por lo que es mejor ver un ejemplo. Consideremos la posibilidad de crear una aplicación básica que visualice nuestros datos de recuento de instalaciones de malaria por distrito. Estos datos tienen muchos parámetros diferentes, por lo que sería estupendo que el usuario final pudiera aplicar algunos filtros para ver los datos por grupo de edad/distrito según tu criterio. Podemos utilizar un diseño Shiny muy simple para empezar - el diseño de la barra lateral. Se trata de un diseño en el que los widgets se colocan en una barra lateral a la izquierda, y el gráfico se coloca a la derecha.
+Vale la pena repetir que estos datos no se pueden visualizar fácilmente de forma abstracta, por lo que es mejor ver un ejemplo. Consideremos la posibilidad de crear una aplicación básica que visualice nuestros datos de recuento de instalaciones de malaria por distrito. Estos datos tienen muchos parámetros diferentes, por lo que sería estupendo que el usuario final pudiera aplicar algunos filtros para ver los datos por grupo de edad/distrito según su criterio. Podemos utilizar un diseño Shiny muy simple para empezar - el diseño de la barra lateral. Se trata de un diseño en el que los widgets se colocan en una barra lateral a la izquierda, y el gráfico se coloca a la derecha.
 
 Planifiquemos nuestra aplicación: podemos empezar con un selector que nos permita elegir el distrito donde queremos visualizar los datos, y otro que nos permita visualizar el grupo de edad que nos interesa. Con estos filtros pretendemos mostrar una epicurva que refleje estos parámetros. Para ello necesitamos:
 
@@ -204,15 +202,15 @@ ui <- fluidPage(
 ```
 
 
-Cuando app.R se ejecuta con el código de interfaz de usuario anterior (sin código activo en la parte del `server` de app.R), el diseño aparece con el siguiente aspecto: ten en cuenta que no habrá ningún gráfico si no hay un servidor que lo represente, ¡pero nuestras entradas están funcionando!
+Cuando se ejecuta app.R con el código de interfaz de usuario anterior (sin código activo en la parte del `server` de app.R), el diseño aparece con el siguiente aspecto: ten en cuenta que no habrá ningún gráfico si no hay un servidor que lo represente, ¡pero nuestras entradas están funcionando!
 
 ```{r, out.width = c('100%'), out.height = c('100%'), echo=F}
 knitr::include_graphics(here::here("images", "shiny", "simple_UI_view.png"))
 ```
 
-Esta es una buena oportunidad para discutir cómo funcionan los widgets - nota que cada widget está aceptando un `inputId`, una `label` (etiqueta`, y una serie de otras opciones que son específicas para el tipo de widget. Este `inputId` es extremadamente importante - estos son los IDs que se utilizan para pasar la información de la UI al servidor. Por esta razón, *deben ser únicos*. Deberías hacer un esfuerzo para nombrarlos algo sensato, y específico a lo que están interactuando en casos de aplicaciones más grandes.
+Esta es una buena oportunidad para discutir cómo funcionan los widgets - nota que cada widget está aceptando un `inputId`, una `label` (etiqueta), y una serie de otras opciones que son específicas para el tipo de widget. Este `inputId` es extremadamente importante - estos son los IDs que se utilizan para pasar la información de la UI al servidor. Por esta razón, *deben ser únicos*. Deberías hacer un esfuerzo para denominarlos con algo sensato, y específico a lo que están interactuando en casos de aplicaciones más grandes.
 
-Deberías leer la documentación cuidadosamente para conocer todos los detalles sobre lo que hace cada uno de estos widgets. Los widgets pasarán tipos específicos de datos al servidor dependiendo del tipo de widget, y esto debe ser entendido completamente. Por ejemplo, `selectInput()` pasará un tipo de carácter al servidor:
+Deberías leer la documentación cuidadosamente para conocer todos los detalles sobre lo que hace cada uno de estos widgets. Los widgets pasarán tipos específicos de datos al servidor dependiendo del tipo de widget, y esto debe entenderse completamente. Por ejemplo, `selectInput()` pasará un dato de tipo carácter al servidor:
 
 - Si seleccionamos *Spring* para el primer widget aquí, pasará el objeto carácter `"Spring"` al servidor.
 - Si seleccionamos dos elementos del menú desplegable, aparecerán como un vector de caracteres (por ejemplo, `c("Primavera", "Bolo")`).
@@ -222,27 +220,27 @@ Otros widgets pasarán diferentes tipos de objetos al servidor. Por ejemplo:
 - `numericInput()` pasará un objeto de tipo numérico al servidor
 - `checkboxInput()` pasará un objeto de tipo lógico al servidor (`TRUE` o `FALSE`)
 
-También vale la pena notar el *vector con nombre* que usamos para los datos de edad aquí. Para muchos widgets, el uso de un vector con nombre como las opciones mostrará los *nombres* del vector como las opciones de visualización, pero pasará el *valor* seleccionado del vector al servidor. Por ejemplo, aquí alguien puede seleccionar "15+" en el menú desplegable, y la interfaz de usuario pasará `"malaria_rdt_15"` al servidor, que resulta ser el nombre de la columna que nos interesa.
+También vale la pena tener en cuenta el *nombre del vector* que usaremos para los datos de edad aquí. Para muchos widgets, el uso de un vector para las opciones mostrará los *nombres* del vector como las opciones de visualización, pero pasará el *valor* seleccionado del vector al servidor. Por ejemplo, aquí alguien puede seleccionar "15+" en el menú desplegable, y la interfaz de usuario pasará `"malaria_rdt_15"` al servidor, que resulta ser el nombre de la columna que nos interesa.
 
-Hay un montón de widgets que puedes utilizar para hacer muchas cosas con tu aplicación. Los widgets también permiten cargar archivos en la aplicación y descargar resultados. También hay algunas excelentes extensiones de shiny que te dan acceso a más widgets que el shiny base - el paquete **shinyWidgets** es un gran ejemplo de esto. Para ver algunos ejemplos puedes consultar los siguientes enlaces:
+Hay un montón de widgets que puedes utilizar para hacer muchas cosas con tu aplicación. Los widgets también permiten cargar archivos en la aplicación y descargar resultados. También hay algunas excelentes extensiones de shiny que te dan acceso a más widgets que el shiny básico - el paquete **shinyWidgets** es un gran ejemplo de esto. Para ver algunos ejemplos puedes consultar los siguientes enlaces:
 
-- [Galería de widgets de Shiny base](https://shiny.rstudio.com/gallery/widget-gallery.html)
+- [Galería de widgets de Shiny](https://shiny.rstudio.com/gallery/widget-gallery.html)
 - [Galería de shinyWidgets](https://github.com/dreamRs/shinyWidgets)
 
 
 
 ## Cargar datos en nuestra app {#loading-data-into-our-app}
 
-El siguiente paso en el desarrollo de nuestra aplicación es poner en marcha el servidor. Para ello, sin embargo, tenemos que conseguir algunos datos en nuestra aplicación, y averiguar todos los cálculos que vamos a hacer. Una aplicación Shiny no es fácil de depurar, ya que a menudo no está claro de dónde provienen los errores, por lo que es ideal para obtener todo nuestro procesamiento de datos y código de visualización de trabajo antes de empezar a hacer el propio servidor.
+El siguiente paso en el desarrollo de nuestra aplicación es poner en marcha el servidor. Para ello, sin embargo, tenemos que conseguir algunos datos en nuestra aplicación, y averiguar todos los cálculos que vamos a hacer. Una aplicación Shiny no es fácil de depurar, ya que a menudo no está claro de dónde provienen los errores, por lo que es ideal desarrollar el código todo nuestro procesamiento de datos y visualización  antes de empezar a hacer el propio servidor.
 
-Así que dado que queremos hacer una aplicación que muestre curvas epi que cambien en base a la entrada del usuario, deberíamos pensar en qué código necesitaríamos para ejecutar esto en un script normal de R. Necesitaremos:
+Así que dado que queremos hacer una aplicación que muestre epicurvas que cambien en base a la entrada del usuario, deberíamos pensar en qué código necesitaríamos para ejecutar esto en un script normal de R. Necesitaremos:
 
 1.  Cargar nuestros paquetes
 2.  Cargar nuestros datos
 3.  Transformar nuestros datos
 4.  Desarrollar una *función* para visualizar nuestros datos en función de las entradas del usuario
 
-Esta lista es bastante sencilla, y no debería ser demasiado difícil de hacer. Ahora es importante pensar qué partes de este proceso deben hacerse una *sola vez* y qué partes deben *ejecutarse en respuesta a las entradas del usuario*. Esto se debe a que las aplicaciones Shinys generalmente ejecutan algún código antes de ejecutarse, que sólo se realiza una vez. Ayudará al rendimiento de nuestra aplicación si la mayor parte de nuestro código puede ser trasladado a esta sección. Para este ejemplo, sólo necesitamos cargar nuestros datos/paquetes y hacer transformaciones básicas una vez, así que podemos poner ese código *fuera del servidor*. Esto significa que lo único que necesitaremos en el servidor es el código para visualizar nuestros datos. Vamos a desarrollar todos estos componentes en un script primero. Sin embargo, ya que estamos visualizando nuestros datos con una función, también podemos poner el código *de la función fuera del servidor* para que nuestra función esté en el entorno cuando la aplicación se ejecute.
+Esta lista es bastante sencilla, y no debería ser demasiado difícil de hacer. Ahora es importante pensar qué partes de este proceso deben hacerse una *sola vez* y qué partes deben *ejecutarse en respuesta a las entradas del usuario*. Esto se debe a que las aplicaciones Shiny generalmente ejecutan algún código antes de ejecutarse, que sólo se realiza una vez. Ayudará al rendimiento de nuestra aplicación si la mayor parte de nuestro código puede ser trasladado a esta sección. Para este ejemplo, sólo necesitamos cargar nuestros datos/paquetes y hacer transformaciones básicas una vez, así que podemos poner ese código *fuera del servidor*. Esto significa que lo único que necesitaremos en el servidor es el código para visualizar nuestros datos. Vamos a desarrollar todos estos componentes en un script primero. Sin embargo, ya que estamos visualizando nuestros datos con una función, también podemos poner el código *de la función fuera del servidor* para que nuestra función esté en el entorno cuando la aplicación se ejecute.
 
 Primero vamos a cargar nuestros datos. Ya que estamos trabajando con un nuevo proyecto, y queremos limpiarlo, podemos crear un nuevo directorio llamado data, y añadir nuestros datos de malaria allí. Podemos ejecutar este código de abajo en un script de prueba que eventualmente borraremos cuando limpiemos la estructura de nuestra aplicación.
 
@@ -259,7 +257,7 @@ print(malaria_data)
 ```
 
 
-Será más fácil trabajar con estos datos si utilizamos estándares de datos ordenados, por lo que también debemos transformarlos en un formato de datos más largo, donde el grupo de edad es una columna, y los casos son otra columna. Podemos hacer esto fácilmente usando lo que hemos aprendido en la página de [Pivoteo de datos](#pivoting-data).
+Será más fácil trabajar con estos datos si utilizamos estándares de datos ordenados, por lo que también debemos transformarlos en un formato de datos más largo, donde el grupo de edad es una columna, y los casos son otra columna. Podemos hacer esto fácilmente usando lo que hemos aprendido en la página de [Pivotar datos](#pivoting-data).
 
 
 ```{r, echo = TRUE}
@@ -272,11 +270,11 @@ print(malaria_data)
 
 ```
 
-Y con esto hemos terminado de preparar nuestros datos! Esto tacha los puntos 1, 2 y 3 de nuestra lista de cosas a desarrollar para nuestro "script de prueba de R". La última tarea, y la más difícil, será construir una función para producir una epicurva basada en parámetros definidos por el usuario. Como se mencionó anteriormente, se *recomienda encarecidamente* que cualquier persona que aprenda a brillar primero mire la sección sobre la programación funcional ([Escribir funciones](#writing-functions-1)) para entender cómo funciona esto!
+Y con esto hemos terminado de preparar nuestros datos! Esto tacha los puntos 1, 2 y 3 de nuestra lista de cosas a desarrollar para nuestro "script de prueba de R". La última tarea, y la más difícil, será construir una función para producir una epicurva basada en parámetros definidos por el usuario. Como se mencionó anteriormente, se *recomienda encarecidamente* que cualquier persona que aprenda shimy primero mire la sección sobre la programación funcional ([Escribir funciones](#writing-functions-1)) para entender cómo funciona esto!
 
 Al definir nuestra función, puede ser difícil pensar en los parámetros que queremos incluir. Para la programación funcional con shiny, cada parámetro relevante tendrá generalmente un widget asociado a él, así que pensar en esto suele ser bastante fácil. Por ejemplo, en nuestra aplicación actual, queremos ser capaces de filtrar por distrito, y tener un widget para ello, por lo que podemos añadir un parámetro de distrito para reflejar esto. *No* tenemos ninguna funcionalidad de la aplicación para filtrar por centro (por ahora), así que no necesitamos añadir esto como parámetro. Empecemos haciendo una función con tres parámetros:
 
-1.  los datos básicos
+1.  Los datos básicos
 2.  El distrito de elección
 3.  El grupo de edad elegido
 
@@ -336,7 +334,7 @@ plot_epicurve <- function(data, district = "All", agegroup = "malaria_tot") {
 ```
 
 
-No entraremos en grandes detalles sobre esta función, ya que su funcionamiento es relativamente sencillo. Una cosa a tener en cuenta, sin embargo, es que manejamos los errores devolviendo `NULL` cuando de otro modo daría un error. Esto se debe a que cuando un servidor Shiny produce un objeto `NULL` en lugar de un objeto gráfico, ¡no se mostrará nada en la interfaz de usuario! Esto es importante, ya que de lo contrario los errores a menudo harán que tu aplicación deje de funcionar.
+No entraremos en grandes detalles sobre esta función, ya que su funcionamiento es relativamente sencillo. Una cosa a tener en cuenta, sin embargo, es que debemos gestionar los errores devolviendo `NULL` cuando de otro modo daría un error. Esto se debe a que cuando un servidor Shiny produce un objeto `NULL` en lugar de un objeto gráfico, ¡no se mostrará nada en la interfaz de usuario! Esto es importante, ya que de lo contrario los errores a menudo harán que la aplicación deje de funcionar.
 
 Otra cosa a tener en cuenta es el uso del operador `%in%` cuando se evalúa la entrada del `district`. Como se mencionó anteriormente, esto podría llegar como un vector de caracteres con múltiples valores, por lo que el uso de `%in%` es más flexible que, por ejemplo, `==`.
 
@@ -348,12 +346,12 @@ plot_epicurve(malaria_data, district = "Bolo", agegroup = "malaria_rdt_0-4")
 
 ```
 
-Con nuestra función funcionando, ahora tenemos que entender cómo todo esto va a encajar en nuestra Shiny aplicación. Hemos mencionado el concepto de *código de inicio* antes, pero vamos a ver cómo podemos incorporar esto en la estructura de nuestra aplicación. Hay dos maneras de hacerlo.
+Con nuestra función ya trabajando, ahora tenemos que entender cómo va a encajar todo esto en nuestra aplicación Shiny. Hemos mencionado el concepto de *código de inicio* antes, pero vamos a ver cómo podemos incorporar esto en la estructura de nuestra aplicación. Hay dos maneras de hacerlo.
 
 1.  Escribe este código en tu archivo *app.R* al principio del script (por encima de la interfaz de usuario), o
-2.  Crea un nuevo archivo en el directorio de tu aplicación llamado *global.R*, y pon el código de inicio en este archivo.
+2.  Crea un nuevo archivo en el directorio de tu aplicación llamado *global.R*, y pon el código de inicio en él.
 
-Vale la pena señalar en este punto que generalmente es más fácil, especialmente con aplicaciones más grandes, utilizar la segunda estructura de archivos, ya que permite separar su estructura de archivos de una manera sencilla. Vamos a desarrollar completamente este script global.R ahora. Esto es lo que podría parecer:
+Vale la pena señalar en este punto que generalmente es más fácil, especialmente con aplicaciones más grandes, utilizar la segunda estructura de archivos, ya que permite separar su estructura de una manera sencilla. Vamos a desarrollar completamente este script global.R ahora. Esto es lo que podría parecer:
 
 
 ```{r, eval = F}
@@ -430,9 +428,9 @@ plot_epicurve <- function(data, district = "All", agegroup = "malaria_tot") {
 ```
 
 
-Fácil! Una gran característica de shiny es que entenderá para qué sirven los archivos llamados *app.R*, *server.R*, *ui.R* y *global.R*, por lo que no es necesario conectarlos entre sí mediante ningún código. Así que sólo con tener este código en *global.R* en el directorio se ejecutará antes de que iniciemos nuestra app!
+Fácil! Una gran característica es qe shiny entenderá para qué sirven los archivos llamados *app.R*, *server.R*, *ui.R* y *global.R*, por lo que no es necesario conectarlos entre sí mediante ningún código. Así que sólo con tener este código en *global.R* en el directorio adecuado se ejecutará antes de que iniciemos nuestra app!
 
-También debemos tener en cuenta que mejoraría la organización de nuestra aplicación si movemos la función de trazado a tu propio archivo - esto será especialmente útil a medida que las aplicaciones se hacen más grandes. Para hacer esto, podríamos hacer otro directorio llamado *funcs*, y poner esta función en un archivo llamado *plot_epicurve.R.* Podríamos entonces leer esta función a través del siguiente comando en *global.R*
+También debemos tener en cuenta que mejoraría la organización de nuestra aplicación si movemos la función de dibujar a su propio archivo - esto será especialmente útil a medida que las aplicaciones se hacen más grandes. Para hacer esto, podríamos hacer otro directorio llamado *funcs*, y poner esta función en un archivo llamado *plot_epicurve.R.* Podríamos entonces leer esta función a través del siguiente comando en *global.R*
 
 ```{r, eval = F}
 
@@ -450,7 +448,7 @@ Ahora que tenemos la mayor parte de nuestro código, sólo tenemos que desarroll
 
 2.  Conductores reactivos - estos son objetos que existen *sólo* dentro del servidor Shiny. En realidad no los necesitamos para aplicaciones simples, pero producen objetos que sólo pueden ser vistos dentro del servidor, y utilizados en otras operaciones. Generalmente dependen de fuentes reactivas.
 
-3.  Puntos finales: son las salidas que se pasan del servidor a la interfaz de usuario. En nuestro ejemplo, esto sería la curva epi que estamos produciendo.
+3.  Puntos finales: son las salidas que se pasan del servidor a la interfaz de usuario. En nuestro ejemplo, esto sería la epicurva que estamos produciendo.
 
 Con esto en mente vamos a construir nuestro servidor paso a paso. Vamos a mostrar nuestro código de interfaz de usuario de nuevo aquí sólo para referencia:
 
@@ -528,14 +526,14 @@ server <- function(input, output, session) {
 ```
 
 
-El servidor para una aplicación simple como esta es en realidad bastante sencillo. Te darás cuenta de que el servidor es una función con tres parámetros - `input`, `output`, and `session` - esto no es tan importante para entender por ahora, pero es importante seguir esta configuración. En nuestro servidor sólo tenemos una tarea - esta procesa un gráfico basado en nuestra función que hicimos antes, y las entradas del servidor. Fíjate en que los nombres de los objetos de entrada y salida se corresponden exactamente con los de la interfaz de usuario.
+El servidor para una aplicación simple como esta es en realidad bastante sencillo. Te darás cuenta de que el servidor es una función con tres parámetros - `input`, `output`, and `session` - esto no es tan importante para entender por ahora, pero es importante seguir esta configuración. En nuestro servidor sólo tenemos una tarea - esta procesa un gráfico basado en la función que hicimos antes, y las entradas del servidor. Fíjate en que los nombres de los objetos de entrada y salida se corresponden exactamente con los de la interfaz de usuario.
 
-Para entender los fundamentos de cómo el servidor reacciona a las entradas del usuario, debe tener en cuenta que la salida sabrá (a través del paquete subyacente) cuando las entradas cambian, y volver a ejecutar esta función para crear un gráfico cada vez que cambian. Ten en cuenta que también utilizamos la función `renderPlot()` aquí - esta es una de una familia de funciones específicas del tipo que pasan esos objetos a una salida ui. Hay una serie de funciones que se comportan de manera similar, pero hay que asegurarse de que la función utilizada coincide con el tipo de objeto que se está pasando a la ui. Por ejemplo:
+Para entender los fundamentos de cómo el servidor reacciona a las entradas del usuario, debes tener en cuenta que la salida sabrá (a través del paquete subyacente) cuando las entradas cambian, y volver a ejecutar esta función para crear un gráfico cada vez que cambian. Ten en cuenta que aquí también utilizamos la función `renderPlot()` - esta es de una familia de funciones específicas del tipo que pasan esos objetos a una salida ui. Hay una serie de funciones que se comportan de manera similar, pero hay que asegurarse de que la función utilizada coincide con el tipo de objeto que se está pasando a la ui. Por ejemplo:
 
 - `renderText()` - enviar texto a la ui
 - `renderDataTable` - envía una tabla interactiva a la ui.
 
-Recuerde que estos también necesitan coincidir con la *función de* salida utilizada en la ui - así que `renderPlot()` se empareja con `plotOutput()`, y `renderText()` se empareja con `textOutput()`.
+Recuerda que estos también necesitan coincidir con la *función de* salida utilizada en la ui - así que `renderPlot()` se empareja con `plotOutput()`, y `renderText()` se empareja con `textOutput()`.
 
 Así que finalmente hemos hecho una aplicación que funciona! Podemos ejecutarla clicando el botón Ejecutar aplicación en la parte superior derecha de la ventana de script en Rstudio. Debes tener en cuenta que puedes elegir ejecutar tu aplicación en tu navegador por defecto (en lugar de Rstudio), lo que reflejará con mayor precisión el aspecto que tendrá la aplicación para otros usuarios.
 
@@ -558,14 +556,14 @@ knitr::include_graphics(here::here("images", "shiny", "listening.png"))
 
 ## Añadir más funcionalidad {#adding-more-functionality}
 
-En este punto tenemos finalmente una aplicación en funcionamiento, pero tenemos muy poca funcionalidad. Tampoco hemos rascado la superficie de lo que shiny puede hacer, ¡así que hay mucho más que aprender! Vamos a seguir construyendo nuestra aplicación actual añadiendo algunas características adicionales. Algunas cosas que podría ser bueno añadir podrían ser:
+En este punto tenemos finalmente una aplicación en funcionamiento, pero tenemos muy poca funcionalidad. Tampoco hemos rascado la superficie de lo que shiny puede hacer, ¡así que hay mucho más que aprender! Vamos a seguir construyendo nuestra aplicación actual añadiendo algunas características adicionales. Algunas cosas que podría ser bueno añadir:
 
 1.  Algunos textos explicativos
 2.  Un botón de descarga para nuestra gráfica - esto proporcionaría al usuario una versión de alta calidad de la imagen que está generando en la aplicación
 3.  Un selector de instalaciones específicas
 4.  Otra página del panel de control: podría mostrar una tabla con nuestros datos.
 
-Esto es mucho para agregar, pero podemos usarlo para aprender sobre un montón de diferentes características de Shiny en el camino. Hay mucho que aprender sobre Shiny (puede ser *muy* avanzado, pero es de esperar que una vez que los usuarios tienen una mejor idea de cómo usarlo pueden llegar a ser más cómodo usando fuentes de aprendizaje externas también).
+Esto es mucho para agregar, pero podemos usarlo para aprender en el camino un montón de diferentes características de Shiny. Hay mucho que aprender sobre Shiny (puede ser *muy* avanzado, pero es de esperar que una vez que los usuarios tienen una mejor idea de cómo usarlo pueden llegar a ser más cómodo usando fuentes de aprendizaje externas también).
 
 ### Añadir texto estático {.unnumbered} 
 
@@ -576,12 +574,12 @@ HTML y css son lenguajes que intervienen explícitamente en el diseño de la int
 - `h1()` - esta es una etiqueta de *encabezado*, que hará que el texto adjunto sea automáticamente más grande, y cambiará los valores predeterminados en cuanto a la fuente, el color, etc. (dependiendo del tema general de tu aplicación). Puedes acceder a subtítulos *cada vez más pequeños* con `h2()` hasta `h6()` también. El uso es así:
   * `h1("mi cabecera - sección 1")`
 
-- `p()` - esta es una etiqueta de *párrafo*, que hará que el texto encerrado sea similar al texto de un cuerpo de texto. Este texto se envolverá automáticamente, y será de un tamaño relativamente pequeño (los pies de página podrían ser más pequeños, por ejemplo.) Piense en ello como el cuerpo de texto de un documento de Word. El uso es así:
+- `p()` - esta es una etiqueta de *párrafo*, que hará que el texto encerrado sea similar al texto de un cuerpo de texto. Este texto se envolverá automáticamente, y será de un tamaño relativamente pequeño (los pies de página podrían ser más pequeños, por ejemplo). Piensa en ello como el cuerpo de texto de un documento de Word. El uso es así:
   * `p("Este es un cuerpo de texto más grande donde explico la función de mi aplicación")`
 
-- `tags$b()` y` tags$i()` - se utilizan para crear `tags$b()` y `tags$i()` en cursiva con el texto que se incluya.
+- `tags$b()` y` tags$i()` - se utilizan para poner `tags$b()` en negrita (bold) y `tags$i()` en cursiva el texto que se incluya entre los paréntesis.
 
-- `tags$ul()`, `tags$ol()` y `tags$li()` - son etiquetas utilizadas para crear *listas*. Todas ellas se utilizan dentro de la sintaxis siguiente, y permiten al usuario crear una lista ordenada (`tags$ol()`; es decir, numerada) o desordenada (`tags$ul()`, es decir, con viñetas). `tags$li()` se utiliza para denotar los elementos de la lista, independientemente del tipo de lista que se utilice. p. ej:
+- `tags$ul()`, `tags$ol()` y `tags$li()` - son etiquetas utilizadas para crear *listas*. Todas ellas se utilizan dentro de la sintaxis siguiente, y permiten al usuario crear una lista ordenada (`tags$ol()`; es decir, numerada) o desordenada (`tags$ul()`, es decir, con viñetas). `tags$li()` se utiliza para marcar los elementos de la lista, independientemente del tipo de lista que se utilice. p. ej:
 
 ```{r, eval = F}
 
@@ -677,7 +675,7 @@ knitr::include_graphics(here::here("images", "shiny", "app_text_view.png"))
 
 ### Añadir un enlace {.unnumbered}
 
-Para añadir un enlace a una página web, utiliza `tags$a()` con el enlace y el texto a mostrar como se muestra a continuación. Para tener como un párrafo independiente, póngalo dentro de `p()`. Para tener sólo algunas palabras de una frase enlazada, divida la frase en partes y utiliza `tags$a()` para la parte hipervinculada. Para que el enlace se abra en una *nueva* ventana del navegador, añada `target = "_blank"` como argumento.
+Para añadir un enlace a una página web, utiliza `tags$a()` con el enlace y el texto a mostrar como se muestra a continuación. Para tener como un párrafo independiente, escríbelo dentro de `p()`. Para tener sólo algunas palabras de una frase enlazada, divide la frase en partes y utiliza `tags$a()` para la parte hipervinculada. Para que el enlace se abra en una *nueva* ventana del navegador, añade `target = "_blank"` como argumento.
 
 ```{r, eval=F}
 tags$a(href = "www.epiRhandbook.com", "Visit our website!")
@@ -791,11 +789,11 @@ server <- function(input, output, session) {
 ```
 
 
-Observa que la función `content` siempre toma un argumento `file`, que ponemos donde se especifica el nombre del archivo de salida. También puedes notar que estamos repitiendo código aquí - estamos usando nuestra función `plot_epicurve()` dos veces en este servidor, una para la descarga y otra para la imagen mostrada en la aplicación. Aunque esto no afecta masivamente al rendimiento, significa que el código para generar este gráfico tendrá que ejecutarse cuando el usuario cambie los widgets que especifican el distrito y el grupo de edad, *y* de nuevo cuando quiera descargar el gráfico. En aplicaciones más grandes, decisiones subóptimas como ésta ralentizarán cada vez más las cosas, así que es bueno aprender a hacer nuestra aplicación más eficiente en este sentido. Lo que tendría más sentido es si tuviéramos una forma de ejecutar el código de la epicurva cuando los distritos/grupos de edad son cambios, *y dejar que eso sea utilizado por* las funciones `renderPlot()` y `downloadHandler()`. Aquí es donde entran los conductores reactivos!
+Observa que la función `content` siempre toma un argumento `file`, que ponemos donde se especifica el nombre del archivo de salida. También puedes notar que estamos repitiendo código aquí - estamos usando nuestra función `plot_epicurve()` dos veces en este servidor, una para la descarga y otra para la imagen mostrada en la aplicación. Aunque esto no afecta masivamente al rendimiento, significa que el código para generar este gráfico tendrá que ejecutarse cuando el usuario cambie los widgets que especifican el distrito y el grupo de edad, *y* de nuevo cuando quiera descargar el gráfico. En aplicaciones más grandes, decisiones subóptimas como ésta ralentizarán cada vez más las cosas, así que es bueno aprender a hacer nuestra aplicación más eficiente en este sentido. Lo que tendría más sentido es si tuviéramos una forma de ejecutar el código de la epicurva cuando los distritos/grupos de edad cambien, *y dejar que eso sea utilizado por* las funciones `renderPlot()` y `downloadHandler()`. Aquí es donde entran los conductores reactivos!
 
 Los conductores reactivos son objetos que se crean en el servidor shiny de forma *reactiva*, pero no se emiten - sólo pueden ser utilizados por otras partes del servidor. Hay varios tipos de conductores *reactivos*, pero vamos a repasar los dos básicos.
 
-1. `reactive()` - este es el conductor reactivo más básico - reaccionará siempre que cualquier entrada utilizada dentro de él cambie (por lo que nuestros widgets de distrito/grupo de edad)
+1. `reactive()` - este es el conductor reactivo más básico - reaccionará siempre que cualquier entrada utilizada dentro de él cambie (por  nuestros widgets de distrito/grupo de edad)
 2. `eventReactive()` - este conductor rectivo funciona igual que `reactive()`, excepto que el usuario puede especificar qué entradas hacen que se vuelva a ejecutar. Esto es útil si tu conductor reactivo tarda mucho en procesar, pero esto se explicará más adelante.
 
 Veamos los dos ejemplos:
@@ -820,7 +818,7 @@ malaria_plot_er <- eventReactive(input$select_district, {
 
 ```
 
-Cuando usamos la configuración de `eventReactive()`, podemos especificar qué entradas hacen que se ejecute este trozo de código - esto no nos es muy útil por el momento, así que podemos dejarlo por ahora. Ten en cuenta que puede incluir múltiples entradas con `c()`
+Cuando usamos la configuración de `eventReactive()`, podemos especificar qué entradas hacen que se ejecute este trozo de código - esto no nos es muy útil por el momento, así que podemos dejarlo por ahora. Ten en cuenta que puedes incluir múltiples entradas con `c()`
 
 Veamos cómo podemos integrar esto en el código de nuestro servidor:
 
@@ -858,7 +856,7 @@ server <- function(input, output, session) {
 
 ```
 
-Puedes ver que sólo estamos llamando a la salida de nuestro reactivo que hemos definido en nuestras funciones de descarga y representación gráfica. Una cosa que hay que tener en cuenta y que suele confundir a la gente es que hay que utilizar las salidas de los reactivos como si fueran funciones, por lo que *hay que añadir paréntesis vacíos al final de los mismos (es* decir, `malaria_plot()` es correcto, y `malaria_plot` no lo es). Ahora que hemos añadido esta solución nuestra aplicación es un poco más ordenada, más rápida y más fácil de cambiar ya que todo nuestro código que ejecuta la función epicurve está en un solo lugar.
+Puedes ver que sólo estamos llamando a la salida del reactivo que hemos definido en nuestras funciones de descarga y representación gráfica. Una cosa que hay que tener en cuenta y que suele confundir a la gente es que hay que utilizar las salidas de los reactivos como si fueran funciones, por lo que *hay que añadir paréntesis vacíos al final de los mismos* (es decir, `malaria_plot()` es correcto, y `malaria_plot` no lo es). Ahora que hemos añadido esta solución nuestra aplicación es un poco más ordenada, más rápida y más fácil de cambiar ya que todo el código que ejecuta la función epicurve está en un solo lugar.
 
 
 ```{r, echo=F}
@@ -1070,7 +1068,7 @@ Al igual que las funciones reactivas, hay dos tipos de funciones de observador, 
 1.  `observe()` - esta función se ejecuta cada vez que cambian las entradas utilizadas dentro de ella
 2.  `observeEvent()` - esta función se ejecuta cuando cambia una entrada *especificada por el usuario*
 
-También necesitamos entender las funciones proporcionadas por Shiny que actualizan los widgets. Estas son bastante sencillas de ejecutar - primero toman el objeto `sesion` de la función del servidor (esto no necesita ser entendido por ahora), y luego el `inputId` de la función a ser cambiada. Luego pasamos las nuevas versiones de todos los parámetros que ya son tomados por `selectInput()` - estos serán actualizados automáticamente en el widget.
+También necesitamos entender las funciones proporcionadas por Shiny que actualizan los widgets. Estas son bastante sencillas de ejecutar - primero toman el objeto `session` de la función del servidor (esto no necesita ser entendido por ahora), y luego el `inputId` de la función a ser cambiada. Luego pasamos las nuevas versiones de todos los parámetros que ya son tomados por `selectInput()` - estos serán actualizados automáticamente en el widget.
 
 Veamos un ejemplo aislado de cómo podríamos utilizar esto en nuestro servidor. Cuando el usuario cambia de distrito, queremos filtrar nuestra lista de instalaciones por distrito, y actualizar las opciones para que *sólo reflejen las que están disponibles en ese distrito* (y una opción para todas las instalaciones)
 
@@ -1350,7 +1348,7 @@ Sin embargo, si vamos a publicar la aplicación en línea, tenemos que hacer un 
 
 - _RStudio Connect_: es una versión mucho más potente de un servidor de R, que puede realizar muchas operaciones, incluida la publicación de aplicaciones Shinys. Sin embargo, es más difícil de usar y menos recomendable para los usuarios noveles.
 
-Para los propósitos de este documento, utilizaremos *shinyapps.io*, ya que es más fácil para los usuarios de primera vez. Puedes hacer una cuenta gratuita aquí para empezar - también hay diferentes planes de precios para los licesnses de los servidores si es necesario. Cuantos más usuarios esperes tener, más caro tendrá que ser tu plan de precios, así que tenlo en cuenta. Si quieres crear algo para un pequeño grupo de personas, una licencia gratuita puede ser perfectamente adecuada, pero una aplicación de cara al público puede necesitar más licencias.
+Para los propósitos de este documento, utilizaremos *shinyapps.io*, ya que es más fácil para los usuarios noveles. Puedes hacer una cuenta gratuita aquí para empezar - también hay diferentes planes de precios para las licecias de los servidores si es necesario. Cuantos más usuarios esperes tener, más caro tendrá que ser tu plan de precios, así que tenlo en cuenta. Si quieres crear algo para un pequeño grupo de personas, una licencia gratuita puede ser perfectamente adecuada, pero una aplicación de cara al público puede necesitar más licencias.
 
 Primero debemos asegurarnos de que nuestra aplicación es adecuada para publicar en un servidor. En tu aplicación, debes reiniciar tu sesión de R, y asegurarte de que se ejecuta sin ejecutar ningún código extra. Esto es importante, ya que una aplicación que requiere la carga de paquetes, o la lectura de datos no definidos en el código de tu aplicación no se ejecutará en un servidor. También ten en cuenta que no puedes tener rutas de archivo *explícitas* en tu aplicación - éstas serán inválidas en la configuración del servidor - el uso del paquete here resuelve muy bien este problema. Por último, si estás leyendo datos de una fuente que requiere autenticación de usuario, como los servidores de tu organización, esto no funcionará generalmente en un servidor. Tendrás que ponerte en contacto con tu departamento de TI para averiguar cómo poner en la lista blanca el Shiny servidor.
 
@@ -1369,7 +1367,7 @@ Hasta ahora, hemos cubierto muchos aspectos de shiny, y apenas hemos arañado la
 
 ## Paquetes de extensión recomendados {#recommended-extension-packages}
 
-A continuación se presenta una selección de extensiones de shiny de alta calidad que pueden ayudarle a sacar mucho más provecho del brillo. Sin ningún orden en particular:
+A continuación se presenta una selección de extensiones de shiny de alta calidad que pueden ayudarte a sacar mucho más provecho de shiny. Sin ningún orden en particular:
 
 * **shinyWidgets** - este paquete ofrece muchos más widgets que pueden ser utilizados en tu aplicación. Ejecuta  `shinyWidgets::shinyWidgetsGallery()` para ver una selección de los widgets disponibles con este paquete. Mira los ejemplos [aquí](https://github.com/dreamRs/shinyWidgets)
 
@@ -1377,14 +1375,14 @@ A continuación se presenta una selección de extensiones de shiny de alta calid
 
 * **shinydashboard** - este paquete expande masivamente la ui disponible que puede ser usada en shiny, específicamente permitiendo al usuario crear un dashboard complejo con una variedad de diseños complejos. Consulta más [aquí](https://rstudio.github.io/shinydashboard/)
 
-* **shinydashboardPlus**: ¡obtenga aún más funciones del marco de trabajo **de shinydashboard**! Puedes ver más  [aquí](https://rinterface.github.io/shinydashboardPlus/articles/shinydashboardPlus.html)
+* **shinydashboardPlus**: ¡aún más funciones del marco de trabajo de **shinydashboard**! Puedes ver más  [aquí](https://rinterface.github.io/shinydashboardPlus/articles/shinydashboardPlus.html)
 
 * **shinythemes** - ¡cambia el tema css por defecto de tu app shiny con una amplia gama de plantillas preestablecidas!  [Más aquí](https://rstudio.github.io/shinythemes/)
 
 
 También hay una serie de paquetes que pueden utilizarse para crear resultados interactivos compatibles con Shiny.
 
-* **DT** está semi-incorporado en base-shiny, pero proporciona un gran conjunto de funciones para crear tablas interactivas.
+* **DT** está semi-incorporado en shinybásico, pero proporciona un gran conjunto de funciones para crear tablas interactivas.
 
 * **plotly** es un paquete para crear gráficos interactivos que el usuario puede manipular en la aplicación. También puede convertir sus gráficos en versiones interactivas mediante `plotly::ggplotly()`. Como alternativas, **dygraphs** y **highcharter** son también excelentes.
 
