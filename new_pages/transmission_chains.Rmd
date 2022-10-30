@@ -1,7 +1,5 @@
 
-# Borrador. Cadenas de transmisión {#transmission-chains}
-
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
+# Cadenas de transmisión {#transmission-chains}
 
 <!-- ======================================================= -->
 ## Resumen {#overview-7}
@@ -97,7 +95,7 @@ pacman::p_install_gh("reconhub/epicontacts@timeline")
 
 ### Importar datos {.unnumbered}
 
-Importamos el conjunto de datos de casos de una epidemia de ébola simulada. Si desea descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página de [descargando el manual y los datos](#download-handbook-and-data). El conjunto de datos se importa utilizando la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos.
+Importamos el conjunto de datos de casos de una epidemia de ébola simulada. Si deseas descargar los datos para seguirlos paso a paso, consulta las instrucciones en la página de [descargando el manual y los datos](#download-handbook-and-data). El conjunto de datos se importa utilizando la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos.
 
 ```{r, echo=F}
 # import the linelist into R
@@ -140,7 +138,7 @@ contacts <- linelist %>%
   drop_na(infector)
 ```
 
-Ahora podemos crear el objeto **epicontactos** utilizando la función `make_epicontacts`. Necesitamos especificar qué columna del listado apunta al identificador único del caso, así como qué columnas de los contactos apuntan a los identificadores únicos de los casos involucrados en cada enlace. Estos enlaces son direccionales en el sentido de que la infección va *del* infector *al* caso, por lo que necesitamos especificar los argumentos `from` y `to`. Por lo tanto, también establecemos el argumento `directed` a `TRUE`, que afectará a las operaciones futuras.
+Ahora podemos crear el objeto **epicontacts** utilizando la función `make_epicontacts`. Necesitamos especificar qué columna del listado apunta al identificador único del caso, así como qué columnas de los contactos apuntan a los identificadores únicos de los casos involucrados en cada enlace. Estos enlaces son direccionales en el sentido de que la infección va *del* infector *al* caso, por lo que necesitamos especificar los argumentos `from` y `to`. Por lo tanto, también establecemos el argumento `directed` a `TRUE`, que afectará a las operaciones futuras.
 
 ```{r transmission_chains_create_epicontacts,}
 ## generate epicontacts object
@@ -226,7 +224,7 @@ length(get_id(epic, "common"))
 <!-- ======================================================= -->
 ## Visualización {#visualization}
 
-### Trazado básico {.unnumbered}
+### Representación básica {.unnumbered}
 
 Todas las visualizaciones de los objetos **epicontacts** son manejadas por la función `plot`. En primer lugar, filtraremos el objeto **epicontacts** para incluir solo los casos con fechas de inicio en junio de 2014 utilizando la función de subconjunto, y solo incluiremos los contactos vinculados a esos casos utilizando la función `thin`.
 	
@@ -250,13 +248,13 @@ plot(
 )
 ```
 
-Puedes mover los nodos arrastrándolos, pasar por encima de ellos para obtener más información y clicar en ellos para resaltar los casos conectados.
+Puedes mover los nodos arrastrándolos, pasar por encima de ellos para obtener más información y clicar sobre ellos para resaltar los casos conectados.
 
 Hay un gran número de argumentos para modificar este gráfico. Aquí cubriremos los principales, pero consulta la documentación a través de `?vis_epicontacts` (la función a la que se llama cuando se utiliza plot en un objeto **epicontacts**) para obtener una descripción completa de los argumentos de la función.
 
 #### Visualizar los atributos de los nodos {.unnumbered}
 
-El color del nodo, la forma del nodo y el tamaño del nodo se pueden asignar a una columna determinada en linelist utilizando los argumentos `node_color`, `node_shape` y `node_size`. Esto es similar a la sintaxis `aes` que puede reconocer de **ggplot2**.
+El color, la forma y el tamaño del nodo se pueden asignar a una columna determinada en linelist utilizando los argumentos `node_color`, `node_shape` y `node_size`. Esto es similar a la sintaxis `aes` que puede reconocer **ggplot2**.
 
 Los colores, formas y tamaños específicos de los nodos pueden especificarse de la siguiente manera:
 
@@ -315,7 +313,7 @@ plot(
 
 ### Eje temporal {.unnumbered}
 
-También podemos visualizar la red a lo largo de un eje temporal asignando el argumento `x_axis` a una columna del listado. En el ejemplo siguiente, el eje-x representa la fecha de inicio de los síntomas. También hemos especificado el argumento `arrow_size` para asegurarnos de que las flechas no son demasiado grandes, y hemos establecido `label = FALSE` para que la figura esté menos recargada.
+También podemos visualizar la red a lo largo de un eje temporal asignando el argumento `x_axis` a una columna del listado. En el ejemplo siguiente, el eje-x representa la fecha de inicio de los síntomas. También hemos especificado el argumento `arrow_size` para asegurarnos que las flechas no son demasiado grandes, y hemos establecido `label = FALSE` para que la figura esté menos recargada.
 
 ```{r transmission_chains_x_axis,}
 plot(
@@ -534,7 +532,7 @@ Por ejemplo, podemos ver que sólo el 57% de los contactos tienen ambos casos en
 
 ### Características de los pares {.unnumbered}
 
-La función `get_pairwise()` permite procesar la(s) variable(s) del listado según cada par de los datos de contactos. En el siguiente ejemplo, la fecha de inicio de la enfermedad se extrae del listado para calcular la diferencia entre la fecha de inicio de la enfermedad para cada par. El valor que se obtiene de esta comparación representa el **intervalo de serie (si)**.
+La función `get_pairwise()` permite procesar la(s) variable(s) del listado según cada par de los datos de contactos. En el siguiente ejemplo, la fecha de inicio de la enfermedad se extrae del listado para calcular la diferencia entre la fecha de inicio de la enfermedad para cada par. El valor que se obtiene de esta comparación representa el **intervalo de serie** (si).
 
 ```{r transmission_chains_pairwise,}
 si <- get_pairwise(epic, "date_onset")   
@@ -573,7 +571,7 @@ ggplot(clust, aes(cluster_size)) +
   )
 ```
 
-Veamos los clusters más grandes. Para ello, añadimos la información de los clústeres al objeto `epicontacts` y luego lo subconjuntamos para mantener sólo los clústers más grandes:
+Veamos los clusters más grandes. Para ello, añadimos la información de los clústers al objeto `epicontacts` y luego lo subconjuntamos para mantener sólo los clústers más grandes:
 
 ```{r transmission_chains_cluster_2,}
 epic <- get_clusters(epic)

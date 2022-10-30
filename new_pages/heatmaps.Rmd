@@ -1,9 +1,7 @@
 
 # Gráficos de calor {#heat-plots}
 
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
-
-Los gráficos de calor, también conocidos como "mapas de calor" o "mosaicos de calor", pueden ser visualizaciones útiles cuando se trata de mostrar 3 variables (eje x, eje y y relleno). A continuación mostramos dos ejemplos:
+Los gráficos de calor, también conocidos como "Heatmaps", o mapas de calor" o "mosaicos de calor", pueden ser visualizaciones útiles cuando se trata de mostrar 3 variables (eje-x, eje-y y relleno). A continuación mostramos dos ejemplos:
 
 * Una matriz visual de eventos de transmisión por edad ("quién infectó a quién")
 * Seguimiento de las métricas de información en muchas instalaciones/jurisdicciones a lo largo del tiempo
@@ -25,7 +23,7 @@ knitr::include_graphics(here::here("images", "heat_tile.png"))
 
 ### Cargar paquetes {.unnumbered}  
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r}
 pacman::p_load(
@@ -51,7 +49,7 @@ Los mapas de calor pueden ser útiles para visualizar matrices. Un ejemplo es la
 
 Ten en cuenta que la página [Rastreo de contactos](#contact-tracing-1) contiene otro ejemplo de elaboración de una matriz de contactos del mapa de calor, utilizando unos datos diferentes (quizás más sencillo) en el que las edades de los casos y sus fuentes están perfectamente alineadas en la misma fila del dataframe. Estos mismos datos se utilizan para hacer un mapa de *densidad* en la página [Consejos de ggplot](#ggplot-tips). Este ejemplo comienza a partir de `linelist`  y, por lo tanto, implica una considerable manipulación de los datos antes de lograr un dataframe ploteable. Así que hay muchos escenarios para elegir...
 
-Partimos de la lista de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar `linelist` "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importe sus datos con la función `import()` del paquete **rio** (acepta muchos tipos de archivos como .xlsx, .rds, .csv - vea la página de [importación y exportación](#import-and-export) para más detalles).
+Partimos de la lista de casos de una epidemia de ébola simulada. Si quieres seguir el proceso, [clica para descargar `linelist` "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (acepta muchos tipos de archivos como .xlsx, .rds, .csv - vea la página de [importación y exportación](#import-and-export) para más detalles).
 
 A continuación se muestran las primeras 50 filas del listado para su demostración:
 
@@ -160,7 +158,7 @@ table(cases = ages_complete$case_age_cat,
 ```
 
 
-Podemos convertir esta tabla en un dataframe con `data.frame()` de R **base**, que también la convierte automáticamente al formato "long", que es el deseado para el `ggplot()`. Las primeras filas se muestran a continuación.
+Podemos convertir esta tabla en un dataframe con `data.frame()` de R **base**, que también la convierte automáticamente al formato "long", que es el deseado por `ggplot()`. Las primeras filas se muestran a continuación.
 
 ```{r}
 long_counts <- data.frame(table(
@@ -195,10 +193,10 @@ DT::datatable(head(long_prop, 50), rownames = FALSE, options = list(pageLength =
 Ahora, finalmente, podemos crear el gráfico de calor con el paquete **ggplot2**, utilizando la función `geom_tile()`. Consulta la página [Consejos de ggplot](#ggplot-tips) para conocer más ampliamente las escalas de color/relleno, especialmente la función `scale_fill_gradient()`.
 
 * En la estética `aes()` de `geom_tile()` establece la x y la y como la edad del caso y la edad del infector
-* También en `aes()` establezca el argumento `fill = ` en la columna `Freq` - este es el valor que se convertirá en un color de mosaico
-* Establece un color e escala con `scale_fill_gradient()` - puedes especificar los colores high/low
+* También en `aes()` establece el argumento `fill = ` en la columna `Freq` - este es el valor que se convertirá en un color de mosaico
+* Establece un color de escala con `scale_fill_gradient()` - puedes especificar los colores high/low
   * Ten en cuenta que `scale_color_gradient()` es diferente. En este caso quieres que rellene
-* Dado que el color se hace a través de "fill", puede utilizar el argumento `fill = ` en `labs()` para cambiar el título de la leyenda  
+* Dado que el color se hace a través de "fill", puedes utilizar el argumento `fill = ` en `labs()` para cambiar el título de la leyenda  
 
 ```{r}
 ggplot(data = long_prop)+       # use long data, with proportions as Freq
@@ -265,7 +263,7 @@ Para ello, realizaremos los siguientes pasos de gestión de datos:
      + Suma de los casos de paludismo notificados por el centro-semana (sólo por interés)
      + Número de días *únicos* en la semana de la instalación para los que hay datos reportados
      + **Porcentaje de los 7 días por instalación-semana para los que se comunicaron datos**
-5.  El dataframe se une con `right_join()` a una lista exhaustiva de todas las posibles combinaciones de semanas de instalaciones, para que el conjunto de datos esté completo. La matriz de todas las combinaciones posibles se crea aplicando `expand()` a esas dos columnas del dataframe tal y como se encuentra en ese momento en la cadena de tuberías (representada por `.`). Como se utiliza un right_join(), se mantienen todas las filas del dataframe de `expand()` y se añaden a `agg_weeks` si es necesario. Estas nuevas filas aparecen con valores resumidos `NA` (missing). 
+5.  El dataframe se une con `right_join()` a una lista exhaustiva de todas las posibles combinaciones de semanas de instalaciones, para que el conjunto de datos esté completo. La matriz de todas las combinaciones posibles se crea aplicando `expand()` a esas dos columnas del dataframe tal y como se encuentra en ese momento en la cadena de pipes (representada por `.`). Como se utiliza un right_join(), se mantienen todas las filas del dataframe de `expand()` y se añaden a `agg_weeks` si es necesario. Estas nuevas filas aparecen con valores resumidos `NA` (missing). 
 
 
 A continuación lo mostramos paso a paso:
@@ -302,7 +300,7 @@ DT::datatable(head(agg_weeks,30), rownames = FALSE, options = list(pageLength = 
 
 Ahora agrupamos los datos en semanas de instalaciones y los resumimos para producir estadísticas por  `facility-week`. Consulta la página sobre [tablas descriptivas](#descriptive-tables) para obtener consejos. La agrupación en sí misma no cambia el dataframe, pero afecta a la forma en que se calculan las estadísticas de resumen posteriores.
 
-A continuación se muestran las filas superiores. Observe cómo las columnas han cambiado completamente para reflejar las estadísticas de resumen deseadas. Cada fila refleja una `facility-week`.
+A continuación se muestran las filas superiores. Observa cómo las columnas han cambiado completamente para reflejar las estadísticas de resumen deseadas. Cada fila refleja una `facility-week`.
 
 ```{r, warning=F, message=F}
 agg_weeks <- agg_weeks %>%   
@@ -323,7 +321,7 @@ agg_weeks <- agg_weeks %>%
 DT::datatable(head(agg_weeks,30), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap')
 ```
 
-Por último, ejecutamos el siguiente comando para asegurarnos de que TODAS las semanas posibles de las instalaciones están presentes en los datos, incluso si antes no estaban.
+Por último, ejecutamos el siguiente comando para asegurarnos que TODAS las semanas posibles de las instalaciones están presentes en los datos, incluso si antes no estaban.
 
 Estamos utilizando un `right_join()` sobre sí mismo (el conjunto de datos está representado por ".") pero habiéndose expandido para incluir todas las combinaciones posibles de las columnas `week` y  `location_name`. Véase la documentación sobre la función `expand()` en la página sobre [Pivotar datos](#pivoting-data). Antes de ejecutar este código, el conjunto de datos contiene `nrow(agg_weeks)` filas.
 
@@ -359,7 +357,7 @@ Después de ejecutar este código, `agg_weeks` contiene `nrow(agg_weeks)` filas.
 
 `ggplot()` se realiza utilizando `geom_tile()` del paquete **ggplot2**:
 
-* Las semanas en el eje x se transforman en fechas, lo que permite utilizar `scale_x_date()`
+* Las semanas en el eje-x se transforman en fechas, lo que permite utilizar `scale_x_date()`
 * `location_name` en el eje y mostrará todos los nombres de las instalaciones
 * `fill` (relleno) es `p_days_reported`, el rendimiento para ese establecimiento-semana (numérico)
 * `scale_fill_gradient()` se utiliza en el relleno numérico, especificando los colores para el alto, el bajo y `NA`
@@ -476,7 +474,7 @@ agg_weeks <- agg_weeks %>%
     )
 ```
 
-Y ahora los datos se vuelven a trazar, con location_name como factor ordenado: 
+Y ahora los datos se vuelven a representar, con location_name como factor ordenado: 
 
 ```{r, message=FALSE, warning=FALSE}
 ggplot(data = agg_weeks)+ 
@@ -533,7 +531,7 @@ ggplot(data = agg_weeks)+
 <!-- ======================================================= -->
 ### Mostrar valores {.unnumbered}  
 
-Puedes añadir una capa `geom_text()` encima de los mosaicos, para mostrar los números reales de cada mosaico. Ten en cuenta que esto puede no parecer bonito si tiene muchos azulejos pequeños.
+Puedes añadir una capa `geom_text()` encima de los mosaicos, para mostrar los números reales de cada mosaico. Ten en cuenta que esto puede no parecer bonito si tiene muchos mosaicos pequeños.
 
 Se ha añadido el siguiente código: `geom_text(aes(label = p_days_reported))`. Esto añade texto en cada mosaico. El texto que se muestra es el valor asignado al argumento `label = `, que en este caso se ha establecido en la misma columna numérica `p_days_reported` que también se utiliza para crear el gradiente de color.
 
