@@ -8,9 +8,9 @@ knitr::include_graphics(here::here("images", "epicurve_top.png"))
 
 Una curva epidémica (también conocida como "curva epi") es un gráfico epidemiológico básico que se suele utilizar para visualizar el patrón temporal de aparición de la enfermedad entre un grupo o epidemia de casos.
 
-El análisis de la epicurva puede revelar tendencias temporales, valores atípicos, la magnitud del brote, el periodo de exposición más probable, los intervalos de tiempo entre las generaciones de casos, e incluso puede ayudar a identificar el modo de transmisión de una enfermedad no identificada (por ejemplo, fuente puntual, fuente común continua, propagación de persona a persona). En el sitio web de los [CDC de EE.UU.](https://www.cdc.gov/training/quicklearns/epimode/index.html) se puede encontrar una lección en línea sobre la interpretación de las epicurvas.
+El análisis de la curva epidémica puede revelar tendencias temporales, valores atípicos, la magnitud del brote, el periodo de exposición más probable, los intervalos de tiempo entre las generaciones de casos, e incluso puede ayudar a identificar el modo de transmisión de una enfermedad no identificada (por ejemplo, fuente puntual, fuente común continua, propagación de persona a persona). En el sitio web de los [CDC de EE.UU.](https://www.cdc.gov/training/quicklearns/epimode/index.html) se puede encontrar una lección en línea sobre la interpretación de las curvas epidémicas.
 
-En esta página mostramos dos enfoques para producir epicurvas en R:
+En esta página mostramos dos enfoques para producir curva epidémicas en R:
 
 * El paquete **incidence2**, que puede producir una curva epi con simples comandos
 * El paquete **ggplot2**, que permite una personalización avanzada mediante comandos más complejos
@@ -136,7 +136,7 @@ ggplot(data = linelist)+
 <!-- ======================================================= -->
 ## Epicurves con el paquete **incidence2** {#epicurves-with-incidence2-package}
 
-A continuación mostramos cómo hacer epicurvas utilizando el paquete **incidence2**. Los autores de este paquete han intentado que el usuario pueda crear y modificar epicurvas sin necesidad de conocer la sintaxis de **ggplot2**. Gran parte de esta página está adaptada de las viñetas del paquete, que se pueden encontrar en la [página de github de **incidence2**](https://github.com/reconhub/incidence2).
+A continuación mostramos cómo hacer curvas epidémicas utilizando el paquete **incidence2**. Los autores de este paquete han intentado que el usuario pueda crear y modificar curvas epidémicas sin necesidad de conocer la sintaxis de **ggplot2**. Gran parte de esta página está adaptada de las viñetas del paquete, que se pueden encontrar en la [página de github de **incidence2**](https://github.com/reconhub/incidence2).
 
 
 <!-- ======================================================= -->
@@ -201,7 +201,7 @@ El argumento `interval = ` de `incidence()` define cómo se agrupan las observac
 
 **Especificar el intervalo**
 
-**incidence2** proporciona flexibilidad y una sintaxis comprensible para especificar cómo quieres agregar tus casos en una epicurva de barras Proporcione un valor como los siguientes al argumento `interval = `. Puedes escribir cualquiera de los siguientes en plural (por ejemplo, "week**s**"), y puedes añadir números antes (por ejemplo, "3 months"). 
+**incidence2** proporciona flexibilidad y una sintaxis comprensible para especificar cómo quieres agregar tus casos en una curva epidémica de barras Proporcione un valor como los siguientes al argumento `interval = `. Puedes escribir cualquiera de los siguientes en plural (por ejemplo, "week**s**"), y puedes añadir números antes (por ejemplo, "3 months"). 
 
 Opción de argumento | Más explicaciones 
 ------------------- | ------------------------------------ |
@@ -273,7 +273,7 @@ Puedes especificar que los casos con valores faltantes en las columnas de agrupa
 
 * Para *crear una faceta basada en una columna de agrupación*, consulta la sección siguiente sobre facetas con **incidence2**.
 
-En el ejemplo siguiente, los casos de todo el brote se agrupan por su categoría de edad. Los valores faltantes se incluyen como grupo. El intervalo de la epicurva es de semanas.
+En el ejemplo siguiente, los casos de todo el brote se agrupan por su categoría de edad. Los valores faltantes se incluyen como grupo. El intervalo de la curva epidémica es de semanas.
 
 
 ```{r, message=F, warning=F}
@@ -317,7 +317,7 @@ Puedes establecer el argumento `na_as_group = ` a FALSE en el comando `incidence
 
 ### Datos filtrados {.unnumbered}
 
-Para trazar la epicurva de un subconjunto de datos:
+Para trazar la curva epidémica de un subconjunto de datos:
 
 1)  Filtrar los datos del listado
 2)  Proporcionar los datos filtrados al comando `incidence()`
@@ -350,7 +350,7 @@ Por ejemplo, este dataframe `count_data` son casos de `linelist` agregados en re
 DT::datatable(head(count_data,50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-Si comienzas tu análisis con datos de recuento diario como el conjunto de datos anterior, tu comando `incidence()` para convertirlo en una epicurva semanal por hospital tendría el siguiente aspecto:
+Si comienzas tu análisis con datos de recuento diario como el conjunto de datos anterior, tu comando `incidence()` para convertirlo en una curva epidémica semanal por hospital tendría el siguiente aspecto:
 
 ```{r}
 epi_counts <- incidence(              # create weekly incidence object
@@ -379,7 +379,7 @@ Facetar los datos por grupos (es decir, producir "pequeños múltiples"):
 
 3.  Especificar qué columnas de agrupación utilizar como `fill = ` y cuáles utilizar como `facets = `
 
-A continuación, establecemos las columnas `hospital` y  `outcome` como columnas de agrupación en el comando `incidence()`. A continuación, en `facet_plot()` trazamos la epicurva, especificando que queremos una epicurva diferente para cada hospital y que dentro de cada epicurva las barras deben estar apiladas y coloreadas por `outcome`.
+A continuación, establecemos las columnas `hospital` y  `outcome` como columnas de agrupación en el comando `incidence()`. A continuación, en `facet_plot()` trazamos la curva epidémica, especificando que queremos una curva epidémica diferente para cada hospital y que dentro de cada curva epidémica las barras deben estar apiladas y coloreadas por `outcome`.
  
 
 ```{r, warning=F, message=F}
@@ -404,7 +404,7 @@ Ten en cuenta que el paquete **ggtree** (utilizado para mostrar árboles filogen
 
 ### Modificaciones con `plot()` {.unnumbered} 
 
-Una epicurva producida por **incidence2** puede ser modificada a través de estos argumentos *dentro de la función `plot()`*.
+Una curva epidémica producida por **incidence2** puede ser modificada a través de estos argumentos *dentro de la función `plot()`*.
 
 **Aquí están los argumentos de `plot()` que modifican la apariencia de las barras:**
 
@@ -524,7 +524,7 @@ Puedes modificar aún más un gráfico de **incidence2** añadiendo modificacion
 
 A continuación, el gráfico de **incidence2** termina y luego se utilizan los comandos de **ggplot2** para modificar los ejes, añadir una leyenda y ajustar la fuente en negrita y el tamaño del texto.
 
-Ten en cuenta que si añades `scale_x_date()`, la mayor parte del formato de fecha de `plot()` se sobrescribirá. Consulta la sección de epicurvas de `ggplot()` y la página del Manual [Consejos de ggplot](#ggplot-tips) para más opciones.
+Ten en cuenta que si añades `scale_x_date()`, la mayor parte del formato de fecha de `plot()` se sobrescribirá. Consulta la sección de curvas epidémicas de `ggplot()` y la página del Manual [Consejos de ggplot](#ggplot-tips) para más opciones.
 
 ```{r, warning=F, message=F}
 # filter the linelist
@@ -658,7 +658,7 @@ my_palette
 
 Para ajustar el orden de aparición de los grupos (en el gráfico y en la leyenda), la columna de agrupación debe ser de tipo Factor. Consulta la página sobre [Factores](#factors) para obtener más información.
 
-En primer lugar, veamos una epicurva semanal por hospital con la ordenación por defecto: 
+En primer lugar, veamos una curva epidémica semanal por hospital con la ordenación por defecto: 
 
 ```{r, message=F, warning=F}
 # ORIGINAL - hospital NOT as factor
@@ -675,7 +675,7 @@ hospital_outbreak <- incidence(
 plot(hospital_outbreak, fill = hospital, title = "ORIGINAL - hospital not a factor")
 ```
 
-Ahora, para ajustar el orden de manera que los "Missing" y "Otros" estén en la parte superior de la epicurva podemos hacer lo siguiente:
+Ahora, para ajustar el orden de manera que los "Missing" y "Otros" estén en la parte superior de la curva epidémica podemos hacer lo siguiente:
 
 * Cargar el paquete **forcats**, para trabajar con factores
 * Ajustar los datos - en este caso vamos a definir un nuevo dataset (`plot_data`) en el que:
@@ -781,7 +781,7 @@ En versiones anteriores de **incidence2** se podía usar la función `cumulate()
 <!-- ``` -->
 
 
-Ver la sección más abajo en esta página para el método alternativo para trazar la incidencia acumulativa con **ggplot2** - por ejemplo para superponer una línea de incidencia acumulativa sobre una epicurva. 
+Ver la sección más abajo en esta página para el método alternativo para trazar la incidencia acumulativa con **ggplot2** - por ejemplo para superponer una línea de incidencia acumulativa sobre una curva epidémica. 
 
 ### Media móvil  {.unnumbered}
 
@@ -804,9 +804,9 @@ Para aprender a aplicar las medias móviles de forma más general sobre los dato
 
 
 <!-- ======================================================= -->
-## Epicurvas con ggplot2 {#epicurves-with-ggplot2}
+## Curvas epidémicas con ggplot2 {#epicurves-with-ggplot2}
 
-El uso de `ggplot()` para construir tu epicurva permite más flexibilidad y personalización, pero requiere más esfuerzo y comprensión de cómo funciona `ggplot()`.
+El uso de `ggplot()` para construir tu curva epidémica permite más flexibilidad y personalización, pero requiere más esfuerzo y comprensión de cómo funciona `ggplot()`.
 
 A diferencia de lo que ocurre con el paquete **incidence2**, hay que controlar *manualmente* la agregación de los casos por tiempo (en semanas, meses, etc.) *y* los intervalos de las etiquetas en el eje de fechas. Esto debe gestionarse cuidadosamente.
 
@@ -828,7 +828,7 @@ detach("package:tidyverse", unload=TRUE)
 library(tidyverse)
 ```
 
-Para producir una epicurva con `ggplot()` hay tres elementos principales:  
+Para producir una curva epidémica con `ggplot()` hay tres elementos principales:  
 
 * Un histograma, con los casos de la lista de líneas agregados en "bins" distinguidos por puntos específicos de "ruptura".  
 * Escalas para los ejes y sus etiquetas  
@@ -839,7 +839,7 @@ Para producir una epicurva con `ggplot()` hay tres elementos principales:
 
 Aquí mostramos cómo especificar cómo se agregarán los casos en los intervalos del histograma ("barras"). Es importante reconocer que la agregación de los casos en los intervalos del histograma **no son** necesariamente los mismos intervalos que las fechas que aparecerán en el eje-x.
 
-A continuación se muestra el código más sencillo para producir epicurvas diarias y semanales.
+A continuación se muestra el código más sencillo para producir curvas epidémicas diarias y semanales.
 
 En el comando general `ggplot()` se proporciona el conjunto de datos en `data = `. Sobre esta base, se añade la geometría de un histograma con un `+`. Dentro de `geom_histogram()`, mapeamos la estética de tal manera que la columna `date_onset` se mapea al eje-x. También dentro de `geom_histogram()` pero *no* dentro de `aes()` establecemos la anchura de las barras del histograma con  `binwidth = `, en días. Si esta sintaxis de **ggplot2** es confusa, revisa la página sobre [Conceptos básicos de ggplot](#ggplot-basics).
 
@@ -937,9 +937,9 @@ Estas salidas de `seq.Date()` pueden utilizarse para crear los saltos de las cas
 
 
 
-### Ejemplo de epicurva semanal {.unnumbered}  
+### Ejemplo de curva epidémica semanal {.unnumbered}  
 
-**A continuación se muestra un código de ejemplo detallado para producir epicurvas semanales para las semanas del lunes, con barras alineadas, etiquetas de fecha y líneas de cuadrícula verticales.** Esta sección es para el usuario que necesita el código rápidamente. Para entender cada aspecto (temas, etiquetas de fecha, etc.) en profundidad, continúa con las secciones siguientes. Es importante tener en cuenta:
+**A continuación se muestra un código de ejemplo detallado para producir curvas epidémicas semanales para las semanas del lunes, con barras alineadas, etiquetas de fecha y líneas de cuadrícula verticales.** Esta sección es para el usuario que necesita el código rápidamente. Para entender cada aspecto (temas, etiquetas de fecha, etc.) en profundidad, continúa con las secciones siguientes. Es importante tener en cuenta:
 
 * Las *pausas del histograma* se definen con `seq.Date()`, como se ha explicado anteriormente, para comenzar el lunes anterior al caso más antiguo y terminar el lunes posterior al último caso
 * El intervalo de las *etiquetas de fecha* se especifica mediante `date_breaks = `  dentro de `scale_x_date()`
@@ -1432,7 +1432,7 @@ ggplot(central_data) +
 
 ### Datos agregados {.unnumbered} 
 
-A menudo, en lugar de un listado, se comienza con recuentos agregados de instalaciones, distritos, etc. Se puede hacer una epicurva con `ggplot()` pero el código será ligeramente diferente. Esta sección utilizará los datos de `count_data` que fue importado anteriormente, en la sección de preparación de datos. Este conjunto de datos es `linelist` agregado a los recuentos de día-hospital. A continuación se muestran las primeras 50 filas.
+A menudo, en lugar de un listado, se comienza con recuentos agregados de instalaciones, distritos, etc. Se puede hacer una curva epidémica con `ggplot()` pero el código será ligeramente diferente. Esta sección utilizará los datos de `count_data` que fue importado anteriormente, en la sección de preparación de datos. Este conjunto de datos es `linelist` agregado a los recuentos de día-hospital. A continuación se muestran las primeras 50 filas.
 
 ```{r message=FALSE, warning=F, echo=F}
 # display the linelist data as a table
@@ -1442,7 +1442,7 @@ DT::datatable(head(count_data, 50), rownames = FALSE, filter="top", options = li
 
 #### Representar recuentos diarios {.unnumbered}  
 
-Podemos trazar una epicurva diaria a partir de estos *recuentos diarios*. Aquí están las diferencias con el código:
+Podemos trazar una curva epidémica diaria a partir de estos *recuentos diarios*. Aquí están las diferencias con el código:
 
 * Dentro del mapeo estético `aes()`, especifica `y = ` como columna de recuento (en este caso, el nombre de la columna es `n_cases`)
 * Añadir el argumento `stat = "identity"` dentro de `geom_histogram()`, que especifica que la altura de la barra debe ser el valor `y =` y no el número de filas, como es el valor por defecto
@@ -1519,7 +1519,7 @@ Consulta la página sobre [medias móviles](#moving-averages-1) para obtener una
 
 1.  Agrega los datos en recuentos según sea necesario (diario, semanal, etc.) (véase la página de [Agrupar datos](#grouping-data))
 2.  Crea una nueva columna para contener la media móvil, creada con `slide_index()` del paquete **slider**
-3.  Dibuja la media móvil como una `geom_line()` encima (después) del histograma de la epicurva
+3.  Dibuja la media móvil como una `geom_line()` encima (después) del histograma de la curva epidémica
 
 Es muy útil la [viñeta en línea del paquete **slider**](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) 
 
@@ -1585,7 +1585,7 @@ ggplot(data = ll_counts_7day) +  # begin with new dataset defined above
 
 ### Facetas/pequeñas múltiples {.unnumbered}
 
-Al igual que con otros ggplots, puedes crear gráficos facetados ("pequeños múltiples"). Como se explica en la página [Consejos de ggplot](#ggplot-tips) de este manual, puedes utilizar `facet_wrap()` o `facet_grid()`. Aquí lo mostramos con `facet_wrap()`. Para las epicurvas, `facet_wrap()` es típicamente más fácil, ya que es probable que sólo necesites facetar una columna.
+Al igual que con otros ggplots, puedes crear gráficos facetados ("pequeños múltiples"). Como se explica en la página [Consejos de ggplot](#ggplot-tips) de este manual, puedes utilizar `facet_wrap()` o `facet_grid()`. Aquí lo mostramos con `facet_wrap()`. Para las curvas epidémicas, `facet_wrap()` es típicamente más fácil, ya que es probable que sólo necesites facetar una columna.
 
 La sintaxis general es `facet_wrap(rows ~ cols)`, donde a la izquierda de la tilde (`~`) está el nombre de una columna que se extiende a través de las "filas" del gráfico facetado, y a la derecha de la tilde está el nombre de una columna que se extiende a través de las "columnas" del gráfico facetado. Lo más sencillo es utilizar un nombre de columna, a la derecha de la tilde: `facet_wrap(~age_cat)`.  
 
@@ -1839,7 +1839,7 @@ ggplot(central_data2) +
 
 ## Datos provisionales  {#tentative-data}
 
-Los datos más recientes que se muestran en las epicurvas deben marcarse a menudo como provisionales, o sujetos a retrasos en los informes. Esto puede hacerse añadiendo una línea vertical y/o un rectángulo sobre un número determinado de días. Aquí hay dos opciones:
+Los datos más recientes que se muestran en las curvas epidémicas deben marcarse a menudo como provisionales, o sujetos a retrasos en los informes. Esto puede hacerse añadiendo una línea vertical y/o un rectángulo sobre un número determinado de días. Aquí hay dos opciones:
 
 
 1.  Utiliza `annotate()`:
@@ -2055,7 +2055,7 @@ Las técnicas anteriores fueron adaptadas de [este](https://stackoverflow.com/qu
 <!-- ======================================================= -->
 ## Doble eje {#dual-axis}  
 
-Aunque hay fuertes discusiones sobre la validez de los ejes duales dentro de la comunidad de visualización de datos, muchos supervisores de epi todavía quieren ver una epicurva o un gráfico similar con un porcentaje superpuesto con un segundo eje. Esto se discute más ampliamente en la página [Consejos de ggplot](#plotting-multiple-datasets), pero a continuación se muestra un ejemplo utilizando el método **cowplot**:
+Aunque hay fuertes discusiones sobre la validez de los ejes duales dentro de la comunidad de visualización de datos, muchos supervisores de epi todavía quieren ver una curva epidémica o un gráfico similar con un porcentaje superpuesto con un segundo eje. Esto se discute más ampliamente en la página [Consejos de ggplot](#plotting-multiple-datasets), pero a continuación se muestra un ejemplo utilizando el método **cowplot**:
 
 * Se hacen dos gráficos distintos y luego se combinan con el paquete **cowplot**.
 * Los gráficos deben tener exactamente el mismo eje x (límites establecidos) o de lo contrario los datos y las etiquetas no se alinearán
@@ -2177,7 +2177,7 @@ plot_cumulative
 ```
 
 
-También se puede superponer a la epicurva, con doble eje utilizando el método **cowplot** descrito anteriormente y en la página [Consejos de ggplot](#ggplot-tips):
+También se puede superponer a la curva epidémica, con doble eje utilizando el método **cowplot** descrito anteriormente y en la página [Consejos de ggplot](#ggplot-tips):
 
 ```{r, warning=F, message=F}
 #load package
