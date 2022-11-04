@@ -1,7 +1,5 @@
 
-# Borrador. Rastreo de contactos {#contact-tracing-1}
-
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
+# Rastreo de contactos {#contact-tracing-1}
 
 Esta página muestra el análisis descriptivo de los datos de rastreo de contactos, abordando algunas consideraciones clave y enfoques exclusivos de este tipo de datos.
 
@@ -16,7 +14,7 @@ Puedes leer más sobre el proyecto Go.Data en el [sitio de documentación de Git
 
 ### Cargar paquetes {.unnumbered}  
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para tu uso. También puede cargar los paquetes instalados con `library()` de R **base** Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con `library()` de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 ```{r, message = F}
 pacman::p_load(
@@ -54,7 +52,7 @@ Si deseas descargar los datos de seguimiento de contactos de ejemplo específico
 
 En su formato original los archivos descargables, reflejan los datos proporcionados por la API de Go.Data (puedes aprender sobre las [API aquí](#import_api)). A modo de ejemplo, aquí limpiaremos los datos para que sean más fáciles de leer en esta página. Si estás utilizando una instancia de Go.Data, puedes ver las instrucciones completas sobre cómo recuperar sus datos [aquí](https://github.com/WorldHealthOrganization/godata/tree/master/analytics/r-reporting).
 
-A continuación, los conjuntos de datos se importan utilizando la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos. Utilizamos `here()` para especificar la ruta del archivo - debes escribir la ruta del archivo específica de tu ordenador. A continuación, utilizamos `select()` para seleccionar sólo ciertas columnas de los datos, para simplificar a efectos de demostración.
+A continuación, los conjuntos de datos se importan utilizando la función `import()` del paquete **rio**. Consulta la página sobre [importación y exportación](#import-and-export) para conocer las distintas formas de importar datos. Utilizamos `here()` para especificar la ruta del archivo - debes escribir la ruta del archivo específica de tu ordenador. A continuación, utilizamos `select()` para seleccionar sólo ciertas columnas de los datos, para simplificar la demostración.
 
 #### Datos de casos {.unnumbered}  
 
@@ -74,9 +72,9 @@ DT::datatable(cases, rownames = FALSE, options = list(pageLength = 5, scrollX=T)
 
 #### Datos de contactos {.unnumbered}  
 
-Estos datos son una tabla de todos los contactos e información sobre ellos. De nuevo, proporcione tu propia ruta de acceso al archivo. Después de la importación, realizamos algunos pasos preliminares de limpieza de datos que incluyen:
+Estos datos son una tabla de todos los contactos e información sobre ellos. De nuevo, proporciona tu propia ruta de acceso al archivo. Después de la importación, realizamos algunos pasos preliminares de limpieza de datos que incluyen:
 
-* Establecer age_class como factor e invierta el orden de los niveles para que las edades más jóvenes sean las primeras
+* Establecer age_class como factor e invertir el orden de los niveles para que las edades más jóvenes sean las primeras
 * Seleccionar sólo una columna determinada, renombrando una de ellas
 * Asignar artificialmente a "Djembe" las filas a las que les falta el nivel 2 de administración, para mejorar la claridad de algunas visualizaciones de ejemplo
 
@@ -96,13 +94,12 @@ Aquí están las filas de los datos de contactos (`nrow(contacts)`):
 DT::datatable(contacts, rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
 ```
 
-#### Follow-up data {.unnumbered}  
+#### Datos de seguimiento {.unnumbered}  
 
-Estos datos son registros de las interacciones de "seguimiento" con los contactos. Se supone que cada contacto tiene un encuentro diario durante los 14 días siguientes a tu exposición.
+Estos datos son registros de las interacciones de "seguimiento" con los contactos. Se supone que cada contacto tiene un encuentro diario durante los 14 días siguientes a su exposición.
 
 Importamos y realizamos algunos pasos de limpieza. Seleccionamos ciertas columnas y también convertimos una columna de caracteres a todos los valores en minúsculas.
 
-Aquí están las primeras 50 filas de los datos `nrow(followups)`- filas de `followups` (cada fila es una interacción de seguimiento, con el estado del resultado en la columna `followup_status`):
 
 ```{r}
 followups <- rio::import(here::here("data", "godata", "followups_clean.rds")) %>% 
@@ -111,7 +108,7 @@ followups <- rio::import(here::here("data", "godata", "followups_clean.rds")) %>
   mutate(followup_status = str_to_lower(followup_status))
 ```
 
-Aquí están las primeras 50 filas de los datos `nrow(followups)`- filas de `followups` (cada fila es una interacción de seguimiento, con el estado del resultado en la columna `followup_status`):
+Aquí están las primeras 50 filas de `followups` (cada fila es una interacción de seguimiento, con el estado del resultado en la columna `followup_status`):
 
 ```{r, message=FALSE, echo=F}
 DT::datatable(head(followups, 50), rownames = FALSE, options = list(pageLength = 5, scrollX=T), class = 'white-space: nowrap' )
@@ -137,13 +134,9 @@ DT::datatable(head(relationships, 50), rownames = FALSE, options = list(pageLeng
 
 
 
-
-
-
-
 ## Análisis descriptivo {#descriptive-analyses}
 
-Puedes utilizar las técnicas tratadas en otras páginas de este manual para realizar análisis descriptivos de tus casos, contactos y sus relaciones. A continuación se ofrecen algunos ejemplos. 
+Puedes utilizar las técnicas tratadas en otras páginas de este manual para realizar análisis descriptivos de los casos, contactos y sus relaciones. A continuación se ofrecen algunos ejemplos. 
 
 
 ### Datos demográficos {.unnumbered}  
@@ -152,7 +145,7 @@ Como se muestra en la página dedicada a las [pirámides demográficas](#demogra
 
 #### Edad y sexo de los contactos {.unnumbered}  
 
-La pirámide que se muestra a continuación compara la distribución de la edad de los contactos, por género. Observe que los contactos a los que les falta la edad se incluyen en tu propia barra en la parte superior. Puedes cambiar este comportamiento por defecto, pero entonces considere listar el número que falta en una leyenda.
+La pirámide que se muestra a continuación compara la distribución de la edad de los contactos, por género. Observa que los contactos a los que les falta la edad se incluyen en su propia barra en la parte superior. Puedes cambiar este comportamiento por defecto, pero entonces considera listar el número que falta en una leyenda.
 
 ```{r, warning=F, message=F}
 apyramid::age_pyramid(
@@ -165,7 +158,7 @@ apyramid::age_pyramid(
   theme_minimal()                                    # simple background
 ```
 
-Con la estructura de datos Go.Data, los datos `relationships` contienen las edades tanto de los casos como de los contactos, por lo que podría utilizar ese conjunto de datos y crear una pirámide de edades que muestre las diferencias entre estos dos grupos de personas. El dataframe `relationships` será mutado para transformar las columnas numéricas de edad en categorías (véase la página de [limpieza de datos y funciones básicas](#cleaning-data-and-core-functions)). También pivotamos el dataframe más largo para facilitar el trazado con **ggplot2** (ver [Pivotar datos](#pivoting-data)).
+Con la estructura de datos Go.Data, los datos `relationships` contienen las edades tanto de los casos como de los contactos, por lo que podrías utilizar ese conjunto de datos y crear una pirámide de edades que muestre las diferencias entre estos dos grupos de personas. El dataframe `relationships` será mutado para transformar las columnas numéricas de edad en categorías (véase la página de [limpieza de datos y funciones básicas](#cleaning-data-and-core-functions)). También pivotamos el dataframe a largo para facilitar el trazado con **ggplot2** (ver [Pivotar datos](#pivoting-data)).
 
 ```{r}
 relation_age <- relationships %>% 
@@ -180,7 +173,7 @@ relation_age <- relationships %>%
 relation_age
 ```
 
-Ahora podemos trazar este conjunto de datos transformado con `age_pyramid()` como antes, pero sustituyendo `gender` con la  `category` (contacto, o caso).
+Ahora podemos representar este conjunto de datos transformado con `age_pyramid()` como antes, pero sustituyendo `gender` con la  `category` (contacto, o caso).
 
 ```{r, warning=F, message=F}
 apyramid::age_pyramid(
@@ -223,9 +216,9 @@ ggplot(data = occ_plot_data, mapping = aes(x = "", y = n, fill = occupation))+
 
 El número de contactos por caso puede ser una métrica importante para evaluar la calidad de la enumeración de los contactos y la conformidad de la población con la respuesta de salud pública.
 
-Dependiendo de tu estructura de datos, esto puede evaluarse con un dataset que contenga todos los casos y contactos. En el conjunto de datos de Go.Data, los vínculos entre los casos ("fuentes") y los contactos ("objetivos") se almacenan en  `relationships`.
+Dependiendo de la estructura de datos, esto puede evaluarse con un juego de datos que contenga todos los casos y contactos. En el conjunto de datos de Go.Data, los vínculos entre los casos ("fuentes") y los contactos ("objetivos") se almacenan en  `relationships`.
 
-En este conjunto de datos, cada fila es un contacto, y el caso de origen aparece en la fila. No hay contactos que tengan relaciones con múltiples casos, pero si esto existe, puede ser necesario tenerlos en cuenta antes de trazar (¡y explorarlos también!).
+En este conjunto de datos, cada fila es un contacto, y el caso de origen aparece en la fila. No hay contactos que tengan relaciones con múltiples casos, pero si esto existiese, puede ser necesario tenerlos en cuenta antes de representarlo (¡y explorarlos también!).
 
 Comenzamos contando el número de filas (contactos) por caso de origen. Esto se guarda como un dataframe.
 
@@ -261,7 +254,7 @@ Los datos de rastreo de contactos suelen contener datos de "seguimiento", que re
 
 ### Limpieza de datos {.unnumbered}  
 
-Estos datos pueden existir en una variedad de formatos. Pueden existir como una hoja de Excel de formato "ancho" con una fila por contacto y una columna por "día" de seguimiento. Consulta [Pivotar datos](#pivoting-data) para ver las descripciones de los datos "largos" y "anchos" y cómo pivotar los datos más anchos o más largos.
+Estos datos pueden existir en una variedad de formatos. Pueden existir como una hoja de Excel de formato "ancho" con una fila por contacto y una columna por "día" de seguimiento. Consulta [Pivotar datos](#pivoting-data) para ver las descripciones de los datos "largos" y "anchos" y cómo pivotar los datos anchos o largos.
 
 En nuestro ejemplo de Go.Data, estos datos se almacenan en el dataframe  `followups`, que tiene un formato "largo" con una fila por interacción de seguimiento. Las primeras 50 filas tienen este aspecto:
 
@@ -271,7 +264,7 @@ DT::datatable(head(followups, 50), rownames = FALSE, options = list(pageLength =
 ```
 
 
-<span style="color: orange;">***PRECAUCIÓN:*** Ten cuidado con los duplicados al tratar los datos de seguimiento, ya que podría haber varios seguimientos erróneos en el mismo día para un contacto determinado. Tal vez parezca un error, pero refleja la realidad: por ejemplo, un rastreador de contactos podría enviar un formulario de seguimiento a primera hora del día cuando no pudo contactar con el contacto, y enviar un segundo formulario cuando se le pudo contactar más tarde. Dependerá del contexto operativo la forma en que desee gestionar los duplicados, pero asegúrese de documentar claramente tu enfoque. </span>
+<span style="color: orange;">***PRECAUCIÓN:*** Ten cuidado con los duplicados al tratar los datos de seguimiento, ya que podría haber varios seguimientos erróneos en el mismo día para un contacto determinado. Tal vez parezca un error, pero refleja la realidad: por ejemplo, un rastreador de contactos podría enviar un formulario de seguimiento a primera hora del día cuando no pudo contactar con el contacto, y enviar un segundo formulario cuando se le pudo contactar más tarde. Dependerá del contexto operativo la forma en que desees gestionar los duplicados, pero asegúrate de documentar claramente tu enfoque. </span>
 
 *Veamos* cuántos casos de filas "duplicadas" tenemos:
 
@@ -297,7 +290,7 @@ followups_clean <- followups %>%
   drop_na(contact_id)                               # remove rows with missing contact_id
 ```
 
-Para cada encuentro de seguimiento, tenemos un estado de seguimiento (como si el encuentro se produjo y, si es así, el contacto tuvo síntomas o no). Para ver todos los valores podemos ejecutar un `tabyl()` rápido (desde el **conserje**) o `table()` (de R **base**) (ver [Tablas descriptivas](#descriptive-tables)) por `followup_status` para ver la frecuencia de cada uno de los resultados.
+Para cada encuentro de seguimiento, tenemos un estado de seguimiento (como si el encuentro se produjo y, si es así, el contacto tuvo síntomas o no). Para ver todos los valores podemos ejecutar un `tabyl()` rápido (de **janitor**) o `table()` (de R **base**) (ver [Tablas descriptivas](#descriptive-tables)) por `followup_status` para ver la frecuencia de cada uno de los resultados.
 
 En este conjunto de datos, "seen_not_ok" significa "visto con síntomas", y "seen_ok" significa "visto sin síntomas".
 
@@ -307,7 +300,7 @@ followups_clean %>%
 ```
 
 
-### Trazado en el tiempo {.unnumbered}  
+### Gráfica en el tiempo {.unnumbered}  
 
 Como los datos de las fechas son continuos, utilizaremos un histograma para representarlos con `date_of_followup` asignado al eje-x. Podemos conseguir un histograma "apilado" especificando un argumento `fill = ` dentro de `aes()`, que asignamos a la columna `followup_status`. En consecuencia, se puede establecer el título de la leyenda utilizando el argumento `fill = ` de `labs()`.
 
@@ -328,7 +321,7 @@ ggplot(data = followups_clean)+
 ```
 
 
-<span style="color: orange;">***PRECAUCIÓN:*** Si estás preparando muchos gráficos (por ejemplo, para múltiples jurisdicciones) querrás que las leyendas aparezcan de forma idéntica incluso con diferentes niveles de finalización o composición de los datos. Puede haber gráficos para los cuales no todos los estados de seguimiento están presentes, pero todavía quieres que esas categorías aparezcan en las leyendas. En ggplots (como arriba), puede especificar el argumento `drop = FALSE` de `scale_fill_discrete()`. En las tablas, utiliza `tabyl()` que muestra los recuentos de todos los niveles de los factores, o si utiliza `count()` de **dplyr** añada el argumento `.drop = FALSE` para incluir los recuentos de todos los niveles de los factores.</span>  
+<span style="color: orange;">***PRECAUCIÓN:*** Si estás preparando muchos gráficos (por ejemplo, para múltiples jurisdicciones) querrás que las leyendas aparezcan de forma idéntica incluso con diferentes niveles de finalización o composición de los datos. Puede haber gráficos para los cuales no todos los estados de seguimiento están presentes, pero todavía quieres que esas categorías aparezcan en las leyendas. En ggplot (como arriba), puedes especificar el argumento `drop = FALSE` de `scale_fill_discrete()`. En las tablas, utiliza `tabyl()` que muestra los recuentos de todos los niveles de los factores, o si utilizas `count()` de **dplyr** añade el argumento `.drop = FALSE` para incluir los recuentos de todos los niveles de los factores.</span>  
 
 
 ### Seguimiento individual diario  {.unnumbered}  
@@ -349,7 +342,7 @@ ggplot(data = followups_clean)+
 
 ### Analizar por grupos {.unnumbered}  
 
-Tal vez estos datos de seguimiento se consulten diaria o semanalmente para la toma de decisiones operativas. Es posible que desee desgloses más significativos por zona geográfica o por equipo de seguimiento de contactos. Podemos hacerlo ajustando las columnas proporcionadas a `group_by()`.
+Tal vez estos datos de seguimiento se consulten diaria o semanalmente para la toma de decisiones operativas. Es posible que desees desgloses más significativos por zona geográfica o por equipo de seguimiento de contactos. Podemos hacerlo ajustando las columnas proporcionadas a `group_by()`.
 
 ```{r, warning=F, message=F}
 
@@ -395,9 +388,9 @@ plot_by_region
 
 ## Tablas KPI {#kpi-tables} 
 
-Hay una serie de indicadores clave de rendimiento (KPI) que pueden calcularse y seguirse a distintos niveles de desagregación y a lo largo de diferentes períodos de tiempo para supervisar el rendimiento del rastreo de contactos. Una vez que se tienen los cálculos y el formato básico de la tabla, es bastante fácil cambiar los diferentes KPI.
+Hay una serie de Indicadores Clave de Rendimiento (KPI) que pueden calcularse y seguirse a distintos niveles de desagregación y a lo largo de diferentes períodos de tiempo para supervisar el rendimiento del rastreo de contactos. Una vez que se tienen los cálculos y el formato básico de la tabla, es bastante fácil cambiar los diferentes KPI.
 
-Existen numerosas fuentes de KPI de rastreo de contactos, como ésta de [ResolveToSaveLives.org](https://contacttracingplaybook.resolvetosavelives.org/checklists/metrics). La mayor parte del trabajo consistirá en recorrer tu estructura de datos y pensar en todos los criterios de inclusión/exclusión. A continuación mostramos algunos ejemplos, utilizando la estructura de metadatos de Go.Data:
+Existen numerosas fuentes de KPI de rastreo de contactos, como ésta de [ResolveToSaveLives.org](https://contacttracingplaybook.resolvetosavelives.org/checklists/metrics). La mayor parte del trabajo consistirá en recorrer la estructura de datos y pensar en todos los criterios de inclusión/exclusión. A continuación mostramos algunos ejemplos, utilizando la estructura de metadatos de Go.Data:
 
 
 Categoría         | Indicador                | Numerador Go.Data         | Denominador Go.Data
@@ -409,7 +402,7 @@ Indicador de resultado - Global|% de nuevos casos entre la lista de contactos ex
 
 A continuación veremos un ejercicio de ejemplo para crear una bonita tabla visual para mostrar el seguimiento de los contactos en las áreas de administración. Al final, lo haremos apto para la presentación con el paquete **formattable** (pero podrías usar otros paquetes como **flextable** - ver [Tablas para presentaciones](#tables-for-presentation)).
 
-La forma de crear una tabla como ésta dependerá de la estructura de sus datos de seguimiento de contactos. Utiliza la página de [tablas descriptivas](#descriptive-tables) para aprender a resumir los datos utilizando las funciones de **dplyr**.
+La forma de crear una tabla como ésta dependerá de la estructura de los datos de seguimiento de contactos. Utiliza la página de [tablas descriptivas](#descriptive-tables) para aprender a resumir los datos utilizando las funciones de **dplyr**.
 
 Crearemos una tabla que será dinámica y cambiará a medida que cambien los datos. Para que los resultados sean interesantes, estableceremos una `report_date` que nos permita simular la ejecución de la tabla en un día determinado (elegimos el 10 de junio de 2020). Los datos se filtran por esa fecha.  
 
@@ -532,7 +525,7 @@ contacts_table %>%
 
 Como se discutió en la página de [Gráficos de calor](#heat-plots), puedes crear una matriz de "quién infectó a quién" utilizando `geom_tile()`.
 
-Cuando se crean nuevos contactos, Go.Data almacena esta información de relación en el punto final de la API `relationships`; y podemos ver las primeras 50 filas de este conjunto de datos a continuación. Esto significa que podemos crear un gráfico de calor con relativamente pocos pasos, dado que cada contacto ya está unido a tu caso de origen.
+Cuando se crean nuevos contactos, Go.Data almacena esta información de relación en el punto final de la API `relationships`; y podemos ver las primeras 50 filas de este conjunto de datos a continuación. Esto significa que podemos crear un gráfico de calor con relativamente pocos pasos, dado que cada contacto ya está unido a su caso de origen.
 
 ```{r, warning=F, message=F, echo=F}
 # display the first 50 rows of relationships data as a table
