@@ -1,17 +1,15 @@
 
-# Borrador. Medias Móviles {#moving-averages}
+# Medias Móviles {#moving-averages}
 
 ```{r, out.width=c("100%"), echo=F}
 knitr::include_graphics(here::here("images", "moving_avg_epicurve.png"))
 ```
 
-<span style="color: red;">**_ADVERTENCIA:_** Esta traducción es sólo un borrador de la traducción al español. Este documento tal cual está ha sido generado automáticamente con DeepL.com y se han hecho algunas correcciones globales. Está pendiente de una revisión completa. </span> 
 
-This page will cover two methods to calculate and visualize moving averages:  
+Esta página cubrirá dos métodos para calcular y visualizar las medias móviles:  
 
-1) Calculate with the **slider** package  
-2) Calculate *within* a `ggplot()` command with the **tidyquant** package  
-
+1) Calcular con el paquete **slider**.  
+2) Calcular *dentro* de un comando `ggplot()` con el paquete **tidyquant**. 
 
 
 <!-- ======================================================= -->
@@ -19,7 +17,7 @@ This page will cover two methods to calculate and visualize moving averages:
 
 ### Cargar paquetes {.unnumbered}
 
-Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puede cargar los paquetes instalados con library() de R**base**. Consulta la página sobre [fundamentos de R]](#r-basics) para obtener más información sobre los paquetes de R.
+Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos `p_load()` de **pacman**, que instala el paquete si es necesario *y* lo carga para su uso. También puedes cargar los paquetes instalados con library() de R **base**. Consulta la página sobre [fundamentos de R](#r-basics) para obtener más información sobre los paquetes de R.
 
 
 ```{r}
@@ -33,7 +31,7 @@ pacman::p_load(
 
 ### Importar datos {.unnumbered}
 
-Importamos los datos de casos de una epidemia de ébola simulada. Si quiere seguir el proceso, [clica para descargar linelist "limpio"]](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - mira la página de [importación y exportación]](#import-and-export) para más detalles).  
+Importamos los datos de casos de una epidemia de ébola simulada. Si quieres seguir el proceso, [clica para descargar linelist "limpio"](https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds) (como archivo .rds). Importa los datos con la función `import()` del paquete **rio** (maneja muchos tipos de archivos como .xlsx, .csv, .rds - mira la página de [importación y exportación](#import-and-export) para más detalles).  
 
 
 ```{r, echo=F}
@@ -57,7 +55,7 @@ DT::datatable(head(linelist, 50), rownames = FALSE, filter="top", options = list
 <!-- ======================================================= -->
 ## Calcular con **slider** {#calculate-with-slider}
 
-**Utiliza este enfoque para calcular una media móvil en un dataframe antes de trazarla.**
+**Utiliza este enfoque para calcular una media móvil en un dataframe antes de representarla**
 
 El paquete **slider** proporciona varias funciones de "ventana deslizante" para calcular medias móviles, sumas acumulativas, regresiones móviles, etc. Trata un dataframe como un vector de filas, permitiendo la iteración por filas sobre un dataframe.
 
@@ -75,12 +73,12 @@ El paquete **slider** tiene muchas otras funciones que se tratan en la sección 
 **Argumentos básicos**
 
 * `.x`, el primer argumento por defecto, es el vector sobre el que iterar y al que aplicar la función
-* `.i = ` para las versiones de "índice" de las funciones de **deslizamiento** - proporciona una columna para "indexar" el rollo (véase la sección [siguiente]](#roll_index))
+* `.i = ` para las versiones de "índice" de las funciones de **deslizamiento** - proporciona una columna para "indexar" el rollo (véase la sección [siguiente](#roll_index))
 * `.f =` , el segundo argumento por defecto, bien:
   * Una función, escrita sin paréntesis, como `mean`, o
   * Una fórmula, que se convertirá en una función. Por ejemplo `~ .x - mean(.x)` devolverá el resultado del valor actual menos la media del valor de la ventana
 
-* Para más detalles, consulta este [material de referencia]](https://davisvaughan.github.io/slider/reference/slide.html)
+* Para más detalles, consulta este [material de referencia](https://davisvaughan.github.io/slider/reference/slide.html)
 
 
 
@@ -92,7 +90,7 @@ Especifica el tamaño de la ventana utilizando los argumentos `.before`, `.after
 * `.after = `- Proporcionar un número entero
 * `.complete = `- Pon este valor a `TRUE` si sólo quieres que se realicen cálculos en ventanas completas
 
-Por ejemplo, para conseguir una ventana de 7 días que incluya el valor actual y los seis anteriores, utiliza `.before = 6`. Para conseguir una ventana "centrada" proporcione el mismo número tanto a `.before = ` como a `.after = `.
+Por ejemplo, para conseguir una ventana de 7 días que incluya el valor actual y los seis anteriores, utiliza `.before = 6`. Para conseguir una ventana "centrada" proporciona el mismo número tanto a `.before = ` como a `.after = `.
 
 Por defecto, `.complete = ` será FALSE por lo que si la ventana completa de filas no existe, las funciones utilizarán las filas disponibles para realizar el cálculo. Si se ajusta a `TRUE`, los cálculos sólo se realizan en ventanas completas.
 
@@ -108,14 +106,14 @@ Para lograr operaciones *acumulativas*, establece el argumento `.before = ` en `
 
 El caso más probable de uso de un cálculo rotativo en epidemiología aplicada es examinar una medida a lo *largo del tiempo*. Por ejemplo, una medición continua de la incidencia de casos, basada en el recuento diario de casos.
 
-Si tienes datos de series temporales limpios con valores para cada fecha, puede estar bien utilizar `slide_dbl()`, como se demuestra aquí en la página de [series temporales y detección de brotes]](#timeseries_moving).
+Si tienes datos de series temporales limpios con valores para cada fecha, puede estar bien utilizar `slide_dbl()`, como se demuestra aquí en la página de [series temporales y detección de brotes](#timeseries_moving).
 
 Sin embargo, en muchas circunstancias de epidemiología aplicada puede haber fechas ausentes en los datos, donde no hay eventos registrados. En estos casos, es mejor utilizar las versiones "index" de las funciones **slider**. 
 
 
 ### Datos indexados {.unnumbered}  
 
-A continuación, mostramos un ejemplo utilizando `slide_index_dbl()` en la lista de casos. Digamos que nuestro objetivo es calcular una incidencia rodante de 7 días - la suma de casos utilizando una ventana rodante de 7 días. Si estás buscando un ejemplo de media rodante, mira la sección de abajo sobre [balanceo agrupado]](#roll_slider_group).
+A continuación, mostramos un ejemplo utilizando `slide_index_dbl()` en la lista de casos. Digamos que nuestro objetivo es calcular una incidencia rodante de 7 días - la suma de casos utilizando una ventana rodante de 7 días. Si estás buscando un ejemplo de media rodante, mira la sección de abajo sobre [balanceo agrupado](#roll_slider_group).
 
 Para empezar, se crean los datos `daily_counts` para reflejar los recuentos diarios de casos de `linelist`, calculados con `count()` de **dplyr**.
 
@@ -139,7 +137,7 @@ Es crucial reconocer que una función estándar de balanceo (como `slide_dbl()` 
 
 Se puede conseguir una ventana móvil "inteligente" con `slide_index_dbl()`. El "índex" significa que la función utiliza una *columna independiente* como "index" para la ventana móvil. La ventana no se basa simplemente en las filas del dataframe.
 
-Si la columna índex es una fecha, tiene la posibilidad añadida de especificar la extensión de la ventana a `.before = ` y/o `.after = ` en unidades de `days()` o `months()` de **lubridate**. Si hace sestas cosas, la función incluirá los días ausentes en las ventanas como si estuvieran allí (como valores `NA`).
+Si la columna índex es una fecha, tienes la posibilidad añadida de especificar la extensión de la ventana a `.before = ` y/o `.after = ` en unidades de `days()` o `months()` de **lubridate**. Si haces estas cosas, la función incluirá los días ausentes en las ventanas como si estuvieran allí (como valores `NA`).
 
 Mostremos una comparación. A continuación, calculamos la incidencia móvil de casos de 7 días con ventanas regulares e indexadas.
 
@@ -165,7 +163,7 @@ rolling <- daily_counts %>%
 
 ```
 
-Fíjate cómo en la columna normal de las 7 primeras filas el recuento aumenta constantemente a *pesar de que las filas no tienen 7 días de diferencia*. La columna adyacente "indexada" tiene en cuenta estos días naturales ausentes, por lo que sus sumas de 7 días son mucho menores, al menos en este periodo de la epidemia en el que los casos están más alejados.
+Fíjate cómo en la columna normal de las 7 primeras filas el recuento aumenta constantemente a *pesar de que las filas no tienen 7 días de diferencia*. La columna adyacente "indexada" tiene en cuenta estos días naturales ausentes, por lo que la suma de 7 días son mucho menores, al menos en este periodo de la epidemia en el que los casos están más alejados.
 
 ```{r, echo=F}
 DT::datatable(rolling, rownames = FALSE, options = list(pageLength = 12, scrollX=T) )
@@ -218,7 +216,7 @@ Si agrupas los datos antes de utilizar una función **slider**, las ventanas des
 
 Cada vez que se inicia un nuevo grupo, la ventana deslizante se reinicia. Por lo tanto, un matiz a tener en cuenta es que si tus datos están agrupados *y* has establecido `.complete = TRUE`, tendrás valores vacíos en cada transición entre grupos. A medida que la función se desplaza hacia abajo a través de las filas, cada transición en la columna de agrupación reiniciará la acumulación del tamaño mínimo de la ventana para permitir un cálculo.
 
-Consulta la página del manual sobre [Agrupar datos]](#grouping-data) para obtener detalles sobre la agrupación de datos.
+Consulta la página del manual sobre [Agrupar datos](#grouping-data) para obtener detalles sobre la agrupación de datos.
 
 A continuación, contamos los casos del listado por fecha *y* por hospital. Luego ordenamos las filas en orden ascendente, primero ordenando por hospital y luego dentro de éste por fecha. A continuación establecemos `group_by()`. Entonces podemos crear nuestra nueva media móvil.
 
@@ -382,11 +380,11 @@ Consulta esta [viñeta](https://cran.r-project.org/web/packages/tidyquant/vignet
 
 Consulta la útil [viñeta en línea del paquete  **slider**](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) 
 
-La [página github del]](https://github.com/DavisVaughan/slider) **slider**
+La [página github del](https://github.com/DavisVaughan/slider) **slider**
 
-Una [viñeta]](https://davisvaughan.github.io/slider/articles/slider.html) **slider**
+Una [viñeta](https://davisvaughan.github.io/slider/articles/slider.html) **slider**
 
-[viñeta tidyquant]](https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ04-charting-with-tidyquant.html)
+[viñeta tidyquant](https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ04-charting-with-tidyquant.html)
 
 Si tu caso de uso requiere que te "saltes" los fines de semana e incluso los días festivos, puede que te guste el paquete **almanac**. 
 
