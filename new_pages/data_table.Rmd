@@ -157,7 +157,7 @@ En los siguientes ejemplos:
 * en los ingresos que duraron más de 7 días, contamos el número de casos según el mes en que ingresaron y el hospital en el que lo hicieron
 
 
-````{r}
+```{r}
 linelist[, .N, .(hospital)] #the number of cases by hospital
 linelist[age > 18, .(mean_wt = mean(wt_kg, na.rm = T),
                              mean_ht = mean(ht_cm, na.rm = T)), .(gender, outcome)] #NAs represent the categories where the data is missing
@@ -167,7 +167,7 @@ linelist[days_onset_hosp > 7, .N, .(month = month(date_hospitalisation), hospita
 
 Data.table también permite encadenar expresiones de la siguiente manera:
 
-````{r}
+```{r}
 
 linelist[, .N, .(hospital)][order(-N)][1:3] #1st selects all cases by hospital, 2nd orders the cases in descending order, 3rd subsets the 3 hospitals with the largest caseload
 
@@ -176,7 +176,7 @@ linelist[, .N, .(hospital)][order(-N)][1:3] #1st selects all cases by hospital, 
 
 En estos ejemplos estamos siguiendo la suposición de que una fila en la tabla de datos es igual a un nuevo caso, y por lo tanto podemos utilizar el **.N** para representar el número de filas en la tabla de datos. Otra función útil para representar el número de casos únicos es `uniqueN()`, que devuelve el número de valores únicos en una entrada dada. Esto se ilustra aquí:
 
-````{r}
+```{r}
 
 linelist[, .(uniqueN(gender))] #remember .() in the j argument returns a data table
 
@@ -184,14 +184,14 @@ linelist[, .(uniqueN(gender))] #remember .() in the j argument returns a data ta
 
 La respuesta es 3, ya que los valores únicos de la columna de género son m, f y N/A. Compárelo con la función R base `unique()`, que devuelve todos los valores únicos en una entrada dada:
 
-````{r}
+```{r}
 
 linelist[, .(unique(gender))]
 ```
 
 Para hallar el número de casos únicos en un mes determinado escribiríamos lo siguiente:
 
-````{r}
+```{r}
 
 linelist[, .(uniqueN(case_id)), .(month = month(date_hospitalisation))]
 
@@ -201,7 +201,7 @@ linelist[, .(uniqueN(case_id)), .(month = month(date_hospitalisation))]
 
 El operador `:=` se utiliza para añadir o actualizar datos en una tabla de datos. La adición de columnas a la tabla de datos puede hacerse de las siguientes maneras:
 
-````{r}
+```{r}
 
 linelist[, adult := age >= 18] #adds one column
 linelist[, c("child", "wt_lbs") := .(age < 18, wt_kg*2.204)] #to add multiple columns requires c("") and list() or .() syntax
