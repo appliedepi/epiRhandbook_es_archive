@@ -202,14 +202,16 @@ sle_adm3_raw <- sf::read_sf(here("data", "gis", "shp", "sle_adm3.shp"))
 
 A continuación utilizamos `clean_names()` del paquete **janitor** para estandarizar los nombres de las columnas del shapefile. También utilizamos `filter()` para mantener sólo las filas con admin2name de "Western Area Urban" o "Western Area Rural".
 
+
 ```{r, include=FALSE}
-
-library("janitor")
-
+# ADM3 level clean
+sle_adm3 <- sle_adm3_raw %>%
+  janitor::clean_names() %>% # standardize column names #jfmont
+  filter(admin2name %in% c("Western Area Urban", "Western Area Rural")) # filter to keep certain areas
 ```
 
 
-```{r}
+```{r, eval = FALSE}
 # ADM3 level clean
 sle_adm3 <- sle_adm3_raw %>%
   clean_names() %>% # standardize column names 
@@ -238,11 +240,18 @@ library("janitor") #jfmont
 
 
 
-```{r}
+```{r, include=FALSE} 
+# Population by ADM3
+sle_adm3_pop <- import(here("data", "gis", "population", "sle_admpop_adm3_2020.csv")) %>%
+  janitor::clean_names() #jfmont
+```
+
+```{r, eval=FALSE} 
 # Population by ADM3
 sle_adm3_pop <- import(here("data", "gis", "population", "sle_admpop_adm3_2020.csv")) %>%
   clean_names() 
 ```
+
 
 Este es el aspecto del archivo de población. *Desplázate a la derecha* para ver cómo cada jurisdicción tiene columnas con la población `male`, `female`, y la población `total` y el desglose de la población en columnas por grupos de edad.
 
@@ -266,12 +275,20 @@ library("janitor")
 ```
 
 
-```{r}
+```{r, include=FALSE}
+# OSM health facility shapefile
+sle_hf <- sf::read_sf(here("data", "gis", "shp", "sle_hf.shp")) %>% 
+  janitor::clean_names() %>% #jfmont
+  filter(amenity %in% c("hospital", "clinic", "doctors"))
+```
+
+```{r, eval=FALSE}
 # OSM health facility shapefile
 sle_hf <- sf::read_sf(here("data", "gis", "shp", "sle_hf.shp")) %>% 
   clean_names() %>% 
   filter(amenity %in% c("hospital", "clinic", "doctors"))
 ```
+
 
 Aquí está el dataframe resultante -- *desplázate a la derecha* para ver el nombre de la instalación y las coordenadas geométricas (`geometry`).
 
