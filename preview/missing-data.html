@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>4 Valores faltantes | EpiRhandbook en español</title>
+<meta name="author" content="El equipo del manual">
+<meta name="description" content="En esta página se explica cómo: Evaluar la falta de información Filtrar las filas por valores faltantes Representar la falta de datos a lo largo del tiempo Manejar cómo se muestra NA en los...">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="4 Valores faltantes | EpiRhandbook en español">
+<meta property="og:type" content="book">
+<meta property="og:description" content="En esta página se explica cómo: Evaluar la falta de información Filtrar las filas por valores faltantes Representar la falta de datos a lo largo del tiempo Manejar cómo se muestra NA en los...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4 Valores faltantes | EpiRhandbook en español">
+<meta name="twitter:description" content="En esta página se explica cómo: Evaluar la falta de información Filtrar las filas por valores faltantes Representar la falta de datos a lo largo del tiempo Manejar cómo se muestra NA en los...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.24/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/tabwid-1.1.0/tabwid.css" rel="stylesheet">
+<link href="libs/tabwid-1.1.0/scrool.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QXDW878QLX"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QXDW878QLX');
+    </script>
+</head>
+<body>
+<div class="alert alert-info alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+      <strong>Need help learning R?</strong> Enroll in Applied Epi's <a href="https://www.appliedepi.org/live/" class="alert-link">intro R course</a>, try our <a href="https://www.appliedepi.org/tutorial/" class="alert-link">free R tutorials</a>, post in our <a href="https://community.appliedepi.org/" class="alert-link">Community Q&amp;A forum</a>, or ask about our <a href="mailto:contact@appliedepi.org" class="alert-link">R Help Desk service</a>.
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style_bs4.css">
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">EpiRhandbook en español</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"></a></li>
+<li class="book-part">Análisis</li>
+<li><a class="" href="descriptive-tables.html"><span class="header-section-number">1</span> Tablas descriptivas</a></li>
+<li><a class="" href="simple-statistical-tests.html"><span class="header-section-number">2</span> Tests estadísticos sencillos</a></li>
+<li><a class="" href="univariate-and-multivariable-regression.html"><span class="header-section-number">3</span> Regresión univariante y multivariable</a></li>
+<li><a class="active" href="missing-data.html"><span class="header-section-number">4</span> Valores faltantes</a></li>
+<li><a class="" href="standardised-rates.html"><span class="header-section-number">5</span> Tasas estandarizadas</a></li>
+<li><a class="" href="moving-averages.html"><span class="header-section-number">6</span> Medias Móviles</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="missing-data" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Valores faltantes<a class="anchor" aria-label="anchor" href="#missing-data"><i class="fas fa-link"></i></a>
+</h1>
+<p><img src="images/missingness.png" width="50%"><img src="images/missingness_overview.png" width="50%"></p>
+<p>En esta página se explica cómo:</p>
+<ol style="list-style-type: decimal">
+<li>Evaluar la falta de información</li>
+<li>Filtrar las filas por valores faltantes</li>
+<li>Representar la falta de datos a lo largo del tiempo</li>
+<li>Manejar cómo se muestra <code>NA</code> en los gráficos</li>
+<li>Realizar la imputación de valores faltantes: MCAR, MAR, MNAR</li>
+</ol>
+<!-- ======================================================= --><div id="preparation-11" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-11"><i class="fas fa-link"></i></a>
+</h2>
+<div id="cargar-paquetes-3" class="section level3 unnumbered">
+<h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Este trozo de código muestra la carga de los paquetes necesarios para los análisis. En este manual destacamos <code>p_load()</code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para su uso. También puedes cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de de R <strong>base</strong> Consulta la página sobre <a href="#r-basics">fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>  <span class="va">rio</span>,           <span class="co"># import/export</span></span>
+<span>  <span class="va">tidyverse</span>,     <span class="co"># data mgmt and viz</span></span>
+<span>  <span class="va">naniar</span>,        <span class="co"># assess and visualize missingness</span></span>
+<span>  <span class="va">mice</span>           <span class="co"># missing data imputation</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="importar-datos-3" class="section level3 unnumbered">
+<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Importamos los datos de casos de una epidemia de ébola simulada. Si quieres seguir el proceso, <a href="https://github.com/epirhandbook/Epi_R_handbook/raw/master/data/case_linelists/linelist_cleaned.rds">clica para descargar <code>linelist</code> “limpioa”</a> (como archivo .rds). Importa tus datos con la función <code>import()</code> del paquete <strong>rio</strong> (acepta muchos tipos de archivos como .xlsx, .rds, .csv - Mira la página de <a href="#import-and-export">importación y exportación</a> para más detalles).</p>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># import the linelist</span></span>
+<span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"linelist_cleaned.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>A continuación se muestran las primeras 50 filas de <code>linelist</code>.</p>
+<div id="htmlwidget-b163863d5d4013250507" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b163863d5d4013250507">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1399075200000\" data-max=\"1406419200000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1399939200000\" data-max=\"1407024000000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1400025600000\" data-max=\"1407110400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1400371200000\" data-max=\"1410566400000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"67\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-29&quot;,&quot;30-49&quot;,&quot;50-69&quot;,&quot;70+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0-4&quot;,&quot;5-9&quot;,&quot;10-14&quot;,&quot;15-19&quot;,&quot;20-24&quot;,&quot;25-29&quot;,&quot;30-34&quot;,&quot;35-39&quot;,&quot;40-44&quot;,&quot;45-49&quot;,&quot;50-54&quot;,&quot;55-59&quot;,&quot;60-64&quot;,&quot;65-69&quot;,&quot;70-74&quot;,&quot;75-79&quot;,&quot;80-84&quot;,&quot;85+&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-13.2697246824573\" data-max=\"-13.209391925612\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"8.45171855856465\" data-max=\"8.48802917129884\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"100\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"11\" data-max=\"241\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"20\" data-max=\"24\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"35.9\" data-max=\"38\" data-scale=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"428.994082840237\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"2\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8","07e3e8","369449","f393b4","1389ca","2978ac","57a565","fc15ef","2eaa9a","bbfa93","c97dd9","f50e8a","3a7673","7f5a01","ddddee","99e8fa","567136","9371a9","bc2adf","403057","8bd1e8","f327be","42e1a9","90e5fe","959170","8ebf6e","e56412","6d788e","a47529","67be4e","da8ecb","148f18","2cb9a5","f5c142","70a9fe","3ad520","062638","c76676","baacc1","497372","23e499","38cc4a","3789ee","c71dcd","6b70f0"],[4,4,2,3,3,3,4,4,4,4,4,4,6,5,6,9,10,8,7,6,7,6,8,6,10,8,6,12,5,8,7,9,11,5,8,5,6,11,7,9,7,8,9,12,13,9,8,10,8,7],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03","2014-05-22","2014-05-28",null,null,"2014-05-30","2014-05-28","2014-06-14","2014-06-07","2014-06-09",null,null,null,"2014-06-23","2014-06-18","2014-06-24",null,null,"2014-07-03",null,"2014-07-10","2014-06-14",null,"2014-06-18","2014-06-29","2014-07-02","2014-07-12","2014-07-12","2014-06-13","2014-07-15","2014-06-20",null,null,"2014-07-20",null,"2014-07-12","2014-07-19","2014-07-18","2014-07-18","2014-07-27",null,"2014-07-19","2014-07-26","2014-07-24",null],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22","2014-05-27","2014-06-02","2014-06-05","2014-06-05","2014-06-06","2014-06-13","2014-06-16","2014-06-17","2014-06-18","2014-06-19","2014-06-22","2014-06-23","2014-06-25","2014-06-26","2014-06-28","2014-07-02","2014-07-08","2014-07-09","2014-07-09","2014-07-10","2014-07-12","2014-07-12","2014-07-13","2014-07-13","2014-07-14","2014-07-15","2014-07-16","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-22","2014-07-22","2014-07-24","2014-07-24","2014-07-25","2014-07-25","2014-07-27","2014-07-29","2014-07-30",null,"2014-08-01","2014-08-02","2014-08-03"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23","2014-05-29","2014-06-03","2014-06-06","2014-06-07","2014-06-08","2014-06-15","2014-06-17","2014-06-17","2014-06-20","2014-06-19","2014-06-23","2014-06-24","2014-06-27","2014-06-28","2014-06-29","2014-07-03","2014-07-09","2014-07-09","2014-07-11","2014-07-11","2014-07-13","2014-07-14","2014-07-14","2014-07-13","2014-07-14","2014-07-17","2014-07-17","2014-07-18","2014-07-19","2014-07-20","2014-07-20","2014-07-22","2014-07-24","2014-07-26","2014-07-24","2014-07-27","2014-07-25","2014-07-27","2014-07-31","2014-08-01","2014-08-03","2014-08-02","2014-08-02","2014-08-04"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24","2014-06-01","2014-06-07","2014-06-18","2014-06-09","2014-06-15",null,"2014-07-09",null,"2014-06-30","2014-07-11","2014-07-01","2014-06-25","2014-07-06","2014-07-02","2014-07-09","2014-07-07","2014-07-20",null,"2014-07-22","2014-07-16","2014-07-14","2014-07-20","2014-07-16","2014-07-19","2014-07-27","2014-07-19",null,"2014-07-26","2014-08-14","2014-08-01","2014-07-23","2014-08-28","2014-07-28","2014-07-19",null,"2014-08-03",null,null,null,"2014-08-06","2014-08-21","2014-09-13","2014-08-04",null],[null,"Recover","Recover",null,"Recover","Recover","Recover","Death","Recover","Death","Death","Death","Recover","Recover",null,"Recover",null,null,"Death","Death","Recover",null,null,null,"Death",null,"Death","Death",null,"Death","Recover","Death","Recover","Death","Recover",null,"Death","Recover","Recover","Death",null,null,"Death","Death","Death","Death","Recover",null,"Death","Death"],["m","f","m","f","m","f","f","f","m","f","m","m","m","f","f","m","f","f","f","f","m","m","f","m","f","m","m","f","m","f","f","f","m","m","f","m","f","f","f","m","f","m","f","m","m","f","m","f","m","m"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years","years"],[2,3,56,18,3,16,16,0,61,27,12,42,19,7,7,13,35,17,11,11,19,54,14,28,6,3,31,6,67,14,10,21,20,45,1,12,3,15,20,36,7,13,14,3,10,1,0,20,26,14],["0-4","0-4","50-69","15-19","0-4","15-19","15-19","0-4","50-69","20-29","10-14","30-49","15-19","5-9","5-9","10-14","30-49","15-19","10-14","10-14","15-19","50-69","10-14","20-29","5-9","0-4","30-49","5-9","50-69","10-14","10-14","20-29","20-29","30-49","0-4","10-14","0-4","15-19","20-29","30-49","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-29","20-29","10-14"],["0-4","0-4","55-59","15-19","0-4","15-19","15-19","0-4","60-64","25-29","10-14","40-44","15-19","5-9","5-9","10-14","35-39","15-19","10-14","10-14","15-19","50-54","10-14","25-29","5-9","0-4","30-34","5-9","65-69","10-14","10-14","20-24","20-24","45-49","0-4","10-14","0-4","15-19","20-24","35-39","5-9","10-14","10-14","0-4","10-14","0-4","0-4","20-24","25-29","10-14"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital","Missing","Missing","Missing","Missing","Port Hospital","Military Hospital","Missing","Missing","Other","Port Hospital","Port Hospital","Port Hospital","Missing","Other","Port Hospital","Port Hospital","St. Mark's Maternity Hospital (SMMH)","Missing","Other","Missing","St. Mark's Maternity Hospital (SMMH)","Military Hospital","Port Hospital","Central Hospital","Military Hospital","Central Hospital","Missing","Military Hospital","Other","Missing","Missing","Port Hospital","Port Hospital","Port Hospital","Missing","Central Hospital","Military Hospital","Other","Other","Other","Missing","St. Mark's Maternity Hospital (SMMH)","St. Mark's Maternity Hospital (SMMH)","Missing"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098,-13.2331547837254,-13.2320975453153,-13.2225511595637,-13.2572163655863,-13.2206286746001,-13.253989309478,-13.2385127873491,-13.209391925612,-13.2157278814899,-13.2243437095992,-13.2336087079551,-13.21422143145,-13.2339681355349,-13.2535640411465,-13.2250089377786,-13.2160657166043,-13.2680671272333,-13.2266742923612,-13.2160179088168,-13.2482584611565,-13.2156319199566,-13.2142410663192,-13.2614879104088,-13.2452992638476,-13.2630592726116,-13.2343341712241,-13.2199077448676,-13.2227293309912,-13.2343062806506,-13.218781651651,-13.2483677722899,-13.2097478342339,-13.2680867723786,-13.2587535457526,-13.262635786914,-13.2697246824573,-13.2209026809759,-13.2330734719715,-13.2680923666905,-13.2547212675054,-13.2573683214693,-13.2137356012883,-13.2175973322257,-13.2486407324245],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.46183062600728,8.46272931462646,8.46144367534271,8.46191259217774,8.47292327643506,8.48401630165138,8.45837125340844,8.47761705512509,8.47570184950483,8.47779946878972,8.47145134147474,8.47804840685363,8.48528034195779,8.46957530395867,8.45957352078114,8.47404889511544,8.48802917129884,8.473437335922,8.48408263734462,8.46242233645879,8.47026822126572,8.46398447480533,8.4641347894342,8.45623094629607,8.48334624336805,8.47493999153642,8.47832062438022,8.4693933891765,8.48480589906514,8.47121232619015,8.48438437371817,8.48466158574339,8.47714159984428,8.46238127010609,8.45568597813113,8.4632880274758,8.47940722413856,8.46353857052336,8.46178968158864,8.47508713872833,8.45825808128071,8.4532568143863,8.4732571907655,8.47911586641933,8.48480340615605],["f547d6",null,null,"f90f5f","11f8ea","aec8ec","893f25","133ee7",null,null,"996f3a","133ee7","37a6f6","9f6884","4802b1",null,null,null,"a75c7f","8e104d","ab634e",null,null,"b799eb",null,"5d9e4d","a15e13",null,"ea3740","beb26e","567136","894024","36e2e7","a2086d","7baf73","eb2277",null,null,"d6584f",null,"312ecf","52ea64","cfd79c","d145b7","174288",null,"53608c","3b096b","f5c142",null],["other",null,null,"other","other","other","other","other",null,null,"other","other","other","other","other",null,null,null,"other","other","other",null,null,"other",null,"other","other",null,"other","funeral","other","funeral","other","other","other","funeral",null,null,"other",null,"other","other","other","other","other",null,"funeral","other","other",null],[27,25,91,41,36,56,47,0,86,69,67,84,68,44,34,66,78,47,53,47,71,86,53,69,38,46,68,37,100,56,50,57,65,72,29,69,37,48,54,71,47,61,47,35,53,16,13,59,69,67],[48,59,238,135,71,116,87,11,226,174,112,186,174,90,91,152,214,137,117,131,150,241,131,161,80,69,188,66,233,142,110,182,164,214,26,157,39,154,133,168,100,125,123,67,134,31,36,125,183,169],[22,22,21,23,23,21,21,22,22,22,22,22,22,21,23,22,23,21,22,23,21,23,21,24,23,22,24,23,20,24,24,20,24,21,22,21,23,22,23,23,23,22,23,22,22,22,23,22,22,22],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","no","no","no","no","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","no","yes","no",null,"no","no","no","yes","no",null,"no","no","yes",null,null,"no","no",null,"no","no",null,null,"no","no",null,"no","no",null,"no","yes","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","yes","yes","yes","yes","yes","yes","yes","yes","yes",null,"yes","yes","yes","yes","yes",null,"yes","yes","yes",null,null,"yes","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","yes","yes","yes","no",null],["no",null,null,"no","no","no",null,"no","no","no","no","no","no","no","no","yes","no","no",null,"no","no","no","no","no",null,"no","no","no",null,null,"no","no",null,"no","no",null,null,"yes","yes",null,"no","no",null,"no","no","no","no","no","no",null],["yes",null,null,"no","yes","yes",null,"yes","yes","no","yes","no","no","no","yes","no","no","no",null,"no","yes","no","no","no",null,"no","no","no",null,null,"no","yes",null,"yes","yes",null,null,"yes","yes",null,"yes","yes",null,"yes","yes","no","yes","yes","yes",null],[36.8,36.9,36.9,36.8,36.9,37.6,37.3,37,36.4,35.9,36.5,36.9,36.5,37.1,36.5,37.3,37,38,38,36,37,36.7,36.9,36.5,37,36.5,37.6,36.6,36.6,36.2,36.4,37.1,37.5,37.5,37.4,36.9,36.4,37.3,37,37.8,36.5,37.5,36.7,37,37.3,36.6,36.5,36.6,37.6,36.8],[null,"09:36","16:48","11:22","12:60","14:13","14:33","09:25","11:16","10:55","16:03","11:14","12:42","11:06","09:10","08:45",null,"15:41","13:34","18:58","12:43","16:33","14:29","07:18","08:11","16:32","16:17","07:32","17:45",null,"13:24","14:43","02:33","11:36","17:28","16:27",null,"20:49",null,"11:38","14:25","13:42","21:22","13:33","19:06","17:14","20:09",null,"10:23","09:09"],[117.1875,71.8184429761563,16.0652496292635,22.4965706447188,71.4144019043841,41.6171224732461,62.0953890870657,0,16.8376536925366,22.7903289734443,53.4119897959184,24.2802636142907,22.4600343506408,54.320987654321,41.0578432556455,28.5664819944598,17.0320552013276,25.0412914912888,38.7172182043977,27.3876813705495,31.5555555555556,14.8069075945662,30.8839811199813,26.6193433895297,59.375,96.6183574879227,19.2394748755093,84.9403122130395,18.4199377406104,27.7722674072605,41.3223140495868,17.2080666586161,24.1671624033314,15.7218971089178,428.994082840237,27.9930220292912,243.261012491782,20.2395007589813,30.527446435638,25.15589569161,47,39.04,31.0661643201798,77.9683671196257,29.5165961238583,166.493236212279,100.308641975309,37.76,20.6037803457852,23.458562375267],[2,1,2,2,1,1,2,1,1,2,2,2,1,0,2,0,1,1,2,2,1,1,1,0,2,1,1,2,1,0,0,2,1,1,2,2,1,0,2,2,0,2,0,0,2,2,null,1,0,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,8,10,14,15,18,19,20,26,28,29]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="convertir-valores-faltantes-en-la-importación" class="section level3 unnumbered">
+<h3>Convertir valores faltantes en la importación<a class="anchor" aria-label="anchor" href="#convertir-valores-faltantes-en-la-importaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h3>
+<p>Al importar los datos, ten en cuenta los valores que deben clasificarse como faltantes. Por ejemplo, 99, 999, “Missing”, celdas en blanco (““) o celdas con un espacio vacío (” “). Puedes convertirlos en <code>NA</code> (la versión de R de los valores faltantes) con el comando de importación de datos.
+Consulta la sección de <a href="#import_missing">datos faltantes</a> de la página de Importación para obtener más detalles, ya que la sintaxis exacta varía según el tipo de archivo.</p>
+<!-- ======================================================= -->
+</div>
+</div>
+<div id="missing-values-in-r" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Valores faltantes en R<a class="anchor" aria-label="anchor" href="#missing-values-in-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>A continuación, exploramos las formas en que se presenta y evalúa los datos faltantes en R, junto con algunos valores y funciones adyacentes.</p>
+<div id="na" class="section level3 unnumbered">
+<h3>
+<code>NA</code><a class="anchor" aria-label="anchor" href="#na"><i class="fas fa-link"></i></a>
+</h3>
+<p>En R, los valores faltantes se representan con un valor reservado (especial): <code>NA</code>. Ten en cuenta que se escribe <em>sin</em> comillas. “NA” es diferente y es sólo un valor de carácter normal (también una letra de los Beatles de la canción Hey Jude).</p>
+<p>Tus datos pueden tener otras formas de representar la falta de información, como “99”, o “Missing”, o “Desconocido” - incluso puedes tener el valor de carácter vacío “” que parece “en blanco”, o un solo espacio ” “. Se consciente de ello y considera la posibilidad de <a href="#import_missing">convertirlos en <code>NA</code> durante la importación</a> o durante la limpieza de datos con <code>na_if()</code>.</p>
+<p>En tu limpieza de datos, también puedes convertir en el otro sentido - cambiando todos los <code>NA</code> a “Missing” o similar con <code>replace_na()</code> o con <code>fct_explicit_na()</code> para los factores.</p>
+</div>
+<div id="versiones-de-na" class="section level3 unnumbered">
+<h3>Versiones de <code>NA</code><a class="anchor" aria-label="anchor" href="#versiones-de-na"><i class="fas fa-link"></i></a>
+</h3>
+<p>La mayoría de las veces, <code>NA</code> representa un valor que falta y todo funciona bien. Sin embargo, en algunas circunstancias puedes encontrar la necesidad de <em>variaciones</em> de <code>NA</code> específicas para un tipo de objeto (carácter, numérico, etc.). Esto será poco frecuente, pero debes tenerlo en cuenta.</p>
+<p>El escenario típico para esto es cuando se crea una nueva columna con la función <strong>dplyr</strong> <code>case_when()</code>. Como se describe en la página de <a href="#clean_case_when">Limpieza de datos y funciones básicas</a>, esta función evalúa cada fila del dataframe, valora si las filas cumplen con los criterios lógicos especificados (lado derecho del código), y asigna el nuevo valor correcto (lado izquierdo del código). <em>Importante: todos los valores del lado derecho deben ser del mismo tipo</em>.</p>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> </span>
+<span>  </span>
+<span>  <span class="co"># Create new "age_years" column from "age" column</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>age_years <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    <span class="va">age_unit</span> <span class="op">==</span> <span class="st">"years"</span>  <span class="op">~</span> <span class="va">age</span>,       <span class="co"># if age is given in years, assign original value</span></span>
+<span>    <span class="va">age_unit</span> <span class="op">==</span> <span class="st">"months"</span> <span class="op">~</span> <span class="va">age</span><span class="op">/</span><span class="fl">12</span>,    <span class="co"># if age is given in months, divide by 12</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">age_unit</span><span class="op">)</span>      <span class="op">~</span> <span class="va">age</span>,       <span class="co"># if age UNIT is missing, assume years</span></span>
+<span>    <span class="cn">TRUE</span>                 <span class="op">~</span> <span class="cn">NA_real_</span><span class="op">)</span><span class="op">)</span> <span class="co"># any other circumstance, assign missing</span></span></code></pre></div>
+<p>Si deseas <code>NA</code> en el lado derecho, es posible que tengas que especificar una de las opciones especiales de <code>NA</code> que se indican a continuación. Si los otros valores del lado derecho son caracteres, considera usar “Missing” en su lugar o, de lo contrario, usa <code>NA_character_</code>. Si todos son numéricos, utiliza <code>NA_real_</code>. Si todos son fechas o lógicos, puedes utilizar <code>NA</code>.</p>
+<ul>
+<li>
+<code>NA</code> - utilizar para fechas o TRUE/FALSE lógico</li>
+<li>
+<code>NA_character_</code> - utilizar para caracteres</li>
+<li>
+<code>NA_real_</code> - uso para numérico</li>
+</ul>
+<p>De nuevo, no es probable que te encuentres con estas variaciones <em>a menos que</em> estés utilizando <code>case_when()</code> para crear una nueva columna. Consulta la <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/NA.html">documentación de R sobre NA</a> para obtener más información.</p>
+</div>
+<div id="null" class="section level3 unnumbered">
+<h3>
+<code>NULL</code><a class="anchor" aria-label="anchor" href="#null"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>NULL</code> es otro valor reservado en R. Es la representación lógica de una declaración que no es ni verdadera ni falsa. Es devuelto por expresiones o funciones cuyos valores son indefinidos. Generalmente no asignes NULL como valor, a menos que escribas funciones o si escribes una <a href="#dashboards-with-shiny">aplicación <strong>Shiny</strong></a> para devolver <code>NULL</code> en escenarios específicos.</p>
+<p>La nulidad puedes evaluarse con <code><a href="https://rdrr.io/r/base/NULL.html">is.null()</a></code> y la conversión puedes hacerse con <code><a href="https://rdrr.io/r/base/NULL.html">as.null()</a></code>.</p>
+<p>Véase esta <a href="https://www.r-bloggers.com/2010/04/r-na-vs-null/">entrada del blog</a> sobre la diferencia entre <code>NULL</code> y <code>NA</code>.</p>
+</div>
+<div id="nan" class="section level3 unnumbered">
+<h3>
+<code>NaN</code><a class="anchor" aria-label="anchor" href="#nan"><i class="fas fa-link"></i></a>
+</h3>
+<p>Los valores imposibles se representan con el valor especial <code>NaN</code>. Un ejemplo de esto es cuando se fuerza a R a dividir 0 entre 0. Puedes evaluar esto con <code><a href="https://rdrr.io/r/base/is.finite.html">is.nan()</a></code>. También puedes encontrar funciones complementarias incluyendo <code><a href="https://rdrr.io/r/base/is.finite.html">is.infinite()</a></code> y <code><a href="https://rdrr.io/r/base/is.finite.html">is.finite()</a></code>.</p>
+</div>
+<div id="inf" class="section level3 unnumbered">
+<h3>
+<code>Inf</code><a class="anchor" aria-label="anchor" href="#inf"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>Inf</code> representa un valor infinito, como cuando se divide un número por 0.</p>
+<p>Como ejemplo de cómo podría afectar esto a tu trabajo: digamos que tienes un vector/columna z que contiene estos valores: <code>z &lt;- c(1, 22, NA, Inf, NaN, 5)</code></p>
+<p>Si deseas utilizar <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code> en la columna para encontrar el valor más alto, puedes utilizar el <code>na.rm = TRUE</code> para eliminar el <code>NA</code> del cálculo, pero el <code>Inf</code> y el<code>NaN</code> permanecen y se devolverá <code>Inf</code>. Para resolver esto, puedes utilizar los corchetes <code>[ ]</code> y <code><a href="https://rdrr.io/r/base/is.finite.html">is.finite()</a></code> para subconjuntar de manera que sólo se utilicen valores finitos para el cálculo: <code>max(z[is.finite(z)])</code>.</p>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">22</span>, <span class="cn">NA</span>, <span class="cn">Inf</span>, <span class="cn">NaN</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>                           <span class="co"># returns NA</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">z</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>                  <span class="co"># returns Inf</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">z</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>             <span class="co"># returns 22</span></span></code></pre></div>
+</div>
+<div id="ejemplos" class="section level3 unnumbered">
+<h3>Ejemplos<a class="anchor" aria-label="anchor" href="#ejemplos"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="41%">
+<col width="58%">
+</colgroup>
+<thead><tr class="header">
+<th>Comando R</th>
+<th>Resultado</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>5 / 0</code></td>
+<td><code>Inf</code></td>
+</tr>
+<tr class="even">
+<td><code>0 / 0</code></td>
+<td><code>NaN</code></td>
+</tr>
+<tr class="odd">
+<td><code>5 / NA</code></td>
+<td><code>NA</code></td>
+</tr>
+<tr class="even">
+<td>
+<code>5 / Inf |</code>0<code></code>NA - 5<code>|</code>NA<code></code>Inf / 5<code>|</code>Inf<code></code>class(NA)<code>| "logical"</code>class(NaN)<code>| "numeric"</code>class(Inf)<code>| "numeric"</code>class(NULL)`</td>
+<td>“NULL”</td>
+</tr>
+</tbody>
+</table></div>
+<p>“NAs introduced by coercion” es un mensaje de aviso común. Esto puede ocurrir si se intenta hacer una conversión ilegal como insertar un valor de carácter en un vector que de otra manera es numérico.</p>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"10"</span>, <span class="st">"20"</span>, <span class="st">"thirty"</span>, <span class="st">"40"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>## [1] 10 20 NA 40</code></pre>
+<p><code>NULL</code> se ignora en un vector.</p>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="cn">NA</span>, <span class="fl">10</span>, <span class="cn">NULL</span><span class="op">)</span>  <span class="co"># define</span></span>
+<span><span class="va">my_vector</span>                         <span class="co"># print</span></span></code></pre></div>
+<pre><code>## [1] 25 NA 10</code></pre>
+<p>La varianza de un número da como resultado <code>NA</code>.</p>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="fl">22</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<!-- ======================================================= -->
+</div>
+</div>
+<div id="useful-functions" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Funciones útiles<a class="anchor" aria-label="anchor" href="#useful-functions"><i class="fas fa-link"></i></a>
+</h2>
+<p>Las siguientes funciones de R <strong>base</strong> son muy útiles a la hora de evaluar o manejar los valores faltantes:</p>
+<div id="is.na-y-is.na" class="section level3 unnumbered">
+<h3>
+<code>is.na()</code> y <code>!is.na()</code><a class="anchor" aria-label="anchor" href="#is.na-y-is.na"><i class="fas fa-link"></i></a>
+</h3>
+<p>Utiliza <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> para identificar los valores que faltan, o utiliza su opuesto (con <code>!</code> delante) para identificar los valores que no faltan. Ambos devuelven un valor lógico (<code>TRUE</code> o <code>FALSE</code>). Recuerda que puedes <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> el vector resultante para contar el número de <code>TRUE</code>, por ejemplo, <code>sum(is.na(linelist$date_outcome))</code>.</p>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">56</span>, <span class="cn">NA</span>, <span class="fl">5</span>, <span class="cn">NA</span>, <span class="fl">22</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">my_vector</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">my_vector</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">my_vector</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="na.omit" class="section level3 unnumbered">
+<h3>
+<code>na.omit()</code><a class="anchor" aria-label="anchor" href="#na.omit"><i class="fas fa-link"></i></a>
+</h3>
+<p>Esta función, si se aplica a un dataframe, eliminará <em>las</em> filas con valores faltantes. También es de R <strong>base</strong>. Si se aplica a un vector, eliminará los valores <code>NA</code> del vector al que se aplica. Por ejemplo:</p>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">my_vector</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  1  4 56  5 22
+## attr(,"na.action")
+## [1] 4 6
+## attr(,"class")
+## [1] "omit"</code></pre>
+</div>
+<div id="drop_na" class="section level3 unnumbered">
+<h3>
+<code>drop_na()</code><a class="anchor" aria-label="anchor" href="#drop_na"><i class="fas fa-link"></i></a>
+</h3>
+<p>Esta es una función <strong>tidyr</strong> que es útil en un <a href="#cleaning-data-and-core-functions">proceso de limpieza de datos</a>. Si se ejecuta con los paréntesis vacíos, elimina <em>las</em> filas con valores faltantes. Si se especifican los nombres de las columnas en los paréntesis, se eliminarán las filas con valores faltantes en esas columnas. También puedes utilizar la sintaxis “tidyselect” para especificar las columnas.</p>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">drop_na</span><span class="op">(</span><span class="va">case_id</span>, <span class="va">date_onset</span>, <span class="va">age</span><span class="op">)</span> <span class="co"># drops rows missing values for any of these columns</span></span></code></pre></div>
+</div>
+<div id="na.rm-true" class="section level3 unnumbered">
+<h3>
+<code>na.rm = TRUE</code><a class="anchor" aria-label="anchor" href="#na.rm-true"><i class="fas fa-link"></i></a>
+</h3>
+<p>Cuando se ejecuta una función matemática como <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code>, <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> o <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, si hay algún valor <code>NA</code> presente el valor devuelto será NA. Este comportamiento por defecto es intencionado, para que avise si falta algún dato.</p>
+<p>Puedes evitarlo eliminando los valores faltantes del cálculo. Para ello, incluye el argumento <code>na.rm = TRUE</code> (“na.rm” significa “eliminar NA”).</p>
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">56</span>, <span class="cn">NA</span>, <span class="fl">5</span>, <span class="cn">NA</span>, <span class="fl">22</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">my_vector</span><span class="op">)</span>     </span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">my_vector</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 17.6</code></pre>
+<!-- ======================================================= -->
+</div>
+</div>
+<div id="assess-missingness-in-a-data-frame" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Evaluar la ausencia de datos en un dataframe<a class="anchor" aria-label="anchor" href="#assess-missingness-in-a-data-frame"><i class="fas fa-link"></i></a>
+</h2>
+<p>Puedes utilizar el paquete <strong>naniar</strong> para evaluar y visualizar la falta de datos del dataframe <code>linelist</code>.</p>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install and/or load package</span></span>
+<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">naniar</span><span class="op">)</span></span></code></pre></div>
+<div id="cuantificación-de-la-ausencia-de-datos" class="section level3 unnumbered">
+<h3>Cuantificación de la ausencia de datos<a class="anchor" aria-label="anchor" href="#cuantificaci%C3%B3n-de-la-ausencia-de-datos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para encontrar el porcentaje de todos los valores que faltan utiliza <code>pct_miss()</code>. Utiliza <code>n_miss()</code> para obtener el número de valores faltantes.</p>
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># percent of ALL data frame values that are missing</span></span>
+<span><span class="fu">pct_miss</span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 6.688745</code></pre>
+<p>Las dos funciones siguientes devuelven el porcentaje de filas con algún valor ausente, o que están totalmente completas, respectivamente. Recuerda que <code>NA</code> significa que falta, y que <code>""</code> o <code>" "</code> no se contarán como faltantes.</p>
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Percent of rows with any value missing</span></span>
+<span><span class="fu">pct_miss_case</span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span>   <span class="co"># use n_complete() for counts</span></span></code></pre></div>
+<pre><code>## [1] 69.12364</code></pre>
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Percent of rows that are complete (no values missing)  </span></span>
+<span><span class="fu">pct_complete_case</span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span> <span class="co"># use n_complete() for counts</span></span></code></pre></div>
+<pre><code>## [1] 30.87636</code></pre>
+</div>
+<div id="visualización-de-faltantes" class="section level3 unnumbered">
+<h3>Visualización de faltantes<a class="anchor" aria-label="anchor" href="#visualizaci%C3%B3n-de-faltantes"><i class="fas fa-link"></i></a>
+</h3>
+<p>La función <code>gg_miss_var()</code> mostrará el número (o el %) de valores faltantes en cada columna. Algunos matices:</p>
+<ul>
+<li>Puedes añadir un nombre de columna (no entre comillas) al argumento <code>facet =</code> para ver el gráfico por grupos</li>
+<li>Por defecto, se muestran los recuentos en lugar de los porcentajes, cámbialo con <code>show_pct = TRUE</code>
+</li>
+<li>Puedes añadir etiquetas de eje y de título como para un <code>ggplot()</code> normal con <code>+ labs(...)</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">gg_miss_var</span><span class="op">(</span><span class="va">linelist</span>, show_pct <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: The `guide` argument in `scale_*()` cannot be `FALSE`. This was deprecated in ggplot2 3.3.4.
+## ℹ Please use "none" instead.
+## ℹ The deprecated feature was likely used in the naniar package.
+##   Please report the issue at &lt; ]8;;https://github.com/njtierney/naniar/issueshttps://github.com/njtierney/naniar/issues ]8;;&gt;.</code></pre>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-135-1.png" width="672"></div>
+<p>Aquí los datos están conectados con <code>%&gt;%</code> en la función. El argumento <code>facet =</code> también se utiliza para dividir los datos.</p>
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">gg_miss_var</span><span class="op">(</span>show_pct <span class="op">=</span> <span class="cn">TRUE</span>, facet <span class="op">=</span> <span class="va">outcome</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-136-1.png" width="672"></div>
+<p>Puedes utilizar <code>vis_miss()</code> para visualizar el dataframe como un mapa de calor, mostrando si cada valor falta o no. También puedes <code>select()</code> determinadas columnas del dataframe y proporcionar sólo esas columnas a la función.</p>
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Heatplot of missingness across the entire data frame  </span></span>
+<span><span class="fu">vis_miss</span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: `gather_()` was deprecated in tidyr 1.2.0.
+## ℹ Please use `gather()` instead.
+## ℹ The deprecated feature was likely used in the visdat package.
+##   Please report the issue at &lt; ]8;;https://github.com/ropensci/visdat/issueshttps://github.com/ropensci/visdat/issues ]8;;&gt;.</code></pre>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-137-1.png" width="672"></div>
+</div>
+<div id="explorar-y-visualizar-las-relaciones-de-datos-faltantes" class="section level3 unnumbered">
+<h3>Explorar y visualizar las relaciones de datos faltantes<a class="anchor" aria-label="anchor" href="#explorar-y-visualizar-las-relaciones-de-datos-faltantes"><i class="fas fa-link"></i></a>
+</h3>
+<p>¿Cómo se visualiza algo que no existe? Por defecto, <code>ggplot()</code> elimina los puntos con valores faltantes de los gráficos.</p>
+<p><strong>naniar</strong> ofrece una solución mediante <code>geom_miss_point()</code>. Al crear un gráfico de dispersión de dos columnas, los registros con uno de los valores ausentes y el otro valor presente se muestran estableciendo los valores ausentes en un 10% más bajo que el valor más bajo de la columna, y coloreándolos de forma distinta.</p>
+<p>En el gráfico de dispersión que aparece a continuación, los puntos rojos son registros en los que el valor de una columna está presente pero falta el valor de la otra columna. Esto permite ver la distribución de los valores que faltan en relación con los valores que no faltan.</p>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">linelist</span>,</span>
+<span>  mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">age_years</span>, y <span class="op">=</span> <span class="va">temp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>     </span>
+<span>  <span class="fu">geom_miss_point</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-138-1.png" width="672"></div>
+<p>Para evaluar la ausencia en el dataframe <em>estratificado por otra columna</em>, puedes utilizar <code>gg_miss_fct()</code>, que devuelve un mapa de calor del porcentaje de ausencia en el dataframe <em>por una columna de factor/categoría (o fecha)</em>:</p>
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">gg_miss_fct</span><span class="op">(</span><span class="va">linelist</span>, <span class="va">age_cat5</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-139-1.png" width="672"></div>
+<p>Esta función también se puede utilizar con una columna de fechas para ver cómo ha cambiado la falta de datos en el tiempo:</p>
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">gg_miss_fct</span><span class="op">(</span><span class="va">linelist</span>, <span class="va">date_onset</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: Removed 29 rows containing missing values (`geom_tile()`).</code></pre>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-140-1.png" width="672"></div>
+</div>
+<div id="sombra-de-las-columnas" class="section level3 unnumbered">
+<h3>“Sombra” de las columnas<a class="anchor" aria-label="anchor" href="#sombra-de-las-columnas"><i class="fas fa-link"></i></a>
+</h3>
+<p>Otra forma de visualizar la ausencia de valores en una columna es mediante una segunda columna que sea como una “sombra” de esta que puede crear <strong>naniar</strong>. <code>bind_shadow()</code> crea una columna binaria <code>NA</code>/no <code>NA</code> para cada columna existente, y vincula todas estas nuevas columnas al conjunto de datos original con el apéndice “_NA”. Esto duplica el número de columnas - ver más abajo:</p>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">shadowed_linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">bind_shadow</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">shadowed_linelist</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] "case_id"                 "generation"              "date_infection"         
+##  [4] "date_onset"              "date_hospitalisation"    "date_outcome"           
+##  [7] "outcome"                 "gender"                  "age"                    
+## [10] "age_unit"                "age_years"               "age_cat"                
+## [13] "age_cat5"                "hospital"                "lon"                    
+## [16] "lat"                     "infector"                "source"                 
+## [19] "wt_kg"                   "ht_cm"                   "ct_blood"               
+## [22] "fever"                   "chills"                  "cough"                  
+## [25] "aches"                   "vomit"                   "temp"                   
+## [28] "time_admission"          "bmi"                     "days_onset_hosp"        
+## [31] "case_id_NA"              "generation_NA"           "date_infection_NA"      
+## [34] "date_onset_NA"           "date_hospitalisation_NA" "date_outcome_NA"        
+## [37] "outcome_NA"              "gender_NA"               "age_NA"                 
+## [40] "age_unit_NA"             "age_years_NA"            "age_cat_NA"             
+## [43] "age_cat5_NA"             "hospital_NA"             "lon_NA"                 
+## [46] "lat_NA"                  "infector_NA"             "source_NA"              
+## [49] "wt_kg_NA"                "ht_cm_NA"                "ct_blood_NA"            
+## [52] "fever_NA"                "chills_NA"               "cough_NA"               
+## [55] "aches_NA"                "vomit_NA"                "temp_NA"                
+## [58] "time_admission_NA"       "bmi_NA"                  "days_onset_hosp_NA"</code></pre>
+<p>Estas “sombras” de las columnas pueden utilizarse para trazar la proporción de valores que faltan, por cualquier otra columna.</p>
+<p>Por ejemplo, el siguiente gráfico muestra la proporción de registros que carecen de <code>days_onset_hosp</code> (número de días desde el inicio de los síntomas hasta la hospitalización), según el valor de ese registro en <code>date_hospitalisation</code>. Esencialmente, se está trazando la densidad de la columna del eje x, pero estratificando los resultados (<code>color =</code> ) por una columna de sombra de interés. Este análisis funciona mejor si el eje-x es una columna numérica o de fecha.</p>
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">shadowed_linelist</span>,          <span class="co"># data frame with shadow columns</span></span>
+<span>  mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date_hospitalisation</span>, <span class="co"># numeric or date column</span></span>
+<span>                colour <span class="op">=</span> <span class="va">age_years_NA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># shadow column of interest</span></span>
+<span>  <span class="fu">geom_density</span><span class="op">(</span><span class="op">)</span>                          <span class="co"># plots the density curves</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-142-1.png" width="672"></div>
+<p>También puedes utilizar estas columnas “sombra” para estratificar un resumen estadístico, como se muestra a continuación:</p>
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">bind_shadow</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>                <span class="co"># create the shows cols</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">date_outcome_NA</span><span class="op">)</span> <span class="op">%&gt;%</span>    <span class="co"># shadow col for stratifying</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span></span>
+<span>    .cols <span class="op">=</span> <span class="va">age_years</span>,             <span class="co"># variable of interest for calculations</span></span>
+<span>    .fns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"mean"</span> <span class="op">=</span> <span class="va">mean</span>,     <span class="co"># stats to calculate</span></span>
+<span>                <span class="st">"sd"</span> <span class="op">=</span> <span class="va">sd</span>,</span>
+<span>                <span class="st">"var"</span> <span class="op">=</span> <span class="va">var</span>,</span>
+<span>                <span class="st">"min"</span> <span class="op">=</span> <span class="va">min</span>,</span>
+<span>                <span class="st">"max"</span> <span class="op">=</span> <span class="va">max</span><span class="op">)</span>,  </span>
+<span>    na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>                 <span class="co"># other arguments for the stat calculations</span></span></code></pre></div>
+<pre><code>## # A tibble: 2 × 6
+##   date_outcome_NA age_years_mean age_years_sd age_years_var age_years_min age_years_max
+##   &lt;fct&gt;                    &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
+## 1 !NA                       16.0         12.6          158.             0            84
+## 2 NA                        16.2         12.9          167.             0            69</code></pre>
+<p>A continuación se muestra una forma alternativa de trazar la proporción de los valores de una columna que faltan a lo largo del tiempo. <em>No</em> implica <strong>naniar</strong>. Este ejemplo muestra el porcentaje de observaciones semanales que faltan).</p>
+<ol style="list-style-type: decimal">
+<li>Agrega los datos en una unidad de tiempo útil (días, semanas, etc.), resumiendo la proporción de observaciones con <code>NA</code> (y cualquier otro valor de interés)</li>
+<li>Representa la proporción que falta como una línea usando <code>ggplot()</code>
+</li>
+</ol>
+<p>A continuación, tomamos <code>linelist</code>, añadimos una nueva columna para la semana, agrupamos los datos por semana y luego calculamos el porcentaje de registros de esa semana en los que falta el valor. (Nota: si se desea el porcentaje de 7 días el cálculo sería ligeramente diferente).</p>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">outcome_missing</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>week <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/round_date.html">floor_date</a></span><span class="op">(</span><span class="va">date_onset</span>, <span class="st">"week"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>   <span class="co"># create new week column</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">week</span><span class="op">)</span> <span class="op">%&gt;%</span>                                             <span class="co"># group the rows by week</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>                                                     <span class="co"># summarize each week</span></span>
+<span>    n_obs <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,                                                  <span class="co"># number of records</span></span>
+<span>    </span>
+<span>    outcome_missing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">|</span> <span class="va">outcome</span> <span class="op">==</span> <span class="st">""</span><span class="op">)</span>,        <span class="co"># number of records missing the value</span></span>
+<span>    outcome_p_miss  <span class="op">=</span> <span class="va">outcome_missing</span> <span class="op">/</span> <span class="va">n_obs</span>,                    <span class="co"># proportion of records missing the value</span></span>
+<span>  </span>
+<span>    outcome_dead    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">outcome</span> <span class="op">==</span> <span class="st">"Death"</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>,           <span class="co"># number of records as dead</span></span>
+<span>    outcome_p_dead  <span class="op">=</span> <span class="va">outcome_dead</span> <span class="op">/</span> <span class="va">n_obs</span><span class="op">)</span> <span class="op">%&gt;%</span>                   <span class="co"># proportion of records as dead</span></span>
+<span>  </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">-</span><span class="va">week</span>, names_to <span class="op">=</span> <span class="st">"statistic"</span><span class="op">)</span> <span class="op">%&gt;%</span>         <span class="co"># pivot all columns except week, to long format for ggplot</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">statistic</span>, <span class="st">"_p_"</span><span class="op">)</span><span class="op">)</span>                  <span class="co"># keep only the proportion values</span></span></code></pre></div>
+<p>Entonces, representamos la proporción que falta como una línea, por semana. Si no estás familiarizado con el paquete de gráficas <strong>ggplot2</strong>, consulta la página de <a href="#ggplot-basics">fundamentos de ggplot</a>.</p>
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">outcome_missing</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span></span>
+<span>      mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">week</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">statistic</span>, color <span class="op">=</span> <span class="va">statistic</span><span class="op">)</span>,</span>
+<span>      size <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Weekly outcomes"</span>,</span>
+<span>         x <span class="op">=</span> <span class="st">"Week"</span>,</span>
+<span>         y <span class="op">=</span> <span class="st">"Proportion of weekly records"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>     <span class="fu">scale_color_discrete</span><span class="op">(</span></span>
+<span>       name <span class="op">=</span> <span class="st">""</span>,</span>
+<span>       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Died"</span>, <span class="st">"Missing outcome"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">scale_y_continuous</span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-145-1.png" width="672"></div>
+<!-- ======================================================= -->
+</div>
+</div>
+<div id="using-data-with-missing-values" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Uso de datos con valores faltantes<a class="anchor" aria-label="anchor" href="#using-data-with-missing-values"><i class="fas fa-link"></i></a>
+</h2>
+<div id="filtrar-las-filas-con-valores-faltantes" class="section level3 unnumbered">
+<h3>Filtrar las filas con valores faltantes<a class="anchor" aria-label="anchor" href="#filtrar-las-filas-con-valores-faltantes"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para eliminar rápidamente las filas con valores faltantes, utiliza la función <strong>dplyr</strong> <code>drop_na()</code>.</p>
+<p><code>linelist</code> original tiene <code>nrow(linelist)</code> filas. El número ajustado de filas se muestra a continuación:</p>
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">drop_na</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>     <span class="co"># remove rows with ANY missing values</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1818</code></pre>
+<p>Puedes especificar que se eliminen las filas que faltan en determinadas columnas:</p>
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">drop_na</span><span class="op">(</span><span class="va">date_onset</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># remove rows missing date_onset </span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 5632</code></pre>
+<p>Puedes listar las columnas una tras otra, o utilizar <a href="#clean_tidyselect">las funciones de ayuda “tidyselect”</a>:</p>
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">drop_na</span><span class="op">(</span><span class="fu">contains</span><span class="op">(</span><span class="st">"date"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># remove rows missing values in any "date" column </span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 3029</code></pre>
+<!-- ======================================================= -->
+</div>
+<div id="manejo-de-na-en-ggplot" class="section level3 unnumbered">
+<h3>Manejo de <code>NA</code> en <code>ggplot()</code><a class="anchor" aria-label="anchor" href="#manejo-de-na-en-ggplot"><i class="fas fa-link"></i></a>
+</h3>
+<p>A menudo es conveniente informar del número de valores excluidos de un gráfico en un pie de foto. A continuación se muestra un ejemplo:</p>
+<p>En <code>ggplot()</code>, puedes añadir <code>labs()</code> y dentro de él un <code>caption =</code>. En el pie, puedes usar <code>str_glue()</code> del paquete <strong>stringr</strong> para pegar los valores juntos en una frase de forma dinámica para que se ajusten a los datos. Un ejemplo es el siguiente:</p>
+<ul>
+<li>Observa el uso de <code>\n</code> para una nueva línea.</li>
+<li>Ten en cuenta que si varias columnas contribuyen a que los valores no se muestren (por ejemplo, la edad o el sexo si se reflejan en el gráfico), deberás filtrar también esas columnas para calcular correctamente el número no mostrado.</li>
+</ul>
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">labs</span><span class="op">(</span></span>
+<span>  title <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  x <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  caption  <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span></span>
+<span>  <span class="st">"n = {nrow(central_data)} from Central Hospital;</span></span>
+<span><span class="st">  {nrow(central_data %&gt;% filter(is.na(date_onset)))} cases missing date of onset and not shown."</span><span class="op">)</span><span class="op">)</span>  </span></code></pre></div>
+<p>A veces, puede ser más fácil guardar la cadena como un objeto en comandos anteriores al comando <code>ggplot()</code>, y simplemente referenciar el objeto de cadena nombrado dentro de <code>str_glue()</code>.</p>
+<!-- ======================================================= -->
+</div>
+<div id="na-en-los-factores" class="section level3 unnumbered">
+<h3>
+<code>NA</code> en los factores<a class="anchor" aria-label="anchor" href="#na-en-los-factores"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si tu columna de interés es un factor, utiliza <code>fct_explicit_na()</code> del paquete <strong>forcats</strong> para convertir los valores <code>NA</code> en un valor de carácter. Mira más detalles en la página de <a href="#factors">Factores</a>. Por defecto, el nuevo valor es “(Missing)” pero puede ajustarse mediante el argumento <code>na_level =</code>.</p>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">forcats</span><span class="op">)</span>   <span class="co"># load package</span></span>
+<span></span>
+<span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>gender <span class="op">=</span> <span class="fu">fct_explicit_na</span><span class="op">(</span><span class="va">gender</span>, na_level <span class="op">=</span> <span class="st">"Missing"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">gender</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "f"       "m"       "Missing"</code></pre>
+<!-- ======================================================= -->
+</div>
+</div>
+<div id="imputation" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Imputación<a class="anchor" aria-label="anchor" href="#imputation"><i class="fas fa-link"></i></a>
+</h2>
+<p>A veces, al analizar los datos, será importante “rellenar los huecos” e imputar los datos que faltan Aunque siempre se puede analizar simplemente unos datos después de eliminar todos los valores que faltan, esto puede causar problemas de muchas maneras. He aquí dos ejemplos:</p>
+<ol style="list-style-type: decimal">
+<li><p>Al eliminar todas las observaciones con valores faltantes o las variables con una gran cantidad de valores faltantes, podría reducir su potencia o la capacidad para realizar algunos tipos de análisis. Por ejemplo, como descubrimos antes, sólo una pequeña fracción de las observaciones de nuestro conjunto de datos de linelist no tiene valores faltantes en todas nuestras variables. Si elimináramos la mayor parte de nuestro conjunto de datos, perderíamos mucha información. Además, la mayoría de nuestras variables tienen una cierta cantidad de valores faltantes; para la mayoría de los análisis, probablemente no sea razonable eliminar todas las variables que tienen muchos valores faltantes.</p></li>
+<li><p>Dependiendo de la razón por la que faltan datos, el análisis de los datos que no faltan podría conducir a resultados sesgados o engañosos. Por ejemplo, como hemos sabido antes, nos faltan datos de algunos pacientes sobre si han tenido algunos síntomas importantes como fiebre o tos. Pero, como una posibilidad, tal vez esa información no se registró para las personas que obviamente no estaban muy enfermas. En ese caso, si elimináramos estas observaciones, estaríamos excluyendo a algunas de las personas más sanas de nuestro conjunto de datos, lo que podría sesgar los resultados.</p></li>
+</ol>
+<p>Es importante pensar en la razón por la que pueden faltar datos, además de ver cuántos faltan. Esto puede ayudarte a decidir la importancia de imputar los datos que faltan, así como el método de imputación de los datos que faltan que pueda ser mejor en esa situación.</p>
+<div id="tipos-de-datos-faltantes" class="section level3 unnumbered">
+<h3>Tipos de datos faltantes<a class="anchor" aria-label="anchor" href="#tipos-de-datos-faltantes"><i class="fas fa-link"></i></a>
+</h3>
+<p>A continuación se presentan tres tipos generales de datos faltantes:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Falta completamente al azar</strong> (MCAR Missing Completely at Random). Esto significa que no existe ninguna relación entre la probabilidad de que falten datos y cualquiera de las otras variables de los datos. La probabilidad de que falte es la misma para todos los casos. Pero, si tienes una fuerte razón para creer que tus datos son MCAR, analizar sólo los datos no ausentes sin imputar no sesgará los resultados (aunque puede perder algo de potencia). [PENDIENTE: considerar la discusión de las pruebas estadísticas para MCAR].</p></li>
+<li><p><strong>Falta al azar</strong> (MAR Missing at Random). Este nombre es, en realidad, un poco engañoso, ya que MAR significa que los datos faltan de forma sistemática y predecible en función del resto de la información que se tiene. Por ejemplo, puede que todas las observaciones de nuestro conjunto de datos con un valor ausente de fiebre no se hayan registrado porque se asumió que todos los pacientes con escalofríos y dolores tenían fiebre, por lo que nunca se les tomó la temperatura. Si es cierto, podríamos predecir fácilmente que cada observación que falta con escalofríos y dolores también tiene fiebre y utilizar esta información para imputar nuestros datos que faltan. En la práctica, esto es más bien un espectro. Quizá si un paciente tiene escalofríos y dolores, es más probable que también tenga fiebre si no se le toma la temperatura, pero no siempre. Esto sigue siendo predecible aunque no sea perfectamente predecible. Este es un tipo común de valores faltantes</p></li>
+<li><p><strong>Desaparición no aleatoria</strong> (MNAR Missing not at Random). A veces, también se denomina Falta no aleatoria (<strong>NMAR</strong>). Esto supone que la probabilidad de que falte un valor NO es sistemática ni predecible utilizando el resto de la información que tenemos, pero tampoco falta al azar. En esta situación, los datos faltan por razones desconocidas o por razones de las que no se tiene ninguna información. Por ejemplo, en nuestro conjunto de datos puede faltar información sobre la edad porque algunos pacientes muy mayores no saben o se niegan a decir su edad. En esta situación, los datos que faltan sobre la edad están relacionados con el propio valor (y, por tanto, no son aleatorios) y no son predecibles en función del resto de la información que tenemos. El MNAR es complejo y, a menudo, la mejor manera de afrontarlo es intentar recopilar más datos o información sobre el motivo por el que faltan los datos en lugar de intentar imputarlos.</p></li>
+</ol>
+<p>En general, la imputación de datos MCAR suele ser bastante sencilla, mientras que la MNAR es muy difícil, si no imposible. Muchos de los métodos comunes de imputación de datos asumen MAR.</p>
+</div>
+<div id="paquetes-útiles" class="section level3 unnumbered">
+<h3>Paquetes útiles<a class="anchor" aria-label="anchor" href="#paquetes-%C3%BAtiles"><i class="fas fa-link"></i></a>
+</h3>
+<p>Algunos paquetes útiles para la imputación de valores faltantes son Mmisc, missForest (que utiliza bosques aleatorios para imputar los valores faltantes) y mice (Imputación multivariada por ecuaciones encadenadas). Para esta sección sólo utilizaremos el paquete mice, que implementa una variedad de técnicas. El mantenedor del paquete mice ha publicado un libro en línea sobre <a href="https://stefvanbuuren.name/fimd/">la imputación Flexible de valores faltantes</a>.</p>
+<p>Este es el código para cargar el paquete <strong>mice</strong> :</p>
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">mice</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="imputación-de-la-media" class="section level3 unnumbered">
+<h3>Imputación de la media<a class="anchor" aria-label="anchor" href="#imputaci%C3%B3n-de-la-media"><i class="fas fa-link"></i></a>
+</h3>
+<p>A veces, si estás haciendo un análisis simple o tienes una razón de peso para pensar que puede asumir MCAR, puedes simplemente establecer los valores numéricos que faltan a la media de esa variable. Tal vez podamos asumir que las mediciones de temperatura que faltan en nuestro conjunto de datos eran MCAR o eran simplemente valores normales. Aquí está el código para crear una nueva variable que reemplaza los valores de temperatura faltantes con el valor medio de la temperatura en nuestro conjunto de datos. Sin embargo, en muchas situaciones reemplazar los datos con la media puede conducir a un sesgo, así que ten cuidado.</p>
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>temp_replace_na_with_mean <span class="op">=</span> <span class="fu">replace_na</span><span class="op">(</span><span class="va">temp</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">temp</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>También puedes realizar un proceso similar para sustituir los datos categóricos por un valor específico. Para nuestro conjunto de datos, imagina que sabes que todas las observaciones con un valor faltante para tu resultado (que puede ser “Muerte” o “Recuperación”) son en realidad personas que han muerto (nota: esto no es realmente cierto para este conjunto de datos):</p>
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>outcome_replace_na_with_death <span class="op">=</span> <span class="fu">replace_na</span><span class="op">(</span><span class="va">outcome</span>, <span class="st">"Death"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="imputación-de-la-regresión" class="section level3 unnumbered">
+<h3>Imputación de la regresión<a class="anchor" aria-label="anchor" href="#imputaci%C3%B3n-de-la-regresi%C3%B3n"><i class="fas fa-link"></i></a>
+</h3>
+<p>Un método algo más avanzado consiste en utilizar algún tipo de modelo estadístico para predecir cuál es el valor que falta y sustituirlo por el valor predicho. Este es un ejemplo de creación de valores predichos para todas las observaciones en las que falta la temperatura, pero no la edad ni la fiebre, mediante una simple regresión lineal que utiliza el estado de la fiebre y la edad en años como predictores. En la práctica, es conveniente utilizar un modelo mejor que este tipo de enfoque simple.</p>
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">simple_temperature_model_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">temp</span> <span class="op">~</span> <span class="va">fever</span> <span class="op">+</span> <span class="va">age_years</span>, data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#using our simple temperature model to predict values just for the observations where temp is missing</span></span>
+<span><span class="va">predictions_for_missing_temps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">simple_temperature_model_fit</span>,</span>
+<span>                                        newdata <span class="op">=</span> <span class="va">linelist</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<p>O bien, utilizando el mismo enfoque de modelización a través del paquete <strong>mice</strong> para crear valores imputados para las observaciones de temperatura que faltan:</p>
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model_dataset</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">temp</span>, <span class="va">fever</span>, <span class="va">age_years</span><span class="op">)</span>  </span>
+<span></span>
+<span><span class="va">temp_imputed</span> <span class="op">&lt;-</span> <span class="fu">mice</span><span class="op">(</span><span class="va">model_dataset</span>,</span>
+<span>                            method <span class="op">=</span> <span class="st">"norm.predict"</span>,</span>
+<span>                            seed <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                            m <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                            print <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: Number of logged events: 1</code></pre>
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">temp_imputed_values</span> <span class="op">&lt;-</span> <span class="va">temp_imputed</span><span class="op">$</span><span class="va">imp</span><span class="op">$</span><span class="va">temp</span></span></code></pre></div>
+<p>Este es el mismo tipo de enfoque de algunos métodos más avanzados, como el uso del paquete <strong>missForest</strong> para sustituir los datos que faltan por valores predichos. En ese caso, el modelo de predicción es un bosque aleatorio en lugar de una regresión lineal. También se pueden utilizar otros tipos de modelos para hacer esto. Sin embargo, aunque este enfoque funciona bien con MCAR, debes tener un poco de cuidado si crees que MAR o MNAR describen con más precisión tu situación. La calidad de tu imputación dependerá de lo bueno que sea tu modelo de predicción e incluso con un modelo muy bueno la variabilidad de los datos imputados puede estar subestimada.</p>
+</div>
+<div id="locf-y-bocf" class="section level3 unnumbered">
+<h3>LOCF y BOCF<a class="anchor" aria-label="anchor" href="#locf-y-bocf"><i class="fas fa-link"></i></a>
+</h3>
+<p>La última observación trasladada (LOCF) y la observación de referencia trasladada (BOCF) son métodos de imputación para datos de series temporales/longitudinales. La idea es tomar el valor observado anterior como reemplazo de los datos que faltan. Cuando faltan varios valores sucesivamente, el método busca el último valor observado.</p>
+<p>La función <code>fill()</code> del paquete <strong>tidyr</strong> puede utilizarse para la imputación LOCF y BOCF (sin embargo, otros paquetes como <strong>HMISC</strong>, <strong>zoo</strong> y <strong>data.table</strong> también incluyen métodos para hacerlo). Para mostrar la sintaxis de <code>fill()</code>, crearemos un sencillo conjunto de datos de series temporales que contenga el número de casos de una enfermedad para cada trimestre de los años 2000 y 2001. Sin embargo, falta el valor del año para los trimestres posteriores al primero, por lo que tendremos que imputarlos. La unión <code>fill()</code> también se demuestra en la página <a href="#pivoting-data">Pivotar datos</a>.</p>
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#creating our simple dataset</span></span>
+<span><span class="va">disease</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">quarter</span>, <span class="op">~</span><span class="va">year</span>, <span class="op">~</span><span class="va">cases</span>,</span>
+<span>  <span class="st">"Q1"</span>,    <span class="fl">2000</span>,    <span class="fl">66013</span>,</span>
+<span>  <span class="st">"Q2"</span>,      <span class="cn">NA</span>,    <span class="fl">69182</span>,</span>
+<span>  <span class="st">"Q3"</span>,      <span class="cn">NA</span>,    <span class="fl">53175</span>,</span>
+<span>  <span class="st">"Q4"</span>,      <span class="cn">NA</span>,    <span class="fl">21001</span>,</span>
+<span>  <span class="st">"Q1"</span>,    <span class="fl">2001</span>,    <span class="fl">46036</span>,</span>
+<span>  <span class="st">"Q2"</span>,      <span class="cn">NA</span>,    <span class="fl">58842</span>,</span>
+<span>  <span class="st">"Q3"</span>,      <span class="cn">NA</span>,    <span class="fl">44568</span>,</span>
+<span>  <span class="st">"Q4"</span>,      <span class="cn">NA</span>,    <span class="fl">50197</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#imputing the missing year values:</span></span>
+<span><span class="va">disease</span> <span class="op">%&gt;%</span> <span class="fu">fill</span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 8 × 3
+##   quarter  year cases
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 Q1       2000 66013
+## 2 Q2       2000 69182
+## 3 Q3       2000 53175
+## 4 Q4       2000 21001
+## 5 Q1       2001 46036
+## 6 Q2       2001 58842
+## 7 Q3       2001 44568
+## 8 Q4       2001 50197</code></pre>
+<p>Nota: asegúrate de que tus datos están correctamente ordenados antes de utilizar la función <code>fill()</code>. <code>fill()</code> rellena por defecto “hacia abajo”, pero también puedes imputar valores en diferentes direcciones cambiando el parámetro <code>.direction</code>. Podemos hacer unos datos similares en el que el valor del año se registra sólo al final del año y falta para los trimestres anteriores:</p>
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#creating our slightly different dataset</span></span>
+<span><span class="va">disease</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">quarter</span>, <span class="op">~</span><span class="va">year</span>, <span class="op">~</span><span class="va">cases</span>,</span>
+<span>  <span class="st">"Q1"</span>,      <span class="cn">NA</span>,    <span class="fl">66013</span>,</span>
+<span>  <span class="st">"Q2"</span>,      <span class="cn">NA</span>,    <span class="fl">69182</span>,</span>
+<span>  <span class="st">"Q3"</span>,      <span class="cn">NA</span>,    <span class="fl">53175</span>,</span>
+<span>  <span class="st">"Q4"</span>,    <span class="fl">2000</span>,    <span class="fl">21001</span>,</span>
+<span>  <span class="st">"Q1"</span>,      <span class="cn">NA</span>,    <span class="fl">46036</span>,</span>
+<span>  <span class="st">"Q2"</span>,      <span class="cn">NA</span>,    <span class="fl">58842</span>,</span>
+<span>  <span class="st">"Q3"</span>,      <span class="cn">NA</span>,    <span class="fl">44568</span>,</span>
+<span>  <span class="st">"Q4"</span>,    <span class="fl">2001</span>,    <span class="fl">50197</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#imputing the missing year values in the "up" direction:</span></span>
+<span><span class="va">disease</span> <span class="op">%&gt;%</span> <span class="fu">fill</span><span class="op">(</span><span class="va">year</span>, .direction <span class="op">=</span> <span class="st">"up"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 8 × 3
+##   quarter  year cases
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 Q1       2000 66013
+## 2 Q2       2000 69182
+## 3 Q3       2000 53175
+## 4 Q4       2000 21001
+## 5 Q1       2001 46036
+## 6 Q2       2001 58842
+## 7 Q3       2001 44568
+## 8 Q4       2001 50197</code></pre>
+<p>En este ejemplo, LOCF y BOCF son claramente lo correcto, pero en situaciones más complicadas puede ser más difícil decidir si estos métodos son apropiados. Por ejemplo, es posible que falten valores de laboratorio para un paciente del hospital después del primer día. A veces, esto puede significar que los valores de laboratorio no cambiaron… ¡pero también podría significar que el paciente se recuperó y sus valores serían muy diferentes después del primer día! Utiliza estos métodos con precaución.</p>
+</div>
+<div id="imputación-múltiple" class="section level3 unnumbered">
+<h3>Imputación múltiple<a class="anchor" aria-label="anchor" href="#imputaci%C3%B3n-m%C3%BAltiple"><i class="fas fa-link"></i></a>
+</h3>
+<p>El <a href="https://stefvanbuuren.name/fimd/">libro en línea que mencionamos antes</a>, escrito por el autor del paquete <strong>mice</strong> contiene una explicación detallada de la imputación múltiple y de los motivos por los que conviene utilizarla. Pero, aquí hay una explicación básica del método:</p>
+<p>Cuando se realiza una imputación múltiple, se crean múltiples conjuntos de datos con los valores faltantes imputados a valores de datos plausibles (dependiendo de los datos de tu investigación, puedes querer crear más o menos de estos conjuntos de datos imputados, pero el paquete <strong>mice</strong> establece el número por defecto en 5). La diferencia es que, en lugar de un valor único y específico, cada valor imputado se extrae de una distribución estimada (por lo que incluye cierta aleatoriedad). Como resultado, cada uno de estos conjuntos de datos tendrá valores imputados ligeramente diferentes (sin embargo, los datos no ausentes serán los mismos en cada uno de estos conjuntos de datos imputados). Todavía se utiliza algún tipo de modelo predictivo para hacer la imputación en cada uno de estos nuevos conjuntos de datos (mice tiene muchas opciones para los métodos de predicción, incluyendo <em>Predictive Mean Matching</em>, <em>regresión logística</em> y <em>random forest</em>), pero el paquete mice puede encargarse de muchos de los detalles del modelado.</p>
+<p>Entonces, una vez que hayas creado estos nuevos conjuntos de datos imputados, puedes aplicar cualquier modelo estadístico o análisis que estuviera planeando hacer para cada uno de estos nuevos conjuntos de datos imputados y juntar los resultados de estos modelos. Esto funciona muy bien para reducir el sesgo tanto en MCAR como en muchas configuraciones de MAR y a menudo resulta en estimaciones de error estándar más precisas.</p>
+<p>He aquí un ejemplo de aplicación del proceso de Imputación Múltiple para predecir la temperatura en nuestro conjunto de datos de <code>linelist</code> utilizando una edad y un estado de fiebre (nuestro conjunto de datos modelo simplificado de arriba):</p>
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># imputing missing values for all variables in our model_dataset, and creating 10 new imputed datasets</span></span>
+<span><span class="va">multiple_imputation</span> <span class="op">=</span> <span class="fu">mice</span><span class="op">(</span></span>
+<span>  <span class="va">model_dataset</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  m <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  print <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span></code></pre></div>
+<pre><code>## Warning: Number of logged events: 1</code></pre>
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">multiple_imputation</span>, <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">temp</span> <span class="op">~</span> <span class="va">age_years</span> <span class="op">+</span> <span class="va">fever</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/pool.html">pool</a></span><span class="op">(</span><span class="va">model_fit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##          term     estimate    std.error     statistic        df       p.value
+## 1 (Intercept) 3.703143e+01 0.0270863456 1367.16240465  26.83673  1.583113e-66
+## 2   age_years 3.867829e-05 0.0006090202    0.06350905 171.44363  9.494351e-01
+## 3    feveryes 1.978044e+00 0.0193587115  102.17849544 176.51325 5.666771e-159</code></pre>
+<p>En este caso, utilizamos el método de imputación por defecto de mice, que es el de Coincidencia de Medias Predictivas. A continuación, utilizamos estos conjuntos de datos imputados para estimar por separado y luego agrupar los resultados de las regresiones lineales simples en cada uno de estos conjuntos de datos. Hay muchos detalles que hemos pasado por alto y muchas configuraciones que puedes ajustar durante el proceso de Imputación Múltiple mientras utilizas el paquete <strong>mice</strong>. Por ejemplo, no siempre tendrá datos numéricos y podría necesitar utilizar otros métodos de imputación (puedes seguir utilizando el paquete mice para muchos otros tipos de datos y métodos). Pero, para un análisis más robusto cuando los datos faltantes son una preocupación significativa, la Imputación Múltiple es una buena solución que no siempre es mucho más trabajo que hacer un análisis de caso completo.</p>
+<!-- ======================================================= -->
+</div>
+</div>
+<div id="resources-13" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> Recursos<a class="anchor" aria-label="anchor" href="#resources-13"><i class="fas fa-link"></i></a>
+</h2>
+<p>Viñeta sobre el <a href="https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html">paquete naniar</a></p>
+<p>Galería de <a href="https://cran.r-project.org/web/packages/naniar/vignettes/naniar-visualisation.html">visualizaciones de valores faltantes</a></p>
+<p><a href="https://stefvanbuuren.name/fimd/">Libro en línea</a> sobre imputación múltiple en R por el mantenedor del paquete <strong>mice</strong></p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="univariate-and-multivariable-regression.html"><span class="header-section-number">3</span> Regresión univariante y multivariable</a></div>
+<div class="next"><a href="standardised-rates.html"><span class="header-section-number">5</span> Tasas estandarizadas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#missing-data"><span class="header-section-number">4</span> Valores faltantes</a></li>
+<li>
+<a class="nav-link" href="#preparation-11"><span class="header-section-number">4.1</span> Preparación</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cargar-paquetes-3">Cargar paquetes</a></li>
+<li><a class="nav-link" href="#importar-datos-3">Importar datos</a></li>
+<li><a class="nav-link" href="#convertir-valores-faltantes-en-la-importaci%C3%B3n">Convertir valores faltantes en la importación</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#missing-values-in-r"><span class="header-section-number">4.2</span> Valores faltantes en R</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#na">NA</a></li>
+<li><a class="nav-link" href="#versiones-de-na">Versiones de NA</a></li>
+<li><a class="nav-link" href="#null">NULL</a></li>
+<li><a class="nav-link" href="#nan">NaN</a></li>
+<li><a class="nav-link" href="#inf">Inf</a></li>
+<li><a class="nav-link" href="#ejemplos">Ejemplos</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#useful-functions"><span class="header-section-number">4.3</span> Funciones útiles</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#is.na-y-is.na">is.na() y !is.na()</a></li>
+<li><a class="nav-link" href="#na.omit">na.omit()</a></li>
+<li><a class="nav-link" href="#drop_na">drop_na()</a></li>
+<li><a class="nav-link" href="#na.rm-true">na.rm = TRUE</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#assess-missingness-in-a-data-frame"><span class="header-section-number">4.4</span> Evaluar la ausencia de datos en un dataframe</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cuantificaci%C3%B3n-de-la-ausencia-de-datos">Cuantificación de la ausencia de datos</a></li>
+<li><a class="nav-link" href="#visualizaci%C3%B3n-de-faltantes">Visualización de faltantes</a></li>
+<li><a class="nav-link" href="#explorar-y-visualizar-las-relaciones-de-datos-faltantes">Explorar y visualizar las relaciones de datos faltantes</a></li>
+<li><a class="nav-link" href="#sombra-de-las-columnas">“Sombra” de las columnas</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#using-data-with-missing-values"><span class="header-section-number">4.5</span> Uso de datos con valores faltantes</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#filtrar-las-filas-con-valores-faltantes">Filtrar las filas con valores faltantes</a></li>
+<li><a class="nav-link" href="#manejo-de-na-en-ggplot">Manejo de NA en ggplot()</a></li>
+<li><a class="nav-link" href="#na-en-los-factores">NA en los factores</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#imputation"><span class="header-section-number">4.6</span> Imputación</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#tipos-de-datos-faltantes">Tipos de datos faltantes</a></li>
+<li><a class="nav-link" href="#paquetes-%C3%BAtiles">Paquetes útiles</a></li>
+<li><a class="nav-link" href="#imputaci%C3%B3n-de-la-media">Imputación de la media</a></li>
+<li><a class="nav-link" href="#imputaci%C3%B3n-de-la-regresi%C3%B3n">Imputación de la regresión</a></li>
+<li><a class="nav-link" href="#locf-y-bocf">LOCF y BOCF</a></li>
+<li><a class="nav-link" href="#imputaci%C3%B3n-m%C3%BAltiple">Imputación múltiple</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#resources-13"><span class="header-section-number">4.7</span> Recursos</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>EpiRhandbook en español</strong>" was written by El equipo del manual. It was last built on 2022-11-22.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

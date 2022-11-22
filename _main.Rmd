@@ -52,15 +52,14 @@ knitr::include_graphics(here::here("images", "Epi R Handbook banner beige 1500x5
 
 ## R para epidemiología aplicada y salud pública {-}  
 
+**Utilización**: Este manual ha sido utilizado más de **1 millón de veces por 300.000 personas** en todo el mundo.
 
-**Este manual pretende:**
 
-* Servir como breve guía de referencia para escribir código en R
-* Proporcionar ejemplos detallados que aborden problemas epidemiológicos.
-* Ayudar a profesionales de la epidemiología en su transición a R
-* Ser accesible en entornos con baja conectividad a Internet a través de una [**versión sin conexión**](#download-handbook-and-data)
- 
-<p><strong>Idiomas:</strong> <a href="https://epirhandbook.com/en/">Inglés</a>, <a href="https://epirhandbook.com/vn/">Vietnamita (Tiếng Việt)</a></p>
+**Objetivo:** Servir como breve guía de referencia para escribir código en R (en línea y [**versión sin conexión**](#download-handbook-and-data) con ejemplos detallados que aborden problemas epidemiológicos.  
+
+**¿Está empezando con R?** Pruebe nuestros **[tutoriales interactivos gratuitos](https://www.appliedepi.org/tutorial/)** o **[el curso de introducción](https://www.appliedepi.org/live/)** sincrónico, utilizado por los CDC de EE.UU., la OMS, y más de 75 agencias de salud y programas de formación de Epi de campo.  
+
+<p><strong>Idiomas:</strong> <a href="https://epirhandbook.com/en/">Inglés</a>, <a href="https://epirhandbook.com/vn/">Vietnamita (Tiếng Việt)</a>, <a href="https://epirhandbook.com/tr/">Turco (Türkçe)</a></p>
 
 <!-- * Use practical epi examples - cleaning case linelists, making transmission chains and epidemic curves, automated reports and dashboards, modeling incidence and making projections, demographic pyramids and rate standardization, record matching, outbreak detection, survey analysis, survival analysis, GIS basics, contact tracing, phylogenetic trees...   -->
 
@@ -97,8 +96,7 @@ a column separator -->
 
 Somos epi's de campo de todo el mundo, escribiendo en nuestro tiempo libre para ofrecer este recurso a la comunidad. Tu apoyo y comentarios son muy bienvenidos:
 
-* **[Cuestionario online](https://forms.gle/A5SnRVws7tPD15Js9)**
-* Envía un email a **epiRhandbook@gmail.com** o un tweet **[\@epiRhandbook](https://twitter.com/epirhandbook)**  
+* Envía un email a **contact@appliedepi.org**, un tweet **[\@appliedepi](https://twitter.com/appliedepi)**, o en LinkedIn  
 * Envía problemas a nuestro **[Repositorio Github](https://github.com/epirhandbook/Epi_R_handbook)**  
 
 
@@ -119,7 +117,6 @@ Somos epi's de campo de todo el mundo, escribiendo en nuestro tiempo libre para 
 * Navega por las páginas del índice o utiliza el cuadro de búsqueda
 * Clica en los iconos "Copy" para copiar el código  
 * Puedes seguir paso a paso las lecciones utilizando nuestros [datos de ejemplo][Download handbook and data]  
-* Consulta la sección "Recursos" de cada página para obtener más material
 
 **Versión sin conexión**  
 
@@ -163,7 +160,7 @@ Este manual **no** es un producto aprobado por ninguna organización específica
 
 
 ### Financiación y apoyo {-}  
-
+Este libro ha sido principalmente un esfuerzo voluntario que ha requerido miles de horas de trabajo.  
 El manual recibió apoyo financiaciero de [TEPHINET](https://www.tephinet.org/), la red mundial de Programas de Formación en Epidemiología de Campo (FETP) a través de una subvención para el desarrollo de capacidades de emergencia COVID-19.
 
 La Red de Antiguos Alumnos de ([EAN](https://epietalumni.net/)) proporcionó apoyo administrativo, con un agradecimiento especial a Annika Wendland. EPIET es el Programa Europeo de Formación en Epidemiología de Intervención.
@@ -229,6 +226,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -273,6 +271,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -453,6 +452,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -795,6 +795,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -839,6 +840,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -1484,7 +1486,7 @@ Puedes actualizar los paquetes reinstalándolos. También puedes clicar en el bo
 
 ### Eliminar paquetes {.unnumbered}
 
-Utiliza `p_delete()` de **pacman**, o `remove.packages()` de **.** Alternativamente, puedes buscar la carpeta que lo contiene en tu librería y borrarla manualmente.
+Utiliza `p_delete()` de **pacman**, o `remove.packages()` de **utils**. Alternativamente, puedes buscar la carpeta que lo contiene en tu librería y borrarla manualmente.
 
 
 
@@ -1636,7 +1638,7 @@ Otras áreas de código que son automáticamente elegibles para plegarlas son la
 <!-- ======================================================= -->
 <!-- ======================================================= -->
 <!-- ======================================================= -->
-## Directorio de trabajo {working_directory}  
+## Directorio de trabajo {#working_directory}  
 
 El directorio de trabajo (o Working Directory "WD") es la ubicación de la carpeta raíz utilizada por R para su trabajo - donde R busca y guarda los archivos por defecto. Por defecto, guardará los nuevos archivos y resultados en esta ubicación, y buscará los archivos de datos para importar aquí también.
 
@@ -2553,6 +2555,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -2855,6 +2858,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -3063,6 +3067,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -3199,6 +3204,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -4155,6 +4161,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -4199,6 +4206,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -4264,7 +4272,7 @@ recode() |recodificar los valores de una columna | **dplyr**
 case_when() | recodificar los valores de una columna con criterios lógicos más complejos | **dplyr**   
 replace_na(), na_if(), coalesce() | funciones especiales de recodificación | **tidyr**   
 age_categories() y [cut()](https://rdrr.io/r/base/cut.html) | crear grupos categóricos a partir de una columna numérica | **epikit** y R **base**
-clean_variable_spelling() | recodificación/limpieza de valores mediante un diccionario de datos | **lista de líneas**   
+match_df() | recodificación/limpieza de valores mediante un diccionario de datos | **matchmaker**   
 [which()](https://rdrr.io/r/base/which.html) | aplicar los criterios lógicos; devolver los índices | R **base**
 
 Si quieres ver cómo se comparan estas funciones con los comandos de Stata o SAS, consulta la página sobre la [transición a R](#transition-to-r). 
@@ -5152,14 +5160,34 @@ linelist <- linelist %>%
   mutate(age_years = case_when(
             age_unit == "years"  ~ age,       # if age is given in years
             age_unit == "months" ~ age/12,    # if age is given in months
-            is.na(age_unit)      ~ age,       # if age unit is missing, assume years
-            TRUE                 ~ NA_real_)) # any other circumstance, assign missing
+            is.na(age_unit)      ~ age))      # if age unit is missing, assume years
+                                              # any other circumstance, assign NA (missing)
 ```
 
 
-A medida que se evalúa cada fila de los datos, los criterios se aplican/evalúan en el orden en que se escriben las sentencias `case_when()`, de arriba a abajo. Si el criterio superior se evalúa como `TRUE` para una fila determinada, se asigna el valor RHS, y los criterios restantes ni siquiera se prueban para esa fila. Por lo tanto, es mejor escribir los criterios más específicos primero y los más generales al final. 
+A medida que se evalúa cada fila de los datos, los criterios se aplican/evalúan en el orden en que se escriben las sentencias `case_when()`, de arriba a abajo. Si el criterio superior se evalúa como `TRUE` para una fila determinada, se asigna el valor RHS, y los criterios restantes ni siquiera se prueban para esa fila. Por lo tanto, es mejor escribir los criterios más específicos primero y los más generales al final. A una fila de datos que no cumpla ninguno de los criterios del RHS se le asignará `NA`.   
 
 En esta línea, en su declaración final, coloca `TRUE` en el lado izquierdo, lo que capturará cualquier fila que no cumpla ninguno de los criterios anteriores. Al lado derecho de esta declaración se le podría asignar un valor como "¡comprobado!" o faltante.  
+
+A continuación se muestra otro ejemplo de `case_when()` utilizado para crear una nueva columna con la clasificación del paciente, según una definición de caso para los casos confirmados y sospechosos:  
+
+```{r, eval=F}
+linelist <- linelist %>% 
+     mutate(case_status = case_when(
+          
+          # if patient had lab test and it is positive,
+          # then they are marked as a confirmed case 
+          ct_blood < 20                   ~ "Confirmed",
+          
+          # given that a patient does not have a positive lab result,
+          # if patient has a "source" (epidemiological link) AND has fever, 
+          # then they are marked as a suspect case
+          !is.na(source) & fever == "yes" ~ "Suspect",
+          
+          # any other patient not addressed above 
+          # is marked for follow up
+          TRUE                            ~ "To investigate"))
+```
 
 
 <span style="color: red;">***PELIGRO:* Los valores del lado derecho deben ser todos del mismo tipo**: numéricos, de caracteres, de fecha, lógicos, etc. Para asignar faltantes (`NA`), puede ser necesario utilizar variaciones especiales de `NA` como `NA_character_`, `NA_real_` (para numérico o POSIX), y `as.Date(NA)`. Lee más en [Trabajar con fechas](#working-with-dates-1). </span>  
@@ -5225,7 +5253,7 @@ linelist <- linelist %>%
 
 ### Diccionario de limpieza  {.unnumbered}
 
-Utiliza el paquete R **linelist** y su función `clean_variable_spelling()` para limpiar un dataframe con un *diccionario de limpieza*. **linelist** es un paquete desarrollado por [RECON](https://github.com/reconhub/linelist) - el  R Epidemics Consortium. 
+Utiliza el paquete R **matchmaker** y su función `match_df()` para limpiar un dataframe con un *diccionario de limpieza*.  
 
 1.  Crear un diccionario de limpieza con 3 columnas:  
      * Una columna "desde" (el valor incorrecto)  
@@ -5249,13 +5277,15 @@ cleaning_dict <- rio::import(here("data", "case_linelists", "cleaning_dict.csv")
 cleaning_dict <- import("cleaning_dict.csv")
 ```
 
-3.  Pasa linelist crudas a `clean_variable_spelling()`, especificando en `wordlists = ` el dataframe del diccionario de limpieza. El argumento `spelling_vars = ` puede utilizarse para especificar a qué columna del diccionario se refieren las columnas (la tercera por defecto), o puede establecerse como `NULL` para que el diccionario se aplique a todas las columnas de caracteres y factores. Ten en cuenta que esta función puede tardar mucho en ejecutarse. 
+3.  Pasa linelist crudas a `match_df()`, especificando en `dictionary = ` el dataframe del diccionario de limpieza. El argumento `from = ` debe ser el nombre de la columna del diccionario que contiene los valores "originales", el argumento `by = ` debe ser la columna del diccionario que contiene los correspondientes valores "nuevos", y la tercera columna enumera la columna en la que se realizará el cambio. Utilice `.global` en la columna `by = ` para aplicar un cambio en todas las columnas. Una cuarta columna del diccionario `order` se puede utilizar para especificar el orden del factor de los nuevos valores.  
 
 ```{r}
-linelist <- linelist %>% 
-  linelist::clean_variable_spelling(
-    wordlists = cleaning_dict,
-    spelling_vars = "col",        # dict column containing column names, defaults to 3rd column in dict
+linelist <- linelist %>%     # provide or pipe your dataset
+     matchmaker::match_df(
+          dictionary = cleaning_dict,  # name of your dictionary
+          from = "from",               # column with values to be replaced (default is col 1)
+          to = "to",                   # column with final values (default is col 2)
+          by = "col"                   # column with column names (default is col 3)
   )
 ```
 
@@ -5267,7 +5297,7 @@ DT::datatable(head(linelist,50), rownames = FALSE, filter="top", options = list(
 ```
 
 
-Ten en cuenta que los nombres de las columnas en el diccionario de limpieza deben corresponder a los nombres *en este punto* de tu script de limpieza. Consulta esta [referencia en línea para el paquete linelist](https://www.repidemicsconsortium.org/linelist/reference/clean_data.html) para obtener más detalles. 
+Ten en cuenta que los nombres de las columnas en el diccionario de limpieza deben corresponder a los nombres *en este punto* de tu script de limpieza. Consulta esta [referencia en línea para el paquete linelist](https://cran.r-project.org/web/packages/matchmaker/vignettes/intro.html) para obtener más detalles. 
 
 
 
@@ -5333,8 +5363,7 @@ linelist <- linelist_raw %>%
     mutate(age_years = case_when(
           age_unit == "years" ~ age,
           age_unit == "months" ~ age/12,
-          is.na(age_unit) ~ age,
-          TRUE ~ NA_real_))
+          is.na(age_unit) ~ age))
 ```
 
 
@@ -5681,8 +5710,7 @@ linelist <- linelist_raw %>%
     mutate(age_years = case_when(
           age_unit == "years" ~ age,
           age_unit == "months" ~ age/12,
-          is.na(age_unit) ~ age,
-          TRUE ~ NA_real_)) %>% 
+          is.na(age_unit) ~ age)) %>% 
   
     # ABOVE ARE UPSTREAM CLEANING STEPS ALREADY DISCUSSED
     ###################################################   
@@ -5982,8 +6010,7 @@ linelist <- linelist_raw %>%
     mutate(age_years = case_when(
           age_unit == "years" ~ age,
           age_unit == "months" ~ age/12,
-          is.na(age_unit) ~ age,
-          TRUE ~ NA_real_)) %>% 
+          is.na(age_unit) ~ age)) %>% 
   
     mutate(
           # age categories: custom
@@ -6115,6 +6142,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -6237,7 +6265,7 @@ A continuación presentamos dos enfoques para convertir una columna de valores d
 El uso de `as.Date()` requiere que:
 
 *	Se especifique el formato **existente** de la fecha de carácter en bruto o la fecha de origen si se suministran las fechas como números (véase la sección sobre las fechas de Excel)
-*	Si se utiliza en una columna de caracteres, todos los valores de fecha deben tener el mismo formato exacto (si no es el caso, pruebe con `guess_dates()` del paquete **linelist**)
+*	Si se utiliza en una columna de caracteres, todos los valores de fecha deben tener el mismo formato exacto (si no es el caso, pruebe con `parse_date()` del paquete **parsedate**)
 
 En **primer** lugar, comprueba el tipo de la columna con `class()` de R **base** . Si no estás seguro o estás confundido sobre el tipo de datos (por ejemplo, ve "POSIXct", etc.) puede ser más fácil convertir primero la columna al tipo Character con `as.character()`, y luego convertirla al tipo Date.
 
@@ -6389,32 +6417,22 @@ data_cleaned <- data %>%
 <!-- ======================================================= -->
 ## Fechas desordenadas {#messy-dates}
 
-La función `guess_dates()` del paquete **linelist** intenta leer una columna de fecha "desordenada" que contiene fechas en muchos formatos diferentes y convertir las fechas a un formato estándar. [Puedes leer más en línea sobre `guess_dates()` ](https://www.repidemicsconsortium.org/linelist/reference/guess_dates.html). Si `guess_dates()` aún no está disponible en CRAN para R 4.0.2, intenta instalarlo mediante `pacman::p_load_gh("reconhub/linelist")`.
+La función `parse_date()` del paquete **parsedate** intenta leer una columna de fecha "desordenada" que contiene fechas en muchos formatos diferentes y convertir las fechas a un formato estándar. [Puedes leer más en línea sobre `guess_dates()` ](https://www.repidemicsconsortium.org/linelist/reference/guess_dates.html).  
 
-Por ejemplo `guess_dates` vería un vector de las siguientes fechas de caracteres "03 Ene 2018", "07/03/1982", y "08/20/85" y las convertiría al tipo Date como `2018-01-03`, `1982-03-07`, y `1985-08-20`.
+Por ejemplo `parse_date()` vería un vector de las siguientes fechas de caracteres "03 Ene 2018", "07/03/1982", y "08/20/85" y las convertiría al tipo Date como `2018-01-03`, `1982-03-07`, y `1985-08-20`.
 
 ```{r, }
-linelist::guess_dates(c("03 Jan 2018",
+parsedate::parse_date(c("03 Jany 2018",
                         "07/03/1982",
                         "08/20/85"))
 ```
-
-Algunos argumentos opcionales para `guess_dates()` que puede incluir son:
-
-*	`error_tolerance` - Proporción de entradas que no pueden ser identificadas como fechas a tolerar (por defecto 0,1 o 10%)
-*	`last_date` - la última fecha válida (por defecto, la fecha actual)
-*	`first_date` - la primera fecha válida. Por defecto, cincuenta años antes de last_date.
 
 
 ```{r eval = FALSE}
 # An example using guess_dates on the column dater_onset
 linelist <- linelist %>%                 # the dataset is called linelist
   mutate(
-    date_onset = linelist::guess_dates(  # the guess_dates() from package "linelist"
-      date_onset,
-      error_tolerance = 0.1,
-      first_date = "2016-01-01"
-    )
+    date_onset = parsedate::parse_date(date_onset))  # the parse_date() from package "parsedate"
 ```
 
 
@@ -6885,6 +6903,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -7922,6 +7941,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -8483,6 +8503,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -9019,7 +9040,7 @@ Pero es menos útil para presentarlo en una tabla, así que practiquemos la conv
 ```{r}
 df_combined %>% 
   pivot_wider(
-    id_cols = c(Facility, Year, Cases),
+    id_cols = c(Measurement, Facility),
     names_from = "Year",
     values_from = "Cases"
   ) %>% 
@@ -9060,6 +9081,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -9216,7 +9238,7 @@ linelist %>%
 
 Por defecto, si ejecutas `group_by()` sobre datos que ya están agrupados, se eliminarán los grupos antiguos y se aplicarán los nuevos. Si deseas añadir nuevos grupos a los existentes, incluye el argumento `.add = TRUE`. 
 
-````{r, eval=F}
+```{r, eval=F}
 # Grouped by outcome
 by_outcome <- linelist %>% 
   group_by(outcome)
@@ -9641,6 +9663,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -10598,6 +10621,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -11252,6 +11276,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -12217,6 +12242,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -12262,6 +12288,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -13317,6 +13344,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -13853,6 +13881,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -14580,6 +14609,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -15269,6 +15299,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -15803,6 +15834,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -15846,7 +15878,7 @@ Esta página cubrirá dos métodos para calcular y visualizar las medias móvile
 
 
 <!-- ======================================================= -->
-## Preparaciónn {#preparation-12}
+## Preparación {#preparation-12}
 
 ### Cargar paquetes {.unnumbered}
 
@@ -15895,10 +15927,10 @@ El paquete **slider** proporciona varias funciones de "ventana deslizante" para 
 Estas son algunas de las funciones más comunes:
 
 * `slide_dbl()` - itera a través de una columna *numérica* (de ahí "_dbl") realizando una operación mediante una ventana deslizante
-  * `slide_sum()` - función abreviada de suma rodante para `slide_dbl()`
+  * `slide_sum()` - función abreviada de suma móvil para `slide_dbl()`
   * `slide_mean()` - función abreviada de media móvil para `slide_dbl()`
-* `slide_index_dbl()` - aplica la ventana rodante en una columna numérica utilizando una columna separada para *indexar* la progresión de la ventana (útil si se rueda por fecha con algunas fechas ausentes)
-  * `slide_index_sum()` - Función abreviada de suma rodante con indexación
+* `slide_index_dbl()` - aplica la ventana móvil en una columna numérica utilizando una columna separada para *indexar* la progresión de la ventana (útil si se rueda por fecha con algunas fechas ausentes)
+  * `slide_index_sum()` - Función abreviada de suma móvil con indexación
   * `slide_index_mean()` - Función de acceso directo a la media móvil con indexación
 
 El paquete **slider** tiene muchas otras funciones que se tratan en la sección de Recursos de esta página. Tocamos brevemente las más comunes.
@@ -15946,7 +15978,7 @@ Sin embargo, en muchas circunstancias de epidemiología aplicada puede haber fec
 
 ### Datos indexados {.unnumbered}  
 
-A continuación, mostramos un ejemplo utilizando `slide_index_dbl()` en la lista de casos. Digamos que nuestro objetivo es calcular una incidencia rodante de 7 días - la suma de casos utilizando una ventana rodante de 7 días. Si estás buscando un ejemplo de media rodante, mira la sección de abajo sobre [balanceo agrupado](#roll_slider_group).
+A continuación, mostramos un ejemplo utilizando `slide_index_dbl()` en la lista de casos. Digamos que nuestro objetivo es calcular una incidencia acumulada de 7 días - la suma de casos utilizando una ventana móvil de 7 días. Si estás buscando un ejemplo de media móvil, mira la sección de abajo sobre [balanceo agrupado](#roll_slider_group).
 
 Para empezar, se crean los datos `daily_counts` para reflejar los recuentos diarios de casos de `linelist`, calculados con `count()` de **dplyr**.
 
@@ -16236,6 +16268,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -16768,7 +16801,7 @@ model <- glm_nb_model(
     fourier)
 
 ## fit your model using the counts dataset
-fitted_model <- trending::fit(model, counts)
+fitted_model <- trending::fit(model, data.frame(counts))
 
 ## calculate confidence intervals and prediction intervals 
 observed <- predict(fitted_model, simulate_pi = FALSE)
@@ -16946,7 +16979,7 @@ model <- glm_nb_model(
     )
 
 ## fit your model using the counts dataset
-fitted_model <- trending::fit(model, counts)
+fitted_model <- trending::fit(model, data.frame(counts))
 
 ## calculate confidence intervals and prediction intervals 
 observed <- predict(fitted_model, simulate_pi = FALSE)
@@ -17168,7 +17201,7 @@ pred_data <- pluck(dat, 1) %>%
   select(case_int, epiweek, fourier)
 
 # fit model 
-fitted_model <- trending::fit(model, fitting_data)
+fitted_model <- trending::fit(model, data.frame(fitting_data))
 
 # get confint and estimates for fitted data
 observed <- fitted_model %>% 
@@ -17176,7 +17209,7 @@ observed <- fitted_model %>%
 
 # forecast with data want to predict with 
 forecasts <- fitted_model %>% 
-  predict(pred_data, simulate_pi = FALSE)
+  predict(data.frame(pred_data), simulate_pi = FALSE)
 
 ## combine baseline and predicted datasets
 observed <- bind_rows(observed, forecasts)
@@ -17361,7 +17394,7 @@ forecasts <- purrr::map(unique(case_roll$.id),
   
   # forecast with data want to predict with 
   forecasts <- fitted_model %>% 
-    predict(pred_data, simulate_pi = FALSE) %>% 
+    predict(data.frame(pred_data), simulate_pi = FALSE) %>% 
     ## only keep the week and the forecast estimate
     select(epiweek, estimate)
     
@@ -17715,6 +17748,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -18602,6 +18636,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -19241,6 +19276,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -19319,18 +19355,30 @@ pacman::p_load(rio,          # File import
               
                ) 
 
-## load packages from github
+
+``` 
+
+```{r, include = FALSE}
+
 pacman::p_load_gh(
   
   "r4epi/epikit") # jfmont
 
+```
+
+
+```{r}
+
+## load packages from github
+
 pacman::p_load_gh(
   
-  "r4epi/sitrep") # jfmont
+  "r4epi/sitrep" # for observation time / weighting functions
 
-library("sitrep") # jfmont (Normally p_load_gh approach fails with sitrep, therefore I switch to an old-school way)
+)
+```
 
-``` 
+
 
 ### Carga de datos {.unnumbered}
 
@@ -19812,7 +19860,7 @@ left_join(ag, propcount, by = "age_group", suffix = c("", "_pop")) %>%
 
 ### Pirámides demográficas {.unnumbered}
 
-Las pirámides demográficas (o de edad y sexo) son una forma sencilla de visualizar la distribución de la población de la encuesta. También vale la pena considerar la creación de [tablas descriptivas](#descriptive-tables) de edad y sexo por estratos de la encuesta. Demostraremos el uso del paquete **apyramid**, ya que permite las proporciones ponderadas utilizando nuestro objeto de diseño de la encuesta creado anteriormente. Otras opciones para crear [pirámides demográficas](#demographic-pyramids-and-likert-scales) se tratan ampliamente en ese capítulo del manual. También utilizaremos una función envolvente de **sitrep** llamada `plot_age_pyramid()` que ahorra algunas líneas de codificación para producir un gráfico con proporciones.
+Las pirámides demográficas (o de edad y sexo) son una forma sencilla de visualizar la distribución de la población de la encuesta. También vale la pena considerar la creación de [tablas descriptivas](#descriptive-tables) de edad y sexo por estratos de la encuesta. Demostraremos el uso del paquete **apyramid**, ya que permite las proporciones ponderadas utilizando nuestro objeto de diseño de la encuesta creado anteriormente. Otras opciones para crear [pirámides demográficas](#demographic-pyramids-and-likert-scales) se tratan ampliamente en ese capítulo del manual. También utilizaremos una función envolvente de **sitrep** llamada `age_pyramid()` que ahorra algunas líneas de codificación para producir un gráfico con proporciones.
 
 Al igual que con el test binomial formal de la diferencia, vista anteriormente en la sección de sesgo de muestreo, aquí estamos interesados en visualizar si nuestra población muestreada es sustancialmente diferente de la población de origen y si la ponderación corrige esta diferencia. Para ello, utilizaremos el paquete **patchwork** para mostrar nuestras visualizaciones **ggplot** una al lado de la otra; para más detalles, consulta la sección sobre la combinación de gráficos en el capítulo de [consejos de ggplot](#combine-plots) del manual. Visualizaremos nuestra población de origen, nuestra población de encuesta no ponderada y nuestra población de encuesta ponderada. También puedes considerar la posibilidad de visualizar por cada estrato de tu encuesta - en nuestro ejemplo aquí sería utilizando el argumento `stack_by = "health_district"` (ver `?plot_age_pyramid` para más detalles).
 
@@ -19879,7 +19927,7 @@ source_population <- population %>%
   
   
 ## plot the unweighted sample population 
-sample_population <- apyramid::age_pyramid(survey_data, #jfmont
+sample_population <- age_pyramid(survey_data, 
                  age_group = "age_group", 
                  split_by = "sex",
                  proportion = TRUE) + 
@@ -19898,7 +19946,7 @@ weighted_population <- survey_design %>%
   ## make sure the variables are factors
   mutate(age_group = factor(age_group), 
          sex = factor(sex)) %>%
-  apyramid::age_pyramid( #jfmont
+  age_pyramid( 
     age_group = "age_group",
     split_by = "sex", 
     proportion = TRUE) +
@@ -19931,16 +19979,10 @@ Visualizar los puntos de partida y los resultados de los individuos puede ser mu
 
 
 ```{r visualise_population_flow}
-
 ## summarize data
 flow_table <- survey_data %>%
   count(startcause, endcause, sex) %>%  # get counts 
-  gather_set_data(x = c("startcause", "endcause")) %>%     # change format for plotting
-  mutate(x = fct_relevel(x, c("startcause", "endcause")),  # set startcause as first level
-         x = fct_recode(x, 
-                        "Start \n cause" = "startcause",   # add line break (\n) after start
-                        "End \n cause"   = "endcause")
-        )
+  gather_set_data(x = c("startcause", "endcause"))     # change format for plotting
 
 
 ## plot your dataset 
@@ -19955,20 +19997,10 @@ ggplot(flow_table, aes(x, id = id, split = y, value = n)) +
   geom_parallel_sets_axes(axis.width = 0.15, fill = "grey80", color = "grey80") +
   ## change text colour and angle (needs to be adjusted)
   geom_parallel_sets_labels(color = "black", angle = 0, size = 5) +
-  ## adjusted y and x axes (probably needs more vertical space)
-  scale_x_discrete(name = NULL, expand = c(0, 0.2)) + 
   ## remove axis labels
-  theme(
-    title = element_text(size = 26),
-    text = element_text(size = 26),
-    axis.line = element_blank(),
-    axis.ticks = element_blank(),
-    axis.text.y = element_blank(),
-    panel.background = element_blank(),
-    legend.position = "bottom",                    # move legend to bottom
-    legend.title = element_blank(),                # remove title
-  )
-
+  theme_void()+
+  ## move legend to bottom
+  theme(legend.position = "bottom")              
 ```
 
 
@@ -20255,6 +20287,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -21026,6 +21059,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -21258,10 +21292,19 @@ sle_adm3_raw <- sf::read_sf(here("data", "gis", "shp", "sle_adm3.shp"))
 
 A continuación utilizamos `clean_names()` del paquete **janitor** para estandarizar los nombres de las columnas del shapefile. También utilizamos `filter()` para mantener sólo las filas con admin2name de "Western Area Urban" o "Western Area Rural".
 
-```{r}
+
+```{r, include=FALSE}
 # ADM3 level clean
 sle_adm3 <- sle_adm3_raw %>%
   janitor::clean_names() %>% # standardize column names #jfmont
+  filter(admin2name %in% c("Western Area Urban", "Western Area Rural")) # filter to keep certain areas
+```
+
+
+```{r, eval = FALSE}
+# ADM3 level clean
+sle_adm3 <- sle_adm3_raw %>%
+  janitor::clean_names() %>% # standardize column names 
   filter(admin2name %in% c("Western Area Urban", "Western Area Rural")) # filter to keep certain areas
 ```
 
@@ -21279,11 +21322,26 @@ DT::datatable(head(sle_adm3, 50), rownames = FALSE, options = list(pageLength = 
 Al igual que hemos hecho antes, te puedes descargar estos datos 
 de [HDX](https://data.humdata.org/dataset/sierra-leone-population)) o a través de nuestro paquete R **epirhandbook** como se explica [en esta página](#download-handbook-and-data). Utilizamos `import()` para cargar el archivo .csv. Al igual que antes, pasamos el archivo importado a `clean_names()` para estandarizar la sintaxis de los nombres de las columnas.
 
-```{r}
+```{r, include = FALSE}
+
+library("janitor") #jfmont
+
+```
+
+
+
+```{r, include=FALSE} 
 # Population by ADM3
 sle_adm3_pop <- import(here("data", "gis", "population", "sle_admpop_adm3_2020.csv")) %>%
   janitor::clean_names() #jfmont
 ```
+
+```{r, eval=FALSE} 
+# Population by ADM3
+sle_adm3_pop <- import(here("data", "gis", "population", "sle_admpop_adm3_2020.csv")) %>%
+  clean_names() 
+```
+
 
 Este es el aspecto del archivo de población. *Desplázate a la derecha* para ver cómo cada jurisdicción tiene columnas con la población `male`, `female`, y la población `total` y el desglose de la población en columnas por grupos de edad.
 
@@ -21300,12 +21358,27 @@ Una vez más, hemos descargado la localización de los centros sanitarios desde 
 
 Importamos el shapefile de puntos de las instalaciones con `read_sf()`, limpiamos de nuevo los nombres de las columnas y filtramos para mantener sólo los puntos etiquetados como "hospital", "clinic" o "doctors".
 
-```{r}
+```{r, include = FALSE}
+
+library("janitor")
+
+```
+
+
+```{r, include=FALSE}
 # OSM health facility shapefile
 sle_hf <- sf::read_sf(here("data", "gis", "shp", "sle_hf.shp")) %>% 
   janitor::clean_names() %>% #jfmont
   filter(amenity %in% c("hospital", "clinic", "doctors"))
 ```
+
+```{r, eval=FALSE}
+# OSM health facility shapefile
+sle_hf <- sf::read_sf(here("data", "gis", "shp", "sle_hf.shp")) %>% 
+  clean_names() %>% 
+  filter(amenity %in% c("hospital", "clinic", "doctors"))
+```
+
 
 Aquí está el dataframe resultante -- *desplázate a la derecha* para ver el nombre de la instalación y las coordenadas geométricas (`geometry`).
 
@@ -22094,6 +22167,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -22138,6 +22212,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -22718,6 +22793,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -23937,6 +24013,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -25174,6 +25251,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -27451,6 +27529,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -28219,6 +28298,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -28563,7 +28643,8 @@ agg_weeks <- agg_weeks %>%
     n_reports       = dplyr::n(),                                 # number of reports received per week (could be >7)
     malaria_tot     = sum(malaria_tot, na.rm = T),                # total malaria cases reported
     n_days_reported = length(unique(data_date)),                  # number of unique days reporting per week
-    p_days_reported = round(100*(n_days_reported / n_days)))      # percent of days reporting
+    p_days_reported = round(100*(n_days_reported / n_days))) %>%  # percent of days reporting
+  ungroup(location_name, week)
 ```
 
 ```{r, echo=F}
@@ -28577,10 +28658,7 @@ Estamos utilizando un `right_join()` sobre sí mismo (el conjunto de datos está
 ```{r, message=F, warning=F}
 # Create data frame of every possible facility-week
 expanded_weeks <- agg_weeks %>% 
-  mutate(week = as.factor(week)) %>%         # convert date to a factor so expand() works correctly
-  tidyr::expand(., week, location_name) %>%  # expand data frame to include all possible facility-week combinations
-                                             # note: "." represents the dataset at that moment in the pipe chain
-  mutate(week = as.Date(week))               # re-convert week to class Date so the subsequent right_join works
+  tidyr::expand(location_name, week)  # expand data frame to include all possible facility-week combinations
 ```
 
 Aquí está `expanded_weeks`: 
@@ -28871,6 +28949,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -29665,6 +29744,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -29710,22 +29790,14 @@ linelist_sym <- linelist %>%
          vomit = sample(c("yes", "no"), nrow(linelist), replace = T))
 
 linelist_sym_2 <- linelist_sym %>% 
+     
+  #mutate(fever = ifelse(fever == "yes", colnames(linelist)[which(colnames(linelist) == "fever")]))
+   mutate(across(.cols = c(fever, chills, cough, aches, vomit),
+                 .fns = ~+(.x == "yes")))   
+
+     
+  #mutate(across(c("fever", "chills", "cough", "aches", "vomit"), ~ifelse(.x = "yes", colnames(.)[which(colnames(.) == "fever")], 0)))   
   
-  # convert the "yes" and "no" values into the symptom name itself
-  mutate(fever = case_when(fever == "yes" ~ 1,          # if old value is "yes", new value is "fever"
-                           TRUE           ~ 0),   # if old value is anything other than "yes", the new value is NA
-         
-         chills = case_when(chills == "yes" ~ 1,
-                           TRUE           ~ 0),
-         
-         cough = case_when(cough == "yes" ~ 1,
-                           TRUE           ~ 0),
-         
-         aches = case_when(aches == "yes" ~ 1,
-                           TRUE           ~ 0),
-         
-         vomit = case_when(vomit == "yes" ~ 1,
-                           TRUE           ~ 0))
 
 # Make the plot
 UpSetR::upset(
@@ -29814,29 +29886,13 @@ Para alinearse con el formato esperado por **ggupset**, convertimos el "yes" y e
 ```{r, warning=F, message=F}
 # create column with the symptoms named, separated by semicolons
 linelist_sym_1 <- linelist_sym %>% 
-  
-  # convert the "yes" and "no" values into the symptom name itself
-  mutate(
-    fever = case_when(
-      fever == "yes" ~ "fever",          # if old value is "yes", new value is "fever"
-      TRUE           ~ NA_character_),   # if old value is anything other than "yes", the new value is NA
-         
-    chills = case_when(
-       chills == "yes" ~ "chills",
-       TRUE           ~ NA_character_),
-    
-    cough = case_when(
-      cough == "yes" ~ "cough",
-      TRUE           ~ NA_character_),
-         
-    aches = case_when(
-      aches == "yes" ~ "aches",
-      TRUE           ~ NA_character_),
-         
-    vomit = case_when(
-      vomit == "yes" ~ "vomit",
-      TRUE           ~ NA_character_)
-    )
+    # convert the "yes" and "no" values into the symptom name itself
+    # if old value is "yes", new value is "fever", otherwise set to missing (NA)
+     mutate(fever = ifelse(fever == "yes", "fever", NA), 
+            chills = ifelse(chills == "yes", "chills", NA),
+            cough = ifelse(cough == "yes", "cough", NA),
+            aches = ifelse(aches == "yes", "aches", NA),
+            vomit = ifelse(vomit == "yes", "vomit", NA))
 ```
 
 Ahora hacemos dos columnas finales:
@@ -29916,51 +29972,42 @@ pacman::p_load(UpSetR)
 Debemos convertir los valores de los síntomas de `linelist` en 1 / 0.
 
 ```{r}
-# Make using upSetR
+linelist_sym_2 <- linelist_sym %>% 
+     # convert the "yes" and "no" values into 1s and 0s
+     mutate(fever = ifelse(fever == "yes", 1, 0), 
+            chills = ifelse(chills == "yes", 1, 0),
+            cough = ifelse(cough == "yes", 1, 0),
+            aches = ifelse(aches == "yes", 1, 0),
+            vomit = ifelse(vomit == "yes", 1, 0))
+```
 
+Si está interesado en un comando más eficiente, puede aprovechar la función `+()`, que convierte en 1s y 0s basándose en una sentencia lógica. Este comando utiliza la función `across()` para cambiar varias columnas a la vez (lea más en [Limpieza de datos y funciones básicas](#clean_across)).  
+
+```{r, eval=F, echo=T}
+# Efficiently convert "yes" to 1 and 0
 linelist_sym_2 <- linelist_sym %>% 
   
-  # convert the "yes" and "no" values into the symptom name itself
-  mutate(
-    fever = case_when(
-      fever == "yes" ~ 1,    # if old value is "yes", new value is 1
-      TRUE           ~ 0),   # if old value is anything other than "yes", the new value is 0
-         
-    chills = case_when(
-      chills == "yes" ~ 1,
-      TRUE           ~ 0),
-         
-    cough = case_when(
-      cough == "yes" ~ 1,
-      TRUE           ~ 0),
-         
-    aches = case_when(
-      aches == "yes" ~ 1,
-      TRUE           ~ 0),
-         
-    vomit = case_when(
-      vomit == "yes" ~ 1,
-      TRUE           ~ 0)
-    )
+  # convert the "yes" and "no" values into 1s and 0s
+  mutate(across(c(fever, chills, cough, aches, vomit), .fns = ~+(.x == "yes")))
 ```
+
 
 Ahora haz el gráfico usando la función personalizada `upset()` - utilizando sólo las columnas de síntomas. Debes designar qué "conjuntos" comparar (los nombres de las columnas de síntomas). Alternativamente, utiliza `nsets = ` y `order.by = "freq"` para mostrar sólo las X combinaciones principales.
 
 ```{r, warning=F, message=F}
-
 # Make the plot
-UpSetR::upset(
-  select(linelist_sym_2, fever, chills, cough, aches, vomit),
-  sets = c("fever", "chills", "cough", "aches", "vomit"),
-  order.by = "freq",
-  sets.bar.color = c("blue", "red", "yellow", "darkgreen", "orange"), # optional colors
-  empty.intersections = "on",
-  # nsets = 3,
-  number.angles = 0,
-  point.size = 3.5,
-  line.size = 2, 
-  mainbar.y.label = "Symptoms Combinations",
-  sets.x.label = "Patients with Symptom")
+linelist_sym_2 %>% 
+  UpSetR::upset(
+       sets = c("fever", "chills", "cough", "aches", "vomit"),
+       order.by = "freq",
+       sets.bar.color = c("blue", "red", "yellow", "darkgreen", "orange"), # optional colors
+       empty.intersections = "on",
+       # nsets = 3,
+       number.angles = 0,
+       point.size = 3.5,
+       line.size = 2, 
+       mainbar.y.label = "Symptoms Combinations",
+       sets.x.label = "Patients with Symptom")
 
 ```
 
@@ -29990,6 +30037,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -30032,7 +30080,7 @@ La principal herramienta para manejar, analizar y visualizar las cadenas de tran
 if(
   !"epicontacts" %in% rownames(installed.packages()) |
   packageVersion("epicontacts") != "1.2.0"
-) remotes::install_github("reconhub/epicontacts@facf491") #jfmont
+) remotes::install_github("reconhub/epicontacts@timelines") #jfmont
 
 ## install and load packages
 pacman::p_load(tidyverse, epicontacts, magrittr, here, webshot, visNetwork)
@@ -30640,6 +30688,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -30867,7 +30916,8 @@ ggtree(tree, layout = "circular", branch.length = 'none') %<+% sample_data + # %
     offset = 1,
     size = 1,
     geom = "text",
-    align = TRUE)+    
+    #align = TRUE
+    )+    
   ggtitle("Phylogenetic tree of Shigella sonnei")+       # Nombre del árbol
   theme(
     axis.title.x = element_blank(), # elimina el título del eje x
@@ -31055,8 +31105,14 @@ p1 # imprime en pantalla
 ```
 
 Ahora podemos rotar el nodo 37 en el objeto `p1` para que las muestras del nodo 38 se muevan hacia abajo. Almacenamos el árbol rotado en un nuevo objeto p2
+
+```{r, include=FALSE}
+library("ggtree") #jfmont
+```
+
+
 ```{r}
-p2 <- ggtree::rotate(p1, 37) + #jfmont
+p2 <- ggtree::rotate(p1, 37) + 
       ggtitle("Rotated Node 37")
 
 
@@ -31066,7 +31122,7 @@ p2   # imprime en pantalla
 O podemos usar el comando flip para rotar el nodo 36 en el objeto `p1` y mover el nodo 37 a la parte superior y el nodo 39 a la parte inferior. Almacenamos el árbol con nodos rotados como un nuevo objeto `p3`.
 ```{r}
 
-p3 <-  flip(p1, 39, 37) +
+p3 <- ggtree::flip(p1, 39, 37) +
       ggtitle("Rotated Node 36")
 
 
@@ -31082,7 +31138,8 @@ ggtree(sub_tree2) %<+% sample_data +     # usamos el operador %<+% para enlazar 
   geom_tiplab(                          # etiqueta las puntas de todas las ramas del árbol con el nombre de la muestra
     size = 2.5,
     offset = 0.001,
-    align = TRUE) + 
+    #align = TRUE
+    ) + 
   theme_tree2()+
   xlim(0, 0.015)+                       # establece los límites del eje x de nuestro árbol
   geom_tippoint(aes(color=Country),     # colorea la punta por continente
@@ -31098,7 +31155,8 @@ ggtree(sub_tree2) %<+% sample_data +     # usamos el operador %<+% para enlazar 
     size = 3,
     linetype = "blank" ,
     geom = "text",
-    align = TRUE)+ 
+    #align = TRUE
+    )+ 
   geom_tiplab(                          # añade el historial de viajes como una etiqueta de texto en las puntas, en color rojo
     aes(label = Travel_history),
     color = 'red',
@@ -31106,7 +31164,8 @@ ggtree(sub_tree2) %<+% sample_data +     # usamos el operador %<+% para enlazar 
     size = 3,
     linetype = "blank",
     geom = "text",
-    align = TRUE)+ 
+    #align = TRUE
+    )+ 
   ggtitle("Phylogenetic tree of Belgian S. sonnei strains with travel history")+  # añade el título del árbol
   xlab("genetic distance (0.001 = 4 nucleotides difference)")+                   # añade una etiqueta en el eje x
  
@@ -31356,6 +31415,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -31597,6 +31657,7 @@ agg_weeks <- facility_count_data %>%
     malaria_tot     = sum(malaria_tot, na.rm = T),
     n_days_reported = length(unique(data_date)),
     p_days_reported = round(100*(n_days_reported / n_days))) %>% 
+  ungroup(location_name, week) %>% 
   right_join(tidyr::expand(., week, location_name)) %>% 
   mutate(week = aweek::week2date(week))
 
@@ -31732,6 +31793,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -31776,6 +31838,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -32609,6 +32672,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -32922,6 +32986,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -33441,6 +33506,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -34876,6 +34942,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -34920,6 +34987,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -35537,6 +35605,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -35851,6 +35920,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -36675,6 +36745,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -36852,6 +36923,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -37044,6 +37116,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -37114,7 +37187,7 @@ Puedes devolver la(s) ruta(s) a las bibliotecas de paquetes que R está utilizan
 
 Es posible que desees cambiar el orden de las bibliotecas de paquetes utilizados por R. Por ejemplo, si R está recogiendo una ubicación de la biblioteca que comienza con "\\\" y uno que comienza con una letra, por ejemplo, "D:". Puedes ajustar el orden de `.libPaths()` con el siguiente código. 
 
-````{r, eval=F}
+```{r, eval=F}
 # Switch order of libraries
 # this can effect the priority of R finding a package. E.g. you may want your C: library to be listed first
 myPaths <- .libPaths() # get the paths
@@ -37262,6 +37335,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(
@@ -37449,7 +37523,7 @@ En los siguientes ejemplos:
 * en los ingresos que duraron más de 7 días, contamos el número de casos según el mes en que ingresaron y el hospital en el que lo hicieron
 
 
-````{r}
+```{r}
 linelist[, .N, .(hospital)] #the number of cases by hospital
 linelist[age > 18, .(mean_wt = mean(wt_kg, na.rm = T),
                              mean_ht = mean(ht_cm, na.rm = T)), .(gender, outcome)] #NAs represent the categories where the data is missing
@@ -37459,7 +37533,7 @@ linelist[days_onset_hosp > 7, .N, .(month = month(date_hospitalisation), hospita
 
 Data.table también permite encadenar expresiones de la siguiente manera:
 
-````{r}
+```{r}
 
 linelist[, .N, .(hospital)][order(-N)][1:3] #1st selects all cases by hospital, 2nd orders the cases in descending order, 3rd subsets the 3 hospitals with the largest caseload
 
@@ -37468,7 +37542,7 @@ linelist[, .N, .(hospital)][order(-N)][1:3] #1st selects all cases by hospital, 
 
 En estos ejemplos estamos siguiendo la suposición de que una fila en la tabla de datos es igual a un nuevo caso, y por lo tanto podemos utilizar el **.N** para representar el número de filas en la tabla de datos. Otra función útil para representar el número de casos únicos es `uniqueN()`, que devuelve el número de valores únicos en una entrada dada. Esto se ilustra aquí:
 
-````{r}
+```{r}
 
 linelist[, .(uniqueN(gender))] #remember .() in the j argument returns a data table
 
@@ -37476,14 +37550,14 @@ linelist[, .(uniqueN(gender))] #remember .() in the j argument returns a data ta
 
 La respuesta es 3, ya que los valores únicos de la columna de género son m, f y N/A. Compárelo con la función R base `unique()`, que devuelve todos los valores únicos en una entrada dada:
 
-````{r}
+```{r}
 
 linelist[, .(unique(gender))]
 ```
 
 Para hallar el número de casos únicos en un mes determinado escribiríamos lo siguiente:
 
-````{r}
+```{r}
 
 linelist[, .(uniqueN(case_id)), .(month = month(date_hospitalisation))]
 
@@ -37493,7 +37567,7 @@ linelist[, .(uniqueN(case_id)), .(month = month(date_hospitalisation))]
 
 El operador `:=` se utiliza para añadir o actualizar datos en una tabla de datos. La adición de columnas a la tabla de datos puede hacerse de las siguientes maneras:
 
-````{r}
+```{r}
 
 linelist[, adult := age >= 18] #adds one column
 linelist[, c("child", "wt_lbs") := .(age < 18, wt_kg*2.204)] #to add multiple columns requires c("") and list() or .() syntax
@@ -37536,6 +37610,7 @@ select <- dplyr::select
 summarise <- dplyr::summarise
 summary <- base::summary
 incidence <- incidence2::incidence
+clean_names <- janitor::clean_names
 
 #load core packages
 pacman::p_load(

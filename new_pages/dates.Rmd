@@ -92,7 +92,7 @@ A continuación presentamos dos enfoques para convertir una columna de valores d
 El uso de `as.Date()` requiere que:
 
 *	Se especifique el formato **existente** de la fecha de carácter en bruto o la fecha de origen si se suministran las fechas como números (véase la sección sobre las fechas de Excel)
-*	Si se utiliza en una columna de caracteres, todos los valores de fecha deben tener el mismo formato exacto (si no es el caso, pruebe con `guess_dates()` del paquete **linelist**)
+*	Si se utiliza en una columna de caracteres, todos los valores de fecha deben tener el mismo formato exacto (si no es el caso, pruebe con `parse_date()` del paquete **parsedate**)
 
 En **primer** lugar, comprueba el tipo de la columna con `class()` de R **base** . Si no estás seguro o estás confundido sobre el tipo de datos (por ejemplo, ve "POSIXct", etc.) puede ser más fácil convertir primero la columna al tipo Character con `as.character()`, y luego convertirla al tipo Date.
 
@@ -244,32 +244,22 @@ data_cleaned <- data %>%
 <!-- ======================================================= -->
 ## Fechas desordenadas {#messy-dates}
 
-La función `guess_dates()` del paquete **linelist** intenta leer una columna de fecha "desordenada" que contiene fechas en muchos formatos diferentes y convertir las fechas a un formato estándar. [Puedes leer más en línea sobre `guess_dates()` ](https://www.repidemicsconsortium.org/linelist/reference/guess_dates.html). Si `guess_dates()` aún no está disponible en CRAN para R 4.0.2, intenta instalarlo mediante `pacman::p_load_gh("reconhub/linelist")`.
+La función `parse_date()` del paquete **parsedate** intenta leer una columna de fecha "desordenada" que contiene fechas en muchos formatos diferentes y convertir las fechas a un formato estándar. [Puedes leer más en línea sobre `guess_dates()` ](https://www.repidemicsconsortium.org/linelist/reference/guess_dates.html).  
 
-Por ejemplo `guess_dates` vería un vector de las siguientes fechas de caracteres "03 Ene 2018", "07/03/1982", y "08/20/85" y las convertiría al tipo Date como `2018-01-03`, `1982-03-07`, y `1985-08-20`.
+Por ejemplo `parse_date()` vería un vector de las siguientes fechas de caracteres "03 Ene 2018", "07/03/1982", y "08/20/85" y las convertiría al tipo Date como `2018-01-03`, `1982-03-07`, y `1985-08-20`.
 
 ```{r, }
-linelist::guess_dates(c("03 Jan 2018",
+parsedate::parse_date(c("03 Jany 2018",
                         "07/03/1982",
                         "08/20/85"))
 ```
-
-Algunos argumentos opcionales para `guess_dates()` que puede incluir son:
-
-*	`error_tolerance` - Proporción de entradas que no pueden ser identificadas como fechas a tolerar (por defecto 0,1 o 10%)
-*	`last_date` - la última fecha válida (por defecto, la fecha actual)
-*	`first_date` - la primera fecha válida. Por defecto, cincuenta años antes de last_date.
 
 
 ```{r eval = FALSE}
 # An example using guess_dates on the column dater_onset
 linelist <- linelist %>%                 # the dataset is called linelist
   mutate(
-    date_onset = linelist::guess_dates(  # the guess_dates() from package "linelist"
-      date_onset,
-      error_tolerance = 0.1,
-      first_date = "2016-01-01"
-    )
+    date_onset = parsedate::parse_date(date_onset))  # the parse_date() from package "parsedate"
 ```
 
 

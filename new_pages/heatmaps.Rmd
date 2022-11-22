@@ -314,7 +314,8 @@ agg_weeks <- agg_weeks %>%
     n_reports       = dplyr::n(),                                 # number of reports received per week (could be >7)
     malaria_tot     = sum(malaria_tot, na.rm = T),                # total malaria cases reported
     n_days_reported = length(unique(data_date)),                  # number of unique days reporting per week
-    p_days_reported = round(100*(n_days_reported / n_days)))      # percent of days reporting
+    p_days_reported = round(100*(n_days_reported / n_days))) %>%  # percent of days reporting
+  ungroup(location_name, week)
 ```
 
 ```{r, echo=F}
@@ -328,10 +329,7 @@ Estamos utilizando un `right_join()` sobre sí mismo (el conjunto de datos está
 ```{r, message=F, warning=F}
 # Create data frame of every possible facility-week
 expanded_weeks <- agg_weeks %>% 
-  mutate(week = as.factor(week)) %>%         # convert date to a factor so expand() works correctly
-  tidyr::expand(., week, location_name) %>%  # expand data frame to include all possible facility-week combinations
-                                             # note: "." represents the dataset at that moment in the pipe chain
-  mutate(week = as.Date(week))               # re-convert week to class Date so the subsequent right_join works
+  tidyr::expand(location_name, week)  # expand data frame to include all possible facility-week combinations
 ```
 
 Aquí está `expanded_weeks`: 

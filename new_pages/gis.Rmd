@@ -214,7 +214,7 @@ sle_adm3 <- sle_adm3_raw %>%
 ```{r, eval = FALSE}
 # ADM3 level clean
 sle_adm3 <- sle_adm3_raw %>%
-  clean_names() %>% # standardize column names 
+  janitor::clean_names() %>% # standardize column names 
   filter(admin2name %in% c("Western Area Urban", "Western Area Rural")) # filter to keep certain areas
 ```
 
