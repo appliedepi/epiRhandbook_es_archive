@@ -35,7 +35,7 @@ recode() |recodificar los valores de una columna | **dplyr**
 case_when() | recodificar los valores de una columna con criterios lógicos más complejos | **dplyr**   
 replace_na(), na_if(), coalesce() | funciones especiales de recodificación | **tidyr**   
 age_categories() y [cut()](https://rdrr.io/r/base/cut.html) | crear grupos categóricos a partir de una columna numérica | **epikit** y R **base**
-clean_variable_spelling() | recodificación/limpieza de valores mediante un diccionario de datos | **lista de líneas**   
+match_df() | recodificación/limpieza de valores mediante un diccionario de datos | **matchmaker**   
 [which()](https://rdrr.io/r/base/which.html) | aplicar los criterios lógicos; devolver los índices | R **base**
 
 Si quieres ver cómo se comparan estas funciones con los comandos de Stata o SAS, consulta la página sobre la [transición a R](#transition-to-r). 
@@ -923,14 +923,34 @@ linelist <- linelist %>%
   mutate(age_years = case_when(
             age_unit == "years"  ~ age,       # if age is given in years
             age_unit == "months" ~ age/12,    # if age is given in months
-            is.na(age_unit)      ~ age,       # if age unit is missing, assume years
-            TRUE                 ~ NA_real_)) # any other circumstance, assign missing
+            is.na(age_unit)      ~ age))      # if age unit is missing, assume years
+                                              # any other circumstance, assign NA (missing)
 ```
 
 
-A medida que se evalúa cada fila de los datos, los criterios se aplican/evalúan en el orden en que se escriben las sentencias `case_when()`, de arriba a abajo. Si el criterio superior se evalúa como `TRUE` para una fila determinada, se asigna el valor RHS, y los criterios restantes ni siquiera se prueban para esa fila. Por lo tanto, es mejor escribir los criterios más específicos primero y los más generales al final. 
+A medida que se evalúa cada fila de los datos, los criterios se aplican/evalúan en el orden en que se escriben las sentencias `case_when()`, de arriba a abajo. Si el criterio superior se evalúa como `TRUE` para una fila determinada, se asigna el valor RHS, y los criterios restantes ni siquiera se prueban para esa fila. Por lo tanto, es mejor escribir los criterios más específicos primero y los más generales al final. A una fila de datos que no cumpla ninguno de los criterios del RHS se le asignará `NA`.   
 
 En esta línea, en su declaración final, coloca `TRUE` en el lado izquierdo, lo que capturará cualquier fila que no cumpla ninguno de los criterios anteriores. Al lado derecho de esta declaración se le podría asignar un valor como "¡comprobado!" o faltante.  
+
+A continuación se muestra otro ejemplo de `case_when()` utilizado para crear una nueva columna con la clasificación del paciente, según una definición de caso para los casos confirmados y sospechosos:  
+
+```{r, eval=F}
+linelist <- linelist %>% 
+     mutate(case_status = case_when(
+          
+          # if patient had lab test and it is positive,
+          # then they are marked as a confirmed case 
+          ct_blood < 20                   ~ "Confirmed",
+          
+          # given that a patient does not have a positive lab result,
+          # if patient has a "source" (epidemiological link) AND has fever, 
+          # then they are marked as a suspect case
+          !is.na(source) & fever == "yes" ~ "Suspect",
+          
+          # any other patient not addressed above 
+          # is marked for follow up
+          TRUE                            ~ "To investigate"))
+```
 
 
 <span style="color: red;">***PELIGRO:* Los valores del lado derecho deben ser todos del mismo tipo**: numéricos, de caracteres, de fecha, lógicos, etc. Para asignar faltantes (`NA`), puede ser necesario utilizar variaciones especiales de `NA` como `NA_character_`, `NA_real_` (para numérico o POSIX), y `as.Date(NA)`. Lee más en [Trabajar con fechas](#working-with-dates-1). </span>  
@@ -996,7 +1016,7 @@ linelist <- linelist %>%
 
 ### Diccionario de limpieza  {.unnumbered}
 
-Utiliza el paquete R **linelist** y su función `clean_variable_spelling()` para limpiar un dataframe con un *diccionario de limpieza*. **linelist** es un paquete desarrollado por [RECON](https://github.com/reconhub/linelist) - el  R Epidemics Consortium. 
+Utiliza el paquete R **matchmaker** y su función `match_df()` para limpiar un dataframe con un *diccionario de limpieza*.  
 
 1.  Crear un diccionario de limpieza con 3 columnas:  
      * Una columna "desde" (el valor incorrecto)  
@@ -1020,13 +1040,15 @@ cleaning_dict <- rio::import(here("data", "case_linelists", "cleaning_dict.csv")
 cleaning_dict <- import("cleaning_dict.csv")
 ```
 
-3.  Pasa linelist crudas a `clean_variable_spelling()`, especificando en `wordlists = ` el dataframe del diccionario de limpieza. El argumento `spelling_vars = ` puede utilizarse para especificar a qué columna del diccionario se refieren las columnas (la tercera por defecto), o puede establecerse como `NULL` para que el diccionario se aplique a todas las columnas de caracteres y factores. Ten en cuenta que esta función puede tardar mucho en ejecutarse. 
+3.  Pasa linelist crudas a `match_df()`, especificando en `dictionary = ` el dataframe del diccionario de limpieza. El argumento `from = ` debe ser el nombre de la columna del diccionario que contiene los valores "originales", el argumento `by = ` debe ser la columna del diccionario que contiene los correspondientes valores "nuevos", y la tercera columna enumera la columna en la que se realizará el cambio. Utilice `.global` en la columna `by = ` para aplicar un cambio en todas las columnas. Una cuarta columna del diccionario `order` se puede utilizar para especificar el orden del factor de los nuevos valores.  
 
 ```{r}
-linelist <- linelist %>% 
-  linelist::clean_variable_spelling(
-    wordlists = cleaning_dict,
-    spelling_vars = "col",        # dict column containing column names, defaults to 3rd column in dict
+linelist <- linelist %>%     # provide or pipe your dataset
+     matchmaker::match_df(
+          dictionary = cleaning_dict,  # name of your dictionary
+          from = "from",               # column with values to be replaced (default is col 1)
+          to = "to",                   # column with final values (default is col 2)
+          by = "col"                   # column with column names (default is col 3)
   )
 ```
 
@@ -1038,7 +1060,7 @@ DT::datatable(head(linelist,50), rownames = FALSE, filter="top", options = list(
 ```
 
 
-Ten en cuenta que los nombres de las columnas en el diccionario de limpieza deben corresponder a los nombres *en este punto* de tu script de limpieza. Consulta esta [referencia en línea para el paquete linelist](https://www.repidemicsconsortium.org/linelist/reference/clean_data.html) para obtener más detalles. 
+Ten en cuenta que los nombres de las columnas en el diccionario de limpieza deben corresponder a los nombres *en este punto* de tu script de limpieza. Consulta esta [referencia en línea para el paquete linelist](https://cran.r-project.org/web/packages/matchmaker/vignettes/intro.html) para obtener más detalles. 
 
 
 
@@ -1104,8 +1126,7 @@ linelist <- linelist_raw %>%
     mutate(age_years = case_when(
           age_unit == "years" ~ age,
           age_unit == "months" ~ age/12,
-          is.na(age_unit) ~ age,
-          TRUE ~ NA_real_))
+          is.na(age_unit) ~ age))
 ```
 
 
@@ -1452,8 +1473,7 @@ linelist <- linelist_raw %>%
     mutate(age_years = case_when(
           age_unit == "years" ~ age,
           age_unit == "months" ~ age/12,
-          is.na(age_unit) ~ age,
-          TRUE ~ NA_real_)) %>% 
+          is.na(age_unit) ~ age)) %>% 
   
     # ABOVE ARE UPSTREAM CLEANING STEPS ALREADY DISCUSSED
     ###################################################   
@@ -1753,8 +1773,7 @@ linelist <- linelist_raw %>%
     mutate(age_years = case_when(
           age_unit == "years" ~ age,
           age_unit == "months" ~ age/12,
-          is.na(age_unit) ~ age,
-          TRUE ~ NA_real_)) %>% 
+          is.na(age_unit) ~ age)) %>% 
   
     mutate(
           # age categories: custom

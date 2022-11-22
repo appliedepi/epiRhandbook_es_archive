@@ -502,7 +502,7 @@ model <- glm_nb_model(
     fourier)
 
 ## fit your model using the counts dataset
-fitted_model <- trending::fit(model, counts)
+fitted_model <- trending::fit(model, data.frame(counts))
 
 ## calculate confidence intervals and prediction intervals 
 observed <- predict(fitted_model, simulate_pi = FALSE)
@@ -680,7 +680,7 @@ model <- glm_nb_model(
     )
 
 ## fit your model using the counts dataset
-fitted_model <- trending::fit(model, counts)
+fitted_model <- trending::fit(model, data.frame(counts))
 
 ## calculate confidence intervals and prediction intervals 
 observed <- predict(fitted_model, simulate_pi = FALSE)
@@ -902,7 +902,7 @@ pred_data <- pluck(dat, 1) %>%
   select(case_int, epiweek, fourier)
 
 # fit model 
-fitted_model <- trending::fit(model, fitting_data)
+fitted_model <- trending::fit(model, data.frame(fitting_data))
 
 # get confint and estimates for fitted data
 observed <- fitted_model %>% 
@@ -910,7 +910,7 @@ observed <- fitted_model %>%
 
 # forecast with data want to predict with 
 forecasts <- fitted_model %>% 
-  predict(pred_data, simulate_pi = FALSE)
+  predict(data.frame(pred_data), simulate_pi = FALSE)
 
 ## combine baseline and predicted datasets
 observed <- bind_rows(observed, forecasts)
@@ -1095,7 +1095,7 @@ forecasts <- purrr::map(unique(case_roll$.id),
   
   # forecast with data want to predict with 
   forecasts <- fitted_model %>% 
-    predict(pred_data, simulate_pi = FALSE) %>% 
+    predict(data.frame(pred_data), simulate_pi = FALSE) %>% 
     ## only keep the week and the forecast estimate
     select(epiweek, estimate)
     

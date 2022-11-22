@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>6 R en redes locales | EpiRhandbook en español</title>
+<meta name="author" content="El equipo del manual">
+<meta name="description" content="6.1 Resumen El uso de R en unidades compartidas de la red o de la “empresa” puede presentar desafíos adicionales. Esta página contiene enfoques, errores comunes y sugerencias sobre la solución de...">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="6 R en redes locales | EpiRhandbook en español">
+<meta property="og:type" content="book">
+<meta property="og:description" content="6.1 Resumen El uso de R en unidades compartidas de la red o de la “empresa” puede presentar desafíos adicionales. Esta página contiene enfoques, errores comunes y sugerencias sobre la solución de...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6 R en redes locales | EpiRhandbook en español">
+<meta name="twitter:description" content="6.1 Resumen El uso de R en unidades compartidas de la red o de la “empresa” puede presentar desafíos adicionales. Esta página contiene enfoques, errores comunes y sugerencias sobre la solución de...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.24/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="libs/proj4js-2.3.15/proj4.js"></script><link href="libs/highcharts-9.3.1/css/motion.css" rel="stylesheet">
+<script src="libs/highcharts-9.3.1/highcharts.js"></script><script src="libs/highcharts-9.3.1/highcharts-3d.js"></script><script src="libs/highcharts-9.3.1/highcharts-more.js"></script><script src="libs/highcharts-9.3.1/modules/stock.js"></script><script src="libs/highcharts-9.3.1/modules/map.js"></script><script src="libs/highcharts-9.3.1/modules/data.js"></script><script src="libs/highcharts-9.3.1/modules/exporting.js"></script><script src="libs/highcharts-9.3.1/modules/offline-exporting.js"></script><script src="libs/highcharts-9.3.1/modules/drilldown.js"></script><script src="libs/highcharts-9.3.1/modules/item-series.js"></script><script src="libs/highcharts-9.3.1/modules/overlapping-datalabels.js"></script><script src="libs/highcharts-9.3.1/modules/annotations.js"></script><script src="libs/highcharts-9.3.1/modules/export-data.js"></script><script src="libs/highcharts-9.3.1/modules/funnel.js"></script><script src="libs/highcharts-9.3.1/modules/heatmap.js"></script><script src="libs/highcharts-9.3.1/modules/treemap.js"></script><script src="libs/highcharts-9.3.1/modules/sankey.js"></script><script src="libs/highcharts-9.3.1/modules/dependency-wheel.js"></script><script src="libs/highcharts-9.3.1/modules/organization.js"></script><script src="libs/highcharts-9.3.1/modules/solid-gauge.js"></script><script src="libs/highcharts-9.3.1/modules/streamgraph.js"></script><script src="libs/highcharts-9.3.1/modules/sunburst.js"></script><script src="libs/highcharts-9.3.1/modules/vector.js"></script><script src="libs/highcharts-9.3.1/modules/wordcloud.js"></script><script src="libs/highcharts-9.3.1/modules/xrange.js"></script><script src="libs/highcharts-9.3.1/modules/tilemap.js"></script><script src="libs/highcharts-9.3.1/modules/venn.js"></script><script src="libs/highcharts-9.3.1/modules/gantt.js"></script><script src="libs/highcharts-9.3.1/modules/timeline.js"></script><script src="libs/highcharts-9.3.1/modules/parallel-coordinates.js"></script><script src="libs/highcharts-9.3.1/modules/bullet.js"></script><script src="libs/highcharts-9.3.1/modules/coloraxis.js"></script><script src="libs/highcharts-9.3.1/modules/dumbbell.js"></script><script src="libs/highcharts-9.3.1/modules/lollipop.js"></script><script src="libs/highcharts-9.3.1/modules/series-label.js"></script><script src="libs/highcharts-9.3.1/plugins/motion.js"></script><script src="libs/highcharts-9.3.1/custom/reset.js"></script><script src="libs/highcharts-9.3.1/modules/boost.js"></script><script src="libs/highchart-binding-0.9.4/highchart.js"></script><link href="libs/tabwid-1.1.0/tabwid.css" rel="stylesheet">
+<link href="libs/tabwid-1.1.0/scrool.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QXDW878QLX"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QXDW878QLX');
+    </script>
+</head>
+<body>
+<div class="alert alert-info alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+      <strong>¿Necesita ayuda para aprender R?</strong> Inscríbase en Applied Epi's <a href="https://www.appliedepi.org/live/" class="alert-link">curso de introducción a R</a>, pruebe nuestro <a href="https://www.appliedepi.org/tutorial/" class="alert-link">tutoriales gratuitos de R</a>, hacer un post en nuestro <a href="https://community.appliedepi.org/" class="alert-link">Foro comunitario de preguntas y respuestas</a>, o pregunte por nuestro <a href="mailto:contact@appliedepi.org" class="alert-link">R Servicio de asistencia técnica</a>.
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style_bs4.css">
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">EpiRhandbook en español</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"></a></li>
+<li class="book-part">Miscelánea</li>
+<li><a class="" href="writing-functions-1.html"><span class="header-section-number">1</span> Escribir funciones</a></li>
+<li><a class="" href="directory-interactions.html"><span class="header-section-number">2</span> Interacciones con directorios</a></li>
+<li><a class="" href="version-control-and-collaboration-with-git-and-github.html"><span class="header-section-number">3</span> Control de versiones y colaboración con Git y Github</a></li>
+<li><a class="" href="common-errors.html"><span class="header-section-number">4</span> Errores comunes</a></li>
+<li><a class="" href="getting-help.html"><span class="header-section-number">5</span> Cómo obtener ayuda</a></li>
+<li><a class="active" href="r-on-network-drives.html"><span class="header-section-number">6</span> R en redes locales</a></li>
+<li><a class="" href="data-table.html"><span class="header-section-number">7</span> Data Table</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="r-on-network-drives" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> R en redes locales<a class="anchor" aria-label="anchor" href="#r-on-network-drives"><i class="fas fa-link"></i></a>
+</h1>
+<!-- ======================================================= -->
+<div id="overview-9" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Resumen<a class="anchor" aria-label="anchor" href="#overview-9"><i class="fas fa-link"></i></a>
+</h2>
+<p>El uso de R en unidades compartidas de la red o de la “empresa” puede presentar desafíos adicionales. Esta página contiene enfoques, errores comunes y sugerencias sobre la solución de problemas obtenidas a partir de nuestra experiencia trabajando con estos problemas. Se incluyen consejos para las situaciones especialmente delicadas relacionadas con R Markdown.</p>
+<p><strong>Uso de R en unidades de red: Principios generales</strong></p>
+<ol style="list-style-type: decimal">
+<li>Debes tener acceso de administrador a tu ordenador. Configura RStudio específicamente para que se ejecute como administrador.<br>
+</li>
+<li>Guarda los paquetes en una biblioteca en una unidad con letras (por ejemplo, “C:”) cuando sea posible. Uiliza lo menos posible una biblioteca de paquetes cuya ruta comience por “\".<br>
+</li>
+<li>El paquete <strong>rmarkdown</strong> debe <strong>no</strong> estar en una librería de paquetes “\", ya que entonces no puede conectarse a TinyTex o Pandoc.</li>
+</ol>
+</div>
+<div id="rstudio-as-administrator" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> RStudio como administrador<a class="anchor" aria-label="anchor" href="#rstudio-as-administrator"><i class="fas fa-link"></i></a>
+</h2>
+<p>Cuando clicas en el icono de RStudio para abrirlo, hazlo clicando con el botón derecho. Dependiendo de tu máquina, puedes ver una opción para “Ejecutar como administrador”. O si no, puedes ver una opción para seleccionar Propiedades (entonces debería aparecer una ventana con la opción “Compatibilidad”, y selecciona una casilla de verificación “Ejecutar como administrador”).</p>
+</div>
+<div id="useful-commands" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Comandos útiles<a class="anchor" aria-label="anchor" href="#useful-commands"><i class="fas fa-link"></i></a>
+</h2>
+<p>A continuación se presentan algunos comandos útiles cuando se trata de solucionar problemas utilizando R en unidades de red.</p>
+<p>Puedes devolver la(s) ruta(s) a las bibliotecas de paquetes que R está utilizando. Serán listadas en el orden que R está usando para instalar/cargar/buscar paquetes. Por lo tanto, si quieres que R utilice una biblioteca diferente por defecto, puedes cambiar el orden de estas rutas (ver más abajo).</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Find libraries</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/libPaths.html">.libPaths</a></span><span class="op">(</span><span class="op">)</span>                   <span class="co"># Your library paths, listed in order that R installs/searches. </span></span>
+<span>                              <span class="co"># Note: all libraries will be listed, but to install to some (e.g. C:) you </span></span>
+<span>                              <span class="co"># may need to be running RStudio as an administrator (it won't appear in the </span></span>
+<span>                              <span class="co"># install packages library drop-down menu) </span></span></code></pre></div>
+<p>Es posible que desees cambiar el orden de las bibliotecas de paquetes utilizados por R. Por ejemplo, si R está recogiendo una ubicación de la biblioteca que comienza con “\" y uno que comienza con una letra, por ejemplo,”D:“. Puedes ajustar el orden de <code><a href="https://rdrr.io/r/base/libPaths.html">.libPaths()</a></code> con el siguiente código.</p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Switch order of libraries</span></span>
+<span><span class="co"># this can effect the priority of R finding a package. E.g. you may want your C: library to be listed first</span></span>
+<span><span class="va">myPaths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/libPaths.html">.libPaths</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># get the paths</span></span>
+<span><span class="va">myPaths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">myPaths</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">myPaths</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="co"># switch them</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/libPaths.html">.libPaths</a></span><span class="op">(</span><span class="va">myPaths</span><span class="op">)</span> <span class="co"># reassign them</span></span></code></pre></div>
+<p>Si tienes dificultades para que R Markdown se conecte a Pandoc, comienza con este código para averiguar dónde cree RStudio que está tu instalación de Pandoc.</p>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Find Pandoc</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"RSTUDIO_PANDOC"</span><span class="op">)</span>  <span class="co"># Find where RStudio thinks your Pandoc installation is</span></span></code></pre></div>
+<p>Si quieres ver de qué biblioteca se está cargando un paquete, prueba con el siguiente código:</p>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Find a package</span></span>
+<span><span class="co"># gives first location of package (note order of your libraries)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/find.package.html">find.package</a></span><span class="op">(</span><span class="st">"rmarkdown"</span>, lib.loc <span class="op">=</span> <span class="cn">NULL</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"verbose"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<!-- ======================================================= -->
+</div>
+<div id="troubleshooting-common-errors" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Solución de errores comunes<a class="anchor" aria-label="anchor" href="#troubleshooting-common-errors"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>“Fallo al compilar…tex en rmarkdown”</strong></p>
+<ul>
+<li>Comprueba la instalación de TinyTex, o instala TinyTex en la ubicación C:. Consulta la página de <a href="#r-basics">fundamentos de R</a> sobre cómo instalar TinyTex.</li>
+</ul>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># check/install tinytex, to C: location</span></span>
+<span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">tinytex</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/is_tinytex.html">is_tinytex</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># should return TRUE (note three colons)</span></span></code></pre></div>
+<p><strong>No se pueden cargar las rutinas de Internet.</strong></p>
+<p>Por ejemplo, <code>Error in tools::startDynamicHelp() : internet routines cannot be loaded</code></p>
+<ul>
+<li>Intenta seleccionar la versión de 32 bits de RStudio a través de Herramientas/Opciones Globales.
+<ul>
+<li>nota: si la versión de 32 bits no aparece en el menú, asegúrate que no está utilizando RStudio v1.2.</li>
+</ul>
+</li>
+<li>Alternativamente, intenta desinstalar R y volver a instalarlo con una versión de bits diferente (32 en lugar de 64)</li>
+</ul>
+<p><strong>C: la biblioteca no aparece como opción cuando intento instalar los paquetes manualmente</strong></p>
+<ul>
+<li>Ejecuta RStudio como administrador, entonces aparecerá esta opción.</li>
+<li>Para configurar RStudio para que se ejecute siempre como administrador (lo que resulta ventajoso cuando se utiliza un proyecto R en el que no se clica en el icono de RStudio para abrirlo)… clica con el botón derecho en el icono de Rstudio</li>
+</ul>
+<p>La imagen siguiente muestra cómo puedes seleccionar manualmente la biblioteca en la que instalar un paquete. Esta ventana aparece cuando se abre el panel de paquetes de RStudio y se clica en “Install”.</p>
+<div class="inline-figure"><img src="images/network_install.png" width="148"></div>
+<p><strong>Error Pandoc 1</strong></p>
+<p>Si aparece el error “pandoc error 1” al ejecutar R Markdowns scripts en unidades de red:</p>
+<ul>
+<li>De las múltiples ubicaciones de las bibliotecas, que aparezca en primer lugar la que tenga una unidad de disco con letras (véanse los códigos anteriores)</li>
+<li>La solución anterior funciona en una unidad de red local, si establece la conexión a Internet en la red</li>
+<li>Mira más consejos aquí: <a href="https://ciser.cornell.edu/rmarkdown-knit-to-html-word-pdf/">https://ciser.cornell.edu/rmarkdown-knit-to-html-word-pdf/</a>
+</li>
+</ul>
+<p><strong>Error Pandoc 83</strong></p>
+<p>El error será algo así: <code>can't find file...rmarkdown...lua...</code>. Esto significa que no se ha podido encontrar este archivo.</p>
+<p><a href="https://stackoverflow.com/questions/58830927/rmarkdown-unable-to-locate-lua-filter-when-knitting-to-word">Ver https://stackoverflow.com/questions/58830927/rmarkdown-unable-to-locate-lua-filter-when-knitting-to-word</a></p>
+<p>Posibilidades:</p>
+<ol style="list-style-type: decimal">
+<li>El paquete Rmarkdown no está instalado</li>
+<li>El paquete Rmarkdown no se encuentra</li>
+<li>Un problema de derechos de administración.</li>
+</ol>
+<p>Es posible que R no sea capaz de encontrar el archivo del paquete rmarkdown, así que comprueba en qué biblioteca está el paquete <strong>rmarkdown</strong> (vearel código anterior). Si el paquete está instalado en una biblioteca inaccesible (por ejemplo, comienza con “\") considera moverlo manualmente a C: o a otra biblioteca con nombre. Ten en cuenta que el paquete <strong>rmarkdown</strong> tiene que ser capaz de conectarse a la instalación de TinyTex, por lo que no puede valojarse en una biblioteca en una unidad de red.</p>
+<p><strong>Error Pandoc 61</strong></p>
+<p>Por ejemplo: <code>Error: pandoc document conversion failed with error 61</code> o <code>Could not fetch...</code></p>
+<ul>
+<li>Prueba a ejecutar RStudio como administrador (clica con el botón derecho en el icono, selecciona ejecutar como administrador, vea las instrucciones anteriores)</li>
+<li>Ver también si el paquete específico que no pudo ser alcanzado puede ser movido a la biblioteca C:.</li>
+</ul>
+<p><strong>Error de LaTex (ver más abajo)</strong></p>
+<p>Un error como: <code>! Package pdftex.def Error: File 'cict_qm2_2020-06-29_files/figure-latex/unnamed-chunk-5-1.png' not found: using draft setting.</code> o <code>Error: LaTeX failed to compile file_name.tex.</code></p>
+<ul>
+<li>Consulta <a href="https://yihui.org/tinytex/r/#debugging" class="uri">https://yihui.org/tinytex/r/#debugging</a> para obtener consejos de depuración.</li>
+<li>Ver file_name.log para más información.</li>
+</ul>
+<p><strong>Error Pandoc 127</strong></p>
+<p>Podría tratarse de un problema de RAM (espacio). Reinicia tu sesión de R e inténtelo de nuevo.</p>
+<p><strong>Asignación de unidades de red</strong></p>
+<p>Mapear una unidad de red puede ser arriesgado. Consulta con tu departamento de TI antes de intentarlo.</p>
+<p>Un consejo tomado de este <a href="https://stackoverflow.com/questions/48161177/r-markdown-openbinaryfile-does-not-exist-no-such-file-or-directory/55616529?noredirect=1#comment97966859_55616529">foro de discusión</a>:</p>
+<p>¿Cómo se abre un archivo “a través de una unidad de red asignada”?</p>
+<ul>
+<li>En primer lugar, tendrás que conocer la ubicación de la red a la que intentas acceder.</li>
+<li>A continuación, en el administrador de archivos de Windows, deberás clicar con el botón derecho en “Este PC” en el panel de la derecha, y seleccionar “Asignar una unidad de red”.</li>
+<li>Asigna la ubicación de red como una letra de unidad.</li>
+<li>Ahora tienes dos maneras de llegar al archivo que estás abriendo. Usar la ruta de la letra de la unidad debería funcionar.</li>
+</ul>
+<p><strong>Error in install.packages()</strong></p>
+<p>Si obtienes un error que incluya la mención de un directorio de “bloqueo”, por ejemplo <code>Error in install.packages : ERROR: failed to lock directory...</code></p>
+<p>Busca en tu biblioteca de paquetes y verás una carpeta cuyo nombre empieza por “00LOCK”. Prueba los siguientes consejos:</p>
+<ul>
+<li>Elimina manualmente el directorio de la carpeta “00LOCK” de tu biblioteca de paquetes. Intenta instalar el paquete de nuevo.</li>
+<li>También puedes probar el comando <code><a href="https://rdrr.io/pkg/pacman/man/p_unlock.html">pacman::p_unlock()</a></code> (también puedes poner este comando en el Rprofile para que se ejecute cada vez que se abra el proyecto). Luego intenta instalar el paquete de nuevo. Puedes necesitar varios intentos.</li>
+<li>Prueba a ejecutar RStudio en modo de administrador e intenta instalar los paquetes uno por uno.</li>
+<li>Si todo lo demás falla, instala el paquete en otra biblioteca o carpeta (por ejemplo, Temp) y luego copia manualmente la carpeta del paquete en la biblioteca deseada.</li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="getting-help.html"><span class="header-section-number">5</span> Cómo obtener ayuda</a></div>
+<div class="next"><a href="data-table.html"><span class="header-section-number">7</span> Data Table</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#r-on-network-drives"><span class="header-section-number">6</span> R en redes locales</a></li>
+<li><a class="nav-link" href="#overview-9"><span class="header-section-number">6.1</span> Resumen</a></li>
+<li><a class="nav-link" href="#rstudio-as-administrator"><span class="header-section-number">6.2</span> RStudio como administrador</a></li>
+<li><a class="nav-link" href="#useful-commands"><span class="header-section-number">6.3</span> Comandos útiles</a></li>
+<li><a class="nav-link" href="#troubleshooting-common-errors"><span class="header-section-number">6.4</span> Solución de errores comunes</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>EpiRhandbook en español</strong>" was written by El equipo del manual. It was last built on 2022-11-22.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>1 De-duplicación | EpiRhandbook en español</title>
+<meta name="author" content="El equipo del manual">
+<meta name="description" content="Esta página cubre las siguientes técnicas de De-duplicación: Identificación y eliminación de filas duplicadas “Recortar” filas para mantener sólo determinadas filas (por ejemplo, mínimas o...">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="1 De-duplicación | EpiRhandbook en español">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Esta página cubre las siguientes técnicas de De-duplicación: Identificación y eliminación de filas duplicadas “Recortar” filas para mantener sólo determinadas filas (por ejemplo, mínimas o...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1 De-duplicación | EpiRhandbook en español">
+<meta name="twitter:description" content="Esta página cubre las siguientes técnicas de De-duplicación: Identificación y eliminación de filas duplicadas “Recortar” filas para mantener sólo determinadas filas (por ejemplo, mínimas o...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.24/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QXDW878QLX"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QXDW878QLX');
+    </script>
+</head>
+<body>
+<div class="alert alert-info alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+      <strong>Need help learning R?</strong> Enroll in Applied Epi's <a href="https://www.appliedepi.org/live/" class="alert-link">intro R course</a>, try our <a href="https://www.appliedepi.org/tutorial/" class="alert-link">free R tutorials</a>, post in our <a href="https://community.appliedepi.org/" class="alert-link">Community Q&amp;A forum</a>, or ask about our <a href="mailto:contact@appliedepi.org" class="alert-link">R Help Desk service</a>.
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style_bs4.css">
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">EpiRhandbook en español</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"></a></li>
+<li><a class="active" href="de-duplication.html"><span class="header-section-number">1</span> De-duplicación</a></li>
+<li><a class="" href="iteration-loops-and-lists.html"><span class="header-section-number">2</span> Iteración, bucles y listas</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="de-duplication" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> De-duplicación<a class="anchor" aria-label="anchor" href="#de-duplication"><i class="fas fa-link"></i></a>
+</h1>
+<div class="inline-figure"><img src="images/deduplication.png" width="50%"></div>
+<p>Esta página cubre las siguientes técnicas de De-duplicación:</p>
+<ol style="list-style-type: decimal">
+<li>Identificación y eliminación de filas duplicadas</li>
+<li>“Recortar” filas para mantener sólo determinadas filas (por ejemplo, mínimas o máximas) de cada grupo de filas</li>
+<li>“Reunir” o combinar valores de varias filas en una sola fila</li>
+</ol>
+<!-- ======================================================= --><div id="preparation-6" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Preparación<a class="anchor" aria-label="anchor" href="#preparation-6"><i class="fas fa-link"></i></a>
+</h2>
+<div id="cargar-paquetes" class="section level3 unnumbered">
+<h3>Cargar paquetes<a class="anchor" aria-label="anchor" href="#cargar-paquetes"><i class="fas fa-link"></i></a>
+</h3>
+<p>Este trozo de código muestra la carga de los paquetes necesarios para el análisis. En este manual destacamos <code>p_load()</code> de <strong>pacman</strong>, que instala el paquete si es necesario <em>y</em> lo carga para su uso. También puedes cargar los paquetes instalados con <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> de R <strong>base</strong> Consulta la página sobre <a href="#r-basics">fundamentos de R</a> para obtener más información sobre los paquetes de R.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>  <span class="va">tidyverse</span>,   <span class="co"># deduplication, grouping, and slicing functions</span></span>
+<span>  <span class="va">janitor</span>,     <span class="co"># function for reviewing duplicates</span></span>
+<span>  <span class="va">stringr</span><span class="op">)</span>      <span class="co"># for string searches, can be used in "rolling-up" values</span></span></code></pre></div>
+</div>
+<div id="importar-datos" class="section level3 unnumbered">
+<h3>Importar datos<a class="anchor" aria-label="anchor" href="#importar-datos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para la demostración, utilizaremos unos datos de ejemplo que se crea con el código R que aparece a continuación.</p>
+<p>Los datos son registros de encuentros telefónicos COVID-19, incluyendo encuentros con contactos y con casos. Las columnas incluyen <code>recordID</code> (generado por ordenador), <code>personID</code>, <code>name</code>, <code>date</code> del encuentro, <code>time</code> del encuentro, <code>purpose</code> del encuentro (para entrevistar como caso o como contacto), y <code>symptoms_ever</code> (si la persona en ese encuentro declaró haber tenido síntomas <em>alguna vez</em>).</p>
+<p>Este es el código para crear el set de datos <code>obs</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  recordID  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span><span class="op">)</span>,</span>
+<span>  personID  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">7</span>,<span class="fl">8</span><span class="op">)</span>,</span>
+<span>  name      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"adam"</span>, <span class="st">"adam"</span>, <span class="st">"amrish"</span>, <span class="st">"amrish"</span>, <span class="st">"mariah"</span>, <span class="st">"amrish"</span>, <span class="st">"nikhil"</span>, <span class="st">"brian"</span>, <span class="st">"smita"</span>, <span class="st">"raquel"</span>, <span class="st">"amrish"</span>,</span>
+<span>                <span class="st">"adam"</span>, <span class="st">"mariah"</span>, <span class="st">"mariah"</span>, <span class="st">"nikhil"</span>, <span class="st">"brian"</span>, <span class="st">"brian"</span>, <span class="st">"raquel"</span>, <span class="st">"natalie"</span><span class="op">)</span>,</span>
+<span>  date      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1/1/2020"</span>, <span class="st">"1/1/2020"</span>, <span class="st">"2/1/2020"</span>, <span class="st">"2/1/2020"</span>, <span class="st">"5/1/2020"</span>, <span class="st">"5/1/2020"</span>, <span class="st">"5/1/2020"</span>, <span class="st">"5/1/2020"</span>, <span class="st">"5/1/2020"</span>,<span class="st">"5/1/2020"</span>, <span class="st">"2/1/2020"</span>,</span>
+<span>                <span class="st">"5/1/2020"</span>, <span class="st">"6/1/2020"</span>, <span class="st">"6/1/2020"</span>, <span class="st">"6/1/2020"</span>, <span class="st">"6/1/2020"</span>, <span class="st">"7/1/2020"</span>, <span class="st">"7/1/2020"</span>, <span class="st">"7/1/2020"</span><span class="op">)</span>,</span>
+<span>  time      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"09:00"</span>, <span class="st">"09:00"</span>, <span class="st">"14:20"</span>, <span class="st">"14:20"</span>, <span class="st">"12:00"</span>, <span class="st">"16:10"</span>, <span class="st">"13:01"</span>, <span class="st">"15:20"</span>, <span class="st">"14:20"</span>, <span class="st">"12:30"</span>, <span class="st">"10:24"</span>,</span>
+<span>                <span class="st">"09:40"</span>, <span class="st">"07:25"</span>, <span class="st">"08:32"</span>, <span class="st">"15:36"</span>, <span class="st">"15:31"</span>, <span class="st">"07:59"</span>, <span class="st">"11:13"</span>, <span class="st">"17:12"</span><span class="op">)</span>,</span>
+<span>  encounter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,</span>
+<span>                <span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>,</span>
+<span>  purpose   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"contact"</span>, <span class="st">"contact"</span>, <span class="st">"contact"</span>, <span class="st">"contact"</span>, <span class="st">"case"</span>, <span class="st">"case"</span>, <span class="st">"contact"</span>, <span class="st">"contact"</span>, <span class="st">"contact"</span>, <span class="st">"contact"</span>, <span class="st">"contact"</span>,</span>
+<span>                <span class="st">"case"</span>, <span class="st">"contact"</span>, <span class="st">"contact"</span>, <span class="st">"contact"</span>, <span class="st">"contact"</span>, <span class="st">"case"</span>, <span class="st">"contact"</span>, <span class="st">"case"</span><span class="op">)</span>,</span>
+<span>  symptoms_ever <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span>, <span class="st">"No"</span>, <span class="st">"No"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="cn">NA</span>, <span class="st">"Yes"</span>,</span>
+<span>                    <span class="st">"No"</span>, <span class="st">"No"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>,<span class="st">"No"</span>, <span class="st">"No"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">date</span>, format <span class="op">=</span> <span class="st">"%d/%m/%Y"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div id="dedup_data" class="section level4 unnumbered">
+<h4>Este es el dataframe<a class="anchor" aria-label="anchor" href="#dedup_data"><i class="fas fa-link"></i></a>
+</h4>
+<p>Utiliza los cuadros de filtro de la parte superior para revisar los encuentros de cada persona.</p>
+<div id="htmlwidget-415add72e6e83e1f164e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-415add72e6e83e1f164e">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1\" data-max=\"18\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1\" data-max=\"8\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1577836800000\" data-max=\"1578355200000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1\" data-max=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],[1,1,2,2,3,2,4,5,6,7,2,1,3,3,4,5,5,7,8],["adam","adam","amrish","amrish","mariah","amrish","nikhil","brian","smita","raquel","amrish","adam","mariah","mariah","nikhil","brian","brian","raquel","natalie"],["2020-01-01","2020-01-01","2020-01-02","2020-01-02","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-02","2020-01-05","2020-01-06","2020-01-06","2020-01-06","2020-01-06","2020-01-07","2020-01-07","2020-01-07"],["09:00","09:00","14:20","14:20","12:00","16:10","13:01","15:20","14:20","12:30","10:24","09:40","07:25","08:32","15:36","15:31","07:59","11:13","17:12"],[1,1,1,1,1,3,1,1,1,1,2,2,2,3,2,2,3,2,1],["contact","contact","contact","contact","case","case","contact","contact","contact","contact","contact","case","contact","contact","contact","contact","case","contact","case"],[null,null,"No","No","No","Yes","Yes","No","Yes",null,"Yes","No","No","No","Yes","Yes","No","No","No"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>recordID<\/th>\n      <th>personID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":19,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,5]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[10,19,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Hay que tener en cuenta algunas cosas al revisar los datos:</p>
+<ul>
+<li>Los dos primeros registros están 100% duplicados, incluido el <code>recordID</code> de registro duplicado (¡debe ser un fallo informático!)</li>
+<li>Las dos segundas filas están duplicadas, en todas las columnas <em>excepto en <code>recordID</code></em>
+</li>
+<li>Varias personas tuvieron múltiples encuentros telefónicos, en diversas fechas y horas, y como contactos y/o casos</li>
+<li>En cada encuentro se preguntaba a la persona si había tenido <strong>alguna vez</strong> síntomas, y parte de esta información falta.</li>
+</ul>
+<p>Y aquí hay un resumen rápido de las personas y los propósitos de sus encuentros, usando <code>tabyl()</code> de <strong>janitor</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">tabyl</span><span class="op">(</span><span class="va">name</span>, <span class="va">purpose</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##     name case contact
+##     adam    1       2
+##   amrish    1       3
+##    brian    1       2
+##   mariah    1       2
+##  natalie    1       0
+##   nikhil    0       2
+##   raquel    0       2
+##    smita    0       1</code></pre>
+<!-- ======================================================= -->
+</div>
+</div>
+</div>
+<div id="deduplication-1" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> De-duplicación<a class="anchor" aria-label="anchor" href="#deduplication-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Esta sección describe cómo revisar y eliminar filas duplicadas en un dataframe. También muestra cómo manejar los elementos duplicados en un vector.</p>
+<!-- ======================================================= -->
+<div id="examinar-las-filas-duplicadas" class="section level3 unnumbered">
+<h3>Examinar las filas duplicadas<a class="anchor" aria-label="anchor" href="#examinar-las-filas-duplicadas"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para revisar rápidamente las filas que tienen duplicados, puedes utilizar <code>get_dupes()</code> del paquete <strong>janitor</strong>. Por <em>defecto</em>, se revisan todas las columnas cuando se evalúan los duplicados - las filas devueltas por la función están 100% duplicadas considerando los valores de <em>todas</em> las columnas.</p>
+<p>En el dataframe <code>obs</code>, las dos primeras filas están <em>100% duplicadas</em> - tienen el mismo valor en cada columna (incluyendo la columna recordID, que se <em>supone</em> que es única - debe ser algún fallo informático). El dataframe devuelto incluye automáticamente una nueva columna <code>dupe_count</code> en el lado derecho, que muestra el número de filas con esa combinación de valores duplicados.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 100% duplicates across all columns</span></span>
+<span><span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/get_dupes.html">get_dupes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-9c6bd444901dd00d2d9b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9c6bd444901dd00d2d9b">{"x":{"filter":"none","vertical":false,"data":[[1,1],[1,1],["adam","adam"],["2020-01-01","2020-01-01"],["09:00","09:00"],[1,1],["contact","contact"],[null,null],[2,2]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>recordID<\/th>\n      <th>personID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n      <th>dupe_count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":19,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,5,8]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,19,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Ver los <a href="de-duplication.html#dedup_data">datos originales</a></p>
+<p>Sin embargo, si decidimos ignorar <code>recordID</code>, las filas 3 y 4 también están duplicadas entre sí. Es decir, tienen los mismos valores en todas las columnas <em>excepto</em> en recordID. Puedes especificar las columnas que se van a ignorar en la función mediante el símbolo <code>-</code> menos.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Duplicates when column recordID is not considered</span></span>
+<span><span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/get_dupes.html">get_dupes</a></span><span class="op">(</span><span class="op">-</span><span class="va">recordID</span><span class="op">)</span>         <span class="co"># if multiple columns, wrap them in c()</span></span></code></pre></div>
+<div id="htmlwidget-51794407e2c6336e6768" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-51794407e2c6336e6768">{"x":{"filter":"none","vertical":false,"data":[[1,1,2,2],["adam","adam","amrish","amrish"],["2020-01-01","2020-01-01","2020-01-02","2020-01-02"],["09:00","09:00","14:20","14:20"],[1,1,1,1],["contact","contact","contact","contact"],[null,null,"No","No"],[2,2,2,2],[1,1,2,3]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>personID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n      <th>dupe_count<\/th>\n      <th>recordID<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":19,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,4,7,8]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,19,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>También puedes especificar positivamente las columnas a considerar. A continuación, sólo se devuelven las filas que tienen los mismos valores en las columnas <code>name</code> y <code>purpose</code>. Observa cómo “amrish” tiene ahora <code>dupe_count</code> igual a 3 para reflejar sus tres encuentros de “contacto”.</p>
+<p>*Desplázate a la izquierda para ver más filas**</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># duplicates based on name and purpose columns ONLY</span></span>
+<span><span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/get_dupes.html">get_dupes</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">purpose</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-862ce8ea50a389aaf1a5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-862ce8ea50a389aaf1a5">{"x":{"filter":"none","vertical":false,"data":[["adam","adam","amrish","amrish","amrish","brian","brian","mariah","mariah","nikhil","nikhil","raquel","raquel"],["contact","contact","contact","contact","contact","contact","contact","contact","contact","contact","contact","contact","contact"],[2,2,3,3,3,2,2,2,2,2,2,2,2],[1,1,2,3,10,7,15,12,13,6,14,9,17],[1,1,2,2,2,5,5,3,3,4,4,7,7],["2020-01-01","2020-01-01","2020-01-02","2020-01-02","2020-01-02","2020-01-05","2020-01-06","2020-01-06","2020-01-06","2020-01-05","2020-01-06","2020-01-05","2020-01-07"],["09:00","09:00","14:20","14:20","10:24","15:20","15:31","07:25","08:32","13:01","15:36","12:30","11:13"],[1,1,1,1,2,1,2,2,3,1,2,1,2],[null,null,"No","No","Yes","No","Yes","No","No","Yes","Yes",null,"No"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>purpose<\/th>\n      <th>dupe_count<\/th>\n      <th>recordID<\/th>\n      <th>personID<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>symptoms_ever<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":7,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[2,3,4,7]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[7,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Ver los <a href="de-duplication.html#dedup_data">datos originales</a>.</p>
+<p>Para más detalles, consulta <code>?get_dupes</code> o esta <a href="https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html#explore-records-with-duplicated-values-for-specific-combinations-of-variables-with-get_dupes">referencia en línea</a></p>
+<!-- ======================================================= -->
+</div>
+<div id="mantener-sólo-filas-únicas" class="section level3 unnumbered">
+<h3>Mantener sólo filas únicas<a class="anchor" aria-label="anchor" href="#mantener-s%C3%B3lo-filas-%C3%BAnicas"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para mantener sólo las filas únicas de un dataframe, utiliza <code>distinct()</code> de <strong>dplyr</strong> (como se muestra en la página <a href="#cleaning-data-and-core-functions">Limpieza de datos y funciones básicas</a>). Las filas duplicadas se eliminan de forma que sólo se conserva la primera de dichas filas. Por defecto, “primero” significa el <code>rownumber</code> más alto (orden de filas de arriba a abajo). Sólo se mantienen las filas únicas.</p>
+<p>En el ejemplo siguiente, ejecutamos <code>distinct()</code> de forma que la columna <code>recordID</code> se excluye de la consideración - así <strong>se eliminan dos filas duplicadas</strong>. La primera fila (para “adam”) estaba 100% duplicada y ha sido eliminada. También la fila 3 (para “amrish”) estaba duplicada en todas las columnas <em>excepto</em> en <code>recordID</code> (que no se tiene en cuenta), por lo que también se ha eliminado. El set de datos <code>obs</code> tiene ahora <code>nrow(obs)-2</code> filas, no <code>nrow(obs)</code>).</p>
+<p><em>Desplázate a la izquierda para ver el dataframe completo</em></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># added to a chain of pipes (e.g. data cleaning)</span></span>
+<span><span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">distinct</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="op">-</span><span class="va">recordID</span><span class="op">)</span>, <span class="co"># reduces data frame to only unique rows (keeps first one of any duplicates)</span></span>
+<span>           .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># if outside pipes, include the data as first argument </span></span>
+<span><span class="co"># distinct(obs)</span></span></code></pre></div>
+<div id="htmlwidget-e02c7fba7d7ba3382120" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e02c7fba7d7ba3382120">{"x":{"filter":"none","vertical":false,"data":[[1,2,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],[1,2,3,2,4,5,6,7,2,1,3,3,4,5,5,7,8],["adam","amrish","mariah","amrish","nikhil","brian","smita","raquel","amrish","adam","mariah","mariah","nikhil","brian","brian","raquel","natalie"],["2020-01-01","2020-01-02","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-02","2020-01-05","2020-01-06","2020-01-06","2020-01-06","2020-01-06","2020-01-07","2020-01-07","2020-01-07"],["09:00","14:20","12:00","16:10","13:01","15:20","14:20","12:30","10:24","09:40","07:25","08:32","15:36","15:31","07:59","11:13","17:12"],[1,1,1,3,1,1,1,1,2,2,2,3,2,2,3,2,1],["contact","contact","case","case","contact","contact","contact","contact","contact","case","contact","contact","contact","contact","case","contact","case"],[null,"No","No","Yes","Yes","No","Yes",null,"Yes","No","No","No","Yes","Yes","No","No","No"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>recordID<\/th>\n      <th>personID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,5]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p><span style="color: orange;"><strong><em>PRECAUCIÓN:</em></strong> Si se utiliza <code>distinct()</code> en datos agrupados, la función se aplicará a cada grupo.</span></p>
+<p><strong>De-duplicar en base a columnas específicas</strong></p>
+<p>También puedes especificar las columnas que serán la base de la De-duplicación. De esta manera, la De-duplicación sólo se aplica a las filas que están duplicadas dentro de las columnas especificadas. A menos que establece <code>.keep_all = TRUE</code>, todas las columnas no mencionadas se eliminarán.</p>
+<p>En el ejemplo siguiente, la De-duplicación sólo se aplica a las filas que tienen valores idénticos para las columnas <code>name</code> y <code>purpose</code>. Por lo tanto, “brian” sólo tiene 2 filas en lugar de 3: su <em>primer</em> encuentro como “contacto” y su único encuentro como “caso”. Para ajustar que se mantenga el <em>último encuentro de brian</em> de cada propósito, Mira el apartado Cortar dentro de los grupos.</p>
+<p><em>Desplázate a la izquierda para ver el dataframe completo</em></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># added to a chain of pipes (e.g. data cleaning)</span></span>
+<span><span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">distinct</span><span class="op">(</span><span class="va">name</span>, <span class="va">purpose</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># keep rows unique by name and purpose, retain all columns</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">name</span><span class="op">)</span>                                  <span class="co"># arrange for easier viewing</span></span></code></pre></div>
+<div id="htmlwidget-f8c4fad396e23952a7d0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f8c4fad396e23952a7d0">{"x":{"filter":"none","vertical":false,"data":[[1,11,2,5,7,16,4,12,18,6,9,8],[1,1,2,2,5,5,3,3,8,4,7,6],["adam","adam","amrish","amrish","brian","brian","mariah","mariah","natalie","nikhil","raquel","smita"],["2020-01-01","2020-01-05","2020-01-02","2020-01-05","2020-01-05","2020-01-07","2020-01-05","2020-01-06","2020-01-07","2020-01-05","2020-01-05","2020-01-05"],["09:00","09:40","14:20","16:10","15:20","07:59","12:00","07:25","17:12","13:01","12:30","14:20"],[1,2,1,3,1,3,1,2,1,1,1,1],["contact","case","contact","case","contact","case","case","contact","case","contact","contact","contact"],[null,"No","No","Yes","No","No","No","No","No","Yes",null,"Yes"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>recordID<\/th>\n      <th>personID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,5]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Ver los <a href="de-duplication.html#dedup_data">datos originales</a>.</p>
+<!-- ======================================================= -->
+</div>
+<div id="de-duplicar-elementos-en-un-vector" class="section level3 unnumbered">
+<h3>De-duplicar elementos en un vector<a class="anchor" aria-label="anchor" href="#de-duplicar-elementos-en-un-vector"><i class="fas fa-link"></i></a>
+</h3>
+<p>La función <code><a href="https://rdrr.io/r/base/duplicated.html">duplicated()</a></code> de R <strong>base</strong> evaluará un vector (columna) y devolverá un vector lógico de la misma longitud (TRUE/FALSE). La primera vez que aparezca un valor, devolverá FALSE (no es un duplicado), y las siguientes veces que aparezca ese valor devolverá TRUE. Nótese que <code>NA</code> se trata igual que cualquier otro valor.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<p>Para devolver sólo los elementos duplicados, se pueden utilizar paréntesis para subconjuntar el vector original:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1]  1 NA  4  4  1  2</code></pre>
+<p>Para devolver sólo los elementos únicos, utiliza <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> de R <strong>base</strong>. Para eliminar los <code>NA</code> de la salida, anida <code><a href="https://rdrr.io/r/stats/na.fail.html">na.omit()</a></code> dentro de <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code>.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>           <span class="co"># alternatively, use x[!duplicated(x)]</span></span></code></pre></div>
+<pre><code>## [1]  1  2 NA  4  5</code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>  <span class="co"># remove NAs </span></span></code></pre></div>
+<pre><code>## [1] 1 2 4 5</code></pre>
+<!-- ======================================================= -->
+</div>
+<div id="utilizando-r-base" class="section level3 unnumbered">
+<h3>Utilizando R <strong>base</strong><a class="anchor" aria-label="anchor" href="#utilizando-r-base"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para devolver las filas duplicadas</strong></p>
+<p>En R <strong>base</strong>, también se puede ver qué filas están 100% duplicadas en un dataframe <code>df</code> con el comando <code>duplicated(df)</code> (devuelve un vector lógico de las filas).</p>
+<p>Así, también puedes utilizar el subconjunto base <code>[ ]</code> en el dataframe para ver las filas <em>duplicadas</em> con <code>df[duplicated(df),]</code> (¡no olvides la coma, que significa que quieres ver todas las columnas!)</p>
+<p><strong>Para devolver filas únicas</strong></p>
+<p>Ver las notas anteriores. Para ver las filas <em>únicas</em> se añade el negador lógico <code>!</code> delante de la función duplicated():
+<code>df[!duplicated(df),]</code></p>
+<p><strong>Para devolver las filas que son duplicados de sólo ciertas columnas</strong></p>
+<p>Subconjunta el <code>df</code> que está <em>dentro de los paréntesis de <code><a href="https://rdrr.io/r/base/duplicated.html">duplicated()</a></code></em>, para que esta función opere sólo en ciertas columnas del df.
+Para especificar las columnas, proporciona los números o nombres de las columnas después de una coma (recuerda que todo esto está <em>dentro</em> de la función <code><a href="https://rdrr.io/r/base/duplicated.html">duplicated()</a></code>).</p>
+<p>¡Asegúrate también de mantener la coma <code>,</code> <em>fuera</em>, después de la función <code><a href="https://rdrr.io/r/base/duplicated.html">duplicated()</a></code>!</p>
+<p>Por ejemplo, para evaluar sólo las columnas 2 a 5 en busca de duplicados: <code>df[!duplicated(df[, 2:5]),]</code>
+Para evaluar sólo las columnas <code>name</code> y <code>purpose</code> en busca de duplicados: <code>df[!duplicated(df[, c("name", "purpose)]),]</code></p>
+<!-- ======================================================= -->
+</div>
+</div>
+<div id="slicing" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Recortar<a class="anchor" aria-label="anchor" href="#slicing"><i class="fas fa-link"></i></a>
+</h2>
+<p>Para “recortar” un dataframe con un filtro de filas por su número de fila/posición. Esto resulta especialmente útil si tiene varias filas por grupo funcional (por ejemplo, por “persona”) y sólo quieres conservar una o algunas de ellas.</p>
+<p>La función básica <code>slice()</code> acepta números y devuelve filas en esas posiciones. Si los números proporcionados son positivos, sólo se devuelven éstos. Si son negativos, <em>no se devuelven esas filas</em>. Los números deben ser todos positivos o todos negativos.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">obs</span> <span class="op">%&gt;%</span> <span class="fu">slice</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>  <span class="co"># return the 4th row</span></span></code></pre></div>
+<pre><code>##   recordID personID   name       date  time encounter purpose symptoms_ever
+## 1        3        2 amrish 2020-01-02 14:20         1 contact            No</code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">obs</span> <span class="op">%&gt;%</span> <span class="fu">slice</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># return rows 2 and 4</span></span></code></pre></div>
+<pre><code>##   recordID personID   name       date  time encounter purpose symptoms_ever
+## 1        1        1   adam 2020-01-01 09:00         1 contact          &lt;NA&gt;
+## 2        3        2 amrish 2020-01-02 14:20         1 contact            No</code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#obs %&gt;% slice(c(2:4))  # return rows 2 through 4</span></span></code></pre></div>
+<p>Ver los <a href="de-duplication.html#dedup_data">datos originales</a>.</p>
+<p>Existen diversas variantes: Se les debe proporcionar una columna y un número de filas a devolver (a <code>n =</code>).</p>
+<ul>
+<li>
+<code>slice_min()</code> y <code>slice_max()</code> mantienen sólo la(s) fila(s) con el valor(es) mínimo o máximo de la columna especificada. Esto también funciona para devolver el “min” y el “max” de los factores ordenados.</li>
+<li>
+<code>slice_head()</code> y <code>slice_tail()</code> - mantienen sólo la <em>primera</em> o la <em>última</em> fila.</li>
+<li>
+<code>slice_sample()</code> - mantener sólo una muestra aleatoria de las filas.</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">obs</span> <span class="op">%&gt;%</span> <span class="fu">slice_max</span><span class="op">(</span><span class="va">encounter</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>  <span class="co"># return rows with the largest encounter number</span></span></code></pre></div>
+<pre><code>##   recordID personID   name       date  time encounter purpose symptoms_ever
+## 1        5        2 amrish 2020-01-05 16:10         3    case           Yes
+## 2       13        3 mariah 2020-01-06 08:32         3 contact            No
+## 3       16        5  brian 2020-01-07 07:59         3    case            No</code></pre>
+<p>Utiliza los argumentos <code>n =</code> o <code>prop =</code> para especificar el número o la proporción de filas que deben conservarse. Si no se utiliza la función en una cadena de tuberías, proporciona primero el argumento datos (por ejemplo, <code>slice(datos, n = 2)</code>). Para más información, consulta con <code>?slice</code>.</p>
+<p>Otros argumentos:</p>
+<p><code>.order_by =</code> utilizado en <code>slice_min()</code> y <code>slice_max()</code> esta es una columna para ordenar por antes de recortarlas.
+<code>with_ties =</code> TRUE por defecto, lo que significa que se mantienen los empates.
+<code>.preserve =</code> FALSE por defecto. Si es TRUE, la estructura de agrupación se recalcula después del recorte.
+<code>weight_by =</code> Opcional, columna numérica para ponderar por (un número mayor tiene más probabilidades de ser muestreado). También <code>replace =</code> para saber si el muestreo se realiza con/sin reemplazo.</p>
+<p><span style="color: darkgreen;"><strong><em>CONSEJO:</em></strong> Al utilizar <code>slice_max()</code> y <code>slice_min()</code>, asegúrate de especificar/escribir el <code>n =</code> (por ejemplo, <code>n = 2</code>, no simplemente 2). De lo contrario, puedes obtener un error <code>Error:</code> …<code>is not empty.</code>. </span></p>
+<p><span style="color: black;"><strong><em>NOTA:</em></strong> Es posible que encuentres la función <a href="https://dplyr.tidyverse.org/reference/top_n.html"><code>top_n()</code></a>, que ha sido sustituida por las funciones <code>slice</code>. </span></p>
+<!-- ======================================================= -->
+<div id="recortar-con-grupos" class="section level3 unnumbered">
+<h3>Recortar con grupos<a class="anchor" aria-label="anchor" href="#recortar-con-grupos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Las funciones <code>slice_*()</code> pueden ser muy útiles si se aplican a un dataframe agrupado porque la operación de recorte se realiza en cada grupo por separado. Utiliza la <strong>función</strong> <code>group_by()</code> junto con <code>slice()</code> para agrupar los datos y tomar un corte de cada grupo.</p>
+<p>Esto es útil para la De-duplicación si tienes varias filas por persona pero sólo quieres mantener una de ellas. Primero se utiliza <code>group_by()</code> con columnas clave que son las mismas por persona, y luego se utiliza una función slice en una columna que será diferente entre las filas agrupadas.</p>
+<p>En el ejemplo siguiente, para mantener sólo el <em>último</em> encuentro <em>por persona</em>, agrupamos las filas por nombre y luego utilizamos <code>slice_max()</code> con <code>n = 1</code> en la columna de <code>date</code>. Ten en cuenta que Para aplicar una función como `slice_max() en las fechas, la columna de fecha debe ser de tipo Date.</p>
+<p>Por defecto, los “empates” (por ejemplo, la misma fecha en este escenario) se mantienen, y todavía obtendríamos múltiples filas para algunas personas (por ejemplo, adam). Para evitar esto, establecemos <code>with_ties = FALSE</code>. Sólo obtendremos una fila por persona.</p>
+<p><span style="color: orange;"><strong><em>PRECACUCIÓN:</em></strong> Si utilizas <code>arrange()</code>, especifica .<code>by_group = TRUE</code> para que los datos se ordenen dentro de cada grupo.</span></p>
+<p><span style="color: red;"><strong><em>PELIGRO:</em></strong> Si <code>with_ties = FALSE</code>, se mantiene la primera fila de un empate. Esto puede ser engañoso. Mira cómo para Mariah, ella tiene dos encuentros en su última fecha (6 de enero) y el primero (el más temprano) se mantuvo. Es probable que queramos mantener tu último encuentro en ese día. Mira cómo “romper” estos vínculos en el siguiente ejemplo. </span></p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">name</span><span class="op">)</span> <span class="op">%&gt;%</span>       <span class="co"># group the rows by 'name'</span></span>
+<span>  <span class="fu">slice_max</span><span class="op">(</span><span class="va">date</span>,          <span class="co"># keep row per group with maximum date value </span></span>
+<span>            n <span class="op">=</span> <span class="fl">1</span>,         <span class="co"># keep only the single highest row </span></span>
+<span>            with_ties <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="co"># if there's a tie (of date), take the first row</span></span></code></pre></div>
+<div id="htmlwidget-c4e40080b5cf32223e19" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c4e40080b5cf32223e19">{"x":{"filter":"none","vertical":false,"data":[[11,5,16,12,18,14,17,8],[1,2,5,3,8,4,7,6],["adam","amrish","brian","mariah","natalie","nikhil","raquel","smita"],["2020-01-05","2020-01-05","2020-01-07","2020-01-06","2020-01-07","2020-01-06","2020-01-07","2020-01-05"],["09:40","16:10","07:59","07:25","17:12","15:36","11:13","14:20"],[2,3,3,2,1,2,2,1],["case","case","case","contact","case","contact","contact","contact"],["No","Yes","No","No","No","Yes","No","Yes"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>recordID<\/th>\n      <th>personID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,5]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Arriba, por ejemplo, podemos ver que sólo se conservó la fila de Amrish del 5 de enero, y sólo se conservó la fila de Brian del 7 de enero. Ver los <a href="de-duplication.html#dedup_data">datos originales</a>.</p>
+<p><strong>Romper los “empates”</strong></p>
+<p>Se pueden ejecutar múltiples sentencias de recorte para “romper empates”. En este caso, si una persona tiene varios encuentros en tu última <em>fecha</em>, se mantiene el encuentro con la última <em>hora</em> (se utiliza <code><a href="https://lubridate.tidyverse.org/reference/hms.html">lubridate::hm()</a></code> para convertir los caracteres de tiempo en tipo tiempo, ordenable).
+Observa ahora cómo, la única fila que se mantiene para “Mariah” el 6 de enero es el encuentro 3 de las 08:32, no el encuentro 2 de las 07:25.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Example of multiple slice statements to "break ties"</span></span>
+<span><span class="va">obs</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">name</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  </span>
+<span>  <span class="co"># FIRST - slice by latest date</span></span>
+<span>  <span class="fu">slice_max</span><span class="op">(</span><span class="va">date</span>, n <span class="op">=</span> <span class="fl">1</span>, with_ties <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  </span>
+<span>  <span class="co"># SECOND - if there is a tie, select row with latest time; ties prohibited</span></span>
+<span>  <span class="fu">slice_max</span><span class="op">(</span><span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/hms.html">hm</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">1</span>, with_ties <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-89dbaa272b2112c1d5f9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-89dbaa272b2112c1d5f9">{"x":{"filter":"none","vertical":false,"data":[[11,5,16,13,18,14,17,8],[1,2,5,3,8,4,7,6],["adam","amrish","brian","mariah","natalie","nikhil","raquel","smita"],["2020-01-05","2020-01-05","2020-01-07","2020-01-06","2020-01-07","2020-01-06","2020-01-07","2020-01-05"],["09:40","16:10","07:59","08:32","17:12","15:36","11:13","14:20"],[2,3,3,3,1,2,2,1],["case","case","case","contact","case","contact","contact","contact"],["No","Yes","No","No","No","Yes","No","Yes"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>recordID<\/th>\n      <th>personID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,5]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p><em>En el ejemplo anterior, también habría sido posible realizar un recorte por número de encuentro, pero mostramos el corte por fecha y hora a modo de ejemplo.</em></p>
+<p><strong><em>CONSEJO:</em></strong> Para utilizar <code>slice_max()</code> o <code>slice_min()</code> en una columna “carácter”, ¡mútala a un tipo de factor <em>ordenado</em>!</p>
+<p>Ver los <a href="de-duplication.html#dedup_data">datos originales</a>.</p>
+<!-- ======================================================= -->
+</div>
+<div id="mantener-todos-pero-marcados" class="section level3 unnumbered">
+<h3>Mantener todos pero marcados<a class="anchor" aria-label="anchor" href="#mantener-todos-pero-marcados"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si deseas conservar todos los registros pero marcar sólo algunos para tu análisis, considera un enfoque de dos pasos utilizando un número de registro/encuentro único:</p>
+<ol style="list-style-type: decimal">
+<li>Reduce/recorta el dataframe original a sólo las filas para el análisis. Guarda/conserva este dataframe reducido.</li>
+<li>En el dataframe original, marca las filas según corresponda con <code>case_when()</code>, basándose en si tu identificador único de registro (recordID en este ejemplo) está presente en el dataframe reducido.</li>
+</ol>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1. Define data frame of rows to keep for analysis</span></span>
+<span><span class="va">obs_keep</span> <span class="op">&lt;-</span> <span class="va">obs</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">name</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">slice_max</span><span class="op">(</span><span class="va">encounter</span>, n <span class="op">=</span> <span class="fl">1</span>, with_ties <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># keep only latest encounter per person</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># 2. Mark original data frame</span></span>
+<span><span class="va">obs_marked</span> <span class="op">&lt;-</span> <span class="va">obs</span> <span class="op">%&gt;%</span></span>
+<span></span>
+<span>  <span class="co"># make new dup_record column</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>dup_record <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    </span>
+<span>    <span class="co"># if record is in obs_keep data frame</span></span>
+<span>    <span class="va">recordID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">obs_keep</span><span class="op">$</span><span class="va">recordID</span> <span class="op">~</span> <span class="st">"For analysis"</span>, </span>
+<span>    </span>
+<span>    <span class="co"># all else marked as "Ignore" for analysis purposes</span></span>
+<span>    <span class="cn">TRUE</span>                            <span class="op">~</span> <span class="st">"Ignore"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># print</span></span>
+<span><span class="va">obs_marked</span></span></code></pre></div>
+<pre><code>##    recordID personID    name       date  time encounter purpose symptoms_ever   dup_record
+## 1         1        1    adam 2020-01-01 09:00         1 contact          &lt;NA&gt;       Ignore
+## 2         1        1    adam 2020-01-01 09:00         1 contact          &lt;NA&gt;       Ignore
+## 3         2        2  amrish 2020-01-02 14:20         1 contact            No       Ignore
+## 4         3        2  amrish 2020-01-02 14:20         1 contact            No       Ignore
+## 5         4        3  mariah 2020-01-05 12:00         1    case            No       Ignore
+## 6         5        2  amrish 2020-01-05 16:10         3    case           Yes For analysis
+## 7         6        4  nikhil 2020-01-05 13:01         1 contact           Yes       Ignore
+## 8         7        5   brian 2020-01-05 15:20         1 contact            No       Ignore
+## 9         8        6   smita 2020-01-05 14:20         1 contact           Yes For analysis
+## 10        9        7  raquel 2020-01-05 12:30         1 contact          &lt;NA&gt;       Ignore
+## 11       10        2  amrish 2020-01-02 10:24         2 contact           Yes       Ignore
+## 12       11        1    adam 2020-01-05 09:40         2    case            No For analysis
+## 13       12        3  mariah 2020-01-06 07:25         2 contact            No       Ignore
+## 14       13        3  mariah 2020-01-06 08:32         3 contact            No For analysis
+## 15       14        4  nikhil 2020-01-06 15:36         2 contact           Yes For analysis
+## 16       15        5   brian 2020-01-06 15:31         2 contact           Yes       Ignore
+## 17       16        5   brian 2020-01-07 07:59         3    case            No For analysis
+## 18       17        7  raquel 2020-01-07 11:13         2 contact            No For analysis
+## 19       18        8 natalie 2020-01-07 17:12         1    case            No For analysis</code></pre>
+<div id="htmlwidget-2adabb2bd7296a1cab9d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2adabb2bd7296a1cab9d">{"x":{"filter":"none","vertical":false,"data":[[1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],[1,1,2,2,3,2,4,5,6,7,2,1,3,3,4,5,5,7,8],["adam","adam","amrish","amrish","mariah","amrish","nikhil","brian","smita","raquel","amrish","adam","mariah","mariah","nikhil","brian","brian","raquel","natalie"],["2020-01-01","2020-01-01","2020-01-02","2020-01-02","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-02","2020-01-05","2020-01-06","2020-01-06","2020-01-06","2020-01-06","2020-01-07","2020-01-07","2020-01-07"],["09:00","09:00","14:20","14:20","12:00","16:10","13:01","15:20","14:20","12:30","10:24","09:40","07:25","08:32","15:36","15:31","07:59","11:13","17:12"],[1,1,1,1,1,3,1,1,1,1,2,2,2,3,2,2,3,2,1],["contact","contact","contact","contact","case","case","contact","contact","contact","contact","contact","case","contact","contact","contact","contact","case","contact","case"],[null,null,"No","No","No","Yes","Yes","No","Yes",null,"Yes","No","No","No","Yes","Yes","No","No","No"],["Ignore","Ignore","Ignore","Ignore","Ignore","For analysis","Ignore","Ignore","For analysis","Ignore","Ignore","For analysis","Ignore","For analysis","For analysis","Ignore","For analysis","For analysis","For analysis"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>recordID<\/th>\n      <th>personID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n      <th>dup_record<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,5]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Ver los <a href="de-duplication.html#dedup_data">datos originales</a>.</p>
+<!-- ======================================================= -->
+</div>
+<div id="calcular-la-exhaustividad-de-las-filas" class="section level3 unnumbered">
+<h3>Calcular la exhaustividad de las filas<a class="anchor" aria-label="anchor" href="#calcular-la-exhaustividad-de-las-filas"><i class="fas fa-link"></i></a>
+</h3>
+<p>Crea una columna que contenga una métrica para la exhaustividad/completitud de la fila (que no tenga valores faltantes). Esto podría ser útil a la hora de decidir qué filas se priorizan sobre otras al de-duplicar/repartir.</p>
+<p>En este ejemplo, las columnas “clave” sobre las que se quiere medir la integridad se guardan en un vector de nombres de columnas.</p>
+<p>A continuación se crea la nueva columna <code>key_completeness</code> con <code>mutate()</code>. El nuevo valor de cada fila se define como una fracción calculada: el número de valores no ausentes en esa fila entre las columnas clave, dividido por el número de columnas clave.</p>
+<p>Esto implica la función <code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code> de R <strong>base</strong>. También se utiliza <code>.</code> , que dentro del piping se refiere al dataframe en ese punto (en este caso, se está subconjuntando con corchetes <code>[]</code>).</p>
+<p>*Desplázate a la derecha para ver más filas**.</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create a "key variable completeness" column</span></span>
+<span><span class="co"># this is a *proportion* of the columns designated as "key_cols" that have non-missing values</span></span>
+<span></span>
+<span><span class="va">key_cols</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"personID"</span>, <span class="st">"name"</span>, <span class="st">"symptoms_ever"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>key_completeness <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">[</span>,<span class="va">key_cols</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">key_cols</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<div id="htmlwidget-606d0ffbb6bb7b2988c7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-606d0ffbb6bb7b2988c7">{"x":{"filter":"none","vertical":false,"data":[[1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],[1,1,2,2,3,2,4,5,6,7,2,1,3,3,4,5,5,7,8],["adam","adam","amrish","amrish","mariah","amrish","nikhil","brian","smita","raquel","amrish","adam","mariah","mariah","nikhil","brian","brian","raquel","natalie"],["2020-01-01","2020-01-01","2020-01-02","2020-01-02","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-05","2020-01-02","2020-01-05","2020-01-06","2020-01-06","2020-01-06","2020-01-06","2020-01-07","2020-01-07","2020-01-07"],["09:00","09:00","14:20","14:20","12:00","16:10","13:01","15:20","14:20","12:30","10:24","09:40","07:25","08:32","15:36","15:31","07:59","11:13","17:12"],[1,1,1,1,1,3,1,1,1,1,2,2,2,3,2,2,3,2,1],["contact","contact","contact","contact","case","case","contact","contact","contact","contact","contact","case","contact","contact","contact","contact","case","contact","case"],[null,null,"No","No","No","Yes","Yes","No","Yes",null,"Yes","No","No","No","Yes","Yes","No","No","No"],[0.666666666666667,0.666666666666667,1,1,1,1,1,1,1,0.666666666666667,1,1,1,1,1,1,1,1,1]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>recordID<\/th>\n      <th>personID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n      <th>key_completeness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,5,8]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Ver los <a href="de-duplication.html#dedup_data">datos originales</a>.</p>
+<!-- ======================================================= -->
+</div>
+</div>
+<div id="str_rollup" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Combinación de valores<a class="anchor" aria-label="anchor" href="#str_rollup"><i class="fas fa-link"></i></a>
+</h2>
+<p>Esta sección describe:</p>
+<ol style="list-style-type: decimal">
+<li>Cómo “combinar” valores de varias filas en una sola fila, con algunas variaciones</li>
+<li>Una vez que se hayan “combinado” los valores, cómo sobrescribir/priorizar los valores en cada celda</li>
+</ol>
+<p>Esta sección utiliza los datos de ejemplo de la sección Preparación.</p>
+<!-- ======================================================= -->
+<div id="combinar-los-valores-en-una-fila" class="section level3 unnumbered">
+<h3>Combinar los valores en una fila<a class="anchor" aria-label="anchor" href="#combinar-los-valores-en-una-fila"><i class="fas fa-link"></i></a>
+</h3>
+<p>El código de ejemplo que se muestra a continuación utiliza <code>group_by()</code> y <code>summarise()</code> para agrupar las filas por persona, y luego pega todos los valores únicos dentro de las filas agrupadas. Así, se obtiene una fila de resumen por persona. Algunas notas:</p>
+<ul>
+<li>Se añade un sufijo a todas las nuevas columnas (“_roll” en este ejemplo)</li>
+<li>Si quieres mostrar sólo los valores únicos por celda, entonces envuelve el <code><a href="https://rdrr.io/r/stats/na.fail.html">na.omit()</a></code> con <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code>
+</li>
+<li>
+<code><a href="https://rdrr.io/r/stats/na.fail.html">na.omit()</a></code> elimina los valores <code>NA</code>, pero si no se desea se puede eliminar con <code>paste0(.x)</code>…</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># "Roll-up" values into one row per group (per "personID") </span></span>
+<span><span class="va">cases_rolled</span> <span class="op">&lt;-</span> <span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  </span>
+<span>  <span class="co"># create groups by name</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">personID</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  </span>
+<span>  <span class="co"># order the rows within each group (e.g. by date)</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">date</span>, .by_group <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  </span>
+<span>  <span class="co"># For each column, paste together all values within the grouped rows, separated by ";"</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    <span class="fu">across</span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>,                           <span class="co"># apply to all columns</span></span>
+<span>           <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># function is defined which combines non-NA values</span></span></code></pre></div>
+<p>El resultado es una fila por grupo (<code>ID</code>), con entradas ordenadas por fecha y pegadas. <em>Desplázate a la izquierda para ver más filas</em></p>
+<div id="htmlwidget-7219707d415fc1eb20f4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7219707d415fc1eb20f4">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8],["1; 1; 11","2; 3; 10; 5","4; 12; 13","6; 14","7; 15; 16","8","9; 17","18"],["adam; adam; adam","amrish; amrish; amrish; amrish","mariah; mariah; mariah","nikhil; nikhil","brian; brian; brian","smita","raquel; raquel","natalie"],["2020-01-01; 2020-01-01; 2020-01-05","2020-01-02; 2020-01-02; 2020-01-02; 2020-01-05","2020-01-05; 2020-01-06; 2020-01-06","2020-01-05; 2020-01-06","2020-01-05; 2020-01-06; 2020-01-07","2020-01-05","2020-01-05; 2020-01-07","2020-01-07"],["09:00; 09:00; 09:40","14:20; 14:20; 10:24; 16:10","12:00; 07:25; 08:32","13:01; 15:36","15:20; 15:31; 07:59","14:20","12:30; 11:13","17:12"],["1; 1; 2","1; 1; 2; 3","1; 2; 3","1; 2","1; 2; 3","1","1; 2","1"],["contact; contact; case","contact; contact; contact; case","case; contact; contact","contact; contact","contact; contact; case","contact","contact; contact","case"],["No","No; No; Yes; Yes","No; No; No","Yes; Yes","No; Yes; No","Yes","No","No"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>personID<\/th>\n      <th>recordID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Ver los <a href="de-duplication.html#dedup_data">datos originales</a>.</p>
+<p><strong>Esta variación sólo muestra valores únicos:</strong></p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Variation - show unique values only </span></span>
+<span><span class="va">cases_rolled</span> <span class="op">&lt;-</span> <span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">personID</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">date</span>, .by_group <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    <span class="fu">across</span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>,                                   <span class="co"># apply to all columns</span></span>
+<span>           <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># function is defined which combines unique non-NA values</span></span></code></pre></div>
+<div id="htmlwidget-f43a7dd4b03fd7b98065" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f43a7dd4b03fd7b98065">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8],["1; 11","2; 3; 10; 5","4; 12; 13","6; 14","7; 15; 16","8","9; 17","18"],["adam","amrish","mariah","nikhil","brian","smita","raquel","natalie"],["2020-01-01; 2020-01-05","2020-01-02; 2020-01-05","2020-01-05; 2020-01-06","2020-01-05; 2020-01-06","2020-01-05; 2020-01-06; 2020-01-07","2020-01-05","2020-01-05; 2020-01-07","2020-01-07"],["09:00; 09:40","14:20; 10:24; 16:10","12:00; 07:25; 08:32","13:01; 15:36","15:20; 15:31; 07:59","14:20","12:30; 11:13","17:12"],["1; 2","1; 2; 3","1; 2; 3","1; 2","1; 2; 3","1","1; 2","1"],["contact; case","contact; case","case; contact","contact","contact; case","contact","contact","case"],["No","No; Yes","No","Yes","No; Yes","Yes","No","No"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>personID<\/th>\n      <th>recordID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p><strong>Esta variación añade un sufijo a cada columna.</strong>
+En este caso, “_roll” para indicar que se ha combinado (roll):</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Variation - suffix added to column names </span></span>
+<span><span class="va">cases_rolled</span> <span class="op">&lt;-</span> <span class="va">obs</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">personID</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">date</span>, .by_group <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    <span class="fu">across</span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>,                </span>
+<span>           <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>roll <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># _roll is appended to column names</span></span></code></pre></div>
+<div id="htmlwidget-ebe2722213cbf0a13bbf" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ebe2722213cbf0a13bbf">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8],["1; 1; 11","2; 3; 10; 5","4; 12; 13","6; 14","7; 15; 16","8","9; 17","18"],["adam; adam; adam","amrish; amrish; amrish; amrish","mariah; mariah; mariah","nikhil; nikhil","brian; brian; brian","smita","raquel; raquel","natalie"],["2020-01-01; 2020-01-01; 2020-01-05","2020-01-02; 2020-01-02; 2020-01-02; 2020-01-05","2020-01-05; 2020-01-06; 2020-01-06","2020-01-05; 2020-01-06","2020-01-05; 2020-01-06; 2020-01-07","2020-01-05","2020-01-05; 2020-01-07","2020-01-07"],["09:00; 09:00; 09:40","14:20; 14:20; 10:24; 16:10","12:00; 07:25; 08:32","13:01; 15:36","15:20; 15:31; 07:59","14:20","12:30; 11:13","17:12"],["1; 1; 2","1; 1; 2; 3","1; 2; 3","1; 2","1; 2; 3","1","1; 2","1"],["contact; contact; case","contact; contact; contact; case","case; contact; contact","contact; contact","contact; contact; case","contact","contact; contact","case"],["No","No; No; Yes; Yes","No; No; No","Yes; Yes","No; Yes; No","Yes","No","No"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>personID<\/th>\n      <th>recordID_roll<\/th>\n      <th>name_roll<\/th>\n      <th>date_roll<\/th>\n      <th>time_roll<\/th>\n      <th>encounter_roll<\/th>\n      <th>purpose_roll<\/th>\n      <th>symptoms_ever_roll<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><!-- ======================================================= -->
+</div>
+<div id="sobrescribir-valoresjerarquía" class="section level3 unnumbered">
+<h3>Sobrescribir valores/jerarquía<a class="anchor" aria-label="anchor" href="#sobrescribir-valoresjerarqu%C3%ADa"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si luego quieres evaluar todos los valores combinados, y mantener sólo un valor específico (por ejemplo, el “mejor” o el “máximo” valor), puedes utilizar <code>mutate()</code> a través de las columnas deseadas, para implementar <code>case_when()</code>, que utiliza <code>str_detect()</code> del paquete <strong>stringr</strong> para buscar secuencialmente patrones de cadena y sobrescribir el contenido de la celda.</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># CLEAN CASES</span></span>
+<span><span class="co">#############</span></span>
+<span><span class="va">cases_clean</span> <span class="op">&lt;-</span> <span class="va">cases_rolled</span> <span class="op">%&gt;%</span> </span>
+<span>    </span>
+<span>    <span class="co"># clean Yes-No-Unknown vars: replace text with "highest" value present in the string</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">contains</span><span class="op">(</span><span class="st">"symptoms_ever"</span><span class="op">)</span><span class="op">)</span>,                     <span class="co"># operates on specified columns (Y/N/U)</span></span>
+<span>             <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mod <span class="op">=</span> <span class="op">~</span><span class="fu">case_when</span><span class="op">(</span>                                 <span class="co"># adds suffix "_mod" to new cols; implements case_when()</span></span>
+<span>               </span>
+<span>               <span class="fu">str_detect</span><span class="op">(</span><span class="va">.x</span>, <span class="st">"Yes"</span><span class="op">)</span>       <span class="op">~</span> <span class="st">"Yes"</span>,                 <span class="co"># if "Yes" is detected, then cell value converts to yes</span></span>
+<span>               <span class="fu">str_detect</span><span class="op">(</span><span class="va">.x</span>, <span class="st">"No"</span><span class="op">)</span>        <span class="op">~</span> <span class="st">"No"</span>,                  <span class="co"># then, if "No" is detected, then cell value converts to no</span></span>
+<span>               <span class="fu">str_detect</span><span class="op">(</span><span class="va">.x</span>, <span class="st">"Unknown"</span><span class="op">)</span>   <span class="op">~</span> <span class="st">"Unknown"</span>,             <span class="co"># then, if "Unknown" is detected, then cell value converts to Unknown</span></span>
+<span>               <span class="cn">TRUE</span>                        <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,   <span class="co"># then, if anything else if it kept as is</span></span>
+<span>      .keep <span class="op">=</span> <span class="st">"unused"</span><span class="op">)</span>                                             <span class="co"># old columns removed, leaving only _mod columns</span></span></code></pre></div>
+<p>Ahora puedes ver en la columna <code>symptoms_ever</code> que si la persona ALGUNA vez dijo “Sí” a los síntomas, entonces sólo se muestra “Sí”.</p>
+<div id="htmlwidget-cd0e9edca5be671dfbe0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cd0e9edca5be671dfbe0">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8],["1; 11","2; 3; 10; 5","4; 12; 13","6; 14","7; 15; 16","8","9; 17","18"],["adam","amrish","mariah","nikhil","brian","smita","raquel","natalie"],["2020-01-01; 2020-01-05","2020-01-02; 2020-01-05","2020-01-05; 2020-01-06","2020-01-05; 2020-01-06","2020-01-05; 2020-01-06; 2020-01-07","2020-01-05","2020-01-05; 2020-01-07","2020-01-07"],["09:00; 09:40","14:20; 10:24; 16:10","12:00; 07:25; 08:32","13:01; 15:36","15:20; 15:31; 07:59","14:20","12:30; 11:13","17:12"],["1; 2","1; 2; 3","1; 2; 3","1; 2","1; 2; 3","1","1; 2","1"],["contact; case","contact; case","case; contact","contact","contact; case","contact","contact","case"],["No","Yes","No","Yes","Yes","Yes","No","No"]],"container":"<table class=\"white-space: nowrap\">\n  <thead>\n    <tr>\n      <th>personID<\/th>\n      <th>recordID<\/th>\n      <th>name<\/th>\n      <th>date<\/th>\n      <th>time<\/th>\n      <th>encounter<\/th>\n      <th>purpose<\/th>\n      <th>symptoms_ever_mod<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>Ver los <a href="de-duplication.html#dedup_data">datos originales</a>.</p>
+</div>
+</div>
+<div id="probabilistic-de-duplication" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> De-duplicación probabilística<a class="anchor" aria-label="anchor" href="#probabilistic-de-duplication"><i class="fas fa-link"></i></a>
+</h2>
+<p>A veces, puedes querer identificar duplicados “probables” basándote en la similitud (por ejemplo, la “distancia” de la cadena) en varias columnas como el nombre, la edad, el sexo, la fecha de nacimiento, etc. Puedes aplicar un algoritmo de coincidencia probabilística para identificar duplicados probables.</p>
+<p>Consulta la página sobre la <a href="#joining-data">unión de datos</a> para obtener una explicación sobre este método. La sección sobre Coincidencia probabilística contiene un ejemplo de aplicación de estos algoritmos para comparar un dataframe <em>consigo mismo</em>, realizando así una De-duplicación probabilística.</p>
+<!-- ======================================================= -->
+</div>
+<div id="resources-8" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> Recursos<a class="anchor" aria-label="anchor" href="#resources-8"><i class="fas fa-link"></i></a>
+</h2>
+<p>Gran parte de la información de esta página está adaptada de estos recursos y viñetas en línea:</p>
+<p><a href="https://www.datanovia.com/en/lessons/identify-and-remove-duplicate-data-in-r/">datanovia</a></p>
+<p><a href="https://dplyr.tidyverse.org/reference/slice.html">Referencia de dplyr tidyverse</a></p>
+<p><a href="https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html#explore-records-with-duplicated-values-for-specific-combinations-of-variables-with-get_dupes">Viñeta janitor de CRAN</a></p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"></a></div>
+<div class="next"><a href="iteration-loops-and-lists.html"><span class="header-section-number">2</span> Iteración, bucles y listas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#de-duplication"><span class="header-section-number">1</span> De-duplicación</a></li>
+<li>
+<a class="nav-link" href="#preparation-6"><span class="header-section-number">1.1</span> Preparación</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cargar-paquetes">Cargar paquetes</a></li>
+<li><a class="nav-link" href="#importar-datos">Importar datos</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#deduplication-1"><span class="header-section-number">1.2</span> De-duplicación</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#examinar-las-filas-duplicadas">Examinar las filas duplicadas</a></li>
+<li><a class="nav-link" href="#mantener-s%C3%B3lo-filas-%C3%BAnicas">Mantener sólo filas únicas</a></li>
+<li><a class="nav-link" href="#de-duplicar-elementos-en-un-vector">De-duplicar elementos en un vector</a></li>
+<li><a class="nav-link" href="#utilizando-r-base">Utilizando R base</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#slicing"><span class="header-section-number">1.3</span> Recortar</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#recortar-con-grupos">Recortar con grupos</a></li>
+<li><a class="nav-link" href="#mantener-todos-pero-marcados">Mantener todos pero marcados</a></li>
+<li><a class="nav-link" href="#calcular-la-exhaustividad-de-las-filas">Calcular la exhaustividad de las filas</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#str_rollup"><span class="header-section-number">1.4</span> Combinación de valores</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#combinar-los-valores-en-una-fila">Combinar los valores en una fila</a></li>
+<li><a class="nav-link" href="#sobrescribir-valoresjerarqu%C3%ADa">Sobrescribir valores/jerarquía</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#probabilistic-de-duplication"><span class="header-section-number">1.5</span> De-duplicación probabilística</a></li>
+<li><a class="nav-link" href="#resources-8"><span class="header-section-number">1.6</span> Recursos</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>EpiRhandbook en español</strong>" was written by El equipo del manual. It was last built on 2022-11-22.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
